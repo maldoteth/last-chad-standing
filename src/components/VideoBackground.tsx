@@ -14,7 +14,6 @@ const VideoBackground = ({ videoUrl }: VideoBackgroundProps) => {
   const [loadProgress, setLoadProgress] = useState(0);
   const videoRef = useRef<HTMLVideoElement>(null);
   const progressIntervalRef = useRef<number | null>(null);
-  const [fallbackActive, setFallbackActive] = useState(false);
 
   const toggleMute = () => {
     if (videoRef.current) {
@@ -41,38 +40,13 @@ const VideoBackground = ({ videoUrl }: VideoBackgroundProps) => {
     }, 300);
   };
 
-  // Convert Google Drive link to a more reliable format if needed
-  const getOptimizedVideoUrl = (url: string) => {
-    // Check if it's a Google Drive link
-    if (url.includes('drive.google.com')) {
-      // Extract the file ID
-      const fileIdMatch = url.match(/[-\w]{25,}/);
-      if (fileIdMatch && fileIdMatch[0]) {
-        const fileId = fileIdMatch[0];
-        // Use an alternative Google Drive direct link format
-        return `https://drive.google.com/uc?export=download&id=${fileId}`;
-      }
-    }
-    return url;
-  };
-
   // Handle video initialization and loading progress
   useEffect(() => {
-    let loadTimeout: number;
-    
     if (videoRef.current) {
       videoRef.current.muted = isMuted;
       
       // Start simulated progress immediately
       startSimulatedProgress();
-      
-      // Set a timeout to try fallback method if video doesn't load within 10 seconds
-      loadTimeout = window.setTimeout(() => {
-        if (isLoading && !fallbackActive) {
-          console.log('Video loading timeout, trying fallback method');
-          setFallbackActive(true);
-        }
-      }, 10000);
       
       // Add event listeners to track video loading states
       const handleCanPlay = () => {
@@ -92,11 +66,6 @@ const VideoBackground = ({ videoUrl }: VideoBackgroundProps) => {
         setIsLoading(true);
       };
       
-      const handleWaiting = () => {
-        console.log('Video is waiting for more data');
-        setIsLoading(true);
-      };
-      
       const handleLoadedData = () => {
         console.log('Video data loaded');
         setLoadProgress(70); // Set to at least 70% when we have some data
@@ -109,7 +78,6 @@ const VideoBackground = ({ videoUrl }: VideoBackgroundProps) => {
             const bufferedEnd = videoRef.current.buffered.end(0);
             const duration = videoRef.current.duration;
             const percent = Math.floor((bufferedEnd / duration) * 100);
-            console.log('Buffered end:', bufferedEnd, 'duration:', duration, 'percent:', percent);
             
             // Only update if the calculated percentage is valid and higher than current
             if (!isNaN(percent) && percent > loadProgress) {
@@ -133,7 +101,6 @@ const VideoBackground = ({ videoUrl }: VideoBackgroundProps) => {
       };
       
       videoRef.current.addEventListener('loadstart', handleLoadStart);
-      videoRef.current.addEventListener('waiting', handleWaiting);
       videoRef.current.addEventListener('canplay', handleCanPlay);
       videoRef.current.addEventListener('loadeddata', handleLoadedData);
       videoRef.current.addEventListener('progress', handleProgress);
@@ -157,29 +124,19 @@ const VideoBackground = ({ videoUrl }: VideoBackgroundProps) => {
       return () => {
         if (videoRef.current) {
           videoRef.current.removeEventListener('loadstart', handleLoadStart);
-          videoRef.current.removeEventListener('waiting', handleWaiting);
           videoRef.current.removeEventListener('canplay', handleCanPlay);
           videoRef.current.removeEventListener('loadeddata', handleLoadedData);
           videoRef.current.removeEventListener('progress', handleProgress);
           videoRef.current.removeEventListener('error', handleError);
         }
         
-        // Clear interval and timeout on unmount
+        // Clear interval on unmount
         if (progressIntervalRef.current) {
           window.clearInterval(progressIntervalRef.current);
         }
-        
-        if (loadTimeout) {
-          window.clearTimeout(loadTimeout);
-        }
       };
     }
-  }, [videoRef, isMuted, loadProgress, fallbackActive]);
-
-  // Prepare video URL based on current state
-  const videoSource = fallbackActive 
-    ? getOptimizedVideoUrl(videoUrl) 
-    : videoUrl;
+  }, [videoRef, isMuted, loadProgress]);
 
   return (
     <div className="fixed inset-0 w-full h-full overflow-hidden">
@@ -210,7 +167,7 @@ const VideoBackground = ({ videoUrl }: VideoBackgroundProps) => {
         playsInline
         preload="auto"
       >
-        <source src={videoSource} type="video/mp4" />
+        <source src={videoUrl} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
       
