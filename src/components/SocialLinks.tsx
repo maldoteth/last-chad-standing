@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Facebook, Instagram, Twitter, Youtube, Linkedin } from 'lucide-react';
+import { Instagram, Twitter, Globe } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface SocialLink {
@@ -16,29 +16,19 @@ interface SocialLinksProps {
 
 const defaultSocialLinks: SocialLink[] = [
   {
-    name: "Facebook",
-    icon: <Facebook size={24} />,
-    url: "#facebook"
+    name: "Website",
+    icon: <Globe size={24} />,
+    url: "https://lastchadstanding.com"
   },
   {
     name: "Twitter",
     icon: <Twitter size={24} />,
-    url: "#twitter"
+    url: "https://x.com/lcs_game"
   },
   {
     name: "Instagram",
     icon: <Instagram size={24} />,
-    url: "#instagram"
-  },
-  {
-    name: "Youtube",
-    icon: <Youtube size={24} />,
-    url: "#youtube"
-  },
-  {
-    name: "LinkedIn",
-    icon: <Linkedin size={24} />,
-    url: "#linkedin"
+    url: "https://instagram.com/lcs_game"
   }
 ];
 
