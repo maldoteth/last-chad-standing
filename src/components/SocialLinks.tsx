@@ -28,7 +28,7 @@ const defaultSocialLinks: SocialLink[] = [
   {
     name: "Instagram",
     icon: <Instagram size={24} />,
-    url: "https://instagram.com/lcs_game"
+    url: "https://www.instagram.com/lastchadstanding/"
   }
 ];
 
