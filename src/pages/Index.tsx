@@ -37,7 +37,7 @@ const Index = () => {
           
           {/* Optional: Add game copyright or other info */}
           <div className="text-center mt-6 text-sm text-white/60">
-            © 2024 Your Game Studio. All rights reserved.
+            © 2024 DeHub Games. All rights reserved.
           </div>
         </div>
       </div>
