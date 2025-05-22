@@ -1,17 +1,25 @@
 
 import React from 'react';
-import VideoBackground from '@/components/VideoBackground';
 import SocialLinks from '@/components/SocialLinks';
 import OrientationPrompt from '@/components/OrientationPrompt';
+import CloudinaryPlayer from '@/components/CloudinaryPlayer';
 
-// This is the actual Cloudinary video URL from the user's collection
-const TRAILER_VIDEO_URL = 'https://res.cloudinary.com/drqvsqsot/video/upload/v1716380758/z6bvdewsoysqlfq9rrzp.mp4';
+// Cloudinary player configuration
+const CLOUDINARY_CONFIG = {
+  cloudName: 'drqvsqsot',
+  publicId: 'LCS_TEASER_1_1_wlqwnc',
+  profile: 'cld-looping'
+};
 
 const Index = () => {
   return (
     <div className="relative min-h-screen bg-black text-white overflow-hidden">
-      {/* Video Background */}
-      <VideoBackground videoUrl={TRAILER_VIDEO_URL} />
+      {/* Cloudinary Player Background */}
+      <CloudinaryPlayer 
+        cloudName={CLOUDINARY_CONFIG.cloudName}
+        publicId={CLOUDINARY_CONFIG.publicId}
+        profile={CLOUDINARY_CONFIG.profile}
+      />
       
       {/* Mobile Orientation Prompt */}
       <OrientationPrompt />
