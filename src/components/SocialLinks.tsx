@@ -10,7 +10,7 @@ interface SocialLink {
 }
 
 interface SocialLinksProps {
-  links: SocialLink[];
+  links?: SocialLink[]; // Make the links prop optional
   className?: string;
 }
 
