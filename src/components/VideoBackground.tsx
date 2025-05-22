@@ -14,6 +14,7 @@ const VideoBackground = ({ videoUrl }: VideoBackgroundProps) => {
   const [loadProgress, setLoadProgress] = useState(0);
   const videoRef = useRef<HTMLVideoElement>(null);
   const progressIntervalRef = useRef<number | null>(null);
+  const [fallbackActive, setFallbackActive] = useState(false);
 
   const toggleMute = () => {
     if (videoRef.current) {
@@ -22,7 +23,7 @@ const VideoBackground = ({ videoUrl }: VideoBackgroundProps) => {
     }
   };
 
-  // Reset and start a simulated loading progress if actual progress isn't available
+  // Reset and start a simulated loading progress
   const startSimulatedProgress = () => {
     // Clear any existing interval
     if (progressIntervalRef.current) {
@@ -40,13 +41,38 @@ const VideoBackground = ({ videoUrl }: VideoBackgroundProps) => {
     }, 300);
   };
 
+  // Convert Google Drive link to a more reliable format if needed
+  const getOptimizedVideoUrl = (url: string) => {
+    // Check if it's a Google Drive link
+    if (url.includes('drive.google.com')) {
+      // Extract the file ID
+      const fileIdMatch = url.match(/[-\w]{25,}/);
+      if (fileIdMatch && fileIdMatch[0]) {
+        const fileId = fileIdMatch[0];
+        // Use an alternative Google Drive direct link format
+        return `https://drive.google.com/uc?export=download&id=${fileId}`;
+      }
+    }
+    return url;
+  };
+
   // Handle video initialization and loading progress
   useEffect(() => {
+    let loadTimeout: number;
+    
     if (videoRef.current) {
       videoRef.current.muted = isMuted;
       
       // Start simulated progress immediately
       startSimulatedProgress();
+      
+      // Set a timeout to try fallback method if video doesn't load within 10 seconds
+      loadTimeout = window.setTimeout(() => {
+        if (isLoading && !fallbackActive) {
+          console.log('Video loading timeout, trying fallback method');
+          setFallbackActive(true);
+        }
+      }, 10000);
       
       // Add event listeners to track video loading states
       const handleCanPlay = () => {
@@ -119,6 +145,12 @@ const VideoBackground = ({ videoUrl }: VideoBackgroundProps) => {
       if (playPromise !== undefined) {
         playPromise.catch(error => {
           console.error('Autoplay prevented:', error);
+          // Auto-retry after a short delay
+          setTimeout(() => {
+            if (videoRef.current) {
+              videoRef.current.play().catch(e => console.error('Retry autoplay failed:', e));
+            }
+          }, 1000);
         });
       }
       
@@ -132,13 +164,22 @@ const VideoBackground = ({ videoUrl }: VideoBackgroundProps) => {
           videoRef.current.removeEventListener('error', handleError);
         }
         
-        // Clear interval on unmount
+        // Clear interval and timeout on unmount
         if (progressIntervalRef.current) {
           window.clearInterval(progressIntervalRef.current);
         }
+        
+        if (loadTimeout) {
+          window.clearTimeout(loadTimeout);
+        }
       };
     }
-  }, [videoRef, isMuted, loadProgress]);
+  }, [videoRef, isMuted, loadProgress, fallbackActive]);
+
+  // Prepare video URL based on current state
+  const videoSource = fallbackActive 
+    ? getOptimizedVideoUrl(videoUrl) 
+    : videoUrl;
 
   return (
     <div className="fixed inset-0 w-full h-full overflow-hidden">
@@ -167,8 +208,9 @@ const VideoBackground = ({ videoUrl }: VideoBackgroundProps) => {
         loop
         muted
         playsInline
+        preload="auto"
       >
-        <source src={videoUrl} type="video/mp4" />
+        <source src={videoSource} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
       
