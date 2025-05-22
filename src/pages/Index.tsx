@@ -4,8 +4,8 @@ import VideoBackground from '@/components/VideoBackground';
 import SocialLinks from '@/components/SocialLinks';
 import OrientationPrompt from '@/components/OrientationPrompt';
 
-// Update the video URL to reference a file in the public folder
-const TRAILER_VIDEO_URL = '/game-trailer.mp4';
+// Using direct Google Drive download link
+const TRAILER_VIDEO_URL = 'https://drive.google.com/uc?export=download&id=1kcVK_cO7ZIuwMk9bR2hvaZZ28g_eBi56';
 
 const Index = () => {
   return (
