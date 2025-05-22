@@ -4,8 +4,9 @@ import VideoBackground from '@/components/VideoBackground';
 import SocialLinks from '@/components/SocialLinks';
 import OrientationPrompt from '@/components/OrientationPrompt';
 
-// Using direct Google Drive download link with fallback structure
-const TRAILER_VIDEO_URL = 'https://drive.google.com/uc?export=download&id=1kcVK_cO7ZIuwMk9bR2hvaZZ28g_eBi56';
+// Replace Google Drive with Cloudinary
+// This is a demo Cloudinary URL - replace with your actual Cloudinary video URL
+const TRAILER_VIDEO_URL = 'https://res.cloudinary.com/demo/video/upload/v1689413329/samples/sea-turtle.mp4';
 
 const Index = () => {
   return (
