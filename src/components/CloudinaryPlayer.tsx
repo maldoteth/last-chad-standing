@@ -10,6 +10,7 @@ interface CloudinaryPlayerProps {
 const CloudinaryPlayer = ({ cloudName, publicId, profile }: CloudinaryPlayerProps) => {
   const playerContainerRef = useRef<HTMLDivElement>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
   
   useEffect(() => {
     // Load Cloudinary SDK script dynamically
@@ -33,30 +34,34 @@ const CloudinaryPlayer = ({ cloudName, publicId, profile }: CloudinaryPlayerProp
           cloud_name: cloudName,
           controls: true,
           autoplayMode: 'always',
+          muted: true, // Muted to ensure autoplay works across browsers
         });
         
-        // Load the video
+        // Load the video without specifying a streaming profile
         player.source(publicId, {
-          sourceTypes: ['hls'],
-          transformation: {
-            streaming_profile: profile
-          }
+          sourceTypes: ['hls', 'mp4'],
+          // Remove specific streaming profile since it's causing errors
         });
         
         // Handle player events
         player.on('started', () => {
           console.log('Video playback started');
           setIsLoading(false);
+          setHasError(false);
         });
         
         player.on('error', (error: any) => {
           console.error('Cloudinary player error:', error);
+          setHasError(true);
+          setIsLoading(false);
         });
       }
     };
     
     script.onerror = () => {
       console.error('Failed to load Cloudinary player SDK');
+      setHasError(true);
+      setIsLoading(false);
     };
     
     document.head.appendChild(script);
@@ -85,6 +90,15 @@ const CloudinaryPlayer = ({ cloudName, publicId, profile }: CloudinaryPlayerProp
         </div>
       )}
       
+      {hasError && (
+        <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/80">
+          <div className="bg-black/70 p-6 rounded-lg text-center max-w-md">
+            <p className="text-white text-lg mb-2">Video playback error</p>
+            <p className="text-gray-300 text-sm">Unable to play the video. Please try again later.</p>
+          </div>
+        </div>
+      )}
+      
       <div 
         ref={playerContainerRef}
         className="absolute inset-0 w-full h-full"
@@ -106,14 +120,15 @@ declare global {
           cloud_name: string;
           controls: boolean;
           autoplayMode: string;
+          muted?: boolean;
         }
       ) => {
         source: (
           publicId: string, 
           options: {
             sourceTypes: string[];
-            transformation: {
-              streaming_profile: string;
+            transformation?: {
+              streaming_profile?: string;
             };
           }
         ) => void;

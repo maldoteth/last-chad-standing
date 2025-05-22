@@ -1,3 +1,4 @@
+
 import React from 'react';
 import SocialLinks from '@/components/SocialLinks';
 import OrientationPrompt from '@/components/OrientationPrompt';
@@ -7,7 +8,7 @@ import CloudinaryPlayer from '@/components/CloudinaryPlayer';
 const CLOUDINARY_CONFIG = {
   cloudName: 'drqvsqsot',
   publicId: 'LCS_TEASER_1_1_wlqwnc',
-  profile: 'cld-default'
+  profile: '' // Remove the profile since it's causing errors
 };
 
 const Index = () => {
