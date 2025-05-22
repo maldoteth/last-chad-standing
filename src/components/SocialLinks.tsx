@@ -18,7 +18,7 @@ const defaultSocialLinks: SocialLink[] = [
   {
     name: "Website",
     icon: <Globe size={24} />,
-    url: "https://lastchadstanding.com"
+    url: "https://leanchadfight.club"
   },
   {
     name: "Twitter",
