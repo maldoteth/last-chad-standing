@@ -4,7 +4,7 @@ import VideoBackground from '@/components/VideoBackground';
 import SocialLinks from '@/components/SocialLinks';
 import OrientationPrompt from '@/components/OrientationPrompt';
 
-// Placeholder for your actual video URL - replace this with your real video file path
+// Update the video URL to reference a file in the public folder
 const TRAILER_VIDEO_URL = '/game-trailer.mp4';
 
 const Index = () => {
