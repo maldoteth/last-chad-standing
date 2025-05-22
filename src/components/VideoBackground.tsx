@@ -13,6 +13,7 @@ const VideoBackground = ({ videoUrl }: VideoBackgroundProps) => {
   const [hasError, setHasError] = useState(false);
   const [loadProgress, setLoadProgress] = useState(0);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const progressIntervalRef = useRef<number | null>(null);
 
   const toggleMute = () => {
     if (videoRef.current) {
@@ -21,25 +22,76 @@ const VideoBackground = ({ videoUrl }: VideoBackgroundProps) => {
     }
   };
 
+  // Reset and start a simulated loading progress if actual progress isn't available
+  const startSimulatedProgress = () => {
+    // Clear any existing interval
+    if (progressIntervalRef.current) {
+      window.clearInterval(progressIntervalRef.current);
+    }
+    
+    setLoadProgress(0);
+    let simulatedProgress = 0;
+    
+    progressIntervalRef.current = window.setInterval(() => {
+      // Simulate progress with diminishing returns (faster at start, slower as it approaches 90%)
+      const increment = Math.max(1, 10 * (1 - simulatedProgress / 100));
+      simulatedProgress = Math.min(90, simulatedProgress + increment);
+      setLoadProgress(simulatedProgress);
+    }, 300);
+  };
+
   // Handle video initialization and loading progress
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.muted = isMuted;
       
+      // Start simulated progress immediately
+      startSimulatedProgress();
+      
       // Add event listeners to track video loading states
       const handleCanPlay = () => {
         console.log('Video can play now');
+        
+        // Clear simulated progress interval
+        if (progressIntervalRef.current) {
+          window.clearInterval(progressIntervalRef.current);
+        }
+        
         setIsLoading(false);
         setLoadProgress(100);
       };
       
+      const handleLoadStart = () => {
+        console.log('Video load started');
+        setIsLoading(true);
+      };
+      
+      const handleWaiting = () => {
+        console.log('Video is waiting for more data');
+        setIsLoading(true);
+      };
+      
+      const handleLoadedData = () => {
+        console.log('Video data loaded');
+        setLoadProgress(70); // Set to at least 70% when we have some data
+      };
+      
       const handleProgress = () => {
         if (videoRef.current && videoRef.current.buffered.length > 0 && videoRef.current.duration) {
-          // Calculate the percentage of video loaded
-          const bufferedEnd = videoRef.current.buffered.end(0);
-          const duration = videoRef.current.duration;
-          const percent = Math.floor((bufferedEnd / duration) * 100);
-          setLoadProgress(percent);
+          try {
+            // Calculate the percentage of video loaded
+            const bufferedEnd = videoRef.current.buffered.end(0);
+            const duration = videoRef.current.duration;
+            const percent = Math.floor((bufferedEnd / duration) * 100);
+            console.log('Buffered end:', bufferedEnd, 'duration:', duration, 'percent:', percent);
+            
+            // Only update if the calculated percentage is valid and higher than current
+            if (!isNaN(percent) && percent > loadProgress) {
+              setLoadProgress(percent);
+            }
+          } catch (e) {
+            console.error('Error calculating buffer progress:', e);
+          }
         }
       };
       
@@ -47,16 +99,19 @@ const VideoBackground = ({ videoUrl }: VideoBackgroundProps) => {
         console.error('Video loading error:', e);
         setHasError(true);
         setIsLoading(false);
+        
+        // Clear simulated progress interval
+        if (progressIntervalRef.current) {
+          window.clearInterval(progressIntervalRef.current);
+        }
       };
       
+      videoRef.current.addEventListener('loadstart', handleLoadStart);
+      videoRef.current.addEventListener('waiting', handleWaiting);
       videoRef.current.addEventListener('canplay', handleCanPlay);
+      videoRef.current.addEventListener('loadeddata', handleLoadedData);
       videoRef.current.addEventListener('progress', handleProgress);
       videoRef.current.addEventListener('error', handleError);
-      
-      // Set an interval to periodically check the loading progress
-      const progressInterval = setInterval(() => {
-        handleProgress();
-      }, 500);
       
       // Attempt autoplay
       const playPromise = videoRef.current.play();
@@ -69,14 +124,21 @@ const VideoBackground = ({ videoUrl }: VideoBackgroundProps) => {
       
       return () => {
         if (videoRef.current) {
+          videoRef.current.removeEventListener('loadstart', handleLoadStart);
+          videoRef.current.removeEventListener('waiting', handleWaiting);
           videoRef.current.removeEventListener('canplay', handleCanPlay);
+          videoRef.current.removeEventListener('loadeddata', handleLoadedData);
           videoRef.current.removeEventListener('progress', handleProgress);
           videoRef.current.removeEventListener('error', handleError);
-          clearInterval(progressInterval);
+        }
+        
+        // Clear interval on unmount
+        if (progressIntervalRef.current) {
+          window.clearInterval(progressIntervalRef.current);
         }
       };
     }
-  }, [videoRef, isMuted]);
+  }, [videoRef, isMuted, loadProgress]);
 
   return (
     <div className="fixed inset-0 w-full h-full overflow-hidden">
