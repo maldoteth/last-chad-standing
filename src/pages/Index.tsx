@@ -4,7 +4,7 @@ import VideoBackground from '@/components/VideoBackground';
 import SocialLinks from '@/components/SocialLinks';
 import OrientationPrompt from '@/components/OrientationPrompt';
 
-// Using direct Google Drive download link
+// Using direct Google Drive download link with fallback structure
 const TRAILER_VIDEO_URL = 'https://drive.google.com/uc?export=download&id=1kcVK_cO7ZIuwMk9bR2hvaZZ28g_eBi56';
 
 const Index = () => {
