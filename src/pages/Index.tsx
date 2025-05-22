@@ -1,11 +1,37 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import React from 'react';
+import VideoBackground from '@/components/VideoBackground';
+import SocialLinks from '@/components/SocialLinks';
+import OrientationPrompt from '@/components/OrientationPrompt';
+
+// Placeholder for your actual video URL - replace this with your real video file path
+const TRAILER_VIDEO_URL = '/game-trailer.mp4';
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
+    <div className="relative min-h-screen bg-black text-white overflow-hidden">
+      {/* Video Background */}
+      <VideoBackground videoUrl={TRAILER_VIDEO_URL} />
+      
+      {/* Mobile Orientation Prompt */}
+      <OrientationPrompt />
+      
+      {/* Content Container */}
+      <div className="relative z-10 flex flex-col min-h-screen">
+        {/* Game Title/Logo (if needed) */}
+        <div className="flex-grow flex items-center justify-center">
+          {/* Optional: Add your game logo/title here */}
+        </div>
+        
+        {/* Social Links positioned in the bottom third */}
+        <div className="pb-12">
+          <SocialLinks className="animate-fade-in" />
+          
+          {/* Optional: Add game copyright or other info */}
+          <div className="text-center mt-6 text-sm text-white/60">
+            © 2024 Your Game Studio. All rights reserved.
+          </div>
+        </div>
       </div>
     </div>
   );
