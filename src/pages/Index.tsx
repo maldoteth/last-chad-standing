@@ -4,9 +4,8 @@ import VideoBackground from '@/components/VideoBackground';
 import SocialLinks from '@/components/SocialLinks';
 import OrientationPrompt from '@/components/OrientationPrompt';
 
-// Replace Google Drive with Cloudinary
-// This is a demo Cloudinary URL - replace with your actual Cloudinary video URL
-const TRAILER_VIDEO_URL = 'https://res.cloudinary.com/demo/video/upload/v1689413329/samples/sea-turtle.mp4';
+// This is the actual Cloudinary video URL from the user's collection
+const TRAILER_VIDEO_URL = 'https://res.cloudinary.com/drqvsqsot/video/upload/v1716380758/z6bvdewsoysqlfq9rrzp.mp4';
 
 const Index = () => {
   return (
