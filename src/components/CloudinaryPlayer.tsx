@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef, useState } from 'react';
 
 interface CloudinaryPlayerProps {
@@ -28,9 +29,6 @@ const CloudinaryPlayer = ({ cloudName, publicId, profile }: CloudinaryPlayerProp
         </div>
       )}
       
-      {/* Dark overlay with reduced opacity */}
-      <div className="absolute inset-0 bg-black/20 pointer-events-none" />
-      
       <iframe 
         ref={iframeRef}
         src={playerUrl}
@@ -40,6 +38,7 @@ const CloudinaryPlayer = ({ cloudName, publicId, profile }: CloudinaryPlayerProp
         title="Cloudinary Player"
         frameBorder="0"
         loading="eager"
+        style={{ pointerEvents: 'auto' }}
       ></iframe>
     </div>
   );
