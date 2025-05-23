@@ -9,7 +9,7 @@ const CLOUDINARY_CONFIG = {
   cloudName: 'drqvsqsot',
   publicId: 'LCS_TEASER_1_1_wlqwnc',
   profile: 'cld-default'
-};
+}; 
 
 const Index = () => {
   return <div className="relative min-h-screen bg-black text-white overflow-hidden">
