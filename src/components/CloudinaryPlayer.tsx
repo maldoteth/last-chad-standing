@@ -11,8 +11,8 @@ const CloudinaryPlayer = ({ cloudName, publicId, profile }: CloudinaryPlayerProp
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [isLoading, setIsLoading] = useState(true);
   
-  // Construct the Cloudinary player URL with autoplay parameter
-  const playerUrl = `https://player.cloudinary.com/embed/?cloud_name=${cloudName}&public_id=${publicId}&profile=${profile}&autoplay=true&muted=true`;
+  // Construct the Cloudinary player URL with autoplay parameter and interaction=true
+  const playerUrl = `https://player.cloudinary.com/embed/?cloud_name=${cloudName}&public_id=${publicId}&profile=${profile}&autoplay=true&muted=true&interaction=true`;
   
   // Handle iframe load complete
   const handleIframeLoad = () => {
@@ -38,10 +38,12 @@ const CloudinaryPlayer = ({ cloudName, publicId, profile }: CloudinaryPlayerProp
         title="Cloudinary Player"
         frameBorder="0"
         loading="eager"
+        style={{ touchAction: 'auto' }}
+        sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox allow-presentation"
       ></iframe>
       
-      {/* Dark overlay to improve text visibility */}
-      <div className="absolute inset-0 bg-black/30 pointer-events-none" />
+      {/* Removed the dark overlay that was blocking interactions */}
+      {/* Previously: <div className="absolute inset-0 bg-black/30 pointer-events-none" /> */}
     </div>
   );
 };
