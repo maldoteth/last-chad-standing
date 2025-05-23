@@ -12,9 +12,14 @@ const CLOUDINARY_CONFIG = {
 };
 
 const Index = () => {
-  return <div className="relative bg-black text-white overflow-hidden">
+  return (
+    <div className="relative bg-black text-white overflow-hidden">
       {/* Cloudinary Player Background */}
-      <CloudinaryPlayer cloudName={CLOUDINARY_CONFIG.cloudName} publicId={CLOUDINARY_CONFIG.publicId} profile={CLOUDINARY_CONFIG.profile} />
+      <CloudinaryPlayer 
+        cloudName={CLOUDINARY_CONFIG.cloudName} 
+        publicId={CLOUDINARY_CONFIG.publicId} 
+        profile={CLOUDINARY_CONFIG.profile} 
+      />
       
       {/* Mobile Orientation Prompt */}
       <OrientationPrompt />
@@ -26,15 +31,18 @@ const Index = () => {
           {/* Optional: Add your game logo/title here */}
         </div>
         
-        {/* Social Links positioned to avoid player controls - Added pt-[25px] for downward movement */}
-        <div className="pb-12 mb-20 pt-[25px] pointer-events-auto">
+        {/* Social Links positioned to avoid player controls - Added mb-20 for more bottom margin */}
+        <div className="pb-12 mb-20 pointer-events-auto">
           <SocialLinks className="animate-fade-in" />
           
           {/* Copyright info */}
-          
+          <div className="text-center mt-6 text-sm text-white/60 my-[20px]">
+            © 2024 DeHub Games
+          </div>
         </div>
       </div>
-    </div>;
+    </div>
+  );
 };
 
 export default Index;
