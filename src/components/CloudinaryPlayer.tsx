@@ -10,7 +10,6 @@ const CloudinaryPlayer = ({ cloudName, publicId, profile }: CloudinaryPlayerProp
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isMuted, setIsMuted] = useState(true);
-  const [isPlaying, setIsPlaying] = useState(false);
   
   // Construct the Cloudinary player URL with autoplay parameter
   const playerUrl = `https://player.cloudinary.com/embed/?cloud_name=${cloudName}&public_id=${publicId}&profile=${profile}&autoplay=true&muted=true`;
@@ -18,39 +17,14 @@ const CloudinaryPlayer = ({ cloudName, publicId, profile }: CloudinaryPlayerProp
   useEffect(() => {
     // Listen for messages from the Cloudinary player iframe
     const handleMessage = (event: MessageEvent) => {
-      console.log('event.origin: ', event.origin)
       // Check if the message is from Cloudinary player
       if (event.origin.includes('cloudinary.com')) {
         try {
           const data = JSON.parse(event.data);
           
-          // Handle play/pause events
-          if (data.event === 'play') {
-            setIsPlaying(true);
-            // Toggle mute when video starts playing
-            if (iframeRef.current) {
-              iframeRef.current.contentWindow?.postMessage(
-                JSON.stringify({
-                  method: 'mute',
-                  value: false
-                }),
-                '*'
-              );
-              setIsMuted(false);
-            }
-          } else if (data.event === 'pause') {
-            setIsPlaying(false);
-            // Mute when video is paused
-            if (iframeRef.current) {
-              iframeRef.current.contentWindow?.postMessage(
-                JSON.stringify({
-                  method: 'mute',
-                  value: true
-                }),
-                '*'
-              );
-              setIsMuted(true);
-            }
+          // Only handle mute state changes
+          if (data.event === 'mutechange') {
+            setIsMuted(data.value);
           }
         } catch (error) {
           console.error('Error parsing Cloudinary player message:', error);
@@ -88,8 +62,8 @@ const CloudinaryPlayer = ({ cloudName, publicId, profile }: CloudinaryPlayerProp
         loading="eager"
       ></iframe>
       
-      {/* Dark overlay to improve text visibility */}
-      <div className="absolute inset-0 bg-black/30 pointer-events-none" />
+      {/* Dark overlay with pointer-events-none to allow interaction with iframe */}
+      <div className="absolute inset-0 bg-black/30 pointer-events-none" style={{ zIndex: -1 }} />
     </div>
   );
 };
