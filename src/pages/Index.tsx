@@ -1,8 +1,8 @@
 
-import React from 'react';
+import React, { useRef } from 'react';
 import SocialLinks from '@/components/SocialLinks';
 import OrientationPrompt from '@/components/OrientationPrompt';
-import CloudinaryPlayer from '@/components/CloudinaryPlayer';
+import CloudinaryPlayer from './CloudinaryPlayer';
 
 // Cloudinary player configuration
 const CLOUDINARY_CONFIG = {
@@ -12,9 +12,35 @@ const CLOUDINARY_CONFIG = {
 };
 
 const Index = () => {
+
+  const playerRef = useRef<any>(null);
+
+  const handlePlayerReady = (player: any) => {
+    playerRef.current = player;
+  };
+
+  const playVideo = () => {
+    if (playerRef.current) {
+      playerRef.current.play();
+    }
+  };
+
+  const pauseVideo = () => {
+    if (playerRef.current) {
+      playerRef.current.pause();
+    }
+  };
+
+  const toggleMute = () => {
+    if (playerRef.current) {
+      const currentlyMuted = playerRef.current.muted();
+      playerRef.current.muted(!currentlyMuted);
+    }
+  };
+
   return <div className="relative min-h-screen bg-black text-white overflow-hidden">
       {/* Cloudinary Player Background */}
-      <CloudinaryPlayer cloudName={CLOUDINARY_CONFIG.cloudName} publicId={CLOUDINARY_CONFIG.publicId} profile={CLOUDINARY_CONFIG.profile} />
+      <CloudinaryPlayer cloudName={CLOUDINARY_CONFIG.cloudName} publicId={CLOUDINARY_CONFIG.publicId} profile={CLOUDINARY_CONFIG.profile} onPlayerReady={handlePlayerReady} />
       
       {/* Mobile Orientation Prompt */}
       <OrientationPrompt />
