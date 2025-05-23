@@ -32,7 +32,15 @@ const CloudinaryPlayer = ({ cloudName, publicId, profile }: CloudinaryPlayerProp
       <iframe 
         ref={iframeRef}
         src={playerUrl}
-        className="absolute inset-0 w-full h-full" 
+        className="absolute inset-0 w-screen h-screen object-cover" 
+        style={{
+          width: '100vw',
+          height: '100vh',
+          objectFit: 'cover',
+          objectPosition: 'center',
+          minWidth: '100%',
+          minHeight: '100%',
+        }}
         allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
         onLoad={handleIframeLoad}
         title="Cloudinary Player"
