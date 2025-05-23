@@ -4,42 +4,62 @@ interface CloudinaryPlayerProps {
   cloudName: string;
   publicId: string;
   profile: string;
+  onPlayerReady?: (player: any) => void;
 }
 
-const CloudinaryPlayer = ({ cloudName, publicId, profile }: CloudinaryPlayerProps) => {
-  const iframeRef = useRef<HTMLIFrameElement>(null);
+declare global {
+  interface Window {
+    cloudinary: any;
+  }
+}
+
+const CloudinaryPlayer = ({ cloudName, publicId, profile, onPlayerReady }: CloudinaryPlayerProps) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const playerRef = useRef<any>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [isMuted, setIsMuted] = useState(true);
-  
-  // Construct the Cloudinary player URL with autoplay parameter
-  const playerUrl = `https://player.cloudinary.com/embed/?cloud_name=${cloudName}&public_id=${publicId}&profile=${profile}&autoplay=true&muted=true`;
-  
+
   useEffect(() => {
-    // Listen for messages from the Cloudinary player iframe
-    const handleMessage = (event: MessageEvent) => {
-      // Check if the message is from Cloudinary player
-      if (event.origin.includes('cloudinary.com')) {
-        try {
-          const data = JSON.parse(event.data);
-          
-          // Only handle mute state changes
-          if (data.event === 'mutechange') {
-            setIsMuted(data.value);
-          }
-        } catch (error) {
-          console.error('Error parsing Cloudinary player message:', error);
-        }
+    // Load Cloudinary SDK if not already loaded
+    if (!window.cloudinary) {
+      const script = document.createElement('script');
+      script.src = 'https://unpkg.com/cloudinary-core/cloudinary-core-shrinkwrap.min.js';
+      script.async = true;
+      script.onload = initializePlayer;
+      document.body.appendChild(script);
+    } else {
+      initializePlayer();
+    }
+
+    return () => {
+      // Clean up player
+      if (playerRef.current) {
+        playerRef.current.dispose();
       }
     };
+  }, [cloudName, publicId, profile]);
 
-    window.addEventListener('message', handleMessage);
-    return () => window.removeEventListener('message', handleMessage);
-  }, []);
+  const initializePlayer = () => {
+    const player = window.cloudinary.videoPlayer(videoRef.current!, {
+      cloud_name: cloudName,
+      publicId: publicId,
+      profile: profile,
+      autoplay: true,
+      muted: true,
+      controls: true,
+      playsinline: true
+    });
 
-  // Handle iframe load complete
-  const handleIframeLoad = () => {
-    console.log('Cloudinary player loaded');
-    setIsLoading(false);
+    playerRef.current = player;
+
+    player.on('loadedmetadata', () => {
+      console.log('Cloudinary player ready');
+      setIsLoading(false);
+      if (onPlayerReady) onPlayerReady(player);
+    });
+
+    player.on('error', (error: any) => {
+      console.error('Player error:', error);
+    });
   };
 
   return (
@@ -51,19 +71,14 @@ const CloudinaryPlayer = ({ cloudName, publicId, profile }: CloudinaryPlayerProp
         </div>
       )}
       
-      <iframe 
-        ref={iframeRef}
-        src={playerUrl}
-        className="absolute inset-0 w-full h-full" 
-        allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
-        onLoad={handleIframeLoad}
-        title="Cloudinary Player"
-        frameBorder="0"
-        loading="eager"
-      ></iframe>
+      <video
+        ref={videoRef}
+        className="absolute inset-0 w-full h-full"
+        playsInline
+      />
       
-      {/* Dark overlay with pointer-events-none to allow interaction with iframe */}
-      <div className="absolute inset-0 bg-black/30 pointer-events-none" style={{ zIndex: -1 }} />
+      {/* Dark overlay to improve text visibility */}
+      <div className="absolute inset-0 bg-black/30 pointer-events-none" />
     </div>
   );
 };
