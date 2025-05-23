@@ -12,7 +12,7 @@ const CloudinaryPlayer = ({ cloudName, publicId, profile }: CloudinaryPlayerProp
   const [isLoading, setIsLoading] = useState(true);
   
   // Construct the Cloudinary player URL with autoplay parameter
-  const playerUrl = `https://player.cloudinary.com/embed/?cloud_name=${cloudName}&public_id=${publicId}&profile=${profile}&autoplay=true&muted=true`;
+  const playerUrl = `https://player.cloudinary.com/embed/?cloud_name=${cloudName}&public_id=${publicId}&profile=${profile}&autoplay=true&muted=true&controls=true&show_controls=true`;
   
   // Handle iframe load complete
   const handleIframeLoad = () => {
