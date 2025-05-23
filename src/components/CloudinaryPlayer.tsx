@@ -10,6 +10,7 @@ const CloudinaryPlayer = ({ cloudName, publicId, profile }: CloudinaryPlayerProp
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isMuted, setIsMuted] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(false);
   
   // Construct the Cloudinary player URL with autoplay parameter
   const playerUrl = `https://player.cloudinary.com/embed/?cloud_name=${cloudName}&public_id=${publicId}&profile=${profile}&autoplay=true&muted=true`;
@@ -23,18 +24,31 @@ const CloudinaryPlayer = ({ cloudName, publicId, profile }: CloudinaryPlayerProp
           const data = JSON.parse(event.data);
           
           // Handle play/pause events
-          if (data.event === 'play' || data.event === 'pause') {
-            // Toggle mute state when play/pause button is clicked
+          if (data.event === 'play') {
+            setIsPlaying(true);
+            // Toggle mute when video starts playing
             if (iframeRef.current) {
-              const newMuteState = !isMuted;
               iframeRef.current.contentWindow?.postMessage(
                 JSON.stringify({
                   method: 'mute',
-                  value: newMuteState
+                  value: false
                 }),
                 '*'
               );
-              setIsMuted(newMuteState);
+              setIsMuted(false);
+            }
+          } else if (data.event === 'pause') {
+            setIsPlaying(false);
+            // Mute when video is paused
+            if (iframeRef.current) {
+              iframeRef.current.contentWindow?.postMessage(
+                JSON.stringify({
+                  method: 'mute',
+                  value: true
+                }),
+                '*'
+              );
+              setIsMuted(true);
             }
           }
         } catch (error) {
@@ -45,7 +59,7 @@ const CloudinaryPlayer = ({ cloudName, publicId, profile }: CloudinaryPlayerProp
 
     window.addEventListener('message', handleMessage);
     return () => window.removeEventListener('message', handleMessage);
-  }, [isMuted]);
+  }, []);
 
   // Handle iframe load complete
   const handleIframeLoad = () => {
