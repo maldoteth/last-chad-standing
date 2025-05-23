@@ -1,3 +1,4 @@
+
 import React from 'react';
 import SocialLinks from '@/components/SocialLinks';
 import OrientationPrompt from '@/components/OrientationPrompt';
@@ -9,6 +10,7 @@ const CLOUDINARY_CONFIG = {
   publicId: 'LCS_TEASER_1_1_wlqwnc',
   profile: 'cld-default'
 };
+
 const Index = () => {
   return <div className="relative bg-black text-white overflow-hidden">
       {/* Cloudinary Player Background */}
@@ -24,16 +26,17 @@ const Index = () => {
           {/* Optional: Add your game logo/title here */}
         </div>
         
-        {/* Social Links positioned closer to bottom - Reduced margin */}
-        <div className="pb-6 mb-6 pointer-events-auto py-0 my-0">
+        {/* Social Links positioned closer to bottom - Further reduced margin */}
+        <div className="pb-2 mb-2 pointer-events-auto py-0 my-0">
           <SocialLinks className="animate-fade-in" />
           
           {/* Copyright info */}
-          <div className="text-center mt-6 text-sm text-white/60 my-[20px]">
+          <div className="text-center mt-4 text-sm text-white/60 my-[10px]">
             © 2024 DeHub Games
           </div>
         </div>
       </div>
     </div>;
 };
+
 export default Index;
