@@ -18,6 +18,7 @@ const CloudinaryPlayer = ({ cloudName, publicId, profile }: CloudinaryPlayerProp
   useEffect(() => {
     // Listen for messages from the Cloudinary player iframe
     const handleMessage = (event: MessageEvent) => {
+      console.log('event.origin: ', event.origin)
       // Check if the message is from Cloudinary player
       if (event.origin.includes('cloudinary.com')) {
         try {
