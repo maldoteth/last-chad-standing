@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Instagram, Twitter, Globe, Layers } from 'lucide-react';
+import { Instagram, Twitter, Globe } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface SocialLink {
@@ -29,11 +29,6 @@ const defaultSocialLinks: SocialLink[] = [
     name: "Instagram",
     icon: <Instagram size={24} />,
     url: "https://www.instagram.com/lastchadstanding/"
-  },
-  {
-    name: "Deck",
-    icon: <Layers size={24} />,
-    url: "https://lcsdeck.com"
   }
 ];
 
