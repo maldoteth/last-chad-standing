@@ -20,6 +20,15 @@ const CloudinaryPlayer = ({ cloudName, publicId, profile }: CloudinaryPlayerProp
     setIsLoading(false);
   };
 
+  // Prevent iframe from interfering with parent page mutations
+  useEffect(() => {
+    const iframe = iframeRef.current;
+    if (iframe) {
+      // Ensure iframe is properly isolated
+      iframe.setAttribute('data-lovable-ignore', 'true');
+    }
+  }, []);
+
   return (
     <div className="fixed inset-0 w-full h-full overflow-hidden">
       {isLoading && (
@@ -36,15 +45,15 @@ const CloudinaryPlayer = ({ cloudName, publicId, profile }: CloudinaryPlayerProp
         allow="autoplay; fullscreen; encrypted-media; picture-in-picture; clipboard-write"
         onLoad={handleIframeLoad}
         title="Cloudinary Player"
-        frameBorder="0"
         loading="eager"
+        data-lovable-ignore="true"
         style={{ 
           pointerEvents: 'auto',
           border: 'none',
           outline: 'none'
         }}
         sandbox="allow-scripts allow-same-origin allow-presentation allow-forms"
-      ></iframe>
+      />
     </div>
   );
 };
