@@ -1,4 +1,3 @@
-
 import React from 'react';
 import SocialLinks from '@/components/SocialLinks';
 import OrientationPrompt from '@/components/OrientationPrompt';
@@ -10,16 +9,10 @@ const CLOUDINARY_CONFIG = {
   publicId: 'LCS_TEASER_1_1_wlqwnc',
   profile: 'cld-default'
 };
-
 const Index = () => {
-  return (
-    <div className="relative min-h-screen bg-black text-white overflow-hidden">
+  return <div className="relative min-h-screen bg-black text-white overflow-hidden">
       {/* Cloudinary Player Background */}
-      <CloudinaryPlayer 
-        cloudName={CLOUDINARY_CONFIG.cloudName} 
-        publicId={CLOUDINARY_CONFIG.publicId} 
-        profile={CLOUDINARY_CONFIG.profile} 
-      />
+      <CloudinaryPlayer cloudName={CLOUDINARY_CONFIG.cloudName} publicId={CLOUDINARY_CONFIG.publicId} profile={CLOUDINARY_CONFIG.profile} />
       
       {/* Mobile Orientation Prompt */}
       <OrientationPrompt />
@@ -41,8 +34,6 @@ const Index = () => {
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default Index;
