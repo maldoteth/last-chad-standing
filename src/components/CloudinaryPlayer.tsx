@@ -11,8 +11,8 @@ const CloudinaryPlayer = ({ cloudName, publicId, profile }: CloudinaryPlayerProp
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [isLoading, setIsLoading] = useState(true);
   
-  // Construct the Cloudinary player URL with autoplay parameter and controls enabled
-  const playerUrl = `https://player.cloudinary.com/embed/?cloud_name=${cloudName}&public_id=${publicId}&profile=${profile}&autoplay=true&muted=true&controls=true&show_controls=true`;
+  // Construct the Cloudinary player URL with proper control parameters
+  const playerUrl = `https://player.cloudinary.com/embed/?cloud_name=${cloudName}&public_id=${publicId}&profile=${profile}&autoplay=true&muted=true&controls=true&show_controls=true&fluid=false&hide_context_menu=false`;
   
   // Handle iframe load complete
   const handleIframeLoad = () => {
@@ -33,12 +33,17 @@ const CloudinaryPlayer = ({ cloudName, publicId, profile }: CloudinaryPlayerProp
         ref={iframeRef}
         src={playerUrl}
         className="absolute inset-0 w-full h-full z-10" 
-        allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+        allow="autoplay; fullscreen; encrypted-media; picture-in-picture; clipboard-write"
         onLoad={handleIframeLoad}
         title="Cloudinary Player"
         frameBorder="0"
         loading="eager"
-        style={{ pointerEvents: 'auto' }}
+        style={{ 
+          pointerEvents: 'auto',
+          border: 'none',
+          outline: 'none'
+        }}
+        sandbox="allow-scripts allow-same-origin allow-presentation allow-forms"
       ></iframe>
     </div>
   );
