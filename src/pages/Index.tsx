@@ -1,3 +1,4 @@
+
 import React from 'react';
 import SocialLinks from '@/components/SocialLinks';
 import OrientationPrompt from '@/components/OrientationPrompt';
@@ -24,8 +25,8 @@ const Index = () => {
           {/* Optional: Add your game logo/title here */}
         </div>
         
-        {/* Social Links positioned to avoid player controls - Added pt-1 for 5px downward movement */}
-        <div className="pb-12 mb-20 pt-1 pointer-events-auto py-0">
+        {/* Social Links positioned to avoid player controls - Added pt-[15px] for 10px additional downward movement */}
+        <div className="pb-12 mb-20 pt-[15px] pointer-events-auto py-0">
           <SocialLinks className="animate-fade-in" />
           
           {/* Copyright info */}
