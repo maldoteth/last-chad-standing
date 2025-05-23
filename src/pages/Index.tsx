@@ -47,6 +47,7 @@ const Index = () => {
             <button onClick={pauseVideo}>Pause</button>
             <button onClick={toggleMute}>Toggle Mute</button>
         </div>
+
       </div>
       
       {/* Mobile Orientation Prompt */}
