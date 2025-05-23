@@ -10,10 +10,16 @@ const CLOUDINARY_CONFIG = {
   publicId: 'LCS_TEASER_1_1_wlqwnc',
   profile: 'cld-default'
 };
+
 const Index = () => {
-  return <div className="relative bg-black text-white overflow-hidden">
+  return (
+    <div className="relative bg-black text-white overflow-hidden">
       {/* Cloudinary Player Background */}
-      <CloudinaryPlayer cloudName={CLOUDINARY_CONFIG.cloudName} publicId={CLOUDINARY_CONFIG.publicId} profile={CLOUDINARY_CONFIG.profile} />
+      <CloudinaryPlayer 
+        cloudName={CLOUDINARY_CONFIG.cloudName} 
+        publicId={CLOUDINARY_CONFIG.publicId} 
+        profile={CLOUDINARY_CONFIG.profile} 
+      />
       
       {/* Mobile Orientation Prompt */}
       <OrientationPrompt />
@@ -25,14 +31,18 @@ const Index = () => {
           {/* Optional: Add your game logo/title here */}
         </div>
         
-        {/* Social Links positioned closer to bottom - Moved up by 5px */}
-        <div className="pb-2 mb-2 pointer-events-auto my-0 py-0">
-          <SocialLinks className="animate-fade-in py-[26px]" />
+        {/* Social Links positioned closer to bottom - Reduced margin */}
+        <div className="pb-6 mb-6 pointer-events-auto">
+          <SocialLinks className="animate-fade-in" />
           
           {/* Copyright info */}
-          
+          <div className="text-center mt-6 text-sm text-white/60 my-[20px]">
+            © 2024 DeHub Games
+          </div>
         </div>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default Index;
