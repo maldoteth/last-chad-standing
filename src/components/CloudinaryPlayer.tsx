@@ -12,7 +12,7 @@ const CloudinaryPlayer = ({ cloudName, publicId, profile }: CloudinaryPlayerProp
   const [isLoading, setIsLoading] = useState(true);
   
   // Construct the Cloudinary player URL with autoplay parameter
-  const playerUrl = `https://player.cloudinary.com/embed/?cloud_name=${cloudName}&public_id=${publicId}&profile=${profile}&autoplay=true&muted=true`;
+  const playerUrl = `https://player.cloudinary.com/embed/?cloud_name=${cloudName}&public_id=${publicId}&profile=${profile}&autoplay=true`;
   
   // Handle iframe load complete
   const handleIframeLoad = () => {
@@ -32,15 +32,7 @@ const CloudinaryPlayer = ({ cloudName, publicId, profile }: CloudinaryPlayerProp
       <iframe 
         ref={iframeRef}
         src={playerUrl}
-        className="absolute inset-0 w-screen h-screen object-cover" 
-        style={{
-          width: '100vw',
-          height: '100vh',
-          objectFit: 'cover',
-          objectPosition: 'center',
-          minWidth: '100%',
-          minHeight: '100%',
-        }}
+        className="absolute inset-0 w-full h-full" 
         allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
         onLoad={handleIframeLoad}
         title="Cloudinary Player"
