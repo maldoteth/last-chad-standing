@@ -19,15 +19,15 @@ const Index = () => {
       {/* Mobile Orientation Prompt */}
       <OrientationPrompt />
       
-      {/* Content Container */}
-      <div className="relative z-10 flex flex-col min-h-screen">
+      {/* Content Container - Changed from min-h-screen to h-screen and pointer-events-none */}
+      <div className="relative z-10 flex flex-col h-screen pointer-events-none">
         {/* Game Title/Logo (if needed) */}
         <div className="flex-grow flex items-center justify-center">
           {/* Optional: Add your game logo/title here */}
         </div>
         
-        {/* Social Links positioned in the bottom third */}
-        <div className="pb-12">
+        {/* Social Links positioned in the bottom third - Added pointer-events-auto */}
+        <div className="pb-12 pointer-events-auto">
           <SocialLinks className="animate-fade-in" />
           
           {/* Copyright info */}
