@@ -22,10 +22,16 @@ const CloudinaryPlayer = ({ cloudName, publicId, profile, onPlayerReady }: Cloud
     // Load Cloudinary SDK if not already loaded
     if (!window.cloudinary) {
       const script = document.createElement('script');
-      script.src = 'https://unpkg.com/cloudinary-core/cloudinary-core-shrinkwrap.min.js';
+      script.src = 'https://unpkg.com/cloudinary-video-player@1.9.4/dist/cld-video-player.min.js';
       script.async = true;
       script.onload = initializePlayer;
       document.body.appendChild(script);
+
+      // Add CSS for the player
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = 'https://unpkg.com/cloudinary-video-player@1.9.4/dist/cld-video-player.min.css';
+      document.head.appendChild(link);
     } else {
       initializePlayer();
     }
@@ -39,6 +45,11 @@ const CloudinaryPlayer = ({ cloudName, publicId, profile, onPlayerReady }: Cloud
   }, [cloudName, publicId, profile]);
 
   const initializePlayer = () => {
+    if (!window.cloudinary?.videoPlayer) {
+      console.error('Cloudinary Video Player SDK not loaded');
+      return;
+    }
+
     const player = window.cloudinary.videoPlayer(videoRef.current!, {
       cloud_name: cloudName,
       publicId: publicId,
@@ -46,7 +57,10 @@ const CloudinaryPlayer = ({ cloudName, publicId, profile, onPlayerReady }: Cloud
       autoplay: true,
       muted: true,
       controls: true,
-      playsinline: true
+      playsinline: true,
+      transformation: [
+        { width: 'auto', height: 'auto', crop: 'fill' }
+      ]
     });
 
     playerRef.current = player;
@@ -73,7 +87,7 @@ const CloudinaryPlayer = ({ cloudName, publicId, profile, onPlayerReady }: Cloud
       
       <video
         ref={videoRef}
-        className="absolute inset-0 w-full h-full"
+        className="absolute inset-0 w-full h-full object-cover"
         playsInline
       />
       
