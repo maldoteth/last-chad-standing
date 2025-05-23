@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 
 interface CloudinaryPlayerProps {
@@ -10,10 +9,44 @@ interface CloudinaryPlayerProps {
 const CloudinaryPlayer = ({ cloudName, publicId, profile }: CloudinaryPlayerProps) => {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isMuted, setIsMuted] = useState(true);
   
   // Construct the Cloudinary player URL with autoplay parameter
-  const playerUrl = `https://player.cloudinary.com/embed/?cloud_name=${cloudName}&public_id=${publicId}&profile=${profile}&autoplay=true`;
+  const playerUrl = `https://player.cloudinary.com/embed/?cloud_name=${cloudName}&public_id=${publicId}&profile=${profile}&autoplay=true&muted=true`;
   
+  useEffect(() => {
+    // Listen for messages from the Cloudinary player iframe
+    const handleMessage = (event: MessageEvent) => {
+      // Check if the message is from Cloudinary player
+      if (event.origin.includes('cloudinary.com')) {
+        try {
+          const data = JSON.parse(event.data);
+          
+          // Handle play/pause events
+          if (data.event === 'play' || data.event === 'pause') {
+            // Toggle mute state when play/pause button is clicked
+            if (iframeRef.current) {
+              const newMuteState = !isMuted;
+              iframeRef.current.contentWindow?.postMessage(
+                JSON.stringify({
+                  method: 'mute',
+                  value: newMuteState
+                }),
+                '*'
+              );
+              setIsMuted(newMuteState);
+            }
+          }
+        } catch (error) {
+          console.error('Error parsing Cloudinary player message:', error);
+        }
+      }
+    };
+
+    window.addEventListener('message', handleMessage);
+    return () => window.removeEventListener('message', handleMessage);
+  }, [isMuted]);
+
   // Handle iframe load complete
   const handleIframeLoad = () => {
     console.log('Cloudinary player loaded');
