@@ -25,7 +25,7 @@ const Index = () => {
         </div>
         
         {/* Social Links positioned closer to bottom - Further reduced margin */}
-        <div className="pb-2 mb-2 pointer-events-auto my-0 py-[80px]">
+        <div className="pb-2 mb-2 pointer-events-auto my-0 py-[120px]">
           <SocialLinks className="animate-fade-in" />
           
           {/* Copyright info */}
