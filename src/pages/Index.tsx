@@ -1,5 +1,5 @@
 
-import React, { useRef } from 'react';
+import React from 'react';
 import SocialLinks from '@/components/SocialLinks';
 import OrientationPrompt from '@/components/OrientationPrompt';
 import CloudinaryPlayer from '@/components/CloudinaryPlayer';
@@ -12,43 +12,9 @@ const CLOUDINARY_CONFIG = {
 };
 
 const Index = () => {
-
-  const playerRef = useRef<any>(null);
-
-  const handlePlayerReady = (player: any) => {
-    playerRef.current = player;
-  };
-
-  const playVideo = () => {
-    if (playerRef.current) {
-      playerRef.current.play();
-    }
-  };
-
-  const pauseVideo = () => {
-    if (playerRef.current) {
-      playerRef.current.pause();
-    }
-  };
-
-  const toggleMute = () => {
-    if (playerRef.current) {
-      const currentlyMuted = playerRef.current.muted();
-      playerRef.current.muted(!currentlyMuted);
-    }
-  };
-
   return <div className="relative min-h-screen bg-black text-white overflow-hidden">
       {/* Cloudinary Player Background */}
-      <div className="absolute inset-0">
-        <CloudinaryPlayer cloudName={CLOUDINARY_CONFIG.cloudName} publicId={CLOUDINARY_CONFIG.publicId} profile={CLOUDINARY_CONFIG.profile} onPlayerReady={handlePlayerReady} />
-        <div className="controls">
-            <button onClick={playVideo}>Play</button>
-            <button onClick={pauseVideo}>Pause</button>
-            <button onClick={toggleMute}>Toggle Mute</button>
-        </div>
-
-      </div>
+      <CloudinaryPlayer cloudName={CLOUDINARY_CONFIG.cloudName} publicId={CLOUDINARY_CONFIG.publicId} profile={CLOUDINARY_CONFIG.profile} />
       
       {/* Mobile Orientation Prompt */}
       <OrientationPrompt />

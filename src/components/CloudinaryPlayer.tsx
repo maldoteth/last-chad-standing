@@ -1,79 +1,23 @@
+
 import React, { useEffect, useRef, useState } from 'react';
 
 interface CloudinaryPlayerProps {
   cloudName: string;
   publicId: string;
   profile: string;
-  onPlayerReady?: (player: any) => void;
 }
 
-declare global {
-  interface Window {
-    cloudinary: any;
-  }
-}
-
-const CloudinaryPlayer = ({ cloudName, publicId, profile, onPlayerReady }: CloudinaryPlayerProps) => {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const playerRef = useRef<any>(null);
+const CloudinaryPlayer = ({ cloudName, publicId, profile }: CloudinaryPlayerProps) => {
+  const iframeRef = useRef<HTMLIFrameElement>(null);
   const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    // Load Cloudinary SDK if not already loaded
-    if (!window.cloudinary) {
-      const script = document.createElement('script');
-      script.src = 'https://unpkg.com/cloudinary-video-player@1.9.4/dist/cld-video-player.min.js';
-      script.async = true;
-      script.onload = initializePlayer;
-      document.body.appendChild(script);
-
-      // Add CSS for the player
-      const link = document.createElement('link');
-      link.rel = 'stylesheet';
-      link.href = 'https://unpkg.com/cloudinary-video-player@1.9.4/dist/cld-video-player.min.css';
-      document.head.appendChild(link);
-    } else {
-      initializePlayer();
-    }
-
-    return () => {
-      // Clean up player
-      if (playerRef.current) {
-        playerRef.current.dispose();
-      }
-    };
-  }, [cloudName, publicId, profile]);
-
-  const initializePlayer = () => {
-    if (!window.cloudinary?.videoPlayer) {
-      console.error('Cloudinary Video Player SDK not loaded');
-      return;
-    }
-
-    const player = window.cloudinary.videoPlayer(videoRef.current!, {
-      cloud_name: cloudName,
-      publicId: publicId,
-      profile: profile,
-      autoplay: true,
-      muted: true,
-      controls: true,
-      playsinline: true,
-      transformation: [
-        { width: 'auto', height: 'auto', crop: 'fill' }
-      ]
-    });
-
-    playerRef.current = player;
-
-    player.on('loadedmetadata', () => {
-      console.log('Cloudinary player ready');
-      setIsLoading(false);
-      if (onPlayerReady) onPlayerReady(player);
-    });
-
-    player.on('error', (error: any) => {
-      console.error('Player error:', error);
-    });
+  
+  // Construct the Cloudinary player URL with autoplay parameter
+  const playerUrl = `https://player.cloudinary.com/embed/?cloud_name=${cloudName}&public_id=${publicId}&profile=${profile}&autoplay=true`;
+  
+  // Handle iframe load complete
+  const handleIframeLoad = () => {
+    console.log('Cloudinary player loaded');
+    setIsLoading(false);
   };
 
   return (
@@ -85,11 +29,16 @@ const CloudinaryPlayer = ({ cloudName, publicId, profile, onPlayerReady }: Cloud
         </div>
       )}
       
-      <video
-        ref={videoRef}
-        className="absolute inset-0 w-full h-full object-cover"
-        playsInline
-      />
+      <iframe 
+        ref={iframeRef}
+        src={playerUrl}
+        className="absolute inset-0 w-full h-full" 
+        allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+        onLoad={handleIframeLoad}
+        title="Cloudinary Player"
+        frameBorder="0"
+        loading="eager"
+      ></iframe>
       
       {/* Dark overlay to improve text visibility */}
       <div className="absolute inset-0 bg-black/30 pointer-events-none" />
