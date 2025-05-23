@@ -12,7 +12,7 @@ const CLOUDINARY_CONFIG = {
 };
 
 const Index = () => {
-  return <div className="relative min-h-screen bg-black text-white overflow-hidden">
+  return <div className="relative bg-black text-white overflow-hidden">
       {/* Cloudinary Player Background */}
       <CloudinaryPlayer cloudName={CLOUDINARY_CONFIG.cloudName} publicId={CLOUDINARY_CONFIG.publicId} profile={CLOUDINARY_CONFIG.profile} />
       
