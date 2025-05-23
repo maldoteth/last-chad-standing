@@ -2,7 +2,7 @@
 import React, { useRef } from 'react';
 import SocialLinks from '@/components/SocialLinks';
 import OrientationPrompt from '@/components/OrientationPrompt';
-import CloudinaryPlayer from './CloudinaryPlayer';
+import CloudinaryPlayer from '@/components/CloudinaryPlayer';
 
 // Cloudinary player configuration
 const CLOUDINARY_CONFIG = {
