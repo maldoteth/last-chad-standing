@@ -40,7 +40,14 @@ const Index = () => {
 
   return <div className="relative min-h-screen bg-black text-white overflow-hidden">
       {/* Cloudinary Player Background */}
-      <CloudinaryPlayer cloudName={CLOUDINARY_CONFIG.cloudName} publicId={CLOUDINARY_CONFIG.publicId} profile={CLOUDINARY_CONFIG.profile} onPlayerReady={handlePlayerReady} />
+      <div className="absolute inset-0">
+        <CloudinaryPlayer cloudName={CLOUDINARY_CONFIG.cloudName} publicId={CLOUDINARY_CONFIG.publicId} profile={CLOUDINARY_CONFIG.profile} onPlayerReady={handlePlayerReady} />
+        <div className="controls">
+            <button onClick={playVideo}>Play</button>
+            <button onClick={pauseVideo}>Pause</button>
+            <button onClick={toggleMute}>Toggle Mute</button>
+        </div>
+      </div>
       
       {/* Mobile Orientation Prompt */}
       <OrientationPrompt />
