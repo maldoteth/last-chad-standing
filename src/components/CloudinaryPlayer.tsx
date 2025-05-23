@@ -30,7 +30,7 @@ const CloudinaryPlayer = ({ cloudName, publicId, profile }: CloudinaryPlayerProp
   }, []);
 
   return (
-    <div className="fixed inset-0 w-full h-full overflow-hidden">
+    <div className="fixed inset-0 w-full h-full overflow-hidden pointer-events-none">
       {isLoading && (
         <div className="absolute inset-0 flex flex-col items-center justify-center bg-black z-20">
           <div className="w-12 h-12 border-4 border-t-transparent border-white rounded-full animate-spin"></div>
@@ -41,7 +41,7 @@ const CloudinaryPlayer = ({ cloudName, publicId, profile }: CloudinaryPlayerProp
       <iframe 
         ref={iframeRef}
         src={playerUrl}
-        className="absolute inset-0 w-full h-full z-10" 
+        className="absolute inset-0 w-full h-full z-10 pointer-events-auto" 
         allow="autoplay; fullscreen; encrypted-media; picture-in-picture; clipboard-write"
         onLoad={handleIframeLoad}
         title="Cloudinary Player"
