@@ -10,6 +10,7 @@ const CLOUDINARY_CONFIG = {
   publicId: 'LCS_TEASER_1_1_wlqwnc',
   profile: 'cld-default'
 };
+
 const Index = () => {
   return <div className="relative bg-black text-white overflow-hidden">
       {/* Cloudinary Player Background */}
@@ -25,8 +26,8 @@ const Index = () => {
           {/* Optional: Add your game logo/title here */}
         </div>
         
-        {/* Social Links positioned to avoid player controls - Added pt-[15px] for 10px additional downward movement */}
-        <div className="pb-12 mb-20 pt-[15px] pointer-events-auto py-0">
+        {/* Social Links positioned to avoid player controls - Added pt-[25px] for downward movement */}
+        <div className="pb-12 mb-20 pt-[25px] pointer-events-auto">
           <SocialLinks className="animate-fade-in" />
           
           {/* Copyright info */}
@@ -35,4 +36,5 @@ const Index = () => {
       </div>
     </div>;
 };
+
 export default Index;
