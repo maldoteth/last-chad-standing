@@ -42,8 +42,13 @@ const CloudinaryPlayer = ({ cloudName, publicId, profile }: CloudinaryPlayerProp
         sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox allow-presentation"
       ></iframe>
       
-      {/* Removed the dark overlay that was blocking interactions */}
-      {/* Previously: <div className="absolute inset-0 bg-black/30 pointer-events-none" /> */}
+      {/* Gradient overlay to fade video edges into black background */}
+      <div 
+        className="absolute inset-0 pointer-events-none z-10"
+        style={{
+          background: 'linear-gradient(to right, black 0%, transparent 15%, transparent 85%, black 100%)'
+        }}
+      />
     </div>
   );
 };
