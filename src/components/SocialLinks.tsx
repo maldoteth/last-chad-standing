@@ -22,7 +22,7 @@ const defaultSocialLinks: SocialLink[] = [
   },
   {
     name: "X",
-    icon: <img src="/lovable-uploads/13b1e254-7a27-4fc3-8040-9882d7705c70.png" alt="X" className="w-6 h-6" />,
+    icon: <img src="/lovable-uploads/77a6c004-93ed-49ee-a5d0-6056ee852612.png" alt="X" className="w-6 h-6" />,
     url: "https://x.com/lcs_game"
   },
   {
