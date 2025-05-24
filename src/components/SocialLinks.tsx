@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Instagram, Twitter, Globe, Layers } from 'lucide-react';
+import { Instagram, X, Globe, Layers } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface SocialLink {
@@ -21,8 +21,8 @@ const defaultSocialLinks: SocialLink[] = [
     url: "https://leanchadfight.club"
   },
   {
-    name: "Twitter",
-    icon: <Twitter size={24} />,
+    name: "X",
+    icon: <X size={24} />,
     url: "https://x.com/lcs_game"
   },
   {
