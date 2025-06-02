@@ -197,8 +197,8 @@ const Documents = () => {
                       <h3>Character Customization</h3>
                       <p>Players can customize the appearance of their characters by selecting base skins and layering accessories, clothing, and weapons. NFTs purchased from the marketplace are fully tradable and can enhance the player's appearance with unique styles, offering individuality and a sense of ownership.</p>
 
-                      <h3>Skill Progression</h3>
-                      <p>Players can improve their characters' base stats (strength, speed, stamina) through gameplay. XP earned during matches can be spent on increasing these attributes, unlocking new moves, or augmenting special abilities. However, the game maintains a balanced approach to avoid "pay-to-win" scenarios—upgrades are capped to ensure fairness.</p>
+                      
+                      
                     </section>
 
                     {/* Character Model Image */}
@@ -298,8 +298,8 @@ const Documents = () => {
                             <li><strong>L1/LB:</strong> Quick Dodge</li>
                             <li><strong>L3 (Click Left Stick):</strong> Sprint</li>
                             <li><strong>R3 (Click Right Stick):</strong> Crouch/Slide</li>
-                            <li><strong>D-Pad:</strong> Weapon select</li>
-                            <li><strong>L2 + Square/X:</strong> Throw weapon</li>
+                            
+                            
                             <li><strong>L1 + R1:</strong> Special Ability</li>
                             <li><strong>Options/Menu:</strong> Pause/Map</li>
                           </ul>
