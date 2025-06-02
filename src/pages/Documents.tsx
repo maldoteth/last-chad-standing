@@ -558,7 +558,7 @@ const Documents = () => {
                       
                       <ul>
                         <li><strong>In-Game Currency:</strong> Buy or sell skins from the store or secondary marketplace directly with other players</li>
-                        <li><strong>Tournament Entry:</strong> Entry fees for competitive events</li>
+                        <li><strong>Tournament Entry:</strong> Access events and experiences, from tournaments to socials</li>
                         <li><strong>NFT Marketplace:</strong> Trading and purchasing unique items</li>
                         <li><strong>Governance:</strong> Voting on game features and updates</li>
                         <li><strong>Staking Rewards:</strong> Earn additional coins by staking</li>
