@@ -1,9 +1,7 @@
-
 import React from 'react';
 import { ArrowLeft, UserCheck, Gamepad2, Map, Sword, Settings, Target, Trophy, DollarSign, Eye, Headphones, Rocket, Joystick, Shield, Navigation, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ScrollArea } from '@/components/ui/scroll-area';
-
 const Documents = () => {
   const documentSections = [{
     title: "Game Overview",
@@ -429,7 +427,7 @@ const Documents = () => {
                     {/* Weapons and Inventory */}
                     <section id="weapons-inventory" className="mb-12">
                       <h2 className="text-3xl font-bold">11. Weapons and Inventory</h2>
-                      <p>Weapons can be found throughout the island and can range from blunt instruments to sharp bladed weapons. Players can carry up to three weapons, and each weapon has durability, meaning it can break over time.</p>
+                      <p>Weapons can be found throughout the island and can range from blunt instruments to branches. Players can carry up to three weapons, and each weapon has durability, meaning it can break over time.</p>
                       
                       <br />
 
