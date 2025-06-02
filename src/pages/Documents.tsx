@@ -571,7 +571,7 @@ const Documents = () => {
                           <div className="grid md:grid-cols-3 gap-4 text-sm">
                             <div className="bg-white p-4 rounded">
                               <h6 className="font-bold text-green-600 mb-2">Play-to-Win</h6>
-                              <p>Players earn LCS tokens by winning matches, completing challenges, and participating in tournaments.</p>
+                              <p>Players earn coins, skins and other cosmetics by winning matches, completing challenges and participating in tournaments.</p>
                             </div>
                             <div className="bg-white p-4 rounded">
                               <h6 className="font-bold text-blue-600 mb-2">Deflationary Model</h6>
