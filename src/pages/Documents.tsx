@@ -356,7 +356,7 @@ const Documents = () => {
 
                     {/* Weapons and Inventory */}
                     <section id="weapons-inventory" className="mb-12">
-                      <h2>11. Weapons and Inventory</h2>
+                      <h2 className="font-bold">11. Weapons and Inventory</h2>
                       <p>Weapons can be found throughout the island and can range from blunt instruments to sharp bladed weapons. Players can carry up to three weapons, and each weapon has durability, meaning it can break over time.</p>
                       
                       <h3>Weapon Categories</h3>
@@ -364,7 +364,7 @@ const Documents = () => {
                         <li><strong>Blunt Weapons:</strong> Bats, pipes, hammers—ideal for bashing enemies. Slower, but cause knockback.</li>
                         
                         <li><strong>Improvised Weapons:</strong> Found objects like bricks, chainsaws, or construction tools. Deal high damage but often have low durability.</li>
-                        <li><strong>Throwable Weapons:</strong> Rocks or even grenades (in special game modes). These can be hurled at enemies from a distance but require good aim.</li>
+                        <li><strong>Throwable Weapons:</strong> Knives, rocks, or even grenades (in special game modes). These can be hurled at enemies from a distance but require good aim.</li>
                       </ul>
 
                       <h3 className="text-base font-bold">Weapon Durability</h3>
