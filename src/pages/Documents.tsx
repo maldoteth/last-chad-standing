@@ -239,7 +239,7 @@ const Documents = () => {
                     <div className="flex flex-col md:flex-row gap-6 p-6 bg-gray-50 rounded-lg">
                       <div className="md:w-1/3">
                         <img 
-                          src="/lovable-uploads/ba9c646a-45e6-4ab3-9b25-1f069d27960b.png" 
+                          src="/lovable-uploads/ea386eae-1f4f-44c0-ad78-7f038df224d3.png" 
                           alt="Rayn Barrera" 
                           className="w-full h-64 object-cover rounded-lg"
                         />
