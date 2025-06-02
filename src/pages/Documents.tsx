@@ -530,6 +530,8 @@ const Documents = () => {
                     <section id="in-game-currency" className="mb-12">
                       <h2 className="text-3xl font-bold">16. Economy</h2>
                       
+                      <br />
+                      
                       <h3 className="text-2xl font-bold">Coins</h3>
 
                       <p>Every game needs in-game currency, but ours is unique compared to most games because it's decentralized and has a set supply, giving players real ownership without manipulation from developers. Unlike traditional games where developers can inflate currency at will, our coins operate on blockchain technology with transparent tokenomics.</p>
