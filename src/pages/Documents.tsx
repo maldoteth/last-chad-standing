@@ -2,7 +2,6 @@ import React from 'react';
 import { ArrowLeft, UserCheck, Gamepad2, Map, Sword, Settings, Target, Trophy, DollarSign, Eye, Headphones, Rocket, Joystick, Shield, Navigation, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ScrollArea } from '@/components/ui/scroll-area';
-
 const Documents = () => {
   const documentSections = [{
     title: "Game Overview",
@@ -557,7 +556,7 @@ const Documents = () => {
 
                       
                       <ul>
-                        <li><strong>In-Game Purchases:</strong> Skins, experiences and other assets</li>
+                        <li><strong>In-Game Purchases:</strong> Skins, weapons, cosmetics</li>
                         <li><strong>Tournament Entry:</strong> Entry fees for competitive events</li>
                         <li><strong>NFT Marketplace:</strong> Trading and purchasing unique items</li>
                         <li><strong>Governance:</strong> Voting on game features and updates</li>
@@ -566,20 +565,11 @@ const Documents = () => {
                       </ul>
 
                       <div className="mt-8">
-                        <h4 className="text-xl font-bold mb-3">Coin Mechanics</h4>
+                        
                         <div className="grid md:grid-cols-3 gap-4 text-sm">
-                          <div className="bg-white p-4 rounded border">
-                            <h6 className="font-bold text-green-600 mb-2">Play-to-Win</h6>
-                            <p>Players earn coins, skins and other cosmetics by winning matches, completing challenges and participating in tournaments.</p>
-                          </div>
-                          <div className="bg-white p-4 rounded border">
-                            <h6 className="font-bold text-blue-600 mb-2">Deflationary Model</h6>
-                            <p>A percentage of coins used for transactions are burned, reducing total supply over time.</p>
-                          </div>
-                          <div className="bg-white p-4 rounded border">
-                            <h6 className="font-bold text-purple-600 mb-2">Yield Generation</h6>
-                            <p>Staking coins provides holders with passive income and exclusive benefits.</p>
-                          </div>
+                          
+                          
+                          
                         </div>
                       </div>
                     </section>
