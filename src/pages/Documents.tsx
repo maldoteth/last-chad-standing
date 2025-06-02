@@ -1,11 +1,31 @@
 
 import React from 'react';
-import { ArrowLeft, UserCheck } from 'lucide-react';
+import { ArrowLeft, UserCheck, Gamepad2, Map, Sword, Settings, Target, Trophy, DollarSign, Eye, Headphones, Rocket, Joystick, Shield, Navigation } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ScrollArea } from '@/components/ui/scroll-area';
 
 const Documents = () => {
   const documentSections = [
+    {
+      title: "Game Overview",
+      icon: <Gamepad2 size={20} />,
+      items: [
+        { title: "Core Concept", href: "#core-concept" },
+        { title: "Game World & Environment", href: "#game-world" },
+        { title: "Gameplay Mechanics", href: "#gameplay-mechanics" },
+        { title: "Progression & Customization", href: "#progression" },
+        { title: "Game Modes", href: "#game-modes" },
+        { title: "Monetization & Marketplace", href: "#monetization" },
+        { title: "Visuals and Sound", href: "#visuals-sound" },
+        { title: "Marketing Strategy", href: "#marketing" },
+        { title: "Controls", href: "#controls" },
+        { title: "Combat Mechanics", href: "#combat-mechanics" },
+        { title: "Weapons & Inventory", href: "#weapons-inventory" },
+        { title: "Movement & Traversal", href: "#movement" },
+        { title: "Map & Hazards", href: "#map-hazards" },
+        { title: "Strategy", href: "#strategy" }
+      ]
+    },
     {
       title: "Team",
       icon: <UserCheck size={20} />,
@@ -75,6 +95,301 @@ const Documents = () => {
                 <div className="p-8">
                   <div className="prose prose-gray max-w-none">
                     
+                    {/* Game Blueprint Header */}
+                    <div className="mb-12 p-6 bg-gradient-to-r from-red-50 to-orange-50 rounded-lg border border-red-200">
+                      <h1 className="text-3xl font-bold text-gray-900 mb-4">Game Blueprint: Last Chad Standing</h1>
+                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                        <div><strong>Genre:</strong> Third-Person Fighter Battle Royale</div>
+                        <div><strong>Players:</strong> 20 players per lobby</div>
+                        <div><strong>Graphics:</strong> Hyperrealistic, gritty, and gory</div>
+                        <div><strong>Platforms:</strong> PC, next-gen consoles</div>
+                        <div><strong>Monetization:</strong> NFT Skins Marketplace</div>
+                        <div><strong>Rating:</strong> Mature audiences (PEGI 18+)</div>
+                      </div>
+                    </div>
+
+                    {/* Core Concept */}
+                    <section id="core-concept" className="mb-12">
+                      <h2>1. Core Concept</h2>
+                      <p>Last Chad Standing is a high-intensity, fast paced, third person fighter battle royale. Players choose from a cast of customizable fighters, each trained in unique fight styles and abilities, in a fast-paced, melee-focused environment. The game emphasizes brutal hand-to-hand combat in an open-world island setting, with dynamic environmental hazards and blood-soaked brawls to the death. Only one Chad can remain standing, and he takes home the loot for his troubles.</p>
+                      
+                      <h3>Overview</h3>
+                      <p>Players are thrown onto the island via helicopter, scattered randomly, and must use both wits and combat prowess to survive against 19 other players. The shrinking zone of poison gas forces fighters into close quarters, ensuring non stop action. Combat is visceral, utilizing a mix of strikes, grappling, weaponry, and brutal finishers.</p>
+                    </section>
+
+                    {/* Game World */}
+                    <section id="game-world" className="mb-12">
+                      <h2>2. Game World & Environment</h2>
+                      <h3>Island Setting</h3>
+                      <p>The map is a relatively small, derelict resort island filled with destructible environments, including beaches, dense jungles, abandoned industrial areas, and decaying urban ruins. The environment offers both vertical and horizontal exploration opportunities, such as:</p>
+                      <ul>
+                        <li><strong>Beaches:</strong> Wide open spaces where players can be easily spotted but have more visibility.</li>
+                        <li><strong>Jungle:</strong> Dense cover where players can ambush or be ambushed.</li>
+                        <li><strong>Resort Ruins:</strong> Multi-level buildings, providing vantage points for striking down on other players.</li>
+                        <li><strong>Industrial Complex:</strong> Space to camp but comes with environmental and structural hazards</li>
+                      </ul>
+                      <p>There are environmental traps like collapsing floors, explosive barrels, and natural hazards (e.g., lava flows, flooding). The environment also dynamically changes over time due to the collapsing zone, adding urgency to exploration.</p>
+                    </section>
+
+                    {/* Gameplay Mechanics */}
+                    <section id="gameplay-mechanics" className="mb-12">
+                      <h2>3. Gameplay Mechanics</h2>
+                      
+                      <h3>Aerial Drop</h3>
+                      <p>Players are thrown out of a helicopter flying erratically over the island, with random ejection points adding an element of chaos and unpredictability to the start of each match.</p>
+
+                      <h3>Combat System</h3>
+                      <p>Combat is the heart of Last Chad Standing. It focuses on hand-to-hand fighting with a realistic physics engine. Every hit feels weighty, and the results of brutal combat are visually emphasized with blood, broken bones, and dismemberment.</p>
+                      <ul>
+                        <li><strong>Strikes:</strong> Light, heavy, and combo-based attacks. Timing and precision are key.</li>
+                        <li><strong>Grappling:</strong> Players can perform grappling moves to counter opponents or initiate brutal finishers.</li>
+                        <li><strong>Weapons:</strong> Found throughout the map, including blunt instruments (bats, pipes), bladed weapons (machetes, knives), and improvised tools (shards of glass, branch). Weapons can break over time, forcing players to fight bare-handed or seek new ones.</li>
+                        <li><strong>Fatalities:</strong> Each character can perform unique, gory finishers when they defeat an opponent. Finishers range from decapitations to brutal bone-breaking maneuvers, depending on the character's style.</li>
+                        <li><strong>Special Moves:</strong> Each fighting style comes with their own special move.</li>
+                        <li><strong>Proximity Voice Chat:</strong> The closer you are to your enemy, the louder you can hear their mic.</li>
+                      </ul>
+
+                      <h3>Character Classes and Abilities</h3>
+                      <p>Fighters choose from different martial arts backgrounds, with varied stats (speed, strength, stamina) and special abilities:</p>
+                      <ul>
+                        <li><strong>Brawler:</strong> High strength, slow but devastating hits. Special Ability: Ground slam causing area damage or breaking through material</li>
+                        <li><strong>Ninja:</strong> Fast, agile, more capable of dodging attacks. Special Ability: Invisibility for a short time.</li>
+                        <li><strong>Grappler:</strong> Masters of throwing opponents and countering attacks. Special Ability: Short dash bursts</li>
+                        <li><strong>Brute:</strong> Slow but can absorb more damage than others. Special Ability: Temporary damage immunity.</li>
+                        <li><strong>Slayer:</strong> Balanced with dirty tricks up his sleeve. Special Ability: Carry an extra weapon.</li>
+                      </ul>
+
+                      <h3>Shrinking Zone Mechanic</h3>
+                      <p>Like other battle royales, the island has a "death zone" that shrinks over time, forcing players into tighter quarters. The visual aesthetic is hyperrealistic, with the zone being a literal wall of toxic gas that corrodes anything it touches. As it closes in, players are forced to fight or flee, and those caught in the zone slowly die in an excruciating spiral of pain. Unless you're lucky enough to find a gas mask, you won't survive more than 30 seconds before you suffocate on your own blood while your skin boils explosively.</p>
+                    </section>
+
+                    {/* Progression & Customization */}
+                    <section id="progression" className="mb-12">
+                      <h2>4. Progression & Customization</h2>
+                      
+                      <h3>NFT Skins Marketplace</h3>
+                      <p>The in-game skins for characters are NFTs, each with unique visual attributes that can be traded on the marketplace. These skins range from cosmetic changes like clothing, tattoos, scars, and armor, to more grotesque body modifications, giving each fighter a distinct appearance. Limited-edition and rare skins are released periodically and can be earned through winning tournaments, in-game challenges, or purchased directly.</p>
+
+                      <h3>Character Customization</h3>
+                      <p>Players can customize the appearance of their characters by selecting base skins and layering accessories, clothing, and weapons. NFTs purchased from the marketplace are fully tradable and can enhance the player's appearance with unique styles, offering individuality and a sense of ownership.</p>
+
+                      <h3>Skill Progression</h3>
+                      <p>Players can improve their characters' base stats (strength, speed, stamina) through gameplay. XP earned during matches can be spent on increasing these attributes, unlocking new moves, or augmenting special abilities. However, the game maintains a balanced approach to avoid "pay-to-win" scenarios—upgrades are capped to ensure fairness.</p>
+                    </section>
+
+                    {/* Game Modes */}
+                    <section id="game-modes" className="mb-12">
+                      <h2>5. Game Modes</h2>
+                      <ul>
+                        <li><strong>Battle Royale:</strong> 20 players, one winner.</li>
+                        <li><strong>Duos:</strong> 10 teams of two compete to be the last duo standing. Teamwork is key for survival.</li>
+                        <li><strong>Death Match:</strong> No shrinking zone, just 7 minutes of pure free-for-all mayhem. Whoever gets the most kills in the time limit wins.</li>
+                        <li><strong>Survival Royale:</strong> PvE/PvP mode where players must survive waves of zombies while also dealing with other players.</li>
+                        <li><strong>Tournaments:</strong> Monthly events with large rewards</li>
+                      </ul>
+                    </section>
+
+                    {/* Monetization */}
+                    <section id="monetization" className="mb-12">
+                      <h2>6. Monetization & Marketplace</h2>
+                      <p>The game operates on a play-and-earn model. Players earn in-game currency by participating in matches, which can be used to buy cosmetics, skins, or lootboxes in the marketplace. All NFTs are tradable on external platforms, allowing players to buy, sell, or auction rare skins for real-world value.</p>
+                      <ul>
+                        <li><strong>NFT Drops:</strong> Special skins and items are occasionally dropped for players to claim in-game or purchase from the marketplace.</li>
+                        <li><strong>In-Game Store:</strong> Besides skins, there are in-game items like weapons, emotes, and accessories, all purchasable with in-game or real-world currency</li>
+                        <li><strong>Season Pass:</strong> Unlock exclusive items the more you play</li>
+                        <li><strong>LootBoxes:</strong> Players can purchase fairly randomized boxes for a chance to win rare items.</li>
+                      </ul>
+                    </section>
+
+                    {/* Visuals and Sound */}
+                    <section id="visuals-sound" className="mb-12">
+                      <h2>7. Visuals and Sound</h2>
+                      
+                      <h3>Hyperrealism and Gore</h3>
+                      <p>The game emphasizes visual fidelity with cutting-edge graphics, using realistic lighting, textures, and physics-based animations. Every punch, kick, and fatality is brought to life with intense visual effects. Blood splatters realistically, bones crack audibly, and finishing moves are rendered in excruciating detail. Dynamic weather effects like rain, thunderstorms, and night/day cycles further enhance immersion.</p>
+
+                      <h3>Sound Design</h3>
+                      <p>Each punch and impact has weight, with a focus on brutal, visceral sound effects—bones snapping, skin tearing, and blood splattering. Background music ranges from tense, atmospheric tunes to heart-pounding battle music, rising in intensity as the match progresses.</p>
+                    </section>
+
+                    {/* Marketing */}
+                    <section id="marketing" className="mb-12">
+                      <h2>8. Marketing and Launch Strategy</h2>
+                      <p>The game will launch with early access and NFT sales to build a dedicated community before full release. Influencers, streamers, and tournaments will drive hype and engagement, especially in the crypto and gaming communities. Post-launch, regular updates, skins, and new game modes will keep the player base engaged.</p>
+                      <p>Last Chad Standing is a brutal, high-octane take on the battle royale genre, offering intense, visceral combat with the unique twist of NFT ownership and customization, pushing the boundaries of what modern multiplayer games can offer.</p>
+                    </section>
+
+                    {/* Controls */}
+                    <section id="controls" className="mb-12">
+                      <h2>9. Basic Controls</h2>
+                      <p>The following are the default controls for Last Chad Standing on PC and consoles. Players can customize controls in the settings.</p>
+                      
+                      <div className="grid md:grid-cols-2 gap-6">
+                        <div className="bg-gray-50 p-4 rounded-lg">
+                          <h3>PC Controls</h3>
+                          <ul className="space-y-1 text-sm">
+                            <li><strong>W/A/S/D:</strong> Move forward, left, backward, right</li>
+                            <li><strong>Mouse Movement:</strong> Camera control</li>
+                            <li><strong>Left Mouse Button:</strong> Light Attack</li>
+                            <li><strong>Right Mouse Button:</strong> Heavy Attack</li>
+                            <li><strong>E:</strong> Interact (pick up items, activate objects)</li>
+                            <li><strong>F:</strong> Grapple/Throw</li>
+                            <li><strong>R:</strong> Execute/Finishers (when prompt appears)</li>
+                            <li><strong>Shift:</strong> Sprint</li>
+                            <li><strong>Spacebar:</strong> Jump</li>
+                            <li><strong>Ctrl (Hold):</strong> Crouch/Slide (while sprinting)</li>
+                            <li><strong>C:</strong> Block/Parry</li>
+                            <li><strong>V:</strong> Quick Dodge</li>
+                            <li><strong>1/2/3:</strong> Weapon select (if equipped)</li>
+                            <li><strong>Q:</strong> Special Ability (varies by character)</li>
+                            <li><strong>G:</strong> Throw weapon</li>
+                            <li><strong>Tab:</strong> Inventory/Map</li>
+                            <li><strong>M:</strong> Large map (full screen)</li>
+                            <li><strong>Esc:</strong> Pause/Options</li>
+                          </ul>
+                        </div>
+
+                        <div className="bg-gray-50 p-4 rounded-lg">
+                          <h3>Console Controls (PlayStation/Xbox)</h3>
+                          <ul className="space-y-1 text-sm">
+                            <li><strong>Left Stick:</strong> Move</li>
+                            <li><strong>Right Stick:</strong> Camera</li>
+                            <li><strong>R2/RT:</strong> Light Attack</li>
+                            <li><strong>L2/LT:</strong> Heavy Attack</li>
+                            <li><strong>Square/X:</strong> Interact</li>
+                            <li><strong>Circle/B:</strong> Grapple/Throw</li>
+                            <li><strong>Triangle/Y:</strong> Execute/Finisher</li>
+                            <li><strong>X/A:</strong> Jump</li>
+                            <li><strong>R1/RB:</strong> Block/Parry</li>
+                            <li><strong>L1/LB:</strong> Quick Dodge</li>
+                            <li><strong>L3 (Click Left Stick):</strong> Sprint</li>
+                            <li><strong>R3 (Click Right Stick):</strong> Crouch/Slide</li>
+                            <li><strong>D-Pad:</strong> Weapon select</li>
+                            <li><strong>L2 + Square/X:</strong> Throw weapon</li>
+                            <li><strong>L1 + R1:</strong> Special Ability</li>
+                            <li><strong>Options/Menu:</strong> Pause/Map</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </section>
+
+                    {/* Combat Mechanics */}
+                    <section id="combat-mechanics" className="mb-12">
+                      <h2>10. Combat Mechanics</h2>
+                      <p>The core of Last Chad Standing revolves around melee combat, blending fast reflexes, precise timing, and smart environmental use.</p>
+                      
+                      <h3>Attack Types</h3>
+                      <ul>
+                        <li><strong>Light Attack (LMB/R2):</strong> Quick, basic attacks that deal moderate damage but are harder to counter. Ideal for rapid combos.</li>
+                        <li><strong>Heavy Attack (RMB/L2):</strong> Slower, more powerful strikes. These can break through blocks but leave you open to counters if missed.</li>
+                        <li><strong>Combos:</strong> Chaining light and heavy attacks in various sequences triggers character-specific combos for extra damage or stuns. Example: Light-Light-Heavy = Overhead Slam Combo. Combos vary based on character type (Brawler, Ninja, etc.).</li>
+                      </ul>
+
+                      <h3>Grappling (F/Circle/B)</h3>
+                      <ul>
+                        <li><strong>Grapple:</strong> Initiate a grapple on a nearby opponent to engage in close-quarters combat. Grapples can be countered with a well-timed block or dodge.</li>
+                        <li><strong>Throws:</strong> After a successful grapple, use directional inputs to throw your opponent into environmental hazards or towards other players.</li>
+                        <li><strong>Special Throws:</strong> Each fighter has unique throws that differ based on their fighting style (e.g., Brawler performs a suplex; Ninja flips the enemy over).</li>
+                      </ul>
+
+                      <h3>Blocking and Parrying</h3>
+                      <ul>
+                        <li><strong>Block (C/R1):</strong> Deflects incoming light attacks but depletes stamina with each hit.</li>
+                        <li><strong>Parry:</strong> If timed perfectly, pressing the block button just as an opponent strikes will parry their attack, opening them up for a devastating counterattack.</li>
+                      </ul>
+
+                      <h3>Dodging and Sprinting</h3>
+                      <ul>
+                        <li><strong>Quick Dodge (V/L1):</strong> Evade enemy attacks with a swift side step. Dodging consumes stamina but can avoid heavy attacks or grapples.</li>
+                        <li><strong>Sprint (Shift/L3):</strong> Use sprint to quickly cover ground or charge towards enemies. While sprinting, players can perform sliding attacks, which knock down opponents.</li>
+                      </ul>
+
+                      <h3>Special Abilities (Q/L1 + R1)</h3>
+                      <p>Each character class has a unique special ability that recharges over time or when certain conditions are met (e.g., landing consecutive hits). Abilities vary greatly but are game-changing when used strategically:</p>
+                      <ul>
+                        <li><strong>Brawler:</strong> Ground slam, causing area-of-effect damage.</li>
+                        <li><strong>Ninja:</strong> Cloaking for a brief period of invisibility.</li>
+                        <li><strong>Brute:</strong> Temporary damage immunity.</li>
+                      </ul>
+
+                      <h3>Finishers (R/Triangle/Y)</h3>
+                      <p>Finishers are unique, gory executions that players can perform when an opponent's health is critically low (triggered when a finisher icon appears).</p>
+                      <ul>
+                        <li><strong>Execution Prompt:</strong> When close to a low-health opponent, press the execute button to perform a brutal finishing move.</li>
+                        <li><strong>Customization:</strong> Players can customize their finisher animations based on NFTs or earned achievements.</li>
+                      </ul>
+                    </section>
+
+                    {/* Weapons and Inventory */}
+                    <section id="weapons-inventory" className="mb-12">
+                      <h2>11. Weapons and Inventory</h2>
+                      <p>Weapons can be found throughout the island and can range from blunt instruments to sharp bladed weapons. Players can carry up to three weapons, and each weapon has durability, meaning it can break over time.</p>
+                      
+                      <h3>Weapon Categories</h3>
+                      <ul>
+                        <li><strong>Blunt Weapons:</strong> Bats, pipes, hammers—ideal for bashing enemies. Slower, but cause knockback.</li>
+                        <li><strong>Bladed Weapons:</strong> Knives, machetes, broken glass—fast and deal bleeding damage over time.</li>
+                        <li><strong>Improvised Weapons:</strong> Found objects like bricks, chainsaws, or construction tools. Deal high damage but often have low durability.</li>
+                        <li><strong>Throwable Weapons:</strong> Knives, rocks, or even grenades (in special game modes). These can be hurled at enemies from a distance but require good aim.</li>
+                      </ul>
+
+                      <h3>Weapon Durability</h3>
+                      <p>Weapons have a limited lifespan. Each time you strike, durability decreases, and eventually, the weapon will break. Broken weapons can be discarded and replaced by scavenging new ones from the environment.</p>
+
+                      <h3>Inventory Management</h3>
+                      <ul>
+                        <li><strong>Access Inventory (Tab/D-Pad):</strong> Check your current weapons, items, and consumables.</li>
+                        <li><strong>Quick Weapon Swap (1/2/3 or D-Pad):</strong> Instantly switch between your three equipped weapons during combat.</li>
+                        <li><strong>Health Items:</strong> Consumables like bandages, fruit or med packs are found across the map. They restore health but take time to use, leaving you vulnerable to attacks.</li>
+                      </ul>
+                    </section>
+
+                    {/* Movement and Traversal */}
+                    <section id="movement" className="mb-12">
+                      <h2>12. Movement and Traversal</h2>
+                      
+                      <h3>Basic Movement</h3>
+                      <p>Use the movement keys/stick to navigate the map. Movement is essential for dodging attacks and avoiding environmental hazards.</p>
+
+                      <h3>Jumping and Climbing (Space/X)</h3>
+                      <p>Jump to clear obstacles or reach higher ground. Some objects are climbable, allowing players to gain an advantage through vertical positioning.</p>
+
+                      <h3>Sliding (Ctrl/R3 while Sprinting)</h3>
+                      <p>Perform a sliding attack while sprinting, which can knock enemies down or be used to quickly evade combat.</p>
+                    </section>
+
+                    {/* Map and Environmental Hazards */}
+                    <section id="map-hazards" className="mb-12">
+                      <h2>13. Map and Environmental Hazards</h2>
+                      <p>The island is littered with environmental traps and hazards that players can use to their advantage or avoid.</p>
+                      
+                      <h3>Map Overview</h3>
+                      <ul>
+                        <li><strong>Access Map (M/Options):</strong> Check the shrinking zone, your position, and possible loot locations.</li>
+                        <li><strong>Shrinking Zone:</strong> The toxic gas zone slowly closes in over time, forcing players to move closer together. The map displays the current safe area and the next shrinking zone.</li>
+                      </ul>
+
+                      <h3>Environmental Traps</h3>
+                      <ul>
+                        <li><strong>Spikes, Lava Pits, Acid Baths, Cliffs:</strong> Throw enemies into these hazards for instant kills.</li>
+                        <li><strong>Dynamic Weather:</strong> Rain or fog can reduce visibility, making ambushes more viable.</li>
+                      </ul>
+                    </section>
+
+                    {/* Game Strategy */}
+                    <section id="strategy" className="mb-12">
+                      <h2>14. Game Strategy</h2>
+                      <p>Here are some tactical tips to help you dominate:</p>
+                      <ul>
+                        <li><strong>Weapon Conservation:</strong> Use each weapon strategically, and don't waste hits on unimportant environmental objects.</li>
+                        <li><strong>Manage Stamina:</strong> Every action (attacking, dodging, blocking) uses stamina. If your stamina runs out, you'll be slow and vulnerable.</li>
+                        <li><strong>Use the Environment:</strong> Environmental hazards can help you eliminate opponents without risking your health in direct combat.</li>
+                        <li><strong>Adapt to Opponents:</strong> Learn to counter different fighter styles</li>
+                        <li><strong>Loot and Move:</strong> Don't stay in one place too long, especially as the zone shrinks. Loot what you need and keep moving.</li>
+                      </ul>
+                    </section>
+
+                    {/* Team Section */}
                     <section id="founding-team" className="mb-12">
                       <h2>Founding Team</h2>
                       <div className="space-y-8">
