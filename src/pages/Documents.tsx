@@ -208,6 +208,8 @@ const Documents = () => {
                         <li><strong>Proximity Voice Chat:</strong> The closer you are to your enemy, the louder you can hear their mic.</li>
                       </ul>
 
+                      <br />
+
                       <h3 className="text-2xl font-bold">Character Classes and Abilities</h3>
                       <p>Fighters choose from different martial arts backgrounds, with varied stats (speed, strength, stamina) and special abilities:</p>
                       <ul>
