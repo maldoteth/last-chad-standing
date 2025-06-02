@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { ArrowLeft, UserCheck, Gamepad2, Map, Sword, Settings, Target, Trophy, DollarSign, Eye, Headphones, Rocket, Joystick, Shield, Navigation } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -176,7 +177,7 @@ const Documents = () => {
                       <ul>
                         <li><strong>Battle Royale:</strong> 20-100 players, one winner.</li>
                         <li><strong>Duos:</strong> 10-50 teams of two compete to be the last duo standing. Teamwork is key for survival.</li>
-                        <li><strong>Death Match:</strong> No shrinking zone, just 7 minutes of pure free-for-all mayhem. Whoever gets the most kills in the time limit wins.</li>
+                        <li><strong>Death Match:</strong> No shrinking zone, just 15 minutes of pure free-for-all mayhem. Whoever gets the most kills in the time limit wins.</li>
                         <li><strong>Survival Royale:</strong> PvE/PvP mode where players must survive waves of zombies while also dealing with other players.</li>
                         <li><strong>Tournaments:</strong> Monthly events with large rewards</li>
                       </ul>
