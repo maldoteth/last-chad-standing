@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { ArrowLeft, UserCheck, Gamepad2, Map, Sword, Settings, Target, Trophy, DollarSign, Eye, Headphones, Rocket, Joystick, Shield, Navigation, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -71,7 +70,7 @@ const Documents = () => {
       title: "X (Twitter)",
       href: "https://x.com/lcs_game"
     }, {
-      title: "Website",
+      title: "LCFC",
       href: "https://leanchadfight.club"
     }]
   }];
