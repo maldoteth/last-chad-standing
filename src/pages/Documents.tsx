@@ -228,6 +228,8 @@ const Documents = () => {
                     <section id="progression" className="mb-12">
                       <h2 className="text-3xl font-bold">4. Progression & Customization</h2>
                       
+                      <br />
+                      
                       <h3 className="text-2xl font-bold">NFT Skins Marketplace</h3>
                       <p>The in-game skins for characters are NFTs, each with unique visual attributes that can be traded on the marketplace. These skins range from cosmetic changes like clothing, tattoos, scars, and armor, to more grotesque body modifications, giving each fighter a distinct appearance. Limited-edition and rare skins are released periodically and can be earned through winning tournaments, in-game challenges, or purchased directly.</p>
 
