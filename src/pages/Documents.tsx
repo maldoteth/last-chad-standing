@@ -1,8 +1,8 @@
-
 import React from 'react';
 import { ArrowLeft, UserCheck, Gamepad2, Map, Sword, Settings, Target, Trophy, DollarSign, Eye, Headphones, Rocket, Joystick, Shield, Navigation } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ScrollArea } from '@/components/ui/scroll-area';
+
 const Documents = () => {
   const documentSections = [{
     title: "Game Overview",
@@ -49,6 +49,9 @@ const Documents = () => {
     }, {
       title: "Strategy",
       href: "#strategy"
+    }, {
+      title: "Social Aspects",
+      href: "#social-aspects"
     }]
   }, {
     title: "Team",
@@ -58,7 +61,9 @@ const Documents = () => {
       href: "#founding-team"
     }]
   }];
-  return <div className="min-h-screen bg-gray-50">
+
+  return (
+    <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <header className="bg-white border-b border-gray-200 sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -424,6 +429,59 @@ const Documents = () => {
                       </ul>
                     </section>
 
+                    {/* Social Aspects */}
+                    <section id="social-aspects" className="mb-12">
+                      <h2 className="font-bold">15. Social Aspects</h2>
+                      <p>Last Chad Standing features robust social mechanics that create a truly immersive and interactive gaming experience. These features foster community engagement and add layers of strategy beyond just combat.</p>
+                      
+                      <h3 className="font-bold">Proximity Voice Chat</h3>
+                      <p>The game features uncensored, proximity-based voice chat that adds intense psychological warfare to combat:</p>
+                      <ul>
+                        <li><strong>Distance-Based Audio:</strong> The closer you are to other players, the louder and clearer their voice becomes. This creates natural ambush opportunities and tense stalking scenarios.</li>
+                        <li><strong>No Restrictions:</strong> Voice chat is completely uncensored, allowing for authentic trash talk, intimidation tactics, and raw emotional reactions that amplify the brutal nature of the competition.</li>
+                        <li><strong>Strategic Communication:</strong> Players can use voice chat to form temporary alliances, negotiate truces, or attempt to deceive opponents about their intentions.</li>
+                        <li><strong>Immersive Experience:</strong> Hearing your opponent's breathing, grunts of pain, or victory cries adds visceral realism to every encounter.</li>
+                      </ul>
+
+                      <h3 className="font-bold">Spectator Mode & Live Viewing</h3>
+                      <p>Players can watch ongoing matches in real-time, creating a live entertainment ecosystem:</p>
+                      <ul>
+                        <li><strong>Free Camera Mode:</strong> Spectators can freely roam the map or follow specific players to catch all the action.</li>
+                        <li><strong>Multiple View Options:</strong> Switch between first-person, third-person, and cinematic camera angles for the best viewing experience.</li>
+                        <li><strong>Live Commentary:</strong> Spectators can provide real-time commentary and reactions via text chat visible to other viewers.</li>
+                        <li><strong>Highlight Clips:</strong> Automatically capture and share the most brutal moments and epic finishers.</li>
+                      </ul>
+
+                      <h3 className="font-bold">Care Packages & Player Support</h3>
+                      <p>Spectators can directly influence ongoing matches by purchasing care packages for their favorite fighters:</p>
+                      <ul>
+                        <li><strong>Weapon Drops:</strong> Send high-quality weapons, armor, or consumables to help your chosen fighter survive longer.</li>
+                        <li><strong>Health Packs:</strong> Purchase medical supplies that can be airdropped to injured fighters at critical moments.</li>
+                        <li><strong>Special Equipment:</strong> Provide temporary buffs, protective gear, or rare weapons that give fighters an edge in combat.</li>
+                        <li><strong>Strategic Timing:</strong> Care packages must be strategically timed - they're visible to all players and can attract unwanted attention to the recipient.</li>
+                        <li><strong>Cost Scaling:</strong> Care package prices increase as the match progresses and fewer players remain, making late-game support more valuable.</li>
+                      </ul>
+
+                      <h3 className="font-bold">Fighter Backing & Reward Sharing</h3>
+                      <p>Players can financially back fighters before matches begin, sharing in the spoils of victory:</p>
+                      <ul>
+                        <li><strong>Pre-Match Betting:</strong> Back your favorite fighter with real currency or in-game tokens before the match starts.</li>
+                        <li><strong>Reward Pool Distribution:</strong> When your backed fighter wins, you receive a percentage of the total match reward pool based on your investment.</li>
+                        <li><strong>Dynamic Odds:</strong> Backing odds change in real-time based on fighter performance, reputation, and community sentiment.</li>
+                        <li><strong>Multiple Fighters:</strong> Diversify your bets by backing multiple fighters in the same match to hedge your investments.</li>
+                        <li><strong>Backer Leaderboards:</strong> Track the most successful backers and follow their betting strategies for future matches.</li>
+                        <li><strong>Exclusive Rewards:</strong> Top backers gain access to exclusive NFT drops, early access to new content, and special recognition in the community.</li>
+                      </ul>
+
+                      <h3 className="font-bold">Community Features</h3>
+                      <ul>
+                        <li><strong>Fighter Profiles:</strong> Detailed statistics, win/loss records, and fighting style breakdowns for every player.</li>
+                        <li><strong>Replay System:</strong> Watch and share epic moments from past matches with full camera control.</li>
+                        <li><strong>Tournament Brackets:</strong> Follow major tournaments and championship events with real-time bracket updates.</li>
+                        <li><strong>Social Media Integration:</strong> Share highlights, backing successes, and epic moments directly to social platforms.</li>
+                      </ul>
+                    </section>
+
                     {/* Team Section */}
                     <section id="founding-team" className="mb-12">
                       <h2 className="font-bold">Founding Team</h2>
@@ -508,6 +566,8 @@ const Documents = () => {
           </div>
         </div>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default Documents;
