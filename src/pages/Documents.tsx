@@ -217,7 +217,7 @@ const Documents = () => {
                     <div className="flex flex-col md:flex-row gap-6 p-6 bg-gray-50 rounded-lg">
                       <div className="md:w-1/3">
                         <img 
-                          src="/lovable-uploads/319fe799-d5a0-4338-a0d4-53b1b1e3fe1a.png" 
+                          src="/lovable-uploads/84ab9eed-00bc-425c-a953-3ea0478e464d.png" 
                           alt="Malik Jan" 
                           className="w-full h-64 object-cover rounded-lg"
                         />
@@ -260,7 +260,7 @@ const Documents = () => {
                     <div className="flex flex-col md:flex-row gap-6 p-6 bg-gray-50 rounded-lg">
                       <div className="md:w-1/3">
                         <img 
-                          src="/lovable-uploads/0438f719-b82a-4f49-80d1-7f232ef63242.png" 
+                          src="/lovable-uploads/1373b087-4cb8-43e3-ae69-f3ff5c05a5d1.png" 
                           alt="Bailey Young" 
                           className="w-full h-64 object-cover rounded-lg"
                         />
