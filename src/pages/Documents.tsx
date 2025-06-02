@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { ArrowLeft, FileText, Book, Code, Users, Target, TrendingUp, Gamepad2, UserCheck, Calendar, Coins, DollarSign, Mail, Zap, Map, Sword, Settings, Users2, Trophy, Play } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -118,7 +119,7 @@ const Documents = () => {
           {/* Sidebar */}
           <div className="lg:col-span-1">
             <div className="sticky top-24 h-[calc(100vh-8rem)]">
-              <ScrollArea className="h-full">
+              <ScrollArea className="h-full [&>[data-radix-scroll-area-viewport]]:!overflow-x-hidden [&>div>div[style]]:!scrollbar-none">
                 <nav className="space-y-6 pr-4">
                   {documentSections.map((section) => (
                     <div key={section.title} className="space-y-3">
