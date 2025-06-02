@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { ArrowLeft, FileText, Book, Code, Users, Target, TrendingUp, Gamepad2, UserCheck } from 'lucide-react';
+import { ArrowLeft, FileText, Book, Code, Users, Target, TrendingUp, Gamepad2, UserCheck, Calendar, Coins, DollarSign, Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Documents = () => {
@@ -41,6 +41,30 @@ const Documents = () => {
       ]
     },
     {
+      title: "Roadmap",
+      icon: <Calendar size={20} />,
+      items: [
+        { title: "Development Timeline", href: "#roadmap" },
+        { title: "Future Growth Plans", href: "#future-growth" }
+      ]
+    },
+    {
+      title: "Tokenomics",
+      icon: <Coins size={20} />,
+      items: [
+        { title: "LCS Token", href: "#lcs-token" },
+        { title: "TGE Information", href: "#tge-info" }
+      ]
+    },
+    {
+      title: "Financials",
+      icon: <DollarSign size={20} />,
+      items: [
+        { title: "Funding & Budget", href: "#financials" },
+        { title: "Revenue Projections", href: "#projections" }
+      ]
+    },
+    {
       title: "Getting Started",
       icon: <Code size={20} />,
       items: [
@@ -57,6 +81,13 @@ const Documents = () => {
         { title: "Leaderboards", href: "#leaderboards" },
         { title: "Discord Community", href: "#discord" },
         { title: "Streaming Guidelines", href: "#streaming" }
+      ]
+    },
+    {
+      title: "Contact",
+      icon: <Mail size={20} />,
+      items: [
+        { title: "Reach Out", href: "#contact" }
       ]
     }
   ];
@@ -317,6 +348,104 @@ const Documents = () => {
                   </ul>
                 </section>
 
+                <section id="roadmap" className="mb-12">
+                  <h2>Development Timeline</h2>
+                  <div className="bg-gray-50 p-6 rounded-lg">
+                    <h3 className="text-lg font-semibold text-gray-900 mb-4">Community Building & User Growth</h3>
+                    <p className="text-gray-700 mb-4"><strong>Q1-2 2025:</strong> Alpha</p>
+                    <p className="text-gray-700 mb-4"><strong>Q3-4 2025:</strong> Beta</p>
+                    <p className="text-gray-700 mb-4"><strong>Q4 2025 - Q1 2026:</strong> Full Game Launch</p>
+                    <p className="text-gray-700"><strong>Q2-4 2026:</strong> Post-launch updates and expansion</p>
+                  </div>
+                </section>
+
+                <section id="future-growth" className="mb-12">
+                  <h2>Future Growth Plans</h2>
+                  <p className="text-gray-700 leading-relaxed mb-4">
+                    Expansion packs with new fighting styles, game mechanics and settings. Introduction of live eSports events, 
+                    and in-game partnerships with fighters, brands, IP, KOLs, meme coins as well as global MMA leagues, 
+                    dojos, health clubs and beyond.
+                  </p>
+                </section>
+
+                <section id="lcs-token" className="mb-12">
+                  <h2>LCS Token</h2>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                      <h3 className="text-lg font-semibold text-gray-900 mb-4">Supply & Distribution</h3>
+                      <p className="text-gray-700 mb-2"><strong>Total Supply:</strong> 100,000,000,000</p>
+                      <ul className="space-y-2 text-gray-700">
+                        <li>• 30% Community</li>
+                        <li>• 25% TGE</li>
+                        <li>• 20% LP</li>
+                        <li>• 15% DAO</li>
+                        <li>• 10% Team</li>
+                      </ul>
+                      <div className="mt-4">
+                        <p className="text-gray-700"><strong>FDV at TGE:</strong> $20,000,000</p>
+                        <p className="text-gray-700"><strong>Price at TGE:</strong> $0.0002</p>
+                      </div>
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-semibold text-gray-900 mb-4">Utility</h3>
+                      <ul className="space-y-2 text-gray-700">
+                        <li>• Only currency in-game for trading skins, purchasing assets, season passes, lootboxes and all other transactions</li>
+                        <li>• Rewards for winners and community, sustained through revenue buy backs</li>
+                        <li>• Required for governance, vote on game direction</li>
+                      </ul>
+                    </div>
+                  </div>
+                </section>
+
+                <section id="tge-info" className="mb-12">
+                  <h2>TGE Information</h2>
+                  <div className="bg-gray-50 p-6 rounded-lg">
+                    <h3 className="text-lg font-semibold text-gray-900 mb-4">LCS Token: TGE Intel</h3>
+                    <div className="space-y-2 text-gray-700">
+                      <p><strong>Listing FDV:</strong> $20,000,000</p>
+                      <p><strong>Listing Price:</strong> 0.0002</p>
+                      <p><strong>Listing Date:</strong> TBC</p>
+                    </div>
+                    
+                    <h4 className="text-md font-semibold text-gray-900 mt-6 mb-3">Release Schedule:</h4>
+                    <ul className="space-y-2 text-gray-700">
+                      <li>• <strong>Sales:</strong> 100% TGE unlock</li>
+                      <li>• <strong>Team:</strong> 20% per year, daily linear</li>
+                      <li>• <strong>Community & DAO:</strong> To be voted via governance</li>
+                    </ul>
+                  </div>
+                </section>
+
+                <section id="financials" className="mb-12">
+                  <h2>Financials</h2>
+                  <div className="space-y-6">
+                    <div>
+                      <h3 className="text-lg font-semibold text-gray-900 mb-3">Funding</h3>
+                      <p className="text-gray-700">
+                        $5 million total raise goal to for AA game release and GTM campaigns.
+                      </p>
+                    </div>
+                    
+                    <div>
+                      <h3 className="text-lg font-semibold text-gray-900 mb-3">Budget Breakdown</h3>
+                      <ul className="space-y-2 text-gray-700">
+                        <li>• 30% Development</li>
+                        <li>• 50% Marketing</li>
+                        <li>• 20% Runway</li>
+                      </ul>
+                    </div>
+                  </div>
+                </section>
+
+                <section id="projections" className="mb-12">
+                  <h2>Revenue Projections</h2>
+                  <p className="text-gray-700 leading-relaxed">
+                    Forecasted revenue of $10 million in the first 24 months, scaling to $50 million by year three. 
+                    Verticals include primary sales of skins and in game assets, secondary trading fees, token fees, 
+                    LP fees and liquidations.
+                  </p>
+                </section>
+
                 <section id="combat" className="mb-12">
                   <h2>Combat System</h2>
                   <p className="text-gray-700 leading-relaxed">
@@ -350,6 +479,31 @@ const Documents = () => {
                   <p className="text-gray-700 leading-relaxed">
                     Compete in weekly tournaments and special events to prove you're the ultimate fighter.
                   </p>
+                </section>
+
+                <section id="contact" className="mb-12">
+                  <h2>Reach Out</h2>
+                  <div className="bg-gray-50 p-6 rounded-lg">
+                    <div className="space-y-4">
+                      <div className="flex items-center gap-3">
+                        <img src="/lovable-uploads/77a6c004-93ed-49ee-a5d0-6056ee852612.png" alt="X" className="w-5 h-5" />
+                        <span className="text-gray-700">@lcs_game</span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <Mail size={20} className="text-gray-600" />
+                        <span className="text-gray-700">finance@lastchadstanding.com</span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <div className="w-5 h-5 bg-blue-500 rounded flex items-center justify-center">
+                          <span className="text-white text-xs">T</span>
+                        </div>
+                        <span className="text-gray-700">@cryptoxba</span>
+                      </div>
+                      <div className="mt-6">
+                        <p className="text-gray-700 font-medium">www.lastchadstanding.com</p>
+                      </div>
+                    </div>
+                  </div>
                 </section>
               </div>
             </div>
