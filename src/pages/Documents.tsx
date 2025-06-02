@@ -1,51 +1,69 @@
-
 import React from 'react';
 import { ArrowLeft, UserCheck, Gamepad2, Map, Sword, Settings, Target, Trophy, DollarSign, Eye, Headphones, Rocket, Joystick, Shield, Navigation } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ScrollArea } from '@/components/ui/scroll-area';
-
 const Documents = () => {
-  const documentSections = [
-    {
-      title: "Game Overview",
-      icon: <Gamepad2 size={20} />,
-      items: [
-        { title: "Core Concept", href: "#core-concept" },
-        { title: "Game World & Environment", href: "#game-world" },
-        { title: "Gameplay Mechanics", href: "#gameplay-mechanics" },
-        { title: "Progression & Customization", href: "#progression" },
-        { title: "Game Modes", href: "#game-modes" },
-        { title: "Monetization & Marketplace", href: "#monetization" },
-        { title: "Visuals and Sound", href: "#visuals-sound" },
-        { title: "Marketing Strategy", href: "#marketing" },
-        { title: "Controls", href: "#controls" },
-        { title: "Combat Mechanics", href: "#combat-mechanics" },
-        { title: "Weapons & Inventory", href: "#weapons-inventory" },
-        { title: "Movement & Traversal", href: "#movement" },
-        { title: "Map & Hazards", href: "#map-hazards" },
-        { title: "Strategy", href: "#strategy" }
-      ]
-    },
-    {
-      title: "Team",
-      icon: <UserCheck size={20} />,
-      items: [
-        { title: "Founding Team", href: "#founding-team" }
-      ]
-    }
-  ];
-
-  return (
-    <div className="min-h-screen bg-gray-50">
+  const documentSections = [{
+    title: "Game Overview",
+    icon: <Gamepad2 size={20} />,
+    items: [{
+      title: "Core Concept",
+      href: "#core-concept"
+    }, {
+      title: "Game World & Environment",
+      href: "#game-world"
+    }, {
+      title: "Gameplay Mechanics",
+      href: "#gameplay-mechanics"
+    }, {
+      title: "Progression & Customization",
+      href: "#progression"
+    }, {
+      title: "Game Modes",
+      href: "#game-modes"
+    }, {
+      title: "Monetization & Marketplace",
+      href: "#monetization"
+    }, {
+      title: "Visuals and Sound",
+      href: "#visuals-sound"
+    }, {
+      title: "Marketing Strategy",
+      href: "#marketing"
+    }, {
+      title: "Controls",
+      href: "#controls"
+    }, {
+      title: "Combat Mechanics",
+      href: "#combat-mechanics"
+    }, {
+      title: "Weapons & Inventory",
+      href: "#weapons-inventory"
+    }, {
+      title: "Movement & Traversal",
+      href: "#movement"
+    }, {
+      title: "Map & Hazards",
+      href: "#map-hazards"
+    }, {
+      title: "Strategy",
+      href: "#strategy"
+    }]
+  }, {
+    title: "Team",
+    icon: <UserCheck size={20} />,
+    items: [{
+      title: "Founding Team",
+      href: "#founding-team"
+    }]
+  }];
+  return <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <header className="bg-white border-b border-gray-200 sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center gap-4">
-              <Link 
-                to="/" 
-                className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors"
-              >
+              <Link to="/" className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors">
                 <ArrowLeft size={20} />
                 <span>Back to Game</span>
               </Link>
@@ -63,26 +81,19 @@ const Documents = () => {
             <div className="sticky top-24 h-[calc(100vh-8rem)]">
               <ScrollArea className="h-full [&>[data-radix-scroll-area-viewport]]:!overflow-x-hidden [&>div>div[style]]:!scrollbar-none">
                 <nav className="space-y-6 pr-4">
-                  {documentSections.map((section) => (
-                    <div key={section.title} className="space-y-3">
+                  {documentSections.map(section => <div key={section.title} className="space-y-3">
                       <div className="flex items-center gap-2 text-gray-900 font-medium">
                         {section.icon}
                         <span>{section.title}</span>
                       </div>
                       <ul className="space-y-2 ml-6">
-                        {section.items.map((item) => (
-                          <li key={item.title}>
-                            <a 
-                              href={item.href}
-                              className="text-gray-600 hover:text-gray-900 transition-colors text-sm"
-                            >
+                        {section.items.map(item => <li key={item.title}>
+                            <a href={item.href} className="text-gray-600 hover:text-gray-900 transition-colors text-sm">
                               {item.title}
                             </a>
-                          </li>
-                        ))}
+                          </li>)}
                       </ul>
-                    </div>
-                  ))}
+                    </div>)}
                 </nav>
               </ScrollArea>
             </div>
@@ -215,7 +226,7 @@ const Documents = () => {
                     {/* Marketing */}
                     <section id="marketing" className="mb-12">
                       <h2>8. Marketing and Launch Strategy</h2>
-                      <p>The game will launch with early access and NFT sales to build a dedicated community before full release. Influencers, streamers, and tournaments will drive hype and engagement, especially in the crypto and gaming communities. Post-launch, regular updates, skins, and new game modes will keep the player base engaged.</p>
+                      <p>The game will launch with early access and token sales to build a dedicated community before full release. Influencers, streamers, and tournaments will drive hype and engagement, especially in the crypto and gaming communities. Post-launch, regular updates, skins, and new game modes will keep the player base engaged.</p>
                       <p>Last Chad Standing is a brutal, high-octane take on the battle royale genre, offering intense, visceral combat with the unique twist of NFT ownership and customization, pushing the boundaries of what modern multiplayer games can offer.</p>
                     </section>
 
@@ -397,11 +408,7 @@ const Documents = () => {
                         {/* Mike Hales */}
                         <div className="flex flex-col md:flex-row gap-6 p-6 bg-gray-50 rounded-lg">
                           <div className="md:w-1/3">
-                            <img 
-                              src="/lovable-uploads/89896bcd-7068-4438-ba8d-95f8e577cb75.png" 
-                              alt="Mike Hales" 
-                              className="w-full h-64 object-cover rounded-lg"
-                            />
+                            <img src="/lovable-uploads/89896bcd-7068-4438-ba8d-95f8e577cb75.png" alt="Mike Hales" className="w-full h-64 object-cover rounded-lg" />
                           </div>
                           <div className="md:w-2/3">
                             <h3 className="text-xl font-bold text-gray-900 mb-2">Mike Hales</h3>
@@ -418,11 +425,7 @@ const Documents = () => {
                         {/* Malik Jan */}
                         <div className="flex flex-col md:flex-row gap-6 p-6 bg-gray-50 rounded-lg">
                           <div className="md:w-1/3">
-                            <img 
-                              src="/lovable-uploads/84ab9eed-00bc-425c-a953-3ea0478e464d.png" 
-                              alt="Malik Jan" 
-                              className="w-full h-64 object-cover rounded-lg"
-                            />
+                            <img src="/lovable-uploads/84ab9eed-00bc-425c-a953-3ea0478e464d.png" alt="Malik Jan" className="w-full h-64 object-cover rounded-lg" />
                           </div>
                           <div className="md:w-2/3">
                             <h3 className="text-xl font-bold text-gray-900 mb-2">Malik Jan AKA mal.eth</h3>
@@ -440,11 +443,7 @@ const Documents = () => {
                         {/* Rayn Barrera */}
                         <div className="flex flex-col md:flex-row gap-6 p-6 bg-gray-50 rounded-lg">
                           <div className="md:w-1/3">
-                            <img 
-                              src="/lovable-uploads/ea386eae-1f4f-44c0-ad78-7f038df224d3.png" 
-                              alt="Rayn Barrera" 
-                              className="w-full h-64 object-cover rounded-lg"
-                            />
+                            <img src="/lovable-uploads/ea386eae-1f4f-44c0-ad78-7f038df224d3.png" alt="Rayn Barrera" className="w-full h-64 object-cover rounded-lg" />
                           </div>
                           <div className="md:w-2/3">
                             <h3 className="text-xl font-bold text-gray-900 mb-2">Rayn Barrera AKA RaynRaps</h3>
@@ -461,11 +460,7 @@ const Documents = () => {
                         {/* Bailey Young */}
                         <div className="flex flex-col md:flex-row gap-6 p-6 bg-gray-50 rounded-lg">
                           <div className="md:w-1/3">
-                            <img 
-                              src="/lovable-uploads/1373b087-4cb8-43e3-ae69-f3ff5c05a5d1.png" 
-                              alt="Bailey Young" 
-                              className="w-full h-64 object-cover rounded-lg"
-                            />
+                            <img src="/lovable-uploads/1373b087-4cb8-43e3-ae69-f3ff5c05a5d1.png" alt="Bailey Young" className="w-full h-64 object-cover rounded-lg" />
                           </div>
                           <div className="md:w-2/3">
                             <h3 className="text-xl font-bold text-gray-900 mb-2">Bailey Young</h3>
@@ -489,8 +484,6 @@ const Documents = () => {
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default Documents;
