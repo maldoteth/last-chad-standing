@@ -541,7 +541,7 @@ const Documents = () => {
 
                       <h3 id="utility" className="font-bold">Utility</h3>
 
-                      <p><strong>Primary Uses:</strong></p>
+                      <p><strong>Utility:</strong></p>
                       <ul>
                         <li><strong>In-Game Purchases:</strong> Skins, weapons, cosmetics</li>
                         <li><strong>Tournament Entry:</strong> Entry fees for competitive events</li>
