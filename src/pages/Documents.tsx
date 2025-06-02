@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { ArrowLeft, UserCheck, Gamepad2, Map, Sword, Settings, Target, Trophy, DollarSign, Eye, Headphones, Rocket, Joystick, Shield, Navigation } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -118,6 +117,15 @@ const Documents = () => {
                       <p>Players are thrown onto the island via helicopter, scattered randomly, and must use both wits and combat prowess to survive against 19 other players. The shrinking zone of poison gas forces fighters into close quarters, ensuring non stop action. Combat is visceral, utilizing a mix of strikes, grappling, weaponry, and brutal finishers.</p>
                     </section>
 
+                    {/* Helicopter Drop Image */}
+                    <div className="my-8 w-full">
+                      <img 
+                        src="/lovable-uploads/1615e7da-29d5-454e-a2fe-57f5abf91d56.png" 
+                        alt="Helicopter dropping players onto the island" 
+                        className="w-full h-auto rounded-lg shadow-md"
+                      />
+                    </div>
+
                     {/* Game World */}
                     <section id="game-world" className="mb-12">
                       <h2>2. Game World & Environment</h2>
@@ -131,6 +139,15 @@ const Documents = () => {
                       </ul>
                       <p>There are environmental traps like collapsing floors, explosive barrels, and natural hazards (e.g., lava flows, flooding). The environment also dynamically changes over time due to the collapsing zone, adding urgency to exploration.</p>
                     </section>
+
+                    {/* Aerial Drop Combat Image */}
+                    <div className="my-8 w-full">
+                      <img 
+                        src="/lovable-uploads/b31c9ab4-6dcf-4a77-bdf6-7e82e5a8c66a.png" 
+                        alt="Aerial view of combat on the island" 
+                        className="w-full h-auto rounded-lg shadow-md"
+                      />
+                    </div>
 
                     {/* Gameplay Mechanics */}
                     <section id="gameplay-mechanics" className="mb-12">
@@ -178,6 +195,15 @@ const Documents = () => {
                       <p>Players can improve their characters' base stats (strength, speed, stamina) through gameplay. XP earned during matches can be spent on increasing these attributes, unlocking new moves, or augmenting special abilities. However, the game maintains a balanced approach to avoid "pay-to-win" scenarios—upgrades are capped to ensure fairness.</p>
                     </section>
 
+                    {/* Character Model Image */}
+                    <div className="my-8 w-full">
+                      <img 
+                        src="/lovable-uploads/7d4ea94f-0c4d-459f-bded-b68a2bd272d6.png" 
+                        alt="3D character models and customization options" 
+                        className="w-full h-auto rounded-lg shadow-md"
+                      />
+                    </div>
+
                     {/* Game Modes */}
                     <section id="game-modes" className="mb-12">
                       <h2>5. Game Modes</h2>
@@ -212,6 +238,15 @@ const Documents = () => {
                       <h3>Sound Design</h3>
                       <p>Each punch and impact has weight, with a focus on brutal, visceral sound effects—bones snapping, skin tearing, and blood splattering. Background music ranges from tense, atmospheric tunes to heart-pounding battle music, rising in intensity as the match progresses.</p>
                     </section>
+
+                    {/* Fighter in Jungle Image */}
+                    <div className="my-8 w-full">
+                      <img 
+                        src="/lovable-uploads/f6dc2342-08e2-45a0-a94c-ad2e0db2efb0.png" 
+                        alt="Fighter in jungle environment showcasing combat stance" 
+                        className="w-full h-auto rounded-lg shadow-md"
+                      />
+                    </div>
 
                     {/* Marketing */}
                     <section id="marketing" className="mb-12">
