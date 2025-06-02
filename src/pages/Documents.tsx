@@ -364,7 +364,7 @@ const Documents = () => {
                         <li><strong>Blunt Weapons:</strong> Bats, pipes, hammers—ideal for bashing enemies. Slower, but cause knockback.</li>
                         
                         <li><strong>Improvised Weapons:</strong> Found objects like bricks, chainsaws, or construction tools. Deal high damage but often have low durability.</li>
-                        <li><strong>Throwable Weapons:</strong> Knives, rocks, or even grenades (in special game modes). These can be hurled at enemies from a distance but require good aim.</li>
+                        <li><strong>Throwable Weapons:</strong> Rocks or even grenades (in special game modes). These can be hurled at enemies from a distance but require good aim.</li>
                       </ul>
 
                       <h3 className="text-base font-bold">Weapon Durability</h3>
