@@ -2,7 +2,6 @@ import React from 'react';
 import { ArrowLeft, UserCheck, Gamepad2, Map, Sword, Settings, Target, Trophy, DollarSign, Eye, Headphones, Rocket, Joystick, Shield, Navigation, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ScrollArea } from '@/components/ui/scroll-area';
-
 const Documents = () => {
   const documentSections = [{
     title: "Game Overview",
@@ -553,7 +552,7 @@ const Documents = () => {
 
                       <h3 id="utility" className="text-2xl font-bold">Utility</h3>
 
-                      <p><strong>Utility:</strong></p>
+                      
                       <ul>
                         <li><strong>In-Game Purchases:</strong> Skins, weapons, cosmetics</li>
                         <li><strong>Tournament Entry:</strong> Entry fees for competitive events</li>
@@ -668,5 +667,4 @@ const Documents = () => {
       </div>
     </div>;
 };
-
 export default Documents;
