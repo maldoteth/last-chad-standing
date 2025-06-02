@@ -2,6 +2,7 @@ import React from 'react';
 import { ArrowLeft, UserCheck, Gamepad2, Map, Sword, Settings, Target, Trophy, DollarSign, Eye, Headphones, Rocket, Joystick, Shield, Navigation, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ScrollArea } from '@/components/ui/scroll-area';
+
 const Documents = () => {
   const documentSections = [{
     title: "Game Overview",
@@ -526,54 +527,41 @@ const Documents = () => {
                       <p>This means players truly own their digital assets and can trade them freely without fear of arbitrary changes to the game's economy. The decentralized nature ensures that the value of player investments is protected by smart contracts rather than corporate decisions.</p>
 
                       <h3 id="token-economy" className="font-bold">Distribution</h3>
-                      <div className="bg-gray-50 p-6 rounded-lg">
-                        
-                        
-                        <div className="mb-6">
-                          <h5 className="font-bold mb-3">Token Supply Breakdown</h5>
-                          <ul className="space-y-2 text-sm">
-                            <li><strong>Total Supply:</strong> 1,000,000,000 coins</li>
-                            <li><strong>Public Sale:</strong> 30% (300M coins)</li>
-                            <li><strong>Team & Advisors:</strong> 20% (200M coins)</li>
-                            <li><strong>Development Fund:</strong> 15% (150M coins)</li>
-                            <li><strong>Marketing & Partnerships:</strong> 15% (150M coins)</li>
-                            <li><strong>Ecosystem Rewards:</strong> 10% (100M coins)</li>
-                            <li><strong>Liquidity Pool:</strong> 10% (100M coins)</li>
-                          </ul>
-                        </div>
-                      </div>
+                      <p><strong>Total Supply:</strong> 1,000,000,000 coins</p>
+                      <ul>
+                        <li><strong>Public Sale:</strong> 30% (300M coins)</li>
+                        <li><strong>Team & Advisors:</strong> 20% (200M coins)</li>
+                        <li><strong>Development Fund:</strong> 15% (150M coins)</li>
+                        <li><strong>Marketing & Partnerships:</strong> 15% (150M coins)</li>
+                        <li><strong>Ecosystem Rewards:</strong> 10% (100M coins)</li>
+                        <li><strong>Liquidity Pool:</strong> 10% (100M coins)</li>
+                      </ul>
 
-                      <h3 id="utility" className="font-bold mt-8">Utility</h3>
-                      <div className="bg-gray-50 p-6 rounded-lg">
-                        
-                        
-                        <div className="mb-6">
-                          <h5 className="font-bold mb-3">Primary Uses</h5>
-                          <ul className="space-y-2 text-sm">
-                            <li><strong>In-Game Purchases:</strong> Skins, weapons, cosmetics</li>
-                            <li><strong>Tournament Entry:</strong> Entry fees for competitive events</li>
-                            <li><strong>NFT Marketplace:</strong> Trading and purchasing unique items</li>
-                            <li><strong>Governance:</strong> Voting on game features and updates</li>
-                            <li><strong>Staking Rewards:</strong> Earn additional coins by staking</li>
-                            <li><strong>Care Packages:</strong> Send support items to players</li>
-                          </ul>
-                        </div>
+                      <h3 id="utility" className="font-bold">Utility</h3>
+                      <p><strong>Primary Uses:</strong></p>
+                      <ul>
+                        <li><strong>In-Game Purchases:</strong> Skins, weapons, cosmetics</li>
+                        <li><strong>Tournament Entry:</strong> Entry fees for competitive events</li>
+                        <li><strong>NFT Marketplace:</strong> Trading and purchasing unique items</li>
+                        <li><strong>Governance:</strong> Voting on game features and updates</li>
+                        <li><strong>Staking Rewards:</strong> Earn additional coins by staking</li>
+                        <li><strong>Care Packages:</strong> Send support items to players</li>
+                      </ul>
 
-                        <div className="border-t pt-4">
-                          <h5 className="font-bold mb-3">Economic Mechanics</h5>
-                          <div className="grid md:grid-cols-3 gap-4 text-sm">
-                            <div className="bg-white p-4 rounded">
-                              <h6 className="font-bold text-green-600 mb-2">Play-to-Win</h6>
-                              <p>Players earn coins, skins and other cosmetics by winning matches, completing challenges and participating in tournaments.</p>
-                            </div>
-                            <div className="bg-white p-4 rounded">
-                              <h6 className="font-bold text-blue-600 mb-2">Deflationary Model</h6>
-                              <p>A percentage of coins used for transactions are burned, reducing total supply over time.</p>
-                            </div>
-                            <div className="bg-white p-4 rounded">
-                              <h6 className="font-bold text-purple-600 mb-2">Yield Generation</h6>
-                              <p>Staking coins provides holders with passive income and exclusive benefits.</p>
-                            </div>
+                      <div className="mt-8">
+                        <h4 className="font-bold mb-3">Economic Mechanics</h4>
+                        <div className="grid md:grid-cols-3 gap-4 text-sm">
+                          <div className="bg-white p-4 rounded border">
+                            <h6 className="font-bold text-green-600 mb-2">Play-to-Win</h6>
+                            <p>Players earn coins, skins and other cosmetics by winning matches, completing challenges and participating in tournaments.</p>
+                          </div>
+                          <div className="bg-white p-4 rounded border">
+                            <h6 className="font-bold text-blue-600 mb-2">Deflationary Model</h6>
+                            <p>A percentage of coins used for transactions are burned, reducing total supply over time.</p>
+                          </div>
+                          <div className="bg-white p-4 rounded border">
+                            <h6 className="font-bold text-purple-600 mb-2">Yield Generation</h6>
+                            <p>Staking coins provides holders with passive income and exclusive benefits.</p>
                           </div>
                         </div>
                       </div>
@@ -665,4 +653,5 @@ const Documents = () => {
       </div>
     </div>;
 };
+
 export default Documents;
