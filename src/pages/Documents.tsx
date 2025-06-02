@@ -307,9 +307,7 @@ const Documents = () => {
                             <li><strong>C:</strong> Block/Parry</li>
                             <li><strong>V:</strong> Quick Dodge</li>
                             <li><strong>1/2/3:</strong> Weapon select (if equipped)</li>
-                            
                             <li><strong>G:</strong> Throw weapon</li>
-                            
                             <li><strong>M:</strong> Large map (full screen)</li>
                             <li><strong>Esc:</strong> Pause/Options</li>
                           </ul>
@@ -330,8 +328,6 @@ const Documents = () => {
                             <li><strong>L1/LB:</strong> Quick Dodge</li>
                             <li><strong>L3 (Click Left Stick):</strong> Sprint</li>
                             <li><strong>R3 (Click Right Stick):</strong> Crouch/Slide</li>
-                            
-                            
                             <li><strong>L1 + R1:</strong> Special Ability</li>
                             <li><strong>Options/Menu:</strong> Pause/Map</li>
                           </ul>
@@ -547,7 +543,7 @@ const Documents = () => {
                         </div>
                       </div>
 
-                      <h3 className="font-bold mt-8">Utility</h3>
+                      <h3 id="utility" className="font-bold mt-8">Utility</h3>
                       <div className="bg-gray-50 p-6 rounded-lg">
                         <h4 className="font-bold text-lg mb-4">Coin Utility</h4>
                         
