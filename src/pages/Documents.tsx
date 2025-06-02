@@ -197,6 +197,8 @@ const Documents = () => {
                       
                       <p>Players are thrown out of a helicopter flying erratically over the island, with random ejection points adding an element of chaos and unpredictability to the start of each match.</p>
 
+                      <br />
+
                       <h3 className="text-2xl font-bold">Combat System</h3>
                       <p>Combat is the heart of Last Chad Standing. It focuses on hand-to-hand fighting with a realistic physics engine. Every hit feels weighty, and the results of brutal combat are visually emphasized with blood, broken bones, and dismemberment.</p>
                       <ul>
