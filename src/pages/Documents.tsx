@@ -523,10 +523,12 @@ const Documents = () => {
                       <h2 className="font-bold">16. Economy</h2>
                       
                       <h3 className="font-bold">Coins</h3>
+
                       <p>Every game needs in-game currency, but ours is unique compared to most games because it's decentralized and has a set supply, giving players real ownership without manipulation from developers. Unlike traditional games where developers can inflate currency at will, our coins operate on blockchain technology with transparent tokenomics.</p>
                       <p>This means players truly own their digital assets and can trade them freely without fear of arbitrary changes to the game's economy. The decentralized nature ensures that the value of player investments is protected by smart contracts rather than corporate decisions.</p>
 
                       <h3 id="token-economy" className="font-bold">Distribution</h3>
+
                       <p><strong>Total Supply:</strong> 1,000,000,000 coins</p>
                       <ul>
                         <li><strong>Public Sale:</strong> 30% (300M coins)</li>
@@ -538,6 +540,7 @@ const Documents = () => {
                       </ul>
 
                       <h3 id="utility" className="font-bold">Utility</h3>
+
                       <p><strong>Primary Uses:</strong></p>
                       <ul>
                         <li><strong>In-Game Purchases:</strong> Skins, weapons, cosmetics</li>
