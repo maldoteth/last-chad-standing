@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { ArrowLeft, UserCheck, Gamepad2, Map, Sword, Settings, Target, Trophy, DollarSign, Eye, Headphones, Rocket, Joystick, Shield, Navigation, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -199,6 +200,8 @@ const Documents = () => {
 
                       <br />
 
+                      <br />
+
                       <h3 className="text-2xl font-bold">Combat System</h3>
                       <p>Combat is the heart of Last Chad Standing. It focuses on hand-to-hand fighting with a realistic physics engine. Every hit feels weighty, and the results of brutal combat are visually emphasized with blood, broken bones, and dismemberment.</p>
                       <ul>
@@ -222,6 +225,8 @@ const Documents = () => {
                         <li><strong>Slayer:</strong> Balanced with dirty tricks up his sleeve. Special Ability: Carry an extra weapon.</li>
                       </ul>
 
+                      <br />
+
                       <h3 className="text-2xl font-bold">Shrinking Zone Mechanic</h3>
                       <p>Like other battle royales, the island has a "death zone" that shrinks over time, forcing players into tighter quarters. The visual aesthetic is hyperrealistic, with the zone being a literal wall of toxic gas that corrodes anything it touches. As it closes in, players are forced to fight or flee, and those caught in the zone slowly die in an excruciating spiral of pain. Unless you're lucky enough to find a gas mask, you won't survive more than 30 seconds before you suffocate on your own blood while your skin boils explosively.</p>
                     </section>
@@ -232,8 +237,12 @@ const Documents = () => {
                       
                       <br />
                       
+                      <br />
+
                       <h3 className="text-2xl font-bold">NFT Skins Marketplace</h3>
                       <p>The in-game skins for characters are NFTs, each with unique visual attributes that can be traded on the marketplace. These skins range from cosmetic changes like clothing, tattoos, scars, and armor, to more grotesque body modifications, giving each fighter a distinct appearance. Limited-edition and rare skins are released periodically and can be earned through winning tournaments, in-game challenges, or purchased directly.</p>
+
+                      <br />
 
                       <h3 className="text-2xl font-bold">Character Customization</h3>
                       <p>Players can customize the appearance of their characters by selecting base skins and layering accessories, clothing, and weapons. NFTs purchased from the marketplace are fully tradable and can enhance the player's appearance with unique styles, offering individuality and a sense of ownership.</p>
@@ -277,8 +286,12 @@ const Documents = () => {
                       
                       <br />
                       
+                      <br />
+
                       <h3 className="text-2xl font-bold">Hyperrealism and Gore</h3>
                       <p>The game emphasizes visual fidelity with cutting-edge graphics, using realistic lighting, textures, and physics-based animations. Every punch, kick, and fatality is brought to life with intense visual effects. Blood splatters realistically, bones crack audibly, and finishing moves are rendered in excruciating detail. Dynamic weather effects like rain, thunderstorms, and night/day cycles further enhance immersion.</p>
+
+                      <br />
 
                       <h3 className="text-2xl font-bold">Sound Design</h3>
                       <p>Each punch and impact has weight, with a focus on brutal, visceral sound effects—bones snapping, skin tearing, and blood splattering. Background music ranges from tense, atmospheric tunes to heart-pounding battle music, rising in intensity as the match progresses.</p>
@@ -303,6 +316,9 @@ const Documents = () => {
                       
                       <div className="grid md:grid-cols-2 gap-6">
                         <div className="bg-gray-50 p-4 rounded-lg">
+
+                          <br />
+
                           <h3 className="text-2xl font-bold">PC Controls</h3>
                           <ul className="space-y-1 text-sm">
                             <li><strong>W/A/S/D:</strong> Move forward, left, backward, right</li>
@@ -325,6 +341,9 @@ const Documents = () => {
                         </div>
 
                         <div className="bg-gray-50 p-4 rounded-lg">
+
+                          <br />
+
                           <h3 className="text-2xl font-bold">Console Controls (PlayStation/Xbox)</h3>
                           <ul className="space-y-1 text-sm">
                             <li><strong>Left Stick:</strong> Move</li>
@@ -353,48 +372,43 @@ const Documents = () => {
                       
                       <br />
                       
-                      <h3 className="text-2xl font-bold">Attack Types</h3>
-                      
                       <br />
-                      
+
+                      <h3 className="text-2xl font-bold">Attack Types</h3>
                       <ul>
                         <li><strong>Punch/Combos (LMB/R2):</strong> Quick, basic attacks that deal moderate damage but are harder to counter. Ideal for rapid combos.</li>
                         <li><strong>Kick/Combos (RMB/L2):</strong> Slower, more powerful strikes. These can break through blocks but leave you open to counters if missed.</li>
                         <li><strong>Combos:</strong> Chaining punch and kick attacks in various sequences triggers character-specific combos for extra damage or stuns. Example: Punch-Punch-Kick = Overhead Slam Combo. Combos vary based on character type (Brawler, Ninja, etc.).</li>
                       </ul>
 
-                      <h3 className="text-2xl font-bold">Grappling (F/Circle/B)</h3>
-                      
                       <br />
-                      
+
+                      <h3 className="text-2xl font-bold">Grappling (F/Circle/B)</h3>
                       <ul>
                         <li><strong>Grapple:</strong> Initiate a grapple on a nearby opponent to engage in close-quarters combat. Grapples can be countered with a well-timed block or dodge.</li>
                         <li><strong>Throws:</strong> After a successful grapple, use directional inputs to throw your opponent into environmental hazards or towards other players.</li>
                         <li><strong>Special Throws:</strong> Each fighter has unique throws that differ based on their fighting style (e.g., Brawler performs a suplex; Ninja flips the enemy over).</li>
                       </ul>
 
-                      <h3 className="text-2xl font-bold">Blocking and Parrying</h3>
-                      
                       <br />
-                      
+
+                      <h3 className="text-2xl font-bold">Blocking and Parrying</h3>
                       <ul>
                         <li><strong>Block (C/R1):</strong> Deflects incoming punch attacks but depletes stamina with each hit.</li>
                         <li><strong>Parry:</strong> If timed perfectly, pressing the block button just as an opponent strikes will parry their attack, opening them up for a devastating counterattack.</li>
                       </ul>
 
-                      <h3 className="text-2xl font-bold">Dodging and Sprinting</h3>
-                      
                       <br />
-                      
+
+                      <h3 className="text-2xl font-bold">Dodging and Sprinting</h3>
                       <ul>
                         <li><strong>Quick Dodge (V/L1):</strong> Evade enemy attacks with a swift side step. Dodging consumes stamina but can avoid kick attacks or grapples.</li>
                         <li><strong>Sprint (Shift/L3):</strong> Use sprint to quickly cover ground or charge towards enemies. While sprinting, players can perform sliding attacks, which knock down opponents.</li>
                       </ul>
 
-                      <h3 className="text-2xl font-bold">Special Abilities (Q/L1 + R1)</h3>
-                      
                       <br />
-                      
+
+                      <h3 className="text-2xl font-bold">Special Abilities (Q/L1 + R1)</h3>
                       <p>Each character class has a unique special ability that recharges over time or when certain conditions are met (e.g., landing consecutive hits). Abilities vary greatly but are game-changing when used strategically:</p>
                       <ul>
                         <li><strong>Brawler:</strong> Ground slam, causing area-of-effect damage.</li>
@@ -402,10 +416,9 @@ const Documents = () => {
                         <li><strong>Brute:</strong> Temporary damage immunity.</li>
                       </ul>
 
-                      <h3 className="text-2xl font-bold">Finishers (R/Triangle/Y)</h3>
-                      
                       <br />
-                      
+
+                      <h3 className="text-2xl font-bold">Finishers (R/Triangle/Y)</h3>
                       <p>Finishers are unique, gory executions that players can perform when an opponent's health is critically low (triggered when a finisher icon appears).</p>
                       <ul>
                         <li><strong>Execution Prompt:</strong> When close to a low-health opponent, press the execute button to perform a brutal finishing move.</li>
@@ -418,6 +431,8 @@ const Documents = () => {
                       <h2 className="text-3xl font-bold">11. Weapons and Inventory</h2>
                       <p>Weapons can be found throughout the island and can range from blunt instruments to sharp bladed weapons. Players can carry up to three weapons, and each weapon has durability, meaning it can break over time.</p>
                       
+                      <br />
+
                       <h3 className="text-2xl font-bold">Weapon Categories</h3>
                       <ul>
                         <li><strong>Blunt Weapons:</strong> Bats, pipes, hammers—ideal for bashing enemies. Slower, but cause knockback.</li>
@@ -426,8 +441,12 @@ const Documents = () => {
                         <li><strong>Throwable Weapons:</strong> Rocks, or even grenades (in special game modes). These can be hurled at enemies from a distance but require good aim.</li>
                       </ul>
 
+                      <br />
+
                       <h3 className="text-2xl font-bold">Weapon Durability</h3>
                       <p>Weapons have a limited lifespan. Each time you strike, durability decreases, and eventually, the weapon will break. Broken weapons can be discarded and replaced by scavenging new ones from the environment.</p>
+
+                      <br />
 
                       <h3 className="text-2xl font-bold">Inventory Management</h3>
                       <ul>
@@ -441,11 +460,17 @@ const Documents = () => {
                     <section id="movement" className="mb-12">
                       <h2 className="text-3xl font-bold">12. Movement and Traversal</h2>
                       
+                      <br />
+
                       <h3 className="text-2xl font-bold">Basic Movement</h3>
                       <p>Use the movement keys/stick to navigate the map. Movement is essential for dodging attacks and avoiding environmental hazards.</p>
 
+                      <br />
+
                       <h3 className="text-2xl font-bold">Jumping and Climbing (Space/X)</h3>
                       <p>Jump to clear obstacles or reach higher ground. Some objects are climbable, allowing players to gain an advantage through vertical positioning.</p>
+
+                      <br />
 
                       <h3 className="text-2xl font-bold">Sliding (Ctrl/R3 while Sprinting)</h3>
                       <p>Perform a sliding attack while sprinting, which can knock enemies down or be used to quickly evade combat.</p>
@@ -456,11 +481,15 @@ const Documents = () => {
                       <h2 className="text-3xl font-bold">13. Map and Environmental Hazards</h2>
                       <p>The island is littered with environmental traps and hazards that players can use to their advantage or avoid.</p>
                       
+                      <br />
+
                       <h3 className="text-2xl font-bold">Map Overview</h3>
                       <ul>
                         <li><strong>Access Map (M/Options):</strong> Check the shrinking zone, your position, and possible loot locations.</li>
                         <li><strong>Shrinking Zone:</strong> The toxic gas zone slowly closes in over time, forcing players to move closer together. The map displays the current safe area and the next shrinking zone.</li>
                       </ul>
+
+                      <br />
 
                       <h3 className="text-2xl font-bold">Environmental Traps</h3>
                       <ul>
@@ -487,6 +516,8 @@ const Documents = () => {
                       <h2 className="text-3xl font-bold">15. Social Aspects</h2>
                       <p>Last Chad Standing features robust social mechanics that create a truly immersive and interactive gaming experience. These features foster community engagement and add layers of strategy beyond just combat.</p>
                       
+                      <br />
+
                       <h3 className="text-2xl font-bold">Proximity Voice Chat</h3>
                       <p>The game features uncensored, proximity-based voice chat that adds intense psychological warfare to combat:</p>
                       <ul>
@@ -496,6 +527,8 @@ const Documents = () => {
                         <li><strong>Immersive Experience:</strong> Hearing your opponent's breathing, grunts of pain, or victory cries adds visceral realism to every encounter.</li>
                       </ul>
 
+                      <br />
+
                       <h3 className="text-2xl font-bold">Spectator Mode & Live Viewing</h3>
                       <p>Players can watch ongoing matches in real-time, creating a live entertainment ecosystem:</p>
                       <ul>
@@ -504,6 +537,8 @@ const Documents = () => {
                         <li><strong>Live Commentary:</strong> Spectators can provide real-time commentary and reactions via text chat visible to other viewers.</li>
                         <li><strong>Highlight Clips:</strong> Automatically capture and share the most brutal moments and epic finishers.</li>
                       </ul>
+
+                      <br />
 
                       <h3 className="text-2xl font-bold">Care Packages & Player Support</h3>
                       <p>Spectators can directly influence ongoing matches by purchasing care packages for their favorite fighters:</p>
@@ -515,6 +550,8 @@ const Documents = () => {
                         <li><strong>Cost Scaling:</strong> Care package prices increase as the match progresses and fewer players remain, making late-game support more valuable.</li>
                       </ul>
 
+                      <br />
+
                       <h3 className="text-2xl font-bold">Fighter Backing & Reward Sharing</h3>
                       <p>Players can financially back fighters before matches begin, sharing in the spoils of victory:</p>
                       <ul>
@@ -525,6 +562,8 @@ const Documents = () => {
                         <li><strong>Backer Leaderboards:</strong> Track the most successful backers and follow their betting strategies for future matches.</li>
                         <li><strong>Exclusive Rewards:</strong> Top backers gain access to exclusive NFT drops, early access to new content, and special recognition in the community.</li>
                       </ul>
+
+                      <br />
 
                       <h3 className="text-2xl font-bold">Social Feedback Loops and Virality</h3>
                       <p>The game creates powerful viral loops that encourage organic growth and community engagement:</p>
@@ -538,6 +577,8 @@ const Documents = () => {
                         <li><strong>Influencer Partnerships:</strong> Exclusive fighter skins and tournaments for content creators, creating authentic promotional content and expanding reach to new audiences.</li>
                         <li><strong>Community Rewards:</strong> Group achievements and milestones that reward the entire community when certain viral or engagement thresholds are met, encouraging collective promotion.</li>
                       </ul>
+
+                      <br />
 
                       <h3 className="text-2xl font-bold">Community Features</h3>
                       <ul>
@@ -554,6 +595,8 @@ const Documents = () => {
                       
                       <br />
                       
+                      <br />
+
                       <h3 className="text-2xl font-bold">Coins</h3>
 
                       <p>Every game needs in-game currency, but ours is unique compared to most games because it's decentralized and has a set supply, giving players real ownership without manipulation from developers. Unlike traditional games where developers can inflate currency at will, our coins operate on blockchain technology with transparent tokenomics.</p>
