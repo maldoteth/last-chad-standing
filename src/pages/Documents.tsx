@@ -557,7 +557,7 @@ const Documents = () => {
 
                       
                       <ul>
-                        <li><strong>In-Game Purchases:</strong> Skins, weapons, cosmetics</li>
+                        <li><strong>In-Game Purchases:</strong> Skins, experiences and other assets</li>
                         <li><strong>Tournament Entry:</strong> Entry fees for competitive events</li>
                         <li><strong>NFT Marketplace:</strong> Trading and purchasing unique items</li>
                         <li><strong>Governance:</strong> Voting on game features and updates</li>
