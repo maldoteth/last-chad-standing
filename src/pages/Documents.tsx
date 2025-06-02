@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { ArrowLeft, UserCheck, Gamepad2, Map, Sword, Settings, Target, Trophy, DollarSign, Eye, Headphones, Rocket, Joystick, Shield, Navigation } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -95,9 +94,7 @@ const Documents = () => {
                       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
                         <div><strong>Genre:</strong> Third-Person Fighter Battle Royale</div>
                         <div><strong>Players:</strong> 20-100 players per lobby</div>
-                        <div><strong>Graphics:</strong> Hyperrealistic, gritty, and gory</div>
                         <div><strong>Platforms:</strong> PC, next-gen consoles</div>
-                        <div><strong>Monetization:</strong> NFT Skins Marketplace</div>
                         <div><strong>Rating:</strong> Mature audiences (PEGI 18+)</div>
                       </div>
                     </div>
