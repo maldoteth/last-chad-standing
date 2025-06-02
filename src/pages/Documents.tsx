@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { ArrowLeft, UserCheck, Gamepad2, Map, Sword, Settings, Target, Trophy, DollarSign, Eye, Headphones, Rocket, Joystick, Shield, Navigation, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -535,8 +534,53 @@ const Documents = () => {
                       <p>This means players truly own their digital assets and can trade them freely without fear of arbitrary changes to the game's economy. The decentralized nature ensures that the value of player investments is protected by smart contracts rather than corporate decisions.</p>
 
                       <h3 id="token-economy" className="font-bold">Token Economy</h3>
-                      <div className="my-8 w-full">
-                        <img src="/lovable-uploads/2c73ccf1-ed96-4f14-98ce-1d73012d0628.png" alt="LCS Token Economy breakdown showing supply distribution and utility" className="w-full h-auto rounded-lg shadow-md" />
+                      <div className="bg-gray-50 p-6 rounded-lg">
+                        <h4 className="font-bold text-lg mb-4">LCS Token Distribution & Utility</h4>
+                        
+                        <div className="grid md:grid-cols-2 gap-6 mb-6">
+                          <div>
+                            <h5 className="font-bold mb-3">Token Supply Breakdown</h5>
+                            <ul className="space-y-2 text-sm">
+                              <li><strong>Total Supply:</strong> 1,000,000,000 LCS</li>
+                              <li><strong>Public Sale:</strong> 30% (300M LCS)</li>
+                              <li><strong>Team & Advisors:</strong> 20% (200M LCS)</li>
+                              <li><strong>Development Fund:</strong> 15% (150M LCS)</li>
+                              <li><strong>Marketing & Partnerships:</strong> 15% (150M LCS)</li>
+                              <li><strong>Ecosystem Rewards:</strong> 10% (100M LCS)</li>
+                              <li><strong>Liquidity Pool:</strong> 10% (100M LCS)</li>
+                            </ul>
+                          </div>
+                          
+                          <div>
+                            <h5 className="font-bold mb-3">Token Utility</h5>
+                            <ul className="space-y-2 text-sm">
+                              <li><strong>In-Game Purchases:</strong> Skins, weapons, cosmetics</li>
+                              <li><strong>Tournament Entry:</strong> Entry fees for competitive events</li>
+                              <li><strong>NFT Marketplace:</strong> Trading and purchasing unique items</li>
+                              <li><strong>Governance:</strong> Voting on game features and updates</li>
+                              <li><strong>Staking Rewards:</strong> Earn additional tokens by staking</li>
+                              <li><strong>Care Packages:</strong> Send support items to players</li>
+                            </ul>
+                          </div>
+                        </div>
+
+                        <div className="border-t pt-4">
+                          <h5 className="font-bold mb-3">Economic Mechanics</h5>
+                          <div className="grid md:grid-cols-3 gap-4 text-sm">
+                            <div className="bg-white p-4 rounded">
+                              <h6 className="font-bold text-green-600 mb-2">Play-to-Earn</h6>
+                              <p>Players earn LCS tokens by winning matches, completing challenges, and participating in tournaments.</p>
+                            </div>
+                            <div className="bg-white p-4 rounded">
+                              <h6 className="font-bold text-blue-600 mb-2">Deflationary Model</h6>
+                              <p>A percentage of tokens used for transactions are burned, reducing total supply over time.</p>
+                            </div>
+                            <div className="bg-white p-4 rounded">
+                              <h6 className="font-bold text-purple-600 mb-2">Yield Generation</h6>
+                              <p>Staking LCS tokens provides holders with passive income and exclusive benefits.</p>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </section>
 
