@@ -537,6 +537,8 @@ const Documents = () => {
                       <p>Every game needs in-game currency, but ours is unique compared to most games because it's decentralized and has a set supply, giving players real ownership without manipulation from developers. Unlike traditional games where developers can inflate currency at will, our coins operate on blockchain technology with transparent tokenomics.</p>
                       <p>This means players truly own their digital assets and can trade them freely without fear of arbitrary changes to the game's economy. The decentralized nature ensures that the value of player investments is protected by smart contracts rather than corporate decisions.</p>
 
+                      <br />
+
                       <h3 id="token-economy" className="text-2xl font-bold">Distribution</h3>
 
                       <p><strong>Total Supply:</strong> 1,000,000,000 coins</p>
