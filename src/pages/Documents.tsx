@@ -367,7 +367,7 @@ const Documents = () => {
                         <li><strong>Throwable Weapons:</strong> Knives, rocks, or even grenades (in special game modes). These can be hurled at enemies from a distance but require good aim.</li>
                       </ul>
 
-                      <h3>Weapon Durability</h3>
+                      <h3 className="text-base font-bold">Weapon Durability</h3>
                       <p>Weapons have a limited lifespan. Each time you strike, durability decreases, and eventually, the weapon will break. Broken weapons can be discarded and replaced by scavenging new ones from the environment.</p>
 
                       <h3>Inventory Management</h3>
