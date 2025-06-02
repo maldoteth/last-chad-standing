@@ -1,5 +1,6 @@
+
 import React from 'react';
-import { ArrowLeft, UserCheck, Gamepad2, Map, Sword, Settings, Target, Trophy, DollarSign, Eye, Headphones, Rocket, Joystick, Shield, Navigation } from 'lucide-react';
+import { ArrowLeft, UserCheck, Gamepad2, Map, Sword, Settings, Target, Trophy, DollarSign, Eye, Headphones, Rocket, Joystick, Shield, Navigation, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ScrollArea } from '@/components/ui/scroll-area';
 
@@ -60,6 +61,19 @@ const Documents = () => {
       title: "Founding Team",
       href: "#founding-team"
     }]
+  }, {
+    title: "Links",
+    icon: <ExternalLink size={20} />,
+    items: [{
+      title: "Instagram",
+      href: "https://instagram.com/lastchadstanding"
+    }, {
+      title: "X (Twitter)",
+      href: "https://x.com/lcs_game"
+    }, {
+      title: "Website",
+      href: "https://leanchadfight.club"
+    }]
   }];
 
   return (
@@ -99,9 +113,16 @@ const Documents = () => {
                       </div>
                       <ul className="space-y-2 ml-6">
                         {section.items.map(item => <li key={item.title}>
-                            <a href={item.href} className="text-gray-600 hover:text-gray-900 transition-colors text-sm">
-                              {item.title}
-                            </a>
+                            {item.href.startsWith('http') ? (
+                              <a href={item.href} target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-gray-900 transition-colors text-sm flex items-center gap-1">
+                                {item.title}
+                                <ExternalLink size={12} />
+                              </a>
+                            ) : (
+                              <a href={item.href} className="text-gray-600 hover:text-gray-900 transition-colors text-sm">
+                                {item.title}
+                              </a>
+                            )}
                           </li>)}
                       </ul>
                     </div>)}
