@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { ArrowLeft, UserCheck, Gamepad2, Map, Sword, Settings, Target, Trophy, DollarSign, Eye, Headphones, Rocket, Joystick, Shield, Navigation, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -60,8 +59,11 @@ const Documents = () => {
       title: "Coins",
       href: "#in-game-currency"
     }, {
-      title: "Token Economy",
+      title: "Distribution",
       href: "#token-economy"
+    }, {
+      title: "Utility",
+      href: "#utility"
     }]
   }, {
     title: "Team",
