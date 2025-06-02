@@ -552,7 +552,7 @@ const Documents = () => {
                       </ul>
 
                       <div className="mt-8">
-                        <h4 className="font-bold mb-3">Economic Mechanics</h4>
+                        <h4 className="font-bold mb-3">Coin Mechanics</h4>
                         <div className="grid md:grid-cols-3 gap-4 text-sm">
                           <div className="bg-white p-4 rounded border">
                             <h6 className="font-bold text-green-600 mb-2">Play-to-Win</h6>
