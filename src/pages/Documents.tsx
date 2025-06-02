@@ -273,6 +273,8 @@ const Documents = () => {
                     <section id="visuals-sound" className="mb-12">
                       <h2 className="text-3xl font-bold">7. Visuals and Sound</h2>
                       
+                      <br />
+                      
                       <h3 className="text-2xl font-bold">Hyperrealism and Gore</h3>
                       <p>The game emphasizes visual fidelity with cutting-edge graphics, using realistic lighting, textures, and physics-based animations. Every punch, kick, and fatality is brought to life with intense visual effects. Blood splatters realistically, bones crack audibly, and finishing moves are rendered in excruciating detail. Dynamic weather effects like rain, thunderstorms, and night/day cycles further enhance immersion.</p>
 
