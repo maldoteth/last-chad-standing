@@ -2,7 +2,6 @@ import React from 'react';
 import { ArrowLeft, UserCheck, Gamepad2, Map, Sword, Settings, Target, Trophy, DollarSign, Eye, Headphones, Rocket, Joystick, Shield, Navigation, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ScrollArea } from '@/components/ui/scroll-area';
-
 const Documents = () => {
   const documentSections = [{
     title: "Game Overview",
@@ -557,9 +556,9 @@ const Documents = () => {
 
                       
                       <ul>
-                        <li><strong>In-Game Currency:</strong> Buy or sell skins from the store or secondary marketplace directly with other players</li>
-                        <li><strong>Tournament Entry:</strong> Access events and experiences, from tournaments to socials</li>
-                        <li><strong>NFT Marketplace:</strong> Trading and purchasing unique items</li>
+                        <li><strong>In-Game Purchases:</strong> Buy or sell skins from the store or secondary marketplace directly with other players</li>
+                        <li><strong>Tournament Entry:</strong> Entry fees for competitive events</li>
+                        
                         <li><strong>Governance:</strong> Voting on game features and updates</li>
                         <li><strong>Staking Rewards:</strong> Earn additional coins by staking</li>
                         <li><strong>Care Packages:</strong> Send support items to players</li>
