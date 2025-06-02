@@ -159,7 +159,7 @@ const Documents = () => {
                     <section id="gameplay-mechanics" className="mb-12">
                       <h2>3. Gameplay Mechanics</h2>
                       
-                      <h3>Aerial Drop</h3>
+                      
                       <p>Players are thrown out of a helicopter flying erratically over the island, with random ejection points adding an element of chaos and unpredictability to the start of each match.</p>
 
                       <h3>Combat System</h3>
