@@ -59,8 +59,11 @@ const Documents = () => {
       title: "Coins",
       href: "#in-game-currency"
     }, {
-      title: "Token Economy",
+      title: "Distribution",
       href: "#token-economy"
+    }, {
+      title: "Utility",
+      href: "#utility"
     }]
   }, {
     title: "Team",
@@ -304,9 +307,7 @@ const Documents = () => {
                             <li><strong>C:</strong> Block/Parry</li>
                             <li><strong>V:</strong> Quick Dodge</li>
                             <li><strong>1/2/3:</strong> Weapon select (if equipped)</li>
-                            
                             <li><strong>G:</strong> Throw weapon</li>
-                            
                             <li><strong>M:</strong> Large map (full screen)</li>
                             <li><strong>Esc:</strong> Pause/Options</li>
                           </ul>
@@ -327,8 +328,6 @@ const Documents = () => {
                             <li><strong>L1/LB:</strong> Quick Dodge</li>
                             <li><strong>L3 (Click Left Stick):</strong> Sprint</li>
                             <li><strong>R3 (Click Right Stick):</strong> Crouch/Slide</li>
-                            
-                            
                             <li><strong>L1 + R1:</strong> Special Ability</li>
                             <li><strong>Options/Menu:</strong> Pause/Map</li>
                           </ul>
@@ -528,14 +527,45 @@ const Documents = () => {
 
                       <h3 id="token-economy" className="font-bold">Distribution</h3>
                       <div className="bg-gray-50 p-6 rounded-lg">
-                        <h4 className="font-bold text-lg mb-4">Coin Distribution & Utility</h4>
+                        <h4 className="font-bold text-lg mb-4">Coin Distribution</h4>
                         
+                        <div className="mb-6">
+                          <h5 className="font-bold mb-3">Token Supply Breakdown</h5>
+                          <ul className="space-y-2 text-sm">
+                            <li><strong>Total Supply:</strong> 1,000,000,000 coins</li>
+                            <li><strong>Public Sale:</strong> 30% (300M coins)</li>
+                            <li><strong>Team & Advisors:</strong> 20% (200M coins)</li>
+                            <li><strong>Development Fund:</strong> 15% (150M coins)</li>
+                            <li><strong>Marketing & Partnerships:</strong> 15% (150M coins)</li>
+                            <li><strong>Ecosystem Rewards:</strong> 10% (100M coins)</li>
+                            <li><strong>Liquidity Pool:</strong> 10% (100M coins)</li>
+                          </ul>
+                        </div>
+                      </div>
+
+                      <h3 id="utility" className="font-bold mt-8">Utility</h3>
+                      <div className="bg-gray-50 p-6 rounded-lg">
+                        <h4 className="font-bold text-lg mb-4">Coin Utility</h4>
                         
+                        <div className="mb-6">
+                          <h5 className="font-bold mb-3">Primary Uses</h5>
+                          <ul className="space-y-2 text-sm">
+                            <li><strong>In-Game Purchases:</strong> Skins, weapons, cosmetics</li>
+                            <li><strong>Tournament Entry:</strong> Entry fees for competitive events</li>
+                            <li><strong>NFT Marketplace:</strong> Trading and purchasing unique items</li>
+                            <li><strong>Governance:</strong> Voting on game features and updates</li>
+                            <li><strong>Staking Rewards:</strong> Earn additional coins by staking</li>
+                            <li><strong>Care Packages:</strong> Send support items to players</li>
+                          </ul>
+                        </div>
 
                         <div className="border-t pt-4">
                           <h5 className="font-bold mb-3">Economic Mechanics</h5>
                           <div className="grid md:grid-cols-3 gap-4 text-sm">
-                            
+                            <div className="bg-white p-4 rounded">
+                              <h6 className="font-bold text-green-600 mb-2">Play-to-Win</h6>
+                              <p>Players earn coins, skins and other cosmetics by winning matches, completing challenges and participating in tournaments.</p>
+                            </div>
                             <div className="bg-white p-4 rounded">
                               <h6 className="font-bold text-blue-600 mb-2">Deflationary Model</h6>
                               <p>A percentage of coins used for transactions are burned, reducing total supply over time.</p>
