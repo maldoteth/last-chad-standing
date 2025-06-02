@@ -557,7 +557,7 @@ const Documents = () => {
 
                       
                       <ul>
-                        <li><strong>Buy or sell skins from the store or secondary marketplace directly with other players</strong></li>
+                        <li><strong>In-Game Purchases:</strong> Buy or sell skins from the store or secondary marketplace directly with other players</li>
                         <li><strong>Tournament Entry:</strong> Entry fees for competitive events</li>
                         <li><strong>NFT Marketplace:</strong> Trading and purchasing unique items</li>
                         <li><strong>Governance:</strong> Voting on game features and updates</li>
