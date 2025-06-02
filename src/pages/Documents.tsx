@@ -2,40 +2,62 @@ import React from 'react';
 import { ArrowLeft, UserCheck, Gamepad2, Map, Sword, Settings, Target, Trophy, DollarSign, Eye, Headphones, Rocket, Joystick, Shield, Navigation } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ScrollArea } from '@/components/ui/scroll-area';
-
 const Documents = () => {
-  const documentSections = [
-    {
-      title: "Game Overview",
-      icon: <Gamepad2 size={20} />,
-      items: [
-        { title: "Core Concept", href: "#core-concept" },
-        { title: "Game World & Environment", href: "#game-world" },
-        { title: "Gameplay Mechanics", href: "#gameplay-mechanics" },
-        { title: "Progression & Customization", href: "#progression" },
-        { title: "Game Modes", href: "#game-modes" },
-        { title: "Monetization & Marketplace", href: "#monetization" },
-        { title: "Visuals and Sound", href: "#visuals-sound" },
-        { title: "Marketing Strategy", href: "#marketing" },
-        { title: "Controls", href: "#controls" },
-        { title: "Combat Mechanics", href: "#combat-mechanics" },
-        { title: "Weapons & Inventory", href: "#weapons-inventory" },
-        { title: "Movement & Traversal", href: "#movement" },
-        { title: "Map & Hazards", href: "#map-hazards" },
-        { title: "Strategy", href: "#strategy" }
-      ]
-    },
-    {
-      title: "Team",
-      icon: <UserCheck size={20} />,
-      items: [
-        { title: "Founding Team", href: "#founding-team" }
-      ]
-    }
-  ];
-
-  return (
-    <div className="min-h-screen bg-gray-50">
+  const documentSections = [{
+    title: "Game Overview",
+    icon: <Gamepad2 size={20} />,
+    items: [{
+      title: "Core Concept",
+      href: "#core-concept"
+    }, {
+      title: "Game World & Environment",
+      href: "#game-world"
+    }, {
+      title: "Gameplay Mechanics",
+      href: "#gameplay-mechanics"
+    }, {
+      title: "Progression & Customization",
+      href: "#progression"
+    }, {
+      title: "Game Modes",
+      href: "#game-modes"
+    }, {
+      title: "Monetization & Marketplace",
+      href: "#monetization"
+    }, {
+      title: "Visuals and Sound",
+      href: "#visuals-sound"
+    }, {
+      title: "Marketing Strategy",
+      href: "#marketing"
+    }, {
+      title: "Controls",
+      href: "#controls"
+    }, {
+      title: "Combat Mechanics",
+      href: "#combat-mechanics"
+    }, {
+      title: "Weapons & Inventory",
+      href: "#weapons-inventory"
+    }, {
+      title: "Movement & Traversal",
+      href: "#movement"
+    }, {
+      title: "Map & Hazards",
+      href: "#map-hazards"
+    }, {
+      title: "Strategy",
+      href: "#strategy"
+    }]
+  }, {
+    title: "Team",
+    icon: <UserCheck size={20} />,
+    items: [{
+      title: "Founding Team",
+      href: "#founding-team"
+    }]
+  }];
+  return <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <header className="bg-white border-b border-gray-200 sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -54,11 +76,7 @@ const Documents = () => {
 
       {/* Poster Image */}
       <div className="w-full">
-        <img 
-          src="/lovable-uploads/b0860230-720f-4dda-b468-f3ff97006100.png" 
-          alt="Last Chad Standing Game Poster" 
-          className="w-full h-auto object-cover"
-        />
+        <img src="/lovable-uploads/b0860230-720f-4dda-b468-f3ff97006100.png" alt="Last Chad Standing Game Poster" className="w-full h-auto object-cover" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -68,23 +86,19 @@ const Documents = () => {
             <div className="sticky top-24 h-[calc(100vh-8rem)]">
               <ScrollArea className="h-full [&>[data-radix-scroll-area-viewport]]:!overflow-x-hidden [&>div>div[style]]:!scrollbar-none">
                 <nav className="space-y-6 pr-4">
-                  {documentSections.map((section) => (
-                    <div key={section.title} className="space-y-3">
+                  {documentSections.map(section => <div key={section.title} className="space-y-3">
                       <div className="flex items-center gap-2 text-gray-900 font-medium">
                         {section.icon}
                         <span>{section.title}</span>
                       </div>
                       <ul className="space-y-2 ml-6">
-                        {section.items.map((item) => (
-                          <li key={item.title}>
+                        {section.items.map(item => <li key={item.title}>
                             <a href={item.href} className="text-gray-600 hover:text-gray-900 transition-colors text-sm">
                               {item.title}
                             </a>
-                          </li>
-                        ))}
+                          </li>)}
                       </ul>
-                    </div>
-                  ))}
+                    </div>)}
                 </nav>
               </ScrollArea>
             </div>
@@ -119,17 +133,13 @@ const Documents = () => {
 
                     {/* Helicopter Drop Image */}
                     <div className="my-8 w-full">
-                      <img 
-                        src="/lovable-uploads/1615e7da-29d5-454e-a2fe-57f5abf91d56.png" 
-                        alt="Helicopter dropping players onto the island" 
-                        className="w-full h-auto rounded-lg shadow-md"
-                      />
+                      <img src="/lovable-uploads/1615e7da-29d5-454e-a2fe-57f5abf91d56.png" alt="Helicopter dropping players onto the island" className="w-full h-auto rounded-lg shadow-md" />
                     </div>
 
                     {/* Game World */}
                     <section id="game-world" className="mb-12">
                       <h2>2. Game World & Environment</h2>
-                      <h3>Island Setting</h3>
+                      <h3></h3>
                       <p>The map is a relatively small, derelict resort island filled with destructible environments, including beaches, dense jungles, abandoned industrial areas, and decaying urban ruins. The environment offers both vertical and horizontal exploration opportunities, such as:</p>
                       <ul>
                         <li><strong>Beaches:</strong> Wide open spaces where players can be easily spotted but have more visibility.</li>
@@ -142,11 +152,7 @@ const Documents = () => {
 
                     {/* Aerial Drop Combat Image */}
                     <div className="my-8 w-full">
-                      <img 
-                        src="/lovable-uploads/b31c9ab4-6dcf-4a77-bdf6-7e82e5a8c66a.png" 
-                        alt="Aerial view of combat on the island" 
-                        className="w-full h-auto rounded-lg shadow-md"
-                      />
+                      <img src="/lovable-uploads/b31c9ab4-6dcf-4a77-bdf6-7e82e5a8c66a.png" alt="Aerial view of combat on the island" className="w-full h-auto rounded-lg shadow-md" />
                     </div>
 
                     {/* Gameplay Mechanics */}
@@ -197,11 +203,7 @@ const Documents = () => {
 
                     {/* Character Model Image */}
                     <div className="my-8 w-full">
-                      <img 
-                        src="/lovable-uploads/7d4ea94f-0c4d-459f-bded-b68a2bd272d6.png" 
-                        alt="3D character models and customization options" 
-                        className="w-full h-auto rounded-lg shadow-md"
-                      />
+                      <img src="/lovable-uploads/7d4ea94f-0c4d-459f-bded-b68a2bd272d6.png" alt="3D character models and customization options" className="w-full h-auto rounded-lg shadow-md" />
                     </div>
 
                     {/* Game Modes */}
@@ -241,11 +243,7 @@ const Documents = () => {
 
                     {/* Fighter in Jungle Image */}
                     <div className="my-8 w-full">
-                      <img 
-                        src="/lovable-uploads/f6dc2342-08e2-45a0-a94c-ad2e0db2efb0.png" 
-                        alt="Fighter in jungle environment showcasing combat stance" 
-                        className="w-full h-auto rounded-lg shadow-md"
-                      />
+                      <img src="/lovable-uploads/f6dc2342-08e2-45a0-a94c-ad2e0db2efb0.png" alt="Fighter in jungle environment showcasing combat stance" className="w-full h-auto rounded-lg shadow-md" />
                     </div>
 
                     {/* Marketing */}
@@ -509,8 +507,6 @@ const Documents = () => {
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default Documents;
