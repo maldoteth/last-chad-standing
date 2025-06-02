@@ -527,7 +527,7 @@ const Documents = () => {
 
                       <h3 id="token-economy" className="font-bold">Distribution</h3>
                       <div className="bg-gray-50 p-6 rounded-lg">
-                        <h4 className="font-bold text-lg mb-4">Coin Distribution</h4>
+                        
                         
                         <div className="mb-6">
                           <h5 className="font-bold mb-3">Token Supply Breakdown</h5>
@@ -545,7 +545,7 @@ const Documents = () => {
 
                       <h3 id="utility" className="font-bold mt-8">Utility</h3>
                       <div className="bg-gray-50 p-6 rounded-lg">
-                        <h4 className="font-bold text-lg mb-4">Coin Utility</h4>
+                        
                         
                         <div className="mb-6">
                           <h5 className="font-bold mb-3">Primary Uses</h5>
