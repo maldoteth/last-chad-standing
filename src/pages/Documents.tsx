@@ -2,6 +2,7 @@ import React from 'react';
 import { ArrowLeft, UserCheck, Gamepad2, Map, Sword, Settings, Target, Trophy, DollarSign, Eye, Headphones, Rocket, Joystick, Shield, Navigation, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ScrollArea } from '@/components/ui/scroll-area';
+
 const Documents = () => {
   const documentSections = [{
     title: "Game Overview",
@@ -549,6 +550,8 @@ const Documents = () => {
                         <li><strong>Ecosystem Rewards:</strong> 10% (100M coins)</li>
                         <li><strong>Liquidity Pool:</strong> 10% (100M coins)</li>
                       </ul>
+
+                      <br />
 
                       <h3 id="utility" className="text-2xl font-bold">Utility</h3>
 
