@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { ArrowLeft, UserCheck, Gamepad2, Map, Sword, Settings, Target, Trophy, DollarSign, Eye, Headphones, Rocket, Joystick, Shield, Navigation } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -426,7 +425,7 @@ const Documents = () => {
                         <li><strong>Manage Stamina:</strong> Every action (attacking, dodging, blocking) uses stamina. If your stamina runs out, you'll be slow and vulnerable.</li>
                         <li><strong>Use the Environment:</strong> Environmental hazards can help you eliminate opponents without risking your health in direct combat.</li>
                         <li><strong>Adapt to Opponents:</strong> Learn to counter different fighter styles</li>
-                        <li><strong>Loot and Move:</strong> Don't stay in one place too long, especially as the zone shrinks. Loot what you need and keep moving.</li>
+                        <li><strong>Loot and Move:</strong> Don't stay in one place too long, especially as the zone shrinks. Loot what you need and keep moving. If you try and camp, you may be spotted by the audience and the only real places to hide are limited to the jungle areas.</li>
                       </ul>
                     </section>
 
