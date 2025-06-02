@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { ArrowLeft, UserCheck, Gamepad2, Map, Sword, Settings, Target, Trophy, DollarSign, Eye, Headphones, Rocket, Joystick, Shield, Navigation } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -51,6 +52,15 @@ const Documents = () => {
           </div>
         </div>
       </header>
+
+      {/* Poster Image */}
+      <div className="w-full">
+        <img 
+          src="/lovable-uploads/b0860230-720f-4dda-b468-f3ff97006100.png" 
+          alt="Last Chad Standing Game Poster" 
+          className="w-full h-auto object-cover"
+        />
+      </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
