@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { ArrowLeft, UserCheck, Gamepad2, Map, Sword, Settings, Target, Trophy, DollarSign, Eye, Headphones, Rocket, Joystick, Shield, Navigation } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -471,6 +472,19 @@ const Documents = () => {
                         <li><strong>Multiple Fighters:</strong> Diversify your bets by backing multiple fighters in the same match to hedge your investments.</li>
                         <li><strong>Backer Leaderboards:</strong> Track the most successful backers and follow their betting strategies for future matches.</li>
                         <li><strong>Exclusive Rewards:</strong> Top backers gain access to exclusive NFT drops, early access to new content, and special recognition in the community.</li>
+                      </ul>
+
+                      <h3 className="font-bold">Social Feedback Loops and Virality</h3>
+                      <p>The game creates powerful viral loops that encourage organic growth and community engagement:</p>
+                      <ul>
+                        <li><strong>Highlight Generation:</strong> Epic moments, brutal finishers, and unexpected victories are automatically captured and packaged into shareable clips optimized for social media platforms.</li>
+                        <li><strong>Performance Analytics:</strong> Detailed post-match breakdowns show your combat effectiveness, crowd support metrics, and backing profits, encouraging players to share their achievements.</li>
+                        <li><strong>Viral Challenges:</strong> Weekly community challenges and trending hashtags (#ChadsOnly, #BrutalFinish) drive social media engagement and attract new players.</li>
+                        <li><strong>Streamer Integration:</strong> Built-in streaming tools with automated highlights, viewer polls for care package purchases, and real-time audience engagement features.</li>
+                        <li><strong>Social Proof Mechanics:</strong> Display of backer counts, spectator numbers, and social media mentions creates FOMO and social validation for successful fighters.</li>
+                        <li><strong>Cross-Platform Sharing:</strong> Seamless integration with TikTok, Twitter, Instagram, and Discord for instant sharing of epic moments and recruitment of new players.</li>
+                        <li><strong>Influencer Partnerships:</strong> Exclusive fighter skins and tournaments for content creators, creating authentic promotional content and expanding reach to new audiences.</li>
+                        <li><strong>Community Rewards:</strong> Group achievements and milestones that reward the entire community when certain viral or engagement thresholds are met, encouraging collective promotion.</li>
                       </ul>
 
                       <h3 className="font-bold">Community Features</h3>
