@@ -362,7 +362,7 @@ const Documents = () => {
                       <h3>Weapon Categories</h3>
                       <ul>
                         <li><strong>Blunt Weapons:</strong> Bats, pipes, hammers—ideal for bashing enemies. Slower, but cause knockback.</li>
-                        <li><strong>Bladed Weapons:</strong> Knives, machetes, broken glass—fast and deal bleeding damage over time.</li>
+                        
                         <li><strong>Improvised Weapons:</strong> Found objects like bricks, chainsaws, or construction tools. Deal high damage but often have low durability.</li>
                         <li><strong>Throwable Weapons:</strong> Knives, rocks, or even grenades (in special game modes). These can be hurled at enemies from a distance but require good aim.</li>
                       </ul>
