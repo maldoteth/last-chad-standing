@@ -4,86 +4,88 @@ import { Link } from 'react-router-dom';
 import { ScrollArea } from '@/components/ui/scroll-area';
 
 const Documents = () => {
-  const documentSections = [{
-    title: "Game Overview",
-    icon: <Gamepad2 size={20} />,
-    items: [{
-      title: "Core Concept",
-      href: "#core-concept"
+  const documentSections = [
+    {
+      title: "Game Overview",
+      icon: <Gamepad2 size={20} />,
+      items: [{
+        title: "Core Concept",
+        href: "#core-concept"
+      }, {
+        title: "Game World & Environment",
+        href: "#game-world"
+      }, {
+        title: "Gameplay Mechanics",
+        href: "#gameplay-mechanics"
+      }, {
+        title: "Progression & Customization",
+        href: "#progression"
+      }, {
+        title: "Game Modes",
+        href: "#game-modes"
+      }, {
+        title: "Monetization & Marketplace",
+        href: "#monetization"
+      }, {
+        title: "Visuals and Sound",
+        href: "#visuals-sound"
+      }, {
+        title: "Marketing Strategy",
+        href: "#marketing"
+      }, {
+        title: "Controls",
+        href: "#controls"
+      }, {
+        title: "Combat Mechanics",
+        href: "#combat-mechanics"
+      }, {
+        title: "Weapons & Inventory",
+        href: "#weapons-inventory"
+      }, {
+        title: "Movement & Traversal",
+        href: "#movement"
+      }, {
+        title: "Map & Hazards",
+        href: "#map-hazards"
+      }, {
+        title: "Strategy",
+        href: "#strategy"
+      }, {
+        title: "Social Aspects",
+        href: "#social-aspects"
+      }]
     }, {
-      title: "Game World & Environment",
-      href: "#game-world"
+      title: "Economy",
+      icon: <DollarSign size={20} />,
+      items: [{
+        title: "Coins",
+        href: "#in-game-currency"
+      }, {
+        title: "Token Economy",
+        href: "#token-economy"
+      }]
     }, {
-      title: "Gameplay Mechanics",
-      href: "#gameplay-mechanics"
+      title: "Team",
+      icon: <UserCheck size={20} />,
+      items: [{
+        title: "Founding Team",
+        href: "#founding-team"
+      }]
     }, {
-      title: "Progression & Customization",
-      href: "#progression"
-    }, {
-      title: "Game Modes",
-      href: "#game-modes"
-    }, {
-      title: "Monetization & Marketplace",
-      href: "#monetization"
-    }, {
-      title: "Visuals and Sound",
-      href: "#visuals-sound"
-    }, {
-      title: "Marketing Strategy",
-      href: "#marketing"
-    }, {
-      title: "Controls",
-      href: "#controls"
-    }, {
-      title: "Combat Mechanics",
-      href: "#combat-mechanics"
-    }, {
-      title: "Weapons & Inventory",
-      href: "#weapons-inventory"
-    }, {
-      title: "Movement & Traversal",
-      href: "#movement"
-    }, {
-      title: "Map & Hazards",
-      href: "#map-hazards"
-    }, {
-      title: "Strategy",
-      href: "#strategy"
-    }, {
-      title: "Social Aspects",
-      href: "#social-aspects"
-    }]
-  }, {
-    title: "Economy",
-    icon: <DollarSign size={20} />,
-    items: [{
-      title: "In-Game Currency",
-      href: "#in-game-currency"
-    }, {
-      title: "Token Economy",
-      href: "#token-economy"
-    }]
-  }, {
-    title: "Team",
-    icon: <UserCheck size={20} />,
-    items: [{
-      title: "Founding Team",
-      href: "#founding-team"
-    }]
-  }, {
-    title: "Links",
-    icon: <ExternalLink size={20} />,
-    items: [{
-      title: "Instagram",
-      href: "https://instagram.com/lastchadstanding"
-    }, {
-      title: "X (Twitter)",
-      href: "https://x.com/lcs_game"
-    }, {
-      title: "LCFC",
-      href: "https://leanchadfight.club"
-    }]
-  }];
+      title: "Links",
+      icon: <ExternalLink size={20} />,
+      items: [{
+        title: "Instagram",
+        href: "https://instagram.com/lastchadstanding"
+      }, {
+        title: "X (Twitter)",
+        href: "https://x.com/lcs_game"
+      }, {
+        title: "LCFC",
+        href: "https://leanchadfight.club"
+      }]
+    }
+  ];
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -529,7 +531,7 @@ const Documents = () => {
                     <section id="in-game-currency" className="mb-12">
                       <h2 className="font-bold">16. Economy</h2>
                       
-                      <h3 className="font-bold">In-Game Currency</h3>
+                      <h3 className="font-bold">Coins</h3>
                       <p>Every game needs in-game currency, but ours is unique compared to most games because it's decentralized and has a set supply, giving players real ownership without manipulation from developers. Unlike traditional games where developers can inflate currency at will, our LCS Token operates on blockchain technology with transparent tokenomics.</p>
                       <p>This means players truly own their digital assets and can trade them freely without fear of arbitrary changes to the game's economy. The decentralized nature ensures that the value of player investments is protected by smart contracts rather than corporate decisions.</p>
 
