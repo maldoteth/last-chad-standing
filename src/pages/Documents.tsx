@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { ArrowLeft, UserCheck, Gamepad2, Map, Sword, Settings, Target, Trophy, DollarSign, Eye, Headphones, Rocket, Joystick, Shield, Navigation, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -528,33 +529,36 @@ const Documents = () => {
 
                       <h3 id="token-economy" className="font-bold">Distribution</h3>
                       <div className="bg-gray-50 p-6 rounded-lg">
-                        <h4 className="font-bold text-lg mb-4">Coin Distribution & Utility</h4>
+                        <h4 className="font-bold text-lg mb-4">Coin Distribution</h4>
                         
-                        <div className="grid md:grid-cols-2 gap-6 mb-6">
-                          <div>
-                            <h5 className="font-bold mb-3">Token Supply Breakdown</h5>
-                            <ul className="space-y-2 text-sm">
-                              <li><strong>Total Supply:</strong> 1,000,000,000 coins</li>
-                              <li><strong>Public Sale:</strong> 30% (300M coins)</li>
-                              <li><strong>Team & Advisors:</strong> 20% (200M coins)</li>
-                              <li><strong>Development Fund:</strong> 15% (150M coins)</li>
-                              <li><strong>Marketing & Partnerships:</strong> 15% (150M coins)</li>
-                              <li><strong>Ecosystem Rewards:</strong> 10% (100M coins)</li>
-                              <li><strong>Liquidity Pool:</strong> 10% (100M coins)</li>
-                            </ul>
-                          </div>
-                          
-                          <div>
-                            <h5 className="font-bold mb-3">Token Utility</h5>
-                            <ul className="space-y-2 text-sm">
-                              <li><strong>In-Game Purchases:</strong> Skins, weapons, cosmetics</li>
-                              <li><strong>Tournament Entry:</strong> Entry fees for competitive events</li>
-                              <li><strong>NFT Marketplace:</strong> Trading and purchasing unique items</li>
-                              <li><strong>Governance:</strong> Voting on game features and updates</li>
-                              <li><strong>Staking Rewards:</strong> Earn additional coins by staking</li>
-                              <li><strong>Care Packages:</strong> Send support items to players</li>
-                            </ul>
-                          </div>
+                        <div className="mb-6">
+                          <h5 className="font-bold mb-3">Token Supply Breakdown</h5>
+                          <ul className="space-y-2 text-sm">
+                            <li><strong>Total Supply:</strong> 1,000,000,000 coins</li>
+                            <li><strong>Public Sale:</strong> 30% (300M coins)</li>
+                            <li><strong>Team & Advisors:</strong> 20% (200M coins)</li>
+                            <li><strong>Development Fund:</strong> 15% (150M coins)</li>
+                            <li><strong>Marketing & Partnerships:</strong> 15% (150M coins)</li>
+                            <li><strong>Ecosystem Rewards:</strong> 10% (100M coins)</li>
+                            <li><strong>Liquidity Pool:</strong> 10% (100M coins)</li>
+                          </ul>
+                        </div>
+                      </div>
+
+                      <h3 className="font-bold mt-8">Utility</h3>
+                      <div className="bg-gray-50 p-6 rounded-lg">
+                        <h4 className="font-bold text-lg mb-4">Coin Utility</h4>
+                        
+                        <div className="mb-6">
+                          <h5 className="font-bold mb-3">Primary Uses</h5>
+                          <ul className="space-y-2 text-sm">
+                            <li><strong>In-Game Purchases:</strong> Skins, weapons, cosmetics</li>
+                            <li><strong>Tournament Entry:</strong> Entry fees for competitive events</li>
+                            <li><strong>NFT Marketplace:</strong> Trading and purchasing unique items</li>
+                            <li><strong>Governance:</strong> Voting on game features and updates</li>
+                            <li><strong>Staking Rewards:</strong> Earn additional coins by staking</li>
+                            <li><strong>Care Packages:</strong> Send support items to players</li>
+                          </ul>
                         </div>
 
                         <div className="border-t pt-4">
