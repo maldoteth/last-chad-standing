@@ -1,95 +1,89 @@
-
 import React from 'react';
 import { ArrowLeft, UserCheck, Gamepad2, Map, Sword, Settings, Target, Trophy, DollarSign, Eye, Headphones, Rocket, Joystick, Shield, Navigation, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ScrollArea } from '@/components/ui/scroll-area';
-
 const Documents = () => {
-  const documentSections = [
-    {
-      title: "Game Overview",
-      icon: <Gamepad2 size={20} />,
-      items: [{
-        title: "Core Concept",
-        href: "#core-concept"
-      }, {
-        title: "Game World & Environment",
-        href: "#game-world"
-      }, {
-        title: "Gameplay Mechanics",
-        href: "#gameplay-mechanics"
-      }, {
-        title: "Progression & Customization",
-        href: "#progression"
-      }, {
-        title: "Game Modes",
-        href: "#game-modes"
-      }, {
-        title: "Monetization & Marketplace",
-        href: "#monetization"
-      }, {
-        title: "Visuals and Sound",
-        href: "#visuals-sound"
-      }, {
-        title: "Marketing Strategy",
-        href: "#marketing"
-      }, {
-        title: "Controls",
-        href: "#controls"
-      }, {
-        title: "Combat Mechanics",
-        href: "#combat-mechanics"
-      }, {
-        title: "Weapons & Inventory",
-        href: "#weapons-inventory"
-      }, {
-        title: "Movement & Traversal",
-        href: "#movement"
-      }, {
-        title: "Map & Hazards",
-        href: "#map-hazards"
-      }, {
-        title: "Strategy",
-        href: "#strategy"
-      }, {
-        title: "Social Aspects",
-        href: "#social-aspects"
-      }]
+  const documentSections = [{
+    title: "Game Overview",
+    icon: <Gamepad2 size={20} />,
+    items: [{
+      title: "Core Concept",
+      href: "#core-concept"
     }, {
-      title: "Economy",
-      icon: <DollarSign size={20} />,
-      items: [{
-        title: "Coins",
-        href: "#in-game-currency"
-      }, {
-        title: "Token Economy",
-        href: "#token-economy"
-      }]
+      title: "Game World & Environment",
+      href: "#game-world"
     }, {
-      title: "Team",
-      icon: <UserCheck size={20} />,
-      items: [{
-        title: "Founding Team",
-        href: "#founding-team"
-      }]
+      title: "Gameplay Mechanics",
+      href: "#gameplay-mechanics"
     }, {
-      title: "Links",
-      icon: <ExternalLink size={20} />,
-      items: [{
-        title: "Instagram",
-        href: "https://instagram.com/lastchadstanding"
-      }, {
-        title: "X (Twitter)",
-        href: "https://x.com/lcs_game"
-      }, {
-        title: "LCFC",
-        href: "https://leanchadfight.club"
-      }]
-    }
-  ];
-
-  return (
-    <div className="min-h-screen bg-gray-50">
+      title: "Progression & Customization",
+      href: "#progression"
+    }, {
+      title: "Game Modes",
+      href: "#game-modes"
+    }, {
+      title: "Monetization & Marketplace",
+      href: "#monetization"
+    }, {
+      title: "Visuals and Sound",
+      href: "#visuals-sound"
+    }, {
+      title: "Marketing Strategy",
+      href: "#marketing"
+    }, {
+      title: "Controls",
+      href: "#controls"
+    }, {
+      title: "Combat Mechanics",
+      href: "#combat-mechanics"
+    }, {
+      title: "Weapons & Inventory",
+      href: "#weapons-inventory"
+    }, {
+      title: "Movement & Traversal",
+      href: "#movement"
+    }, {
+      title: "Map & Hazards",
+      href: "#map-hazards"
+    }, {
+      title: "Strategy",
+      href: "#strategy"
+    }, {
+      title: "Social Aspects",
+      href: "#social-aspects"
+    }]
+  }, {
+    title: "Economy",
+    icon: <DollarSign size={20} />,
+    items: [{
+      title: "Coins",
+      href: "#in-game-currency"
+    }, {
+      title: "Token Economy",
+      href: "#token-economy"
+    }]
+  }, {
+    title: "Team",
+    icon: <UserCheck size={20} />,
+    items: [{
+      title: "Founding Team",
+      href: "#founding-team"
+    }]
+  }, {
+    title: "Links",
+    icon: <ExternalLink size={20} />,
+    items: [{
+      title: "Instagram",
+      href: "https://instagram.com/lastchadstanding"
+    }, {
+      title: "X (Twitter)",
+      href: "https://x.com/lcs_game"
+    }, {
+      title: "LCFC",
+      href: "https://leanchadfight.club"
+    }]
+  }];
+  return <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <header className="bg-white border-b border-gray-200 sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -125,16 +119,12 @@ const Documents = () => {
                       </div>
                       <ul className="space-y-2 ml-6">
                         {section.items.map(item => <li key={item.title}>
-                            {item.href.startsWith('http') ? (
-                              <a href={item.href} target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-gray-900 transition-colors text-sm flex items-center gap-1">
+                            {item.href.startsWith('http') ? <a href={item.href} target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-gray-900 transition-colors text-sm flex items-center gap-1">
                                 {item.title}
                                 <ExternalLink size={12} />
-                              </a>
-                            ) : (
-                              <a href={item.href} className="text-gray-600 hover:text-gray-900 transition-colors text-sm">
+                              </a> : <a href={item.href} className="text-gray-600 hover:text-gray-900 transition-colors text-sm">
                                 {item.title}
-                              </a>
-                            )}
+                              </a>}
                           </li>)}
                       </ul>
                     </div>)}
@@ -536,7 +526,7 @@ const Documents = () => {
                       <p>Every game needs in-game currency, but ours is unique compared to most games because it's decentralized and has a set supply, giving players real ownership without manipulation from developers. Unlike traditional games where developers can inflate currency at will, our coins operate on blockchain technology with transparent tokenomics.</p>
                       <p>This means players truly own their digital assets and can trade them freely without fear of arbitrary changes to the game's economy. The decentralized nature ensures that the value of player investments is protected by smart contracts rather than corporate decisions.</p>
 
-                      <h3 id="token-economy" className="font-bold">Token Economy</h3>
+                      <h3 id="token-economy" className="font-bold">Distribution</h3>
                       <div className="bg-gray-50 p-6 rounded-lg">
                         <h4 className="font-bold text-lg mb-4">Coin Distribution & Utility</h4>
                         
@@ -671,8 +661,6 @@ const Documents = () => {
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default Documents;
