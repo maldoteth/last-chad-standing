@@ -165,7 +165,8 @@ const Documents = () => {
                       <h3>Combat System</h3>
                       <p>Combat is the heart of Last Chad Standing. It focuses on hand-to-hand fighting with a realistic physics engine. Every hit feels weighty, and the results of brutal combat are visually emphasized with blood, broken bones, and dismemberment.</p>
                       <ul>
-                        <li><strong>Strikes:</strong> Light, heavy, and combo-based attacks. Timing and precision are key.</li>
+                        <li><strong>Punches:</strong> Quick punch attacks and combo-based sequences. Timing and precision are key.</li>
+                        <li><strong>Kicks:</strong> Slower, more powerful strikes. These can break through blocks but leave you open to counters if missed.</li>
                         <li><strong>Grappling:</strong> Players can perform grappling moves to counter opponents or initiate brutal finishers.</li>
                         <li><strong>Weapons:</strong> Found throughout the map, including blunt instruments (bats, pipes), bladed weapons (machetes, knives), and improvised tools (shards of glass, branch). Weapons can break over time, forcing players to fight bare-handed or seek new ones.</li>
                         <li><strong>Fatalities:</strong> Each character can perform unique, gory finishers when they defeat an opponent. Finishers range from decapitations to brutal bone-breaking maneuvers, depending on the character's style.</li>
@@ -264,8 +265,8 @@ const Documents = () => {
                           <ul className="space-y-1 text-sm">
                             <li><strong>W/A/S/D:</strong> Move forward, left, backward, right</li>
                             <li><strong>Mouse Movement:</strong> Camera control</li>
-                            <li><strong>Left Mouse Button:</strong> Light Attack</li>
-                            <li><strong>Right Mouse Button:</strong> Heavy Attack</li>
+                            <li><strong>Left Mouse Button:</strong> Punch/Combos</li>
+                            <li><strong>Right Mouse Button:</strong> Kick/Combos</li>
                             <li><strong>E:</strong> Interact (pick up items, activate objects)</li>
                             <li><strong>F:</strong> Grapple/Throw</li>
                             <li><strong>R:</strong> Execute/Finishers (when prompt appears)</li>
@@ -288,8 +289,8 @@ const Documents = () => {
                           <ul className="space-y-1 text-sm">
                             <li><strong>Left Stick:</strong> Move</li>
                             <li><strong>Right Stick:</strong> Camera</li>
-                            <li><strong>R2/RT:</strong> Light Attack</li>
-                            <li><strong>L2/LT:</strong> Heavy Attack</li>
+                            <li><strong>R2/RT:</strong> Punch/Combos</li>
+                            <li><strong>L2/LT:</strong> Kick/Combos</li>
                             <li><strong>Square/X:</strong> Interact</li>
                             <li><strong>Circle/B:</strong> Grapple/Throw</li>
                             <li><strong>Triangle/Y:</strong> Execute/Finisher</li>
@@ -314,9 +315,9 @@ const Documents = () => {
                       
                       <h3>Attack Types</h3>
                       <ul>
-                        <li><strong>Light Attack (LMB/R2):</strong> Quick, basic attacks that deal moderate damage but are harder to counter. Ideal for rapid combos.</li>
-                        <li><strong>Heavy Attack (RMB/L2):</strong> Slower, more powerful strikes. These can break through blocks but leave you open to counters if missed.</li>
-                        <li><strong>Combos:</strong> Chaining light and heavy attacks in various sequences triggers character-specific combos for extra damage or stuns. Example: Light-Light-Heavy = Overhead Slam Combo. Combos vary based on character type (Brawler, Ninja, etc.).</li>
+                        <li><strong>Punch/Combos (LMB/R2):</strong> Quick, basic punch attacks that deal moderate damage but are harder to counter. Ideal for rapid combo sequences.</li>
+                        <li><strong>Kick/Combos (RMB/L2):</strong> Slower, more powerful strikes. These can break through blocks but leave you open to counters if missed.</li>
+                        <li><strong>Combos:</strong> Chaining punch and kick attacks in various sequences triggers character-specific combos for extra damage or stuns. Example: Punch-Punch-Kick = Overhead Slam Combo. Combos vary based on character type (Brawler, Ninja, etc.).</li>
                       </ul>
 
                       <h3>Grappling (F/Circle/B)</h3>
