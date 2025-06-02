@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { ArrowLeft, UserCheck, Gamepad2, Map, Sword, Settings, Target, Trophy, DollarSign, Eye, Headphones, Rocket, Joystick, Shield, Navigation, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -52,6 +53,16 @@ const Documents = () => {
     }, {
       title: "Social Aspects",
       href: "#social-aspects"
+    }]
+  }, {
+    title: "Economy",
+    icon: <DollarSign size={20} />,
+    items: [{
+      title: "In-Game Currency",
+      href: "#in-game-currency"
+    }, {
+      title: "Token Economy",
+      href: "#token-economy"
     }]
   }, {
     title: "Team",
@@ -513,6 +524,20 @@ const Documents = () => {
                         <li><strong>Tournament Brackets:</strong> Follow major tournaments and championship events with real-time bracket updates.</li>
                         <li><strong>Social Media Integration:</strong> Share highlights, backing successes, and epic moments directly to social platforms.</li>
                       </ul>
+                    </section>
+
+                    {/* Economy Section */}
+                    <section id="in-game-currency" className="mb-12">
+                      <h2 className="font-bold">16. Economy</h2>
+                      
+                      <h3 className="font-bold">In-Game Currency</h3>
+                      <p>Every game needs in-game currency, but ours is unique compared to most games because it's decentralized and has a set supply, giving players real ownership without manipulation from developers. Unlike traditional games where developers can inflate currency at will, our LCS Token operates on blockchain technology with transparent tokenomics.</p>
+                      <p>This means players truly own their digital assets and can trade them freely without fear of arbitrary changes to the game's economy. The decentralized nature ensures that the value of player investments is protected by smart contracts rather than corporate decisions.</p>
+
+                      <h3 id="token-economy" className="font-bold">Token Economy</h3>
+                      <div className="my-8 w-full">
+                        <img src="/lovable-uploads/2c73ccf1-ed96-4f14-98ce-1d73012d0628.png" alt="LCS Token Economy breakdown showing supply distribution and utility" className="w-full h-auto rounded-lg shadow-md" />
+                      </div>
                     </section>
 
                     {/* Team Section */}
