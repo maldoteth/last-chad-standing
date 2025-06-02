@@ -196,7 +196,7 @@ const Documents = () => {
                     <div className="flex flex-col md:flex-row gap-6 p-6 bg-gray-50 rounded-lg">
                       <div className="md:w-1/3">
                         <img 
-                          src="/lovable-uploads/d56b1da1-8a84-4b18-b362-0f0023e03739.png" 
+                          src="/lovable-uploads/909e4c87-a878-40aa-96be-f612a1dbac06.png" 
                           alt="Mike Hales" 
                           className="w-full h-64 object-cover rounded-lg"
                         />
