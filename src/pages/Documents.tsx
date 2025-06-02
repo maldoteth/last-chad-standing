@@ -351,6 +351,8 @@ const Documents = () => {
                       <h2 className="text-3xl font-bold">10. Combat Mechanics</h2>
                       <p>The core of Last Chad Standing revolves around melee combat, blending fast reflexes, precise timing, and smart environmental use.</p>
                       
+                      <br />
+                      
                       <h3 className="text-2xl font-bold">Attack Types</h3>
                       <ul>
                         <li><strong>Punch/Combos (LMB/R2):</strong> Quick, basic attacks that deal moderate damage but are harder to counter. Ideal for rapid combos.</li>
