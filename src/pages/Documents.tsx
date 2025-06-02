@@ -2,62 +2,40 @@ import React from 'react';
 import { ArrowLeft, UserCheck, Gamepad2, Map, Sword, Settings, Target, Trophy, DollarSign, Eye, Headphones, Rocket, Joystick, Shield, Navigation } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ScrollArea } from '@/components/ui/scroll-area';
+
 const Documents = () => {
-  const documentSections = [{
-    title: "Game Overview",
-    icon: <Gamepad2 size={20} />,
-    items: [{
-      title: "Core Concept",
-      href: "#core-concept"
-    }, {
-      title: "Game World & Environment",
-      href: "#game-world"
-    }, {
-      title: "Gameplay Mechanics",
-      href: "#gameplay-mechanics"
-    }, {
-      title: "Progression & Customization",
-      href: "#progression"
-    }, {
-      title: "Game Modes",
-      href: "#game-modes"
-    }, {
-      title: "Monetization & Marketplace",
-      href: "#monetization"
-    }, {
-      title: "Visuals and Sound",
-      href: "#visuals-sound"
-    }, {
-      title: "Marketing Strategy",
-      href: "#marketing"
-    }, {
-      title: "Controls",
-      href: "#controls"
-    }, {
-      title: "Combat Mechanics",
-      href: "#combat-mechanics"
-    }, {
-      title: "Weapons & Inventory",
-      href: "#weapons-inventory"
-    }, {
-      title: "Movement & Traversal",
-      href: "#movement"
-    }, {
-      title: "Map & Hazards",
-      href: "#map-hazards"
-    }, {
-      title: "Strategy",
-      href: "#strategy"
-    }]
-  }, {
-    title: "Team",
-    icon: <UserCheck size={20} />,
-    items: [{
-      title: "Founding Team",
-      href: "#founding-team"
-    }]
-  }];
-  return <div className="min-h-screen bg-gray-50">
+  const documentSections = [
+    {
+      title: "Game Overview",
+      icon: <Gamepad2 size={20} />,
+      items: [
+        { title: "Core Concept", href: "#core-concept" },
+        { title: "Game World & Environment", href: "#game-world" },
+        { title: "Gameplay Mechanics", href: "#gameplay-mechanics" },
+        { title: "Progression & Customization", href: "#progression" },
+        { title: "Game Modes", href: "#game-modes" },
+        { title: "Monetization & Marketplace", href: "#monetization" },
+        { title: "Visuals and Sound", href: "#visuals-sound" },
+        { title: "Marketing Strategy", href: "#marketing" },
+        { title: "Controls", href: "#controls" },
+        { title: "Combat Mechanics", href: "#combat-mechanics" },
+        { title: "Weapons & Inventory", href: "#weapons-inventory" },
+        { title: "Movement & Traversal", href: "#movement" },
+        { title: "Map & Hazards", href: "#map-hazards" },
+        { title: "Strategy", href: "#strategy" }
+      ]
+    },
+    {
+      title: "Team",
+      icon: <UserCheck size={20} />,
+      items: [
+        { title: "Founding Team", href: "#founding-team" }
+      ]
+    }
+  ];
+
+  return (
+    <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <header className="bg-white border-b border-gray-200 sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -81,19 +59,23 @@ const Documents = () => {
             <div className="sticky top-24 h-[calc(100vh-8rem)]">
               <ScrollArea className="h-full [&>[data-radix-scroll-area-viewport]]:!overflow-x-hidden [&>div>div[style]]:!scrollbar-none">
                 <nav className="space-y-6 pr-4">
-                  {documentSections.map(section => <div key={section.title} className="space-y-3">
+                  {documentSections.map((section) => (
+                    <div key={section.title} className="space-y-3">
                       <div className="flex items-center gap-2 text-gray-900 font-medium">
                         {section.icon}
                         <span>{section.title}</span>
                       </div>
                       <ul className="space-y-2 ml-6">
-                        {section.items.map(item => <li key={item.title}>
+                        {section.items.map((item) => (
+                          <li key={item.title}>
                             <a href={item.href} className="text-gray-600 hover:text-gray-900 transition-colors text-sm">
                               {item.title}
                             </a>
-                          </li>)}
+                          </li>
+                        ))}
                       </ul>
-                    </div>)}
+                    </div>
+                  ))}
                 </nav>
               </ScrollArea>
             </div>
@@ -111,7 +93,7 @@ const Documents = () => {
                       <h1 className="text-3xl font-bold text-gray-900 mb-4">Game Blueprint: Last Chad Standing</h1>
                       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
                         <div><strong>Genre:</strong> Third-Person Fighter Battle Royale</div>
-                        <div><strong>Players:</strong> 20 players per lobby</div>
+                        <div><strong>Players:</strong> 20-100 players per lobby</div>
                         <div><strong>Graphics:</strong> Hyperrealistic, gritty, and gory</div>
                         <div><strong>Platforms:</strong> PC, next-gen consoles</div>
                         <div><strong>Monetization:</strong> NFT Skins Marketplace</div>
@@ -192,8 +174,8 @@ const Documents = () => {
                     <section id="game-modes" className="mb-12">
                       <h2>5. Game Modes</h2>
                       <ul>
-                        <li><strong>Battle Royale:</strong> 20 players, one winner.</li>
-                        <li><strong>Duos:</strong> 10 teams of two compete to be the last duo standing. Teamwork is key for survival.</li>
+                        <li><strong>Battle Royale:</strong> 20-100 players, one winner.</li>
+                        <li><strong>Duos:</strong> 10-50 teams of two compete to be the last duo standing. Teamwork is key for survival.</li>
                         <li><strong>Death Match:</strong> No shrinking zone, just 7 minutes of pure free-for-all mayhem. Whoever gets the most kills in the time limit wins.</li>
                         <li><strong>Survival Royale:</strong> PvE/PvP mode where players must survive waves of zombies while also dealing with other players.</li>
                         <li><strong>Tournaments:</strong> Monthly events with large rewards</li>
@@ -484,6 +466,8 @@ const Documents = () => {
           </div>
         </div>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default Documents;
