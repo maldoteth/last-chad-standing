@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Instagram, Globe, Layers, Book } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -17,11 +16,6 @@ interface SocialLinksProps {
 }
 
 const defaultSocialLinks: SocialLink[] = [
-  {
-    name: "Website",
-    icon: <Globe size={24} />,
-    url: "https://leanchadfight.club"
-  },
   {
     name: "X",
     icon: <img src="/lovable-uploads/77a6c004-93ed-49ee-a5d0-6056ee852612.png" alt="X" className="w-6 h-6" />,
