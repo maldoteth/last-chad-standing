@@ -1,6 +1,5 @@
-
 import React from 'react';
-import { ArrowLeft, UserCheck, Gamepad2, Map, Sword, Settings, Target, Trophy, DollarSign, Eye, Headphones, Rocket, Joystick, Shield, Navigation, ExternalLink } from 'lucide-react';
+import { ArrowLeft, UserCheck, Gamepad2, Map, Sword, Settings, Target, Trophy, DollarSign, Eye, Headphones, Rocket, Joystick, Shield, Navigation, ExternalLink, Coins } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ScrollArea } from '@/components/ui/scroll-area';
 const Documents = () => {
@@ -60,6 +59,9 @@ const Documents = () => {
     title: "Economy",
     icon: <DollarSign size={20} />,
     items: [{
+      title: "Genesis Chads",
+      href: "#genesis-chads"
+    }, {
       title: "Coins",
       href: "#in-game-currency"
     }, {
@@ -677,6 +679,29 @@ const Documents = () => {
                     </section>
 
                     {/* Economy Section */}
+                    <section id="genesis-chads" className="mb-12">
+                      <br />
+                      <h2 className="text-3xl font-bold">Genesis Chads</h2>
+                      
+                      <p>Our collection of randomly generated cartoon chads from 2022 hand drawn by founder Mike Hales.</p>
+                      
+                      <p>Every chad will appear one by one, on the skins marketplace in 3D form, ready to be used in-game, with revenue shared with the holder from buyers and secondary traders.</p>
+                      
+                      <p>Holders of the genesis chads or any of the passes also qualify for an airdrop of $LCS.</p>
+                      
+                      <br />
+                      
+                      <h3 className="text-2xl font-bold">Airdrop Distribution</h3>
+                      <p><strong>5% of the supply is divided between:</strong></p>
+                      <ul>
+                        <li><strong>2%</strong> Genesis Chads</li>
+                        <li><strong>0.25%</strong> Honorary Chads</li>
+                        <li><strong>0.25%</strong> All Access Pass</li>
+                        <li><strong>1%</strong> Elite Pass</li>
+                        <li><strong>1.5%</strong> VIP Pass</li>
+                      </ul>
+                    </section>
+
                     <section id="in-game-currency" className="mb-12">
 
                       <br />
