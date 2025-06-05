@@ -2,6 +2,7 @@ import React from 'react';
 import { ArrowLeft, UserCheck, Gamepad2, DollarSign, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ScrollArea } from '@/components/ui/scroll-area';
+
 const Documents = () => {
   const documentSections = [{
     title: "Game Overview",
@@ -163,7 +164,7 @@ const Documents = () => {
                       <br />
                       
                       <h3 className="font-bold">Overview</h3>
-                      <p>Players are thrown onto the island via helicopter, scattered randomly, and must use both wits and combat prowess to survive against 19 other players. The shrinking zone of poison gas and a cage forces fighters into close quarters, ensuring non stop action. Combat is visceral, utilizing a mix of strikes, grappling, weaponry, and brutal finishers.</p>
+                      <p>Players are thrown onto the island via helicopter, scattered randomly, and must use both wits and combat prowess to survive against 19 other players. The shrinking cage forces fighters into close quarters, ensuring non stop action. Combat is visceral, utilizing a mix of strikes, grappling, weaponry, and brutal finishers.</p>
                     </section>
 
                     {/* Helicopter Drop Image */}
@@ -227,37 +228,37 @@ const Documents = () => {
                       <br />
 
                       <h3 className="text-2xl font-bold">Shrinking Zone Mechanic</h3>
-                      <p>Like other battle royales, the island has a "death zone" that shrinks over time, forcing players into tighter quarters. The visual aesthetic is hyperrealistic, with the zone being a literal wall of toxic gas that corrodes anything it touches. As it closes in, players are forced to fight or flee, and those caught in the zone slowly die in an excruciating spiral of pain. Unless you're lucky enough to find a gas mask, you won't survive more than 30 seconds before you suffocate on your own blood while your skin boils explosively.</p>
+                      <p>Like other battle royales, the island has a "death zone" that shrinks over time, forcing players into tighter quarters. The visual aesthetic is hyperrealistic, with the zone being a literal wall of steel cage that closes in from all sides. As it closes in, players are forced to fight or flee, and those caught in the cage slowly take damage until they die if they don't escape. The cage deals continuous damage to anyone who touches it, making it impossible to survive outside the safe zone for more than a few seconds.</p>
                     </section>
 
                     {/* Enhanced Storm & Cage Mechanics */}
                     <section id="storm-cage-mechanics" className="mb-12">
-
                       <br />
 
-                      <h2 className="text-3xl font-bold">4. Enhanced Storm & Cage Mechanics</h2>
-                      <p>Last Chad Standing takes the traditional battle royale storm concept to the next level with a dual-threat system that combines environmental hazards with structural confinement.</p>
+                      <h2 className="text-3xl font-bold">4. Enhanced Cage Mechanics</h2>
+                      <p>Last Chad Standing takes the traditional battle royale zone concept to the next level with a dynamic cage system that creates intense pressure and strategic gameplay.</p>
                       
                       <br />
 
-                      <h3 className="text-2xl font-bold">The Cage Behind the Storm</h3>
-                      <p>Following closely behind the toxic gas wall is a massive, impenetrable steel cage that rises from the ground and extends high into the sky. This cage ensures that once an area is consumed by the storm, there's absolutely no way back - creating permanent barriers that reshape the battlefield with each phase.</p>
+                      <h3 className="text-2xl font-bold">The Closing Cage</h3>
+                      <p>Instead of a traditional storm or gas, Last Chad Standing features a massive steel cage that mechanically closes in from all sides of the island. This cage creates absolute barriers that reshape the battlefield with each phase.</p>
                       <ul>
-                        <li><strong>Permanent Barriers:</strong> Unlike the gas which can theoretically be survived briefly, the cage creates absolute no-go zones</li>
-                        <li><strong>Strategic Positioning:</strong> Players must not only outrun the gas but also consider their escape routes before the cage locks them in</li>
+                        <li><strong>Permanent Barriers:</strong> The cage creates absolute no-go zones that deal continuous damage to anyone who touches them</li>
+                        <li><strong>Strategic Positioning:</strong> Players must not only avoid the cage but also consider their escape routes before being trapped</li>
                         <li><strong>Vertical Limitation:</strong> The cage extends upward, preventing any attempts to climb or fly over previously accessible areas</li>
-                        <li><strong>Sound Design:</strong> The grinding, mechanical sound of the cage rising from the earth adds to the psychological pressure</li>
+                        <li><strong>Sound Design:</strong> The grinding, mechanical sound of the cage closing adds to the psychological pressure</li>
+                        <li><strong>Damage System:</strong> Contact with the cage deals significant damage over time, making survival outside the safe zone impossible</li>
                       </ul>
 
                       <br />
 
-                      <h3 className="text-2xl font-bold">Final Storm Transformation</h3>
-                      <p>When the storm reaches its final phase - the smallest eye of the storm - something extraordinary happens. The remaining safe zone undergoes a dramatic transformation as the ground shifts and mechanical structures emerge from beneath the island.</p>
+                      <h3 className="text-2xl font-bold">Final Zone Transformation</h3>
+                      <p>When the cage reaches its final phase - the smallest safe zone - something extraordinary happens. The remaining safe zone undergoes a dramatic transformation as the ground shifts and mechanical structures emerge from beneath the island.</p>
                       
                       <br />
 
                       <h3 className="text-2xl font-bold">The Final MMA Cage</h3>
-                      <p>The final storm location warps into a professional MMA octagon cage, creating the ultimate arena for the last remaining fighters. This transformation marks the transition from survival-based gameplay to pure, brutal combat.</p>
+                      <p>The final zone transforms into a professional MMA octagon cage, creating the ultimate arena for the last remaining fighters. This transformation marks the transition from survival-based gameplay to pure, brutal combat.</p>
                       <ul>
                         <li><strong>Arena Transformation:</strong> The natural environment dissolves away as a regulation-sized MMA cage materializes with proper flooring, lighting, and cage walls</li>
                         <li><strong>No Escape:</strong> Once inside the final cage, there's nowhere to run - fighters must face each other in direct combat until only one remains</li>
@@ -270,7 +271,7 @@ const Documents = () => {
                       <br />
 
                       <h3 className="text-2xl font-bold">Tactical Implications</h3>
-                      <p>This dual-system creates unique strategic considerations throughout the match:</p>
+                      <p>This cage system creates unique strategic considerations throughout the match:</p>
                       <ul>
                         <li><strong>Early Game:</strong> Players must balance looting with positioning to avoid being trapped by the advancing cage</li>
                         <li><strong>Mid Game:</strong> The permanent barriers created by previous cage advances force players into increasingly predictable paths</li>
