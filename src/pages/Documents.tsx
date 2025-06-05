@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { ArrowLeft, UserCheck, Gamepad2, Map, Sword, Settings, Target, Trophy, DollarSign, Eye, Headphones, Rocket, Joystick, Shield, Navigation, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -15,6 +16,9 @@ const Documents = () => {
     }, {
       title: "Gameplay Mechanics",
       href: "#gameplay-mechanics"
+    }, {
+      title: "Enhanced Storm & Cage Mechanics",
+      href: "#storm-cage-mechanics"
     }, {
       title: "Progression & Customization",
       href: "#progression"
@@ -229,9 +233,61 @@ const Documents = () => {
                       <p>Like other battle royales, the island has a "death zone" that shrinks over time, forcing players into tighter quarters. The visual aesthetic is hyperrealistic, with the zone being a literal wall of toxic gas that corrodes anything it touches. As it closes in, players are forced to fight or flee, and those caught in the zone slowly die in an excruciating spiral of pain. Unless you're lucky enough to find a gas mask, you won't survive more than 30 seconds before you suffocate on your own blood while your skin boils explosively.</p>
                     </section>
 
+                    {/* Enhanced Storm & Cage Mechanics */}
+                    <section id="storm-cage-mechanics" className="mb-12">
+
+                      <br />
+
+                      <h2 className="text-3xl font-bold">4. Enhanced Storm & Cage Mechanics</h2>
+                      <p>Last Chad Standing takes the traditional battle royale storm concept to the next level with a dual-threat system that combines environmental hazards with structural confinement.</p>
+                      
+                      <br />
+
+                      <h3 className="text-2xl font-bold">The Cage Behind the Storm</h3>
+                      <p>Following closely behind the toxic gas wall is a massive, impenetrable steel cage that rises from the ground and extends high into the sky. This cage ensures that once an area is consumed by the storm, there's absolutely no way back - creating permanent barriers that reshape the battlefield with each phase.</p>
+                      <ul>
+                        <li><strong>Permanent Barriers:</strong> Unlike the gas which can theoretically be survived briefly, the cage creates absolute no-go zones</li>
+                        <li><strong>Strategic Positioning:</strong> Players must not only outrun the gas but also consider their escape routes before the cage locks them in</li>
+                        <li><strong>Vertical Limitation:</strong> The cage extends upward, preventing any attempts to climb or fly over previously accessible areas</li>
+                        <li><strong>Sound Design:</strong> The grinding, mechanical sound of the cage rising from the earth adds to the psychological pressure</li>
+                      </ul>
+
+                      <br />
+
+                      <h3 className="text-2xl font-bold">Final Storm Transformation</h3>
+                      <p>When the storm reaches its final phase - the smallest eye of the storm - something extraordinary happens. The remaining safe zone undergoes a dramatic transformation as the ground shifts and mechanical structures emerge from beneath the island.</p>
+                      
+                      <br />
+
+                      <h3 className="text-2xl font-bold">The Final MMA Cage</h3>
+                      <p>The final storm location warps into a professional MMA octagon cage, creating the ultimate arena for the last remaining fighters. This transformation marks the transition from survival-based gameplay to pure, brutal combat.</p>
+                      <ul>
+                        <li><strong>Arena Transformation:</strong> The natural environment dissolves away as a regulation-sized MMA cage materializes with proper flooring, lighting, and cage walls</li>
+                        <li><strong>No Escape:</strong> Once inside the final cage, there's nowhere to run - fighters must face each other in direct combat until only one remains</li>
+                        <li><strong>Enhanced Visibility:</strong> Bright arena lighting ensures spectators can clearly see every brutal detail of the final confrontation</li>
+                        <li><strong>Crowd Simulation:</strong> The arena fills with the roar of a virtual crowd, creating an authentic championship fight atmosphere</li>
+                        <li><strong>Referee Presence:</strong> A holographic referee appears to officiate the final bout, adding legitimacy to the ultimate showdown</li>
+                        <li><strong>Championship Stakes:</strong> The final cage fight feels like a true championship bout, with maximum rewards for the victor</li>
+                      </ul>
+
+                      <br />
+
+                      <h3 className="text-2xl font-bold">Tactical Implications</h3>
+                      <p>This dual-system creates unique strategic considerations throughout the match:</p>
+                      <ul>
+                        <li><strong>Early Game:</strong> Players must balance looting with positioning to avoid being trapped by the advancing cage</li>
+                        <li><strong>Mid Game:</strong> The permanent barriers created by previous cage advances force players into increasingly predictable paths</li>
+                        <li><strong>Late Game:</strong> Knowing that the final zone becomes a cage adds pressure to eliminate opponents before reaching the final confrontation</li>
+                        <li><strong>Final Showdown:</strong> The MMA cage ensures that the last fight is always an epic, unavoidable battle between the final survivors</li>
+                      </ul>
+                    </section>
+
                     {/* Progression & Customization */}
                     <section id="progression" className="mb-12">
-                      <h2 className="text-3xl font-bold">4. Progression & Customization</h2>
+
+                      <br />
+
+                      <h2 className="text-3xl font-bold">5. Progression & Customization</h2>
                       
                       <br />
                       
@@ -256,7 +312,10 @@ const Documents = () => {
 
                     {/* Game Modes */}
                     <section id="game-modes" className="mb-12">
-                      <h2 className="text-3xl font-bold">5. Game Modes</h2>
+
+                      <br />
+
+                      <h2 className="text-3xl font-bold">6. Game Modes</h2>
                       <ul>
                         <li><strong>Battle Royale:</strong> 20-100 players, one winner.</li>
                         <li><strong>Duos:</strong> 10-50 teams of two compete to be the last duo standing. Teamwork is key for survival.</li>
@@ -268,7 +327,10 @@ const Documents = () => {
 
                     {/* Monetization */}
                     <section id="monetization" className="mb-12">
-                      <h2 className="text-3xl font-bold">6. Monetization & Marketplace</h2>
+
+                      <br />
+
+                      <h2 className="text-3xl font-bold">7. Monetization & Marketplace</h2>
                       <p>The game operates on a play-and-earn model. Players earn in-game currency by participating in matches, which can be used to buy cosmetics, skins, or lootboxes in the marketplace. All NFTs are tradable on external platforms, allowing players to buy, sell, or auction rare skins for real-world value.</p>
                       <ul>
                         <li><strong>NFT Drops:</strong> Special skins and items are occasionally dropped for players to claim in-game or purchase from the marketplace.</li>
@@ -280,7 +342,10 @@ const Documents = () => {
 
                     {/* Visuals and Sound */}
                     <section id="visuals-sound" className="mb-12">
-                      <h2 className="text-3xl font-bold">7. Visuals and Sound</h2>
+
+                      <br />
+
+                      <h2 className="text-3xl font-bold">8. Visuals and Sound</h2>
                       
                       <br />
                       
@@ -302,14 +367,20 @@ const Documents = () => {
 
                     {/* Marketing */}
                     <section id="marketing" className="mb-12">
-                      <h2 className="text-3xl font-bold">8. Marketing and Launch Strategy</h2>
+
+                      <br />
+
+                      <h2 className="text-3xl font-bold">9. Marketing and Launch Strategy</h2>
                       <p>The game will launch with early access and token sales to build a dedicated community before full release. Influencers, streamers, and tournaments will drive hype and engagement, especially in the crypto and gaming communities. Post-launch, regular updates, skins, and new game modes will keep the player base engaged.</p>
                       <p>Last Chad Standing is a brutal, high-octane take on the battle royale genre, offering intense, visceral combat with the unique twist of NFT ownership and customization, pushing the boundaries of what modern multiplayer games can offer.</p>
                     </section>
 
                     {/* Controls */}
                     <section id="controls" className="mb-12">
-                      <h2 className="text-3xl font-bold">9. Basic Controls</h2>
+
+                      <br />
+
+                      <h2 className="text-3xl font-bold">10. Basic Controls</h2>
                       <p>The following are the default controls for Last Chad Standing on PC and consoles. Players can customize controls in the settings.</p>
                       
                       <div className="grid md:grid-cols-2 gap-6">
@@ -365,7 +436,10 @@ const Documents = () => {
 
                     {/* Combat Mechanics */}
                     <section id="combat-mechanics" className="mb-12">
-                      <h2 className="text-3xl font-bold">10. Combat Mechanics</h2>
+
+                      <br />
+
+                      <h2 className="text-3xl font-bold">11. Combat Mechanics</h2>
                       <p>The core of Last Chad Standing revolves around melee combat, blending fast reflexes, precise timing, and smart environmental use.</p>
                       
                       <br />
@@ -426,7 +500,10 @@ const Documents = () => {
 
                     {/* Weapons and Inventory */}
                     <section id="weapons-inventory" className="mb-12">
-                      <h2 className="text-3xl font-bold">11. Weapons and Inventory</h2>
+
+                      <br />
+
+                      <h2 className="text-3xl font-bold">12. Weapons and Inventory</h2>
                       <p>Weapons can be found throughout the island and can range from blunt instruments to branches. Players can carry up to three weapons, and each weapon has durability, meaning it can break over time.</p>
                       
                       <br />
@@ -456,7 +533,10 @@ const Documents = () => {
 
                     {/* Movement and Traversal */}
                     <section id="movement" className="mb-12">
-                      <h2 className="text-3xl font-bold">12. Movement and Traversal</h2>
+
+                      <br />
+
+                      <h2 className="text-3xl font-bold">13. Movement and Traversal</h2>
                       
                       <br />
 
@@ -476,7 +556,10 @@ const Documents = () => {
 
                     {/* Map and Environmental Hazards */}
                     <section id="map-hazards" className="mb-12">
-                      <h2 className="text-3xl font-bold">13. Map and Environmental Hazards</h2>
+
+                      <br />
+
+                      <h2 className="text-3xl font-bold">14. Map and Environmental Hazards</h2>
                       <p>The island is littered with environmental traps and hazards that players can use to their advantage or avoid.</p>
                       
                       <br />
@@ -498,7 +581,10 @@ const Documents = () => {
 
                     {/* Game Strategy */}
                     <section id="strategy" className="mb-12">
-                      <h2 className="text-3xl font-bold">14. Game Strategy</h2>
+
+                      <br />
+
+                      <h2 className="text-3xl font-bold">15. Game Strategy</h2>
                       <p>Here are some tactical tips to help you dominate:</p>
                       <ul>
                         <li><strong>Weapon Conservation:</strong> Use each weapon strategically, and don't waste hits on unimportant environmental objects.</li>
@@ -511,7 +597,10 @@ const Documents = () => {
 
                     {/* Social Aspects */}
                     <section id="social-aspects" className="mb-12">
-                      <h2 className="text-3xl font-bold">15. Social Aspects</h2>
+
+                      <br />
+
+                      <h2 className="text-3xl font-bold">16. Social Aspects</h2>
                       <p>Last Chad Standing features robust social mechanics that create a truly immersive and interactive gaming experience. These features foster community engagement and add layers of strategy beyond just combat.</p>
                       
                       <br />
@@ -589,7 +678,10 @@ const Documents = () => {
 
                     {/* Economy Section */}
                     <section id="in-game-currency" className="mb-12">
-                      <h2 className="text-3xl font-bold">16. Economy</h2>
+
+                      <br />
+
+                      <h2 className="text-3xl font-bold">17. Economy</h2>
                       
                       <br />
                       
@@ -641,6 +733,9 @@ const Documents = () => {
 
                     {/* Team Section */}
                     <section id="founding-team" className="mb-12">
+
+                      <br />
+
                       <h2 className="text-3xl font-bold">Founding Team</h2>
                       <div className="space-y-8">
                         
