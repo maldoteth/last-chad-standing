@@ -59,14 +59,14 @@ const Documents = () => {
     title: "Economy",
     icon: <DollarSign size={20} />,
     items: [{
-      title: "Genesis Chads",
-      href: "#genesis-chads"
-    }, {
       title: "Coins",
       href: "#in-game-currency"
     }, {
       title: "Distribution",
       href: "#token-economy"
+    }, {
+      title: "Genesis Chads",
+      href: "#genesis-chads"
     }, {
       title: "Utility",
       href: "#utility"
@@ -674,6 +674,37 @@ const Documents = () => {
                     </section>
 
                     {/* Economy Section */}
+                    <section id="in-game-currency" className="mb-12">
+
+                      <br />
+
+                      <h2 className="text-3xl font-bold">17. Economy</h2>
+                      
+                      <br />
+                      
+                      <br />
+
+                      <h3 className="text-2xl font-bold">Coins</h3>
+
+                      <p>Every game needs in-game currency, but ours is unique compared to most games because it's decentralized and has a set supply, giving players real ownership without manipulation from developers. Unlike traditional games where developers can inflate currency at will, our coins operate on blockchain technology with transparent tokenomics.</p>
+                      <p>This means players truly own their digital assets and can trade them freely without fear of arbitrary changes to the game's economy. The decentralized nature ensures that the value of player investments is protected by smart contracts rather than corporate decisions.</p>
+
+                      <br />
+
+                      <h3 id="token-economy" className="text-2xl font-bold">Distribution</h3>
+
+                      <p><strong>Total Supply:</strong> 1,000,000,000 coins</p>
+                      <ul>
+                        <li><strong>Public Sale:</strong> 30% (300M coins)</li>
+                        <li><strong>Team & Advisors:</strong> 20% (200M coins)</li>
+                        <li><strong>Development Fund:</strong> 15% (150M coins)</li>
+                        <li><strong>Marketing & Partnerships:</strong> 15% (150M coins)</li>
+                        <li><strong>Ecosystem Rewards:</strong> 10% (100M coins)</li>
+                        <li><strong>Liquidity Pool:</strong> 10% (100M coins)</li>
+                      </ul>
+                    </section>
+
+                    {/* Genesis Chads Section - moved here */}
                     <section id="genesis-chads" className="mb-12">
                       <br />
                       <h2 className="text-3xl font-bold">Genesis Chads</h2>
@@ -707,38 +738,11 @@ const Documents = () => {
                       </ul>
                     </section>
 
-                    <section id="in-game-currency" className="mb-12">
+                    <section id="utility" className="mb-12">
 
                       <br />
 
-                      <h2 className="text-3xl font-bold">17. Economy</h2>
-                      
-                      <br />
-                      
-                      <br />
-
-                      <h3 className="text-2xl font-bold">Coins</h3>
-
-                      <p>Every game needs in-game currency, but ours is unique compared to most games because it's decentralized and has a set supply, giving players real ownership without manipulation from developers. Unlike traditional games where developers can inflate currency at will, our coins operate on blockchain technology with transparent tokenomics.</p>
-                      <p>This means players truly own their digital assets and can trade them freely without fear of arbitrary changes to the game's economy. The decentralized nature ensures that the value of player investments is protected by smart contracts rather than corporate decisions.</p>
-
-                      <br />
-
-                      <h3 id="token-economy" className="text-2xl font-bold">Distribution</h3>
-
-                      <p><strong>Total Supply:</strong> 1,000,000,000 coins</p>
-                      <ul>
-                        <li><strong>Public Sale:</strong> 30% (300M coins)</li>
-                        <li><strong>Team & Advisors:</strong> 20% (200M coins)</li>
-                        <li><strong>Development Fund:</strong> 15% (150M coins)</li>
-                        <li><strong>Marketing & Partnerships:</strong> 15% (150M coins)</li>
-                        <li><strong>Ecosystem Rewards:</strong> 10% (100M coins)</li>
-                        <li><strong>Liquidity Pool:</strong> 10% (100M coins)</li>
-                      </ul>
-
-                      <br />
-
-                      <h3 id="utility" className="text-2xl font-bold">Utility</h3>
+                      <h3 className="text-2xl font-bold">Utility</h3>
 
                       
                       <ul>
