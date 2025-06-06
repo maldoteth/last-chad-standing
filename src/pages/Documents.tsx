@@ -776,10 +776,10 @@ const Documents = () => {
                         
                         {/* Mike Hales */}
                         <div className="flex flex-col md:flex-row gap-6 p-6 bg-gray-50 rounded-lg">
-                          <div className="md:w-1/3">
-                            <img src="/lovable-uploads/89896bcd-7068-4438-ba8d-95f8e577cb75.png" alt="Mike Hales" className="w-full h-64 object-cover rounded-lg" />
+                          <div className="md:w-1/4">
+                            <img src="/lovable-uploads/89896bcd-7068-4438-ba8d-95f8e577cb75.png" alt="Mike Hales" className="w-full aspect-[3/4] object-cover rounded-lg" />
                           </div>
-                          <div className="md:w-2/3">
+                          <div className="md:w-3/4">
                             <h3 className="text-2xl font-bold text-gray-900 mb-2">Mike Hales</h3>
                             <p className="text-gray-700 leading-relaxed">
                               Founder and CEO of Rapz, a notable high end MMA fightwear brand backed by top 
@@ -793,10 +793,10 @@ const Documents = () => {
 
                         {/* Malik Jan */}
                         <div className="flex flex-col md:flex-row gap-6 p-6 bg-gray-50 rounded-lg">
-                          <div className="md:w-1/3">
-                            <img src="/lovable-uploads/84ab9eed-00bc-425c-a953-3ea0478e464d.png" alt="Malik Jan" className="w-full h-64 object-cover rounded-lg" />
+                          <div className="md:w-1/4">
+                            <img src="/lovable-uploads/84ab9eed-00bc-425c-a953-3ea0478e464d.png" alt="Malik Jan" className="w-full aspect-[3/4] object-cover rounded-lg" />
                           </div>
-                          <div className="md:w-2/3">
+                          <div className="md:w-3/4">
                             <h3 className="text-2xl font-bold text-gray-900 mb-2">Malik Jan AKA mal.eth</h3>
                             <p className="text-gray-700 leading-relaxed">
                               Founder of DeHub (DHB) which Malik bootstrapped from 690k to 600m FDV 
@@ -811,10 +811,10 @@ const Documents = () => {
 
                         {/* Rayn Barrera */}
                         <div className="flex flex-col md:flex-row gap-6 p-6 bg-gray-50 rounded-lg">
-                          <div className="md:w-1/3">
-                            <img src="/lovable-uploads/ea386eae-1f4f-44c0-ad78-7f038df224d3.png" alt="Rayn Barrera" className="w-full h-64 object-cover rounded-lg" />
+                          <div className="md:w-1/4">
+                            <img src="/lovable-uploads/ea386eae-1f4f-44c0-ad78-7f038df224d3.png" alt="Rayn Barrera" className="w-full aspect-[3/4] object-cover rounded-lg" />
                           </div>
-                          <div className="md:w-2/3">
+                          <div className="md:w-3/4">
                             <h3 className="text-2xl font-bold text-gray-900 mb-2">Rayn Barrera AKA RaynRaps</h3>
                             <p className="text-gray-700 leading-relaxed">
                               Gaming and Web3 expert with over ten years in community growth and game 
@@ -828,10 +828,10 @@ const Documents = () => {
 
                         {/* Bailey Young */}
                         <div className="flex flex-col md:flex-row gap-6 p-6 bg-gray-50 rounded-lg">
-                          <div className="md:w-1/3">
-                            <img src="/lovable-uploads/1373b087-4cb8-43e3-ae69-f3ff5c05a5d1.png" alt="Bailey Young" className="w-full h-64 object-cover rounded-lg" />
+                          <div className="md:w-1/4">
+                            <img src="/lovable-uploads/1373b087-4cb8-43e3-ae69-f3ff5c05a5d1.png" alt="Bailey Young" className="w-full aspect-[3/4] object-cover rounded-lg" />
                           </div>
-                          <div className="md:w-2/3">
+                          <div className="md:w-3/4">
                             <h3 className="text-2xl font-bold text-gray-900 mb-2">Bailey Young</h3>
                             <p className="text-gray-700 leading-relaxed">
                               Investments and tokenomics expert who played an instrumental role in the 
