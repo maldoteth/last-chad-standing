@@ -231,11 +231,11 @@ const Documents = () => {
                       <p>Like other battle royales, the island has a "death zone" that shrinks over time, forcing players into tighter quarters. The visual aesthetic is hyperrealistic, with the zone being a literal wall of steel cage that closes in from all sides. As it closes in, players are forced to fight or flee, and those caught in the cage slowly take damage until they die if they don't escape. The cage deals continuous damage to anyone who touches it, making it impossible to survive outside the safe zone for more than a few seconds.</p>
                     </section>
 
-                    {/* Enhanced Storm & Cage Mechanics */}
+                    {/* Enhanced Zone Mechanics */}
                     <section id="storm-cage-mechanics" className="mb-12">
                       <br />
 
-                      <h2 className="text-3xl font-bold">4. Enhanced Cage Mechanics</h2>
+                      <h2 className="text-3xl font-bold">4. Enhanced Zone Mechanics</h2>
                       <p>Last Chad Standing takes the traditional battle royale zone concept to the next level with a dynamic cage system that creates intense pressure and strategic gameplay.</p>
                       
                       <br />
