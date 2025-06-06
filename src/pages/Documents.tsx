@@ -221,7 +221,7 @@ const Documents = () => {
                         <li><strong>Brawler:</strong> High strength, slow but devastating hits. Special Ability: Ground slam causing area damage or breaking through material</li>
                         <li><strong>Ninja:</strong> Fast, agile, more capable of dodging attacks. Special Ability: Invisibility for a short time.</li>
                         <li><strong>Grappler:</strong> Masters of throwing opponents and countering attacks. Special Ability: Short dash bursts</li>
-                        <li><strong>Brute:</strong> Slow but can absorb more damage than others. Special Ability: Temporary damage immunity.</li>
+                        <li><strong>Brute:</strong> Slow but can absorb more damage than others and bulldoze through most material or dense jungle shrub. Special Ability: Temporary damage immunity.</li>
                         <li><strong>Slayer:</strong> Balanced with dirty tricks up his sleeve. Special Ability: Carry an extra weapon.</li>
                       </ul>
 
