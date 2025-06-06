@@ -28,7 +28,9 @@ const TokenDistributionChart = () => {
 
   const CustomLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent }: any) => {
     const RADIAN = Math.PI / 180;
-    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+    // Adjust radius based on slice size - smaller slices get labels closer to the edge
+    const radiusMultiplier = percent < 0.15 ? 0.7 : 0.5;
+    const radius = innerRadius + (outerRadius - innerRadius) * radiusMultiplier;
     const x = cx + radius * Math.cos(-midAngle * RADIAN);
     const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
