@@ -17,7 +17,7 @@ const Documents = () => {
       title: "Gameplay Mechanics",
       href: "#gameplay-mechanics"
     }, {
-      title: "Enhanced Storm & Cage Mechanics",
+      title: "Enhanced Zone Mechanics",
       href: "#storm-cage-mechanics"
     }, {
       title: "Progression & Customization",
