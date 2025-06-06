@@ -686,8 +686,8 @@ const Documents = () => {
 
                       <h3 className="text-2xl font-bold">Coins</h3>
 
-                      <p>Every game needs in-game currency, but ours is unique compared to most games because it's decentralized and has a set supply, giving players real ownership without manipulation from developers. Unlike traditional games where developers can inflate currency at will, our coins operate on blockchain technology with transparent tokenomics.</p>
-                      <p>This means players truly own their digital assets and can trade them freely without fear of arbitrary changes to the game's economy. The decentralized nature ensures that the value of player investments is protected by smart contracts rather than corporate decisions.</p>
+                      <p>Every game needs in-game currency, but ours is unique compared to most games because it's decentralized and has a set supply, giving fighters real ownership without manipulation from developers. Unlike traditional games where developers can inflate currency at will, our coins operate on blockchain technology with transparent tokenomics.</p>
+                      <p>This means fighters truly own their digital assets and can trade them freely without fear of arbitrary changes to the game's economy. The decentralized nature ensures that the value of fighter investments is protected by smart contracts rather than corporate decisions.</p>
 
                       <br />
 
@@ -696,11 +696,12 @@ const Documents = () => {
                       <p><strong>Total Supply:</strong> 1,000,000,000 coins</p>
                       <ul>
                         <li><strong>Public Sale:</strong> 30% (300M coins)</li>
-                        <li><strong>Team & Advisors:</strong> 20% (200M coins)</li>
+                        <li><strong>Team:</strong> 15% (150M coins)</li>
                         <li><strong>Development Fund:</strong> 15% (150M coins)</li>
                         <li><strong>Marketing & Partnerships:</strong> 15% (150M coins)</li>
                         <li><strong>Ecosystem Rewards:</strong> 10% (100M coins)</li>
                         <li><strong>Liquidity Pool:</strong> 10% (100M coins)</li>
+                        <li><strong>Advisors:</strong> 5% (50M coins)</li>
                       </ul>
                     </section>
 
