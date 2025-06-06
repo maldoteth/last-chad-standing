@@ -2,7 +2,6 @@ import React from 'react';
 import { ArrowLeft, UserCheck, Gamepad2, DollarSign, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ScrollArea } from '@/components/ui/scroll-area';
-
 const Documents = () => {
   const documentSections = [{
     title: "Game Overview",
@@ -17,7 +16,7 @@ const Documents = () => {
       title: "Gameplay Mechanics",
       href: "#gameplay-mechanics"
     }, {
-      title: "Enhanced Zone Mechanics",
+      title: "Enhanced Storm & Cage Mechanics",
       href: "#storm-cage-mechanics"
     }, {
       title: "Progression & Customization",
@@ -150,7 +149,7 @@ const Documents = () => {
                       <h1 className="text-4xl font-bold text-gray-900 mb-4">Game Blueprint: Last Chad Standing</h1>
                       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
                         <div><strong>Genre:</strong> Third-Person Fighter Battle Royale</div>
-                        <div><strong>Fighters:</strong> 20-100 fighters per lobby</div>
+                        <div><strong>Players:</strong> 20-100 players per lobby</div>
                         <div><strong>Platforms:</strong> PC, next-gen consoles</div>
                         <div><strong>Rating:</strong> Mature audiences (PEGI 18+)</div>
                       </div>
@@ -159,17 +158,17 @@ const Documents = () => {
                     {/* Core Concept */}
                     <section id="core-concept" className="mb-12">
                       <h2 className="text-4xl font-bold">1. Core Concept</h2>
-                      <p>Last Chad Standing is a high-intensity, fast paced, third person fighter battle royale. Fighters choose from a cast of customizable fighters, each trained in unique fight styles and abilities, in a fast-paced, melee-focused environment. The game emphasizes brutal hand-to-hand combat in an open-world island setting, with dynamic environmental hazards and blood-soaked brawls to the death. Only one Chad can remain standing, and he takes home the loot for his troubles.</p>
+                      <p>Last Chad Standing is a high-intensity, fast paced, third person fighter battle royale. Players choose from a cast of customizable fighters, each trained in unique fight styles and abilities, in a fast-paced, melee-focused environment. The game emphasizes brutal hand-to-hand combat in an open-world island setting, with dynamic environmental hazards and blood-soaked brawls to the death. Only one Chad can remain standing, and he takes home the loot for his troubles.</p>
                       
                       <br />
                       
                       <h3 className="font-bold">Overview</h3>
-                      <p>Fighters are thrown onto the island via helicopter, scattered randomly, and must use both wits and combat prowess to survive against 19 other fighters. The shrinking cage forces fighters into close quarters, ensuring non stop action. Combat is visceral, utilizing a mix of strikes, grappling, weaponry, and brutal finishers.</p>
+                      <p>Players are thrown onto the island via helicopter, scattered randomly, and must use both wits and combat prowess to survive against 19 other players. The shrinking cage forces fighters into close quarters, ensuring non stop action. Combat is visceral, utilizing a mix of strikes, grappling, weaponry, and brutal finishers.</p>
                     </section>
 
                     {/* Helicopter Drop Image */}
                     <div className="my-8 w-full">
-                      <img src="/lovable-uploads/1615e7da-29d5-454e-a2fe-57f5abf91d56.png" alt="Helicopter dropping fighters onto the island" className="w-full h-auto rounded-lg shadow-md" />
+                      <img src="/lovable-uploads/1615e7da-29d5-454e-a2fe-57f5abf91d56.png" alt="Helicopter dropping players onto the island" className="w-full h-auto rounded-lg shadow-md" />
                     </div>
 
                     {/* Game World */}
@@ -178,12 +177,12 @@ const Documents = () => {
                       <h3 className="text-2xl font-bold"></h3>
                       <p>The map is a relatively small, derelict resort island filled with destructible environments, including beaches, dense jungles, abandoned industrial areas, and decaying urban ruins. The environment offers both vertical and horizontal exploration opportunities, such as:</p>
                       <ul>
-                        <li><strong>Beaches:</strong> Wide open spaces where fighters can be easily spotted but have more visibility.</li>
-                        <li><strong>Jungle:</strong> Dense cover where fighters can ambush or be ambushed.</li>
-                        <li><strong>Resort Ruins:</strong> Multi-level buildings, providing vantage points for striking down on other fighters.</li>
+                        <li><strong>Beaches:</strong> Wide open spaces where players can be easily spotted but have more visibility.</li>
+                        <li><strong>Jungle:</strong> Dense cover where players can ambush or be ambushed.</li>
+                        <li><strong>Resort Ruins:</strong> Multi-level buildings, providing vantage points for striking down on other players.</li>
                         <li><strong>Industrial Complex:</strong> Space to camp but comes with environmental and structural hazards</li>
                       </ul>
-                      <p>There are traps like collapsing floors, explosive barrels, and natural hazards (e.g., lava flows, flooding). The environment also dynamically changes over time due to the collapsing zone, adding urgency to exploration.</p>
+                      <p>There are environmental traps like collapsing floors, explosive barrels, and natural hazards (e.g., lava flows, flooding). The environment also dynamically changes over time due to the collapsing zone, adding urgency to exploration.</p>
                     </section>
 
                     {/* Aerial Drop Combat Image */}
@@ -196,7 +195,7 @@ const Documents = () => {
                       <h2 className="text-3xl font-bold">3. Gameplay Mechanics</h2>
                       
                       
-                      <p>Fighters are thrown out of a helicopter flying erratically over the island, with random ejection points adding an element of chaos and unpredictability to the start of each match.</p>
+                      <p>Players are thrown out of a helicopter flying erratically over the island, with random ejection points adding an element of chaos and unpredictability to the start of each match.</p>
 
                       <br />
 
@@ -206,8 +205,8 @@ const Documents = () => {
                       <p>Combat is the heart of Last Chad Standing. It focuses on hand-to-hand fighting with a realistic physics engine. Every hit feels weighty, and the results of brutal combat are visually emphasized with blood, broken bones, and dismemberment.</p>
                       <ul>
                         <li><strong>Strikes:</strong> Light, heavy, and combo-based attacks. Timing and precision are key.</li>
-                        <li><strong>Grappling:</strong> Fighters can perform grappling moves to counter opponents or initiate brutal finishers.</li>
-                        <li><strong>Weapons:</strong> Found throughout the map, including blunt instruments (bats, pipes), bladed weapons (machetes), and improvised tools (shards of glass, branch). Weapons can break over time, forcing fighters to fight bare-handed or seek new ones.</li>
+                        <li><strong>Grappling:</strong> Players can perform grappling moves to counter opponents or initiate brutal finishers.</li>
+                        <li><strong>Weapons:</strong> Found throughout the map, including blunt instruments (bats, pipes), bladed weapons (machetes), and improvised tools (shards of glass, branch). Weapons can break over time, forcing players to fight bare-handed or seek new ones.</li>
                         <li><strong>Fatalities:</strong> Each character can perform unique, gory finishers when they defeat an opponent. Finishers range from decapitations to brutal bone-breaking maneuvers, depending on the character's style.</li>
                         <li><strong>Special Moves:</strong> Each fighting style comes with their own special move.</li>
                         <li><strong>Proximity Voice Chat:</strong> The closer you are to your enemy, the louder you can hear their mic.</li>
@@ -228,14 +227,14 @@ const Documents = () => {
                       <br />
 
                       <h3 className="text-2xl font-bold">Shrinking Zone Mechanic</h3>
-                      <p>Like other battle royales, the island has a "death zone" that shrinks over time, forcing fighters into tighter quarters. The visual aesthetic is hyperrealistic, with the zone being a literal wall of steel cage that closes in from all sides. As it closes in, fighters are forced to fight or flee, and those caught in the cage slowly take damage until they die if they don't escape. The cage deals continuous damage to anyone who touches it, making it impossible to survive outside the safe zone for more than a few seconds.</p>
+                      <p>Like other battle royales, the island has a "death zone" that shrinks over time, forcing players into tighter quarters. The visual aesthetic is hyperrealistic, with the zone being a literal wall of steel cage that closes in from all sides. As it closes in, players are forced to fight or flee, and those caught in the cage slowly take damage until they die if they don't escape. The cage deals continuous damage to anyone who touches it, making it impossible to survive outside the safe zone for more than a few seconds.</p>
                     </section>
 
-                    {/* Enhanced Zone Mechanics */}
+                    {/* Enhanced Storm & Cage Mechanics */}
                     <section id="storm-cage-mechanics" className="mb-12">
                       <br />
 
-                      <h2 className="text-3xl font-bold">4. Enhanced Zone Mechanics</h2>
+                      <h2 className="text-3xl font-bold">4. Enhanced Cage Mechanics</h2>
                       <p>Last Chad Standing takes the traditional battle royale zone concept to the next level with a dynamic cage system that creates intense pressure and strategic gameplay.</p>
                       
                       <br />
@@ -244,7 +243,7 @@ const Documents = () => {
                       <p>Instead of a traditional storm or gas, Last Chad Standing features a massive steel cage that mechanically closes in from all sides of the island. This cage creates absolute barriers that reshape the battlefield with each phase.</p>
                       <ul>
                         <li><strong>Permanent Barriers:</strong> The cage creates absolute no-go zones that deal continuous damage to anyone who touches them</li>
-                        <li><strong>Strategic Positioning:</strong> Fighters must not only avoid the cage but also consider their escape routes before being trapped</li>
+                        <li><strong>Strategic Positioning:</strong> Players must not only avoid the cage but also consider their escape routes before being trapped</li>
                         <li><strong>Vertical Limitation:</strong> The cage extends upward, preventing any attempts to climb or fly over previously accessible areas</li>
                         <li><strong>Sound Design:</strong> The grinding, mechanical sound of the cage closing adds to the psychological pressure</li>
                         <li><strong>Damage System:</strong> Contact with the cage deals significant damage over time, making survival outside the safe zone impossible</li>
@@ -273,8 +272,8 @@ const Documents = () => {
                       <h3 className="text-2xl font-bold">Tactical Implications</h3>
                       <p>This cage system creates unique strategic considerations throughout the match:</p>
                       <ul>
-                        <li><strong>Early Game:</strong> Fighters must balance looting with positioning to avoid being trapped by the advancing cage</li>
-                        <li><strong>Mid Game:</strong> The permanent barriers created by previous cage advances force fighters into increasingly predictable paths</li>
+                        <li><strong>Early Game:</strong> Players must balance looting with positioning to avoid being trapped by the advancing cage</li>
+                        <li><strong>Mid Game:</strong> The permanent barriers created by previous cage advances force players into increasingly predictable paths</li>
                         <li><strong>Late Game:</strong> Knowing that the final zone becomes a cage adds pressure to eliminate opponents before reaching the final confrontation</li>
                         <li><strong>Final Showdown:</strong> The MMA cage ensures that the last fight is always an epic, unavoidable battle between the final survivors</li>
                       </ul>
@@ -297,7 +296,7 @@ const Documents = () => {
                       <br />
 
                       <h3 className="text-2xl font-bold">Character Customization</h3>
-                      <p>Fighters can customize the appearance of their characters by selecting base skins and layering accessories, clothing, and weapons. NFTs purchased from the marketplace are fully tradable and can enhance the fighter's appearance with unique styles, offering individuality and a sense of ownership.</p>
+                      <p>Players can customize the appearance of their characters by selecting base skins and layering accessories, clothing, and weapons. NFTs purchased from the marketplace are fully tradable and can enhance the player's appearance with unique styles, offering individuality and a sense of ownership.</p>
 
                       
                       
@@ -315,10 +314,10 @@ const Documents = () => {
 
                       <h2 className="text-3xl font-bold">6. Game Modes</h2>
                       <ul>
-                        <li><strong>Battle Royale:</strong> 20-100 fighters, one winner.</li>
+                        <li><strong>Battle Royale:</strong> 20-100 players, one winner.</li>
                         <li><strong>Duos:</strong> 10-50 teams of two compete to be the last duo standing. Teamwork is key for survival.</li>
                         <li><strong>Death Match:</strong> No shrinking zone, just 15 minutes of pure free-for-all mayhem. Whoever gets the most kills in the time limit wins.</li>
-                        <li><strong>Survival Royale:</strong> PvE/PvP mode where fighters must survive waves of zombies while also dealing with other fighters.</li>
+                        <li><strong>Survival Royale:</strong> PvE/PvP mode where players must survive waves of zombies while also dealing with other players.</li>
                         <li><strong>Tournaments:</strong> Monthly events with large rewards</li>
                       </ul>
                     </section>
@@ -329,12 +328,12 @@ const Documents = () => {
                       <br />
 
                       <h2 className="text-3xl font-bold">7. Monetization & Marketplace</h2>
-                      <p>The game operates on a play-and-earn model. Fighters earn in-game currency by participating in matches, which can be used to buy cosmetics, skins, or lootboxes in the marketplace. All NFTs are tradable on external platforms, allowing fighters to buy, sell, or auction rare skins for real-world value.</p>
+                      <p>The game operates on a play-and-earn model. Players earn in-game currency by participating in matches, which can be used to buy cosmetics, skins, or lootboxes in the marketplace. All NFTs are tradable on external platforms, allowing players to buy, sell, or auction rare skins for real-world value.</p>
                       <ul>
-                        <li><strong>NFT Drops:</strong> Special skins and items are occasionally dropped for fighters to claim in-game or purchase from the marketplace.</li>
+                        <li><strong>NFT Drops:</strong> Special skins and items are occasionally dropped for players to claim in-game or purchase from the marketplace.</li>
                         <li><strong>In-Game Store:</strong> Besides skins, there are in-game items like weapons, emotes, and accessories, all purchasable with in-game or real-world currency</li>
                         <li><strong>Season Pass:</strong> Unlock exclusive items the more you play</li>
-                        <li><strong>LootBoxes:</strong> Fighters can purchase fairly randomized boxes for a chance to win rare items.</li>
+                        <li><strong>LootBoxes:</strong> Players can purchase fairly randomized boxes for a chance to win rare items.</li>
                       </ul>
                     </section>
 
@@ -369,7 +368,7 @@ const Documents = () => {
                       <br />
 
                       <h2 className="text-3xl font-bold">9. Marketing and Launch Strategy</h2>
-                      <p>The game will launch with early access and token sales to build a dedicated community before full release. Influencers, streamers, and tournaments will drive hype and engagement, especially in the crypto and gaming communities. Post-launch, regular updates, skins, and new game modes will keep the fighter base engaged.</p>
+                      <p>The game will launch with early access and token sales to build a dedicated community before full release. Influencers, streamers, and tournaments will drive hype and engagement, especially in the crypto and gaming communities. Post-launch, regular updates, skins, and new game modes will keep the player base engaged.</p>
                       <p>Last Chad Standing is a brutal, high-octane take on the battle royale genre, offering intense, visceral combat with the unique twist of NFT ownership and customization, pushing the boundaries of what modern multiplayer games can offer.</p>
                     </section>
 
@@ -379,7 +378,7 @@ const Documents = () => {
                       <br />
 
                       <h2 className="text-3xl font-bold">10. Basic Controls</h2>
-                      <p>The following are the default controls for Last Chad Standing on PC and consoles. Fighters can customize controls in the settings.</p>
+                      <p>The following are the default controls for Last Chad Standing on PC and consoles. Players can customize controls in the settings.</p>
                       
                       <div className="grid md:grid-cols-2 gap-6">
                         <div className="bg-gray-50 p-4 rounded-lg">
@@ -456,7 +455,7 @@ const Documents = () => {
                       <h3 className="text-2xl font-bold">Grappling (F/Circle/B)</h3>
                       <ul>
                         <li><strong>Grapple:</strong> Initiate a grapple on a nearby opponent to engage in close-quarters combat. Grapples can be countered with a well-timed block or dodge.</li>
-                        <li><strong>Throws:</strong> After a successful grapple, use directional inputs to throw your opponent into environmental hazards or towards other fighters.</li>
+                        <li><strong>Throws:</strong> After a successful grapple, use directional inputs to throw your opponent into environmental hazards or towards other players.</li>
                         <li><strong>Special Throws:</strong> Each fighter has unique throws that differ based on their fighting style (e.g., Brawler performs a suplex; Ninja flips the enemy over).</li>
                       </ul>
 
@@ -473,7 +472,7 @@ const Documents = () => {
                       <h3 className="text-2xl font-bold">Dodging and Sprinting</h3>
                       <ul>
                         <li><strong>Quick Dodge (V/L1):</strong> Evade enemy attacks with a swift side step. Dodging consumes stamina but can avoid kick attacks or grapples.</li>
-                        <li><strong>Sprint (Shift/L3):</strong> Use sprint to quickly cover ground or charge towards enemies. While sprinting, fighters can perform sliding attacks, which knock down opponents.</li>
+                        <li><strong>Sprint (Shift/L3):</strong> Use sprint to quickly cover ground or charge towards enemies. While sprinting, players can perform sliding attacks, which knock down opponents.</li>
                       </ul>
 
                       <br />
@@ -489,10 +488,10 @@ const Documents = () => {
                       <br />
 
                       <h3 className="text-2xl font-bold">Finishers (R/Triangle/Y)</h3>
-                      <p>Finishers are unique, gory executions that fighters can perform when an opponent's health is critically low (triggered when a finisher icon appears).</p>
+                      <p>Finishers are unique, gory executions that players can perform when an opponent's health is critically low (triggered when a finisher icon appears).</p>
                       <ul>
                         <li><strong>Execution Prompt:</strong> When close to a low-health opponent, press the execute button to perform a brutal finishing move.</li>
-                        <li><strong>Customization:</strong> Fighters can customize their finisher animations based on NFTs or earned achievements.</li>
+                        <li><strong>Customization:</strong> Players can customize their finisher animations based on NFTs or earned achievements.</li>
                       </ul>
                     </section>
 
@@ -502,7 +501,7 @@ const Documents = () => {
                       <br />
 
                       <h2 className="text-3xl font-bold">12. Weapons and Inventory</h2>
-                      <p>Weapons can be found throughout the island and can range from blunt instruments to branches. Fighters can carry up to three weapons, and each weapon has durability, meaning it can break over time.</p>
+                      <p>Weapons can be found throughout the island and can range from blunt instruments to branches. Players can carry up to three weapons, and each weapon has durability, meaning it can break over time.</p>
                       
                       <br />
 
@@ -544,7 +543,7 @@ const Documents = () => {
                       <br />
 
                       <h3 className="text-2xl font-bold">Jumping and Climbing (Space/X)</h3>
-                      <p>Jump to clear obstacles or reach higher ground. Some objects are climbable, allowing fighters to gain an advantage through vertical positioning.</p>
+                      <p>Jump to clear obstacles or reach higher ground. Some objects are climbable, allowing players to gain an advantage through vertical positioning.</p>
 
                       <br />
 
@@ -558,14 +557,14 @@ const Documents = () => {
                       <br />
 
                       <h2 className="text-3xl font-bold">14. Map and Environmental Hazards</h2>
-                      <p>The island is littered with environmental traps and hazards that fighters can use to their advantage or avoid.</p>
+                      <p>The island is littered with environmental traps and hazards that players can use to their advantage or avoid.</p>
                       
                       <br />
 
                       <h3 className="text-2xl font-bold">Map Overview</h3>
                       <ul>
                         <li><strong>Access Map (M/Options):</strong> Check the shrinking zone, your position, and possible loot locations.</li>
-                        <li><strong>Shrinking Zone:</strong> The toxic gas zone slowly closes in over time, forcing fighters to move closer together. The map displays the current safe area and the next shrinking zone.</li>
+                        <li><strong>Shrinking Zone:</strong> The toxic gas zone slowly closes in over time, forcing players to move closer together. The map displays the current safe area and the next shrinking zone.</li>
                       </ul>
 
                       <br />
@@ -606,18 +605,18 @@ const Documents = () => {
                       <h3 className="text-2xl font-bold">Proximity Voice Chat</h3>
                       <p>The game features uncensored, proximity-based voice chat that adds intense psychological warfare to combat:</p>
                       <ul>
-                        <li><strong>Distance-Based Audio:</strong> The closer you are to other fighters, the louder and clearer their voice becomes. This creates natural ambush opportunities and tense stalking scenarios.</li>
+                        <li><strong>Distance-Based Audio:</strong> The closer you are to other players, the louder and clearer their voice becomes. This creates natural ambush opportunities and tense stalking scenarios.</li>
                         <li><strong>No Restrictions:</strong> Voice chat is completely uncensored, allowing for authentic trash talk, intimidation tactics, and raw emotional reactions that amplify the brutal nature of the competition.</li>
-                        <li><strong>Strategic Communication:</strong> Fighters can use voice chat to form temporary alliances, negotiate truces, or attempt to deceive opponents about their intentions.</li>
+                        <li><strong>Strategic Communication:</strong> Players can use voice chat to form temporary alliances, negotiate truces, or attempt to deceive opponents about their intentions.</li>
                         <li><strong>Immersive Experience:</strong> Hearing your opponent's breathing, grunts of pain, or victory cries adds visceral realism to every encounter.</li>
                       </ul>
 
                       <br />
 
                       <h3 className="text-2xl font-bold">Spectator Mode & Live Viewing</h3>
-                      <p>Fighters can watch ongoing matches in real-time, creating a live entertainment ecosystem:</p>
+                      <p>Players can watch ongoing matches in real-time, creating a live entertainment ecosystem:</p>
                       <ul>
-                        <li><strong>Free Camera Mode:</strong> Spectators can freely roam the map or follow specific fighters to catch all the action.</li>
+                        <li><strong>Free Camera Mode:</strong> Spectators can freely roam the map or follow specific players to catch all the action.</li>
                         <li><strong>Multiple View Options:</strong> Switch between first-person, third-person, and cinematic camera angles for the best viewing experience.</li>
                         <li><strong>Live Commentary:</strong> Spectators can provide real-time commentary and reactions via text chat visible to other viewers.</li>
                         <li><strong>Highlight Clips:</strong> Automatically capture and share the most brutal moments and epic finishers.</li>
@@ -625,20 +624,20 @@ const Documents = () => {
 
                       <br />
 
-                      <h3 className="text-2xl font-bold">Care Packages & Fighter Support</h3>
+                      <h3 className="text-2xl font-bold">Care Packages & Player Support</h3>
                       <p>Spectators can directly influence ongoing matches by purchasing care packages for their favorite fighters:</p>
                       <ul>
                         <li><strong>Weapon Drops:</strong> Send high-quality weapons, armor, or consumables to help your chosen fighter survive longer.</li>
                         <li><strong>Health Packs:</strong> Purchase medical supplies that can be airdropped to injured fighters at critical moments.</li>
                         <li><strong>Special Equipment:</strong> Provide temporary buffs, protective gear, or rare weapons that give fighters an edge in combat.</li>
-                        <li><strong>Strategic Timing:</strong> Care packages must be strategically timed - they're visible to all fighters and can attract unwanted attention to the recipient.</li>
-                        <li><strong>Cost Scaling:</strong> Care package prices increase as the match progresses and fewer fighters remain, making late-game support more valuable.</li>
+                        <li><strong>Strategic Timing:</strong> Care packages must be strategically timed - they're visible to all players and can attract unwanted attention to the recipient.</li>
+                        <li><strong>Cost Scaling:</strong> Care package prices increase as the match progresses and fewer players remain, making late-game support more valuable.</li>
                       </ul>
 
                       <br />
 
                       <h3 className="text-2xl font-bold">Fighter Backing & Reward Sharing</h3>
-                      <p>Fighters can financially back fighters before matches begin, sharing in the spoils of victory:</p>
+                      <p>Players can financially back fighters before matches begin, sharing in the spoils of victory:</p>
                       <ul>
                         <li><strong>Pre-Match Betting:</strong> Back your favorite fighter with real currency or in-game tokens before the match starts.</li>
                         <li><strong>Reward Pool Distribution:</strong> When your backed fighter wins, you receive a percentage of the total match reward pool based on your investment.</li>
@@ -654,11 +653,11 @@ const Documents = () => {
                       <p>The game creates powerful viral loops that encourage organic growth and community engagement:</p>
                       <ul>
                         <li><strong>Highlight Generation:</strong> Epic moments, brutal finishers, and unexpected victories are automatically captured and packaged into shareable clips optimized for social media platforms.</li>
-                        <li><strong>Performance Analytics:</strong> Detailed post-match breakdowns show your combat effectiveness, crowd support metrics, and backing profits, encouraging fighters to share their achievements.</li>
-                        <li><strong>Viral Challenges:</strong> Weekly community challenges and trending hashtags (#ChadsOnly, #BrutalFinish) drive social media engagement and attract new fighters.</li>
+                        <li><strong>Performance Analytics:</strong> Detailed post-match breakdowns show your combat effectiveness, crowd support metrics, and backing profits, encouraging players to share their achievements.</li>
+                        <li><strong>Viral Challenges:</strong> Weekly community challenges and trending hashtags (#ChadsOnly, #BrutalFinish) drive social media engagement and attract new players.</li>
                         <li><strong>Streamer Integration:</strong> Built-in streaming tools with automated highlights, viewer polls for care package purchases, and real-time audience engagement features.</li>
                         <li><strong>Social Proof Mechanics:</strong> Display of backer counts, spectator numbers, and social media mentions creates FOMO and social validation for successful fighters.</li>
-                        <li><strong>Cross-Platform Sharing:</strong> Seamless integration with TikTok, Twitter, Instagram, and Discord for instant sharing of epic moments and recruitment of new fighters.</li>
+                        <li><strong>Cross-Platform Sharing:</strong> Seamless integration with TikTok, Twitter, Instagram, and Discord for instant sharing of epic moments and recruitment of new players.</li>
                         <li><strong>Influencer Partnerships:</strong> Exclusive fighter skins and tournaments for content creators, creating authentic promotional content and expanding reach to new audiences.</li>
                         <li><strong>Community Rewards:</strong> Group achievements and milestones that reward the entire community when certain viral or engagement thresholds are met, encouraging collective promotion.</li>
                       </ul>
@@ -667,7 +666,7 @@ const Documents = () => {
 
                       <h3 className="text-2xl font-bold">Community Features</h3>
                       <ul>
-                        <li><strong>Fighter Profiles:</strong> Detailed statistics, win/loss records, and fighting style breakdowns for every fighter.</li>
+                        <li><strong>Fighter Profiles:</strong> Detailed statistics, win/loss records, and fighting style breakdowns for every player.</li>
                         <li><strong>Replay System:</strong> Watch and share epic moments from past matches with full camera control.</li>
                         <li><strong>Tournament Brackets:</strong> Follow major tournaments and championship events with real-time bracket updates.</li>
                         <li><strong>Social Media Integration:</strong> Share highlights, backing successes, and epic moments directly to social platforms.</li>
@@ -687,8 +686,8 @@ const Documents = () => {
 
                       <h3 className="text-2xl font-bold">Coins</h3>
 
-                      <p>Every game needs in-game currency, but ours is unique compared to most games because it's decentralized and has a set supply, giving fighters real ownership without manipulation from developers. Unlike traditional games where developers can inflate currency at will, our coins operate on blockchain technology with transparent tokenomics.</p>
-                      <p>This means fighters truly own their digital assets and can trade them freely without fear of arbitrary changes to the game's economy. The decentralized nature ensures that the value of fighter investments is protected by smart contracts rather than corporate decisions.</p>
+                      <p>Every game needs in-game currency, but ours is unique compared to most games because it's decentralized and has a set supply, giving players real ownership without manipulation from developers. Unlike traditional games where developers can inflate currency at will, our coins operate on blockchain technology with transparent tokenomics.</p>
+                      <p>This means players truly own their digital assets and can trade them freely without fear of arbitrary changes to the game's economy. The decentralized nature ensures that the value of player investments is protected by smart contracts rather than corporate decisions.</p>
 
                       <br />
 
@@ -710,7 +709,7 @@ const Documents = () => {
                       <br />
                       <h2 className="text-3xl font-bold">Genesis Chads</h2>
                       
-                      <p>Our collection of randomly generated cartoon chads from 2022 hand drawn by founder Mike Hales.</p>
+                      <p>Randomly generated cartoon chads from 2022 hand drawn by founder Mike Hales.</p>
                       
                       <p>Every chad will appear one by one, on the skins marketplace in 3D form, ready to be used in-game, with revenue shared with the holder from buyers and secondary traders.</p>
                       
@@ -747,12 +746,12 @@ const Documents = () => {
 
                       
                       <ul>
-                        <li><strong>In-Game Currency:</strong> Buy or sell skins from the store or secondary marketplace directly with other fighters</li>
+                        <li><strong>In-Game Currency:</strong> Buy or sell skins from the store or secondary marketplace directly with other players</li>
                         <li><strong>Tournament Entry:</strong> Access events and experiences, from tournaments to socials</li>
                         
                         <li><strong>Governance:</strong> Voting on game features and updates</li>
                         <li><strong>Staking Rewards:</strong> Earn additional coins by staking</li>
-                        <li><strong>Care Packages:</strong> Send support items to fighters</li>
+                        <li><strong>Care Packages:</strong> Send support items to players</li>
                         <li><strong>Back Fighters:</strong> Support fighters with coins and share the loot if you win. However, if your fighter loses, you get nothing but shame.</li>
                       </ul>
 
