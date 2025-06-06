@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { ArrowLeft, UserCheck, Gamepad2, DollarSign, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -184,7 +183,7 @@ const Documents = () => {
                         <li><strong>Resort Ruins:</strong> Multi-level buildings, providing vantage points for striking down on other fighters.</li>
                         <li><strong>Industrial Complex:</strong> Space to camp but comes with environmental and structural hazards</li>
                       </ul>
-                      <p>There are environmental traps like collapsing floors, explosive barrels, and natural hazards (e.g., lava flows, flooding). The environment also dynamically changes over time due to the collapsing zone, adding urgency to exploration.</p>
+                      <p>There are traps like collapsing floors, explosive barrels, and natural hazards (e.g., lava flows, flooding). The environment also dynamically changes over time due to the collapsing zone, adding urgency to exploration.</p>
                     </section>
 
                     {/* Aerial Drop Combat Image */}
