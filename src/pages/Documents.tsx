@@ -2,6 +2,8 @@ import React from 'react';
 import { ArrowLeft, UserCheck, Gamepad2, DollarSign, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import TokenDistributionChart from '@/components/TokenDistributionChart';
+
 const Documents = () => {
   const documentSections = [{
     title: "Game Overview",
@@ -694,6 +696,9 @@ const Documents = () => {
                       <h3 id="token-economy" className="text-2xl font-bold">Distribution</h3>
 
                       <p><strong>Total Supply:</strong> 1,000,000,000 coins</p>
+                      
+                      <TokenDistributionChart />
+                      
                       <ul>
                         <li><strong>Public Sale:</strong> 30% (300M coins)</li>
                         <li><strong>Team:</strong> 15% (150M coins)</li>
