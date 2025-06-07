@@ -113,18 +113,10 @@ const Documents = () => {
                 </Link>
                 <div className="h-6 w-px bg-gray-300" />
                 <h1 className="text-xl font-semibold text-gray-900 hidden sm:block">Fight Paper</h1>
-                {/* Logo on mobile instead of Fight Paper */}
-                <div className="block sm:hidden">
-                  <img 
-                    src="/lovable-uploads/745baeae-f05a-4a2a-828f-45aed6d05972.png" 
-                    alt="Last Chad Standing Logo" 
-                    className="h-6 w-auto opacity-90"
-                  />
-                </div>
               </div>
               
-              {/* Logo in the middle on desktop */}
-              <div className="absolute left-1/2 transform -translate-x-1/2 hidden md:block">
+              {/* Logo in the middle - visible on all screen sizes */}
+              <div className="absolute left-1/2 transform -translate-x-1/2">
                 <img 
                   src="/lovable-uploads/745baeae-f05a-4a2a-828f-45aed6d05972.png" 
                   alt="Last Chad Standing Logo" 
