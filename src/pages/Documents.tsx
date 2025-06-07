@@ -114,6 +114,16 @@ const Documents = () => {
                 <div className="h-6 w-px bg-gray-300" />
                 <h1 className="text-xl font-semibold text-gray-900 text-center sm:text-left">Fight Paper</h1>
               </div>
+              
+              {/* Logo in the middle */}
+              <div className="absolute left-1/2 transform -translate-x-1/2 hidden md:block">
+                <img 
+                  src="/lovable-uploads/745baeae-f05a-4a2a-828f-45aed6d05972.png" 
+                  alt="Last Chad Standing Logo" 
+                  className="h-8 w-auto opacity-90"
+                />
+              </div>
+              
               <Button variant="outline" size="sm" onClick={() => setIsSearchOpen(true)} className="flex items-center gap-2">
                 <Search size={16} />
                 <span>Search</span>
