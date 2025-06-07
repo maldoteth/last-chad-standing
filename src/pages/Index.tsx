@@ -31,11 +31,8 @@ const Index = () => {
           <SocialLinks className="animate-fade-in" />
         </div>
         
-        {/* Spacer to push content to bottom third */}
-        <div className="flex-grow"></div>
-        
-        {/* Game Title positioned in the bottom third */}
-        <div className="flex items-center justify-center pb-16 pointer-events-auto">
+        {/* Game Title positioned in the center-bottom area (where red line indicates) */}
+        <div className="flex-grow flex items-center justify-center pb-32 pointer-events-auto">
           <img 
             src="/lovable-uploads/f654d26f-b781-41e0-9155-bb36713c7513.png" 
             alt="Last Chad Standing"
