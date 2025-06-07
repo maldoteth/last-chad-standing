@@ -15,9 +15,10 @@ interface SearchResult {
 interface DocumentSearchProps {
   isOpen: boolean;
   onClose: () => void;
+  isMobileInline?: boolean;
 }
 
-const DocumentSearch: React.FC<DocumentSearchProps> = ({ isOpen, onClose }) => {
+const DocumentSearch: React.FC<DocumentSearchProps> = ({ isOpen, onClose, isMobileInline = false }) => {
   const [searchTerm, setSearchTerm] = useState('');
 
   // Define all searchable content sections
@@ -171,6 +172,60 @@ const DocumentSearch: React.FC<DocumentSearchProps> = ({ isOpen, onClose }) => {
 
   if (!isOpen) return null;
 
+  // Mobile inline version
+  if (isMobileInline) {
+    return (
+      <div className="w-full bg-white border-b border-gray-200">
+        <div className="p-4">
+          <div className="flex items-center gap-2 mb-4">
+            <div className="relative flex-1">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+              <Input
+                type="text"
+                placeholder="Search documentation..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="pl-10 pr-4"
+                autoFocus
+              />
+            </div>
+            <Button variant="ghost" size="sm" onClick={onClose}>
+              <X size={20} />
+            </Button>
+          </div>
+
+          <div className="max-h-96 overflow-y-auto">
+            {searchTerm.trim() === '' ? (
+              <p className="text-gray-500 text-center py-8">Start typing to search through the documentation...</p>
+            ) : searchResults.length === 0 ? (
+              <p className="text-gray-500 text-center py-8">No results found for "{searchTerm}"</p>
+            ) : (
+              <div className="space-y-3">
+                {searchResults.map((result, index) => (
+                  <div
+                    key={index}
+                    onClick={() => handleResultClick(result.sectionId)}
+                    className="p-3 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors"
+                  >
+                    <h4 className="font-semibold text-gray-900 mb-1">{result.title}</h4>
+                    <p className="text-sm text-gray-600 line-clamp-2">{result.match}</p>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {searchResults.length > 0 && (
+            <div className="pt-4 text-sm text-gray-500">
+              Found {searchResults.length} result{searchResults.length !== 1 ? 's' : ''}
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  }
+
+  // Desktop modal version
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-start justify-center pt-20">
       <div className="bg-white rounded-lg shadow-xl w-full max-w-2xl mx-4 max-h-[80vh] flex flex-col">
