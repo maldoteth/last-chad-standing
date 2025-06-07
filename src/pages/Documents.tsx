@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowLeft, UserCheck, Gamepad2, DollarSign, ExternalLink, Search } from 'lucide-react';
+import { ArrowLeft, UserCheck, Gamepad2, DollarSign, ExternalLink, Search, Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Button } from '@/components/ui/button';
@@ -828,6 +828,10 @@ const Documents = () => {
                                 <a href="https://x.com/mikehalesmma" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-800 text-sm">
                                   X (Twitter)
                                   <ExternalLink size={12} />
+                                </a>
+                                <a href="mailto:chads@lastchadstanding.com" className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-800 text-sm">
+                                  Email
+                                  <Mail size={12} />
                                 </a>
                                 <a href="https://www.espn.co.uk/mma/fighter/_/id/4610150/mike-hales" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-800 text-sm">
                                   ESPN Profile
