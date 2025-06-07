@@ -26,6 +26,15 @@ const Index = () => {
       
       {/* Content Container - Changed positioning to avoid blocking player controls */}
       <div className="relative z-10 flex flex-col h-screen pointer-events-none">
+        {/* Game Title in top left */}
+        <div className="absolute top-4 left-4 pointer-events-auto">
+          <img 
+            src="/lovable-uploads/10b201c5-4459-46db-8a74-f056acdf247b.png" 
+            alt="Last Chad Standing"
+            className="h-16 md:h-20 lg:h-24 w-auto animate-fade-in"
+          />
+        </div>
+        
         {/* Social Links positioned at the top */}
         <div className="pt-8 pb-4 pointer-events-auto">
           <SocialLinks className="animate-fade-in" />
