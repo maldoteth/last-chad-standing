@@ -1,4 +1,3 @@
-
 import React, { useState, useMemo } from 'react';
 import { Search, X } from 'lucide-react';
 import { Input } from '@/components/ui/input';
@@ -195,9 +194,7 @@ const DocumentSearch: React.FC<DocumentSearchProps> = ({ isOpen, onClose, isMobi
           </div>
 
           <div className="max-h-96 overflow-y-auto">
-            {searchTerm.trim() === '' ? (
-              <p className="text-gray-500 text-center py-8">Start typing to search through the documentation...</p>
-            ) : searchResults.length === 0 ? (
+            {searchResults.length === 0 ? (
               <p className="text-gray-500 text-center py-8">No results found for "{searchTerm}"</p>
             ) : (
               <div className="space-y-3">
