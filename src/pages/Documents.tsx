@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Search, FileText, Download, ExternalLink } from 'lucide-react';
@@ -35,16 +36,6 @@ const documents: Document[] = [
 
 const Documents: React.FC = () => {
   const [showSearch, setShowSearch] = useState(false);
-  const [searchTerm, setSearchTerm] = useState('');
-
-  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(event.target.value);
-  };
-
-  const filteredDocuments = documents.filter(document =>
-    document.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    document.description.toLowerCase().includes(searchTerm.toLowerCase())
-  );
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -60,8 +51,6 @@ const Documents: React.FC = () => {
                 <ArrowLeft className="h-5 w-5" />
                 <span className="hidden sm:inline">Back</span>
               </Link>
-              <div className="h-6 w-px bg-gray-300" />
-              <h1 className="text-xl font-semibold text-gray-900 hidden sm:block">Fight Paper</h1>
             </div>
             
             {/* Logo in the middle - visible on all screen sizes */}
@@ -87,15 +76,13 @@ const Documents: React.FC = () => {
       </header>
 
       {/* Search Component */}
-      {showSearch && (
-        <DocumentSearch searchTerm={searchTerm} onSearchChange={handleSearchChange} />
-      )}
+      <DocumentSearch isOpen={showSearch} onClose={() => setShowSearch(false)} />
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
         <div className="px-4 py-4 sm:px-0">
           <ul className="divide-y divide-gray-200">
-            {filteredDocuments.map(document => (
+            {documents.map(document => (
               <li key={document.id} className="py-4">
                 <div className="flex items-center justify-between">
                   <div className="flex flex-col">
