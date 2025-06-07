@@ -108,7 +108,7 @@ const Documents = () => {
                   <span>Back</span>
                 </Link>
                 <div className="h-6 w-px bg-gray-300" />
-                <h1 className="text-xl font-semibold text-gray-900">Documentation</h1>
+                <h1 className="text-xl font-semibold text-gray-900">Fight Paper</h1>
               </div>
               <Button variant="outline" size="sm" onClick={() => setIsSearchOpen(true)} className="flex items-center gap-2">
                 <Search size={16} />
