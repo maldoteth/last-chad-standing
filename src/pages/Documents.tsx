@@ -5,11 +5,9 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Button } from '@/components/ui/button';
 import TokenDistributionChart from '@/components/TokenDistributionChart';
 import DocumentSearch from '@/components/DocumentSearch';
-
 const Documents = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
-
   const handleSearchClick = () => {
     // Check if mobile
     if (window.innerWidth < 640) {
@@ -18,12 +16,10 @@ const Documents = () => {
       setIsSearchOpen(true);
     }
   };
-
   const handleSearchClose = () => {
     setIsSearchOpen(false);
     setIsMobileSearchOpen(false);
   };
-
   const documentSections = [{
     title: "Game Overview",
     icon: <Gamepad2 size={20} />,
@@ -116,7 +112,6 @@ const Documents = () => {
       href: "https://leanchadfight.club"
     }]
   }];
-
   return <>
       <div className="min-h-screen bg-gray-50">
         {/* Header */}
@@ -151,13 +146,7 @@ const Documents = () => {
         </header>
 
         {/* Mobile Search Inline */}
-        {isMobileSearchOpen && (
-          <DocumentSearch 
-            isOpen={isMobileSearchOpen} 
-            onClose={handleSearchClose}
-            isMobileInline={true}
-          />
-        )}
+        {isMobileSearchOpen && <DocumentSearch isOpen={isMobileSearchOpen} onClose={handleSearchClose} isMobileInline={true} />}
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
@@ -284,7 +273,7 @@ const Documents = () => {
                       <section id="storm-cage-mechanics" className="mb-12">
                         <br />
 
-                        <h2 className="text-3xl font-bold">4. Enhanced Cage Mechanics</h2>
+                        <h2 className="text-3xl font-bold">4. Enhanced Zone Mechanics</h2>
                         <p>Last Chad Standing takes the traditional battle royale zone concept to the next level with a dynamic cage system that creates intense pressure and strategic gameplay.</p>
                         
                         <br />
@@ -973,5 +962,4 @@ const Documents = () => {
       <DocumentSearch isOpen={isSearchOpen} onClose={handleSearchClose} />
     </>;
 };
-
 export default Documents;
