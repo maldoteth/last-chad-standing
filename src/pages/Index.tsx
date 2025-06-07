@@ -31,9 +31,16 @@ const Index = () => {
           <SocialLinks className="animate-fade-in" />
         </div>
         
-        {/* Game Title/Logo (if needed) */}
-        <div className="flex-grow flex items-center justify-center">
-          {/* Optional: Add your game logo/title here */}
+        {/* Spacer to push content to bottom third */}
+        <div className="flex-grow"></div>
+        
+        {/* Game Title positioned in the bottom third */}
+        <div className="flex items-center justify-center pb-16 pointer-events-auto">
+          <img 
+            src="/lovable-uploads/f654d26f-b781-41e0-9155-bb36713c7513.png" 
+            alt="Last Chad Standing"
+            className="w-full max-w-2xl px-8 animate-fade-in"
+          />
         </div>
       </div>
     </div>
