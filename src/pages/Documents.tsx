@@ -87,6 +87,9 @@ const Documents = () => {
     title: "Links",
     icon: <ExternalLink size={20} />,
     items: [{
+      title: "Email",
+      href: "mailto:chads@lastchadstanding.com"
+    }, {
       title: "Instagram",
       href: "https://instagram.com/lastchadstanding"
     }, {
