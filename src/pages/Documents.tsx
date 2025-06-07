@@ -813,8 +813,8 @@ const Documents = () => {
                                 UK and Asia.
                               </p>
                               <div className="flex flex-wrap gap-3">
-                                <a href="https://www.espn.co.uk/mma/fighter/_/id/4610150/mike-hales" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-800 text-sm">
-                                  ESPN Profile
+                                <a href="https://tiktok.com/@mikehalesmma" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-800 text-sm">
+                                  TikTok
                                   <ExternalLink size={12} />
                                 </a>
                                 <a href="https://www.tapology.com/fightcenter/fighters/101647-mike-hales" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-800 text-sm">
@@ -829,8 +829,8 @@ const Documents = () => {
                                   X (Twitter)
                                   <ExternalLink size={12} />
                                 </a>
-                                <a href="https://tiktok.com/@mikehalesmma" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-800 text-sm">
-                                  TikTok
+                                <a href="https://www.espn.co.uk/mma/fighter/_/id/4610150/mike-hales" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-800 text-sm">
+                                  ESPN Profile
                                   <ExternalLink size={12} />
                                 </a>
                               </div>
