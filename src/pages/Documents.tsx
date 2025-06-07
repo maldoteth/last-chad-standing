@@ -805,13 +805,31 @@ const Documents = () => {
                             </div>
                             <div className="md:w-3/4">
                               <h3 className="text-2xl font-bold text-gray-900 mb-2">Mike Hales</h3>
-                              <p className="text-gray-700 leading-relaxed">
+                              <p className="text-gray-700 leading-relaxed mb-4">
                                 Founder and CEO of Rapz, a notable high end MMA fightwear brand backed by top 
                                 UFC and boxing stars, with exclusive supplier rights to BKFC. Joint-owner of 
                                 First Class, the UK's largest TikTok partner agency, approaching 1000 streamers 
                                 signed on and reporting directly for the in-house executive team with offices in the 
                                 UK and Asia.
                               </p>
+                              <div className="flex flex-wrap gap-3">
+                                <a href="https://www.espn.co.uk/mma/fighter/_/id/4610150/mike-hales" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-800 text-sm">
+                                  ESPN Profile
+                                  <ExternalLink size={12} />
+                                </a>
+                                <a href="https://instagram.com/mikehalesmma" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-800 text-sm">
+                                  Instagram
+                                  <ExternalLink size={12} />
+                                </a>
+                                <a href="https://x.com/mikehalesmma" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-800 text-sm">
+                                  X (Twitter)
+                                  <ExternalLink size={12} />
+                                </a>
+                                <a href="https://tiktok.com/@mikehalesmma" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-800 text-sm">
+                                  TikTok
+                                  <ExternalLink size={12} />
+                                </a>
+                              </div>
                             </div>
                           </div>
 
