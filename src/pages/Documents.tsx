@@ -5,8 +5,25 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Button } from '@/components/ui/button';
 import TokenDistributionChart from '@/components/TokenDistributionChart';
 import DocumentSearch from '@/components/DocumentSearch';
+
 const Documents = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
+
+  const handleSearchClick = () => {
+    // Check if mobile
+    if (window.innerWidth < 640) {
+      setIsMobileSearchOpen(true);
+    } else {
+      setIsSearchOpen(true);
+    }
+  };
+
+  const handleSearchClose = () => {
+    setIsSearchOpen(false);
+    setIsMobileSearchOpen(false);
+  };
+
   const documentSections = [{
     title: "Game Overview",
     icon: <Gamepad2 size={20} />,
@@ -99,6 +116,7 @@ const Documents = () => {
       href: "https://leanchadfight.club"
     }]
   }];
+
   return <>
       <div className="min-h-screen bg-gray-50">
         {/* Header */}
@@ -121,7 +139,7 @@ const Documents = () => {
                 <img src="/lovable-uploads/745baeae-f05a-4a2a-828f-45aed6d05972.png" alt="Last Chad Standing Logo" className="h-8 w-auto opacity-90" />
               </div>
               
-              <Button variant="outline" size="sm" onClick={() => setIsSearchOpen(true)} className="flex items-center gap-2">
+              <Button variant="outline" size="sm" onClick={handleSearchClick} className="flex items-center gap-2">
                 <Search size={16} />
                 <span className="hidden sm:inline">Search</span>
                 <kbd className="hidden sm:inline-flex pointer-events-none h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground">
@@ -131,6 +149,15 @@ const Documents = () => {
             </div>
           </div>
         </header>
+
+        {/* Mobile Search Inline */}
+        {isMobileSearchOpen && (
+          <DocumentSearch 
+            isOpen={isMobileSearchOpen} 
+            onClose={handleSearchClose}
+            isMobileInline={true}
+          />
+        )}
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
@@ -943,7 +970,8 @@ const Documents = () => {
         </div>
       </div>
 
-      <DocumentSearch isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
+      <DocumentSearch isOpen={isSearchOpen} onClose={handleSearchClose} />
     </>;
 };
+
 export default Documents;
