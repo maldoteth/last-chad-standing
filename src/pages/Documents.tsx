@@ -5,7 +5,6 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Button } from '@/components/ui/button';
 import TokenDistributionChart from '@/components/TokenDistributionChart';
 import DocumentSearch from '@/components/DocumentSearch';
-
 const Documents = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const documentSections = [{
@@ -113,17 +112,13 @@ const Documents = () => {
                     <span className="hidden sm:inline">Back</span>
                   </Link>
                 </Button>
-                <div className="h-6 w-px bg-gray-300" />
+                
                 <h1 className="text-xl font-semibold text-gray-900 hidden sm:block">Fight Paper</h1>
               </div>
               
               {/* Logo in the middle - visible on all screen sizes */}
               <div className="absolute left-1/2 transform -translate-x-1/2">
-                <img 
-                  src="/lovable-uploads/745baeae-f05a-4a2a-828f-45aed6d05972.png" 
-                  alt="Last Chad Standing Logo" 
-                  className="h-8 w-auto opacity-90"
-                />
+                <img src="/lovable-uploads/745baeae-f05a-4a2a-828f-45aed6d05972.png" alt="Last Chad Standing Logo" className="h-8 w-auto opacity-90" />
               </div>
               
               <Button variant="outline" size="sm" onClick={() => setIsSearchOpen(true)} className="flex items-center gap-2">
