@@ -107,10 +107,12 @@ const Documents = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between h-16">
               <div className="flex items-center gap-4">
-                <Link to="/" className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors">
-                  <ArrowLeft size={20} />
-                  <span>Back</span>
-                </Link>
+                <Button variant="outline" size="sm" asChild className="flex items-center gap-2">
+                  <Link to="/" className="text-gray-600 hover:text-gray-900 transition-colors">
+                    <ArrowLeft size={20} />
+                    <span className="hidden sm:inline">Back</span>
+                  </Link>
+                </Button>
                 <div className="h-6 w-px bg-gray-300" />
                 <h1 className="text-xl font-semibold text-gray-900 hidden sm:block">Fight Paper</h1>
               </div>
@@ -126,7 +128,7 @@ const Documents = () => {
               
               <Button variant="outline" size="sm" onClick={() => setIsSearchOpen(true)} className="flex items-center gap-2">
                 <Search size={16} />
-                <span>Search</span>
+                <span className="hidden sm:inline">Search</span>
                 <kbd className="hidden sm:inline-flex pointer-events-none h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground">
                   ⌘K
                 </kbd>
