@@ -36,7 +36,7 @@ const Index = () => {
           <img 
             src="/lovable-uploads/f654d26f-b781-41e0-9155-bb36713c7513.png" 
             alt="Last Chad Standing"
-            className="w-full max-w-2xl px-8 animate-fade-in"
+            className="w-full max-w-xl px-8 animate-fade-in"
           />
         </div>
       </div>
