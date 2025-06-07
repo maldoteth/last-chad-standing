@@ -817,6 +817,10 @@ const Documents = () => {
                                   ESPN Profile
                                   <ExternalLink size={12} />
                                 </a>
+                                <a href="https://www.tapology.com/fightcenter/fighters/101647-mike-hales" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-800 text-sm">
+                                  Tapology
+                                  <ExternalLink size={12} />
+                                </a>
                                 <a href="https://instagram.com/mikehalesmma" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-800 text-sm">
                                   Instagram
                                   <ExternalLink size={12} />
@@ -840,7 +844,7 @@ const Documents = () => {
                             </div>
                             <div className="md:w-3/4">
                               <h3 className="text-2xl font-bold text-gray-900 mb-2">Malik Jan AKA mal.eth</h3>
-                              <p className="text-gray-700 leading-relaxed">
+                              <p className="text-gray-700 leading-relaxed mb-4">
                                 Founder of DeHub (DHB) which Malik bootstrapped from 690k to 600m FDV 
                                 with a ~1000x ROI at peak last bull run, amassing 50,000 holders and close to 
                                 $10m in the LP, with over $1m in on-chain revenue and $1m in distributed rewards. 
@@ -848,6 +852,16 @@ const Documents = () => {
                                 at World's largest agency Randstad. Raised 7 figures for Guide Dogs Charity 
                                 during tenure as fundraising manager.
                               </p>
+                              <div className="flex flex-wrap gap-3">
+                                <a href="https://x.com/maldoteth" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-800 text-sm">
+                                  X (Twitter)
+                                  <ExternalLink size={12} />
+                                </a>
+                                <a href="https://uk.linkedin.com/in/malik-jan-turkistani-842b4b195" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-800 text-sm">
+                                  LinkedIn
+                                  <ExternalLink size={12} />
+                                </a>
+                              </div>
                             </div>
                           </div>
 
@@ -858,13 +872,31 @@ const Documents = () => {
                             </div>
                             <div className="md:w-3/4">
                               <h3 className="text-2xl font-bold text-gray-900 mb-2">Rayn Barrera AKA RaynRaps</h3>
-                              <p className="text-gray-700 leading-relaxed">
+                              <p className="text-gray-700 leading-relaxed mb-4">
                                 Gaming and Web3 expert with over ten years in community growth and game 
                                 development. Rayn is currently a co-founding Head of Community at Boss 
                                 Fighters, Backed by Decentraland & Open Loot, the makers of Big Time. As Founder of 
                                 UP LVL, a gaming and Web3 consulting firm, he's partnered with Ubisoft, Riot Games, 
                                 Twitch and other leading industry giants.
                               </p>
+                              <div className="flex flex-wrap gap-3">
+                                <a href="https://www.twitch.tv/raynraps" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-800 text-sm">
+                                  Twitch
+                                  <ExternalLink size={12} />
+                                </a>
+                                <a href="https://www.youtube.com/c/RaynRaps" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-800 text-sm">
+                                  YouTube
+                                  <ExternalLink size={12} />
+                                </a>
+                                <a href="https://www.instagram.com/raynraps/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-800 text-sm">
+                                  Instagram
+                                  <ExternalLink size={12} />
+                                </a>
+                                <a href="https://x.com/RaynRaps" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-800 text-sm">
+                                  X (Twitter)
+                                  <ExternalLink size={12} />
+                                </a>
+                              </div>
                             </div>
                           </div>
 
