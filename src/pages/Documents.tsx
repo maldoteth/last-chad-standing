@@ -5,10 +5,8 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Button } from '@/components/ui/button';
 import TokenDistributionChart from '@/components/TokenDistributionChart';
 import DocumentSearch from '@/components/DocumentSearch';
-
 const Documents = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-
   const documentSections = [{
     title: "Game Overview",
     icon: <Gamepad2 size={20} />,
@@ -98,8 +96,7 @@ const Documents = () => {
       href: "https://leanchadfight.club"
     }]
   }];
-  return (
-    <>
+  return <>
       <div className="min-h-screen bg-gray-50">
         {/* Header */}
         <header className="bg-white border-b border-gray-200 sticky top-0 z-10">
@@ -108,17 +105,12 @@ const Documents = () => {
               <div className="flex items-center gap-4">
                 <Link to="/" className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors">
                   <ArrowLeft size={20} />
-                  <span>Back to Game</span>
+                  <span>Back</span>
                 </Link>
                 <div className="h-6 w-px bg-gray-300" />
                 <h1 className="text-xl font-semibold text-gray-900">Documentation</h1>
               </div>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => setIsSearchOpen(true)}
-                className="flex items-center gap-2"
-              >
+              <Button variant="outline" size="sm" onClick={() => setIsSearchOpen(true)} className="flex items-center gap-2">
                 <Search size={16} />
                 <span>Search</span>
                 <kbd className="hidden sm:inline-flex pointer-events-none h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground">
@@ -886,12 +878,7 @@ const Documents = () => {
         </div>
       </div>
 
-      <DocumentSearch 
-        isOpen={isSearchOpen} 
-        onClose={() => setIsSearchOpen(false)} 
-      />
-    </>
-  );
+      <DocumentSearch isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
+    </>;
 };
-
 export default Documents;
