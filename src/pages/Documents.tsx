@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { ArrowLeft, UserCheck, Gamepad2, DollarSign, ExternalLink, Search, Mail, Download, Palette } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -979,12 +980,12 @@ const Documents = () => {
                           {/* Logo Text */}
                           <div className="bg-gray-50 p-6 rounded-lg border">
                             <div className="mb-4">
-                              <img src="/lovable-uploads/69c61fed-9ccd-43d2-bab5-17c6c0db05b4.png" alt="Last Chad Standing Logo Text" className="w-full h-auto" />
+                              <img src="/lovable-uploads/c076819c-8944-483c-9fd4-336da5ebba11.png" alt="Last Chad Standing Logo Text" className="w-full h-auto" />
                             </div>
                             <h3 className="font-semibold mb-2">Logo Text</h3>
                             <p className="text-sm text-gray-600 mb-4">Official Last Chad Standing text logo</p>
                             <Button 
-                              onClick={() => handleDownload('/lovable-uploads/69c61fed-9ccd-43d2-bab5-17c6c0db05b4.png', 'lcs-logo-text.png')}
+                              onClick={() => handleDownload('/lovable-uploads/c076819c-8944-483c-9fd4-336da5ebba11.png', 'lcs-logo-text.png')}
                               size="sm" 
                               className="w-full flex items-center gap-2"
                             >
