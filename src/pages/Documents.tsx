@@ -150,7 +150,7 @@ const Documents = () => {
               
               {/* Logo in the middle - visible on all screen sizes */}
               <div className="absolute left-1/2 transform -translate-x-1/2">
-                <img src="/lovable-uploads/fad5ac16-91ea-4a18-a409-3e98d3856494.png" alt="Last Chad Standing Logo" className="h-14 w-auto opacity-90" />
+                <img src="/lovable-uploads/896892f1-7ebc-4852-acea-80dcdbf7c545.png" alt="Last Chad Standing Logo" className="h-14 w-auto opacity-90" />
               </div>
               
               <Button variant="outline" size="sm" onClick={handleSearchClick} className="flex items-center gap-2">
