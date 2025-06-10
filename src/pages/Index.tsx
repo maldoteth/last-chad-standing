@@ -1,3 +1,4 @@
+
 import React from 'react';
 import SocialLinks from '@/components/SocialLinks';
 import OrientationPrompt from '@/components/OrientationPrompt';
@@ -9,10 +10,16 @@ const CLOUDINARY_CONFIG = {
   publicId: 'LCS_TEASER_1_1_wlqwnc',
   profile: 'cld-default'
 };
+
 const Index = () => {
-  return <div className="relative bg-black text-white overflow-hidden">
+  return (
+    <div className="relative bg-black text-white overflow-hidden">
       {/* Cloudinary Player Background */}
-      <CloudinaryPlayer cloudName={CLOUDINARY_CONFIG.cloudName} publicId={CLOUDINARY_CONFIG.publicId} profile={CLOUDINARY_CONFIG.profile} />
+      <CloudinaryPlayer 
+        cloudName={CLOUDINARY_CONFIG.cloudName} 
+        publicId={CLOUDINARY_CONFIG.publicId} 
+        profile={CLOUDINARY_CONFIG.profile} 
+      />
       
       {/* Mobile Orientation Prompt */}
       <OrientationPrompt />
@@ -21,7 +28,11 @@ const Index = () => {
       <div className="relative z-10 flex flex-col h-screen pointer-events-none">
         {/* Game Title in top left */}
         <div className="absolute top-4 left-4 pointer-events-auto">
-          
+          <img 
+            src="/lovable-uploads/5c309cef-5628-4ff0-abb3-2351ef140372.png" 
+            alt="Last Chad Standing" 
+            className="h-12 w-auto"
+          />
         </div>
         
         {/* Social Links positioned at the top */}
@@ -34,6 +45,8 @@ const Index = () => {
           {/* Optional: Add your game logo/title here */}
         </div>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default Index;
