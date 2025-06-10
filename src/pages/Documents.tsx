@@ -5,6 +5,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Button } from '@/components/ui/button';
 import TokenDistributionChart from '@/components/TokenDistributionChart';
 import DocumentSearch from '@/components/DocumentSearch';
+
 const Documents = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
@@ -112,7 +113,8 @@ const Documents = () => {
       href: "https://leanchadfight.club"
     }]
   }];
-  return <>
+  return (
+    <>
       <div className="min-h-screen bg-gray-50">
         {/* Header */}
         <header className="bg-white border-b border-gray-200 sticky top-0 z-10">
@@ -131,7 +133,7 @@ const Documents = () => {
               
               {/* Logo in the middle - visible on all screen sizes */}
               <div className="absolute left-1/2 transform -translate-x-1/2">
-                <img src="/lovable-uploads/7311683b-ea99-4dd9-9b1f-89d96742eff0.png" alt="Last Chad Standing Logo" className="h-24 w-auto opacity-90 border-2 border-red-500" />
+                <img src="/lovable-uploads/7311683b-ea99-4dd9-9b1f-89d96742eff0.png" alt="Last Chad Standing Logo" className="h-24 w-auto opacity-90" />
               </div>
               
               <Button variant="outline" size="sm" onClick={handleSearchClick} className="flex items-center gap-2">
@@ -949,7 +951,6 @@ const Documents = () => {
 
                         </div>
                       </section>
-
                     </div>
                   </div>
                 </ScrollArea>
@@ -960,6 +961,8 @@ const Documents = () => {
       </div>
 
       <DocumentSearch isOpen={isSearchOpen} onClose={handleSearchClose} />
-    </>;
+    </>
+  );
 };
+
 export default Documents;
