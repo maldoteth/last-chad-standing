@@ -975,16 +975,16 @@ const Documents = () => {
                         <h2 className="text-3xl font-bold">Brand Assets</h2>
                         <p className="mb-6">Download official Last Chad Standing brand assets for your use. All assets are provided in high quality formats.</p>
                         
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                           {/* Logo Text */}
                           <div className="bg-gray-50 p-6 rounded-lg border">
                             <div className="mb-4">
-                              <img src="/lovable-uploads/4c80b2cf-0ea7-49a2-96b8-58ecbfa7623a.png" alt="Last Chad Standing Logo Text" className="w-full h-auto" />
+                              <img src="/lovable-uploads/69c61fed-9ccd-43d2-bab5-17c6c0db05b4.png" alt="Last Chad Standing Logo Text" className="w-full h-auto" />
                             </div>
                             <h3 className="font-semibold mb-2">Logo Text</h3>
                             <p className="text-sm text-gray-600 mb-4">Official Last Chad Standing text logo</p>
                             <Button 
-                              onClick={() => handleDownload('/lovable-uploads/4c80b2cf-0ea7-49a2-96b8-58ecbfa7623a.png', 'lcs-logo-text.png')}
+                              onClick={() => handleDownload('/lovable-uploads/69c61fed-9ccd-43d2-bab5-17c6c0db05b4.png', 'lcs-logo-text.png')}
                               size="sm" 
                               className="w-full flex items-center gap-2"
                             >
@@ -996,29 +996,12 @@ const Documents = () => {
                           {/* Fist Logo */}
                           <div className="bg-gray-50 p-6 rounded-lg border">
                             <div className="mb-4">
-                              <img src="/lovable-uploads/04d47857-2947-4d8d-a573-ff6bdaa23efb.png" alt="LCS Fist Logo" className="w-full h-auto" />
+                              <img src="/lovable-uploads/467b4b2b-4ef7-4259-8c00-cc82ac4255ae.png" alt="LCS Fist Logo" className="w-full h-auto" />
                             </div>
                             <h3 className="font-semibold mb-2">Fist Logo</h3>
                             <p className="text-sm text-gray-600 mb-4">LCS fist emblem logo</p>
                             <Button 
-                              onClick={() => handleDownload('/lovable-uploads/04d47857-2947-4d8d-a573-ff6bdaa23efb.png', 'lcs-fist-logo.png')}
-                              size="sm" 
-                              className="w-full flex items-center gap-2"
-                            >
-                              <Download size={16} />
-                              Download PNG
-                            </Button>
-                          </div>
-
-                          {/* LCS Text Logo */}
-                          <div className="bg-gray-50 p-6 rounded-lg border">
-                            <div className="mb-4">
-                              <img src="/lovable-uploads/2d3f78f9-ea64-4ca6-83e4-30cb240f0d0a.png" alt="LCS Text Logo" className="w-full h-auto" />
-                            </div>
-                            <h3 className="font-semibold mb-2">LCS Text</h3>
-                            <p className="text-sm text-gray-600 mb-4">LCS abbreviation logo</p>
-                            <Button 
-                              onClick={() => handleDownload('/lovable-uploads/2d3f78f9-ea64-4ca6-83e4-30cb240f0d0a.png', 'lcs-text-logo.png')}
+                              onClick={() => handleDownload('/lovable-uploads/467b4b2b-4ef7-4259-8c00-cc82ac4255ae.png', 'lcs-fist-logo.png')}
                               size="sm" 
                               className="w-full flex items-center gap-2"
                             >
