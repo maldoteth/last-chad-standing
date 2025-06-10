@@ -975,7 +975,7 @@ const Documents = () => {
                         <h2 className="text-3xl font-bold">Brand Assets</h2>
                         <p className="mb-6">Download official Last Chad Standing brand assets for your use. All assets are provided in high quality formats.</p>
                         
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                           {/* Logo Text */}
                           <div className="bg-gray-50 p-6 rounded-lg border">
                             <div className="mb-4">
@@ -1002,6 +1002,23 @@ const Documents = () => {
                             <p className="text-sm text-gray-600 mb-4">LCS fist emblem logo</p>
                             <Button 
                               onClick={() => handleDownload('/lovable-uploads/467b4b2b-4ef7-4259-8c00-cc82ac4255ae.png', 'lcs-fist-logo.png')}
+                              size="sm" 
+                              className="w-full flex items-center gap-2"
+                            >
+                              <Download size={16} />
+                              Download PNG
+                            </Button>
+                          </div>
+
+                          {/* LCS Letter Logo */}
+                          <div className="bg-gray-50 p-6 rounded-lg border">
+                            <div className="mb-4">
+                              <img src="/lovable-uploads/ac3e1f52-ba21-4588-9051-87eef47caf5c.png" alt="LCS Letter Logo" className="w-full h-auto" />
+                            </div>
+                            <h3 className="font-semibold mb-2">LCS Letters</h3>
+                            <p className="text-sm text-gray-600 mb-4">LCS abbreviated letter logo</p>
+                            <Button 
+                              onClick={() => handleDownload('/lovable-uploads/ac3e1f52-ba21-4588-9051-87eef47caf5c.png', 'lcs-letters-logo.png')}
                               size="sm" 
                               className="w-full flex items-center gap-2"
                             >
