@@ -29,7 +29,7 @@ const Index = () => {
         {/* Game Title in top left */}
         <div className="absolute top-4 left-4 pointer-events-auto">
           <img 
-            src="/lovable-uploads/048eb62f-cb05-478b-a60a-5dc0bb43b721.png" 
+            src="/lovable-uploads/d7985914-9867-479d-9ae7-6028fb346c32.png" 
             alt="Last Chad Standing"
             className="h-16 md:h-20 lg:h-24 w-auto animate-fade-in"
           />
