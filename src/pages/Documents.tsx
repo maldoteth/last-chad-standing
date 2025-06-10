@@ -5,6 +5,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Button } from '@/components/ui/button';
 import TokenDistributionChart from '@/components/TokenDistributionChart';
 import DocumentSearch from '@/components/DocumentSearch';
+
 const Documents = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
@@ -20,6 +21,7 @@ const Documents = () => {
     setIsSearchOpen(false);
     setIsMobileSearchOpen(false);
   };
+
   const handleDownload = (url: string, filename: string) => {
     const link = document.createElement('a');
     link.href = url;
@@ -28,6 +30,7 @@ const Documents = () => {
     link.click();
     document.body.removeChild(link);
   };
+
   const documentSections = [{
     title: "Game Overview",
     icon: <Gamepad2 size={20} />,
@@ -127,7 +130,8 @@ const Documents = () => {
       href: "https://leanchadfight.club"
     }]
   }];
-  return <>
+  return (
+    <>
       <div className="min-h-screen bg-gray-50">
         {/* Header */}
         <header className="bg-white border-b border-gray-200 sticky top-0 z-10">
@@ -146,7 +150,7 @@ const Documents = () => {
               
               {/* Logo in the middle - visible on all screen sizes */}
               <div className="absolute left-1/2 transform -translate-x-1/2">
-                <img src="/lovable-uploads/7311683b-ea99-4dd9-9b1f-89d96742eff0.png" alt="Last Chad Standing Logo" className="h-24 w-auto opacity-90" />
+                <img src="/lovable-uploads/dd15acda-3123-4e95-916c-ba6ef8db31fd.png" alt="Last Chad Standing Logo" className="h-24 w-auto opacity-90" />
               </div>
               
               <Button variant="outline" size="sm" onClick={handleSearchClick} className="flex items-center gap-2">
@@ -971,15 +975,19 @@ const Documents = () => {
                         <h2 className="text-3xl font-bold">Brand Assets</h2>
                         <p className="mb-6">Download official Last Chad Standing brand assets for your use. All assets are provided in high quality formats.</p>
                         
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                           {/* Logo Text */}
                           <div className="bg-gray-50 p-6 rounded-lg border">
                             <div className="mb-4">
-                              <img src="/lovable-uploads/4c80b2cf-0ea7-49a2-96b8-58ecbfa7623a.png" alt="Last Chad Standing Logo Text" className="w-full h-auto" />
+                              <img src="/lovable-uploads/69c61fed-9ccd-43d2-bab5-17c6c0db05b4.png" alt="Last Chad Standing Logo Text" className="w-full h-auto" />
                             </div>
-                            <h3 className="font-semibold mb-2">Logo Full</h3>
+                            <h3 className="font-semibold mb-2">Logo Text</h3>
                             <p className="text-sm text-gray-600 mb-4">Official Last Chad Standing text logo</p>
-                            <Button onClick={() => handleDownload('/lovable-uploads/4c80b2cf-0ea7-49a2-96b8-58ecbfa7623a.png', 'lcs-logo-text.png')} size="sm" className="w-full flex items-center gap-2">
+                            <Button 
+                              onClick={() => handleDownload('/lovable-uploads/69c61fed-9ccd-43d2-bab5-17c6c0db05b4.png', 'lcs-logo-text.png')}
+                              size="sm" 
+                              className="w-full flex items-center gap-2"
+                            >
                               <Download size={16} />
                               Download PNG
                             </Button>
@@ -988,24 +996,15 @@ const Documents = () => {
                           {/* Fist Logo */}
                           <div className="bg-gray-50 p-6 rounded-lg border">
                             <div className="mb-4">
-                              <img src="/lovable-uploads/04d47857-2947-4d8d-a573-ff6bdaa23efb.png" alt="LCS Fist Logo" className="w-full h-auto" />
+                              <img src="/lovable-uploads/467b4b2b-4ef7-4259-8c00-cc82ac4255ae.png" alt="LCS Fist Logo" className="w-full h-auto" />
                             </div>
                             <h3 className="font-semibold mb-2">Fist Logo</h3>
                             <p className="text-sm text-gray-600 mb-4">LCS fist emblem logo</p>
-                            <Button onClick={() => handleDownload('/lovable-uploads/04d47857-2947-4d8d-a573-ff6bdaa23efb.png', 'lcs-fist-logo.png')} size="sm" className="w-full flex items-center gap-2">
-                              <Download size={16} />
-                              Download PNG
-                            </Button>
-                          </div>
-
-                          {/* LCS Text Logo */}
-                          <div className="bg-gray-50 p-6 rounded-lg border">
-                            <div className="mb-4">
-                              <img src="/lovable-uploads/2d3f78f9-ea64-4ca6-83e4-30cb240f0d0a.png" alt="LCS Text Logo" className="w-full h-auto" />
-                            </div>
-                            <h3 className="font-semibold mb-2">LCS Text</h3>
-                            <p className="text-sm text-gray-600 mb-4">LCS abbreviation logo</p>
-                            <Button onClick={() => handleDownload('/lovable-uploads/2d3f78f9-ea64-4ca6-83e4-30cb240f0d0a.png', 'lcs-text-logo.png')} size="sm" className="w-full flex items-center gap-2">
+                            <Button 
+                              onClick={() => handleDownload('/lovable-uploads/467b4b2b-4ef7-4259-8c00-cc82ac4255ae.png', 'lcs-fist-logo.png')}
+                              size="sm" 
+                              className="w-full flex items-center gap-2"
+                            >
                               <Download size={16} />
                               Download PNG
                             </Button>
@@ -1032,6 +1031,8 @@ const Documents = () => {
       </div>
 
       <DocumentSearch isOpen={isSearchOpen} onClose={handleSearchClose} />
-    </>;
+    </>
+  );
 };
+
 export default Documents;
