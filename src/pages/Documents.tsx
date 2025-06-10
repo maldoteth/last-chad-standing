@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowLeft, UserCheck, Gamepad2, DollarSign, ExternalLink, Search, Mail } from 'lucide-react';
+import { ArrowLeft, UserCheck, Gamepad2, DollarSign, ExternalLink, Search, Mail, Download, Palette } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Button } from '@/components/ui/button';
@@ -21,6 +21,16 @@ const Documents = () => {
     setIsSearchOpen(false);
     setIsMobileSearchOpen(false);
   };
+
+  const handleDownload = (url: string, filename: string) => {
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   const documentSections = [{
     title: "Game Overview",
     icon: <Gamepad2 size={20} />,
@@ -95,6 +105,13 @@ const Documents = () => {
     items: [{
       title: "Founding Team",
       href: "#founding-team"
+    }]
+  }, {
+    title: "Brand",
+    icon: <Palette size={20} />,
+    items: [{
+      title: "Assets",
+      href: "#brand-assets"
     }]
   }, {
     title: "Links",
@@ -949,6 +966,76 @@ const Documents = () => {
                             </div>
                           </div>
 
+                        </div>
+                      </section>
+
+                      {/* Brand Assets Section */}
+                      <section id="brand-assets" className="mb-12">
+                        <br />
+                        <h2 className="text-3xl font-bold">Brand Assets</h2>
+                        <p className="mb-6">Download official Last Chad Standing brand assets for your use. All assets are provided in high quality formats.</p>
+                        
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                          {/* Logo Text */}
+                          <div className="bg-gray-50 p-6 rounded-lg border">
+                            <div className="mb-4">
+                              <img src="/lovable-uploads/4c80b2cf-0ea7-49a2-96b8-58ecbfa7623a.png" alt="Last Chad Standing Logo Text" className="w-full h-auto" />
+                            </div>
+                            <h3 className="font-semibold mb-2">Logo Text</h3>
+                            <p className="text-sm text-gray-600 mb-4">Official Last Chad Standing text logo</p>
+                            <Button 
+                              onClick={() => handleDownload('/lovable-uploads/4c80b2cf-0ea7-49a2-96b8-58ecbfa7623a.png', 'lcs-logo-text.png')}
+                              size="sm" 
+                              className="w-full flex items-center gap-2"
+                            >
+                              <Download size={16} />
+                              Download PNG
+                            </Button>
+                          </div>
+
+                          {/* Fist Logo */}
+                          <div className="bg-gray-50 p-6 rounded-lg border">
+                            <div className="mb-4">
+                              <img src="/lovable-uploads/04d47857-2947-4d8d-a573-ff6bdaa23efb.png" alt="LCS Fist Logo" className="w-full h-auto" />
+                            </div>
+                            <h3 className="font-semibold mb-2">Fist Logo</h3>
+                            <p className="text-sm text-gray-600 mb-4">LCS fist emblem logo</p>
+                            <Button 
+                              onClick={() => handleDownload('/lovable-uploads/04d47857-2947-4d8d-a573-ff6bdaa23efb.png', 'lcs-fist-logo.png')}
+                              size="sm" 
+                              className="w-full flex items-center gap-2"
+                            >
+                              <Download size={16} />
+                              Download PNG
+                            </Button>
+                          </div>
+
+                          {/* LCS Text Logo */}
+                          <div className="bg-gray-50 p-6 rounded-lg border">
+                            <div className="mb-4">
+                              <img src="/lovable-uploads/2d3f78f9-ea64-4ca6-83e4-30cb240f0d0a.png" alt="LCS Text Logo" className="w-full h-auto" />
+                            </div>
+                            <h3 className="font-semibold mb-2">LCS Text</h3>
+                            <p className="text-sm text-gray-600 mb-4">LCS abbreviation logo</p>
+                            <Button 
+                              onClick={() => handleDownload('/lovable-uploads/2d3f78f9-ea64-4ca6-83e4-30cb240f0d0a.png', 'lcs-text-logo.png')}
+                              size="sm" 
+                              className="w-full flex items-center gap-2"
+                            >
+                              <Download size={16} />
+                              Download PNG
+                            </Button>
+                          </div>
+                        </div>
+
+                        <div className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
+                          <h4 className="font-semibold text-blue-900 mb-2">Usage Guidelines</h4>
+                          <ul className="text-sm text-blue-800 space-y-1">
+                            <li>• These assets are for promotional and community use</li>
+                            <li>• Do not modify the logos without permission</li>
+                            <li>• Maintain proper spacing and proportions</li>
+                            <li>• Contact us for custom formats or additional assets</li>
+                          </ul>
                         </div>
                       </section>
                     </div>
