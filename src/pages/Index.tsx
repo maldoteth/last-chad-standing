@@ -69,12 +69,7 @@ const Index = () => {
 
         {/* Center Links */}
         <div className="absolute left-1/2 transform -translate-x-1/2 sm:relative sm:left-auto sm:transform-none flex-1 flex justify-center">
-          <div className="flex items-center gap-6">
-            <SocialLinks />
-            <a href="/calculator" className="text-slate-300 hover:text-white transition-colors text-sm font-inter">
-              Calculator
-            </a>
-          </div>
+          <SocialLinks />
         </div>
 
         {/* Right Status */}
