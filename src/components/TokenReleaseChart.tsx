@@ -36,8 +36,8 @@ const TokenReleaseChart = () => {
       // Airdrops: 15B - 100% at TGE
       const airdropsTokens = 15;
       
-      // Foundation: 15B - Gradual release over governance (modeled as 10% per year)
-      const foundationTokens = Math.min(15, 15 * 0.1 * year);
+      // Foundation: 15B - 20% a year linear daily
+      const foundationTokens = Math.min(15, 15 * 0.2 * year);
       
       data.push({
         month: `Month ${month}`,
