@@ -134,17 +134,14 @@ const Index = () => {
               Get Notified
             </button>
           </DialogTrigger>
-          <DialogContent className="bg-black/90 border-white/20 backdrop-blur-sm text-white">
+          <DialogContent className="bg-black/10 border border-white/20 backdrop-blur-sm text-white">
             <DialogHeader>
               <DialogTitle className="font-sora text-xl text-center text-white">
-                Join the Consciousness Network
+                Get notified
               </DialogTitle>
             </DialogHeader>
             <form onSubmit={handleEmailSubmit} className="space-y-4 mt-4">
               <div>
-                <Label htmlFor="email" className="font-inter text-slate-300">
-                  Neural Interface Email
-                </Label>
                 <Input
                   id="email"
                   type="email"
@@ -160,7 +157,7 @@ const Index = () => {
                 disabled={isSubmitting}
                 className="w-full bg-white/10 border border-white/20 text-white hover:bg-white/20 font-inter"
               >
-                {isSubmitting ? 'Connecting...' : 'Initialize Connection'}
+                {isSubmitting ? 'Connecting...' : 'Confirm'}
               </Button>
             </form>
           </DialogContent>
