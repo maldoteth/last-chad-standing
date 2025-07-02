@@ -29,14 +29,14 @@ const Index = () => {
     
     try {
       await emailjs.send(
-        'YOUR_SERVICE_ID', // Replace with your EmailJS service ID
-        'YOUR_TEMPLATE_ID', // Replace with your EmailJS template ID
+        'service_fweuzbc',
+        'template_72mnqmt',
         {
           to_email: email,
           from_name: 'Soma-Cortex Initiative',
           message: 'New notification signup from the consciousness interface.'
         },
-        'YOUR_PUBLIC_KEY' // Replace with your EmailJS public key
+        'lrm5ruPzHreaD8EiM'
       );
       
       toast({
