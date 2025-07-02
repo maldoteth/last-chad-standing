@@ -105,21 +105,14 @@ const TokenReleaseChart = () => {
             iconType="rect"
           />
           
-          {/* Stack areas from bottom to top */}
+          {/* Stack areas from bottom to top - logical hierarchy */}
+          {/* Bottom layer: 100% TGE unlock (stable base) */}
           <Area
             type="monotone"
             dataKey="Public"
             stackId="1"
             stroke="#3b82f6"
             fill="#3b82f6"
-            fillOpacity={0.8}
-          />
-          <Area
-            type="monotone"
-            dataKey="Ecosystem Rewards"
-            stackId="1"
-            stroke="#f97316"
-            fill="#f97316"
             fillOpacity={0.8}
           />
           <Area
@@ -138,6 +131,16 @@ const TokenReleaseChart = () => {
             fill="#22c55e"
             fillOpacity={0.8}
           />
+          
+          {/* Middle layer: Linear growth from day 1 */}
+          <Area
+            type="monotone"
+            dataKey="Ecosystem Rewards"
+            stackId="1"
+            stroke="#f97316"
+            fill="#f97316"
+            fillOpacity={0.8}
+          />
           <Area
             type="monotone"
             dataKey="Foundation"
@@ -146,6 +149,8 @@ const TokenReleaseChart = () => {
             fill="#eab308"
             fillOpacity={0.8}
           />
+          
+          {/* Top layer: Cliff-based (delayed growth) */}
           <Area
             type="monotone"
             dataKey="Team"
