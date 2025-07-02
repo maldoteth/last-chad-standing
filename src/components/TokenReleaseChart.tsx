@@ -45,7 +45,8 @@ const TokenReleaseChart = () => {
       if (day === 0) {
         dateLabel = 'TGE';
       } else if (day % 365 === 0) {
-        dateLabel = `Y${day / 365}`;
+        const yearNum = day / 365;
+        dateLabel = `Year ${yearNum}`;
       } else if (day % 183 === 0) { // Every 6 months
         dateLabel = `Y${(day / 365).toFixed(1)}`;
       } else {
@@ -107,7 +108,7 @@ const TokenReleaseChart = () => {
             interval="preserveStartEnd"
             tickFormatter={(value, index) => {
               // Only show major time markers on axis
-              if (value === 'TGE' || value.startsWith('Y')) {
+              if (value === 'TGE' || value.startsWith('Year')) {
                 return value;
               }
               return '';
