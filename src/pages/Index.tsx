@@ -28,9 +28,9 @@ const Index = () => {
 
         {/* Center Links */}
         <div className="flex items-center space-x-8 font-inter text-sm font-normal text-slate-300">
-          <a href="#" className="hover:text-white transition-colors hover:glow">The Source</a>
-          <a href="#" className="hover:text-white transition-colors hover:glow">Transmissions</a>
-          <a href="/docs" className="hover:text-white transition-colors hover:glow">The Nexus</a>
+          
+          
+          
         </div>
 
         {/* Right Status */}
