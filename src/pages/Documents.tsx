@@ -24,6 +24,10 @@ const Documents = () => {
     elitePass: 0,
   });
 
+  // DeHub state
+  const [dhbHoldings, setDhbHoldings] = useState(0);
+  const [dhbStaked, setDhbStaked] = useState(0);
+
   // NFT Collection Data
   const collections = {
     genesisDads: { name: 'Genesis Chads', supply: 2076 },
@@ -35,6 +39,11 @@ const Documents = () => {
 
   // Airdrop Constants
   const TOTAL_AIRDROP = 5_000_000_000; // 5% of 100,000,000,000
+
+  // DeHub Constants
+  const TOTAL_DHB_STAKED = 1_792_474_753;
+  const TOTAL_DHB_HOLDINGS = 2_903_416_217;
+  const TOTAL_SUPPLY = 100_000_000_000;
 
   // Calculate tokens per NFT for each collection based on allocation percentages
   const tokensPerNFT = useMemo(() => {
@@ -60,6 +69,23 @@ const Documents = () => {
     }, 0);
   }, [holdings, tokensPerNFT]);
 
+  // DeHub calculations
+  const dhbAllocation = useMemo(() => {
+    const stakerPercentage = dhbStaked / TOTAL_DHB_STAKED;
+    const holderPercentage = dhbHoldings / TOTAL_DHB_HOLDINGS;
+    
+    const stakerAllocation = stakerPercentage * (0.075 * TOTAL_SUPPLY); // 7.5% for stakers
+    const holderAllocation = holderPercentage * (0.025 * TOTAL_SUPPLY); // 2.5% for holders
+    
+    return {
+      stakerTokens: isNaN(stakerAllocation) ? 0 : stakerAllocation,
+      holderTokens: isNaN(holderAllocation) ? 0 : holderAllocation,
+      totalTokens: (isNaN(stakerAllocation) ? 0 : stakerAllocation) + (isNaN(holderAllocation) ? 0 : holderAllocation),
+      stakerPercentage: isNaN(stakerPercentage) ? 0 : stakerPercentage * 100,
+      holderPercentage: isNaN(holderPercentage) ? 0 : holderPercentage * 100
+    };
+  }, [dhbStaked, dhbHoldings]);
+
   const handleInputChange = (collection: string, value: string) => {
     const numValue = Math.max(0, parseInt(value) || 0);
     setHoldings(prev => ({
@@ -76,6 +102,8 @@ const Documents = () => {
       vipPass: 0,
       elitePass: 0,
     });
+    setDhbHoldings(0);
+    setDhbStaked(0);
   };
   const handleSearchClick = () => {
     // Check if mobile
@@ -1006,6 +1034,133 @@ const Documents = () => {
                           </CardContent>
                         </Card>
                         
+                        <br />
+
+                        {/* DeHub Partner Airdrop Section */}
+                        <section id="dehub-airdrop" className="mb-12">
+                          <h2 className="text-3xl font-bold">DeHub Partner Airdrop</h2>
+                          <p>As the builders behind the LCS game, 10% of the supply is reserved for the DeHub community. 7.5% for stakers and 2.5% for holders.</p>
+                          
+                          <hr className="my-8 border-gray-300" />
+
+                          {/* DeHub Calculator */}
+                          <div className="space-y-6">
+                            <Card className="bg-white border-gray-200">
+                              <CardHeader>
+                                <CardTitle className="text-gray-900">DeHub Airdrop Calculator</CardTitle>
+                                <CardDescription>Calculate your DeHub allocation based on your $DHB holdings and staked amounts</CardDescription>
+                              </CardHeader>
+                              <CardContent className="space-y-4">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                  <div>
+                                    <Label htmlFor="dhb-holdings" className="text-gray-700">$DHB Holdings:</Label>
+                                    <Input
+                                      id="dhb-holdings"
+                                      type="number"
+                                      min="0"
+                                      value={dhbHoldings || ''}
+                                      onChange={(e) => setDhbHoldings(Math.max(0, parseInt(e.target.value) || 0))}
+                                      placeholder="Enter your DHB holdings"
+                                      className="bg-white border-gray-300"
+                                    />
+                                  </div>
+                                  <div>
+                                    <Label htmlFor="dhb-staked" className="text-gray-700">$DHB Staked:</Label>
+                                    <Input
+                                      id="dhb-staked"
+                                      type="number"
+                                      min="0"
+                                      value={dhbStaked || ''}
+                                      onChange={(e) => setDhbStaked(Math.max(0, parseInt(e.target.value) || 0))}
+                                      placeholder="Enter your DHB staked"
+                                      className="bg-white border-gray-300"
+                                    />
+                                  </div>
+                                </div>
+                              </CardContent>
+                            </Card>
+
+                            {/* DeHub Results */}
+                            <Card className="bg-gradient-to-r from-green-50 to-emerald-50 border-green-200">
+                              <CardHeader>
+                                <CardTitle className="text-gray-900">Your DeHub Allocation</CardTitle>
+                              </CardHeader>
+                              <CardContent>
+                                {dhbHoldings > 0 || dhbStaked > 0 ? (
+                                  <div className="space-y-4">
+                                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                      <div className="text-center p-4 bg-white rounded-lg border border-green-200">
+                                        <div className="text-2xl font-bold text-gray-900">
+                                          {dhbAllocation.totalTokens.toLocaleString(undefined, { maximumFractionDigits: 0 })}
+                                        </div>
+                                        <div className="text-sm text-gray-600">Total Tokens</div>
+                                      </div>
+                                      <div className="text-center p-4 bg-white rounded-lg border border-green-200">
+                                        <div className="text-2xl font-bold text-gray-900">
+                                          {dhbAllocation.stakerTokens.toLocaleString(undefined, { maximumFractionDigits: 0 })}
+                                        </div>
+                                        <div className="text-sm text-gray-600">From Staking</div>
+                                      </div>
+                                      <div className="text-center p-4 bg-white rounded-lg border border-green-200">
+                                        <div className="text-2xl font-bold text-gray-900">
+                                          {dhbAllocation.holderTokens.toLocaleString(undefined, { maximumFractionDigits: 0 })}
+                                        </div>
+                                        <div className="text-sm text-gray-600">From Holdings</div>
+                                      </div>
+                                      <div className="text-center p-4 bg-white rounded-lg border border-green-200">
+                                        <div className="text-2xl font-bold text-gray-900">
+                                          ${(dhbAllocation.totalTokens * 0.0002).toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                                        </div>
+                                        <div className="text-sm text-gray-600">Est. TGE Value</div>
+                                      </div>
+                                    </div>
+                                    <div className="grid grid-cols-2 gap-4 text-sm text-gray-600">
+                                      <div>
+                                        <span className="font-medium">Your Staking Share:</span> {dhbAllocation.stakerPercentage.toFixed(4)}%
+                                      </div>
+                                      <div>
+                                        <span className="font-medium">Your Holdings Share:</span> {dhbAllocation.holderPercentage.toFixed(4)}%
+                                      </div>
+                                    </div>
+                                  </div>
+                                ) : (
+                                  <div className="text-center text-gray-500 py-8">
+                                    Enter your DHB holdings and staked amounts to see your allocation
+                                  </div>
+                                )}
+                              </CardContent>
+                            </Card>
+
+                            {/* DeHub Calculator Info */}
+                            <Card className="bg-gray-50 border-gray-200">
+                              <CardHeader>
+                                <CardTitle className="text-gray-900">DeHub Calculation Details</CardTitle>
+                              </CardHeader>
+                              <CardContent>
+                                <div className="grid gap-4 md:grid-cols-2">
+                                  <div>
+                                    <h4 className="font-semibold mb-2 text-gray-900">Allocation Breakdown</h4>
+                                    <ul className="text-sm text-gray-600 space-y-1">
+                                      <li>Total DeHub Allocation: 10% (10,000,000,000 tokens)</li>
+                                      <li>Stakers Pool: 7.5% (7,500,000,000 tokens)</li>
+                                      <li>Holders Pool: 2.5% (2,500,000,000 tokens)</li>
+                                      <li>Estimated TGE Price: $0.0002</li>
+                                    </ul>
+                                  </div>
+                                  <div>
+                                    <h4 className="font-semibold mb-2 text-gray-900">Total Pool Sizes</h4>
+                                    <ul className="text-sm text-gray-600 space-y-1">
+                                      <li>Total DHB Staked: {TOTAL_DHB_STAKED.toLocaleString()}</li>
+                                      <li>Total DHB Holdings: {TOTAL_DHB_HOLDINGS.toLocaleString()}</li>
+                                      <li>Your share is proportional to your holdings/staking</li>
+                                    </ul>
+                                  </div>
+                                </div>
+                              </CardContent>
+                            </Card>
+                          </div>
+                        </section>
+
                         <br />
                       </section>
 
