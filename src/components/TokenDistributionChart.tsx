@@ -4,13 +4,13 @@ import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from 'recha
 
 const TokenDistributionChart = () => {
   const data = [
-    { name: 'Public Sale', value: 30, amount: '300M coins', color: '#ef4444' },
-    { name: 'Team', value: 15, amount: '150M coins', color: '#f97316' },
-    { name: 'Development Fund', value: 15, amount: '150M coins', color: '#eab308' },
-    { name: 'Marketing & Partnerships', value: 15, amount: '150M coins', color: '#22c55e' },
-    { name: 'Ecosystem Rewards', value: 10, amount: '100M coins', color: '#3b82f6' },
-    { name: 'Liquidity Pool', value: 10, amount: '100M coins', color: '#8b5cf6' },
-    { name: 'Advisors', value: 5, amount: '50M coins', color: '#ec4899' },
+    { name: 'Public Sale', value: 30, amount: '30B coins', color: '#ef4444' },
+    { name: 'Team', value: 15, amount: '15B coins', color: '#f97316' },
+    { name: 'Development Fund', value: 15, amount: '15B coins', color: '#eab308' },
+    { name: 'Marketing & Partnerships', value: 15, amount: '15B coins', color: '#22c55e' },
+    { name: 'Ecosystem Rewards', value: 10, amount: '10B coins', color: '#3b82f6' },
+    { name: 'Liquidity Pool', value: 10, amount: '10B coins', color: '#8b5cf6' },
+    { name: 'Advisors', value: 5, amount: '5B coins', color: '#ec4899' },
   ];
 
   const CustomTooltip = ({ active, payload }: any) => {
