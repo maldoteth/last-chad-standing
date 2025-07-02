@@ -873,6 +873,9 @@ const Documents = () => {
 
                       {/* Genesis Chads Section - moved here */}
                       <section id="genesis-chads" className="mb-12">
+                         <div className="sm:hidden">
+                           <br /><br /><br /><br /><br /><br /><br /><br />
+                         </div>
                          <br />
                          <br />
                          <h2 className="text-3xl font-bold">Genesis Chads</h2>
