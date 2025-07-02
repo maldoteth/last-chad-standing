@@ -1,7 +1,9 @@
 import React from 'react';
 import { AreaChart, Area, XAxis, YAxis, ResponsiveContainer, Tooltip, Legend } from 'recharts';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const TokenReleaseChart = () => {
+  const isMobile = useIsMobile();
   // Generate data points for 5 years (1,825 days) starting from TGE
   const generateReleaseData = () => {
     const data = [];
@@ -108,7 +110,15 @@ const TokenReleaseChart = () => {
             interval={0}
             tickFormatter={(value, index) => {
               // Only show major time markers on axis
-              if (value === 'TGE' || value.startsWith('Year')) {
+              if (value === 'TGE') {
+                return value;
+              }
+              if (value.startsWith('Year')) {
+                if (isMobile) {
+                  // Convert "Year 1" to "1y" for mobile
+                  const yearNum = value.split(' ')[1];
+                  return `${yearNum}y`;
+                }
                 return value;
               }
               return '';
