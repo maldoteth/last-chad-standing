@@ -33,8 +33,8 @@ const TokenReleaseChart = () => {
         advisorTokens = Math.min(5, 5 * 0.2 * yearsAfterCliff);
       }
       
-      // Growth Fund: 15B - 20% per year linear
-      const growthTokens = Math.min(15, 15 * 0.2 * year);
+      // Airdrops: 15B - 100% at TGE
+      const airdropsTokens = 15;
       
       // Foundation: 15B - Gradual release over governance (modeled as 10% per year)
       const foundationTokens = Math.min(15, 15 * 0.1 * year);
@@ -47,9 +47,9 @@ const TokenReleaseChart = () => {
         LP: lpTokens,
         Team: teamTokens,
         Advisors: advisorTokens,
-        'Growth Fund': growthTokens,
+        Airdrops: airdropsTokens,
         Foundation: foundationTokens,
-        total: publicTokens + ecosystemTokens + lpTokens + teamTokens + advisorTokens + growthTokens + foundationTokens
+        total: publicTokens + ecosystemTokens + lpTokens + teamTokens + advisorTokens + airdropsTokens + foundationTokens
       });
     }
     
@@ -132,7 +132,7 @@ const TokenReleaseChart = () => {
           />
           <Area
             type="monotone"
-            dataKey="Growth Fund"
+            dataKey="Airdrops"
             stackId="1"
             stroke="#22c55e"
             fill="#22c55e"

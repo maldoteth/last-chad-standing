@@ -859,7 +859,7 @@ const Documents = () => {
                           <li><strong>Foundation:</strong> 15% (15B coins)<br />
                             <span className="text-sm text-gray-600">As voted under governance</span></li>
                           <li><strong>Airdrops:</strong> 15% (15B coins)<br />
-                            <span className="text-sm text-gray-600">20% per year linear unlock</span></li>
+                            <span className="text-sm text-gray-600">100% TGE unlock</span></li>
                           <li><strong>Ecosystem Rewards:</strong> 10% (10B coins)<br />
                             <span className="text-sm text-gray-600">100% TGE unlock</span></li>
                           <li><strong>LP:</strong> 10% (10B coins)<br />
