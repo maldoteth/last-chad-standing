@@ -35,12 +35,18 @@ const Documents = () => {
   // Airdrop Constants
   const TOTAL_AIRDROP = 50_000_000; // 5% of 1,000,000,000
 
-  // Calculate tokens per NFT for each collection
+  // Calculate tokens per NFT for each collection based on allocation percentages
   const tokensPerNFT = useMemo(() => {
-    const totalNFTs = Object.values(collections).reduce((sum, collection) => sum + collection.supply, 0);
+    const allocations = {
+      genesisDads: 0.02 * TOTAL_AIRDROP, // 2% = 1,000,000 tokens
+      honoraryChads: 0.0025 * TOTAL_AIRDROP, // 0.25% = 125,000 tokens
+      allAccessPass: 0.0025 * TOTAL_AIRDROP, // 0.25% = 125,000 tokens
+      elitePass: 0.01 * TOTAL_AIRDROP, // 1% = 500,000 tokens
+      vipPass: 0.015 * TOTAL_AIRDROP, // 1.5% = 750,000 tokens
+    };
     
     return Object.entries(collections).reduce((acc, [key, collection]) => {
-      acc[key] = TOTAL_AIRDROP / totalNFTs;
+      acc[key] = allocations[key as keyof typeof allocations] / collection.supply;
       return acc;
     }, {} as Record<string, number>);
   }, []);
