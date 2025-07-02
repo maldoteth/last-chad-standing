@@ -49,7 +49,7 @@ const Index = () => {
         <div className="max-w-3xl px-8 text-white animate-fade-in">
           <h1 className="font-sora text-6xl font-light tracking-wide"></h1>
           <p className="mt-4 mx-auto max-w-lg font-inter text-base font-normal text-slate-300"></p>
-          <button className="mt-8 border border-white/20 bg-black/10 backdrop-blur-sm text-white px-6 rounded-lg font-inter text-sm font-medium transition-colors hover:bg-white/10 hover:border-white/40 my-0 py-0">
+          <button className="mt-8 border border-white/20 bg-black/10 backdrop-blur-sm text-white rounded-lg font-inter text-sm transition-colors hover:bg-white/10 hover:border-white/40 my-0 py-[8px] px-[28px] font-medium">
             Begin Interface →
           </button>
         </div>
