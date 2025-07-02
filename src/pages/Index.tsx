@@ -74,11 +74,13 @@ const Index = () => {
       <nav className="absolute top-0 left-0 right-0 z-50 px-10 py-7 flex justify-between items-center">
         {/* Left Icon - Minimalist Iris */}
         <div className="flex items-center">
-          <svg width="24" height="24" viewBox="0 0 24 24" className="text-white/70">
-            <circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" strokeWidth="1.5" />
-            <circle cx="12" cy="12" r="3" fill="currentColor" />
-            <path d="M12 1v6m0 10v6m11-7h-6m-10 0H1" stroke="currentColor" strokeWidth="1" opacity="0.6" />
-          </svg>
+          <img 
+            src="/lovable-uploads/ebc2efc2-8d89-4230-921a-5d8b6b3e2e17.png" 
+            alt="LCS Fist Logo" 
+            width="24" 
+            height="24" 
+            className="opacity-70"
+          />
         </div>
 
         {/* Center Links */}
