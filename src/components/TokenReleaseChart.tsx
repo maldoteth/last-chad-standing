@@ -81,6 +81,8 @@ const TokenReleaseChart = () => {
 
   return (
     <div className="w-full h-96 mb-8">
+      <br />
+      <br />
       <h4 className="text-lg font-semibold mb-4">Token Release Schedule</h4>
       <ResponsiveContainer width="100%" height="100%">
         <AreaChart data={chartData}>
