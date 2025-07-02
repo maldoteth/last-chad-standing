@@ -857,7 +857,7 @@ const Documents = () => {
                           <li><strong>Team:</strong> 15% (15B coins)<br />
                             <span className="text-sm text-gray-600">12 month cliff + 20% daily linear per year</span></li>
                           <li><strong>Foundation:</strong> 15% (15B coins)<br />
-                            <span className="text-sm text-gray-600">As voted under governance</span></li>
+                            <span className="text-sm text-gray-600">20% a year linear daily</span></li>
                           <li><strong>Airdrops:</strong> 15% (15B coins)<br />
                             <span className="text-sm text-gray-600">100% TGE unlock</span></li>
                           <li><strong>Ecosystem Rewards:</strong> 10% (10B coins)<br />
