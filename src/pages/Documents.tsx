@@ -828,7 +828,7 @@ const Documents = () => {
                           <li><strong>Foundation:</strong> 15% (15B coins)</li>
                           <li><strong>Growth Fund:</strong> 15% (15B coins)</li>
                           <li><strong>Ecosystem Rewards:</strong> 10% (10B coins)</li>
-                          <li><strong>Liquidity Pool:</strong> 10% (10B coins)</li>
+                          <li><strong>LP:</strong> 10% (10B coins)</li>
                           <li><strong>Advisors:</strong> 5% (5B coins)</li>
                         </ul>
                       </section>
