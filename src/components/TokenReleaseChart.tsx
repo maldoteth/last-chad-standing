@@ -2,13 +2,14 @@ import React from 'react';
 import { AreaChart, Area, XAxis, YAxis, ResponsiveContainer, Tooltip, Legend } from 'recharts';
 
 const TokenReleaseChart = () => {
-  // Generate data points for 5 years (60 months) starting from TGE
+  // Generate data points for 5 years (1,825 days) starting from TGE
   const generateReleaseData = () => {
     const data = [];
     const totalSupply = 100; // 100B coins
+    const totalDays = 1825; // 5 years × 365 days
     
-    for (let month = 0; month <= 60; month++) {
-      const year = month / 12;
+    for (let day = 0; day <= totalDays; day++) {
+      const year = day / 365;
       
       // Public: 30B - 100% at TGE
       const publicTokens = 30;
@@ -21,15 +22,15 @@ const TokenReleaseChart = () => {
       
       // Team: 15B - 12 month cliff + 20% per year linear
       let teamTokens = 0;
-      if (month > 12) {
-        const yearsAfterCliff = (month - 12) / 12;
+      if (day > 365) { // 12 months = 365 days cliff
+        const yearsAfterCliff = (day - 365) / 365;
         teamTokens = Math.min(15, 15 * 0.2 * yearsAfterCliff);
       }
       
       // Advisors: 5B - 12 month cliff + 20% per year linear  
       let advisorTokens = 0;
-      if (month > 12) {
-        const yearsAfterCliff = (month - 12) / 12;
+      if (day > 365) { // 12 months = 365 days cliff
+        const yearsAfterCliff = (day - 365) / 365;
         advisorTokens = Math.min(5, 5 * 0.2 * yearsAfterCliff);
       }
       
@@ -39,9 +40,21 @@ const TokenReleaseChart = () => {
       // Foundation: 15B - 20% a year linear daily
       const foundationTokens = Math.min(15, 15 * 0.2 * year);
       
+      // Create date label for X-axis display
+      let dateLabel;
+      if (day === 0) {
+        dateLabel = 'TGE';
+      } else if (day % 365 === 0) {
+        dateLabel = `Y${day / 365}`;
+      } else if (day % 183 === 0) { // Every 6 months
+        dateLabel = `Y${(day / 365).toFixed(1)}`;
+      } else {
+        dateLabel = `D${day}`;
+      }
+      
       data.push({
-        month: `Month ${month}`,
-        date: month === 0 ? 'TGE' : `M${month}`,
+        day: day,
+        date: dateLabel,
         Public: publicTokens,
         'Ecosystem Rewards': ecosystemTokens,
         LP: lpTokens,
@@ -58,8 +71,8 @@ const TokenReleaseChart = () => {
 
   const data = generateReleaseData();
   
-  // Sample every 6 months for cleaner visualization
-  const chartData = data.filter((_, index) => index % 6 === 0 || index === 0);
+  // Use all daily data points for smooth hovering experience
+  const chartData = data;
 
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
@@ -91,6 +104,14 @@ const TokenReleaseChart = () => {
             axisLine={false}
             tickLine={false}
             tick={{ fontSize: 12 }}
+            interval="preserveStartEnd"
+            tickFormatter={(value, index) => {
+              // Only show major time markers on axis
+              if (value === 'TGE' || value.startsWith('Y')) {
+                return value;
+              }
+              return '';
+            }}
           />
           <YAxis 
             axisLine={false}
