@@ -6,7 +6,7 @@ const TokenDistributionChart = () => {
   const data = [
     { name: 'Public', value: 30, amount: '30B coins', color: '#ef4444' },
     { name: 'Team', value: 15, amount: '15B coins', color: '#f97316' },
-    { name: 'Development Fund', value: 15, amount: '15B coins', color: '#eab308' },
+    { name: 'Foundation', value: 15, amount: '15B coins', color: '#eab308' },
     { name: 'Marketing & Partnerships', value: 15, amount: '15B coins', color: '#22c55e' },
     { name: 'Ecosystem Rewards', value: 10, amount: '10B coins', color: '#3b82f6' },
     { name: 'Liquidity Pool', value: 10, amount: '10B coins', color: '#8b5cf6' },
