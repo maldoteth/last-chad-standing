@@ -94,7 +94,7 @@ const Index = () => {
         writingMode: 'vertical-rl',
         textOrientation: 'mixed'
       }}>
-          NEXT GEN CONSOLES & PC
+          UNREAL ENGINE 5
         </div>
       </div>
 
