@@ -989,7 +989,7 @@ const Documents = () => {
                                 <ul className="text-sm text-gray-600 space-y-1">
                                   <li>Total Token Supply: 100,000,000,000</li>
                                   <li>Airdrop Allocation: 5% (5,000,000,000 tokens)</li>
-                                  <li>Tokens per NFT: {(TOTAL_AIRDROP / Object.values(collections).reduce((sum, c) => sum + c.supply, 0)).toLocaleString(undefined, { maximumFractionDigits: 0 })}</li>
+                                  
                                 </ul>
                               </div>
                               <div>
