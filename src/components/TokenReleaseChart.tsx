@@ -20,18 +20,18 @@ const TokenReleaseChart = () => {
       // LP: 10B - 100% at TGE
       const lpTokens = 10;
       
-      // Team: 15B - 12 month cliff + 20% per year linear
+      // Team: 15B - 12 month cliff + 25% per year linear (to reach 100% in 4 years after cliff)
       let teamTokens = 0;
       if (day > 365) { // 12 months = 365 days cliff
         const yearsAfterCliff = (day - 365) / 365;
-        teamTokens = Math.min(15, 15 * 0.2 * yearsAfterCliff);
+        teamTokens = Math.min(15, 15 * 0.25 * yearsAfterCliff);
       }
       
-      // Advisors: 5B - 12 month cliff + 20% per year linear  
+      // Advisors: 5B - 12 month cliff + 25% per year linear (to reach 100% in 4 years after cliff)
       let advisorTokens = 0;
       if (day > 365) { // 12 months = 365 days cliff
         const yearsAfterCliff = (day - 365) / 365;
-        advisorTokens = Math.min(5, 5 * 0.2 * yearsAfterCliff);
+        advisorTokens = Math.min(5, 5 * 0.25 * yearsAfterCliff);
       }
       
       // Airdrops: 15B - 100% at TGE
