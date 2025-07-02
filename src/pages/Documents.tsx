@@ -27,7 +27,7 @@ const Documents = () => {
   // NFT Collection Data
   const collections = {
     genesisDads: { name: 'Genesis Chads', supply: 2076 },
-    honoraryChads: { name: 'Honorary Chads', supply: 113 },
+    honoraryChads: { name: 'Honorary Chads', supply: 133 },
     allAccessPass: { name: 'All Access Pass', supply: 881 },
     vipPass: { name: 'VIP Pass', supply: 245 },
     elitePass: { name: 'Elite Pass', supply: 82 },
