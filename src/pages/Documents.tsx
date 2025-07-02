@@ -868,8 +868,6 @@ const Documents = () => {
                         </ul>
                         
                         <br />
-                        
-                        <p><strong>10% of the supply is reserved for $DHB stakers and holders.</strong></p>
                       </section>
 
                       {/* Airdrop Calculator */}
@@ -997,6 +995,13 @@ const Documents = () => {
                             </div>
                           </CardContent>
                         </Card>
+                        
+                        <br />
+                        
+                        <br />
+                        
+                        <h3 className="text-2xl font-bold">$DHB Token Distribution</h3>
+                        <p><strong>10% of the supply is reserved for $DHB stakers and holders.</strong></p>
                         <ul>
                           <li><strong>2.5%</strong> for holders</li>
                           <li><strong>7.5%</strong> for stakers</li>
