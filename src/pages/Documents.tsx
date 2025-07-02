@@ -33,17 +33,17 @@ const Documents = () => {
   };
 
   // Airdrop Constants
-  const TOTAL_AIRDROP = 50_000_000; // 5% of 1,000,000,000
+  const TOTAL_AIRDROP = 5_000_000_000; // 5% of 100,000,000,000
 
   // Calculate tokens per NFT for each collection based on allocation percentages
   const tokensPerNFT = useMemo(() => {
-    const TOTAL_SUPPLY = 1_000_000_000; // Total token supply
+    const TOTAL_SUPPLY = 100_000_000_000; // Total token supply
     const allocations = {
-      genesisDads: 0.02 * TOTAL_SUPPLY, // 2% = 20,000,000 tokens
-      honoraryChads: 0.0025 * TOTAL_SUPPLY, // 0.25% = 2,500,000 tokens
-      allAccessPass: 0.0025 * TOTAL_SUPPLY, // 0.25% = 2,500,000 tokens
-      elitePass: 0.01 * TOTAL_SUPPLY, // 1% = 10,000,000 tokens
-      vipPass: 0.015 * TOTAL_SUPPLY, // 1.5% = 15,000,000 tokens
+      genesisDads: 0.02 * TOTAL_SUPPLY, // 2% = 2,000,000,000 tokens
+      honoraryChads: 0.0025 * TOTAL_SUPPLY, // 0.25% = 250,000,000 tokens
+      allAccessPass: 0.0025 * TOTAL_SUPPLY, // 0.25% = 250,000,000 tokens
+      elitePass: 0.01 * TOTAL_SUPPLY, // 1% = 1,000,000,000 tokens
+      vipPass: 0.015 * TOTAL_SUPPLY, // 1.5% = 1,500,000,000 tokens
     };
     
     return Object.entries(collections).reduce((acc, [key, collection]) => {
