@@ -68,7 +68,7 @@ const Index = () => {
         </div>
 
         {/* Center Links */}
-        <div className="flex-1 flex justify-center">
+        <div className="absolute left-1/2 transform -translate-x-1/2 sm:relative sm:left-auto sm:transform-none flex-1 flex justify-center">
           <SocialLinks />
         </div>
 
