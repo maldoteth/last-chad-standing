@@ -8,6 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import TokenDistributionChart from '@/components/TokenDistributionChart';
+import TokenReleaseChart from '@/components/TokenReleaseChart';
 import DocumentSearch from '@/components/DocumentSearch';
 
 const Documents = () => {
@@ -838,6 +839,8 @@ const Documents = () => {
                           <li><strong>Advisors:</strong> 5% (5B coins)<br />
                             <span className="text-sm text-gray-600">12 month cliff + 20% daily linear per year</span></li>
                         </ul>
+                        
+                        <TokenReleaseChart />
                       </section>
 
                       {/* Genesis Chads Section - moved here */}

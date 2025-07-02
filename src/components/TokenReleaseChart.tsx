@@ -1,0 +1,169 @@
+import React from 'react';
+import { AreaChart, Area, XAxis, YAxis, ResponsiveContainer, Tooltip, Legend } from 'recharts';
+
+const TokenReleaseChart = () => {
+  // Generate data points for 5 years (60 months) starting from TGE
+  const generateReleaseData = () => {
+    const data = [];
+    const totalSupply = 100; // 100B coins
+    
+    for (let month = 0; month <= 60; month++) {
+      const year = month / 12;
+      
+      // Public: 30B - 100% at TGE
+      const publicTokens = 30;
+      
+      // Ecosystem Rewards: 10B - 100% at TGE  
+      const ecosystemTokens = 10;
+      
+      // LP: 10B - 100% at TGE
+      const lpTokens = 10;
+      
+      // Team: 15B - 12 month cliff + 20% per year linear
+      let teamTokens = 0;
+      if (month > 12) {
+        const yearsAfterCliff = (month - 12) / 12;
+        teamTokens = Math.min(15, 15 * 0.2 * yearsAfterCliff);
+      }
+      
+      // Advisors: 5B - 12 month cliff + 20% per year linear  
+      let advisorTokens = 0;
+      if (month > 12) {
+        const yearsAfterCliff = (month - 12) / 12;
+        advisorTokens = Math.min(5, 5 * 0.2 * yearsAfterCliff);
+      }
+      
+      // Growth Fund: 15B - 20% per year linear
+      const growthTokens = Math.min(15, 15 * 0.2 * year);
+      
+      // Foundation: 15B - Gradual release over governance (modeled as 10% per year)
+      const foundationTokens = Math.min(15, 15 * 0.1 * year);
+      
+      data.push({
+        month: `Month ${month}`,
+        date: month === 0 ? 'TGE' : `M${month}`,
+        Public: publicTokens,
+        'Ecosystem Rewards': ecosystemTokens,
+        LP: lpTokens,
+        Team: teamTokens,
+        Advisors: advisorTokens,
+        'Growth Fund': growthTokens,
+        Foundation: foundationTokens,
+        total: publicTokens + ecosystemTokens + lpTokens + teamTokens + advisorTokens + growthTokens + foundationTokens
+      });
+    }
+    
+    return data;
+  };
+
+  const data = generateReleaseData();
+  
+  // Sample every 6 months for cleaner visualization
+  const chartData = data.filter((_, index) => index % 6 === 0 || index === 0);
+
+  const CustomTooltip = ({ active, payload, label }: any) => {
+    if (active && payload && payload.length) {
+      const total = payload.reduce((sum: number, entry: any) => sum + entry.value, 0);
+      return (
+        <div className="bg-white p-3 border border-gray-200 rounded-lg shadow-lg">
+          <p className="font-semibold text-gray-900">{label}</p>
+          <p className="text-gray-700 mb-2">Total: {total.toFixed(1)}B tokens</p>
+          {payload.reverse().map((entry: any, index: number) => (
+            <p key={index} style={{ color: entry.color }}>
+              {entry.dataKey}: {entry.value.toFixed(1)}B
+            </p>
+          ))}
+        </div>
+      );
+    }
+    return null;
+  };
+
+  return (
+    <div className="w-full h-96 mb-8">
+      <h4 className="text-lg font-semibold mb-4">Token Release Schedule</h4>
+      <ResponsiveContainer width="100%" height="100%">
+        <AreaChart data={chartData}>
+          <XAxis 
+            dataKey="date" 
+            axisLine={false}
+            tickLine={false}
+            tick={{ fontSize: 12 }}
+          />
+          <YAxis 
+            axisLine={false}
+            tickLine={false}
+            tick={{ fontSize: 12 }}
+            tickFormatter={(value) => `${value}B`}
+          />
+          <Tooltip content={<CustomTooltip />} />
+          <Legend 
+            verticalAlign="bottom" 
+            height={36}
+            iconType="rect"
+          />
+          
+          {/* Stack areas from bottom to top */}
+          <Area
+            type="monotone"
+            dataKey="Public"
+            stackId="1"
+            stroke="#3b82f6"
+            fill="#3b82f6"
+            fillOpacity={0.8}
+          />
+          <Area
+            type="monotone"
+            dataKey="Ecosystem Rewards"
+            stackId="1"
+            stroke="#f97316"
+            fill="#f97316"
+            fillOpacity={0.8}
+          />
+          <Area
+            type="monotone"
+            dataKey="LP"
+            stackId="1"
+            stroke="#8b5cf6"
+            fill="#8b5cf6"
+            fillOpacity={0.8}
+          />
+          <Area
+            type="monotone"
+            dataKey="Growth Fund"
+            stackId="1"
+            stroke="#22c55e"
+            fill="#22c55e"
+            fillOpacity={0.8}
+          />
+          <Area
+            type="monotone"
+            dataKey="Foundation"
+            stackId="1"
+            stroke="#eab308"
+            fill="#eab308"
+            fillOpacity={0.8}
+          />
+          <Area
+            type="monotone"
+            dataKey="Team"
+            stackId="1"
+            stroke="#06b6d4"
+            fill="#06b6d4"
+            fillOpacity={0.8}
+          />
+          <Area
+            type="monotone"
+            dataKey="Advisors"
+            stackId="1"
+            stroke="#ec4899"
+            fill="#ec4899"
+            fillOpacity={0.8}
+          />
+        </AreaChart>
+      </ResponsiveContainer>
+    </div>
+  );
+};
+
+export default TokenReleaseChart;
