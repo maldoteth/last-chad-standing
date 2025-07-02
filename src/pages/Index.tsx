@@ -73,7 +73,7 @@ const Index = () => {
       {/* Navigation Interface */}
       <nav className="absolute top-0 left-0 right-0 z-50 px-10 py-7 flex justify-between items-center">
         {/* Left Icon - Minimalist Iris */}
-        <div className="flex items-center">
+        <div className="flex items-center w-24">
           <img 
             src="/lovable-uploads/ebc2efc2-8d89-4230-921a-5d8b6b3e2e17.png" 
             alt="LCS Fist Logo" 
@@ -84,12 +84,12 @@ const Index = () => {
         </div>
 
         {/* Center Links */}
-        <div className="flex items-center space-x-8 font-inter text-sm font-normal text-slate-300">
+        <div className="flex-1 flex justify-center">
           <SocialLinks />
         </div>
 
         {/* Right Status */}
-        <div className="font-inter text-sm text-slate-300">
+        <div className="font-inter text-sm text-slate-300 w-24 text-right">
           SYNC: <span className="text-pink-300/80">ACTIVE</span>
         </div>
       </nav>
