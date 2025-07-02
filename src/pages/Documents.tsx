@@ -1091,7 +1091,7 @@ const Documents = () => {
                             {/* DeHub Results */}
                             <Card className="bg-gradient-to-r from-green-50 to-emerald-50 border-green-200">
                               <CardHeader>
-                                <CardTitle className="text-gray-900">Your DeHub Allocation</CardTitle>
+                                <CardTitle className="text-gray-900">Your $LCS Allocation</CardTitle>
                               </CardHeader>
                               <CardContent>
                                 {dhbHoldings > 0 || dhbStaked > 0 ? (
