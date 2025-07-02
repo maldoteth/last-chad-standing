@@ -126,7 +126,7 @@ const Index = () => {
             </DialogHeader>
             <form onSubmit={handleEmailSubmit} className="space-y-4 mt-4">
               <div>
-                <Input id="email" type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="consciousness@domain.net" className="bg-black/20 border-white/20 text-white placeholder:text-slate-400 focus:border-pink-300/50" required />
+                <Input id="email" type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="your@email.com" className="bg-black/20 border-white/20 text-white placeholder:text-slate-400 focus:border-pink-300/50" required />
               </div>
               <Button type="submit" disabled={isSubmitting} className="w-full bg-white/10 border border-white/20 text-white hover:bg-white/20 font-inter">
                 {isSubmitting ? 'Connecting...' : 'Confirm'}
