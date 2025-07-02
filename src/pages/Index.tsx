@@ -73,7 +73,7 @@ const Index = () => {
         </div>
 
         {/* Right Status */}
-        <div className="font-inter text-xs sm:text-sm text-slate-300 w-16 sm:w-24 text-right">
+        <div className="font-inter text-xs sm:text-sm text-slate-300 w-16 sm:w-24 text-right hidden sm:block">
           PHASE: <span className="text-cyan-400">2/4</span>
         </div>
       </nav>
