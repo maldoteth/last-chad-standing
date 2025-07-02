@@ -28,9 +28,7 @@ const Index = () => {
 
         {/* Center Links */}
         <div className="flex items-center space-x-8 font-inter text-sm font-normal text-slate-300">
-          
-          
-          
+          <SocialLinks />
         </div>
 
         {/* Right Status */}
@@ -39,10 +37,6 @@ const Index = () => {
         </div>
       </nav>
 
-      {/* Social Links positioned at the top */}
-      <div className="absolute top-20 left-0 right-0 z-40 pt-8 pb-4">
-        <SocialLinks className="animate-fade-in" />
-      </div>
 
       {/* The Core Message: Centered Content */}
       <main className="relative z-10 flex h-screen items-center justify-center text-center">
