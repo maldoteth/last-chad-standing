@@ -52,8 +52,8 @@ const Documents = () => {
       genesisDads: 0.02 * TOTAL_SUPPLY, // 2% = 2,000,000,000 tokens
       honoraryChads: 0.0025 * TOTAL_SUPPLY, // 0.25% = 250,000,000 tokens
       allAccessPass: 0.0025 * TOTAL_SUPPLY, // 0.25% = 250,000,000 tokens
-      elitePass: 0.01 * TOTAL_SUPPLY, // 1% = 1,000,000,000 tokens
-      vipPass: 0.015 * TOTAL_SUPPLY, // 1.5% = 1,500,000,000 tokens
+      elitePass: 0.015 * TOTAL_SUPPLY, // 1.5% = 1,500,000,000 tokens
+      vipPass: 0.01 * TOTAL_SUPPLY, // 1% = 1,000,000,000 tokens
     };
     
     return Object.entries(collections).reduce((acc, [key, collection]) => {
@@ -901,8 +901,8 @@ const Documents = () => {
                           <li><strong>2%</strong> Genesis Chads</li>
                           <li><strong>0.25%</strong> Honorary Chads</li>
                           <li><strong>0.25%</strong> All Access Pass</li>
-                          <li><strong>1%</strong> Elite Pass</li>
-                          <li><strong>1.5%</strong> VIP Pass</li>
+                          <li><strong>1.5%</strong> Elite Pass</li>
+                          <li><strong>1%</strong> VIP Pass</li>
                         </ul>
                         
                         <br />
