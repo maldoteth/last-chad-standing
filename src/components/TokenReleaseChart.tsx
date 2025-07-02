@@ -13,8 +13,8 @@ const TokenReleaseChart = () => {
       // Public: 30B - 100% at TGE
       const publicTokens = 30;
       
-      // Ecosystem Rewards: 10B - 100% at TGE  
-      const ecosystemTokens = 10;
+      // Ecosystem Rewards: 10B - 20% per year daily linear
+      const ecosystemTokens = Math.min(10, 10 * 0.2 * year);
       
       // LP: 10B - 100% at TGE
       const lpTokens = 10;
