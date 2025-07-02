@@ -146,6 +146,12 @@ const Documents = () => {
                   </Link>
                 </Button>
                 
+                <Button variant="outline" size="sm" asChild>
+                  <Link to="/calculator" className="text-gray-600 hover:text-gray-900 transition-colors">
+                    Calculator
+                  </Link>
+                </Button>
+                
                 <h1 className="text-xl font-semibold text-gray-900 hidden sm:block">Fight Paper</h1>
               </div>
               
