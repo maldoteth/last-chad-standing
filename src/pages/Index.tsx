@@ -74,7 +74,7 @@ const Index = () => {
 
         {/* Right Status */}
         <div className="font-inter text-sm text-slate-300 w-24 text-right">
-          SYNC: <span className="text-pink-300/80">2/4</span>
+          SYNC: <span className="text-cyan-400">2/4</span>
         </div>
       </nav>
 
