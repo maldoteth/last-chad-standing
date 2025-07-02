@@ -50,16 +50,16 @@ const TokenDistributionChart = () => {
   };
 
   return (
-    <div className="not-prose w-full h-[500px] mb-8 p-4 overflow-visible">
+    <div className="w-full h-96 mb-8">
       <ResponsiveContainer width="100%" height="100%">
         <PieChart>
           <Pie
             data={data}
             cx="50%"
-            cy="40%"
+            cy="50%"
             labelLine={false}
             label={CustomLabel}
-            outerRadius={80}
+            outerRadius={120}
             fill="#8884d8"
             dataKey="value"
           >
