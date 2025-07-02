@@ -11,11 +11,11 @@ const Index = () => {
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const { toast } = useToast();
-
+  const {
+    toast
+  } = useToast();
   const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
     if (!email || !email.includes('@')) {
       toast({
         title: "Invalid Email",
@@ -24,26 +24,17 @@ const Index = () => {
       });
       return;
     }
-
     setIsSubmitting(true);
-    
     try {
-      await emailjs.send(
-        'service_fweuzbc',
-        'template_72mnqmt',
-        {
-          to_email: email,
-          from_name: 'Soma-Cortex Initiative',
-          message: 'New notification signup from the consciousness interface.'
-        },
-        'lrm5ruPzHreaD8EiM'
-      );
-      
+      await emailjs.send('service_fweuzbc', 'template_72mnqmt', {
+        to_email: email,
+        from_name: 'Soma-Cortex Initiative',
+        message: 'New notification signup from the consciousness interface.'
+      }, 'lrm5ruPzHreaD8EiM');
       toast({
         title: "Successfully Registered",
-        description: "You'll be notified when the consciousness interface is ready.",
+        description: "You'll be notified when the consciousness interface is ready."
       });
-      
       setEmail('');
       setIsOpen(false);
     } catch (error) {
@@ -56,7 +47,6 @@ const Index = () => {
       setIsSubmitting(false);
     }
   };
-
   return <div className="relative min-h-screen w-screen overflow-hidden">
       {/* Background Video: The Digital Soul */}
       <div className="absolute inset-0 z-0">
@@ -74,13 +64,7 @@ const Index = () => {
       <nav className="absolute top-0 left-0 right-0 z-50 px-10 py-7 flex justify-between items-center">
         {/* Left Icon - Minimalist Iris */}
         <div className="flex items-center w-24">
-          <img 
-            src="/lovable-uploads/ebc2efc2-8d89-4230-921a-5d8b6b3e2e17.png" 
-            alt="LCS Fist Logo" 
-            width="24" 
-            height="24" 
-            className="opacity-70"
-          />
+          <img src="/lovable-uploads/ebc2efc2-8d89-4230-921a-5d8b6b3e2e17.png" alt="LCS Fist Logo" width="24" height="24" className="opacity-70" />
         </div>
 
         {/* Center Links */}
@@ -90,7 +74,7 @@ const Index = () => {
 
         {/* Right Status */}
         <div className="font-inter text-sm text-slate-300 w-24 text-right">
-          SYNC: <span className="text-pink-300/80">ACTIVE</span>
+          SYNC: <span className="text-pink-300/80">2/4</span>
         </div>
       </nav>
 
@@ -144,21 +128,9 @@ const Index = () => {
             </DialogHeader>
             <form onSubmit={handleEmailSubmit} className="space-y-4 mt-4">
               <div>
-                <Input
-                  id="email"
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="consciousness@domain.net"
-                  className="bg-black/20 border-white/20 text-white placeholder:text-slate-400 focus:border-pink-300/50"
-                  required
-                />
+                <Input id="email" type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="consciousness@domain.net" className="bg-black/20 border-white/20 text-white placeholder:text-slate-400 focus:border-pink-300/50" required />
               </div>
-              <Button 
-                type="submit" 
-                disabled={isSubmitting}
-                className="w-full bg-white/10 border border-white/20 text-white hover:bg-white/20 font-inter"
-              >
+              <Button type="submit" disabled={isSubmitting} className="w-full bg-white/10 border border-white/20 text-white hover:bg-white/20 font-inter">
                 {isSubmitting ? 'Connecting...' : 'Confirm'}
               </Button>
             </form>
