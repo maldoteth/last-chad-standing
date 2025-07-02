@@ -818,18 +818,18 @@ const Documents = () => {
 
                         <h3 id="token-economy" className="text-2xl font-bold">Distribution</h3>
 
-                        <p><strong>Total Supply:</strong> 1,000,000,000 coins</p>
+                        <p><strong>Total Supply:</strong> 100,000,000,000 coins</p>
                         
                         <TokenDistributionChart />
                         
                         <ul>
-                          <li><strong>Public Sale:</strong> 30% (300M coins)</li>
-                          <li><strong>Team:</strong> 15% (150M coins)</li>
-                          <li><strong>Development Fund:</strong> 15% (150M coins)</li>
-                          <li><strong>Marketing & Partnerships:</strong> 15% (150M coins)</li>
-                          <li><strong>Ecosystem Rewards:</strong> 10% (100M coins)</li>
-                          <li><strong>Liquidity Pool:</strong> 10% (100M coins)</li>
-                          <li><strong>Advisors:</strong> 5% (50M coins)</li>
+                          <li><strong>Public Sale:</strong> 30% (30B coins)</li>
+                          <li><strong>Team:</strong> 15% (15B coins)</li>
+                          <li><strong>Development Fund:</strong> 15% (15B coins)</li>
+                          <li><strong>Marketing & Partnerships:</strong> 15% (15B coins)</li>
+                          <li><strong>Ecosystem Rewards:</strong> 10% (10B coins)</li>
+                          <li><strong>Liquidity Pool:</strong> 10% (10B coins)</li>
+                          <li><strong>Advisors:</strong> 5% (5B coins)</li>
                         </ul>
                       </section>
 
@@ -977,8 +977,8 @@ const Documents = () => {
                               <div>
                                 <h4 className="font-semibold mb-2 text-gray-900">Token Distribution</h4>
                                 <ul className="text-sm text-gray-600 space-y-1">
-                                  <li>Total Token Supply: 1,000,000,000</li>
-                                  <li>Airdrop Allocation: 5% (50,000,000 tokens)</li>
+                                  <li>Total Token Supply: 100,000,000,000</li>
+                                  <li>Airdrop Allocation: 5% (5,000,000,000 tokens)</li>
                                   <li>Tokens per NFT: {(TOTAL_AIRDROP / Object.values(collections).reduce((sum, c) => sum + c.supply, 0)).toLocaleString(undefined, { maximumFractionDigits: 0 })}</li>
                                 </ul>
                               </div>
