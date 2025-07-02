@@ -1,13 +1,81 @@
-import React, { useState } from 'react';
+
+import React, { useState, useMemo } from 'react';
 import { ArrowLeft, UserCheck, Gamepad2, DollarSign, ExternalLink, Search, Mail, Download, Palette } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import TokenDistributionChart from '@/components/TokenDistributionChart';
 import DocumentSearch from '@/components/DocumentSearch';
+
 const Documents = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
+
+  // Calculator state
+  const [holdings, setHoldings] = useState({
+    genesisDads: 0,
+    honoraryChads: 0,
+    allAccessPass: 0,
+    vipPass: 0,
+    elitePass: 0,
+  });
+
+  // NFT Collection Data
+  const collections = {
+    genesisDads: { name: 'Genesis Chads', supply: 2076 },
+    honoraryChads: { name: 'Honorary Chads', supply: 15 },
+    allAccessPass: { name: 'All Access Pass', supply: 881 },
+    vipPass: { name: 'VIP Pass', supply: 245 },
+    elitePass: { name: 'Elite Pass', supply: 82 },
+  };
+
+  // Airdrop Constants
+  const TOTAL_AIRDROP = 50_000_000; // 5% of 1,000,000,000
+
+  // Calculate tokens per NFT for each collection based on allocation percentages
+  const tokensPerNFT = useMemo(() => {
+    const TOTAL_SUPPLY = 1_000_000_000; // Total token supply
+    const allocations = {
+      genesisDads: 0.02 * TOTAL_SUPPLY, // 2% = 20,000,000 tokens
+      honoraryChads: 0.0025 * TOTAL_SUPPLY, // 0.25% = 2,500,000 tokens
+      allAccessPass: 0.0025 * TOTAL_SUPPLY, // 0.25% = 2,500,000 tokens
+      elitePass: 0.01 * TOTAL_SUPPLY, // 1% = 10,000,000 tokens
+      vipPass: 0.015 * TOTAL_SUPPLY, // 1.5% = 15,000,000 tokens
+    };
+    
+    return Object.entries(collections).reduce((acc, [key, collection]) => {
+      acc[key] = allocations[key as keyof typeof allocations] / collection.supply;
+      return acc;
+    }, {} as Record<string, number>);
+  }, []);
+
+  // Calculate user's total allocation
+  const userAllocation = useMemo(() => {
+    return Object.entries(holdings).reduce((total, [key, amount]) => {
+      return total + (amount * tokensPerNFT[key]);
+    }, 0);
+  }, [holdings, tokensPerNFT]);
+
+  const handleInputChange = (collection: string, value: string) => {
+    const numValue = Math.max(0, parseInt(value) || 0);
+    setHoldings(prev => ({
+      ...prev,
+      [collection]: numValue
+    }));
+  };
+
+  const clearAll = () => {
+    setHoldings({
+      genesisDads: 0,
+      honoraryChads: 0,
+      allAccessPass: 0,
+      vipPass: 0,
+      elitePass: 0,
+    });
+  };
   const handleSearchClick = () => {
     // Check if mobile
     if (window.innerWidth < 640) {
@@ -20,6 +88,7 @@ const Documents = () => {
     setIsSearchOpen(false);
     setIsMobileSearchOpen(false);
   };
+
   const handleDownload = (url: string, filename: string) => {
     const link = document.createElement('a');
     link.href = url;
@@ -28,6 +97,7 @@ const Documents = () => {
     link.click();
     document.body.removeChild(link);
   };
+
   const documentSections = [{
     title: "Game Overview",
     icon: <Gamepad2 size={20} />,
@@ -127,7 +197,8 @@ const Documents = () => {
       href: "https://leanchadfight.club"
     }]
   }];
-  return <>
+  return (
+    <>
       <div className="min-h-screen bg-gray-50">
         {/* Header */}
         <header className="bg-white border-b border-gray-200 sticky top-0 z-10">
@@ -775,10 +846,11 @@ const Documents = () => {
                         
                         <br />
                         
-                        <h3 className="text-2xl font-bold">Collections</h3>
-                        <ul>
-                          <li><strong><a href="https://opensea.io/collection/lcfc-genesis" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">Genesis Chads</a></strong></li>
-                          <li><strong><a href="https://opensea.io/collection/lcfca" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">All Access Pass</a></strong></li>
+                         <h3 className="text-2xl font-bold">Collections</h3>
+                         <ul>
+                           <li><strong><a href="https://opensea.io/collection/lcfc-genesis" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">Genesis Chads</a></strong></li>
+                           <li><strong><a href="https://opensea.io/es/collection/honorary-lean-chad-collection" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">Honorary Chads</a></strong></li>
+                           <li><strong><a href="https://opensea.io/collection/lcfca" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">All Access Pass</a></strong></li>
                           <li><strong><a href="https://opensea.io/collection/lcfcv" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">VIP Pass</a></strong></li>
                           <li><strong><a href="https://opensea.io/collection/lcfce" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">Elite Pass</a></strong></li>
                         </ul>
@@ -798,6 +870,133 @@ const Documents = () => {
                         <br />
                         
                         <p><strong>10% of the supply is reserved for $DHB stakers and holders.</strong></p>
+                      </section>
+
+                      {/* Airdrop Calculator */}
+                      <section id="airdrop-calculator" className="mb-12">
+                        <br />
+                        <h2 className="text-3xl font-bold">Airdrop Calculator</h2>
+                        <p className="mb-6">Calculate your share of the 50,000,000 token airdrop based on your NFT holdings.</p>
+
+                        <div className="grid gap-6 md:grid-cols-2 mb-8">
+                          {/* Input Section */}
+                          <Card className="bg-white border-gray-200">
+                            <CardHeader>
+                              <CardTitle className="text-gray-900">Your NFT Holdings</CardTitle>
+                              <CardDescription>
+                                Enter the number of NFTs you hold for each collection
+                              </CardDescription>
+                            </CardHeader>
+                            <CardContent className="space-y-4">
+                              {Object.entries(collections).map(([key, collection]) => (
+                                <div key={key} className="space-y-2">
+                                  <Label htmlFor={key} className="flex justify-between text-gray-700">
+                                    <span>{collection.name}</span>
+                                    <span className="text-xs text-gray-500">
+                                      Total Supply: {collection.supply.toLocaleString()}
+                                    </span>
+                                  </Label>
+                                  <Input
+                                    id={key}
+                                    type="number"
+                                    min="0"
+                                    value={holdings[key as keyof typeof holdings] || ''}
+                                    onChange={(e) => handleInputChange(key, e.target.value)}
+                                    placeholder="0"
+                                    className="bg-white border-gray-300"
+                                  />
+                                </div>
+                              ))}
+                              
+                              <Button onClick={clearAll} variant="outline" className="w-full mt-4">
+                                Clear All
+                              </Button>
+                            </CardContent>
+                          </Card>
+
+                          {/* Results Section */}
+                          <Card className="bg-white border-gray-200">
+                            <CardHeader>
+                              <CardTitle className="text-gray-900">Your Airdrop Allocation</CardTitle>
+                              <CardDescription>
+                                Based on your NFT holdings
+                              </CardDescription>
+                            </CardHeader>
+                            <CardContent className="space-y-4">
+                              {/* Breakdown by Collection */}
+                              <div className="space-y-3">
+                                {Object.entries(collections).map(([key, collection]) => {
+                                  const userTokens = holdings[key as keyof typeof holdings] * tokensPerNFT[key];
+                                  if (holdings[key as keyof typeof holdings] === 0) return null;
+                                  
+                                  return (
+                                    <div key={key} className="flex justify-between text-sm">
+                                      <span className="text-gray-600">
+                                        {collection.name} ({holdings[key as keyof typeof holdings]}x)
+                                      </span>
+                                      <span className="font-medium text-gray-900">
+                                        {userTokens.toLocaleString(undefined, { maximumFractionDigits: 0 })} tokens
+                                      </span>
+                                    </div>
+                                  );
+                                })}
+                              </div>
+
+                              {userAllocation > 0 && <div className="border-t border-gray-200 pt-3" />}
+
+                              {/* Total Allocation */}
+                              <div className="space-y-2">
+                                <div className="flex justify-between items-center">
+                                  <span className="text-lg font-semibold text-gray-900">Total Allocation:</span>
+                                  <span className="text-xl font-bold text-blue-600">
+                                    {userAllocation.toLocaleString(undefined, { maximumFractionDigits: 0 })} tokens
+                                  </span>
+                                </div>
+                                
+                                {userAllocation > 0 && (
+                                  <div className="text-center text-sm text-gray-500">
+                                    {((userAllocation / TOTAL_AIRDROP) * 100).toFixed(4)}% of total airdrop
+                                  </div>
+                                )}
+                              </div>
+
+                              {userAllocation === 0 && (
+                                <div className="text-center text-gray-500 py-8">
+                                  Enter your NFT holdings above to see your airdrop allocation
+                                </div>
+                              )}
+                            </CardContent>
+                          </Card>
+                        </div>
+
+                        {/* Calculator Info */}
+                        <Card className="bg-gray-50 border-gray-200">
+                          <CardHeader>
+                            <CardTitle className="text-gray-900">Calculation Details</CardTitle>
+                          </CardHeader>
+                          <CardContent>
+                            <div className="grid gap-4 md:grid-cols-2">
+                              <div>
+                                <h4 className="font-semibold mb-2 text-gray-900">Token Distribution</h4>
+                                <ul className="text-sm text-gray-600 space-y-1">
+                                  <li>Total Token Supply: 1,000,000,000</li>
+                                  <li>Airdrop Allocation: 5% (50,000,000 tokens)</li>
+                                  <li>Tokens per NFT: {(TOTAL_AIRDROP / Object.values(collections).reduce((sum, c) => sum + c.supply, 0)).toLocaleString(undefined, { maximumFractionDigits: 0 })}</li>
+                                </ul>
+                              </div>
+                              <div>
+                                <h4 className="font-semibold mb-2 text-gray-900">NFT Collections</h4>
+                                <ul className="text-sm text-gray-600 space-y-1">
+                                  {Object.entries(collections).map(([key, collection]) => (
+                                    <li key={key}>
+                                      {collection.name}: {collection.supply.toLocaleString()} supply
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            </div>
+                          </CardContent>
+                        </Card>
                         <ul>
                           <li><strong>2.5%</strong> for holders</li>
                           <li><strong>7.5%</strong> for stakers</li>
@@ -864,7 +1063,7 @@ const Documents = () => {
                                 </a>
                                 <a href="https://instagram.com/mikehalesmma" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-800 text-sm">
                                   Instagram
-                                  
+                                  <ExternalLink size={12} />
                                 </a>
                                 <a href="https://x.com/mikehalesmma" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-800 text-sm">
                                   X (Twitter)
@@ -979,7 +1178,11 @@ const Documents = () => {
                             </div>
                             <h3 className="font-semibold mb-2">Logo Text</h3>
                             <p className="text-sm text-gray-600 mb-4">Official Last Chad Standing text logo</p>
-                            <Button onClick={() => handleDownload('/lovable-uploads/c076819c-8944-483c-9fd4-336da5ebba11.png', 'lcs-logo-text.png')} size="sm" className="w-full flex items-center gap-2">
+                            <Button 
+                              onClick={() => handleDownload('/lovable-uploads/c076819c-8944-483c-9fd4-336da5ebba11.png', 'lcs-logo-text.png')}
+                              size="sm" 
+                              className="w-full flex items-center gap-2"
+                            >
                               <Download size={16} />
                               Download PNG
                             </Button>
@@ -990,9 +1193,13 @@ const Documents = () => {
                             <div className="mb-4">
                               <img src="/lovable-uploads/467b4b2b-4ef7-4259-8c00-cc82ac4255ae.png" alt="LCS Fist Logo" className="w-full h-auto" />
                             </div>
-                            
+                            <h3 className="font-semibold mb-2">Fist Logo</h3>
                             <p className="text-sm text-gray-600 mb-4">LCS fist emblem logo</p>
-                            <Button onClick={() => handleDownload('/lovable-uploads/467b4b2b-4ef7-4259-8c00-cc82ac4255ae.png', 'lcs-fist-logo.png')} size="sm" className="w-full flex items-center gap-2">
+                            <Button 
+                              onClick={() => handleDownload('/lovable-uploads/467b4b2b-4ef7-4259-8c00-cc82ac4255ae.png', 'lcs-fist-logo.png')}
+                              size="sm" 
+                              className="w-full flex items-center gap-2"
+                            >
                               <Download size={16} />
                               Download PNG
                             </Button>
@@ -1005,7 +1212,11 @@ const Documents = () => {
                             </div>
                             <h3 className="font-semibold mb-2">LCS Letters</h3>
                             <p className="text-sm text-gray-600 mb-4">LCS abbreviated letter logo</p>
-                            <Button onClick={() => handleDownload('/lovable-uploads/ac3e1f52-ba21-4588-9051-87eef47caf5c.png', 'lcs-letters-logo.png')} size="sm" className="w-full flex items-center gap-2">
+                            <Button 
+                              onClick={() => handleDownload('/lovable-uploads/ac3e1f52-ba21-4588-9051-87eef47caf5c.png', 'lcs-letters-logo.png')}
+                              size="sm" 
+                              className="w-full flex items-center gap-2"
+                            >
                               <Download size={16} />
                               Download PNG
                             </Button>
@@ -1032,6 +1243,8 @@ const Documents = () => {
       </div>
 
       <DocumentSearch isOpen={isSearchOpen} onClose={handleSearchClose} />
-    </>;
+    </>
+  );
 };
+
 export default Documents;
