@@ -21,6 +21,8 @@ export default {
 		extend: {
 			fontFamily: {
 				'exo': ['Exo', 'sans-serif'],
+				'sora': ['Sora', 'sans-serif'],
+				'inter': ['Inter', 'sans-serif'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',
