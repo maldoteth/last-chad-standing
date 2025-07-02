@@ -1,17 +1,20 @@
 import React from 'react';
 import SocialLinks from '@/components/SocialLinks';
 import OrientationPrompt from '@/components/OrientationPrompt';
-import CloudinaryPlayer from '@/components/CloudinaryPlayer';
 
 const Index = () => {
   return (
     <div className="relative min-h-screen w-screen overflow-hidden">
       {/* Background Video: The Digital Soul */}
       <div className="absolute inset-0 z-0">
-        <CloudinaryPlayer 
-          cloudName="drqvsqsot"
-          publicId="LCS_TEASER_1_1_wlqwnc"
-          profile="cld-default"
+        <video
+          src="https://res.cloudinary.com/drqvsqsot/video/upload/v1/LCS_TEASER_1_1_wlqwnc"
+          className="absolute inset-0 w-full h-full object-cover"
+          autoPlay
+          muted
+          loop
+          playsInline
+          style={{ pointerEvents: 'none' }}
         />
         {/* The subtle vignette to draw focus inward */}
         <div className="absolute inset-0 bg-gradient-radial from-transparent via-black/20 to-black/60"></div>
