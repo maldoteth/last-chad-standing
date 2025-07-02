@@ -880,11 +880,15 @@ const Documents = () => {
                          <br />
                          <h2 className="text-3xl font-bold text-center sm:text-left">Genesis Chads</h2>
                         
-                        <p>Randomly generated cartoon chads from 2022 hand drawn by founder Mike Hales.</p>
-                        
-                        <p>Every chad will appear one by one, on the skins marketplace in 3D form, ready to be used in-game, with revenue shared with the holder from buyers and secondary traders.</p>
-                        
-                        <p>Holders of the genesis chads or any of the passes also qualify for an airdrop of $LCS.</p>
+                         <div className="space-y-4 text-gray-700 leading-relaxed">
+                           <p>The Genesis Chads collection represents the original foundation of the Lean Chad ecosystem, featuring uniquely hand-drawn cartoon characters created by founder Mike Hales in 2022. Each Chad was meticulously crafted with distinctive traits and personalities, forming the cornerstone of what would become a revolutionary gaming and NFT experience.</p>
+                           
+                           <p>These aren't just static collectibles—they're dynamic assets designed for utility and engagement. Each Genesis Chad will be progressively introduced to the in-game skins marketplace, where they'll be transformed into stunning 3D models ready for use across various gaming environments. This seamless integration bridges the gap between digital collectibles and interactive entertainment.</p>
+                           
+                           <p>The tokenomics behind Genesis Chads create a sustainable revenue-sharing ecosystem. When these 3D skins are purchased or traded on secondary markets, the original holders receive a portion of the revenue, establishing a continuous income stream that rewards early supporters and creates long-term value for the community.</p>
+                           
+                           <p>Beyond their utility in gaming, Genesis Chad holders—along with owners of any tier passes—are eligible for exclusive airdrops of $LCS tokens. This multi-layered reward system ensures that early believers in the project are recognized and compensated for their support as the ecosystem grows and evolves.</p>
+                         </div>
                         
                         <br />
                         
