@@ -823,7 +823,7 @@ const Documents = () => {
                         <TokenDistributionChart />
                         
                         <ul>
-                          <li><strong>Public Sale:</strong> 30% (30B coins)</li>
+                          <li><strong>Public:</strong> 30% (30B coins)</li>
                           <li><strong>Team:</strong> 15% (15B coins)</li>
                           <li><strong>Development Fund:</strong> 15% (15B coins)</li>
                           <li><strong>Marketing & Partnerships:</strong> 15% (15B coins)</li>
