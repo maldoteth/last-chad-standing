@@ -105,7 +105,7 @@ const TokenReleaseChart = () => {
             axisLine={false}
             tickLine={false}
             tick={{ fontSize: 12 }}
-            interval="preserveStartEnd"
+            interval={0}
             tickFormatter={(value, index) => {
               // Only show major time markers on axis
               if (value === 'TGE' || value.startsWith('Year')) {
