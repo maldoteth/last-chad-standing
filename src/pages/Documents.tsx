@@ -872,13 +872,13 @@ const Documents = () => {
                       </section>
 
                       {/* Genesis Chads Section - moved here */}
-                      <section id="genesis-chads" className="mb-12">
+                      <section id="genesis-chads" className="mb-12 -mx-6 sm:mx-0 px-6">
                          <div className="sm:hidden">
                            <br /><br /><br /><br /><br /><br /><br /><br />
                          </div>
                          <br />
                          <br />
-                         <h2 className="text-3xl font-bold">Genesis Chads</h2>
+                         <h2 className="text-3xl font-bold text-center sm:text-left">Genesis Chads</h2>
                         
                         <p>Randomly generated cartoon chads from 2022 hand drawn by founder Mike Hales.</p>
                         
