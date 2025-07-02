@@ -115,7 +115,7 @@ const Index = () => {
       {/* Bottom-Right Designation */}
       <div className="absolute bottom-4 right-4 z-30">
         <div className="text-xs font-inter text-white/60">
-          © The Soma-Cortex Initiative
+          © Last Chad Standing
         </div>
       </div>
 
