@@ -901,8 +901,8 @@ const Documents = () => {
                           <li><strong>2%</strong> Genesis Chads</li>
                           <li><strong>0.25%</strong> Honorary Chads</li>
                           <li><strong>0.25%</strong> All Access Pass</li>
-                          <li><strong>1.5%</strong> Elite Pass</li>
                           <li><strong>1%</strong> VIP Pass</li>
+                          <li><strong>1.5%</strong> Elite Pass</li>
                         </ul>
                         
                         <br />
