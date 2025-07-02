@@ -780,10 +780,11 @@ const Documents = () => {
                         
                         <br />
                         
-                        <h3 className="text-2xl font-bold">Collections</h3>
-                        <ul>
-                          <li><strong><a href="https://opensea.io/collection/lcfc-genesis" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">Genesis Chads</a></strong></li>
-                          <li><strong><a href="https://opensea.io/collection/lcfca" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">All Access Pass</a></strong></li>
+                         <h3 className="text-2xl font-bold">Collections</h3>
+                         <ul>
+                           <li><strong><a href="https://opensea.io/collection/lcfc-genesis" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">Genesis Chads</a></strong></li>
+                           <li><strong><a href="https://opensea.io/es/collection/honorary-lean-chad-collection" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">Honorary Chads</a></strong></li>
+                           <li><strong><a href="https://opensea.io/collection/lcfca" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">All Access Pass</a></strong></li>
                           <li><strong><a href="https://opensea.io/collection/lcfcv" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">VIP Pass</a></strong></li>
                           <li><strong><a href="https://opensea.io/collection/lcfce" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">Elite Pass</a></strong></li>
                         </ul>
