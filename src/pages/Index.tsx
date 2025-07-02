@@ -1,21 +1,13 @@
 import React from 'react';
 import SocialLinks from '@/components/SocialLinks';
 import OrientationPrompt from '@/components/OrientationPrompt';
-
 const Index = () => {
-  return (
-    <div className="relative min-h-screen w-screen overflow-hidden">
+  return <div className="relative min-h-screen w-screen overflow-hidden">
       {/* Background Video: The Digital Soul */}
       <div className="absolute inset-0 z-0">
-        <video
-          src="https://res.cloudinary.com/drqvsqsot/video/upload/v1/LCS_TEASER_1_1_wlqwnc"
-          className="absolute inset-0 w-full h-full object-cover"
-          autoPlay
-          muted
-          loop
-          playsInline
-          style={{ pointerEvents: 'none' }}
-        />
+        <video src="https://res.cloudinary.com/drqvsqsot/video/upload/v1/LCS_TEASER_1_1_wlqwnc" className="absolute inset-0 w-full h-full object-cover" autoPlay muted loop playsInline style={{
+        pointerEvents: 'none'
+      }} />
         {/* The subtle vignette to draw focus inward */}
         <div className="absolute inset-0 bg-gradient-radial from-transparent via-black/20 to-black/60"></div>
       </div>
@@ -28,9 +20,9 @@ const Index = () => {
         {/* Left Icon - Minimalist Iris */}
         <div className="flex items-center">
           <svg width="24" height="24" viewBox="0 0 24 24" className="text-white/70">
-            <circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" strokeWidth="1.5"/>
-            <circle cx="12" cy="12" r="3" fill="currentColor"/>
-            <path d="M12 1v6m0 10v6m11-7h-6m-10 0H1" stroke="currentColor" strokeWidth="1" opacity="0.6"/>
+            <circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" strokeWidth="1.5" />
+            <circle cx="12" cy="12" r="3" fill="currentColor" />
+            <path d="M12 1v6m0 10v6m11-7h-6m-10 0H1" stroke="currentColor" strokeWidth="1" opacity="0.6" />
           </svg>
         </div>
 
@@ -55,13 +47,9 @@ const Index = () => {
       {/* The Core Message: Centered Content */}
       <main className="relative z-10 flex h-screen items-center justify-center text-center">
         <div className="max-w-3xl px-8 text-white animate-fade-in">
-          <h1 className="font-sora text-6xl font-light tracking-wide">
-            See Beyond the Code.
-          </h1>
-          <p className="mt-4 mx-auto max-w-lg font-inter text-base font-normal text-slate-300">
-            Consciousness is not a sequence, but a signal. We are the interface for the soul's data stream, translating the universe within into shared reality.
-          </p>
-          <button className="mt-8 border border-white/20 bg-black/10 backdrop-blur-sm text-white px-6 py-2 rounded-lg font-inter text-sm font-medium transition-colors hover:bg-white/10 hover:border-white/40">
+          <h1 className="font-sora text-6xl font-light tracking-wide"></h1>
+          <p className="mt-4 mx-auto max-w-lg font-inter text-base font-normal text-slate-300"></p>
+          <button className="mt-8 border border-white/20 bg-black/10 backdrop-blur-sm text-white px-6 rounded-lg font-inter text-sm font-medium transition-colors hover:bg-white/10 hover:border-white/40 my-0 py-0">
             Begin Interface →
           </button>
         </div>
@@ -70,10 +58,10 @@ const Index = () => {
       {/* Ambient Data: Decorative UI */}
       {/* Right-Side Vertical Label */}
       <div className="absolute right-4 top-1/2 transform -translate-y-1/2 z-30">
-        <div 
-          className="text-white/40 text-sm uppercase tracking-[0.4em] font-inter"
-          style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
-        >
+        <div className="text-white/40 text-sm uppercase tracking-[0.4em] font-inter" style={{
+        writingMode: 'vertical-rl',
+        textOrientation: 'mixed'
+      }}>
           PROTOCOL :: CONSCIOUSNESS
         </div>
       </div>
@@ -91,8 +79,6 @@ const Index = () => {
           ✦ AWAKENING SEQUENCE INITIATED...
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default Index;
