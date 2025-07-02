@@ -189,9 +189,6 @@ const Documents = () => {
       title: "Distribution",
       href: "#token-economy"
     }, {
-      title: "Genesis Chads",
-      href: "#genesis-chads"
-    }, {
       title: "Utility",
       href: "#utility"
     }]
