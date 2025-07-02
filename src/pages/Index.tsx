@@ -108,7 +108,7 @@ const Index = () => {
       {/* Bottom-Left Log Status */}
       <div className="absolute bottom-4 left-4 z-30">
         <div className="text-xs font-inter text-white/50">
-          ✦ AWAKENING SEQUENCE INITIATED...
+          Closed Alpha Imminent
         </div>
       </div>
 
