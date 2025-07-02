@@ -94,7 +94,7 @@ const Index = () => {
         writingMode: 'vertical-rl',
         textOrientation: 'mixed'
       }}>
-          PROTOCOL :: CONSCIOUSNESS
+          NEXT GEN CONSOLES & PC
         </div>
       </div>
 
