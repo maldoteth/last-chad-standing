@@ -61,7 +61,7 @@ const Index = () => {
       <OrientationPrompt />
 
       {/* Navigation Interface */}
-      <nav className="absolute top-0 left-0 right-0 z-50 px-4 sm:px-10 py-7 flex justify-between items-center border-b border-white/20 bg-black/10 backdrop-blur-sm">
+      <nav className="absolute top-0 left-0 right-0 z-50 px-4 sm:px-10 py-7 flex justify-between items-center">
         {/* Left Icon - Minimalist Iris */}
         <div className="flex items-center w-16 sm:w-24">
           <img src="/lovable-uploads/ebc2efc2-8d89-4230-921a-5d8b6b3e2e17.png" alt="LCS Fist Logo" width="20" height="20" className="opacity-70 sm:w-6 sm:h-6" />
