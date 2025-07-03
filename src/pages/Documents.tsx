@@ -218,6 +218,9 @@ const Documents = () => {
       title: "Distribution",
       href: "#token-economy"
     }, {
+      title: "Calculator",
+      href: "#airdrop-calculator"
+    }, {
       title: "Utility",
       href: "#utility"
     }]
