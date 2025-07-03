@@ -64,7 +64,7 @@ const Index = () => {
       <nav className="absolute top-0 left-0 right-0 z-50 px-4 sm:px-10 py-7 flex justify-between items-center">
         {/* Left Icon - Minimalist Iris */}
         <div className="flex items-center w-16 sm:w-24">
-          <img src="/lovable-uploads/ebc2efc2-8d89-4230-921a-5d8b6b3e2e17.png" alt="LCS Fist Logo" width="24" height="24" className="opacity-70" />
+          <img src="/lovable-uploads/ebc2efc2-8d89-4230-921a-5d8b6b3e2e17.png" alt="LCS Fist Logo" className="opacity-70 w-7 h-7 sm:w-6 sm:h-6" />
         </div>
 
         {/* Center Links */}
