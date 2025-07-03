@@ -1019,7 +1019,7 @@ const Documents = () => {
                                     <div className="flex justify-between items-center">
                                       <span className="text-md font-medium text-gray-700">Est. TGE Value:</span>
                                       <span className="text-lg font-semibold text-green-600">
-                                        ${(userAllocation * 0.0002).toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                                        ${formatNumberWithAbbreviation(userAllocation * 0.0002)}
                                       </span>
                                     </div>
                                     <div className="text-center text-sm text-gray-500">
