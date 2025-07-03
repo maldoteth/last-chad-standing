@@ -1007,7 +1007,7 @@ const Documents = () => {
                                 <div className="flex justify-between items-center">
                                   <span className="text-lg font-semibold text-gray-900">Total:</span>
                                   <span className="text-xl font-bold text-blue-600">
-                                    {formatNumberWithAbbreviation(userAllocation)} tokens
+                                    {formatNumberWithAbbreviation(userAllocation)} $LCS
                                   </span>
                                 </div>
                                 
