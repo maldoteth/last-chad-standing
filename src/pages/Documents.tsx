@@ -80,10 +80,13 @@ const Documents = () => {
     const baseStakerAllocation = stakerPercentage * (0.075 * TOTAL_SUPPLY); // 7.5% for stakers
     const holderAllocation = holderPercentage * (0.025 * TOTAL_SUPPLY); // 2.5% for holders
     
-    // Calculate bonuses
+    // Calculate bonus multiplier (mutually exclusive)
     let bonusMultiplier = 1;
-    if (ogBonus) bonusMultiplier += 1; // +100% bonus
-    if (veteranBonus) bonusMultiplier += 0.3; // +30% bonus
+    if (ogBonus) {
+      bonusMultiplier = 2; // 2x multiplier (100% bonus)
+    } else if (veteranBonus) {
+      bonusMultiplier = 1.3; // 1.3x multiplier (30% bonus)
+    }
     
     const stakerAllocation = baseStakerAllocation * bonusMultiplier;
     const bonusTokens = baseStakerAllocation * (bonusMultiplier - 1);
@@ -1150,9 +1153,8 @@ const Documents = () => {
                                   {(ogBonus || veteranBonus) && (
                                     <div className="p-3 bg-white rounded-lg border border-blue-200">
                                       <p className="text-sm text-gray-700">
-                                        <span className="font-medium">Active Bonuses:</span> Total multiplier of {dhbAllocation.bonusMultiplier}x 
-                                        {ogBonus && veteranBonus ? ' (OG + Veteran bonuses stack)' : 
-                                         ogBonus ? ' (OG bonus)' : ' (Veteran bonus)'}
+                                        <span className="font-medium">Active Bonus:</span> {dhbAllocation.bonusMultiplier}x multiplier 
+                                        {ogBonus ? ' (OG Bonus - staked since launch)' : ' (Veteran Bonus - staked before Nov 16th)'}
                                       </p>
                                     </div>
                                   )}
@@ -1245,8 +1247,9 @@ const Documents = () => {
                                        <li>Total DeHub Allocation: 10% (10,000,000,000 tokens)</li>
                                        <li>Stakers Pool: 7.5% (7,500,000,000 tokens)</li>
                                        <li>Holders Pool: 2.5% (2,500,000,000 tokens)</li>
-                                       <li>OG Bonus: +100% for stakers since launch</li>
-                                       <li>Veteran Bonus: +30% for stakers before Nov 16, 2024</li>
+                                        <li>OG Bonus: 2x multiplier for stakers since launch</li>
+                                        <li>Veteran Bonus: 1.3x multiplier for stakers before Nov 16, 2024</li>
+                                        <li>Note: Bonuses are mutually exclusive (no stacking)</li>
                                        <li>Estimated TGE Price: $0.0002</li>
                                      </ul>
                                   </div>
