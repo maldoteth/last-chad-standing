@@ -1084,7 +1084,7 @@ const Documents = () => {
                                     <Input id="dhb-holdings" type="number" min="0" value={dhbHoldings || ''} onChange={e => setDhbHoldings(Math.max(0, parseInt(e.target.value) || 0))} placeholder="Enter your DHB holdings" className="bg-white border-gray-300" />
                                   </div>
                                   <div>
-                                    <Label htmlFor="dhb-staked" className="text-gray-700">$DHB Staked: (before April 1st 2025)</Label>
+                                    <Label htmlFor="dhb-staked" className="text-gray-700">$DHB Staked: (before 01.04.25)</Label>
                                     <Input id="dhb-staked" type="number" min="0" value={dhbStaked || ''} onChange={e => setDhbStaked(Math.max(0, parseInt(e.target.value) || 0))} placeholder="Enter your DHB staked" className="bg-white border-gray-300" />
                                   </div>
                                  </div>
