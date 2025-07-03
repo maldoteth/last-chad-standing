@@ -1,4 +1,3 @@
-
 import React, { useState, useMemo } from 'react';
 import { ArrowLeft, UserCheck, Gamepad2, DollarSign, ExternalLink, Search, Mail, Download, Palette } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -12,7 +11,6 @@ import TokenDistributionChart from '@/components/TokenDistributionChart';
 import TokenReleaseChart from '@/components/TokenReleaseChart';
 import DocumentSearch from '@/components/DocumentSearch';
 import { formatNumberWithAbbreviation } from '@/lib/utils';
-
 const Documents = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
@@ -23,7 +21,7 @@ const Documents = () => {
     honoraryChads: 0,
     allAccessPass: 0,
     vipPass: 0,
-    elitePass: 0,
+    elitePass: 0
   });
 
   // DeHub state
@@ -34,11 +32,26 @@ const Documents = () => {
 
   // NFT Collection Data
   const collections = {
-    genesisDads: { name: 'Genesis Chads', supply: 2076 },
-    honoraryChads: { name: 'Honorary Chads', supply: 133 },
-    allAccessPass: { name: 'All Access Pass', supply: 881 },
-    vipPass: { name: 'VIP Pass', supply: 245 },
-    elitePass: { name: 'Elite Pass', supply: 82 },
+    genesisDads: {
+      name: 'Genesis Chads',
+      supply: 2076
+    },
+    honoraryChads: {
+      name: 'Honorary Chads',
+      supply: 133
+    },
+    allAccessPass: {
+      name: 'All Access Pass',
+      supply: 881
+    },
+    vipPass: {
+      name: 'VIP Pass',
+      supply: 245
+    },
+    elitePass: {
+      name: 'Elite Pass',
+      supply: 82
+    }
   };
 
   // Airdrop Constants
@@ -53,13 +66,16 @@ const Documents = () => {
   const tokensPerNFT = useMemo(() => {
     const TOTAL_SUPPLY = 100_000_000_000; // Total token supply
     const allocations = {
-      genesisDads: 0.02 * TOTAL_SUPPLY, // 2% = 2,000,000,000 tokens
-      honoraryChads: 0.0025 * TOTAL_SUPPLY, // 0.25% = 250,000,000 tokens
-      allAccessPass: 0.0025 * TOTAL_SUPPLY, // 0.25% = 250,000,000 tokens
-      elitePass: 0.015 * TOTAL_SUPPLY, // 1.5% = 1,500,000,000 tokens
-      vipPass: 0.01 * TOTAL_SUPPLY, // 1% = 1,000,000,000 tokens
+      genesisDads: 0.02 * TOTAL_SUPPLY,
+      // 2% = 2,000,000,000 tokens
+      honoraryChads: 0.0025 * TOTAL_SUPPLY,
+      // 0.25% = 250,000,000 tokens
+      allAccessPass: 0.0025 * TOTAL_SUPPLY,
+      // 0.25% = 250,000,000 tokens
+      elitePass: 0.015 * TOTAL_SUPPLY,
+      // 1.5% = 1,500,000,000 tokens
+      vipPass: 0.01 * TOTAL_SUPPLY // 1% = 1,000,000,000 tokens
     };
-    
     return Object.entries(collections).reduce((acc, [key, collection]) => {
       acc[key] = allocations[key as keyof typeof allocations] / collection.supply;
       return acc;
@@ -69,7 +85,7 @@ const Documents = () => {
   // Calculate user's total allocation
   const userAllocation = useMemo(() => {
     return Object.entries(holdings).reduce((total, [key, amount]) => {
-      return total + (amount * tokensPerNFT[key]);
+      return total + amount * tokensPerNFT[key];
     }, 0);
   }, [holdings, tokensPerNFT]);
 
@@ -77,10 +93,9 @@ const Documents = () => {
   const dhbAllocation = useMemo(() => {
     const stakerPercentage = dhbStaked / TOTAL_DHB_STAKED;
     const holderPercentage = dhbHoldings / TOTAL_DHB_HOLDINGS;
-    
     const baseStakerAllocation = stakerPercentage * (0.075 * TOTAL_SUPPLY); // 7.5% for stakers
     const holderAllocation = holderPercentage * (0.025 * TOTAL_SUPPLY); // 2.5% for holders
-    
+
     // Calculate bonus multiplier (mutually exclusive)
     let bonusMultiplier = 1;
     if (ogBonus) {
@@ -88,10 +103,8 @@ const Documents = () => {
     } else if (veteranBonus) {
       bonusMultiplier = 1.3; // 1.3x multiplier (30% bonus)
     }
-    
     const stakerAllocation = baseStakerAllocation * bonusMultiplier;
     const bonusTokens = baseStakerAllocation * (bonusMultiplier - 1);
-    
     return {
       baseStakerTokens: isNaN(baseStakerAllocation) ? 0 : baseStakerAllocation,
       bonusTokens: isNaN(bonusTokens) ? 0 : bonusTokens,
@@ -103,7 +116,6 @@ const Documents = () => {
       bonusMultiplier: bonusMultiplier
     };
   }, [dhbStaked, dhbHoldings, ogBonus, veteranBonus]);
-
   const handleInputChange = (collection: string, value: string) => {
     const numValue = Math.max(0, parseInt(value) || 0);
     setHoldings(prev => ({
@@ -111,14 +123,13 @@ const Documents = () => {
       [collection]: numValue
     }));
   };
-
   const clearAll = () => {
     setHoldings({
       genesisDads: 0,
       honoraryChads: 0,
       allAccessPass: 0,
       vipPass: 0,
-      elitePass: 0,
+      elitePass: 0
     });
     setDhbHoldings(0);
     setDhbStaked(0);
@@ -137,7 +148,6 @@ const Documents = () => {
     setIsSearchOpen(false);
     setIsMobileSearchOpen(false);
   };
-
   const handleDownload = (url: string, filename: string) => {
     const link = document.createElement('a');
     link.href = url;
@@ -146,7 +156,6 @@ const Documents = () => {
     link.click();
     document.body.removeChild(link);
   };
-
   const documentSections = [{
     title: "Game Overview",
     icon: <Gamepad2 size={20} />,
@@ -243,8 +252,7 @@ const Documents = () => {
       href: "https://leanchadfight.club"
     }]
   }];
-  return (
-    <>
+  return <>
       <div className="min-h-screen bg-gray-50">
         {/* Header */}
         <header className="bg-white border-b border-gray-200 sticky top-0 z-10">
@@ -949,25 +957,15 @@ const Documents = () => {
                               </CardDescription>
                             </CardHeader>
                             <CardContent className="space-y-4">
-                              {Object.entries(collections).map(([key, collection]) => (
-                                <div key={key} className="space-y-2">
+                              {Object.entries(collections).map(([key, collection]) => <div key={key} className="space-y-2">
                                   <Label htmlFor={key} className="flex justify-between text-gray-700">
                                     <span>{collection.name}</span>
                                     <span className="text-xs text-gray-500">
                                       Total Supply: {collection.supply.toLocaleString()}
                                     </span>
                                   </Label>
-                                  <Input
-                                    id={key}
-                                    type="number"
-                                    min="0"
-                                    value={holdings[key as keyof typeof holdings] || ''}
-                                    onChange={(e) => handleInputChange(key, e.target.value)}
-                                    placeholder="0"
-                                    className="bg-white border-gray-300"
-                                  />
-                                </div>
-                              ))}
+                                  <Input id={key} type="number" min="0" value={holdings[key as keyof typeof holdings] || ''} onChange={e => handleInputChange(key, e.target.value)} placeholder="0" className="bg-white border-gray-300" />
+                                </div>)}
                               
                               <Button onClick={clearAll} variant="outline" className="w-full mt-4">
                                 Clear All
@@ -987,20 +985,19 @@ const Documents = () => {
                               {/* Breakdown by Collection */}
                               <div className="space-y-3">
                                 {Object.entries(collections).map(([key, collection]) => {
-                                  const userTokens = holdings[key as keyof typeof holdings] * tokensPerNFT[key];
-                                  if (holdings[key as keyof typeof holdings] === 0) return null;
-                                  
-                                  return (
-                                    <div key={key} className="flex justify-between text-sm">
+                                const userTokens = holdings[key as keyof typeof holdings] * tokensPerNFT[key];
+                                if (holdings[key as keyof typeof holdings] === 0) return null;
+                                return <div key={key} className="flex justify-between text-sm">
                                       <span className="text-gray-600">
                                         {collection.name} ({holdings[key as keyof typeof holdings]}x)
                                       </span>
                                       <span className="font-medium text-gray-900">
-                                        {userTokens.toLocaleString(undefined, { maximumFractionDigits: 0 })} tokens
+                                        {userTokens.toLocaleString(undefined, {
+                                      maximumFractionDigits: 0
+                                    })} tokens
                                       </span>
-                                    </div>
-                                  );
-                                })}
+                                    </div>;
+                              })}
                               </div>
 
                               {userAllocation > 0 && <div className="border-t border-gray-200 pt-3" />}
@@ -1010,12 +1007,13 @@ const Documents = () => {
                                 <div className="flex justify-between items-center">
                                   <span className="text-lg font-semibold text-gray-900">Total Allocation:</span>
                                   <span className="text-xl font-bold text-blue-600">
-                                    {userAllocation.toLocaleString(undefined, { maximumFractionDigits: 0 })} tokens
+                                    {userAllocation.toLocaleString(undefined, {
+                                    maximumFractionDigits: 0
+                                  })} tokens
                                   </span>
                                 </div>
                                 
-                                {userAllocation > 0 && (
-                                  <>
+                                {userAllocation > 0 && <>
                                     <div className="flex justify-between items-center">
                                       <span className="text-md font-medium text-gray-700">Est. TGE Value:</span>
                                       <span className="text-lg font-semibold text-green-600">
@@ -1023,17 +1021,14 @@ const Documents = () => {
                                       </span>
                                     </div>
                                     <div className="text-center text-sm text-gray-500">
-                                      {((userAllocation / TOTAL_AIRDROP) * 100).toFixed(4)}% of total airdrop
+                                      {(userAllocation / TOTAL_AIRDROP * 100).toFixed(4)}% of total airdrop
                                     </div>
-                                  </>
-                                )}
+                                  </>}
                               </div>
 
-                              {userAllocation === 0 && (
-                                <div className="text-center text-gray-500 py-8">
+                              {userAllocation === 0 && <div className="text-center text-gray-500 py-8">
                                   Enter your NFT holdings above to see your airdrop allocation
-                                </div>
-                              )}
+                                </div>}
                             </CardContent>
                           </Card>
                         </div>
@@ -1056,11 +1051,9 @@ const Documents = () => {
                               <div>
                                 <h4 className="font-semibold mb-2 text-gray-900">NFT Collections</h4>
                                 <ul className="text-sm text-gray-600 space-y-1">
-                                  {Object.entries(collections).map(([key, collection]) => (
-                                    <li key={key}>
+                                  {Object.entries(collections).map(([key, collection]) => <li key={key}>
                                       {collection.name}: {collection.supply.toLocaleString()} supply
-                                    </li>
-                                  ))}
+                                    </li>)}
                                 </ul>
                               </div>
                             </div>
@@ -1087,27 +1080,11 @@ const Documents = () => {
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                   <div>
                                     <Label htmlFor="dhb-holdings" className="text-gray-700">$DHB Holdings:</Label>
-                                    <Input
-                                      id="dhb-holdings"
-                                      type="number"
-                                      min="0"
-                                      value={dhbHoldings || ''}
-                                      onChange={(e) => setDhbHoldings(Math.max(0, parseInt(e.target.value) || 0))}
-                                      placeholder="Enter your DHB holdings"
-                                      className="bg-white border-gray-300"
-                                    />
+                                    <Input id="dhb-holdings" type="number" min="0" value={dhbHoldings || ''} onChange={e => setDhbHoldings(Math.max(0, parseInt(e.target.value) || 0))} placeholder="Enter your DHB holdings" className="bg-white border-gray-300" />
                                   </div>
                                   <div>
                                     <Label htmlFor="dhb-staked" className="text-gray-700">$DHB Staked:</Label>
-                                    <Input
-                                      id="dhb-staked"
-                                      type="number"
-                                      min="0"
-                                      value={dhbStaked || ''}
-                                      onChange={(e) => setDhbStaked(Math.max(0, parseInt(e.target.value) || 0))}
-                                      placeholder="Enter your DHB staked"
-                                      className="bg-white border-gray-300"
-                                    />
+                                    <Input id="dhb-staked" type="number" min="0" value={dhbStaked || ''} onChange={e => setDhbStaked(Math.max(0, parseInt(e.target.value) || 0))} placeholder="Enter your DHB staked" className="bg-white border-gray-300" />
                                   </div>
                                  </div>
                               </CardContent>
@@ -1122,11 +1099,7 @@ const Documents = () => {
                               <CardContent className="space-y-4">
                                 <div className="space-y-3">
                                   <div className="flex items-center space-x-3">
-                                    <Checkbox 
-                                      id="og-bonus" 
-                                      checked={ogBonus}
-                                      onCheckedChange={(checked) => setOgBonus(checked === true)}
-                                    />
+                                    <Checkbox id="og-bonus" checked={ogBonus} onCheckedChange={checked => setOgBonus(checked === true)} />
                                     <div className="grid gap-1.5 leading-none">
                                       <Label htmlFor="og-bonus" className="text-sm font-medium text-gray-900 cursor-pointer">
                                         OG Bonus: Staked since launch (+100%)
@@ -1137,11 +1110,7 @@ const Documents = () => {
                                     </div>
                                   </div>
                                   <div className="flex items-center space-x-3">
-                                    <Checkbox 
-                                      id="veteran-bonus" 
-                                      checked={veteranBonus}
-                                      onCheckedChange={(checked) => setVeteranBonus(checked === true)}
-                                    />
+                                    <Checkbox id="veteran-bonus" checked={veteranBonus} onCheckedChange={checked => setVeteranBonus(checked === true)} />
                                     <div className="grid gap-1.5 leading-none">
                                       <Label htmlFor="veteran-bonus" className="text-sm font-medium text-gray-900 cursor-pointer">
                                         Veteran Bonus: Staked before Nov 16th, 2024 (+30%)
@@ -1151,14 +1120,12 @@ const Documents = () => {
                                       </p>
                                     </div>
                                   </div>
-                                  {(ogBonus || veteranBonus) && (
-                                    <div className="p-3 bg-white rounded-lg border border-blue-200">
+                                  {(ogBonus || veteranBonus) && <div className="p-3 bg-white rounded-lg border border-blue-200">
                                       <p className="text-sm text-gray-700">
                                         <span className="font-medium">Active Bonus:</span> {dhbAllocation.bonusMultiplier}x multiplier 
                                         {ogBonus ? ' (OG Bonus - staked since launch)' : ' (Veteran Bonus - staked before Nov 16th)'}
                                       </p>
-                                    </div>
-                                  )}
+                                    </div>}
                                 </div>
                               </CardContent>
                             </Card>
@@ -1169,8 +1136,7 @@ const Documents = () => {
                                 <CardTitle className="text-gray-900">Your $LCS Allocation</CardTitle>
                               </CardHeader>
                               <CardContent>
-                                 {dhbHoldings > 0 || dhbStaked > 0 ? (
-                                   <div className="space-y-4">
+                                 {dhbHoldings > 0 || dhbStaked > 0 ? <div className="space-y-4">
                                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                                         <div className="text-center p-4 bg-white rounded-lg border border-green-200">
                                           <div className="text-2xl font-bold text-gray-900">
@@ -1182,7 +1148,7 @@ const Documents = () => {
                                           <div className="text-2xl font-bold text-gray-900">
                                             {formatNumberWithAbbreviation(dhbAllocation.baseStakerTokens)}
                                           </div>
-                                          <div className="text-sm text-gray-600">Base Staking</div>
+                                          <div className="text-sm text-gray-600">From Staking</div>
                                         </div>
                                         <div className="text-center p-4 bg-white rounded-lg border border-green-200">
                                           <div className="text-2xl font-bold text-gray-900">
@@ -1199,25 +1165,29 @@ const Documents = () => {
                                      </div>
                                      
                                      {/* Bonus breakdown */}
-                                     {dhbAllocation.bonusTokens > 0 && (
-                                       <div className="p-4 bg-blue-50 rounded-lg border border-blue-200">
+                                     {dhbAllocation.bonusTokens > 0 && <div className="p-4 bg-blue-50 rounded-lg border border-blue-200">
                                          <h4 className="font-semibold text-gray-900 mb-2">Staking Bonus Breakdown</h4>
                                          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm">
                                            <div>
                                              <span className="font-medium text-gray-700">Base Staking:</span>
-                                             <span className="ml-2 text-gray-900">{dhbAllocation.baseStakerTokens.toLocaleString(undefined, { maximumFractionDigits: 0 })} tokens</span>
+                                             <span className="ml-2 text-gray-900">{dhbAllocation.baseStakerTokens.toLocaleString(undefined, {
+                                          maximumFractionDigits: 0
+                                        })} tokens</span>
                                            </div>
                                            <div>
                                              <span className="font-medium text-gray-700">Bonus Tokens:</span>
-                                             <span className="ml-2 text-green-600 font-semibold">+{dhbAllocation.bonusTokens.toLocaleString(undefined, { maximumFractionDigits: 0 })} tokens</span>
+                                             <span className="ml-2 text-green-600 font-semibold">+{dhbAllocation.bonusTokens.toLocaleString(undefined, {
+                                          maximumFractionDigits: 0
+                                        })} tokens</span>
                                            </div>
                                            <div>
                                              <span className="font-medium text-gray-700">Total Staking:</span>
-                                             <span className="ml-2 text-blue-600 font-semibold">{dhbAllocation.stakerTokens.toLocaleString(undefined, { maximumFractionDigits: 0 })} tokens</span>
+                                             <span className="ml-2 text-blue-600 font-semibold">{dhbAllocation.stakerTokens.toLocaleString(undefined, {
+                                          maximumFractionDigits: 0
+                                        })} tokens</span>
                                            </div>
                                          </div>
-                                       </div>
-                                     )}
+                                       </div>}
                                     <div className="grid grid-cols-2 gap-4 text-sm text-gray-600">
                                       <div>
                                         <span className="font-medium">Your Staking Share:</span> {dhbAllocation.stakerPercentage.toFixed(4)}%
@@ -1226,12 +1196,9 @@ const Documents = () => {
                                         <span className="font-medium">Your Holdings Share:</span> {dhbAllocation.holderPercentage.toFixed(4)}%
                                       </div>
                                     </div>
-                                  </div>
-                                ) : (
-                                  <div className="text-center text-gray-500 py-8">
+                                  </div> : <div className="text-center text-gray-500 py-8">
                                     Enter your DHB holdings and staked amounts to see your allocation
-                                  </div>
-                                )}
+                                  </div>}
                               </CardContent>
                             </Card>
 
@@ -1446,11 +1413,7 @@ const Documents = () => {
                             </div>
                             <h3 className="font-semibold mb-2">Logo Text</h3>
                             <p className="text-sm text-gray-600 mb-4">Official Last Chad Standing text logo</p>
-                            <Button 
-                              onClick={() => handleDownload('/lovable-uploads/c076819c-8944-483c-9fd4-336da5ebba11.png', 'lcs-logo-text.png')}
-                              size="sm" 
-                              className="w-full flex items-center gap-2"
-                            >
+                            <Button onClick={() => handleDownload('/lovable-uploads/c076819c-8944-483c-9fd4-336da5ebba11.png', 'lcs-logo-text.png')} size="sm" className="w-full flex items-center gap-2">
                               <Download size={16} />
                               Download PNG
                             </Button>
@@ -1463,11 +1426,7 @@ const Documents = () => {
                             </div>
                             <h3 className="font-semibold mb-2">Fist Logo</h3>
                             <p className="text-sm text-gray-600 mb-4">LCS fist emblem logo</p>
-                            <Button 
-                              onClick={() => handleDownload('/lovable-uploads/467b4b2b-4ef7-4259-8c00-cc82ac4255ae.png', 'lcs-fist-logo.png')}
-                              size="sm" 
-                              className="w-full flex items-center gap-2"
-                            >
+                            <Button onClick={() => handleDownload('/lovable-uploads/467b4b2b-4ef7-4259-8c00-cc82ac4255ae.png', 'lcs-fist-logo.png')} size="sm" className="w-full flex items-center gap-2">
                               <Download size={16} />
                               Download PNG
                             </Button>
@@ -1480,11 +1439,7 @@ const Documents = () => {
                             </div>
                             <h3 className="font-semibold mb-2">LCS Letters</h3>
                             <p className="text-sm text-gray-600 mb-4">LCS abbreviated letter logo</p>
-                            <Button 
-                              onClick={() => handleDownload('/lovable-uploads/ac3e1f52-ba21-4588-9051-87eef47caf5c.png', 'lcs-letters-logo.png')}
-                              size="sm" 
-                              className="w-full flex items-center gap-2"
-                            >
+                            <Button onClick={() => handleDownload('/lovable-uploads/ac3e1f52-ba21-4588-9051-87eef47caf5c.png', 'lcs-letters-logo.png')} size="sm" className="w-full flex items-center gap-2">
                               <Download size={16} />
                               Download PNG
                             </Button>
@@ -1511,8 +1466,6 @@ const Documents = () => {
       </div>
 
       <DocumentSearch isOpen={isSearchOpen} onClose={handleSearchClose} />
-    </>
-  );
+    </>;
 };
-
 export default Documents;
