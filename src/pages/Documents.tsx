@@ -1138,32 +1138,32 @@ const Documents = () => {
                               </CardHeader>
                               <CardContent>
                                  {dhbHoldings > 0 || dhbStaked > 0 ? <div className="space-y-4">
-                                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                                        <div className="text-center p-4 bg-white rounded-lg border border-green-200">
-                                          <div className="text-2xl font-bold text-gray-900">
-                                            {formatNumberWithAbbreviation(dhbAllocation.totalTokens)}
-                                          </div>
-                                          <div className="text-sm text-gray-600">Total Tokens</div>
-                                        </div>
-                                        <div className="text-center p-4 bg-white rounded-lg border border-green-200">
-                                          <div className="text-2xl font-bold text-gray-900">
-                                            {formatNumberWithAbbreviation(dhbAllocation.baseStakerTokens)}
-                                          </div>
-                                          <div className="text-sm text-gray-600">From Staking</div>
-                                        </div>
-                                        <div className="text-center p-4 bg-white rounded-lg border border-green-200">
-                                          <div className="text-2xl font-bold text-gray-900">
-                                            {formatNumberWithAbbreviation(dhbAllocation.holderTokens)}
-                                          </div>
-                                          <div className="text-sm text-gray-600">From Holdings</div>
-                                        </div>
-                                        <div className="text-center p-4 bg-white rounded-lg border border-green-200">
-                                          <div className="text-2xl font-bold text-gray-900">
-                                            ${formatNumberWithAbbreviation(dhbAllocation.totalTokens * 0.0002)}
-                                          </div>
-                                          <div className="text-sm text-gray-600">Est. TGE Value</div>
-                                        </div>
-                                     </div>
+                                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                         <div className="text-center p-4 bg-white rounded-lg border border-green-200">
+                                           <div className="text-lg md:text-2xl font-bold text-gray-900">
+                                             {formatNumberWithAbbreviation(dhbAllocation.totalTokens)}
+                                           </div>
+                                           <div className="text-xs md:text-sm text-gray-600">Total Tokens</div>
+                                         </div>
+                                         <div className="text-center p-4 bg-white rounded-lg border border-green-200">
+                                           <div className="text-lg md:text-2xl font-bold text-gray-900">
+                                             {formatNumberWithAbbreviation(dhbAllocation.baseStakerTokens)}
+                                           </div>
+                                           <div className="text-xs md:text-sm text-gray-600">From Staking</div>
+                                         </div>
+                                         <div className="text-center p-4 bg-white rounded-lg border border-green-200">
+                                           <div className="text-lg md:text-2xl font-bold text-gray-900">
+                                             {formatNumberWithAbbreviation(dhbAllocation.holderTokens)}
+                                           </div>
+                                           <div className="text-xs md:text-sm text-gray-600">From Holdings</div>
+                                         </div>
+                                         <div className="text-center p-4 bg-white rounded-lg border border-green-200">
+                                           <div className="text-lg md:text-2xl font-bold text-gray-900">
+                                             ${formatNumberWithAbbreviation(dhbAllocation.totalTokens * 0.0002)}
+                                           </div>
+                                           <div className="text-xs md:text-sm text-gray-600">Est. TGE Value</div>
+                                         </div>
+                                      </div>
                                      
                                      {/* Bonus breakdown */}
                                      {dhbAllocation.bonusTokens > 0 && <div className="p-4 bg-blue-50 rounded-lg border border-blue-200">
