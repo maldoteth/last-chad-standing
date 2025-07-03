@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Checkbox } from '@/components/ui/checkbox';
 import TokenDistributionChart from '@/components/TokenDistributionChart';
 import TokenReleaseChart from '@/components/TokenReleaseChart';
 import DocumentSearch from '@/components/DocumentSearch';
@@ -27,6 +28,8 @@ const Documents = () => {
   // DeHub state
   const [dhbHoldings, setDhbHoldings] = useState(0);
   const [dhbStaked, setDhbStaked] = useState(0);
+  const [ogBonus, setOgBonus] = useState(false);
+  const [veteranBonus, setVeteranBonus] = useState(false);
 
   // NFT Collection Data
   const collections = {
@@ -74,17 +77,28 @@ const Documents = () => {
     const stakerPercentage = dhbStaked / TOTAL_DHB_STAKED;
     const holderPercentage = dhbHoldings / TOTAL_DHB_HOLDINGS;
     
-    const stakerAllocation = stakerPercentage * (0.075 * TOTAL_SUPPLY); // 7.5% for stakers
+    const baseStakerAllocation = stakerPercentage * (0.075 * TOTAL_SUPPLY); // 7.5% for stakers
     const holderAllocation = holderPercentage * (0.025 * TOTAL_SUPPLY); // 2.5% for holders
     
+    // Calculate bonuses
+    let bonusMultiplier = 1;
+    if (ogBonus) bonusMultiplier += 1; // +100% bonus
+    if (veteranBonus) bonusMultiplier += 0.3; // +30% bonus
+    
+    const stakerAllocation = baseStakerAllocation * bonusMultiplier;
+    const bonusTokens = baseStakerAllocation * (bonusMultiplier - 1);
+    
     return {
+      baseStakerTokens: isNaN(baseStakerAllocation) ? 0 : baseStakerAllocation,
+      bonusTokens: isNaN(bonusTokens) ? 0 : bonusTokens,
       stakerTokens: isNaN(stakerAllocation) ? 0 : stakerAllocation,
       holderTokens: isNaN(holderAllocation) ? 0 : holderAllocation,
       totalTokens: (isNaN(stakerAllocation) ? 0 : stakerAllocation) + (isNaN(holderAllocation) ? 0 : holderAllocation),
       stakerPercentage: isNaN(stakerPercentage) ? 0 : stakerPercentage * 100,
-      holderPercentage: isNaN(holderPercentage) ? 0 : holderPercentage * 100
+      holderPercentage: isNaN(holderPercentage) ? 0 : holderPercentage * 100,
+      bonusMultiplier: bonusMultiplier
     };
-  }, [dhbStaked, dhbHoldings]);
+  }, [dhbStaked, dhbHoldings, ogBonus, veteranBonus]);
 
   const handleInputChange = (collection: string, value: string) => {
     const numValue = Math.max(0, parseInt(value) || 0);
@@ -104,6 +118,8 @@ const Documents = () => {
     });
     setDhbHoldings(0);
     setDhbStaked(0);
+    setOgBonus(false);
+    setVeteranBonus(false);
   };
   const handleSearchClick = () => {
     // Check if mobile
@@ -1089,6 +1105,57 @@ const Documents = () => {
                                       className="bg-white border-gray-300"
                                     />
                                   </div>
+                                 </div>
+                              </CardContent>
+                            </Card>
+
+                            {/* Staking Bonuses */}
+                            <Card className="bg-blue-50 border-blue-200">
+                              <CardHeader>
+                                <CardTitle className="text-gray-900">Staking Bonuses</CardTitle>
+                                <CardDescription>Select applicable bonuses for your staked $DHB allocation</CardDescription>
+                              </CardHeader>
+                              <CardContent className="space-y-4">
+                                <div className="space-y-3">
+                                  <div className="flex items-center space-x-3">
+                                    <Checkbox 
+                                      id="og-bonus" 
+                                      checked={ogBonus}
+                                      onCheckedChange={(checked) => setOgBonus(checked === true)}
+                                    />
+                                    <div className="grid gap-1.5 leading-none">
+                                      <Label htmlFor="og-bonus" className="text-sm font-medium text-gray-900 cursor-pointer">
+                                        OG Bonus: Staked since launch (+100%)
+                                      </Label>
+                                      <p className="text-xs text-gray-600">
+                                        For users who have been staking $DHB since the protocol launch
+                                      </p>
+                                    </div>
+                                  </div>
+                                  <div className="flex items-center space-x-3">
+                                    <Checkbox 
+                                      id="veteran-bonus" 
+                                      checked={veteranBonus}
+                                      onCheckedChange={(checked) => setVeteranBonus(checked === true)}
+                                    />
+                                    <div className="grid gap-1.5 leading-none">
+                                      <Label htmlFor="veteran-bonus" className="text-sm font-medium text-gray-900 cursor-pointer">
+                                        Veteran Bonus: Staked before Nov 16th, 2024 (+30%)
+                                      </Label>
+                                      <p className="text-xs text-gray-600">
+                                        For users who staked $DHB before November 16th, 2024
+                                      </p>
+                                    </div>
+                                  </div>
+                                  {(ogBonus || veteranBonus) && (
+                                    <div className="p-3 bg-white rounded-lg border border-blue-200">
+                                      <p className="text-sm text-gray-700">
+                                        <span className="font-medium">Active Bonuses:</span> Total multiplier of {dhbAllocation.bonusMultiplier}x 
+                                        {ogBonus && veteranBonus ? ' (OG + Veteran bonuses stack)' : 
+                                         ogBonus ? ' (OG bonus)' : ' (Veteran bonus)'}
+                                      </p>
+                                    </div>
+                                  )}
                                 </div>
                               </CardContent>
                             </Card>
@@ -1099,34 +1166,55 @@ const Documents = () => {
                                 <CardTitle className="text-gray-900">Your $LCS Allocation</CardTitle>
                               </CardHeader>
                               <CardContent>
-                                {dhbHoldings > 0 || dhbStaked > 0 ? (
-                                  <div className="space-y-4">
-                                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                                      <div className="text-center p-4 bg-white rounded-lg border border-green-200">
-                                        <div className="text-2xl font-bold text-gray-900">
-                                          {dhbAllocation.totalTokens.toLocaleString(undefined, { maximumFractionDigits: 0 })}
-                                        </div>
-                                        <div className="text-sm text-gray-600">Total Tokens</div>
-                                      </div>
-                                      <div className="text-center p-4 bg-white rounded-lg border border-green-200">
-                                        <div className="text-2xl font-bold text-gray-900">
-                                          {dhbAllocation.stakerTokens.toLocaleString(undefined, { maximumFractionDigits: 0 })}
-                                        </div>
-                                        <div className="text-sm text-gray-600">From Staking</div>
-                                      </div>
-                                      <div className="text-center p-4 bg-white rounded-lg border border-green-200">
-                                        <div className="text-2xl font-bold text-gray-900">
-                                          {dhbAllocation.holderTokens.toLocaleString(undefined, { maximumFractionDigits: 0 })}
-                                        </div>
-                                        <div className="text-sm text-gray-600">From Holdings</div>
-                                      </div>
-                                      <div className="text-center p-4 bg-white rounded-lg border border-green-200">
-                                        <div className="text-2xl font-bold text-gray-900">
-                                          ${(dhbAllocation.totalTokens * 0.0002).toLocaleString(undefined, { maximumFractionDigits: 2 })}
-                                        </div>
-                                        <div className="text-sm text-gray-600">Est. TGE Value</div>
-                                      </div>
-                                    </div>
+                                 {dhbHoldings > 0 || dhbStaked > 0 ? (
+                                   <div className="space-y-4">
+                                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                       <div className="text-center p-4 bg-white rounded-lg border border-green-200">
+                                         <div className="text-2xl font-bold text-gray-900">
+                                           {dhbAllocation.totalTokens.toLocaleString(undefined, { maximumFractionDigits: 0 })}
+                                         </div>
+                                         <div className="text-sm text-gray-600">Total Tokens</div>
+                                       </div>
+                                       <div className="text-center p-4 bg-white rounded-lg border border-green-200">
+                                         <div className="text-2xl font-bold text-gray-900">
+                                           {dhbAllocation.baseStakerTokens.toLocaleString(undefined, { maximumFractionDigits: 0 })}
+                                         </div>
+                                         <div className="text-sm text-gray-600">Base Staking</div>
+                                       </div>
+                                       <div className="text-center p-4 bg-white rounded-lg border border-green-200">
+                                         <div className="text-2xl font-bold text-gray-900">
+                                           {dhbAllocation.holderTokens.toLocaleString(undefined, { maximumFractionDigits: 0 })}
+                                         </div>
+                                         <div className="text-sm text-gray-600">From Holdings</div>
+                                       </div>
+                                       <div className="text-center p-4 bg-white rounded-lg border border-green-200">
+                                         <div className="text-2xl font-bold text-gray-900">
+                                           ${(dhbAllocation.totalTokens * 0.0002).toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                                         </div>
+                                         <div className="text-sm text-gray-600">Est. TGE Value</div>
+                                       </div>
+                                     </div>
+                                     
+                                     {/* Bonus breakdown */}
+                                     {dhbAllocation.bonusTokens > 0 && (
+                                       <div className="p-4 bg-blue-50 rounded-lg border border-blue-200">
+                                         <h4 className="font-semibold text-gray-900 mb-2">Staking Bonus Breakdown</h4>
+                                         <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm">
+                                           <div>
+                                             <span className="font-medium text-gray-700">Base Staking:</span>
+                                             <span className="ml-2 text-gray-900">{dhbAllocation.baseStakerTokens.toLocaleString(undefined, { maximumFractionDigits: 0 })} tokens</span>
+                                           </div>
+                                           <div>
+                                             <span className="font-medium text-gray-700">Bonus Tokens:</span>
+                                             <span className="ml-2 text-green-600 font-semibold">+{dhbAllocation.bonusTokens.toLocaleString(undefined, { maximumFractionDigits: 0 })} tokens</span>
+                                           </div>
+                                           <div>
+                                             <span className="font-medium text-gray-700">Total Staking:</span>
+                                             <span className="ml-2 text-blue-600 font-semibold">{dhbAllocation.stakerTokens.toLocaleString(undefined, { maximumFractionDigits: 0 })} tokens</span>
+                                           </div>
+                                         </div>
+                                       </div>
+                                     )}
                                     <div className="grid grid-cols-2 gap-4 text-sm text-gray-600">
                                       <div>
                                         <span className="font-medium">Your Staking Share:</span> {dhbAllocation.stakerPercentage.toFixed(4)}%
@@ -1153,12 +1241,14 @@ const Documents = () => {
                                 <div className="grid gap-4 md:grid-cols-2">
                                   <div>
                                     <h4 className="font-semibold mb-2 text-gray-900">Allocation Breakdown</h4>
-                                    <ul className="text-sm text-gray-600 space-y-1">
-                                      <li>Total DeHub Allocation: 10% (10,000,000,000 tokens)</li>
-                                      <li>Stakers Pool: 7.5% (7,500,000,000 tokens)</li>
-                                      <li>Holders Pool: 2.5% (2,500,000,000 tokens)</li>
-                                      <li>Estimated TGE Price: $0.0002</li>
-                                    </ul>
+                                     <ul className="text-sm text-gray-600 space-y-1">
+                                       <li>Total DeHub Allocation: 10% (10,000,000,000 tokens)</li>
+                                       <li>Stakers Pool: 7.5% (7,500,000,000 tokens)</li>
+                                       <li>Holders Pool: 2.5% (2,500,000,000 tokens)</li>
+                                       <li>OG Bonus: +100% for stakers since launch</li>
+                                       <li>Veteran Bonus: +30% for stakers before Nov 16, 2024</li>
+                                       <li>Estimated TGE Price: $0.0002</li>
+                                     </ul>
                                   </div>
                                   <div>
                                     <h4 className="font-semibold mb-2 text-gray-900">Total Pool Sizes</h4>
