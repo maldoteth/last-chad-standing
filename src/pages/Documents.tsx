@@ -39,17 +39,17 @@ const Documents = () => {
         const id = location.hash.substring(1); // Remove the # character
         const element = document.getElementById(id);
         if (element) {
-          // Add a small delay to ensure DOM is fully rendered
+          // Add delay to ensure DOM is fully rendered
           setTimeout(() => {
             const headerOffset = 64; // Account for sticky header (h-16 = 64px)
-            const elementPosition = element.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+            const elementTop = element.offsetTop;
+            const scrollPosition = elementTop - headerOffset;
             
             window.scrollTo({
-              top: offsetPosition,
+              top: Math.max(0, scrollPosition),
               behavior: 'smooth'
             });
-          }, 100);
+          }, 300);
         }
       }
     };
