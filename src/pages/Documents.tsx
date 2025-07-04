@@ -32,50 +32,35 @@ const Documents = () => {
 
   const location = useLocation();
 
-  // Handle hash scrolling on page load and hash changes
+  // Hash-based scrolling - handles both initial load and hash changes
   useEffect(() => {
     const scrollToHash = () => {
       if (location.hash) {
         const id = location.hash.substring(1); // Remove the # character
+        console.log('Attempting to scroll to:', id);
         const element = document.getElementById(id);
         if (element) {
-          // Add delay to ensure DOM is fully rendered
+          console.log('Element found:', element);
+          // Use longer delay to ensure DOM is fully rendered
           setTimeout(() => {
             const headerOffset = 64; // Account for sticky header (h-16 = 64px)
             const elementTop = element.offsetTop;
             const scrollPosition = elementTop - headerOffset;
             
+            console.log('Scrolling to position:', scrollPosition);
             window.scrollTo({
               top: scrollPosition,
               behavior: 'smooth'
             });
-          }, 500);
+          }, 1000); // Longer delay for both initial load and hash changes
+        } else {
+          console.log('Element not found for id:', id);
         }
       }
     };
 
     scrollToHash();
-  }, [location.hash]);
-
-  // Handle initial page load with hash
-  useEffect(() => {
-    if (location.hash) {
-      const id = location.hash.substring(1);
-      const element = document.getElementById(id);
-      if (element) {
-        setTimeout(() => {
-          const headerOffset = 64;
-          const elementTop = element.offsetTop;
-          const scrollPosition = elementTop - headerOffset;
-          
-          window.scrollTo({
-            top: scrollPosition,
-            behavior: 'smooth'
-          });
-        }, 1000); // Longer delay for initial page load
-      }
-    }
-  }, []); // Empty dependency array - runs once on mount
+  }, [location.hash]); // Runs on mount AND when hash changes
 
   // NFT Collection Data
   const collections = {
