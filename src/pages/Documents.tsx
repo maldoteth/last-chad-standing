@@ -36,31 +36,41 @@ const Documents = () => {
   useEffect(() => {
     const scrollToHash = () => {
       if (location.hash) {
-        const id = location.hash.substring(1); // Remove the # character
+        const id = location.hash.substring(1);
         console.log('Attempting to scroll to:', id);
-        const element = document.getElementById(id);
-        if (element) {
-          console.log('Element found:', element);
-          // Use longer delay to ensure DOM is fully rendered
-          setTimeout(() => {
-            const headerOffset = 64; // Account for sticky header (h-16 = 64px)
-            const elementTop = element.offsetTop;
-            const scrollPosition = elementTop - headerOffset;
+        
+        const attemptScroll = (attempt = 1, maxAttempts = 5) => {
+          const element = document.getElementById(id);
+          if (element) {
+            console.log('Element found on attempt:', attempt);
             
-            console.log('Scrolling to position:', scrollPosition);
-            window.scrollTo({
-              top: scrollPosition,
-              behavior: 'smooth'
+            // Use requestAnimationFrame to ensure DOM is painted
+            requestAnimationFrame(() => {
+              const headerOffset = 64;
+              const elementTop = element.offsetTop;
+              const scrollPosition = Math.max(0, elementTop - headerOffset);
+              
+              console.log('Scrolling to position:', scrollPosition);
+              window.scrollTo({
+                top: scrollPosition,
+                behavior: 'smooth'
+              });
             });
-          }, 1000); // Longer delay for both initial load and hash changes
-        } else {
-          console.log('Element not found for id:', id);
-        }
+          } else if (attempt < maxAttempts) {
+            console.log(`Element not found on attempt ${attempt}, retrying...`);
+            setTimeout(() => attemptScroll(attempt + 1, maxAttempts), 200);
+          } else {
+            console.log('Element not found after', maxAttempts, 'attempts');
+          }
+        };
+        
+        // Initial delay, then attempt scroll with retries
+        setTimeout(() => attemptScroll(), 500);
       }
     };
 
     scrollToHash();
-  }, [location.hash]); // Runs on mount AND when hash changes
+  }, [location.hash]);
 
   // NFT Collection Data
   const collections = {
