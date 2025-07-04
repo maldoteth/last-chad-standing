@@ -1,6 +1,6 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import { ArrowLeft, UserCheck, Gamepad2, DollarSign, ExternalLink, Search, Mail, Download, Palette } from 'lucide-react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -29,48 +29,6 @@ const Documents = () => {
   const [dhbStaked, setDhbStaked] = useState(0);
   const [ogBonus, setOgBonus] = useState(false);
   const [veteranBonus, setVeteranBonus] = useState(false);
-
-  const location = useLocation();
-
-  // Hash-based scrolling - handles both initial load and hash changes
-  useEffect(() => {
-    const scrollToHash = () => {
-      if (location.hash) {
-        const id = location.hash.substring(1);
-        console.log('Attempting to scroll to:', id);
-        
-        const attemptScroll = (attempt = 1, maxAttempts = 5) => {
-          const element = document.getElementById(id);
-          if (element) {
-            console.log('Element found on attempt:', attempt);
-            
-            // Use requestAnimationFrame to ensure DOM is painted
-            requestAnimationFrame(() => {
-              const headerOffset = 64;
-              const elementTop = element.offsetTop;
-              const scrollPosition = Math.max(0, elementTop - headerOffset);
-              
-              console.log('Scrolling to position:', scrollPosition);
-              window.scrollTo({
-                top: scrollPosition,
-                behavior: 'smooth'
-              });
-            });
-          } else if (attempt < maxAttempts) {
-            console.log(`Element not found on attempt ${attempt}, retrying...`);
-            setTimeout(() => attemptScroll(attempt + 1, maxAttempts), 200);
-          } else {
-            console.log('Element not found after', maxAttempts, 'attempts');
-          }
-        };
-        
-        // Initial delay, then attempt scroll with retries
-        setTimeout(() => attemptScroll(), 500);
-      }
-    };
-
-    scrollToHash();
-  }, [location.hash]);
 
   // NFT Collection Data
   const collections = {
