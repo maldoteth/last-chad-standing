@@ -1105,9 +1105,9 @@ const Documents = () => {
                                       <Label htmlFor="og-bonus" className="text-sm font-medium text-gray-900 cursor-pointer">
                                         OG Bonus: Staked since launch (+100%)
                                       </Label>
-                                      <p className="text-xs text-gray-600">
-                                        For users who have been staking $DHB since the protocol launch
-                                      </p>
+                                       <p className="text-xs text-gray-600">
+                                         For users who have been staking $DHB since the <a href="https://bscscan.com/address/0x26d2cd7763106fdce443fadd36163e2ad33a76e6" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 underline">protocol launch</a>
+                                       </p>
                                     </div>
                                   </div>
                                   <div className="flex items-center space-x-3">
