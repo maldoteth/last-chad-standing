@@ -326,6 +326,29 @@ const Documents = () => {
                   <div className="p-8">
                     <div className="prose prose-gray max-w-none">
                       
+                      {/* Scrolling Announcement */}
+                      <div className="mb-6 overflow-hidden bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-lg border-2 border-orange-600 shadow-lg">
+                        <div className="py-3 px-4">
+                          <div className="flex items-center justify-center text-center">
+                            <div className="animate-pulse text-sm sm:text-base font-semibold">
+                              🔔 Airdrop calculators are out now! click airdrops in the menu or{' '}
+                              <button 
+                                onClick={() => {
+                                  const element = document.getElementById('airdrop-calculator');
+                                  if (element) {
+                                    element.scrollIntoView({ behavior: 'smooth' });
+                                  }
+                                }}
+                                className="underline hover:text-yellow-300 transition-colors font-bold"
+                              >
+                                tap here
+                              </button>
+                              {' '}to view now
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
                       {/* Game Blueprint Header */}
                       <div className="mb-12 p-6 bg-gradient-to-r from-red-50 to-orange-50 rounded-lg border border-red-200">
                         <h1 className="text-4xl font-bold text-gray-900 mb-4">Game Blueprint: Last Chad Standing</h1>
