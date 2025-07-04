@@ -1,6 +1,6 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { ArrowLeft, UserCheck, Gamepad2, DollarSign, ExternalLink, Search, Mail, Download, Palette } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -29,6 +29,33 @@ const Documents = () => {
   const [dhbStaked, setDhbStaked] = useState(0);
   const [ogBonus, setOgBonus] = useState(false);
   const [veteranBonus, setVeteranBonus] = useState(false);
+
+  const location = useLocation();
+
+  // Handle hash scrolling on page load and hash changes
+  useEffect(() => {
+    const scrollToHash = () => {
+      if (location.hash) {
+        const id = location.hash.substring(1); // Remove the # character
+        const element = document.getElementById(id);
+        if (element) {
+          // Add a small delay to ensure DOM is fully rendered
+          setTimeout(() => {
+            const headerOffset = 64; // Account for sticky header (h-16 = 64px)
+            const elementPosition = element.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+            
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            });
+          }, 100);
+        }
+      }
+    };
+
+    scrollToHash();
+  }, [location.hash]);
 
   // NFT Collection Data
   const collections = {
