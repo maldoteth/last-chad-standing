@@ -46,16 +46,36 @@ const Documents = () => {
             const scrollPosition = elementTop - headerOffset;
             
             window.scrollTo({
-              top: Math.max(0, scrollPosition),
+              top: scrollPosition,
               behavior: 'smooth'
             });
-          }, 300);
+          }, 500);
         }
       }
     };
 
     scrollToHash();
   }, [location.hash]);
+
+  // Handle initial page load with hash
+  useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.substring(1);
+      const element = document.getElementById(id);
+      if (element) {
+        setTimeout(() => {
+          const headerOffset = 64;
+          const elementTop = element.offsetTop;
+          const scrollPosition = elementTop - headerOffset;
+          
+          window.scrollTo({
+            top: scrollPosition,
+            behavior: 'smooth'
+          });
+        }, 1000); // Longer delay for initial page load
+      }
+    }
+  }, []); // Empty dependency array - runs once on mount
 
   // NFT Collection Data
   const collections = {
