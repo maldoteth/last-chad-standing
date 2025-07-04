@@ -111,6 +111,14 @@ export default {
 					'100%': {
 						transform: 'rotate(90deg)'
 					}
+				},
+				'scroll-left': {
+					'0%': {
+						transform: 'translateX(100%)'
+					},
+					'100%': {
+						transform: 'translateX(-100%)'
+					}
 				}
 			},
 			animation: {
