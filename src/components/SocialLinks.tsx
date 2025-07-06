@@ -53,7 +53,7 @@ const SocialLinks = ({
       {links.map(link => {
         const commonProps = {
           key: link.name,
-          className: "text-white/80 hover:text-white transition-colors hover:scale-110 transform duration-200",
+          className: "text-muted-foreground hover:text-foreground transition-colors hover:scale-110 transform duration-200",
           "aria-label": link.name
         };
 
