@@ -96,17 +96,25 @@ const TokenReleaseChart = () => {
   };
 
   return (
-    <div className="w-full h-96 mb-8 -mx-6 sm:mx-0">
+    <div className="w-full h-96 mb-8 px-4 sm:px-0">
       <br />
       <br />
       <h4 className="text-lg font-semibold mb-4 text-center">Token Release Schedule</h4>
       <ResponsiveContainer width="100%" height="100%">
-        <AreaChart data={chartData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+        <AreaChart 
+          data={chartData} 
+          margin={{ 
+            top: 10, 
+            right: isMobile ? 60 : 30, 
+            left: isMobile ? 10 : 0, 
+            bottom: 0 
+          }}
+        >
           <XAxis 
             dataKey="date" 
             axisLine={false}
             tickLine={false}
-            tick={{ fontSize: 12 }}
+            tick={{ fontSize: isMobile ? 10 : 12 }}
             interval={0}
             tickFormatter={(value, index) => {
               // Only show TGE and yearly markers
@@ -124,7 +132,7 @@ const TokenReleaseChart = () => {
           <YAxis 
             axisLine={false}
             tickLine={false}
-            tick={{ fontSize: 12 }}
+            tick={{ fontSize: isMobile ? 10 : 12 }}
             tickFormatter={(value) => `${value}B`}
           />
           <Tooltip content={<CustomTooltip />} />
