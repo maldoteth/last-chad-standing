@@ -96,7 +96,7 @@ const TokenReleaseChart = () => {
   };
 
   return (
-    <div className="w-full h-96 mb-8 -mx-2 sm:mx-0">
+    <div className="w-full h-96 mb-8">
       <br />
       <br />
       <h4 className="text-lg font-semibold mb-4 text-center px-4 sm:px-0">Token Release Schedule</h4>

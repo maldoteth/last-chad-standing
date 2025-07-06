@@ -879,45 +879,48 @@ const Documents = () => {
                       </section>
 
                       {/* Economy Section */}
-                      <section id="in-game-currency" className="mb-12 -mx-6 sm:mx-0 px-6">
+                      <section id="in-game-currency" className="mb-12 -mx-6 sm:mx-0">
+                        <div className="px-6 sm:px-0">
+                          <br />
 
-                        <br />
+                          <h2 className="text-3xl font-bold">17. Economy</h2>
+                          
+                          <br />
+                          
+                          <br />
 
-                        <h2 className="text-3xl font-bold">17. Economy</h2>
-                        
-                        <br />
-                        
-                        <br />
+                          <h3 className="text-2xl font-bold">Coins</h3>
 
-                        <h3 className="text-2xl font-bold">Coins</h3>
+                          <p>Every game needs in-game currency, but ours is unique compared to most games because it's decentralized and has a set supply, giving fighters real ownership without manipulation from developers. Unlike traditional games where developers can inflate currency at will, our coins operate on blockchain technology with transparent tokenomics.</p>
+                          <p>This means fighters truly own their digital assets and can trade them freely without fear of arbitrary changes to the game's economy. The decentralized nature ensures that the value of fighter investments is protected by smart contracts rather than corporate decisions.</p>
 
-                        <p>Every game needs in-game currency, but ours is unique compared to most games because it's decentralized and has a set supply, giving fighters real ownership without manipulation from developers. Unlike traditional games where developers can inflate currency at will, our coins operate on blockchain technology with transparent tokenomics.</p>
-                        <p>This means fighters truly own their digital assets and can trade them freely without fear of arbitrary changes to the game's economy. The decentralized nature ensures that the value of fighter investments is protected by smart contracts rather than corporate decisions.</p>
+                          <br />
 
-                        <br />
+                          <h3 id="token-economy" className="text-2xl font-bold">Distribution</h3>
 
-                        <h3 id="token-economy" className="text-2xl font-bold">Distribution</h3>
-
-                        <p><strong>Total Supply:</strong> 100,000,000,000 coins</p>
+                          <p><strong>Total Supply:</strong> 100,000,000,000 coins</p>
+                        </div>
                         
                         <TokenDistributionChart />
                         
-                        <ul>
-                          <li><strong>Public:</strong> 30% (30B coins)<br />
-                            <span className="text-sm text-gray-600">100% unlock at TGE</span></li>
-                          <li><strong>Team:</strong> 15% (15B coins)<br />
-                            <span className="text-sm text-gray-600">12 month cliff + 20% daily linear per year</span></li>
-                          <li><strong>Foundation:</strong> 15% (15B coins)<br />
-                            <span className="text-sm text-gray-600">20% a year linear daily</span></li>
-                          <li><strong>Airdrops:</strong> 15% (15B coins)<br />
-                            <span className="text-sm text-gray-600">100% TGE unlock</span></li>
-                          <li><strong>Ecosystem Rewards:</strong> 10% (10B coins)<br />
-                            <span className="text-sm text-gray-600">20% per year daily linear</span></li>
-                          <li><strong>LP:</strong> 10% (10B coins)<br />
-                            <span className="text-sm text-gray-600">100% TGE unlock</span></li>
-                          <li><strong>Advisors:</strong> 5% (5B coins)<br />
-                            <span className="text-sm text-gray-600">12 month cliff + 20% daily linear per year</span></li>
-                        </ul>
+                        <div className="px-6 sm:px-0">
+                          <ul>
+                            <li><strong>Public:</strong> 30% (30B coins)<br />
+                              <span className="text-sm text-gray-600">100% unlock at TGE</span></li>
+                            <li><strong>Team:</strong> 15% (15B coins)<br />
+                              <span className="text-sm text-gray-600">12 month cliff + 20% daily linear per year</span></li>
+                            <li><strong>Foundation:</strong> 15% (15B coins)<br />
+                              <span className="text-sm text-gray-600">20% a year linear daily</span></li>
+                            <li><strong>Airdrops:</strong> 15% (15B coins)<br />
+                              <span className="text-sm text-gray-600">100% TGE unlock</span></li>
+                            <li><strong>Ecosystem Rewards:</strong> 10% (10B coins)<br />
+                              <span className="text-sm text-gray-600">20% per year daily linear</span></li>
+                            <li><strong>LP:</strong> 10% (10B coins)<br />
+                              <span className="text-sm text-gray-600">100% TGE unlock</span></li>
+                            <li><strong>Advisors:</strong> 5% (5B coins)<br />
+                              <span className="text-sm text-gray-600">12 month cliff + 20% daily linear per year</span></li>
+                          </ul>
+                        </div>
                         
                         <TokenReleaseChart />
                       </section>
