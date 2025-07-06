@@ -106,7 +106,7 @@ const TokenReleaseChart = () => {
           margin={{ 
             top: 20, 
             right: isMobile ? 10 : 40, 
-            left: isMobile ? 25 : 20, 
+            left: isMobile ? 10 : 20, 
             bottom: 10 
           }}
         >
