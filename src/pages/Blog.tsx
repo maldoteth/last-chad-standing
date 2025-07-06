@@ -3,7 +3,7 @@ import SocialLinks from '@/components/SocialLinks';
 
 const Blog = () => {
   return (
-    <div className="relative min-h-screen bg-background">
+    <div className="relative min-h-screen bg-black">
       {/* Navigation Interface */}
       <nav className="absolute top-0 left-0 right-0 z-50 px-4 sm:px-10 py-7">
         <div className="grid grid-cols-3 items-center">
@@ -19,8 +19,8 @@ const Blog = () => {
 
           {/* Right Status */}
           <div className="flex justify-end">
-            <div className="font-inter text-xs sm:text-sm text-muted-foreground text-right hidden sm:block">
-              PHASE: <span className="text-primary">2/4</span>
+            <div className="font-inter text-xs sm:text-sm text-white text-right hidden sm:block">
+              PHASE: <span className="text-white">2/4</span>
             </div>
           </div>
         </div>
@@ -29,8 +29,8 @@ const Blog = () => {
       {/* Main Content */}
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-center">
-          <h1 className="text-4xl font-bold text-foreground mb-4">Announcements On The Way</h1>
-          <p className="text-muted-foreground text-lg"> Check back soon!</p>
+          <h1 className="text-4xl font-bold text-white mb-4">Announcements On The Way</h1>
+          <p className="text-white text-lg"> Check back soon!</p>
         </div>
       </div>
     </div>
