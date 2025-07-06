@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Instagram, Globe, Layers, Book } from 'lucide-react';
+import { Instagram, Globe, Layers, BookOpen } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 
@@ -29,12 +29,12 @@ const defaultSocialLinks: SocialLink[] = [
   },
   {
     name: "Deck",
-    icon: <Book size={24} />,
+    icon: <Layers size={24} />,
     url: "https://lcsdeck.com"
   },
   {
     name: "Documentation",
-    icon: <Book size={24} className="my-[5px]" />,
+    icon: <BookOpen size={24} className="my-[5px]" />,
     to: "/docs"
   }
 ];
