@@ -106,7 +106,7 @@ const TokenReleaseChart = () => {
           margin={{ 
             top: 20, 
             right: isMobile ? 10 : 40, 
-            left: isMobile ? 35 : 20, 
+            left: isMobile ? 10 : 20, 
             bottom: 10 
           }}
         >
@@ -129,15 +129,14 @@ const TokenReleaseChart = () => {
               return '';
             }}
           />
-          <YAxis 
-            axisLine={false}
-            tickLine={false}
-            tick={{ 
-              fontSize: isMobile ? 10 : 12,
-              dx: isMobile ? -5 : 0
-            }}
-            tickFormatter={(value) => `${value}B`}
-          />
+          {!isMobile && (
+            <YAxis 
+              axisLine={false}
+              tickLine={false}
+              tick={{ fontSize: 12 }}
+              tickFormatter={(value) => `${value}B`}
+            />
+          )}
           <Tooltip content={<CustomTooltip />} />
           <Legend 
             verticalAlign="bottom" 
