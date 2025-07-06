@@ -52,13 +52,13 @@ const TokenDistributionChart = () => {
   };
 
   return (
-    <div className="w-full h-80 md:h-96 mb-8">
+    <div className="w-full h-96 md:h-[28rem] mb-8">
       <ResponsiveContainer width="100%" height="100%">
         <PieChart>
           <Pie
             data={data}
             cx="50%"
-            cy="50%"
+            cy="45%"
             labelLine={false}
             label={CustomLabel}
             outerRadius={isMobile ? 80 : 120}
@@ -72,7 +72,7 @@ const TokenDistributionChart = () => {
           <Tooltip content={<CustomTooltip />} />
           <Legend 
             verticalAlign="bottom" 
-            height={36}
+            height={80}
             formatter={(value, entry: any) => (
               <span style={{ color: entry.color }}>{value}</span>
             )}
