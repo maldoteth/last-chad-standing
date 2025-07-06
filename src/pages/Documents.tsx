@@ -856,6 +856,7 @@ const Documents = () => {
                         <h3 className="text-2xl font-bold">Social Feedback Loops and Virality</h3>
                         <p>The game creates powerful viral loops that encourage organic growth and community engagement:</p>
                         <ul>
+                          
                           <li><strong>Highlight Generation:</strong> Epic moments, brutal finishers, and unexpected victories are automatically captured and packaged into shareable clips optimized for social media platforms.</li>
                           <li><strong>Performance Analytics:</strong> Detailed post-match breakdowns show your combat effectiveness, crowd support metrics, and backing profits, encouraging players to share their achievements.</li>
                           <li><strong>Viral Challenges:</strong> Weekly community challenges and trending hashtags (#ChadsOnly, #BrutalFinish) drive social media engagement and attract new players.</li>
