@@ -879,7 +879,7 @@ const Documents = () => {
                       </section>
 
                       {/* Economy Section */}
-                      <section id="in-game-currency" className="mb-12">
+                      <section id="in-game-currency" className="mb-12 -mx-6 sm:mx-0 px-6">
 
                         <br />
 
