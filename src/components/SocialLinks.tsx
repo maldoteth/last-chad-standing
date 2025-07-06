@@ -24,22 +24,22 @@ const defaultSocialLinks: SocialLink[] = [
   },
   {
     name: "Instagram",
-    icon: <Instagram size={24} />,
+    icon: <Instagram className="w-6 h-6" />,
     url: "https://www.instagram.com/lastchadstanding/"
   },
   {
     name: "Deck",
-    icon: <Layers size={24} />,
+    icon: <Layers className="w-6 h-6" />,
     url: "https://lcsdeck.com"
   },
   {
     name: "Documentation",
-    icon: <BookOpen size={24} className="my-[5px]" />,
+    icon: <BookOpen className="w-6 h-6" />,
     to: "/docs"
   },
   {
     name: "Blog",
-    icon: <Bell size={24} />,
+    icon: <Bell className="w-6 h-6" />,
     to: "/blog"
   }
 ];
