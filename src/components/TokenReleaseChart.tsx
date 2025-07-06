@@ -101,7 +101,7 @@ const TokenReleaseChart = () => {
       <br />
       <h4 className="text-lg font-semibold mb-4 text-center">Token Release Schedule</h4>
       <ResponsiveContainer width="100%" height="100%">
-        <AreaChart data={chartData}>
+        <AreaChart data={chartData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
           <XAxis 
             dataKey="date" 
             axisLine={false}
