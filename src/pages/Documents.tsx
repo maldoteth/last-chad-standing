@@ -331,15 +331,14 @@ const Documents = () => {
                         <div className="py-3 px-4">
                           <div className="whitespace-nowrap animate-[scroll-left_15s_linear_infinite] text-sm sm:text-base font-semibold">
                             🔔 Airdrop calculators are out now! click airdrops in the menu or{' '}
-                            <button 
-                              onClick={() => {
-                                const element = document.getElementById('airdrop-calculator');
-                                if (element) {
-                                  element.scrollIntoView({ behavior: 'smooth' });
-                                }
-                              }}
-                              className="underline hover:text-yellow-300 transition-colors font-bold"
-                            >
+                            <button onClick={() => {
+                            const element = document.getElementById('airdrop-calculator');
+                            if (element) {
+                              element.scrollIntoView({
+                                behavior: 'smooth'
+                              });
+                            }
+                          }} className="underline hover:text-yellow-300 transition-colors font-bold">
                               tap here
                             </button>
                             {' '}to view now
@@ -932,7 +931,7 @@ const Documents = () => {
                          </div>
                          <br />
                          <br />
-                         <h2 className="text-3xl font-bold text-center sm:text-left">Genesis Chads</h2>
+                         <h2 className="text-3xl font-bold text-center sm:text-left my-[30px]">Genesis Chads</h2>
                         
                          <div className="space-y-4 text-gray-700 leading-relaxed">
                            <p>The Genesis Chads collection represents the original foundation of the Lean Chad ecosystem, featuring uniquely hand-drawn cartoon characters created by founder Mike Hales in 2022. Each Chad was meticulously crafted with distinctive traits and personalities, forming the cornerstone of what would become a revolutionary gaming and NFT experience.</p>
