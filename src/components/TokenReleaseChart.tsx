@@ -129,14 +129,15 @@ const TokenReleaseChart = () => {
               return '';
             }}
           />
-          {!isMobile && (
-            <YAxis 
-              axisLine={false}
-              tickLine={false}
-              tick={{ fontSize: 12 }}
-              tickFormatter={(value) => `${value}B`}
-            />
-          )}
+          <YAxis 
+            axisLine={false}
+            tickLine={false}
+            tick={{ 
+              fontSize: isMobile ? 10 : 12,
+              dx: isMobile ? -5 : 0
+            }}
+            tickFormatter={(value) => `${value}B`}
+          />
           <Tooltip content={<CustomTooltip />} />
           <Legend 
             verticalAlign="bottom" 
