@@ -96,7 +96,7 @@ const TokenReleaseChart = () => {
   };
 
   return (
-    <div className="w-full h-96 mb-8">
+    <div className="w-full h-80 mb-8">
       <br />
       <br />
       <h4 className="text-lg font-semibold mb-4 text-center">Token Release Schedule</h4>
@@ -104,10 +104,10 @@ const TokenReleaseChart = () => {
         <AreaChart 
           data={chartData} 
           margin={{ 
-            top: 10, 
-            right: isMobile ? 0 : 30, 
-            left: 0, 
-            bottom: 0 
+            top: 20, 
+            right: isMobile ? 10 : 40, 
+            left: isMobile ? 10 : 20, 
+            bottom: 10 
           }}
         >
           <XAxis 
