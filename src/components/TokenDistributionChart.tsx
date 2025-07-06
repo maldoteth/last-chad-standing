@@ -1,8 +1,10 @@
 
 import React from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from 'recharts';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const TokenDistributionChart = () => {
+  const isMobile = useIsMobile();
   const data = [
     { name: 'Public', value: 30, amount: '30B coins', color: '#ef4444' },
     { name: 'Team', value: 15, amount: '15B coins', color: '#f97316' },
@@ -50,7 +52,7 @@ const TokenDistributionChart = () => {
   };
 
   return (
-    <div className="w-full h-96 mb-8">
+    <div className="w-full h-80 md:h-96 mb-8">
       <ResponsiveContainer width="100%" height="100%">
         <PieChart>
           <Pie
@@ -59,7 +61,7 @@ const TokenDistributionChart = () => {
             cy="50%"
             labelLine={false}
             label={CustomLabel}
-            outerRadius={120}
+            outerRadius={isMobile ? 80 : 120}
             fill="#8884d8"
             dataKey="value"
           >
