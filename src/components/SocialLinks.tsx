@@ -19,7 +19,7 @@ interface SocialLinksProps {
 const defaultSocialLinks: SocialLink[] = [
   {
     name: "X",
-    icon: <img src="/lovable-uploads/77a6c004-93ed-49ee-a5d0-6056ee852612.png" alt="X" className="w-6 h-6" />,
+    icon: <img src="/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png" alt="X" className="w-6 h-6" />,
     url: "https://x.com/lcs_game"
   },
   {
