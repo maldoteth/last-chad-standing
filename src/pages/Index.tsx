@@ -61,20 +61,24 @@ const Index = () => {
       <OrientationPrompt />
 
       {/* Navigation Interface */}
-      <nav className="absolute top-0 left-0 right-0 z-50 px-4 sm:px-10 py-7 flex justify-between items-center">
-        {/* Left Icon - Minimalist Iris */}
-        <div className="flex items-center w-16 sm:w-24">
-          <img src="/lovable-uploads/ebc2efc2-8d89-4230-921a-5d8b6b3e2e17.png" alt="LCS Fist Logo" className="opacity-70 w-7 h-7 sm:w-6 sm:h-6" />
-        </div>
+      <nav className="absolute top-0 left-0 right-0 z-50 px-4 sm:px-10 py-7">
+        <div className="grid grid-cols-3 items-center">
+          {/* Left Icon - Minimalist Iris */}
+          <div className="flex items-center justify-start">
+            <img src="/lovable-uploads/ebc2efc2-8d89-4230-921a-5d8b6b3e2e17.png" alt="LCS Fist Logo" className="opacity-70 w-7 h-7 sm:w-6 sm:h-6" />
+          </div>
 
-        {/* Center Links */}
-        <div className="absolute left-1/2 transform -translate-x-1/2 sm:relative sm:left-auto sm:transform-none flex-1 flex justify-center">
-          <SocialLinks />
-        </div>
+          {/* Center Links */}
+          <div className="flex justify-center">
+            <SocialLinks />
+          </div>
 
-        {/* Right Status */}
-        <div className="font-inter text-xs sm:text-sm text-slate-300 w-16 sm:w-24 text-right hidden sm:block">
-          PHASE: <span className="text-cyan-400">2/4</span>
+          {/* Right Status */}
+          <div className="flex justify-end">
+            <div className="font-inter text-xs sm:text-sm text-slate-300 text-right hidden sm:block">
+              PHASE: <span className="text-cyan-400">2/4</span>
+            </div>
+          </div>
         </div>
       </nav>
 
