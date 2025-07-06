@@ -220,6 +220,9 @@ const Documents = () => {
     }, {
       title: "Airdrops",
       href: "#airdrop-calculator"
+    }, {
+      title: "Utility",
+      href: "#utility"
     }]
   }, {
     title: "Team",
@@ -1261,6 +1264,32 @@ const Documents = () => {
                         <br />
                       </section>
 
+                      <section id="utility" className="mb-12">
+
+                        <br />
+
+                        <h3 className="text-2xl font-bold">Utility</h3>
+
+                        
+                        <ul>
+                          <li><strong>In-Game Currency:</strong> Buy or sell skins from the store or secondary marketplace directly with other players</li>
+                          <li><strong>Tournament Entry:</strong> Access events and experiences, from tournaments to socials</li>
+                          
+                          <li><strong>Governance:</strong> Voting on game features and updates</li>
+                          <li><strong>Staking Rewards:</strong> Earn additional coins by staking</li>
+                          <li><strong>Care Packages:</strong> Send support items to players</li>
+                          <li><strong>Back Fighters:</strong> Support fighters with coins and share the loot if you win. However, if your fighter loses, you get nothing but shame.</li>
+                        </ul>
+
+                        <div className="mt-8">
+                          
+                          <div className="grid md:grid-cols-3 gap-4 text-sm">
+                            
+                            
+                            
+                          </div>
+                        </div>
+                      </section>
 
                       {/* Team Section */}
                       <section id="founding-team" className="mb-12">
