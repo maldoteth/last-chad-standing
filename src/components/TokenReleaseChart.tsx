@@ -109,18 +109,15 @@ const TokenReleaseChart = () => {
             tick={{ fontSize: 12 }}
             interval={0}
             tickFormatter={(value, index) => {
-              // Only show major time markers on axis
+              // Only show TGE and yearly markers
               if (value === 'TGE') {
-                return value;
+                return 'TGE';
               }
-              if (value.startsWith('Y') && value !== 'Y0.5') {
-                if (isMobile) {
-                  // Convert "Y1" to "1y" for mobile
-                  const yearNum = value.substring(1);
-                  return `${yearNum}y`;
-                }
-                return value;
-              }
+              if (value === 'Y1') return '1y';
+              if (value === 'Y2') return '2y'; 
+              if (value === 'Y3') return '3y';
+              if (value === 'Y4') return '4y';
+              if (value === 'Y5') return '5y';
               return '';
             }}
           />
