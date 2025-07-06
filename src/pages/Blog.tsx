@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import SocialLinks from '@/components/SocialLinks';
 
 const Blog = () => {
@@ -9,7 +10,9 @@ const Blog = () => {
         <div className="grid grid-cols-3 items-center">
           {/* Left Icon - Minimalist Iris */}
           <div className="flex items-center justify-start">
-            <img src="/lovable-uploads/ebc2efc2-8d89-4230-921a-5d8b6b3e2e17.png" alt="LCS Fist Logo" className="opacity-70 w-7 h-7 sm:w-6 sm:h-6" />
+            <Link to="/">
+              <img src="/lovable-uploads/ebc2efc2-8d89-4230-921a-5d8b6b3e2e17.png" alt="LCS Fist Logo" className="opacity-70 w-7 h-7 sm:w-6 sm:h-6" />
+            </Link>
           </div>
 
           {/* Center Links */}
