@@ -48,7 +48,7 @@ const TokenReleaseChart = () => {
         dateLabel = 'TGE';
       } else if (day % 365 === 0) {
         const yearNum = day / 365;
-        dateLabel = `Year ${yearNum}`;
+        dateLabel = `Y${yearNum}`;
       } else if (day % 183 === 0) { // Every 6 months
         dateLabel = `Y${(day / 365).toFixed(1)}`;
       } else {
@@ -113,10 +113,10 @@ const TokenReleaseChart = () => {
               if (value === 'TGE') {
                 return value;
               }
-              if (value.startsWith('Year')) {
+              if (value.startsWith('Y') && value !== 'Y0.5') {
                 if (isMobile) {
-                  // Convert "Year 1" to "1y" for mobile
-                  const yearNum = value.split(' ')[1];
+                  // Convert "Y1" to "1y" for mobile
+                  const yearNum = value.substring(1);
                   return `${yearNum}y`;
                 }
                 return value;
