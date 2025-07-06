@@ -842,6 +842,7 @@ const Documents = () => {
                         <h3 className="text-2xl font-bold">Fighter Backing & Reward Sharing</h3>
                         <p>Players can financially back fighters before matches begin, sharing in the spoils of victory:</p>
                         <ul>
+                          
                           <li><strong>Pre-Match Betting:</strong> Back your favorite fighter with real currency or in-game tokens before the match starts.</li>
                           <li><strong>Reward Pool Distribution:</strong> When your backed fighter wins, you receive a percentage of the total match reward pool based on your investment.</li>
                           <li><strong>Dynamic Odds:</strong> Backing odds change in real-time based on fighter performance, reputation, and community sentiment.</li>
