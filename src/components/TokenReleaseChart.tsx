@@ -99,14 +99,14 @@ const TokenReleaseChart = () => {
     <div className="w-full h-96 mb-8">
       <br />
       <br />
-      <h4 className="text-lg font-semibold mb-4 text-center px-4 sm:px-0">Token Release Schedule</h4>
+      <h4 className="text-lg font-semibold mb-4 text-center">Token Release Schedule</h4>
       <ResponsiveContainer width="100%" height="100%">
         <AreaChart 
           data={chartData} 
           margin={{ 
             top: 10, 
-            right: isMobile ? 60 : 30, 
-            left: isMobile ? 10 : 0, 
+            right: isMobile ? 0 : 30, 
+            left: isMobile ? 0 : 0, 
             bottom: 0 
           }}
         >
