@@ -29,7 +29,7 @@ const defaultSocialLinks: SocialLink[] = [
   },
   {
     name: "Deck",
-    icon: <Layers size={24} />,
+    icon: <Book size={24} />,
     url: "https://lcsdeck.com"
   },
   {
