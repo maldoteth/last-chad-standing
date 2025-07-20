@@ -229,7 +229,7 @@ const Documents = () => {
         )}
 
         {/* Document Search Component */}
-        <DocumentSearch />
+        <DocumentSearch isOpen={false} onClose={() => {}} />
       </div>
     </div>
   );
