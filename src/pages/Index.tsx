@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import SocialLinks from '@/components/SocialLinks';
 import OrientationPrompt from '@/components/OrientationPrompt';
@@ -7,13 +8,13 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import emailjs from '@emailjs/browser';
+
 const Index = () => {
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const {
-    toast
-  } = useToast();
+  const { toast } = useToast();
+
   const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || !email.includes('@')) {
@@ -47,12 +48,19 @@ const Index = () => {
       setIsSubmitting(false);
     }
   };
-  return <div className="relative min-h-screen w-screen overflow-hidden">
+
+  return (
+    <div className="relative min-h-screen w-screen overflow-hidden">
       {/* Background Video: The Digital Soul */}
       <div className="absolute inset-0 z-0">
-        <video src="https://res.cloudinary.com/drqvsqsot/video/upload/v1/LCS_TEASER_1_1_wlqwnc" className="absolute inset-0 w-full h-full object-cover" autoPlay muted loop playsInline style={{
-        pointerEvents: 'none'
-      }} />
+        <iframe 
+          src="https://iframe.mediadelivery.net/play/470660/b0e924a2-bf3d-4c9c-ae64-9eb620241421?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
+          className="absolute inset-0 w-full h-full object-cover"
+          allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+          title="Background Video"
+          frameBorder="0"
+          style={{ pointerEvents: 'none' }}
+        />
         {/* The subtle vignette to draw focus inward */}
         <div className="absolute inset-0 bg-gradient-radial from-transparent via-black/20 to-black/60"></div>
       </div>
@@ -82,7 +90,6 @@ const Index = () => {
         </div>
       </nav>
 
-
       {/* The Core Message: Centered Content */}
       <main className="relative z-10 flex h-screen items-center justify-center text-center">
         <div className="max-w-3xl px-8 text-white animate-fade-in">
@@ -95,9 +102,9 @@ const Index = () => {
       {/* Right-Side Vertical Label */}
       <div className="absolute right-4 top-1/2 transform -translate-y-1/2 z-30">
         <div className="text-white/40 text-sm uppercase tracking-[0.4em] font-inter" style={{
-        writingMode: 'vertical-rl',
-        textOrientation: 'mixed'
-      }}>
+          writingMode: 'vertical-rl',
+          textOrientation: 'mixed'
+        }}>
           UNREAL ENGINE 5
         </div>
       </div>
@@ -130,15 +137,29 @@ const Index = () => {
             </DialogHeader>
             <form onSubmit={handleEmailSubmit} className="space-y-4 mt-4">
               <div>
-                <Input id="email" type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="" className="bg-black/20 border-white/20 text-white placeholder:text-slate-400 focus:border-pink-300/50" required />
+                <Input 
+                  id="email" 
+                  type="email" 
+                  value={email} 
+                  onChange={e => setEmail(e.target.value)} 
+                  placeholder="" 
+                  className="bg-black/20 border-white/20 text-white placeholder:text-slate-400 focus:border-pink-300/50" 
+                  required 
+                />
               </div>
-              <Button type="submit" disabled={isSubmitting} className="w-full bg-white/10 border border-white/20 text-white hover:bg-white/20 font-inter">
+              <Button 
+                type="submit" 
+                disabled={isSubmitting} 
+                className="w-full bg-white/10 border border-white/20 text-white hover:bg-white/20 font-inter"
+              >
                 {isSubmitting ? 'Connecting...' : 'Confirm'}
               </Button>
             </form>
           </DialogContent>
         </Dialog>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default Index;
