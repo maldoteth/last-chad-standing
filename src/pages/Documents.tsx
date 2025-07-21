@@ -1492,13 +1492,31 @@ This means fighters truly own their digital assets and can trade them freely wit
 
                         <div className="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
                           <h4 className="font-semibold text-gray-900 mb-2">Brand Colors</h4>
-                          <ul className="text-sm text-gray-800 space-y-1">
-                            <li>• #1C1C1C - Deep black/dark gray (main logo fill)</li>
-                            <li>• #2B2B2B - Charcoal gray (logo shading)</li>
-                            <li>• #4B4B4B - Dark chrome outline</li>
-                            <li>• #A8A8A8 - Mid gray/chrome detail</li>
-                            <li>• #D9D9D9 - Light silver highlight</li>
-                            <li>• #F2F2F2 - Light cream (fist fill)</li>
+                          <ul className="text-sm text-gray-800 space-y-2">
+                            <li className="flex items-center gap-2">
+                              <div className="w-3 h-3 rounded-full border border-gray-300" style={{ backgroundColor: '#1C1C1C' }}></div>
+                              #1C1C1C - Deep black/dark gray (main logo fill)
+                            </li>
+                            <li className="flex items-center gap-2">
+                              <div className="w-3 h-3 rounded-full border border-gray-300" style={{ backgroundColor: '#2B2B2B' }}></div>
+                              #2B2B2B - Charcoal gray (logo shading)
+                            </li>
+                            <li className="flex items-center gap-2">
+                              <div className="w-3 h-3 rounded-full border border-gray-300" style={{ backgroundColor: '#4B4B4B' }}></div>
+                              #4B4B4B - Dark chrome outline
+                            </li>
+                            <li className="flex items-center gap-2">
+                              <div className="w-3 h-3 rounded-full border border-gray-300" style={{ backgroundColor: '#A8A8A8' }}></div>
+                              #A8A8A8 - Mid gray/chrome detail
+                            </li>
+                            <li className="flex items-center gap-2">
+                              <div className="w-3 h-3 rounded-full border border-gray-300" style={{ backgroundColor: '#D9D9D9' }}></div>
+                              #D9D9D9 - Light silver highlight
+                            </li>
+                            <li className="flex items-center gap-2">
+                              <div className="w-3 h-3 rounded-full border border-gray-300" style={{ backgroundColor: '#F2F2F2' }}></div>
+                              #F2F2F2 - Light cream (fist fill)
+                            </li>
                           </ul>
                         </div>
                       </section>
