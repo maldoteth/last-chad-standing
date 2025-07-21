@@ -1489,6 +1489,18 @@ This means fighters truly own their digital assets and can trade them freely wit
                             <li>• Contact us for custom formats or additional assets</li>
                           </ul>
                         </div>
+
+                        <div className="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                          <h4 className="font-semibold text-gray-900 mb-2">Brand Colors</h4>
+                          <ul className="text-sm text-gray-800 space-y-1">
+                            <li>• #1C1C1C - Deep black/dark gray (main logo fill)</li>
+                            <li>• #2B2B2B - Charcoal gray (logo shading)</li>
+                            <li>• #4B4B4B - Dark chrome outline</li>
+                            <li>• #A8A8A8 - Mid gray/chrome detail</li>
+                            <li>• #D9D9D9 - Light silver highlight</li>
+                            <li>• #F2F2F2 - Light cream (fist fill)</li>
+                          </ul>
+                        </div>
                       </section>
                     </div>
                   </div>
