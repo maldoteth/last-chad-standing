@@ -365,7 +365,7 @@ const Documents = () => {
                         <br />
                         
                         <h3 className="font-bold">Overview</h3>
-                        <p>Players are thrown onto the island via helicopter, scattered randomly, and must use both wits and combat prowess to survive against 19 other players. The shrinking cage forces fighters into close quarters, ensuring non stop action. Combat is visceral, utilizing a mix of strikes, grappling, weaponry, and brutal finishers.</p>
+                        <p>Players are thrown onto the island via helicopter, scattered randomly, and must use both wits and combat prowess to survive against at least 19 other players. The shrinking cage forces fighters into close quarters, ensuring non stop action. Combat is visceral, utilizing a mix of strikes, grappling, weaponry, and brutal finishers.</p>
                       </section>
 
                       {/* Helicopter Drop Image */}
