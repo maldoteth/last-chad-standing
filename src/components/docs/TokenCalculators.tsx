@@ -1,7 +1,7 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import TokenDistributionChart from "@/components/TokenDistributionChart";
-import TokenReleaseChart from "@/components/TokenReleaseChart";
+import { TokenDistributionChart } from "@/components/TokenDistributionChart";
+import { TokenReleaseChart } from "@/components/TokenReleaseChart";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
