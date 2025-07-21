@@ -55,7 +55,7 @@ const Index = () => {
       <div className="absolute inset-0 z-0">
         <iframe 
           src="https://iframe.mediadelivery.net/play/470660/b0e924a2-bf3d-4c9c-ae64-9eb620241421?autoplay=true&loop=true&muted=true&preload=true"
-          className="absolute inset-0 w-full h-full scale-150 origin-center"
+          className="absolute inset-0 w-full h-full"
           width="100%"
           height="100%"
           allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
@@ -65,7 +65,12 @@ const Index = () => {
             pointerEvents: 'none',
             minWidth: '100vw',
             minHeight: '100vh',
-            transform: 'scale(1.5) translate(-16.67%, -16.67%)'
+            transform: 'scale(1.5)',
+            transformOrigin: 'center center',
+            left: '-25%',
+            top: '-25%',
+            width: '150%',
+            height: '150%'
           }}
         />
         {/* The subtle vignette to draw focus inward */}
