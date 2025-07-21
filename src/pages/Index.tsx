@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import SocialLinks from '@/components/SocialLinks';
 import OrientationPrompt from '@/components/OrientationPrompt';
@@ -54,13 +55,18 @@ const Index = () => {
       <div className="absolute inset-0 z-0">
         <iframe 
           src="https://iframe.mediadelivery.net/play/470660/b0e924a2-bf3d-4c9c-ae64-9eb620241421?autoplay=true&loop=true&muted=true&preload=true"
-          className="absolute inset-0 w-full h-full"
+          className="absolute inset-0 w-full h-full scale-150 origin-center"
           width="100%"
           height="100%"
           allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
           title="Background Video"
           frameBorder="0"
-          style={{ pointerEvents: 'none' }}
+          style={{ 
+            pointerEvents: 'none',
+            minWidth: '100vw',
+            minHeight: '100vh',
+            transform: 'scale(1.5) translate(-16.67%, -16.67%)'
+          }}
         />
         {/* The subtle vignette to draw focus inward */}
         <div className="absolute inset-0 bg-gradient-radial from-transparent via-black/20 to-black/60"></div>
