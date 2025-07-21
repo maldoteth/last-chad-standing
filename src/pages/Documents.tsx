@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import DocumentSearch from "@/components/DocumentSearch";
+import { DocumentSearch } from "@/components/DocumentSearch";
 import { GameDocumentation } from "@/components/docs/GameDocumentation";
 import { BrandAssets } from "@/components/docs/BrandAssets";
 import { TokenCalculators } from "@/components/docs/TokenCalculators";
@@ -9,7 +9,6 @@ import { DocumentNavigation } from "@/components/docs/DocumentNavigation";
 
 const Documents = () => {
   const [activeSection, setActiveSection] = useState("game");
-  const [searchOpen, setSearchOpen] = useState(false);
 
   const renderActiveSection = () => {
     switch (activeSection) {
@@ -34,11 +33,7 @@ const Documents = () => {
           <p className="text-xl text-muted-foreground mb-6">
             Everything you need to know about MindForge
           </p>
-          <DocumentSearch 
-            isOpen={searchOpen}
-            onClose={() => setSearchOpen(false)}
-            isMobileInline={true}
-          />
+          <DocumentSearch />
         </div>
 
         <div className="flex gap-8">
