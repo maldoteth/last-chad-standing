@@ -377,14 +377,18 @@ const Documents = () => {
                       <section id="game-world" className="mb-12">
                         <h2 className="text-3xl font-bold">2. Game World & Environment</h2>
                         <h3 className="text-2xl font-bold"></h3>
-                        <p>The map is a relatively small, derelict resort island filled with destructible environments, including beaches, dense jungles, abandoned industrial areas, and decaying urban ruins. The environment offers both vertical and horizontal exploration opportunities, such as:</p>
+                        <p>The map is a relatively small, derelict resort island filled with destructible environments, including beaches, dense jungles, abandoned industrial areas, and decaying urban ruins. The environment offers both vertical and horizontal exploration opportunities, such as:
+
+                      </p>
                         <ul>
                           <li><strong>Beaches:</strong> Wide open spaces where players can be easily spotted but have more visibility.</li>
                           <li><strong>Jungle:</strong> Dense cover where players can ambush or be ambushed.</li>
                           <li><strong>Resort Ruins:</strong> Multi-level buildings, providing vantage points for striking down on other players.</li>
                           <li><strong>Industrial Complex:</strong> Space to camp but comes with environmental and structural hazards</li>
                         </ul>
-                        <p>There are environmental traps like collapsing floors, explosive barrels, and natural hazards (e.g., lava flows, flooding). The environment also dynamically changes over time due to the collapsing zone, adding urgency to exploration.</p>
+                        <p>
+
+There are environmental traps like collapsing floors, explosive barrels, and natural hazards (e.g., lava flows, flooding). The environment also dynamically changes over time due to the collapsing zone, adding urgency to exploration.</p>
                       </section>
 
                       {/* Aerial Drop Combat Image */}
