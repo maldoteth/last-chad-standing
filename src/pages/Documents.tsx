@@ -879,16 +879,6 @@ There are environmental traps like collapsing floors, explosive barrels, and nat
                           <li><strong>Tournament Brackets:</strong> Follow major tournaments and championship events with real-time bracket updates.</li>
                           <li><strong>Social Media Integration:</strong> Share highlights, backing successes, and epic moments directly to social platforms.</li>
                         </ul>
-                        
-                        {/* Video Embed */}
-                        <div className="mt-8 mb-8">
-                          <iframe
-                            src="https://player.cloudinary.com/embed/?cloud_name=dhlwtdell&public_id=Indy_zjnj6n&profile=cld-adaptive-stream&autoplay=true&muted=true"
-                            className="w-full h-64 md:h-96 rounded-lg"
-                            allow="autoplay; fullscreen"
-                            allowFullScreen
-                          />
-                        </div>
                       </section>
 
                       {/* Economy Section */}
