@@ -1286,6 +1286,7 @@ This means fighters truly own their digital assets and can trade them freely wit
                           <li><strong>Staking Rewards:</strong> Earn additional coins by staking</li>
                           <li><strong>Care Packages:</strong> Send support items to players</li>
                           <li><strong>Back Fighters:</strong> Support fighters with coins and share the loot if you win. However, if your fighter loses, you get nothing but shame.</li>
+                          <li><strong>Profit Share:</strong> 100% of all profit is used to buy back $LCS from the market and share with holders.</li>
                         </ul>
 
                         <div className="mt-8">
