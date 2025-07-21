@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import SocialLinks from '@/components/SocialLinks';
 import OrientationPrompt from '@/components/OrientationPrompt';
@@ -54,8 +53,10 @@ const Index = () => {
       {/* Background Video: The Digital Soul */}
       <div className="absolute inset-0 z-0">
         <iframe 
-          src="https://iframe.mediadelivery.net/play/470660/b0e924a2-bf3d-4c9c-ae64-9eb620241421?autoplay=true&loop=true&muted=true&preload=true&responsive=true"
-          className="absolute inset-0 w-full h-full object-cover"
+          src="https://iframe.mediadelivery.net/play/470660/b0e924a2-bf3d-4c9c-ae64-9eb620241421?autoplay=true&loop=true&muted=true&preload=true"
+          className="absolute inset-0 w-full h-full"
+          width="100%"
+          height="100%"
           allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
           title="Background Video"
           frameBorder="0"
