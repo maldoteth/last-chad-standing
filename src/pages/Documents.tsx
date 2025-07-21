@@ -894,7 +894,9 @@ There are environmental traps like collapsing floors, explosive barrels, and nat
 
                           <h3 className="text-2xl font-bold">Coins</h3>
 
-                          <p>Every game needs in-game currency, but ours is unique compared to most games because it's decentralized and has a set supply, giving fighters real ownership without manipulation from developers. Unlike traditional games where developers can inflate currency at will, our coins operate on blockchain technology with transparent tokenomics.</p>
+                          <p>Every game needs in-game currency, but ours is unique compared to most games because it's decentralized and has a set supply, giving fighters real ownership without manipulation from developers. Unlike traditional games where developers can inflate currency at will, our coins operate on blockchain technology with transparent tokenomics.
+
+                        </p>
                           <p>
 
 This means fighters truly own their digital assets and can trade them freely without fear of arbitrary changes to the game's economy. The decentralized nature ensures that the value of fighter investments is protected by smart contracts rather than corporate decisions.</p>
