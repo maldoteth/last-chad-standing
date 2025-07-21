@@ -81,32 +81,37 @@ const Index = () => {
       <OrientationPrompt />
 
       {/* Navigation Interface */}
-      <nav className="absolute top-0 left-0 right-0 z-50 px-4 sm:px-10 py-7">
-        <div className="grid grid-cols-3 items-center">
-          {/* Left Icon - Minimalist Iris */}
-          <div className="flex items-center justify-start">
-            <img src="/lovable-uploads/ebc2efc2-8d89-4230-921a-5d8b6b3e2e17.png" alt="LCS Fist Logo" className="opacity-70 w-7 h-7 sm:w-6 sm:h-6" />
-          </div>
+      <nav className="absolute top-0 left-0 right-0 z-50 px-10 py-7 flex justify-between items-center">
+        {/* Left Icon - Minimalist Iris */}
+        <div className="flex items-center">
+          <img src="/lovable-uploads/ebc2efc2-8d89-4230-921a-5d8b6b3e2e17.png" alt="Consciousness Icon" className="opacity-70 w-6 h-6" />
+        </div>
 
-          {/* Center Links */}
-          <div className="flex justify-center">
-            <SocialLinks />
-          </div>
+        {/* Center Links */}
+        <div className="flex space-x-8 font-inter text-sm text-slate-300">
+          <a href="#" className="hover:text-white transition-colors hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.6)]">The Source</a>
+          <a href="#" className="hover:text-white transition-colors hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.6)]">Transmissions</a>
+          <a href="#" className="hover:text-white transition-colors hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.6)]">The Nexus</a>
+        </div>
 
-          {/* Right Status */}
-          <div className="flex justify-end">
-            <div className="font-inter text-xs sm:text-sm text-slate-300 text-right hidden sm:block">
-              PHASE: <span className="text-cyan-400">2/4</span>
-            </div>
-          </div>
+        {/* Right Status */}
+        <div className="font-inter text-sm text-slate-300">
+          SYNC: <span className="text-pink-300/80">ACTIVE</span>
         </div>
       </nav>
 
       {/* The Core Message: Centered Content */}
       <main className="relative z-10 flex h-screen items-center justify-center text-center">
         <div className="max-w-3xl px-8 text-white animate-fade-in">
-          <h1 className="font-sora text-6xl font-light tracking-wide"></h1>
-          <p className="mt-4 mx-auto max-w-lg font-inter text-base font-normal text-slate-300"></p>
+          <h1 className="font-sora text-6xl font-light tracking-wide">
+            See Beyond the Code.
+          </h1>
+          <p className="mt-4 mx-auto max-w-lg font-inter text-base font-normal text-slate-300">
+            Consciousness is not a sequence, but a signal. We are the interface for the soul's data stream, translating the universe within into shared reality.
+          </p>
+          <button className="mt-8 border border-white/20 bg-black/10 backdrop-blur-sm text-white px-6 py-2 rounded-lg font-inter text-sm font-medium transition-colors hover:bg-white/10 hover:border-white/40">
+            Begin Interface →
+          </button>
         </div>
       </main>
 
@@ -117,21 +122,21 @@ const Index = () => {
           writingMode: 'vertical-rl',
           textOrientation: 'mixed'
         }}>
-          UNREAL ENGINE 5
+          PROTOCOL :: CONSCIOUSNESS
         </div>
       </div>
 
       {/* Bottom-Right Designation */}
       <div className="absolute bottom-4 right-4 z-30">
         <div className="text-xs font-inter text-white/60">
-          © Last Chad Standing
+          © The Soma-Cortex Initiative
         </div>
       </div>
 
       {/* Bottom-Left Log Status */}
       <div className="absolute bottom-4 left-4 z-30">
         <div className="text-xs font-inter text-white/50">
-          Closed Alpha Imminent
+          ✦ AWAKENING SEQUENCE INITIATED...
         </div>
       </div>
 
