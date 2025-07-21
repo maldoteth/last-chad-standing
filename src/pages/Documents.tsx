@@ -1484,7 +1484,7 @@ This means fighters truly own their digital assets and can trade them freely wit
                           <h4 className="font-semibold text-blue-900 mb-2">Usage Guidelines</h4>
                           <ul className="text-sm text-blue-800 space-y-1">
                             <li>• These assets are for promotional and community use</li>
-                            <li>• Do not modify the logos without permission</li>
+                            <li></li>
                             <li>• Maintain proper spacing and proportions</li>
                             <li>• Contact us for custom formats or additional assets</li>
                           </ul>
