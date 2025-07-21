@@ -6,14 +6,14 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Download, Copy, Check } from 'lucide-react';
-import { DocumentSearch } from '@/components/DocumentSearch';
-import { TokenDistributionChart } from '@/components/TokenDistributionChart';
-import { TokenReleaseChart } from '@/components/TokenReleaseChart';
+import DocumentSearch from '@/components/DocumentSearch';
+import TokenDistributionChart from '@/components/TokenDistributionChart';
+import TokenReleaseChart from '@/components/TokenReleaseChart';
 import { useToast } from '@/hooks/use-toast';
 
 const Documents = () => {
   const [isCopied, setIsCopied] = useState(false);
-  const [searchValue, setSearchValue] = useState('');
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const { toast } = useToast();
 
   const handleCopyClick = () => {
@@ -31,9 +31,6 @@ const Documents = () => {
     }, 2000);
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchValue(e.target.value);
-  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
@@ -52,9 +49,16 @@ const Documents = () => {
         {/* Search Bar and Address */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
           <div>
+            <Button 
+              variant="secondary" 
+              onClick={() => setIsSearchOpen(true)}
+              className="w-full"
+            >
+              Search Documentation
+            </Button>
             <DocumentSearch
-              searchValue={searchValue}
-              handleInputChange={handleInputChange}
+              isOpen={isSearchOpen}
+              onClose={() => setIsSearchOpen(false)}
             />
           </div>
           <Card className="bg-slate-800/50 border-slate-700">
