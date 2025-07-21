@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import SocialLinks from '@/components/SocialLinks';
 import OrientationPrompt from '@/components/OrientationPrompt';
@@ -8,13 +7,13 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import emailjs from '@emailjs/browser';
-
 const Index = () => {
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const { toast } = useToast();
-
+  const {
+    toast
+  } = useToast();
   const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || !email.includes('@')) {
@@ -48,31 +47,12 @@ const Index = () => {
       setIsSubmitting(false);
     }
   };
-
-  return (
-    <div className="relative min-h-screen w-screen overflow-hidden">
+  return <div className="relative min-h-screen w-screen overflow-hidden">
       {/* Background Video: The Digital Soul */}
       <div className="absolute inset-0 z-0">
-        <iframe 
-          src="https://iframe.mediadelivery.net/play/470660/b0e924a2-bf3d-4c9c-ae64-9eb620241421?autoplay=true&loop=true&muted=true&preload=true&controls=false&ui=false&title=false&logo=false"
-          className="absolute inset-0 w-full h-full"
-          width="100%"
-          height="100%"
-          allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
-          title="Background Video"
-          frameBorder="0"
-          style={{ 
-            pointerEvents: 'none',
-            minWidth: '100vw',
-            minHeight: '100vh',
-            transform: 'scale(1.5)',
-            transformOrigin: 'center center',
-            left: '-25%',
-            top: '-25%',
-            width: '150%',
-            height: '150%'
-          }}
-        />
+        <video src="https://res.cloudinary.com/drqvsqsot/video/upload/v1/LCS_TEASER_1_1_wlqwnc" className="absolute inset-0 w-full h-full object-cover" autoPlay muted loop playsInline style={{
+        pointerEvents: 'none'
+      }} />
         {/* The subtle vignette to draw focus inward */}
         <div className="absolute inset-0 bg-gradient-radial from-transparent via-black/20 to-black/60"></div>
       </div>
@@ -81,37 +61,33 @@ const Index = () => {
       <OrientationPrompt />
 
       {/* Navigation Interface */}
-      <nav className="absolute top-0 left-0 right-0 z-50 px-10 py-7 flex justify-between items-center">
-        {/* Left Icon - Minimalist Iris */}
-        <div className="flex items-center">
-          <img src="/lovable-uploads/ebc2efc2-8d89-4230-921a-5d8b6b3e2e17.png" alt="Consciousness Icon" className="opacity-70 w-6 h-6" />
-        </div>
+      <nav className="absolute top-0 left-0 right-0 z-50 px-4 sm:px-10 py-7">
+        <div className="grid grid-cols-3 items-center">
+          {/* Left Icon - Minimalist Iris */}
+          <div className="flex items-center justify-start">
+            <img src="/lovable-uploads/ebc2efc2-8d89-4230-921a-5d8b6b3e2e17.png" alt="LCS Fist Logo" className="opacity-70 w-7 h-7 sm:w-6 sm:h-6" />
+          </div>
 
-        {/* Center Links */}
-        <div className="flex space-x-8 font-inter text-sm text-slate-300">
-          <a href="#" className="hover:text-white transition-colors hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.6)]">The Source</a>
-          <a href="#" className="hover:text-white transition-colors hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.6)]">Transmissions</a>
-          <a href="#" className="hover:text-white transition-colors hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.6)]">The Nexus</a>
-        </div>
+          {/* Center Links */}
+          <div className="flex justify-center">
+            <SocialLinks />
+          </div>
 
-        {/* Right Status */}
-        <div className="font-inter text-sm text-slate-300">
-          SYNC: <span className="text-pink-300/80">ACTIVE</span>
+          {/* Right Status */}
+          <div className="flex justify-end">
+            <div className="font-inter text-xs sm:text-sm text-slate-300 text-right hidden sm:block">
+              PHASE: <span className="text-cyan-400">2/4</span>
+            </div>
+          </div>
         </div>
       </nav>
+
 
       {/* The Core Message: Centered Content */}
       <main className="relative z-10 flex h-screen items-center justify-center text-center">
         <div className="max-w-3xl px-8 text-white animate-fade-in">
-          <h1 className="font-sora text-6xl font-light tracking-wide">
-            See Beyond the Code.
-          </h1>
-          <p className="mt-4 mx-auto max-w-lg font-inter text-base font-normal text-slate-300">
-            Consciousness is not a sequence, but a signal. We are the interface for the soul's data stream, translating the universe within into shared reality.
-          </p>
-          <button className="mt-8 border border-white/20 bg-black/10 backdrop-blur-sm text-white px-6 py-2 rounded-lg font-inter text-sm font-medium transition-colors hover:bg-white/10 hover:border-white/40">
-            Begin Interface →
-          </button>
+          <h1 className="font-sora text-6xl font-light tracking-wide"></h1>
+          <p className="mt-4 mx-auto max-w-lg font-inter text-base font-normal text-slate-300"></p>
         </div>
       </main>
 
@@ -119,24 +95,24 @@ const Index = () => {
       {/* Right-Side Vertical Label */}
       <div className="absolute right-4 top-1/2 transform -translate-y-1/2 z-30">
         <div className="text-white/40 text-sm uppercase tracking-[0.4em] font-inter" style={{
-          writingMode: 'vertical-rl',
-          textOrientation: 'mixed'
-        }}>
-          PROTOCOL :: CONSCIOUSNESS
+        writingMode: 'vertical-rl',
+        textOrientation: 'mixed'
+      }}>
+          UNREAL ENGINE 5
         </div>
       </div>
 
       {/* Bottom-Right Designation */}
       <div className="absolute bottom-4 right-4 z-30">
         <div className="text-xs font-inter text-white/60">
-          © The Soma-Cortex Initiative
+          © Last Chad Standing
         </div>
       </div>
 
       {/* Bottom-Left Log Status */}
       <div className="absolute bottom-4 left-4 z-30">
         <div className="text-xs font-inter text-white/50">
-          ✦ AWAKENING SEQUENCE INITIATED...
+          Closed Alpha Imminent
         </div>
       </div>
 
@@ -154,29 +130,15 @@ const Index = () => {
             </DialogHeader>
             <form onSubmit={handleEmailSubmit} className="space-y-4 mt-4">
               <div>
-                <Input 
-                  id="email" 
-                  type="email" 
-                  value={email} 
-                  onChange={e => setEmail(e.target.value)} 
-                  placeholder="" 
-                  className="bg-black/20 border-white/20 text-white placeholder:text-slate-400 focus:border-pink-300/50" 
-                  required 
-                />
+                <Input id="email" type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="" className="bg-black/20 border-white/20 text-white placeholder:text-slate-400 focus:border-pink-300/50" required />
               </div>
-              <Button 
-                type="submit" 
-                disabled={isSubmitting} 
-                className="w-full bg-white/10 border border-white/20 text-white hover:bg-white/20 font-inter"
-              >
+              <Button type="submit" disabled={isSubmitting} className="w-full bg-white/10 border border-white/20 text-white hover:bg-white/20 font-inter">
                 {isSubmitting ? 'Connecting...' : 'Confirm'}
               </Button>
             </form>
           </DialogContent>
         </Dialog>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default Index;
