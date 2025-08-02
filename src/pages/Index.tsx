@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import SocialLinks from '@/components/SocialLinks';
 import OrientationPrompt from '@/components/OrientationPrompt';
+import PreOrderDialog from '@/components/PreOrderDialog';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -116,28 +117,38 @@ const Index = () => {
         </div>
       </div>
 
-      {/* Bottom Center - Get Notified Button */}
+      {/* Bottom Center - Action Buttons */}
       <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-30">
-        <Dialog open={isOpen} onOpenChange={setIsOpen}>
-          <DialogTrigger asChild>
-            <button className="border border-white/20 bg-black/10 backdrop-blur-sm text-white rounded-lg font-inter text-sm transition-colors hover:bg-white/10 hover:border-white/40 py-[8px] px-[28px] font-medium">
-              Get Notified
+        <div className="flex gap-4">
+          {/* Get Notified Button */}
+          <Dialog open={isOpen} onOpenChange={setIsOpen}>
+            <DialogTrigger asChild>
+              <button className="border border-white/20 bg-black/10 backdrop-blur-sm text-white rounded-lg font-inter text-sm transition-colors hover:bg-white/10 hover:border-white/40 py-[8px] px-[28px] font-medium">
+                Get Notified
+              </button>
+            </DialogTrigger>
+            <DialogContent className="bg-black/10 border border-white/20 backdrop-blur-sm text-white">
+              <DialogHeader>
+                <DialogTitle className="font-sora text-xl text-center text-white">Enter Email</DialogTitle>
+              </DialogHeader>
+              <form onSubmit={handleEmailSubmit} className="space-y-4 mt-4">
+                <div>
+                  <Input id="email" type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="" className="bg-black/20 border-white/20 text-white placeholder:text-slate-400 focus:border-pink-300/50" required />
+                </div>
+                <Button type="submit" disabled={isSubmitting} className="w-full bg-white/10 border border-white/20 text-white hover:bg-white/20 font-inter">
+                  {isSubmitting ? 'Connecting...' : 'Confirm'}
+                </Button>
+              </form>
+            </DialogContent>
+          </Dialog>
+
+          {/* Pre-Order Button */}
+          <PreOrderDialog>
+            <button className="border border-cyan-400/40 bg-cyan-400/10 backdrop-blur-sm text-cyan-300 rounded-lg font-inter text-sm transition-colors hover:bg-cyan-400/20 hover:border-cyan-400/60 py-[8px] px-[28px] font-medium">
+              Pre-Order
             </button>
-          </DialogTrigger>
-          <DialogContent className="bg-black/10 border border-white/20 backdrop-blur-sm text-white">
-            <DialogHeader>
-              <DialogTitle className="font-sora text-xl text-center text-white">Enter Email</DialogTitle>
-            </DialogHeader>
-            <form onSubmit={handleEmailSubmit} className="space-y-4 mt-4">
-              <div>
-                <Input id="email" type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="" className="bg-black/20 border-white/20 text-white placeholder:text-slate-400 focus:border-pink-300/50" required />
-              </div>
-              <Button type="submit" disabled={isSubmitting} className="w-full bg-white/10 border border-white/20 text-white hover:bg-white/20 font-inter">
-                {isSubmitting ? 'Connecting...' : 'Confirm'}
-              </Button>
-            </form>
-          </DialogContent>
-        </Dialog>
+          </PreOrderDialog>
+        </div>
       </div>
     </div>;
 };
