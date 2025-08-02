@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Instagram, Globe, Layers, BookOpen, Bell, Scale } from 'lucide-react';
+import { Instagram, Globe, Layers, BookOpen, Bell } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 
@@ -41,16 +41,6 @@ const defaultSocialLinks: SocialLink[] = [
     name: "Blog",
     icon: <Bell className="w-6 h-6" />,
     to: "/blog"
-  },
-  {
-    name: "Terms of Service",
-    icon: <Scale className="w-6 h-6" />,
-    to: "/terms"
-  },
-  {
-    name: "Privacy Policy",
-    icon: <Scale className="w-6 h-6" />,
-    to: "/privacy"
   }
 ];
 
