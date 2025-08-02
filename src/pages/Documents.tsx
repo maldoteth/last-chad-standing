@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { ArrowLeft, UserCheck, Gamepad2, DollarSign, ExternalLink, Search, Mail, Download, Palette } from 'lucide-react';
+import { ArrowLeft, UserCheck, Gamepad2, DollarSign, ExternalLink, Search, Mail, Download, Palette, Scale } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Button } from '@/components/ui/button';
@@ -253,6 +253,16 @@ const Documents = () => {
     }, {
       title: "LCFC",
       href: "https://leanchadfight.club"
+    }]
+  }, {
+    title: "Legal",
+    icon: <Scale size={20} />,
+    items: [{
+      title: "Terms of Service",
+      href: "/terms"
+    }, {
+      title: "Privacy Policy",
+      href: "/privacy"
     }]
   }];
   return <>
