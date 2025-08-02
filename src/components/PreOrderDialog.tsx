@@ -43,20 +43,19 @@ const PreOrderDialog = ({
     setQuantities(prev => {
       const current = prev[tierId] || 1;
       const newQuantity = Math.max(1, current + change);
-      return { ...prev, [tierId]: newQuantity };
+      return {
+        ...prev,
+        [tierId]: newQuantity
+      };
     });
   };
-
   const getQuantity = (tierId: string) => quantities[tierId] || 1;
-
   const getTotalPrice = (tier: PreOrderTier) => {
     const quantity = getQuantity(tier.id);
     return tier.price * quantity;
   };
-
   const handlePreOrder = () => {
     if (!selectedTier) return;
-
     const tier = preOrderTiers.find(t => t.id === selectedTier);
     const quantity = getQuantity(selectedTier);
     const totalPrice = getTotalPrice(tier!);
@@ -77,7 +76,7 @@ const PreOrderDialog = ({
         <div className="grid md:grid-cols-3 gap-6">
           {preOrderTiers.map(tier => <div key={tier.id} className={`relative border rounded-lg p-6 cursor-pointer transition-all duration-200 ${selectedTier === tier.id ? 'border-cyan-400 bg-cyan-400/10' : 'border-white/20 bg-black/20 hover:border-white/40'} ${tier.popular ? 'ring-2 ring-cyan-400/50' : ''}`} onClick={() => setSelectedTier(tier.id)}>
               {tier.popular && <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                  <span className="bg-cyan-400 text-black px-3 py-1 rounded-full text-xs md:text-sm font-semibold whitespace-nowrap">
+                  <span className="bg-cyan-400 text-black px-3 py-1 rounded-full text-xs font-semibold">
                     MOST POPULAR
                   </span>
                 </div>}
@@ -96,29 +95,19 @@ const PreOrderDialog = ({
                 </div>
                 
                 <div className="flex items-center justify-center gap-3 mb-4">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="h-8 w-8 p-0 border-white/20 text-black bg-white/90 hover:bg-white"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      updateQuantity(tier.id, -1);
-                    }}
-                  >
+                  <Button variant="outline" size="sm" className="h-8 w-8 p-0 border-white/20 text-black bg-white/90 hover:bg-white" onClick={e => {
+                e.stopPropagation();
+                updateQuantity(tier.id, -1);
+              }}>
                     <Minus className="h-4 w-4" />
                   </Button>
                   <span className="text-lg font-semibold min-w-[2rem] text-center">
                     {getQuantity(tier.id)}
                   </span>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="h-8 w-8 p-0 border-white/20 text-black bg-white/90 hover:bg-white"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      updateQuantity(tier.id, 1);
-                    }}
-                  >
+                  <Button variant="outline" size="sm" className="h-8 w-8 p-0 border-white/20 text-black bg-white/90 hover:bg-white" onClick={e => {
+                e.stopPropagation();
+                updateQuantity(tier.id, 1);
+              }}>
                     <Plus className="h-4 w-4" />
                   </Button>
                 </div>
@@ -143,14 +132,7 @@ const PreOrderDialog = ({
           <Button onClick={handlePreOrder} disabled={!selectedTier} className="bg-cyan-400 text-black hover:bg-cyan-300 font-inter font-semibold px-8 py-3 disabled:opacity-50 disabled:cursor-not-allowed">
             {selectedTier ? 'Pre-Order Now' : 'Select a Package'}
           </Button>
-          <p className="text-xs text-slate-400 mt-3">Secure payment processing • 14-day money-back guarantee</p>
-          <div className="mt-4 flex justify-center">
-            <img 
-              src="/lovable-uploads/7d84dfb4-4db3-4adb-87f0-36f33c0f8daa.png" 
-              alt="Powered by Stripe" 
-              className="h-8 opacity-80"
-            />
-          </div>
+          
         </div>
       </DialogContent>
     </Dialog>;
