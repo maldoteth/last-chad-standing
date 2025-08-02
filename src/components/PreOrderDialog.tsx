@@ -99,7 +99,7 @@ const PreOrderDialog = ({
                   <Button
                     variant="outline"
                     size="sm"
-                    className="h-8 w-8 p-0 border-white/20 text-white hover:bg-white/10"
+                    className="h-8 w-8 p-0 border-white/20 text-black bg-white/90 hover:bg-white"
                     onClick={(e) => {
                       e.stopPropagation();
                       updateQuantity(tier.id, -1);
@@ -113,7 +113,7 @@ const PreOrderDialog = ({
                   <Button
                     variant="outline"
                     size="sm"
-                    className="h-8 w-8 p-0 border-white/20 text-white hover:bg-white/10"
+                    className="h-8 w-8 p-0 border-white/20 text-black bg-white/90 hover:bg-white"
                     onClick={(e) => {
                       e.stopPropagation();
                       updateQuantity(tier.id, 1);
