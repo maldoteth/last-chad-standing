@@ -259,10 +259,10 @@ const Documents = () => {
     icon: <Scale size={20} />,
     items: [{
       title: "Terms of Service",
-      href: "/terms"
+      href: "#terms-of-service"
     }, {
       title: "Privacy Policy",
-      href: "/privacy"
+      href: "#privacy-policy"
     }]
   }];
   return <>
@@ -1509,6 +1509,169 @@ This means fighters truly own their digital assets and can trade them freely wit
                               #F2F2F2 - Light cream (fist fill)
                             </li>
                           </ul>
+                        </div>
+                      </section>
+
+                      {/* Terms of Service Section */}
+                      <section id="terms-of-service" className="mb-12">
+                        <h2 className="text-3xl font-bold mb-6 text-gray-900 border-b border-gray-200 pb-2">
+                          Terms of Service
+                        </h2>
+                        <div className="space-y-6 text-gray-700">
+                          <p className="text-sm text-gray-500">Last Updated: August 2, 2025</p>
+
+                          <div>
+                            <h3 className="text-xl font-semibold mb-3 text-gray-900">1. Acceptance of Terms</h3>
+                            <p>By accessing and playing Last Chad Standing ("the Game"), you accept and agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our game.</p>
+                          </div>
+
+                          <div>
+                            <h3 className="text-xl font-semibold mb-3 text-gray-900">2. Game Description</h3>
+                            <p>Last Chad Standing is a competitive multiplayer game where players compete to be the last surviving player. The game may include in-game purchases, rewards, and community features.</p>
+                          </div>
+
+                          <div>
+                            <h3 className="text-xl font-semibold mb-3 text-gray-900">3. Player Conduct</h3>
+                            <p>Players agree to:</p>
+                            <ul className="list-disc pl-6 space-y-1 mt-2">
+                              <li>Play fairly and not use cheats, hacks, or exploits</li>
+                              <li>Respect other players and maintain appropriate conduct</li>
+                              <li>Not engage in harassment, toxic behavior, or discrimination</li>
+                              <li>Not attempt to disrupt game servers or other players' experiences</li>
+                            </ul>
+                          </div>
+
+                          <div>
+                            <h3 className="text-xl font-semibold mb-3 text-gray-900">4. Virtual Items and Purchases</h3>
+                            <p>The Game may offer virtual items, currency, or other digital goods for purchase. All purchases are final and non-refundable unless required by law. Virtual items have no real-world value and cannot be exchanged for real money.</p>
+                          </div>
+
+                          <div>
+                            <h3 className="text-xl font-semibold mb-3 text-gray-900">5. Account Security</h3>
+                            <p>You are responsible for maintaining the security of your account and all activities that occur under your account. Notify us immediately of any unauthorized use.</p>
+                          </div>
+
+                          <div>
+                            <h3 className="text-xl font-semibold mb-3 text-gray-900">6. Intellectual Property</h3>
+                            <p>All game content, including but not limited to graphics, sounds, text, and code, is owned by Last Chad Standing and protected by copyright and other intellectual property laws.</p>
+                          </div>
+
+                          <div>
+                            <h3 className="text-xl font-semibold mb-3 text-gray-900">7. Termination</h3>
+                            <p>We reserve the right to suspend or terminate your access to the Game at any time for violation of these terms or for any other reason we deem appropriate.</p>
+                          </div>
+
+                          <div>
+                            <h3 className="text-xl font-semibold mb-3 text-gray-900">8. Limitation of Liability</h3>
+                            <p>The Game is provided "as is" without warranties. We are not liable for any damages arising from your use of the Game, including but not limited to loss of data, interruption of service, or any indirect damages.</p>
+                          </div>
+
+                          <div>
+                            <h3 className="text-xl font-semibold mb-3 text-gray-900">9. Changes to Terms</h3>
+                            <p>We may update these Terms of Service at any time. Continued use of the Game after changes constitutes acceptance of the new terms.</p>
+                          </div>
+
+                          <div>
+                            <h3 className="text-xl font-semibold mb-3 text-gray-900">10. Contact Information</h3>
+                            <p>For questions about these Terms of Service, please contact us through our official social media channels or support system.</p>
+                          </div>
+                        </div>
+                      </section>
+
+                      {/* Privacy Policy Section */}
+                      <section id="privacy-policy" className="mb-12">
+                        <h2 className="text-3xl font-bold mb-6 text-gray-900 border-b border-gray-200 pb-2">
+                          Privacy Policy
+                        </h2>
+                        <div className="space-y-6 text-gray-700">
+                          <p className="text-sm text-gray-500">Last Updated: August 2, 2025</p>
+
+                          <div>
+                            <h3 className="text-xl font-semibold mb-3 text-gray-900">1. Information We Collect</h3>
+                            
+                            <h4 className="text-lg font-medium mb-2 text-gray-800">Personal Information</h4>
+                            <p className="mb-2">We may collect personal information you provide directly, such as:</p>
+                            <ul className="list-disc pl-6 space-y-1">
+                              <li>Username and display name</li>
+                              <li>Email address (if provided)</li>
+                              <li>Profile information and preferences</li>
+                            </ul>
+
+                            <h4 className="text-lg font-medium mb-2 mt-4 text-gray-800">Game Data</h4>
+                            <p className="mb-2">We automatically collect game-related information, including:</p>
+                            <ul className="list-disc pl-6 space-y-1">
+                              <li>Gameplay statistics and performance data</li>
+                              <li>In-game achievements and progress</li>
+                              <li>Device information and technical data</li>
+                              <li>IP address and general location information</li>
+                            </ul>
+                          </div>
+
+                          <div>
+                            <h3 className="text-xl font-semibold mb-3 text-gray-900">2. How We Use Your Information</h3>
+                            <p className="mb-2">We use collected information to:</p>
+                            <ul className="list-disc pl-6 space-y-1">
+                              <li>Provide and improve the gaming experience</li>
+                              <li>Maintain player accounts and save game progress</li>
+                              <li>Enable multiplayer features and matchmaking</li>
+                              <li>Prevent cheating and maintain fair play</li>
+                              <li>Communicate important game updates</li>
+                              <li>Analyze game performance and player behavior</li>
+                            </ul>
+                          </div>
+
+                          <div>
+                            <h3 className="text-xl font-semibold mb-3 text-gray-900">3. Information Sharing</h3>
+                            <p className="mb-2">We do not sell your personal information. We may share information in the following circumstances:</p>
+                            <ul className="list-disc pl-6 space-y-1">
+                              <li>With service providers who help us operate the game</li>
+                              <li>To comply with legal obligations or protect our rights</li>
+                              <li>In connection with a business transfer or acquisition</li>
+                              <li>With your consent for specific purposes</li>
+                            </ul>
+                          </div>
+
+                          <div>
+                            <h3 className="text-xl font-semibold mb-3 text-gray-900">4. Data Security</h3>
+                            <p>We implement appropriate security measures to protect your information against unauthorized access, alteration, disclosure, or destruction. However, no internet transmission is completely secure.</p>
+                          </div>
+
+                          <div>
+                            <h3 className="text-xl font-semibold mb-3 text-gray-900">5. Data Retention</h3>
+                            <p>We retain your information for as long as necessary to provide our services and comply with legal obligations. Inactive accounts may be deleted after a reasonable period of inactivity.</p>
+                          </div>
+
+                          <div>
+                            <h3 className="text-xl font-semibold mb-3 text-gray-900">6. Third-Party Services</h3>
+                            <p>Our game may integrate with third-party services for analytics, advertising, or social features. These services have their own privacy policies, and we encourage you to review them.</p>
+                          </div>
+
+                          <div>
+                            <h3 className="text-xl font-semibold mb-3 text-gray-900">7. Children's Privacy</h3>
+                            <p>Our game is not intended for children under 13. We do not knowingly collect personal information from children under 13. If we become aware of such collection, we will delete the information promptly.</p>
+                          </div>
+
+                          <div>
+                            <h3 className="text-xl font-semibold mb-3 text-gray-900">8. Your Rights</h3>
+                            <p className="mb-2">Depending on your location, you may have rights regarding your personal information, including:</p>
+                            <ul className="list-disc pl-6 space-y-1">
+                              <li>Access to your personal information</li>
+                              <li>Correction of inaccurate information</li>
+                              <li>Deletion of your information</li>
+                              <li>Data portability</li>
+                              <li>Opting out of certain data processing</li>
+                            </ul>
+                          </div>
+
+                          <div>
+                            <h3 className="text-xl font-semibold mb-3 text-gray-900">9. Changes to This Policy</h3>
+                            <p>We may update this Privacy Policy from time to time. We will notify you of significant changes by posting the new policy in the game or through other communication methods.</p>
+                          </div>
+
+                          <div>
+                            <h3 className="text-xl font-semibold mb-3 text-gray-900">10. Contact Us</h3>
+                            <p>If you have questions about this Privacy Policy or our data practices, please contact us through our official support channels or social media.</p>
+                          </div>
                         </div>
                       </section>
                     </div>
