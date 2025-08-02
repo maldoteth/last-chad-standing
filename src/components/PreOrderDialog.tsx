@@ -69,7 +69,7 @@ const PreOrderDialog = ({
       </DialogTrigger>
       <DialogContent className="bg-black/90 border border-white/20 backdrop-blur-sm text-white max-w-4xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle className="font-sora text-2xl text-center text-white mb-6">
+          <DialogTitle className="font-exo text-2xl text-center text-white mb-6">
             Pre-Order Last Chad Standing
           </DialogTitle>
         </DialogHeader>
@@ -83,7 +83,7 @@ const PreOrderDialog = ({
                 </div>}
               
               <div className="text-center mb-4">
-                <h3 className="font-sora text-xl font-semibold mb-2">{tier.name}</h3>
+                <h3 className="font-exo text-xl font-semibold mb-2">{tier.name}</h3>
                 <div className="mb-4">
                   <div className="text-lg font-bold">${tier.price} each</div>
                   <div className="text-3xl font-bold text-cyan-400">${getTotalPrice(tier)} total</div>
@@ -140,7 +140,7 @@ const PreOrderDialog = ({
         </div>
         
         <div className="mt-4 text-center">
-          <Button onClick={handlePreOrder} disabled={!selectedTier} className="bg-cyan-400 text-black hover:bg-cyan-300 font-inter font-semibold px-8 py-3 disabled:opacity-50 disabled:cursor-not-allowed">
+          <Button onClick={handlePreOrder} disabled={!selectedTier} className="bg-cyan-400 text-black hover:bg-cyan-300 font-exo font-semibold px-8 py-3 disabled:opacity-50 disabled:cursor-not-allowed">
             {selectedTier ? 'Pre-Order Now' : 'Select a Package'}
           </Button>
           <p className="text-xs text-slate-400 mt-3">Secure payment processing • 14-day money-back guarantee</p>
