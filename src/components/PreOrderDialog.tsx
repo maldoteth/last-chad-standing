@@ -77,7 +77,7 @@ const PreOrderDialog = ({
         <div className="grid md:grid-cols-3 gap-6">
           {preOrderTiers.map(tier => <div key={tier.id} className={`relative border rounded-lg p-6 cursor-pointer transition-all duration-200 ${selectedTier === tier.id ? 'border-cyan-400 bg-cyan-400/10' : 'border-white/20 bg-black/20 hover:border-white/40'} ${tier.popular ? 'ring-2 ring-cyan-400/50' : ''}`} onClick={() => setSelectedTier(tier.id)}>
               {tier.popular && <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                  <span className="bg-cyan-400 text-black px-3 py-1 rounded-full text-xs font-semibold">
+                  <span className="bg-cyan-400 text-black px-3 py-1 rounded-full text-xs md:text-sm font-semibold whitespace-nowrap">
                     MOST POPULAR
                   </span>
                 </div>}
