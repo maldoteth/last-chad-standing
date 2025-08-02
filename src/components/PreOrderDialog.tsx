@@ -139,7 +139,7 @@ const PreOrderDialog = ({
             </div>)}
         </div>
         
-        <div className="mt-8 text-center">
+        <div className="mt-4 text-center">
           <Button onClick={handlePreOrder} disabled={!selectedTier} className="bg-cyan-400 text-black hover:bg-cyan-300 font-inter font-semibold px-8 py-3 disabled:opacity-50 disabled:cursor-not-allowed">
             {selectedTier ? 'Pre-Order Now' : 'Select a Package'}
           </Button>
