@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import { Check } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { Check, Plus, Minus } from 'lucide-react';
 interface PreOrderTier {
   id: string;
   name: string;
@@ -36,13 +37,30 @@ const PreOrderDialog = ({
   children
 }: PreOrderDialogProps) => {
   const [selectedTier, setSelectedTier] = useState<string | null>(null);
+  const [quantities, setQuantities] = useState<Record<string, number>>({});
   const [isOpen, setIsOpen] = useState(false);
+  const updateQuantity = (tierId: string, change: number) => {
+    setQuantities(prev => {
+      const current = prev[tierId] || 1;
+      const newQuantity = Math.max(1, current + change);
+      return { ...prev, [tierId]: newQuantity };
+    });
+  };
+
+  const getQuantity = (tierId: string) => quantities[tierId] || 1;
+
+  const getTotalPrice = (tier: PreOrderTier) => {
+    const quantity = getQuantity(tier.id);
+    return tier.price * quantity;
+  };
+
   const handlePreOrder = () => {
     if (!selectedTier) return;
 
-    // For now, just show an alert - will be replaced with Stripe integration
     const tier = preOrderTiers.find(t => t.id === selectedTier);
-    alert(`Pre-order functionality coming soon!\n\nSelected: ${tier?.name}\nPrice: $${tier?.price}`);
+    const quantity = getQuantity(selectedTier);
+    const totalPrice = getTotalPrice(tier!);
+    alert(`Pre-order functionality coming soon!\n\nSelected: ${tier?.name}\nQuantity: ${quantity}\nTotal Price: $${totalPrice}`);
     setIsOpen(false);
   };
   return <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -66,14 +84,43 @@ const PreOrderDialog = ({
               
               <div className="text-center mb-4">
                 <h3 className="font-sora text-xl font-semibold mb-2">{tier.name}</h3>
-                <div className="mb-2">
-                  <span className="text-3xl font-bold">${tier.price}</span>
+                <div className="mb-4">
+                  <div className="text-lg font-bold">${tier.price} each</div>
+                  <div className="text-3xl font-bold text-cyan-400">${getTotalPrice(tier)} total</div>
                   {tier.originalValue && <div className="text-sm text-slate-400">
-                      <span className="line-through">${tier.originalValue}</span>
+                      <span className="line-through">${tier.originalValue * getQuantity(tier.id)} total value</span>
                       <span className="text-cyan-400 ml-2">
-                        Save ${tier.originalValue - tier.price}
+                        Save ${(tier.originalValue - tier.price) * getQuantity(tier.id)}
                       </span>
                     </div>}
+                </div>
+                
+                <div className="flex items-center justify-center gap-3 mb-4">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="h-8 w-8 p-0 border-white/20 text-white hover:bg-white/10"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      updateQuantity(tier.id, -1);
+                    }}
+                  >
+                    <Minus className="h-4 w-4" />
+                  </Button>
+                  <span className="text-lg font-semibold min-w-[2rem] text-center">
+                    {getQuantity(tier.id)}
+                  </span>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="h-8 w-8 p-0 border-white/20 text-white hover:bg-white/10"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      updateQuantity(tier.id, 1);
+                    }}
+                  >
+                    <Plus className="h-4 w-4" />
+                  </Button>
                 </div>
               </div>
               
