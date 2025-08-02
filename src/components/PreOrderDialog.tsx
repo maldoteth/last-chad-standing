@@ -61,7 +61,6 @@ const PreOrderDialog = ({
 
     toast({
       title: "Coming Soon!",
-      description: "Pre-order functionality will be available soon. Stay tuned!",
     });
     setIsOpen(false);
   };
