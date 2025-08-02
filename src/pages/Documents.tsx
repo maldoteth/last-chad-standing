@@ -212,7 +212,7 @@ const Documents = () => {
     title: "Economy",
     icon: <DollarSign size={20} />,
     items: [{
-      title: "Coins",
+      title: "In-Game Currency",
       href: "#in-game-currency"
     }, {
       title: "Distribution",
