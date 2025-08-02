@@ -3,6 +3,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Check, Plus, Minus } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 interface PreOrderTier {
   id: string;
   name: string;
@@ -39,6 +40,7 @@ const PreOrderDialog = ({
   const [selectedTier, setSelectedTier] = useState<string | null>(null);
   const [quantities, setQuantities] = useState<Record<string, number>>({});
   const [isOpen, setIsOpen] = useState(false);
+  const { toast } = useToast();
   const updateQuantity = (tierId: string, change: number) => {
     setQuantities(prev => {
       const current = prev[tierId] || 1;
@@ -57,10 +59,10 @@ const PreOrderDialog = ({
   const handlePreOrder = () => {
     if (!selectedTier) return;
 
-    const tier = preOrderTiers.find(t => t.id === selectedTier);
-    const quantity = getQuantity(selectedTier);
-    const totalPrice = getTotalPrice(tier!);
-    alert(`Pre-order functionality coming soon!\n\nSelected: ${tier?.name}\nQuantity: ${quantity}\nTotal Price: $${totalPrice}`);
+    toast({
+      title: "Coming Soon!",
+      description: "Pre-order functionality will be available soon. Stay tuned!",
+    });
     setIsOpen(false);
   };
   return <Dialog open={isOpen} onOpenChange={setIsOpen}>
