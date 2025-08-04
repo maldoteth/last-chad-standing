@@ -1485,27 +1485,39 @@ This means fighters truly own their digital assets and can trade them freely wit
                           <h4 className="font-semibold text-gray-900 mb-2">Brand Colors</h4>
                           <ul className="text-sm text-gray-800 space-y-2">
                             <li className="flex items-center gap-2">
-                              <div className="w-3 h-3 rounded-full border border-gray-300" style={{ backgroundColor: '#1C1C1C' }}></div>
+                              <div className="w-3 h-3 rounded-full border border-gray-300" style={{
+                              backgroundColor: '#1C1C1C'
+                            }}></div>
                               #1C1C1C - Deep black/dark gray (main logo fill)
                             </li>
                             <li className="flex items-center gap-2">
-                              <div className="w-3 h-3 rounded-full border border-gray-300" style={{ backgroundColor: '#2B2B2B' }}></div>
+                              <div className="w-3 h-3 rounded-full border border-gray-300" style={{
+                              backgroundColor: '#2B2B2B'
+                            }}></div>
                               #2B2B2B - Charcoal gray (logo shading)
                             </li>
                             <li className="flex items-center gap-2">
-                              <div className="w-3 h-3 rounded-full border border-gray-300" style={{ backgroundColor: '#4B4B4B' }}></div>
+                              <div className="w-3 h-3 rounded-full border border-gray-300" style={{
+                              backgroundColor: '#4B4B4B'
+                            }}></div>
                               #4B4B4B - Dark chrome outline
                             </li>
                             <li className="flex items-center gap-2">
-                              <div className="w-3 h-3 rounded-full border border-gray-300" style={{ backgroundColor: '#A8A8A8' }}></div>
+                              <div className="w-3 h-3 rounded-full border border-gray-300" style={{
+                              backgroundColor: '#A8A8A8'
+                            }}></div>
                               #A8A8A8 - Mid gray/chrome detail
                             </li>
                             <li className="flex items-center gap-2">
-                              <div className="w-3 h-3 rounded-full border border-gray-300" style={{ backgroundColor: '#D9D9D9' }}></div>
+                              <div className="w-3 h-3 rounded-full border border-gray-300" style={{
+                              backgroundColor: '#D9D9D9'
+                            }}></div>
                               #D9D9D9 - Light silver highlight
                             </li>
                             <li className="flex items-center gap-2">
-                              <div className="w-3 h-3 rounded-full border border-gray-300" style={{ backgroundColor: '#F2F2F2' }}></div>
+                              <div className="w-3 h-3 rounded-full border border-gray-300" style={{
+                              backgroundColor: '#F2F2F2'
+                            }}></div>
                               #F2F2F2 - Light cream (fist fill)
                             </li>
                           </ul>
@@ -1573,7 +1585,7 @@ This means fighters truly own their digital assets and can trade them freely wit
 
                           <div>
                             <h3 className="text-xl font-semibold mb-3 text-gray-900">10. Company Information</h3>
-                            <p>Last Chad Standing and all related IP is owned and developed by:</p>
+                            <p>Last Chad Standing and all related IP is owned. distributed and developed solely by:</p>
                             <div className="mt-3 pl-4 border-l-4 border-gray-200">
                               <p className="font-semibold">DeLabs LTD</p>
                               <p>3rd Floor Suite, 207 Regent Street, London, England, W1B 3HH</p>
