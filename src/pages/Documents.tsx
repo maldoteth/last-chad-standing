@@ -1572,7 +1572,17 @@ This means fighters truly own their digital assets and can trade them freely wit
                           </div>
 
                           <div>
-                            <h3 className="text-xl font-semibold mb-3 text-gray-900">10. Contact Information</h3>
+                            <h3 className="text-xl font-semibold mb-3 text-gray-900">10. Company Information</h3>
+                            <p>Last Chad Standing and all related IP is owned and developed by:</p>
+                            <div className="mt-3 pl-4 border-l-4 border-gray-200">
+                              <p className="font-semibold">DeLabs LTD</p>
+                              <p>3rd Floor Suite, 207 Regent Street, London, England, W1B 3HH</p>
+                              <p>Company Number: 14204474</p>
+                            </div>
+                          </div>
+
+                          <div>
+                            <h3 className="text-xl font-semibold mb-3 text-gray-900">11. Contact Information</h3>
                             <p>For questions about these Terms of Service, please contact us through our official social media channels or support system.</p>
                           </div>
                         </div>
