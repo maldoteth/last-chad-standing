@@ -5,9 +5,11 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Progress } from "@/components/ui/progress";
-import { Coins, ShoppingBag, Users, Package, CreditCard, Trophy, Star, Target, ChevronRight, Bell, Play, Home, TrendingUp, UserPlus } from "lucide-react";
+import { Coins, ShoppingBag, Users, Package, CreditCard, Trophy, Star, Target, ChevronRight, Bell, Play, Home, TrendingUp, UserPlus, Medal } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 const Game = () => {
   const [activeTab, setActiveTab] = useState("home");
+  const [rightSidebarTab, setRightSidebarTab] = useState("notifications");
   const [userCoins] = useState(12500);
   const {
     toast
@@ -447,18 +449,72 @@ const Game = () => {
 
           {/* Right Sidebar - Desktop only */}
           <aside className="w-80 bg-card border-l border-border p-6">
-            <div className="flex items-center space-x-2 mb-6">
-              <Bell className="w-5 h-5" />
-              <h2 className="text-lg font-semibold">Notifications</h2>
-            </div>
-            
-            <div className="text-center py-12">
-              <Bell className="w-12 h-12 mx-auto text-muted-foreground mb-4 opacity-50" />
-              <p className="text-muted-foreground">Buy & sell fighters</p>
-              <p className="text-sm text-muted-foreground mt-2">
-                You'll see game updates and important announcements here
-              </p>
-            </div>
+            <Tabs value={rightSidebarTab} onValueChange={setRightSidebarTab} className="w-full">
+              <TabsList className="grid w-full grid-cols-2">
+                <TabsTrigger value="notifications" className="flex items-center gap-2">
+                  <Bell className="w-4 h-4" />
+                  Notifications
+                </TabsTrigger>
+                <TabsTrigger value="rankings" className="flex items-center gap-2">
+                  <Medal className="w-4 h-4" />
+                  Rankings
+                </TabsTrigger>
+              </TabsList>
+              
+              <TabsContent value="notifications" className="mt-6">
+                <div className="text-center py-12">
+                  <Bell className="w-12 h-12 mx-auto text-muted-foreground mb-4 opacity-50" />
+                  <p className="text-muted-foreground">Buy & sell fighters</p>
+                  <p className="text-sm text-muted-foreground mt-2">
+                    You'll see game updates and important announcements here
+                  </p>
+                </div>
+              </TabsContent>
+              
+              <TabsContent value="rankings" className="mt-6">
+                <div className="space-y-4">
+                  <h3 className="text-lg font-semibold text-center mb-4">Top Players</h3>
+                  {[
+                    { rank: 1, name: "CryptoKing", level: 45, points: 15420, avatar: "👑" },
+                    { rank: 2, name: "BlockMaster", level: 43, points: 14890, avatar: "⚔️" },
+                    { rank: 3, name: "ChainWarrior", level: 41, points: 14320, avatar: "🛡️" },
+                    { rank: 4, name: "TokenSlayer", level: 38, points: 13780, avatar: "🗡️" },
+                    { rank: 5, name: "NFTChampion", level: 37, points: 13240, avatar: "🏆" },
+                    { rank: 6, name: "DeFiGamer", level: 35, points: 12890, avatar: "💎" },
+                    { rank: 7, name: "MetaPlayer", level: 34, points: 12450, avatar: "🎮" },
+                    { rank: 8, name: "Web3Hero", level: 32, points: 12120, avatar: "🚀" },
+                    { rank: 9, name: "CoinMaster", level: 30, points: 11780, avatar: "💰" },
+                    { rank: 10, name: "BlockHero", level: 29, points: 11340, avatar: "⭐" }
+                  ].map((player) => (
+                    <div key={player.rank} className="flex items-center space-x-3 p-3 rounded-lg hover:bg-muted/50 transition-colors">
+                      <div className="flex-shrink-0 w-8 text-center">
+                        {player.rank <= 3 ? (
+                          <Medal className={`w-5 h-5 ${
+                            player.rank === 1 ? 'text-yellow-400' : 
+                            player.rank === 2 ? 'text-gray-300' : 
+                            'text-amber-600'
+                          }`} />
+                        ) : (
+                          <span className="text-sm font-medium text-muted-foreground">#{player.rank}</span>
+                        )}
+                      </div>
+                      
+                      <Avatar className="w-8 h-8">
+                        <AvatarFallback className="text-sm">{player.avatar}</AvatarFallback>
+                      </Avatar>
+                      
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center justify-between">
+                          <p className="text-sm font-medium truncate">{player.name}</p>
+                          <Badge variant="outline" className="text-xs">Lv.{player.level}</Badge>
+                        </div>
+                        <p className="text-xs text-muted-foreground">{player.points.toLocaleString()} pts</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </TabsContent>
+            </Tabs>
           </aside>
         </div>
       </div>
