@@ -250,7 +250,7 @@ const Game = () => {
         </div>
 
         {/* Desktop Layout - Hidden on mobile */}
-        <div className="hidden lg:flex lg:min-h-screen w-full">
+        <div className="hidden lg:flex lg:h-screen w-full overflow-hidden">
           {/* Left Sidebar - Desktop only */}
           <aside className="w-80 bg-card border-r border-border p-6 space-y-6">
             <Card>
@@ -348,8 +348,8 @@ const Game = () => {
           </aside>
 
           {/* Center Content - Desktop Bento Boxes */}
-          <main className="flex-1 p-6">
-            <div className="grid grid-cols-12 gap-6 h-full">
+          <main className="flex-1 p-6 overflow-hidden">
+            <div className="grid grid-cols-12 gap-6 h-full min-h-0">
               {/* Large Welcome Card */}
               <Card className="col-span-8 row-span-2 bg-gradient-to-br from-blue-600/80 to-purple-700/80 text-white border-0 relative overflow-hidden">
                 <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
@@ -447,9 +447,9 @@ const Game = () => {
           </main>
 
           {/* Right Sidebar - Desktop only */}
-          <aside className="w-80 bg-card border-l border-border p-6">
-            <Tabs value={rightSidebarTab} onValueChange={setRightSidebarTab} className="w-full">
-              <TabsList className="grid w-full grid-cols-2">
+          <aside className="w-80 bg-card border-l border-border p-6 flex flex-col h-screen">
+            <Tabs value={rightSidebarTab} onValueChange={setRightSidebarTab} className="w-full flex flex-col h-full">
+              <TabsList className="grid w-full grid-cols-2 flex-shrink-0">
                 <TabsTrigger value="notifications" className="flex items-center gap-2">
                   <Bell className="w-4 h-4" />
                   Notifications
@@ -460,8 +460,8 @@ const Game = () => {
                 </TabsTrigger>
               </TabsList>
               
-              <TabsContent value="notifications" className="mt-6">
-                <div className="text-center py-8">
+              <TabsContent value="notifications" className="mt-6 flex-1 flex flex-col">
+                <div className="text-center py-8 flex-1 flex flex-col justify-center">
                   <Bell className="w-12 h-12 mx-auto text-muted-foreground mb-4 opacity-50" />
                   <p className="text-muted-foreground">No notifications yet</p>
                   <p className="text-sm text-muted-foreground mt-2">
@@ -470,9 +470,9 @@ const Game = () => {
                 </div>
               </TabsContent>
               
-              <TabsContent value="rankings" className="mt-6">
-                <h3 className="text-lg font-semibold text-center mb-4">Top Players</h3>
-                <div className="max-h-[620px] overflow-y-auto space-y-2 scrollbar-none" style={{ scrollBehavior: 'auto' }}>
+              <TabsContent value="rankings" className="mt-6 flex-1 flex flex-col">
+                <h3 className="text-lg font-semibold text-center mb-4 flex-shrink-0">Top Players</h3>
+                <div className="flex-1 overflow-y-auto space-y-2 scrollbar-none" style={{ scrollBehavior: 'auto' }}>
                   {[
                     { rank: 1, name: "CryptoKing", level: 45, points: 15420, avatar: "👑" },
                     { rank: 2, name: "BlockMaster", level: 43, points: 14890, avatar: "⚔️" },
