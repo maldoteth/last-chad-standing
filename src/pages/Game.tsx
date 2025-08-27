@@ -438,7 +438,7 @@ const Game = () => {
                     <div className="flex space-x-4">
                       <Button 
                         variant="secondary" 
-                        size="lg" 
+                        size="default" 
                         className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 transition-all duration-300"
                         onClick={() => navigate('/docs')}
                       >
@@ -447,7 +447,7 @@ const Game = () => {
                       </Button>
                       <Button 
                         variant="secondary" 
-                        size="lg" 
+                        size="default" 
                         className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 transition-all duration-300"
                         onClick={() => toast({
                           title: "Coming Soon",
