@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Instagram, Globe, Layers, BookOpen, Bell } from 'lucide-react';
+import { Instagram, Globe, Layers, BookOpen, Gamepad2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 
@@ -38,9 +38,9 @@ const defaultSocialLinks: SocialLink[] = [
     to: "/docs"
   },
   {
-    name: "Blog",
-    icon: <Bell className="w-6 h-6" />,
-    to: "/blog"
+    name: "Game",
+    icon: <Gamepad2 className="w-6 h-6" />,
+    to: "/game"
   }
 ];
 
