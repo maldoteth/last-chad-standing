@@ -82,6 +82,26 @@ const Game = () => {
           <Card>
             <CardHeader>
               <CardTitle className="text-base flex items-center space-x-2">
+                <Star className="w-4 h-4" />
+                <span>Progress</span>
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-sm font-medium">Level 0: Recruit</span>
+                    <span className="text-xs text-muted-foreground">0/100 XP</span>
+                  </div>
+                  <Progress value={0} className="h-2" />
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-base flex items-center space-x-2">
                 <Target className="w-4 h-4" />
                 <span>Objectives</span>
               </CardTitle>
