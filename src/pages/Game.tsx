@@ -143,9 +143,9 @@ const Game = () => {
                       How to play
                     </Button>
                     <Button 
-                      variant="default" 
+                      variant="secondary" 
                       size="default" 
-                      className="bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300"
+                      className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 transition-all duration-300"
                       onClick={() => toast({
                         title: "Coming Soon",
                         description: "The game will be available soon!"
@@ -445,9 +445,9 @@ const Game = () => {
                         How to play
                       </Button>
                       <Button 
-                        variant="default" 
+                        variant="secondary" 
                         size="lg" 
-                        className="bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300"
+                        className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 transition-all duration-300"
                         onClick={() => toast({
                           title: "Coming Soon",
                           description: "The game will be available soon!"
