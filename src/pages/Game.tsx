@@ -100,9 +100,12 @@ const Game = () => {
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
-              <Button onClick={login} variant="outline" size="sm">
-                Sign In
-              </Button>
+              <button 
+                onClick={login}
+                className="flex items-center bg-card border border-border rounded-full px-2 py-1 lg:px-3 lg:py-1.5 hover:bg-accent transition-colors"
+              >
+                <span className="font-semibold text-sm lg:text-base">Sign In</span>
+              </button>
             )}
           </div>
         </div>
