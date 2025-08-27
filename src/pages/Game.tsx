@@ -142,20 +142,6 @@ const Game = () => {
                 {/* Metallic base layer */}
                 <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
                 
-                {/* Drill holes pattern */}
-                <div className="absolute inset-0" style={{
-                  backgroundImage: `
-                    radial-gradient(circle at 15px 15px, rgba(0,0,0,0.8) 1.5px, transparent 1.5px),
-                    radial-gradient(circle at 45px 15px, rgba(0,0,0,0.8) 1.5px, transparent 1.5px),
-                    radial-gradient(circle at 75px 15px, rgba(0,0,0,0.8) 1.5px, transparent 1.5px),
-                    radial-gradient(circle at 15px 45px, rgba(0,0,0,0.8) 1.5px, transparent 1.5px),
-                    radial-gradient(circle at 45px 45px, rgba(0,0,0,0.8) 1.5px, transparent 1.5px),
-                    radial-gradient(circle at 75px 45px, rgba(0,0,0,0.8) 1.5px, transparent 1.5px)
-                  `,
-                  backgroundSize: '90px 60px',
-                  backgroundRepeat: 'repeat'
-                }} />
-                
                 {/* Metallic shine overlay */}
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-400/10 to-transparent transform -skew-x-12" />
                 <CardContent className="p-4">
@@ -401,20 +387,6 @@ const Game = () => {
               <Card className="col-span-4 bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
                 {/* Metallic base layer */}
                 <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
-                
-                {/* Drill holes pattern */}
-                <div className="absolute inset-0" style={{
-                  backgroundImage: `
-                    radial-gradient(circle at 20px 20px, rgba(0,0,0,0.8) 2px, transparent 2px),
-                    radial-gradient(circle at 60px 20px, rgba(0,0,0,0.8) 2px, transparent 2px),
-                    radial-gradient(circle at 100px 20px, rgba(0,0,0,0.8) 2px, transparent 2px),
-                    radial-gradient(circle at 20px 60px, rgba(0,0,0,0.8) 2px, transparent 2px),
-                    radial-gradient(circle at 60px 60px, rgba(0,0,0,0.8) 2px, transparent 2px),
-                    radial-gradient(circle at 100px 60px, rgba(0,0,0,0.8) 2px, transparent 2px)
-                  `,
-                  backgroundSize: '120px 80px',
-                  backgroundRepeat: 'repeat'
-                }} />
                 
                 {/* Metallic shine overlay */}
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-400/10 to-transparent transform -skew-x-12" />
