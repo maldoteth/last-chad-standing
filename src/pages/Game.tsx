@@ -496,7 +496,7 @@ const Game = () => {
                 </div>
               </TabsContent>
               
-              <TabsContent value="rankings" className="mt-0">
+              <TabsContent value="rankings" className="!mt-0">
                 <div className="overflow-y-auto space-y-2 scrollbar-none max-h-[580px]">
                   {[
                     { rank: 1, name: "CryptoKing", level: 45, points: 15420, avatar: "👑" },
