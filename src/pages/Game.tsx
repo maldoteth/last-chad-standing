@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Progress } from "@/components/ui/progress";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Coins, ShoppingBag, Users, Package, CreditCard, Trophy, Star, Target, ChevronRight, Bell, Play, Home, TrendingUp, UserPlus, Medal, LogOut, Settings, Info } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 const Game = () => {
@@ -199,9 +200,36 @@ const Game = () => {
                   </div>
                   <h3 className="text-sm font-bold mb-1">Smash that XP</h3>
                   <p className="text-gray-300 text-xs mb-3">by completing all quests</p>
-                  <Button variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 text-xs h-7 relative z-10 transition-all duration-300">
-                    Show Quests
-                  </Button>
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 text-xs h-7 relative z-10 transition-all duration-300">
+                        Show Quests
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent className="sm:max-w-md">
+                      <DialogHeader>
+                        <DialogTitle>Available Quests</DialogTitle>
+                      </DialogHeader>
+                      <div className="space-y-3">
+                        <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg">
+                          <span className="text-sm font-medium">Connect X</span>
+                          <Badge variant="outline" className="text-xs">+50 XP</Badge>
+                        </div>
+                        <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg">
+                          <span className="text-sm font-medium">Connect Insta</span>
+                          <Badge variant="outline" className="text-xs">+50 XP</Badge>
+                        </div>
+                        <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg">
+                          <span className="text-sm font-medium">Follow X page</span>
+                          <Badge variant="outline" className="text-xs">+25 XP</Badge>
+                        </div>
+                        <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg">
+                          <span className="text-sm font-medium">Follow Insta page</span>
+                          <Badge variant="outline" className="text-xs">+25 XP</Badge>
+                        </div>
+                      </div>
+                    </DialogContent>
+                  </Dialog>
                 </CardContent>
               </Card>
 
@@ -476,9 +504,36 @@ const Game = () => {
                   </div>
                   <h3 className="text-lg font-bold mb-2">Smash that XP</h3>
                   <p className="text-gray-300 text-sm mb-4">by completing all quests</p>
-                  <Button variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 w-full relative z-10 transition-all duration-300">
-                    Show Quests
-                  </Button>
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 w-full relative z-10 transition-all duration-300">
+                        Show Quests
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent className="sm:max-w-md">
+                      <DialogHeader>
+                        <DialogTitle>Available Quests</DialogTitle>
+                      </DialogHeader>
+                      <div className="space-y-3">
+                        <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg">
+                          <span className="text-sm font-medium">Connect X</span>
+                          <Badge variant="outline" className="text-xs">+50 XP</Badge>
+                        </div>
+                        <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg">
+                          <span className="text-sm font-medium">Connect Insta</span>
+                          <Badge variant="outline" className="text-xs">+50 XP</Badge>
+                        </div>
+                        <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg">
+                          <span className="text-sm font-medium">Follow X page</span>
+                          <Badge variant="outline" className="text-xs">+25 XP</Badge>
+                        </div>
+                        <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg">
+                          <span className="text-sm font-medium">Follow Insta page</span>
+                          <Badge variant="outline" className="text-xs">+25 XP</Badge>
+                        </div>
+                      </div>
+                    </DialogContent>
+                  </Dialog>
                 </CardContent>
               </Card>
 
