@@ -114,7 +114,7 @@ const Game = () => {
               </DropdownMenu>
             ) : (
               <Button onClick={login} variant="outline" size="sm">
-                Sign In
+                Log In
               </Button>
             )}
           </div>
