@@ -72,49 +72,6 @@ const Game = () => {
       <div className="flex min-h-[calc(100vh-80px)]">
         {/* Left Sidebar - User Profile */}
         <aside className="w-80 bg-card border-r border-border p-6 space-y-6">
-          <Card className="bg-accent/30 border-accent">
-            <CardHeader className="text-center pb-4">
-              <Avatar className="w-16 h-16 mx-auto mb-3">
-                <AvatarImage src="/placeholder.svg" />
-                <AvatarFallback className="bg-primary text-primary-foreground text-lg font-bold">
-                  DD
-                </AvatarFallback>
-              </Avatar>
-              <CardTitle className="text-lg">diversedonkey#5936</CardTitle>
-              <Badge variant="outline" className="border-orange-500 text-orange-500 bg-orange-500/10">
-                Bronze
-              </Badge>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="flex justify-between items-center">
-                <span className="text-sm text-muted-foreground">REP</span>
-                <span className="font-semibold">0</span>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-sm text-muted-foreground">LVL</span>
-                <span className="font-semibold">10</span>
-              </div>
-              <div className="space-y-2">
-                <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">XP</span>
-                  <span>5400 / Next level 1.1k</span>
-                </div>
-                <Progress value={83} className="h-2" />
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-sm text-muted-foreground">Skill rating</span>
-                <span className="font-semibold">0</span>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-sm text-muted-foreground">Squad value</span>
-                <div className="flex items-center space-x-1">
-                  <Coins className="w-4 h-4 text-yellow-500" />
-                  <span className="font-semibold">0</span>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
           <Card>
             <CardHeader>
               <CardTitle className="text-base flex items-center space-x-2">
