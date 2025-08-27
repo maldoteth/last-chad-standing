@@ -25,8 +25,6 @@ const Game = () => {
         title: "Coming Soon",
         description: "The lobby feature is currently under development."
       });
-    } else if (tabId === "store") {
-      navigate('/store');
     } else {
       setActiveTab(tabId);
     }
@@ -120,254 +118,391 @@ const Game = () => {
         
         {/* Mobile: Stack everything vertically */}
         <div className="lg:hidden overflow-y-auto max-h-[calc(100vh-80px)]">
-          {/* Hero Card - Portrait oriented for mobile */}
-          <div className="p-4">
-            <Card className="bg-gradient-to-b from-blue-600/90 to-purple-700/90 text-white border-0 relative overflow-hidden h-96">
-              <div 
-                className="absolute inset-0 bg-cover bg-center bg-no-repeat" 
-                style={{
-                  backgroundImage: 'url(/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png)',
-                  backgroundPosition: 'center top'
-                }} 
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
-              <CardContent className="p-6 h-full flex flex-col justify-end relative z-10">
-                <div>
-                  <h2 className="text-2xl font-bold mb-2">Welcome to LCS</h2>
-                  <p className="text-blue-100 mb-4 text-sm">
-                    Start your journey in the ultimate crypto gaming experience
-                  </p>
-                  <div className="flex space-x-3">
-                    <Button 
-                      variant="secondary" 
-                      size="default" 
-                      className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 transition-all duration-300"
-                      onClick={() => navigate('/docs')}
-                    >
-                      <Info className="w-4 h-4 mr-2" />
-                      How to play
-                    </Button>
-                    <Button 
-                      variant="secondary" 
-                      size="default" 
-                      className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 transition-all duration-300"
-                      onClick={() => toast({
-                        title: "Coming Soon",
-                        description: "The game will be available soon!"
-                      })}
-                    >
-                      <Play className="w-4 h-4 mr-2" />
-                      Play now
-                    </Button>
+            {activeTab === "home" && (
+              <>
+                {/* Hero Card - Portrait oriented for mobile */}
+                <div className="p-4">
+                  <Card className="bg-gradient-to-b from-blue-600/90 to-purple-700/90 text-white border-0 relative overflow-hidden h-96">
+                    <div 
+                      className="absolute inset-0 bg-cover bg-center bg-no-repeat" 
+                      style={{
+                        backgroundImage: 'url(/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png)',
+                        backgroundPosition: 'center top'
+                      }} 
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
+                    <CardContent className="p-6 h-full flex flex-col justify-end relative z-10">
+                      <div>
+                        <h2 className="text-2xl font-bold mb-2">Welcome to LCS</h2>
+                        <p className="text-blue-100 mb-4 text-sm">
+                          Start your journey in the ultimate crypto gaming experience
+                        </p>
+                        <div className="flex space-x-3">
+                          <Button 
+                            variant="secondary" 
+                            size="default" 
+                            className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 transition-all duration-300"
+                            onClick={() => navigate('/docs')}
+                          >
+                            <Info className="w-4 h-4 mr-2" />
+                            How to play
+                          </Button>
+                          <Button 
+                            variant="secondary" 
+                            size="default" 
+                            className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 transition-all duration-300"
+                            onClick={() => toast({
+                              title: "Coming Soon",
+                              description: "The game will be available soon!"
+                            })}
+                          >
+                            <Play className="w-4 h-4 mr-2" />
+                            Play now
+                          </Button>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+
+                {/* Progress Card */}
+                <div className="px-4 pb-4">
+                  <Card>
+                    <CardHeader className="pb-3">
+                      <CardTitle className="text-base flex items-center space-x-2">
+                        <Star className="w-4 h-4" />
+                        <span>Progress</span>
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-3">
+                        <div>
+                          <div className="flex items-center justify-between mb-2">
+                            <span className="text-sm font-medium">Level 0: Recruit</span>
+                            <span className="text-xs text-muted-foreground">0/100 XP</span>
+                          </div>
+                          <Progress value={0} className="h-2" />
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+
+                {/* Action Cards Grid - 2 columns on mobile */}
+                <div className="px-4 pb-4">
+                  <div className="grid grid-cols-2 gap-3">
+                    <Card className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
+                      {/* Metallic base layer */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
+                      
+                      {/* Metallic shine overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-400/10 to-transparent transform -skew-x-12" />
+                      <CardContent className="p-4 flex flex-col h-full">
+                        <div className="flex items-center space-x-1 mb-2">
+                          <Trophy className="w-4 h-4 text-white" />
+                          <span className="text-xs font-medium text-white">Quests!</span>
+                        </div>
+                        <h3 className="text-sm font-bold mb-1">Smash that XP</h3>
+                        <p className="text-gray-300 text-xs mb-3 flex-1">by completing all quests</p>
+                        <Dialog>
+                          <DialogTrigger asChild>
+                            <Button variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 text-xs h-7 relative z-10 transition-all duration-300">
+                              Show Quests
+                            </Button>
+                          </DialogTrigger>
+                          <DialogContent className="sm:max-w-md bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
+                            {/* Metallic base layer */}
+                            <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
+                            
+                            {/* Metallic shine overlay */}
+                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-400/10 to-transparent transform -skew-x-12" />
+                            
+                            {/* Content wrapper */}
+                            <div className="relative z-10">
+                              <DialogHeader>
+                                <DialogTitle className="text-white">Available Quests</DialogTitle>
+                              </DialogHeader>
+                              <div className="space-y-3">
+                                <div className="flex items-center justify-between p-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg">
+                                  <span className="text-sm font-medium text-white">Connect X</span>
+                                  <Badge variant="outline" className="text-xs border-white/30 text-white">+50 XP</Badge>
+                                </div>
+                                <div className="flex items-center justify-between p-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg">
+                                  <span className="text-sm font-medium text-white">Connect Insta</span>
+                                  <Badge variant="outline" className="text-xs border-white/30 text-white">+50 XP</Badge>
+                                </div>
+                                <div className="flex items-center justify-between p-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg">
+                                  <span className="text-sm font-medium text-white">Follow X page</span>
+                                  <Badge variant="outline" className="text-xs border-white/30 text-white">+25 XP</Badge>
+                                </div>
+                                <div className="flex items-center justify-between p-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg">
+                                  <span className="text-sm font-medium text-white">Follow Insta page</span>
+                                  <Badge variant="outline" className="text-xs border-white/30 text-white">+25 XP</Badge>
+                                </div>
+                              </div>
+                            </div>
+                          </DialogContent>
+                        </Dialog>
+                      </CardContent>
+                    </Card>
+
+                    <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
+                      <div className="absolute inset-0" style={{
+                        backgroundImage: `
+                          linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
+                          linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
+                        `,
+                        backgroundSize: '4px 4px'
+                      }} />
+                      <CardContent className="p-4">
+                        <div className="flex items-center space-x-1 mb-2">
+                          <Gift className="w-4 h-4" />
+                          <span className="text-xs font-medium">Open Packs</span>
+                        </div>
+                        <div className="space-y-1 mb-3">
+                          <div className="flex items-center justify-between">
+                            <span className="text-xs text-yellow-300 font-semibold">GOLD</span>
+                            <span className="text-xs">x0</span>
+                          </div>
+                          <div className="flex items-center justify-between">
+                            <span className="text-xs text-gray-300 font-semibold">SILVER</span>
+                            <span className="text-xs">x0</span>
+                          </div>
+                          <div className="flex items-center justify-between">
+                            <span className="text-xs bg-gradient-to-r from-purple-400 via-pink-400 to-yellow-400 bg-clip-text text-transparent font-bold">SPECIAL</span>
+                            <span className="text-xs">x0</span>
+                          </div>
+                        </div>
+                        <Button variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 text-xs h-7 relative z-10 transition-all duration-300 w-full">
+                          Buy Now
+                        </Button>
+                      </CardContent>
+                    </Card>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
-          </div>
 
-          {/* Progress Card */}
-          <div className="px-4 pb-4">
-            <Card>
-              <CardHeader className="pb-3">
-                <CardTitle className="text-base flex items-center space-x-2">
-                  <Star className="w-4 h-4" />
-                  <span>Progress</span>
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  <div>
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-sm font-medium">Level 0: Recruit</span>
-                      <span className="text-xs text-muted-foreground">0/100 XP</span>
-                    </div>
-                    <Progress value={0} className="h-2" />
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* Action Cards Grid - 2 columns on mobile */}
-          <div className="px-4 pb-4">
-            <div className="grid grid-cols-2 gap-3">
-              <Card className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
-                {/* Metallic base layer */}
-                <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
-                
-                {/* Metallic shine overlay */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-400/10 to-transparent transform -skew-x-12" />
-                <CardContent className="p-4 flex flex-col h-full">
-                  <div className="flex items-center space-x-1 mb-2">
-                    <Trophy className="w-4 h-4 text-white" />
-                    <span className="text-xs font-medium text-white">Quests!</span>
-                  </div>
-                  <h3 className="text-sm font-bold mb-1">Smash that XP</h3>
-                  <p className="text-gray-300 text-xs mb-3 flex-1">by completing all quests</p>
-                  <Dialog>
-                    <DialogTrigger asChild>
-                      <Button variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 text-xs h-7 relative z-10 transition-all duration-300">
-                        Show Quests
-                      </Button>
-                    </DialogTrigger>
-                    <DialogContent className="sm:max-w-md bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
+                {/* Quick Actions */}
+                <div className="px-4 pb-4">
+                  <div className="grid grid-cols-1 gap-3">
+                    <Card className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
                       {/* Metallic base layer */}
                       <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
                       
                       {/* Metallic shine overlay */}
                       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-400/10 to-transparent transform -skew-x-12" />
                       
-                      {/* Content wrapper */}
-                      <div className="relative z-10">
-                        <DialogHeader>
-                          <DialogTitle className="text-white">Available Quests</DialogTitle>
-                        </DialogHeader>
-                        <div className="space-y-3">
-                          <div className="flex items-center justify-between p-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg">
-                            <span className="text-sm font-medium text-white">Connect X</span>
-                            <Badge variant="outline" className="text-xs border-white/30 text-white">+50 XP</Badge>
+                      <CardContent className="p-4 relative z-10">
+                        <div className="flex flex-col items-center text-center space-y-3 mb-3">
+                          <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
+                            <Users className="w-4 h-4 text-white" />
                           </div>
-                          <div className="flex items-center justify-between p-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg">
-                            <span className="text-sm font-medium text-white">Connect Insta</span>
-                            <Badge variant="outline" className="text-xs border-white/30 text-white">+50 XP</Badge>
-                          </div>
-                          <div className="flex items-center justify-between p-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg">
-                            <span className="text-sm font-medium text-white">Follow X page</span>
-                            <Badge variant="outline" className="text-xs border-white/30 text-white">+25 XP</Badge>
-                          </div>
-                          <div className="flex items-center justify-between p-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg">
-                            <span className="text-sm font-medium text-white">Follow Insta page</span>
-                            <Badge variant="outline" className="text-xs border-white/30 text-white">+25 XP</Badge>
+                          <div>
+                            <h3 className="font-semibold text-sm text-white">Build your roster</h3>
+                            <p className="text-xs text-gray-300">Build your dream team</p>
                           </div>
                         </div>
-                      </div>
-                    </DialogContent>
-                  </Dialog>
-                </CardContent>
-              </Card>
+                        <Button variant="outline" size="sm" className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 transition-all duration-300">
+                          Start Building
+                        </Button>
+                      </CardContent>
+                    </Card>
 
-              <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
-                <div className="absolute inset-0" style={{
-                  backgroundImage: `
-                    linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
-                    linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
-                  `,
-                  backgroundSize: '4px 4px'
-                }} />
-                <CardContent className="p-4">
-                  <div className="flex items-center space-x-1 mb-2">
-                    <Gift className="w-4 h-4" />
-                    <span className="text-xs font-medium">Open Packs</span>
-                  </div>
-                  <div className="space-y-1 mb-3">
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs text-yellow-300 font-semibold">GOLD</span>
-                      <span className="text-xs">x0</span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs text-gray-300 font-semibold">SILVER</span>
-                      <span className="text-xs">x0</span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs bg-gradient-to-r from-purple-400 via-pink-400 to-yellow-400 bg-clip-text text-transparent font-bold">SPECIAL</span>
-                      <span className="text-xs">x0</span>
-                    </div>
-                  </div>
-                  <Button variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 text-xs h-7 relative z-10 transition-all duration-300 w-full">
-                    Buy Now
-                  </Button>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-
-          {/* Quick Actions */}
-          <div className="px-4 pb-4">
-            <div className="grid grid-cols-1 gap-3">
-              <Card className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
-                {/* Metallic base layer */}
-                <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
-                
-                {/* Metallic shine overlay */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-400/10 to-transparent transform -skew-x-12" />
-                
-                <CardContent className="p-4 relative z-10">
-                  <div className="flex flex-col items-center text-center space-y-3 mb-3">
-                    <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
-                      <Users className="w-4 h-4 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-sm text-white">Build your roster</h3>
-                      <p className="text-xs text-gray-300">Build your dream team</p>
-                    </div>
-                  </div>
-                  <Button variant="outline" size="sm" className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 transition-all duration-300">
-                    Start Building
-                  </Button>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
-                {/* Metallic base layer */}
-                <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
-                
-                {/* Metallic shine overlay */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-400/10 to-transparent transform -skew-x-12" />
-                
-                <CardContent className="p-4 relative z-10">
-                  <div className="flex flex-col items-center text-center space-y-3 mb-3">
-                    <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
-                      <CreditCard className="w-4 h-4 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-sm text-white">Transfer Market</h3>
-                      <p className="text-xs text-gray-300">Buy & sell fighters</p>
-                    </div>
-                  </div>
-                  <Button variant="outline" size="sm" className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 transition-all duration-300">
-                    Browse Market
-                  </Button>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-
-          {/* Objectives - Collapsible on mobile */}
-          <div className="px-4 pb-4">
-            <Card>
-              <CardHeader className="pb-3">
-                <CardTitle className="text-base flex items-center space-x-2">
-                  <Target className="w-4 h-4" />
-                  <span>Weekly Objectives</span>
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-2">
-                  {[
-                    { icon: Package, text: "Open 3 packs", progress: "0/3", bg: "bg-primary" },
-                    { icon: ShoppingBag, text: "Buy 3 fighters", progress: "0/3", bg: "bg-secondary" },
-                    { icon: CreditCard, text: "Sell 3 fighters", progress: "0/3", bg: "bg-destructive" },
-                    { icon: TrendingUp, text: "Trade 3 days in a row", progress: "0/3", bg: "bg-orange-500" },
-                    { icon: UserPlus, text: "Invite 3 friends", progress: "0/3", bg: "bg-blue-500" }
-                  ].map((obj, idx) => (
-                    <div key={idx} className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
-                      <div className="flex items-center space-x-3">
-                        <div className={`w-6 h-6 ${obj.bg} rounded-full flex items-center justify-center`}>
-                          <obj.icon className="w-3 h-3 text-white" />
+                    <Card className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
+                      {/* Metallic base layer */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
+                      
+                      {/* Metallic shine overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-400/10 to-transparent transform -skew-x-12" />
+                      
+                      <CardContent className="p-4 relative z-10">
+                        <div className="flex flex-col items-center text-center space-y-3 mb-3">
+                          <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
+                            <CreditCard className="w-4 h-4 text-white" />
+                          </div>
+                          <div>
+                            <h3 className="font-semibold text-sm text-white">Transfer Market</h3>
+                            <p className="text-xs text-gray-300">Buy & sell fighters</p>
+                          </div>
                         </div>
-                        <div>
-                          <p className="text-sm font-medium">{obj.text}</p>
-                          <p className="text-xs text-muted-foreground">{obj.progress} • 10 XP</p>
-                        </div>
-                      </div>
-                      <ChevronRight className="w-4 h-4 text-muted-foreground" />
-                    </div>
-                  ))}
+                        <Button variant="outline" size="sm" className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 transition-all duration-300">
+                          Browse Market
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  </div>
                 </div>
-              </CardContent>
-            </Card>
-          </div>
+
+                {/* Objectives - Collapsible on mobile */}
+                <div className="px-4 pb-4">
+                  <Card>
+                    <CardHeader className="pb-3">
+                      <CardTitle className="text-base flex items-center space-x-2">
+                        <Target className="w-4 h-4" />
+                        <span>Weekly Objectives</span>
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-2">
+                        {[
+                          { icon: Package, text: "Open 3 packs", progress: "0/3", bg: "bg-primary" },
+                          { icon: ShoppingBag, text: "Buy 3 fighters", progress: "0/3", bg: "bg-secondary" },
+                          { icon: CreditCard, text: "Sell 3 fighters", progress: "0/3", bg: "bg-destructive" },
+                          { icon: TrendingUp, text: "Trade 3 days in a row", progress: "0/3", bg: "bg-orange-500" },
+                          { icon: UserPlus, text: "Invite 3 friends", progress: "0/3", bg: "bg-blue-500" }
+                        ].map((obj, idx) => (
+                          <div key={idx} className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
+                            <div className="flex items-center space-x-3">
+                              <div className={`w-6 h-6 ${obj.bg} rounded-full flex items-center justify-center`}>
+                                <obj.icon className="w-3 h-3 text-white" />
+                              </div>
+                              <div>
+                                <p className="text-sm font-medium">{obj.text}</p>
+                                <p className="text-xs text-muted-foreground">{obj.progress} • 10 XP</p>
+                              </div>
+                            </div>
+                            <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                          </div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              </>
+            )}
+
+            {activeTab === "store" && (
+              <div className="p-4 space-y-6">
+                {/* Store Header */}
+                <div className="text-center">
+                  <div className="flex items-center justify-center space-x-3 mb-4">
+                    <ShoppingBag className="w-8 h-8 text-primary" />
+                    <div>
+                      <h1 className="text-2xl font-bold">LCS Store</h1>
+                      <p className="text-muted-foreground text-sm">Customize your gaming experience</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Categories */}
+                <div className="space-y-4">
+                  {/* Skins Category */}
+                  <Card className="bg-gradient-to-br from-blue-600/20 to-purple-700/20 border border-blue-600/30">
+                    <CardHeader>
+                      <CardTitle className="flex items-center justify-between">
+                        <span>Skins</span>
+                        <Badge variant="secondary">4 items</Badge>
+                      </CardTitle>
+                      <CardDescription>Characters to play in game</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="grid grid-cols-2 gap-3">
+                        {[
+                          { name: "Cyber Warrior", price: 2500, rarity: "legendary", image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png" },
+                          { name: "Shadow Assassin", price: 1800, rarity: "epic", image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png" }
+                        ].map((item, idx) => (
+                          <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
+                            <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
+                            <CardContent className="p-3 relative z-10">
+                              <div className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden">
+                                <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+                              </div>
+                              <h3 className="font-semibold text-xs text-white mb-1">{item.name}</h3>
+                              <div className="flex items-center justify-between">
+                                <div className="flex items-center space-x-1">
+                                  <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
+                                  <span className="text-xs font-bold text-white">{item.price.toLocaleString()}</span>
+                                </div>
+                                <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
+                                  Buy
+                                </Button>
+                              </div>
+                            </CardContent>
+                          </Card>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  {/* Accessories Category */}
+                  <Card className="bg-gradient-to-br from-green-600/20 to-blue-700/20 border border-green-600/30">
+                    <CardHeader>
+                      <CardTitle className="flex items-center justify-between">
+                        <span>Accessories</span>
+                        <Badge variant="secondary">4 items</Badge>
+                      </CardTitle>
+                      <CardDescription>Shoes, backpacks, hats</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="grid grid-cols-2 gap-3">
+                        {[
+                          { name: "Neon Sneakers", price: 600, image: "/lovable-uploads/69c61fed-9ccd-43d2-bab5-17c6c0db05b4.png" },
+                          { name: "Combat Backpack", price: 450, image: "/lovable-uploads/7311683b-ea99-4dd9-9b1f-89d96742eff0.png" }
+                        ].map((item, idx) => (
+                          <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
+                            <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
+                            <CardContent className="p-3 relative z-10">
+                              <div className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden">
+                                <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+                              </div>
+                              <h3 className="font-semibold text-xs text-white mb-1">{item.name}</h3>
+                              <div className="flex items-center justify-between">
+                                <div className="flex items-center space-x-1">
+                                  <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
+                                  <span className="text-xs font-bold text-white">{item.price.toLocaleString()}</span>
+                                </div>
+                                <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
+                                  Buy
+                                </Button>
+                              </div>
+                            </CardContent>
+                          </Card>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  {/* Mobility Category */}
+                  <Card className="bg-gradient-to-br from-orange-600/20 to-red-700/20 border border-orange-600/30">
+                    <CardHeader>
+                      <CardTitle className="flex items-center justify-between">
+                        <span>Mobility</span>
+                        <Badge variant="secondary">4 items</Badge>
+                      </CardTitle>
+                      <CardDescription>Cars, golf buggies, etc</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="grid grid-cols-2 gap-3">
+                        {[
+                          { name: "Cyber Car", price: 5000, image: "/lovable-uploads/84ab9eed-00bc-425c-a953-3ea0478e464d.png" },
+                          { name: "Speed Buggy", price: 3200, image: "/lovable-uploads/896892f1-7ebc-4852-acea-80dcdbf7c545.png" }
+                        ].map((item, idx) => (
+                          <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
+                            <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
+                            <CardContent className="p-3 relative z-10">
+                              <div className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden">
+                                <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+                              </div>
+                              <h3 className="font-semibold text-xs text-white mb-1">{item.name}</h3>
+                              <div className="flex items-center justify-between">
+                                <div className="flex items-center space-x-1">
+                                  <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
+                                  <span className="text-xs font-bold text-white">{item.price.toLocaleString()}</span>
+                                </div>
+                                <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
+                                  Buy
+                                </Button>
+                              </div>
+                            </CardContent>
+                          </Card>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              </div>
+            )}
+          
         </div>
 
         {/* Desktop Layout - Hidden on mobile */}
