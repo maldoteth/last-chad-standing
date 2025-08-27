@@ -486,12 +486,14 @@ const Game = () => {
                 </TabsTrigger>
               </TabsList>
               
-              <TabsContent value="notifications" className="flex-1 flex flex-col">
-                <Bell className="w-12 h-12 mx-auto text-muted-foreground mb-4 opacity-50" />
-                <p className="text-muted-foreground">No notifications yet</p>
-                <p className="text-sm text-muted-foreground mt-2">
-                  You'll see game updates and important announcements here
-                </p>
+              <TabsContent value="notifications" className="mt-6 flex-1 flex flex-col">
+                <div className="text-center py-8 flex-1 flex flex-col justify-center">
+                  <Bell className="w-12 h-12 mx-auto text-muted-foreground mb-4 opacity-50" />
+                  <p className="text-muted-foreground">No notifications yet</p>
+                  <p className="text-sm text-muted-foreground mt-2">
+                    You'll see game updates and important announcements here
+                  </p>
+                </div>
               </TabsContent>
               
               <TabsContent value="rankings" className="mt-0">
