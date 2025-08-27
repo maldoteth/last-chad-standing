@@ -198,11 +198,11 @@ const Game = () => {
                   <div className="space-y-1 mb-3">
                     <div className="flex items-center justify-between">
                       <span className="text-xs text-yellow-300 font-semibold">GOLD</span>
-                      <span className="text-xs">x3</span>
+                      <span className="text-xs">x0</span>
                     </div>
                     <div className="flex items-center justify-between">
                       <span className="text-xs text-gray-300 font-semibold">SILVER</span>
-                      <span className="text-xs">x1</span>
+                      <span className="text-xs">x0</span>
                     </div>
                   </div>
                   <Button variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 text-xs h-7 relative z-10 transition-all duration-300">
@@ -457,11 +457,11 @@ const Game = () => {
                   <div className="space-y-2 mb-4">
                     <div className="flex items-center justify-between">
                       <span className="text-sm text-yellow-300 font-semibold">GOLD</span>
-                      <span className="text-sm">x3</span>
+                      <span className="text-sm">x0</span>
                     </div>
                     <div className="flex items-center justify-between">
                       <span className="text-sm text-gray-300 font-semibold">SILVER</span>
-                      <span className="text-sm">x1</span>
+                      <span className="text-sm">x0</span>
                     </div>
                     <div className="flex items-center justify-between">
                       <span className="text-sm bg-gradient-to-r from-purple-400 via-pink-400 to-yellow-400 bg-clip-text text-transparent font-bold">SPECIAL</span>
