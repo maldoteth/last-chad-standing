@@ -152,7 +152,15 @@ const Game = () => {
                 </CardContent>
               </Card>
 
-              <Card className="bg-orange-500 text-white border-0">
+              <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
+                <div className="absolute inset-0" style={{
+                  backgroundImage: `
+                    linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
+                    linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
+                  `,
+                  backgroundSize: '4px 4px'
+                }} />
                 <CardContent className="p-4">
                   <h3 className="text-sm font-bold mb-2">Open Packs</h3>
                   <div className="space-y-1 mb-3">
@@ -165,7 +173,7 @@ const Game = () => {
                       <span className="text-xs">x1</span>
                     </div>
                   </div>
-                  <Button variant="secondary" size="sm" className="bg-white text-orange-500 hover:bg-orange-50 text-xs h-7">
+                  <Button variant="secondary" size="sm" className="bg-gray-100 text-black hover:bg-white text-xs h-7 relative z-10">
                     Buy Now
                   </Button>
                 </CardContent>
@@ -386,7 +394,15 @@ const Game = () => {
               </Card>
 
               {/* Open Packs Card */}
-              <Card className="col-span-4 bg-orange-500 text-white border-0">
+              <Card className="col-span-4 bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
+                <div className="absolute inset-0" style={{
+                  backgroundImage: `
+                    linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
+                    linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
+                  `,
+                  backgroundSize: '4px 4px'
+                }} />
                 <CardContent className="p-6">
                   <h3 className="text-lg font-bold mb-4">Open Packs</h3>
                   <div className="space-y-2 mb-4">
@@ -403,7 +419,7 @@ const Game = () => {
                       <span className="text-sm">x0</span>
                     </div>
                   </div>
-                  <Button variant="secondary" size="sm" className="bg-white text-orange-500 hover:bg-orange-50 w-full">
+                  <Button variant="secondary" size="sm" className="bg-gray-100 text-black hover:bg-white w-full relative z-10">
                     Buy Now
                   </Button>
                 </CardContent>
