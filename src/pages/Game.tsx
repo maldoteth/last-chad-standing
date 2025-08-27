@@ -352,7 +352,7 @@ const Game = () => {
           <main className="flex-1 p-6">
             <div className="grid grid-cols-12 gap-6 h-full">
               {/* Large Welcome Card */}
-              <Card className="col-span-8 row-span-2 bg-gradient-to-br from-blue-600/80 to-purple-700/80 text-white border-0 relative overflow-hidden">
+              <Card className="col-span-8 row-span-2 bg-gradient-to-br from-blue-600/20 to-purple-700/20 backdrop-blur-xl text-white border border-white/20 relative overflow-hidden shadow-2xl hover:shadow-blue-500/25 transition-all duration-500 hover:bg-gradient-to-br hover:from-blue-600/30 hover:to-purple-700/30">
                 <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
                 backgroundImage: 'url(/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png)'
               }} />
@@ -372,7 +372,7 @@ const Game = () => {
               </Card>
 
               {/* Tournament Complete Card */}
-              <Card className="col-span-4 bg-green-600 text-white border-0">
+              <Card className="col-span-4 bg-green-600/20 backdrop-blur-xl text-white border border-green-400/30 shadow-2xl hover:shadow-green-500/25 transition-all duration-500 hover:bg-green-600/30">
                 <CardContent className="p-6">
                   <div className="flex items-center space-x-2 mb-4">
                     <Trophy className="w-5 h-5" />
@@ -387,7 +387,7 @@ const Game = () => {
               </Card>
 
               {/* Open Packs Card */}
-              <Card className="col-span-4 bg-orange-500 text-white border-0">
+              <Card className="col-span-4 bg-orange-500/20 backdrop-blur-xl text-white border border-orange-400/30 shadow-2xl hover:shadow-orange-500/25 transition-all duration-500 hover:bg-orange-500/30">
                 <CardContent className="p-6">
                   <h3 className="text-lg font-bold mb-4">Open Packs</h3>
                   <div className="space-y-2 mb-4">
@@ -411,7 +411,7 @@ const Game = () => {
               </Card>
 
               {/* Additional Cards */}
-              <Card className="col-span-6 bg-card">
+              <Card className="col-span-6 bg-card/30 backdrop-blur-xl border border-white/20 shadow-2xl hover:shadow-primary/25 transition-all duration-500 hover:bg-card/40">
                 <CardContent className="p-6">
                   <div className="flex flex-col items-center text-center space-y-3 mb-4">
                     <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
@@ -428,7 +428,7 @@ const Game = () => {
                 </CardContent>
               </Card>
 
-              <Card className="col-span-6 bg-card">
+              <Card className="col-span-6 bg-card/30 backdrop-blur-xl border border-white/20 shadow-2xl hover:shadow-secondary/25 transition-all duration-500 hover:bg-card/40">
                 <CardContent className="p-6">
                   <div className="flex flex-col items-center text-center space-y-3 mb-4">
                     <div className="w-10 h-10 bg-secondary rounded-full flex items-center justify-center">
