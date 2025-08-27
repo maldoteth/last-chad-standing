@@ -155,9 +155,6 @@ const Game = () => {
                     How to play
                   </Button>
                 </div>
-                <div className="absolute top-4 right-4 w-24 h-24 bg-white/20 rounded-full flex items-center justify-center">
-                  <div className="text-4xl">🎮</div>
-                </div>
               </CardContent>
             </Card>
 
