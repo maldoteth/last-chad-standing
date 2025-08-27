@@ -41,13 +41,13 @@ const Game = () => {
     label: "Home",
     icon: Home
   }, {
-    id: "lobby",
-    label: "Lobby",
-    icon: Users
-  }, {
     id: "store",
     label: "Store",
     icon: ShoppingBag
+  }, {
+    id: "lobby",
+    label: "Lobby",
+    icon: Users
   }, {
     id: "market",
     label: "Market",
