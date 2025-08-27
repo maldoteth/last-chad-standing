@@ -198,8 +198,8 @@ const Game = () => {
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-400/10 to-transparent transform -skew-x-12" />
                 <CardContent className="p-4">
                   <div className="flex items-center space-x-1 mb-2">
-                    <Trophy className="w-4 h-4" />
-                    <span className="text-xs font-medium">Quests!</span>
+                    <Trophy className="w-4 h-4 text-white" />
+                    <span className="text-xs font-medium text-white">Quests!</span>
                   </div>
                   <h3 className="text-sm font-bold mb-1">Smash that XP</h3>
                   <p className="text-gray-300 text-xs mb-3">by completing all quests</p>
@@ -518,8 +518,8 @@ const Game = () => {
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-400/10 to-transparent transform -skew-x-12" />
                 <CardContent className="p-6">
                   <div className="flex items-center space-x-2 mb-4">
-                    <Trophy className="w-5 h-5" />
-                    <span className="text-sm font-medium">Quests!</span>
+                    <Trophy className="w-5 h-5 text-white" />
+                    <span className="text-sm font-medium text-white">Quests!</span>
                   </div>
                   <h3 className="text-lg font-bold mb-2">Smash that XP</h3>
                   <p className="text-gray-300 text-sm mb-4">by completing all quests</p>
