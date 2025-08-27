@@ -217,7 +217,7 @@ const Game = () => {
               <CardHeader className="pb-3">
                 <CardTitle className="text-base flex items-center space-x-2">
                   <Target className="w-4 h-4" />
-                  <span>Objectives</span>
+                  <span>Weekly Objectives</span>
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -276,7 +276,7 @@ const Game = () => {
               <CardHeader>
                 <CardTitle className="text-base flex items-center space-x-2">
                   <Target className="w-4 h-4" />
-                  <span>Objectives</span>
+                  <span>Weekly Objectives</span>
                 </CardTitle>
               </CardHeader>
               <CardContent>
