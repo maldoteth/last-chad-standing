@@ -206,26 +206,35 @@ const Game = () => {
                         Show Quests
                       </Button>
                     </DialogTrigger>
-                    <DialogContent className="sm:max-w-md">
-                      <DialogHeader>
-                        <DialogTitle>Available Quests</DialogTitle>
-                      </DialogHeader>
-                      <div className="space-y-3">
-                        <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg">
-                          <span className="text-sm font-medium">Connect X</span>
-                          <Badge variant="outline" className="text-xs">+50 XP</Badge>
-                        </div>
-                        <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg">
-                          <span className="text-sm font-medium">Connect Insta</span>
-                          <Badge variant="outline" className="text-xs">+50 XP</Badge>
-                        </div>
-                        <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg">
-                          <span className="text-sm font-medium">Follow X page</span>
-                          <Badge variant="outline" className="text-xs">+25 XP</Badge>
-                        </div>
-                        <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg">
-                          <span className="text-sm font-medium">Follow Insta page</span>
-                          <Badge variant="outline" className="text-xs">+25 XP</Badge>
+                    <DialogContent className="sm:max-w-md bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
+                      {/* Metallic base layer */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
+                      
+                      {/* Metallic shine overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-400/10 to-transparent transform -skew-x-12" />
+                      
+                      {/* Content wrapper */}
+                      <div className="relative z-10">
+                        <DialogHeader>
+                          <DialogTitle className="text-white">Available Quests</DialogTitle>
+                        </DialogHeader>
+                        <div className="space-y-3">
+                          <div className="flex items-center justify-between p-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg">
+                            <span className="text-sm font-medium text-white">Connect X</span>
+                            <Badge variant="outline" className="text-xs border-white/30 text-white">+50 XP</Badge>
+                          </div>
+                          <div className="flex items-center justify-between p-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg">
+                            <span className="text-sm font-medium text-white">Connect Insta</span>
+                            <Badge variant="outline" className="text-xs border-white/30 text-white">+50 XP</Badge>
+                          </div>
+                          <div className="flex items-center justify-between p-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg">
+                            <span className="text-sm font-medium text-white">Follow X page</span>
+                            <Badge variant="outline" className="text-xs border-white/30 text-white">+25 XP</Badge>
+                          </div>
+                          <div className="flex items-center justify-between p-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg">
+                            <span className="text-sm font-medium text-white">Follow Insta page</span>
+                            <Badge variant="outline" className="text-xs border-white/30 text-white">+25 XP</Badge>
+                          </div>
                         </div>
                       </div>
                     </DialogContent>
@@ -514,26 +523,35 @@ const Game = () => {
                         Show Quests
                       </Button>
                     </DialogTrigger>
-                    <DialogContent className="sm:max-w-md">
-                      <DialogHeader>
-                        <DialogTitle>Available Quests</DialogTitle>
-                      </DialogHeader>
-                      <div className="space-y-3">
-                        <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg">
-                          <span className="text-sm font-medium">Connect X</span>
-                          <Badge variant="outline" className="text-xs">+50 XP</Badge>
-                        </div>
-                        <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg">
-                          <span className="text-sm font-medium">Connect Insta</span>
-                          <Badge variant="outline" className="text-xs">+50 XP</Badge>
-                        </div>
-                        <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg">
-                          <span className="text-sm font-medium">Follow X page</span>
-                          <Badge variant="outline" className="text-xs">+25 XP</Badge>
-                        </div>
-                        <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg">
-                          <span className="text-sm font-medium">Follow Insta page</span>
-                          <Badge variant="outline" className="text-xs">+25 XP</Badge>
+                    <DialogContent className="sm:max-w-md bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
+                      {/* Metallic base layer */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
+                      
+                      {/* Metallic shine overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-400/10 to-transparent transform -skew-x-12" />
+                      
+                      {/* Content wrapper */}
+                      <div className="relative z-10">
+                        <DialogHeader>
+                          <DialogTitle className="text-white">Available Quests</DialogTitle>
+                        </DialogHeader>
+                        <div className="space-y-3">
+                          <div className="flex items-center justify-between p-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg">
+                            <span className="text-sm font-medium text-white">Connect X</span>
+                            <Badge variant="outline" className="text-xs border-white/30 text-white">+50 XP</Badge>
+                          </div>
+                          <div className="flex items-center justify-between p-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg">
+                            <span className="text-sm font-medium text-white">Connect Insta</span>
+                            <Badge variant="outline" className="text-xs border-white/30 text-white">+50 XP</Badge>
+                          </div>
+                          <div className="flex items-center justify-between p-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg">
+                            <span className="text-sm font-medium text-white">Follow X page</span>
+                            <Badge variant="outline" className="text-xs border-white/30 text-white">+25 XP</Badge>
+                          </div>
+                          <div className="flex items-center justify-between p-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg">
+                            <span className="text-sm font-medium text-white">Follow Insta page</span>
+                            <Badge variant="outline" className="text-xs border-white/30 text-white">+25 XP</Badge>
+                          </div>
                         </div>
                       </div>
                     </DialogContent>
