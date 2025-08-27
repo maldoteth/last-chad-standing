@@ -375,7 +375,7 @@ const Game = () => {
                   <p className="text-blue-100 mb-6">
                     Get ready to play the first ever MMA battle royale
                   </p>
-                    <Button variant="secondary" size="lg" className="bg-white text-blue-600 hover:bg-blue-50">
+                    <Button variant="secondary" size="lg" className="bg-white text-black hover:bg-blue-50">
                       <Play className="w-4 h-4 mr-2" />
                       How to play
                     </Button>
