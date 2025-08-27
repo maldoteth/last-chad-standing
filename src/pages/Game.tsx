@@ -103,7 +103,7 @@ const Game = () => {
                   <p className="text-blue-100 mb-4 text-sm">
                     Start your journey in the ultimate crypto gaming experience
                   </p>
-                  <Button variant="secondary" size="default" className="bg-white text-blue-600 hover:bg-blue-50">
+                  <Button variant="secondary" size="default" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 transition-all duration-300">
                     <Play className="w-4 h-4 mr-2" />
                     How to play
                   </Button>
@@ -151,7 +151,7 @@ const Game = () => {
                   </div>
                   <h3 className="text-sm font-bold mb-1">Weekend League</h3>
                   <p className="text-gray-300 text-xs mb-3">Dec 16 - Dec 18</p>
-                  <Button variant="secondary" size="sm" className="bg-gray-100 text-black hover:bg-white text-xs h-7 relative z-10">
+                  <Button variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 text-xs h-7 relative z-10 transition-all duration-300">
                     View winners
                   </Button>
                 </CardContent>
@@ -178,7 +178,7 @@ const Game = () => {
                       <span className="text-xs">x1</span>
                     </div>
                   </div>
-                  <Button variant="secondary" size="sm" className="bg-gray-100 text-black hover:bg-white text-xs h-7 relative z-10">
+                  <Button variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 text-xs h-7 relative z-10 transition-all duration-300">
                     Buy Now
                   </Button>
                 </CardContent>
@@ -200,7 +200,7 @@ const Game = () => {
                       <p className="text-xs text-muted-foreground">Build your dream team</p>
                     </div>
                   </div>
-                  <Button variant="outline" size="sm" className="w-full">
+                  <Button variant="outline" size="sm" className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 transition-all duration-300">
                     Start Building
                   </Button>
                 </CardContent>
@@ -217,7 +217,7 @@ const Game = () => {
                       <p className="text-xs text-muted-foreground">Buy & sell fighters</p>
                     </div>
                   </div>
-                  <Button variant="outline" size="sm" className="w-full">
+                  <Button variant="outline" size="sm" className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 transition-all duration-300">
                     Browse Market
                   </Button>
                 </CardContent>
