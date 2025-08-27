@@ -25,6 +25,8 @@ const Game = () => {
         title: "Coming Soon",
         description: "The lobby feature is currently under development."
       });
+    } else if (tabId === "store") {
+      navigate('/store');
     } else {
       setActiveTab(tabId);
     }
