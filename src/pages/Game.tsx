@@ -402,7 +402,7 @@ const Game = () => {
                       <span className="text-sm">x0</span>
                     </div>
                   </div>
-                  <Button variant="secondary" size="sm" className="bg-white text-orange-500 hover:bg-orange-50">
+                  <Button variant="secondary" size="sm" className="bg-white text-orange-500 hover:bg-orange-50 w-full">
                     Buy Now
                   </Button>
                 </CardContent>
