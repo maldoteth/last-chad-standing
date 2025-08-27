@@ -610,186 +610,326 @@ const Game = () => {
             </Card>
           </aside>
 
-          {/* Center Content - Desktop Bento Boxes */}
-          <main className="flex-1 p-6 overflow-hidden">
-            <div className="grid grid-cols-12 gap-6 h-full min-h-0">
-              {/* Large Welcome Card */}
-              <Card className="col-span-8 row-span-2 bg-gradient-to-br from-blue-600/80 to-purple-700/80 text-white border-0 relative overflow-hidden">
-                <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
-                backgroundImage: 'url(/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png)'
-              }} />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-                <CardContent className="p-8 h-full flex flex-col justify-end relative z-10">
-                  <div>
-                    <h2 className="text-3xl font-bold mb-2">Welcome to LCS</h2>
-                  <p className="text-blue-100 mb-6">
-                    Get ready to play the first ever MMA battle royale
-                  </p>
-                    <div className="flex space-x-4">
-                      <Button 
-                        variant="secondary" 
-                        size="default" 
-                        className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 transition-all duration-300"
-                        onClick={() => navigate('/docs')}
-                      >
-                        <Info className="w-4 h-4 mr-2" />
-                        How to play
-                      </Button>
-                      <Button 
-                        variant="secondary" 
-                        size="default" 
-                        className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 transition-all duration-300"
-                        onClick={() => toast({
-                          title: "Coming Soon",
-                          description: "The game will be available soon!"
-                        })}
-                      >
-                        <Play className="w-4 h-4 mr-2" />
-                        Play now
-                      </Button>
+          {/* Center Content - Desktop Layout */}
+          <main className="flex-1 p-6 overflow-y-auto">
+            {activeTab === "home" && (
+              <div className="grid grid-cols-12 gap-6 h-full min-h-0">
+                {/* Large Welcome Card */}
+                <Card className="col-span-8 row-span-2 bg-gradient-to-br from-blue-600/80 to-purple-700/80 text-white border-0 relative overflow-hidden">
+                  <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
+                  backgroundImage: 'url(/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png)'
+                }} />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+                  <CardContent className="p-8 h-full flex flex-col justify-end relative z-10">
+                    <div>
+                      <h2 className="text-3xl font-bold mb-2">Welcome to LCS</h2>
+                    <p className="text-blue-100 mb-6">
+                      Get ready to play the first ever MMA battle royale
+                    </p>
+                      <div className="flex space-x-4">
+                        <Button 
+                          variant="secondary" 
+                          size="default" 
+                          className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 transition-all duration-300"
+                          onClick={() => navigate('/docs')}
+                        >
+                          <Info className="w-4 h-4 mr-2" />
+                          How to play
+                        </Button>
+                        <Button 
+                          variant="secondary" 
+                          size="default" 
+                          className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 transition-all duration-300"
+                          onClick={() => toast({
+                            title: "Coming Soon",
+                            description: "The game will be available soon!"
+                          })}
+                        >
+                          <Play className="w-4 h-4 mr-2" />
+                          Play now
+                        </Button>
+                      </div>
                     </div>
-                  </div>
-                </CardContent>
-              </Card>
+                  </CardContent>
+                </Card>
 
-              {/* Tournament Complete Card */}
-              <Card className="col-span-4 bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
-                {/* Metallic base layer */}
-                <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
-                
-                {/* Metallic shine overlay */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-400/10 to-transparent transform -skew-x-12" />
-                <CardContent className="p-6">
-                  <div className="flex items-center space-x-2 mb-4">
-                    <Trophy className="w-5 h-5 text-white" />
-                    <span className="text-sm font-medium text-white">Quests!</span>
-                  </div>
-                  <h3 className="text-lg font-bold mb-2">Smash that XP</h3>
-                  <p className="text-gray-300 text-sm mb-4">by completing all quests</p>
-                  <Dialog>
-                    <DialogTrigger asChild>
-                      <Button variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 w-full relative z-10 transition-all duration-300">
-                        Show Quests
-                      </Button>
-                    </DialogTrigger>
-                    <DialogContent className="sm:max-w-md bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden z-[100]">
-                      {/* Metallic base layer */}
-                      <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
-                      
-                      {/* Metallic shine overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-400/10 to-transparent transform -skew-x-12" />
-                      
-                      {/* Content wrapper */}
-                      <div className="relative z-10">
-                        <DialogHeader>
-                          <DialogTitle className="text-white">Available Quests</DialogTitle>
-                        </DialogHeader>
-                        <div className="space-y-3">
-                          <div className="flex items-center justify-between p-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg">
-                            <span className="text-sm font-medium text-white">Connect X</span>
-                            <Badge variant="outline" className="text-xs border-white/30 text-white">+50 XP</Badge>
-                          </div>
-                          <div className="flex items-center justify-between p-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg">
-                            <span className="text-sm font-medium text-white">Connect Insta</span>
-                            <Badge variant="outline" className="text-xs border-white/30 text-white">+50 XP</Badge>
-                          </div>
-                          <div className="flex items-center justify-between p-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg">
-                            <span className="text-sm font-medium text-white">Follow X page</span>
-                            <Badge variant="outline" className="text-xs border-white/30 text-white">+25 XP</Badge>
-                          </div>
-                          <div className="flex items-center justify-between p-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg">
-                            <span className="text-sm font-medium text-white">Follow Insta page</span>
-                            <Badge variant="outline" className="text-xs border-white/30 text-white">+25 XP</Badge>
+                {/* Tournament Complete Card */}
+                <Card className="col-span-4 bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
+                  {/* Metallic base layer */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
+                  
+                  {/* Metallic shine overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-400/10 to-transparent transform -skew-x-12" />
+                  <CardContent className="p-6">
+                    <div className="flex items-center space-x-2 mb-4">
+                      <Trophy className="w-5 h-5 text-white" />
+                      <span className="text-sm font-medium text-white">Quests!</span>
+                    </div>
+                    <h3 className="text-lg font-bold mb-2">Smash that XP</h3>
+                    <p className="text-gray-300 text-sm mb-4">by completing all quests</p>
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <Button variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 w-full relative z-10 transition-all duration-300">
+                          Show Quests
+                        </Button>
+                      </DialogTrigger>
+                      <DialogContent className="sm:max-w-md bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden z-[100]">
+                        {/* Metallic base layer */}
+                        <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
+                        
+                        {/* Metallic shine overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-400/10 to-transparent transform -skew-x-12" />
+                        
+                        {/* Content wrapper */}
+                        <div className="relative z-10">
+                          <DialogHeader>
+                            <DialogTitle className="text-white">Available Quests</DialogTitle>
+                          </DialogHeader>
+                          <div className="space-y-3">
+                            <div className="flex items-center justify-between p-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg">
+                              <span className="text-sm font-medium text-white">Connect X</span>
+                              <Badge variant="outline" className="text-xs border-white/30 text-white">+50 XP</Badge>
+                            </div>
+                            <div className="flex items-center justify-between p-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg">
+                              <span className="text-sm font-medium text-white">Connect Insta</span>
+                              <Badge variant="outline" className="text-xs border-white/30 text-white">+50 XP</Badge>
+                            </div>
+                            <div className="flex items-center justify-between p-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg">
+                              <span className="text-sm font-medium text-white">Follow X page</span>
+                              <Badge variant="outline" className="text-xs border-white/30 text-white">+25 XP</Badge>
+                            </div>
+                            <div className="flex items-center justify-between p-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg">
+                              <span className="text-sm font-medium text-white">Follow Insta page</span>
+                              <Badge variant="outline" className="text-xs border-white/30 text-white">+25 XP</Badge>
+                            </div>
                           </div>
                         </div>
+                      </DialogContent>
+                    </Dialog>
+                  </CardContent>
+                </Card>
+
+                {/* Open Packs Card */}
+                <Card className="col-span-4 bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
+                  <div className="absolute inset-0" style={{
+                    backgroundImage: `
+                      linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
+                      linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
+                    `,
+                    backgroundSize: '4px 4px'
+                  }} />
+                  <CardContent className="p-6">
+                    <div className="flex items-center space-x-2 mb-4">
+                      <Gift className="w-5 h-5" />
+                      <span className="text-sm font-medium">Open Packs</span>
+                    </div>
+                    <div className="space-y-2 mb-4">
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm text-yellow-300 font-semibold">GOLD</span>
+                        <span className="text-sm">x0</span>
                       </div>
-                    </DialogContent>
-                  </Dialog>
-                </CardContent>
-              </Card>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm text-gray-300 font-semibold">SILVER</span>
+                        <span className="text-sm">x0</span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm bg-gradient-to-r from-purple-400 via-pink-400 to-yellow-400 bg-clip-text text-transparent font-bold">SPECIAL</span>
+                        <span className="text-sm">x0</span>
+                      </div>
+                    </div>
+                    <Button variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 w-full relative z-10 transition-all duration-300">
+                      Buy Now
+                    </Button>
+                  </CardContent>
+                </Card>
 
-              {/* Open Packs Card */}
-              <Card className="col-span-4 bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
-                <div className="absolute inset-0" style={{
-                  backgroundImage: `
-                    linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
-                    linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
-                  `,
-                  backgroundSize: '4px 4px'
-                }} />
-                <CardContent className="p-6">
-                  <div className="flex items-center space-x-2 mb-4">
-                    <Gift className="w-5 h-5" />
-                    <span className="text-sm font-medium">Open Packs</span>
-                  </div>
-                  <div className="space-y-2 mb-4">
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm text-yellow-300 font-semibold">GOLD</span>
-                      <span className="text-sm">x0</span>
+                {/* Additional Cards */}
+                <Card className="col-span-6 bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
+                  {/* Metallic base layer */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
+                  
+                  {/* Metallic shine overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-400/10 to-transparent transform -skew-x-12" />
+                  
+                  <CardContent className="p-6 relative z-10">
+                    <div className="flex flex-col items-center text-center space-y-3 mb-4">
+                      <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
+                        <Users className="w-5 h-5 text-white" />
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-white">Build your roster</h3>
+                        <p className="text-sm text-gray-300">Build your dream team</p>
+                      </div>
                     </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-300 font-semibold">SILVER</span>
-                      <span className="text-sm">x0</span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm bg-gradient-to-r from-purple-400 via-pink-400 to-yellow-400 bg-clip-text text-transparent font-bold">SPECIAL</span>
-                      <span className="text-sm">x0</span>
-                    </div>
-                  </div>
-                  <Button variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 w-full relative z-10 transition-all duration-300">
-                    Buy Now
-                  </Button>
-                </CardContent>
-              </Card>
+                    <Button variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 w-full transition-all duration-300">
+                      Start Building
+                    </Button>
+                  </CardContent>
+                </Card>
 
-              {/* Additional Cards */}
-              <Card className="col-span-6 bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
-                {/* Metallic base layer */}
-                <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
-                
-                {/* Metallic shine overlay */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-400/10 to-transparent transform -skew-x-12" />
-                
-                <CardContent className="p-6 relative z-10">
-                  <div className="flex flex-col items-center text-center space-y-3 mb-4">
-                    <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
-                      <Users className="w-5 h-5 text-white" />
+                <Card className="col-span-6 bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
+                  {/* Metallic base layer */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
+                  
+                  {/* Metallic shine overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-400/10 to-transparent transform -skew-x-12" />
+                  
+                  <CardContent className="p-6 relative z-10">
+                    <div className="flex flex-col items-center text-center space-y-3 mb-4">
+                      <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
+                        <CreditCard className="w-5 h-5 text-white" />
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-white">Transfer Market</h3>
+                        <p className="text-sm text-gray-300">Buy & sell fighters</p>
+                      </div>
                     </div>
+                    <Button variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 w-full transition-all duration-300">
+                      Browse Market
+                    </Button>
+                  </CardContent>
+                </Card>
+              </div>
+            )}
+
+            {activeTab === "store" && (
+              <div className="space-y-6 max-w-4xl">
+                {/* Store Header */}
+                <div className="text-center">
+                  <div className="flex items-center justify-center space-x-3 mb-4">
+                    <ShoppingBag className="w-8 h-8 text-primary" />
                     <div>
-                      <h3 className="font-semibold text-white">Build your roster</h3>
-                      <p className="text-sm text-gray-300">Build your dream team</p>
+                      <h1 className="text-3xl font-bold">LCS Store</h1>
+                      <p className="text-muted-foreground">Customize your gaming experience</p>
                     </div>
                   </div>
-                  <Button variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 w-full transition-all duration-300">
-                    Start Building
-                  </Button>
-                </CardContent>
-              </Card>
+                </div>
 
-              <Card className="col-span-6 bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
-                {/* Metallic base layer */}
-                <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
-                
-                {/* Metallic shine overlay */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-400/10 to-transparent transform -skew-x-12" />
-                
-                <CardContent className="p-6 relative z-10">
-                  <div className="flex flex-col items-center text-center space-y-3 mb-4">
-                    <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
-                      <CreditCard className="w-5 h-5 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-white">Transfer Market</h3>
-                      <p className="text-sm text-gray-300">Buy & sell fighters</p>
-                    </div>
-                  </div>
-                  <Button variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 w-full transition-all duration-300">
-                    Browse Market
-                  </Button>
-                </CardContent>
-              </Card>
-            </div>
+                {/* Categories */}
+                <div className="space-y-6">
+                  {/* Skins Category */}
+                  <Card className="bg-gradient-to-br from-blue-600/20 to-purple-700/20 border border-blue-600/30">
+                    <CardHeader>
+                      <CardTitle className="flex items-center justify-between">
+                        <span>Skins</span>
+                        <Badge variant="secondary">4 items</Badge>
+                      </CardTitle>
+                      <CardDescription>Characters to play in game</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="grid grid-cols-4 gap-4">
+                        {[
+                          { name: "Cyber Warrior", price: 2500, rarity: "legendary", image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png" },
+                          { name: "Shadow Assassin", price: 1800, rarity: "epic", image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png" },
+                          { name: "Battle Mage", price: 2200, rarity: "legendary", image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png" },
+                          { name: "Iron Guardian", price: 1500, rarity: "rare", image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png" }
+                        ].map((item, idx) => (
+                          <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
+                            <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
+                            <CardContent className="p-4 relative z-10">
+                              <div className="aspect-square bg-gray-800/50 rounded-lg mb-3 overflow-hidden">
+                                <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+                              </div>
+                              <h3 className="font-semibold text-sm text-white mb-2">{item.name}</h3>
+                              <div className="flex items-center justify-between">
+                                <div className="flex items-center space-x-1">
+                                  <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4" />
+                                  <span className="text-sm font-bold text-white">{item.price.toLocaleString()}</span>
+                                </div>
+                                <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-7 px-3">
+                                  Buy
+                                </Button>
+                              </div>
+                            </CardContent>
+                          </Card>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  {/* Accessories Category */}
+                  <Card className="bg-gradient-to-br from-green-600/20 to-blue-700/20 border border-green-600/30">
+                    <CardHeader>
+                      <CardTitle className="flex items-center justify-between">
+                        <span>Accessories</span>
+                        <Badge variant="secondary">4 items</Badge>
+                      </CardTitle>
+                      <CardDescription>Shoes, backpacks, hats</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="grid grid-cols-4 gap-4">
+                        {[
+                          { name: "Neon Sneakers", price: 600, image: "/lovable-uploads/69c61fed-9ccd-43d2-bab5-17c6c0db05b4.png" },
+                          { name: "Combat Backpack", price: 450, image: "/lovable-uploads/7311683b-ea99-4dd9-9b1f-89d96742eff0.png" },
+                          { name: "Tactical Helmet", price: 750, image: "/lovable-uploads/69c61fed-9ccd-43d2-bab5-17c6c0db05b4.png" },
+                          { name: "Power Gloves", price: 550, image: "/lovable-uploads/7311683b-ea99-4dd9-9b1f-89d96742eff0.png" }
+                        ].map((item, idx) => (
+                          <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
+                            <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
+                            <CardContent className="p-4 relative z-10">
+                              <div className="aspect-square bg-gray-800/50 rounded-lg mb-3 overflow-hidden">
+                                <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+                              </div>
+                              <h3 className="font-semibold text-sm text-white mb-2">{item.name}</h3>
+                              <div className="flex items-center justify-between">
+                                <div className="flex items-center space-x-1">
+                                  <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4" />
+                                  <span className="text-sm font-bold text-white">{item.price.toLocaleString()}</span>
+                                </div>
+                                <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-7 px-3">
+                                  Buy
+                                </Button>
+                              </div>
+                            </CardContent>
+                          </Card>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  {/* Mobility Category */}
+                  <Card className="bg-gradient-to-br from-orange-600/20 to-red-700/20 border border-orange-600/30">
+                    <CardHeader>
+                      <CardTitle className="flex items-center justify-between">
+                        <span>Mobility</span>
+                        <Badge variant="secondary">4 items</Badge>
+                      </CardTitle>
+                      <CardDescription>Cars, golf buggies, etc</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="grid grid-cols-4 gap-4">
+                        {[
+                          { name: "Cyber Car", price: 5000, image: "/lovable-uploads/84ab9eed-00bc-425c-a953-3ea0478e464d.png" },
+                          { name: "Speed Buggy", price: 3200, image: "/lovable-uploads/896892f1-7ebc-4852-acea-80dcdbf7c545.png" },
+                          { name: "Hover Bike", price: 4500, image: "/lovable-uploads/84ab9eed-00bc-425c-a953-3ea0478e464d.png" },
+                          { name: "Stealth Jet", price: 8000, image: "/lovable-uploads/896892f1-7ebc-4852-acea-80dcdbf7c545.png" }
+                        ].map((item, idx) => (
+                          <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
+                            <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
+                            <CardContent className="p-4 relative z-10">
+                              <div className="aspect-square bg-gray-800/50 rounded-lg mb-3 overflow-hidden">
+                                <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+                              </div>
+                              <h3 className="font-semibold text-sm text-white mb-2">{item.name}</h3>
+                              <div className="flex items-center justify-between">
+                                <div className="flex items-center space-x-1">
+                                  <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4" />
+                                  <span className="text-sm font-bold text-white">{item.price.toLocaleString()}</span>
+                                </div>
+                                <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-7 px-3">
+                                  Buy
+                                </Button>
+                              </div>
+                            </CardContent>
+                          </Card>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              </div>
+            )}
           </main>
 
           {/* Right Sidebar - Desktop only */}
