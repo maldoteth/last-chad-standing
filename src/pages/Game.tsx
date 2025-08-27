@@ -115,7 +115,7 @@ const Game = () => {
                     </div>
                     <div>
                       <p className="text-sm font-medium">Open 3 packs</p>
-                      <p className="text-xs text-muted-foreground">0/3</p>
+                      <p className="text-xs text-muted-foreground">0/3 • 10 XP</p>
                     </div>
                   </div>
                   <ChevronRight className="w-4 h-4 text-muted-foreground" />
@@ -126,8 +126,8 @@ const Game = () => {
                       <ShoppingBag className="w-4 h-4 text-secondary-foreground" />
                     </div>
                     <div>
-                      <p className="text-sm font-medium">Buy 3 players</p>
-                      <p className="text-xs text-muted-foreground">0/3</p>
+                      <p className="text-sm font-medium">Buy 3 fighters</p>
+                      <p className="text-xs text-muted-foreground">0/3 • 10 XP</p>
                     </div>
                   </div>
                   <ChevronRight className="w-4 h-4 text-muted-foreground" />
@@ -138,8 +138,8 @@ const Game = () => {
                       <CreditCard className="w-4 h-4 text-destructive-foreground" />
                     </div>
                     <div>
-                      <p className="text-sm font-medium">Sell 3 players</p>
-                      <p className="text-xs text-muted-foreground">0/3</p>
+                      <p className="text-sm font-medium">Sell 3 fighters</p>
+                      <p className="text-xs text-muted-foreground">0/3 • 10 XP</p>
                     </div>
                   </div>
                   <ChevronRight className="w-4 h-4 text-muted-foreground" />
@@ -151,7 +151,7 @@ const Game = () => {
                     </div>
                     <div>
                       <p className="text-sm font-medium">Trade 3 days in a row</p>
-                      <p className="text-xs text-muted-foreground">0/3</p>
+                      <p className="text-xs text-muted-foreground">0/3 • 10 XP</p>
                     </div>
                   </div>
                   <ChevronRight className="w-4 h-4 text-muted-foreground" />
@@ -163,7 +163,7 @@ const Game = () => {
                     </div>
                     <div>
                       <p className="text-sm font-medium">Invite 3 friends</p>
-                      <p className="text-xs text-muted-foreground">0/3</p>
+                      <p className="text-xs text-muted-foreground">0/3 • 10 XP</p>
                     </div>
                   </div>
                   <ChevronRight className="w-4 h-4 text-muted-foreground" />
