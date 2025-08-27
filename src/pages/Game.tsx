@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Progress } from "@/components/ui/progress";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { Coins, ShoppingBag, Users, Package, CreditCard, Trophy, Star, Target, ChevronRight, Bell, Play, Home, TrendingUp, UserPlus, Medal, LogOut, Settings } from "lucide-react";
+import { Coins, ShoppingBag, Users, Package, CreditCard, Trophy, Star, Target, ChevronRight, Bell, Play, Home, TrendingUp, UserPlus, Medal, LogOut, Settings, Info } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 const Game = () => {
   const [activeTab, setActiveTab] = useState("home");
@@ -139,7 +139,7 @@ const Game = () => {
                       className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 transition-all duration-300"
                       onClick={() => navigate('/docs')}
                     >
-                      <Play className="w-4 h-4 mr-2" />
+                      <Info className="w-4 h-4 mr-2" />
                       How to play
                     </Button>
                     <Button 
@@ -151,6 +151,7 @@ const Game = () => {
                         description: "The game will be available soon!"
                       })}
                     >
+                      <Play className="w-4 h-4 mr-2" />
                       Play now
                     </Button>
                   </div>
@@ -441,7 +442,7 @@ const Game = () => {
                         className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 transition-all duration-300"
                         onClick={() => navigate('/docs')}
                       >
-                        <Play className="w-4 h-4 mr-2" />
+                        <Info className="w-4 h-4 mr-2" />
                         How to play
                       </Button>
                       <Button 
@@ -453,6 +454,7 @@ const Game = () => {
                           description: "The game will be available soon!"
                         })}
                       >
+                        <Play className="w-4 h-4 mr-2" />
                         Play now
                       </Button>
                     </div>
