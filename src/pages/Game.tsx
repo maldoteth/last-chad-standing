@@ -196,13 +196,13 @@ const Game = () => {
                 
                 {/* Metallic shine overlay */}
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-400/10 to-transparent transform -skew-x-12" />
-                <CardContent className="p-4">
+                <CardContent className="p-4 flex flex-col h-full">
                   <div className="flex items-center space-x-1 mb-2">
                     <Trophy className="w-4 h-4 text-white" />
                     <span className="text-xs font-medium text-white">Quests!</span>
                   </div>
                   <h3 className="text-sm font-bold mb-1">Smash that XP</h3>
-                  <p className="text-gray-300 text-xs mb-3">by completing all quests</p>
+                  <p className="text-gray-300 text-xs mb-3 flex-1">by completing all quests</p>
                   <Dialog>
                     <DialogTrigger asChild>
                       <Button variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 text-xs h-7 relative z-10 transition-all duration-300">
