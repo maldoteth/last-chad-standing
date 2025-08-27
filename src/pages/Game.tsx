@@ -524,7 +524,7 @@ const Game = () => {
                     { rank: 23, name: "BlockBuilder", level: 16, points: 7480, avatar: "🏗️" },
                     { rank: 24, name: "TokenHunter", level: 15, points: 7280, avatar: "🎣" },
                     { rank: 25, name: "ChainLink", level: 14, points: 7090, avatar: "🔗" }
-                  ].slice(0, visiblePlayers).map((player) => (
+                  ].map((player) => (
                     <div key={player.rank} className="flex items-center space-x-3 p-3 rounded-lg hover:bg-muted/50 transition-colors">
                       <div className="flex-shrink-0 w-8 text-center">
                         {player.rank <= 3 ? (
