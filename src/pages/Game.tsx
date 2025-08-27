@@ -241,7 +241,7 @@ const Game = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold">Transfer Market</h3>
-                    <p className="text-sm text-muted-foreground">Buy & sell players</p>
+                    <p className="text-sm text-muted-foreground">Buy & sell fighters</p>
                   </div>
                 </div>
                 <Button variant="outline" size="sm">
