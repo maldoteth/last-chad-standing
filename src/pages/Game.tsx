@@ -397,7 +397,7 @@ const Game = () => {
                   </div>
                   <h3 className="text-lg font-bold mb-2">Weekend League</h3>
                   <p className="text-gray-300 text-sm mb-4">Dec 16 - Dec 18</p>
-                  <Button variant="secondary" size="sm" className="bg-gray-100 text-black hover:bg-white w-full relative z-10">
+                  <Button variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 w-full relative z-10 transition-all duration-300">
                     Reveal winners
                   </Button>
                 </CardContent>
