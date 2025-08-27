@@ -72,7 +72,7 @@ const Game = () => {
           </nav>
           
           <div className="flex items-center space-x-3">
-            <div className="flex items-center space-x-2 bg-muted px-2 py-1.5 lg:px-3 lg:py-2 rounded-lg">
+            <div className="flex items-center space-x-2">
               <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4" />
               <span className="font-semibold text-sm lg:text-base">{userCoins.toLocaleString()}</span>
             </div>
