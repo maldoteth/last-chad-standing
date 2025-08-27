@@ -472,7 +472,7 @@ const Game = () => {
               
               <TabsContent value="rankings" className="mt-6">
                 <h3 className="text-lg font-semibold text-center mb-4">Top Players</h3>
-                <div className="max-h-[620px] overflow-y-auto space-y-2">
+                <div className="max-h-[620px] overflow-y-auto space-y-2 scrollbar-none" style={{ scrollBehavior: 'auto' }}>
                   {[
                     { rank: 1, name: "CryptoKing", level: 45, points: 15420, avatar: "👑" },
                     { rank: 2, name: "BlockMaster", level: 43, points: 14890, avatar: "⚔️" },
