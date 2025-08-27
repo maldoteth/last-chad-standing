@@ -150,7 +150,12 @@ const Game = () => {
         <main className="flex-1 p-6">
           <div className="grid grid-cols-12 gap-6 h-full">
             {/* Large Welcome Card */}
-            <Card className="col-span-8 row-span-2 bg-gradient-to-br from-blue-600 to-purple-700 text-white border-0 relative overflow-hidden">
+            <Card className="col-span-8 row-span-2 bg-gradient-to-br from-blue-600/80 to-purple-700/80 text-white border-0 relative overflow-hidden">
+              <div 
+                className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+                style={{ backgroundImage: 'url(/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png)' }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-900/60 to-purple-900/60" />
               <CardContent className="p-8 h-full flex flex-col justify-between relative z-10">
                 <div>
                   <h2 className="text-3xl font-bold mb-2">Welcome to LCS</h2>
