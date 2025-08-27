@@ -372,9 +372,9 @@ const Game = () => {
                 <CardContent className="p-8 h-full flex flex-col justify-end relative z-10">
                   <div>
                     <h2 className="text-3xl font-bold mb-2">Welcome to LCS</h2>
-                    <p className="text-blue-100 mb-6">
-                      Start your journey in the ultimate crypto gaming experience
-                    </p>
+                  <p className="text-blue-100 mb-6">
+                    Get ready to play the first ever MMA battle royale
+                  </p>
                     <Button variant="secondary" size="lg" className="bg-white text-blue-600 hover:bg-blue-50">
                       <Play className="w-4 h-4 mr-2" />
                       How to play
