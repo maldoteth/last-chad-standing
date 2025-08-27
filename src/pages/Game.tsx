@@ -132,15 +132,28 @@ const Game = () => {
                   <p className="text-blue-100 mb-4 text-sm">
                     Start your journey in the ultimate crypto gaming experience
                   </p>
-                   <Button 
-                     variant="secondary" 
-                     size="default" 
-                     className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 transition-all duration-300"
-                     onClick={() => navigate('/docs')}
-                   >
-                     <Play className="w-4 h-4 mr-2" />
-                     How to play
-                   </Button>
+                  <div className="flex space-x-3">
+                    <Button 
+                      variant="secondary" 
+                      size="default" 
+                      className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 transition-all duration-300"
+                      onClick={() => navigate('/docs')}
+                    >
+                      <Play className="w-4 h-4 mr-2" />
+                      How to play
+                    </Button>
+                    <Button 
+                      variant="default" 
+                      size="default" 
+                      className="bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300"
+                      onClick={() => toast({
+                        title: "Coming Soon",
+                        description: "The game will be available soon!"
+                      })}
+                    >
+                      Play now
+                    </Button>
+                  </div>
                 </div>
               </CardContent>
             </Card>
@@ -421,15 +434,28 @@ const Game = () => {
                   <p className="text-blue-100 mb-6">
                     Get ready to play the first ever MMA battle royale
                   </p>
-                     <Button 
-                       variant="secondary" 
-                       size="lg" 
-                       className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 transition-all duration-300"
-                       onClick={() => navigate('/docs')}
-                     >
-                       <Play className="w-4 h-4 mr-2" />
-                       How to play
-                     </Button>
+                    <div className="flex space-x-4">
+                      <Button 
+                        variant="secondary" 
+                        size="lg" 
+                        className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 transition-all duration-300"
+                        onClick={() => navigate('/docs')}
+                      >
+                        <Play className="w-4 h-4 mr-2" />
+                        How to play
+                      </Button>
+                      <Button 
+                        variant="default" 
+                        size="lg" 
+                        className="bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300"
+                        onClick={() => toast({
+                          title: "Coming Soon",
+                          description: "The game will be available soon!"
+                        })}
+                      >
+                        Play now
+                      </Button>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
