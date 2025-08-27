@@ -524,7 +524,7 @@ const Game = () => {
                 </div>
               </TabsContent>
               
-              <TabsContent value="rankings" className="mt-6 flex-1 flex flex-col">
+              <TabsContent value="rankings" className="flex-1 flex flex-col">
                 <div className="flex-1 overflow-y-auto space-y-2 scrollbar-none" style={{ scrollBehavior: 'auto' }}>
                   {[
                     { rank: 1, name: "CryptoKing", level: 45, points: 15420, avatar: "👑" },
