@@ -250,7 +250,7 @@ const Game = () => {
         </div>
 
         {/* Desktop Layout - Hidden on mobile */}
-        <div className="hidden lg:flex lg:min-h-[calc(100vh-80px)] w-full">
+        <div className="hidden lg:flex lg:min-h-screen w-full">
           {/* Left Sidebar - Desktop only */}
           <aside className="w-80 bg-card border-r border-border p-6 space-y-6">
             <Card>
@@ -472,7 +472,7 @@ const Game = () => {
               
               <TabsContent value="rankings" className="mt-6">
                 <h3 className="text-lg font-semibold text-center mb-4">Top Players</h3>
-                <div className="max-h-[300px] overflow-y-auto space-y-2">
+                <div className="max-h-[500px] overflow-y-auto space-y-2">
                   {[
                     { rank: 1, name: "CryptoKing", level: 45, points: 15420, avatar: "👑" },
                     { rank: 2, name: "BlockMaster", level: 43, points: 14890, avatar: "⚔️" },
