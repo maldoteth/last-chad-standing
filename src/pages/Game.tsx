@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { usePrivy } from '@privy-io/react-auth';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Progress } from "@/components/ui/progress";
-import { Coins, ShoppingBag, Users, Package, CreditCard, Trophy, Star, Target, ChevronRight, Bell, Play, Home, TrendingUp, UserPlus, Medal } from "lucide-react";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { Coins, ShoppingBag, Users, Package, CreditCard, Trophy, Star, Target, ChevronRight, Bell, Play, Home, TrendingUp, UserPlus, Medal, LogOut, Settings } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 const Game = () => {
   const [activeTab, setActiveTab] = useState("home");
@@ -13,6 +15,7 @@ const Game = () => {
   const [userCoins] = useState(0);
   const [visiblePlayers, setVisiblePlayers] = useState(10);
   const { toast } = useToast();
+  const { login, logout, authenticated, user } = usePrivy();
   const handleTabClick = (tabId: string) => {
     if (tabId === "lobby") {
       toast({
@@ -73,10 +76,34 @@ const Game = () => {
               <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4" />
               <span className="font-semibold text-sm lg:text-base">{userCoins.toLocaleString()}</span>
             </div>
-            <Avatar className="w-7 h-7 lg:w-8 lg:h-8">
-              <AvatarImage src="/placeholder.svg" />
-              <AvatarFallback>DD</AvatarFallback>
-            </Avatar>
+            
+            {authenticated ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Avatar className="w-7 h-7 lg:w-8 lg:h-8 cursor-pointer">
+                    <AvatarImage src="/placeholder.svg" />
+                    <AvatarFallback>{user?.email?.address?.charAt(0).toUpperCase() || "U"}</AvatarFallback>
+                  </Avatar>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-56 bg-card border border-border z-50">
+                  <DropdownMenuItem className="flex items-center space-x-2 cursor-pointer">
+                    <Settings className="w-4 h-4" />
+                    <span>Settings</span>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem 
+                    onClick={() => logout()}
+                    className="flex items-center space-x-2 cursor-pointer text-red-500 hover:text-red-600"
+                  >
+                    <LogOut className="w-4 h-4" />
+                    <span>Sign out</span>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <Button onClick={login} variant="outline" size="sm">
+                Sign In
+              </Button>
+            )}
           </div>
         </div>
       </header>
