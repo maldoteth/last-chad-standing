@@ -12,7 +12,9 @@ const Game = () => {
   const [rightSidebarTab, setRightSidebarTab] = useState("notifications");
   const [userCoins] = useState(0);
   const [visiblePlayers, setVisiblePlayers] = useState(10);
-  const { toast } = useToast();
+  const {
+    toast
+  } = useToast();
   const handleTabClick = (tabId: string) => {
     if (tabId === "lobby") {
       toast({
@@ -89,13 +91,10 @@ const Game = () => {
           {/* Hero Card - Portrait oriented for mobile */}
           <div className="p-4">
             <Card className="bg-gradient-to-b from-blue-600/90 to-purple-700/90 text-white border-0 relative overflow-hidden h-96">
-              <div 
-                className="absolute inset-0 bg-cover bg-center bg-no-repeat" 
-                style={{
-                  backgroundImage: 'url(/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png)',
-                  backgroundPosition: 'center top'
-                }} 
-              />
+              <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
+              backgroundImage: 'url(/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png)',
+              backgroundPosition: 'center top'
+            }} />
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
               <CardContent className="p-6 h-full flex flex-col justify-end relative z-10">
                 <div>
@@ -160,12 +159,12 @@ const Game = () => {
               <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                 <div className="absolute inset-0" style={{
-                  backgroundImage: `
+                backgroundImage: `
                     linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
                     linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
                   `,
-                  backgroundSize: '4px 4px'
-                }} />
+                backgroundSize: '4px 4px'
+              }} />
                 <CardContent className="p-4">
                   <h3 className="text-sm font-bold mb-2">Open Packs</h3>
                   <div className="space-y-1 mb-3">
@@ -236,14 +235,32 @@ const Game = () => {
               </CardHeader>
               <CardContent>
                 <div className="space-y-2">
-                  {[
-                    { icon: Package, text: "Open 3 packs", progress: "0/3", bg: "bg-primary" },
-                    { icon: ShoppingBag, text: "Buy 3 fighters", progress: "0/3", bg: "bg-secondary" },
-                    { icon: CreditCard, text: "Sell 3 fighters", progress: "0/3", bg: "bg-destructive" },
-                    { icon: TrendingUp, text: "Trade 3 days in a row", progress: "0/3", bg: "bg-orange-500" },
-                    { icon: UserPlus, text: "Invite 3 friends", progress: "0/3", bg: "bg-blue-500" }
-                  ].map((obj, idx) => (
-                    <div key={idx} className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
+                  {[{
+                  icon: Package,
+                  text: "Open 3 packs",
+                  progress: "0/3",
+                  bg: "bg-primary"
+                }, {
+                  icon: ShoppingBag,
+                  text: "Buy 3 fighters",
+                  progress: "0/3",
+                  bg: "bg-secondary"
+                }, {
+                  icon: CreditCard,
+                  text: "Sell 3 fighters",
+                  progress: "0/3",
+                  bg: "bg-destructive"
+                }, {
+                  icon: TrendingUp,
+                  text: "Trade 3 days in a row",
+                  progress: "0/3",
+                  bg: "bg-orange-500"
+                }, {
+                  icon: UserPlus,
+                  text: "Invite 3 friends",
+                  progress: "0/3",
+                  bg: "bg-blue-500"
+                }].map((obj, idx) => <div key={idx} className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
                       <div className="flex items-center space-x-3">
                         <div className={`w-6 h-6 ${obj.bg} rounded-full flex items-center justify-center`}>
                           <obj.icon className="w-3 h-3 text-white" />
@@ -254,8 +271,7 @@ const Game = () => {
                         </div>
                       </div>
                       <ChevronRight className="w-4 h-4 text-muted-foreground" />
-                    </div>
-                  ))}
+                    </div>)}
                 </div>
               </CardContent>
             </Card>
@@ -407,12 +423,12 @@ const Game = () => {
               <Card className="col-span-4 bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                 <div className="absolute inset-0" style={{
-                  backgroundImage: `
+                backgroundImage: `
                     linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
                     linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
                   `,
-                  backgroundSize: '4px 4px'
-                }} />
+                backgroundSize: '4px 4px'
+              }} />
                 <CardContent className="p-6">
                   <h3 className="text-lg font-bold mb-4">Open Packs</h3>
                   <div className="space-y-2 mb-4">
@@ -486,55 +502,72 @@ const Game = () => {
                 </TabsTrigger>
               </TabsList>
               
-              <TabsContent value="notifications" className="mt-6 flex-1 flex flex-col">
-                <div className="text-center py-8 flex-1 flex flex-col justify-center">
-                  <Bell className="w-12 h-12 mx-auto text-muted-foreground mb-4 opacity-50" />
-                  <p className="text-muted-foreground">No notifications yet</p>
-                  <p className="text-sm text-muted-foreground mt-2">
-                    You'll see game updates and important announcements here
-                  </p>
-                </div>
-              </TabsContent>
               
-              <TabsContent value="rankings" className="overflow-y-auto space-y-2 scrollbar-none max-h-[580px] -mt-2">
-                {[
-                  { rank: 1, name: "CryptoKing", level: 45, points: 15420, avatar: "👑" },
-                  { rank: 2, name: "BlockMaster", level: 43, points: 14890, avatar: "⚔️" },
-                  { rank: 3, name: "ChainWarrior", level: 41, points: 14320, avatar: "🛡️" },
-                  { rank: 4, name: "TokenSlayer", level: 38, points: 13780, avatar: "🗡️" },
-                  { rank: 5, name: "NFTChampion", level: 37, points: 13240, avatar: "🏆" },
-                  { rank: 6, name: "DeFiGamer", level: 35, points: 12890, avatar: "💎" },
-                  { rank: 7, name: "MetaPlayer", level: 34, points: 12450, avatar: "🎮" },
-                  { rank: 8, name: "Web3Hero", level: 32, points: 12120, avatar: "🚀" },
-                  { rank: 9, name: "CoinMaster", level: 30, points: 11780, avatar: "💰" },
-                  { rank: 10, name: "BlockHero", level: 29, points: 11340, avatar: "⭐" },
-                  { rank: 11, name: "SmartTrader", level: 28, points: 10920, avatar: "🧠" },
-                  { rank: 12, name: "CyberNinja", level: 27, points: 10540, avatar: "🥷" },
-                  { rank: 13, name: "QuantumGamer", level: 26, points: 10180, avatar: "⚡" },
-                  { rank: 14, name: "PixelMaster", level: 25, points: 9840, avatar: "🎨" },
-                  { rank: 15, name: "CodeWarrior", level: 24, points: 9520, avatar: "💻" },
-                  { rank: 16, name: "AlgoTrader", level: 23, points: 9210, avatar: "📈" },
-                  { rank: 17, name: "BitCrusher", level: 22, points: 8920, avatar: "🔨" },
-                  { rank: 18, name: "EtherLord", level: 21, points: 8650, avatar: "⚡" },
-                  { rank: 19, name: "GameChanger", level: 20, points: 8390, avatar: "🎯" },
-                  { rank: 20, name: "TechSavvy", level: 19, points: 8140, avatar: "🔧" },
-                  { rank: 21, name: "DigitalNomad", level: 18, points: 7910, avatar: "🌐" },
-                  { rank: 22, name: "CryptoSage", level: 17, points: 7690, avatar: "🧙‍♂️" },
-                  { rank: 23, name: "BlockBuilder", level: 16, points: 7480, avatar: "🏗️" },
-                  { rank: 24, name: "TokenHunter", level: 15, points: 7280, avatar: "🎣" },
-                  { rank: 25, name: "ChainLink", level: 14, points: 7090, avatar: "🔗" }
-                ].map((player) => (
-                  <div key={player.rank} className="flex items-center space-x-3 p-3 rounded-lg hover:bg-muted/50 transition-colors">
-                    <div className="flex-shrink-0 w-8 text-center">
-                      {player.rank <= 3 ? (
-                        <Medal className={`w-5 h-5 ${
-                          player.rank === 1 ? 'text-yellow-400' : 
-                          player.rank === 2 ? 'text-gray-300' : 
-                          'text-amber-600'
-                        }`} />
-                      ) : (
-                        <span className="text-sm font-medium text-muted-foreground">#{player.rank}</span>
-                      )}
+              
+              <TabsContent value="rankings" className="!mt-0 overflow-y-auto space-y-2 scrollbar-none max-h-[580px]">
+                {[{
+                rank: 1,
+                name: "CryptoKing",
+                level: 45,
+                points: 15420,
+                avatar: "👑"
+              }, {
+                rank: 2,
+                name: "BlockMaster",
+                level: 43,
+                points: 14890,
+                avatar: "⚔️"
+              }, {
+                rank: 3,
+                name: "ChainWarrior",
+                level: 41,
+                points: 14320,
+                avatar: "🛡️"
+              }, {
+                rank: 4,
+                name: "TokenSlayer",
+                level: 38,
+                points: 13780,
+                avatar: "🗡️"
+              }, {
+                rank: 5,
+                name: "NFTChampion",
+                level: 37,
+                points: 13240,
+                avatar: "🏆"
+              }, {
+                rank: 6,
+                name: "DeFiGamer",
+                level: 35,
+                points: 12890,
+                avatar: "💎"
+              }, {
+                rank: 7,
+                name: "MetaPlayer",
+                level: 34,
+                points: 12450,
+                avatar: "🎮"
+              }, {
+                rank: 8,
+                name: "Web3Hero",
+                level: 32,
+                points: 12120,
+                avatar: "🚀"
+              }, {
+                rank: 9,
+                name: "CoinMaster",
+                level: 30,
+                points: 11780,
+                avatar: "💰"
+              }, {
+                rank: 10,
+                name: "GameMaster",
+                level: 28,
+                points: 11340,
+                avatar: "🎯"
+              }].map(player => <div key={player.rank} className="flex items-center space-x-3 p-3 rounded-lg border border-border hover:bg-accent/50 transition-colors">
+                    <div className="flex items-center justify-center w-8 h-8">
+                      {player.rank <= 3 ? <Medal className={`w-5 h-5 ${player.rank === 1 ? 'text-yellow-400' : player.rank === 2 ? 'text-gray-300' : 'text-amber-600'}`} /> : <span className="text-sm font-medium text-muted-foreground">#{player.rank}</span>}
                     </div>
                     
                     <Avatar className="w-8 h-8">
@@ -546,10 +579,9 @@ const Game = () => {
                         <p className="text-sm font-medium truncate">{player.name}</p>
                         <Badge variant="outline" className="text-xs">Lv.{player.level}</Badge>
                       </div>
-                      <p className="text-xs text-muted-foreground">{player.points.toLocaleString()} XP</p>
+                      <p className="text-xs text-muted-foreground">{player.points.toLocaleString()} pts</p>
                     </div>
-                  </div>
-                ))}
+                  </div>)}
               </TabsContent>
             </Tabs>
           </aside>
@@ -559,20 +591,10 @@ const Game = () => {
       {/* Mobile Bottom Navigation */}
       <nav className="lg:hidden fixed bottom-0 left-0 right-0 bg-card border-t border-border px-4 py-2 z-50">
         <div className="flex items-center justify-around">
-          {tabItems.slice(0, 5).map(tab => (
-            <button 
-              key={tab.id} 
-              onClick={() => handleTabClick(tab.id)} 
-              className={`flex flex-col items-center space-y-1 px-2 py-1 rounded-lg transition-colors ${
-                activeTab === tab.id 
-                  ? "text-primary" 
-                  : "text-muted-foreground"
-              }`}
-            >
+          {tabItems.slice(0, 5).map(tab => <button key={tab.id} onClick={() => handleTabClick(tab.id)} className={`flex flex-col items-center space-y-1 px-2 py-1 rounded-lg transition-colors ${activeTab === tab.id ? "text-primary" : "text-muted-foreground"}`}>
               <tab.icon className="w-5 h-5" />
               <span className="text-xs font-medium">{tab.label}</span>
-            </button>
-          ))}
+            </button>)}
         </div>
       </nav>
     </div>;
