@@ -351,7 +351,7 @@ const Game = () => {
           <main className="flex-1 p-6">
             <div className="grid grid-cols-12 gap-6 h-full">
               {/* Large Welcome Card */}
-              <Card className="col-span-6 row-span-2 bg-gradient-to-br from-blue-600/80 to-purple-700/80 text-white border-0 relative overflow-hidden">
+              <Card className="col-span-8 row-span-2 bg-gradient-to-br from-blue-600/80 to-purple-700/80 text-white border-0 relative overflow-hidden">
                 <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
                 backgroundImage: 'url(/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png)'
               }} />
@@ -370,80 +370,8 @@ const Game = () => {
                 </CardContent>
               </Card>
 
-              {/* Rankings & Notifications Bento Box */}
-              <Card className="col-span-6 row-span-2 bg-card">
-                <CardContent className="p-6 h-full flex flex-col">
-                  <Tabs value={rightSidebarTab} onValueChange={setRightSidebarTab} className="w-full h-full flex flex-col">
-                    <TabsList className="grid w-full grid-cols-2 mb-4">
-                      <TabsTrigger value="notifications" className="flex items-center gap-2">
-                        <Bell className="w-4 h-4" />
-                        Notifications
-                      </TabsTrigger>
-                      <TabsTrigger value="rankings" className="flex items-center gap-2">
-                        <Medal className="w-4 h-4" />
-                        Rankings
-                      </TabsTrigger>
-                    </TabsList>
-                    
-                    <TabsContent value="notifications" className="flex-1 flex items-center justify-center">
-                      <div className="text-center">
-                        <Bell className="w-12 h-12 mx-auto text-muted-foreground mb-4 opacity-50" />
-                        <p className="text-muted-foreground">No notifications yet</p>
-                        <p className="text-sm text-muted-foreground mt-2">
-                          You'll see game updates and important announcements here
-                        </p>
-                      </div>
-                    </TabsContent>
-                    
-                    <TabsContent value="rankings" className="flex-1 flex flex-col">
-                      <h3 className="text-lg font-semibold text-center mb-4">Top Players</h3>
-                      <div className="flex-1 overflow-y-auto space-y-2">
-                        {[
-                          { rank: 1, name: "CryptoKing", level: 45, points: 15420, avatar: "👑" },
-                          { rank: 2, name: "BlockMaster", level: 43, points: 14890, avatar: "⚔️" },
-                          { rank: 3, name: "ChainWarrior", level: 41, points: 14320, avatar: "🛡️" },
-                          { rank: 4, name: "TokenSlayer", level: 38, points: 13780, avatar: "🗡️" },
-                          { rank: 5, name: "NFTChampion", level: 37, points: 13240, avatar: "🏆" },
-                          { rank: 6, name: "DeFiGamer", level: 35, points: 12890, avatar: "💎" },
-                          { rank: 7, name: "MetaPlayer", level: 34, points: 12450, avatar: "🎮" },
-                          { rank: 8, name: "Web3Hero", level: 32, points: 12120, avatar: "🚀" },
-                          { rank: 9, name: "CoinMaster", level: 30, points: 11780, avatar: "💰" },
-                          { rank: 10, name: "BlockHero", level: 29, points: 11340, avatar: "⭐" }
-                        ].slice(0, visiblePlayers).map((player) => (
-                          <div key={player.rank} className="flex items-center space-x-3 p-3 rounded-lg hover:bg-muted/50 transition-colors">
-                            <div className="flex-shrink-0 w-8 text-center">
-                              {player.rank <= 3 ? (
-                                <Medal className={`w-5 h-5 ${
-                                  player.rank === 1 ? 'text-yellow-400' : 
-                                  player.rank === 2 ? 'text-gray-300' : 
-                                  'text-amber-600'
-                                }`} />
-                              ) : (
-                                <span className="text-sm font-medium text-muted-foreground">#{player.rank}</span>
-                              )}
-                            </div>
-                            
-                            <Avatar className="w-8 h-8">
-                              <AvatarFallback className="text-sm">{player.avatar}</AvatarFallback>
-                            </Avatar>
-                            
-                            <div className="flex-1 min-w-0">
-                              <div className="flex items-center justify-between">
-                                <p className="text-sm font-medium truncate">{player.name}</p>
-                                <Badge variant="outline" className="text-xs">Lv.{player.level}</Badge>
-                              </div>
-                              <p className="text-xs text-muted-foreground">{player.points.toLocaleString()} pts</p>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </TabsContent>
-                  </Tabs>
-                </CardContent>
-              </Card>
-
               {/* Tournament Complete Card */}
-              <Card className="col-span-3 bg-green-600 text-white border-0">
+              <Card className="col-span-4 bg-green-600 text-white border-0">
                 <CardContent className="p-6">
                   <div className="flex items-center space-x-2 mb-4">
                     <Trophy className="w-5 h-5" />
@@ -458,7 +386,7 @@ const Game = () => {
               </Card>
 
               {/* Open Packs Card */}
-              <Card className="col-span-3 bg-orange-500 text-white border-0">
+              <Card className="col-span-4 bg-orange-500 text-white border-0">
                 <CardContent className="p-6">
                   <h3 className="text-lg font-bold mb-4">Open Packs</h3>
                   <div className="space-y-2 mb-4">
@@ -482,7 +410,7 @@ const Game = () => {
               </Card>
 
               {/* Additional Cards */}
-              <Card className="col-span-3 bg-card">
+              <Card className="col-span-6 bg-card">
                 <CardContent className="p-6">
                   <div className="flex flex-col items-center text-center space-y-3 mb-4">
                     <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
@@ -499,7 +427,7 @@ const Game = () => {
                 </CardContent>
               </Card>
 
-              <Card className="col-span-3 bg-card">
+              <Card className="col-span-6 bg-card">
                 <CardContent className="p-6">
                   <div className="flex flex-col items-center text-center space-y-3 mb-4">
                     <div className="w-10 h-10 bg-secondary rounded-full flex items-center justify-center">
@@ -517,6 +445,76 @@ const Game = () => {
               </Card>
             </div>
           </main>
+
+          {/* Right Sidebar - Desktop only */}
+          <aside className="w-80 bg-card border-l border-border p-6">
+            <Tabs value={rightSidebarTab} onValueChange={setRightSidebarTab} className="w-full">
+              <TabsList className="grid w-full grid-cols-2">
+                <TabsTrigger value="notifications" className="flex items-center gap-2">
+                  <Bell className="w-4 h-4" />
+                  Notifications
+                </TabsTrigger>
+                <TabsTrigger value="rankings" className="flex items-center gap-2">
+                  <Medal className="w-4 h-4" />
+                  Rankings
+                </TabsTrigger>
+              </TabsList>
+              
+              <TabsContent value="notifications" className="mt-6">
+                <div className="text-center py-8">
+                  <Bell className="w-12 h-12 mx-auto text-muted-foreground mb-4 opacity-50" />
+                  <p className="text-muted-foreground">No notifications yet</p>
+                  <p className="text-sm text-muted-foreground mt-2">
+                    You'll see game updates and important announcements here
+                  </p>
+                </div>
+              </TabsContent>
+              
+              <TabsContent value="rankings" className="mt-6">
+                <h3 className="text-lg font-semibold text-center mb-4">Top Players</h3>
+                <div className="max-h-[500px] overflow-y-auto space-y-2">
+                  {[
+                    { rank: 1, name: "CryptoKing", level: 45, points: 15420, avatar: "👑" },
+                    { rank: 2, name: "BlockMaster", level: 43, points: 14890, avatar: "⚔️" },
+                    { rank: 3, name: "ChainWarrior", level: 41, points: 14320, avatar: "🛡️" },
+                    { rank: 4, name: "TokenSlayer", level: 38, points: 13780, avatar: "🗡️" },
+                    { rank: 5, name: "NFTChampion", level: 37, points: 13240, avatar: "🏆" },
+                    { rank: 6, name: "DeFiGamer", level: 35, points: 12890, avatar: "💎" },
+                    { rank: 7, name: "MetaPlayer", level: 34, points: 12450, avatar: "🎮" },
+                    { rank: 8, name: "Web3Hero", level: 32, points: 12120, avatar: "🚀" },
+                    { rank: 9, name: "CoinMaster", level: 30, points: 11780, avatar: "💰" },
+                    { rank: 10, name: "BlockHero", level: 29, points: 11340, avatar: "⭐" }
+                  ].slice(0, visiblePlayers).map((player) => (
+                    <div key={player.rank} className="flex items-center space-x-3 p-3 rounded-lg hover:bg-muted/50 transition-colors">
+                      <div className="flex-shrink-0 w-8 text-center">
+                        {player.rank <= 3 ? (
+                          <Medal className={`w-5 h-5 ${
+                            player.rank === 1 ? 'text-yellow-400' : 
+                            player.rank === 2 ? 'text-gray-300' : 
+                            'text-amber-600'
+                          }`} />
+                        ) : (
+                          <span className="text-sm font-medium text-muted-foreground">#{player.rank}</span>
+                        )}
+                      </div>
+                      
+                      <Avatar className="w-8 h-8">
+                        <AvatarFallback className="text-sm">{player.avatar}</AvatarFallback>
+                      </Avatar>
+                      
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center justify-between">
+                          <p className="text-sm font-medium truncate">{player.name}</p>
+                          <Badge variant="outline" className="text-xs">Lv.{player.level}</Badge>
+                        </div>
+                        <p className="text-xs text-muted-foreground">{player.points.toLocaleString()} pts</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </TabsContent>
+            </Tabs>
+          </aside>
         </div>
       </div>
 
