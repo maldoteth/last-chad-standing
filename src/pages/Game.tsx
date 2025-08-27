@@ -6,53 +6,60 @@ import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Progress } from "@/components/ui/progress";
 import { Coins, ShoppingBag, Users, Package, CreditCard, Trophy, Star, Target, ChevronRight, Bell, Play, Home, TrendingUp, UserPlus } from "lucide-react";
-
 const Game = () => {
   const [activeTab, setActiveTab] = useState("home");
   const [userCoins] = useState(12500);
-  const { toast } = useToast();
-
+  const {
+    toast
+  } = useToast();
   const handleTabClick = (tabId: string) => {
     if (tabId === "lobby") {
       toast({
         title: "Coming Soon",
-        description: "The lobby feature is currently under development.",
+        description: "The lobby feature is currently under development."
       });
     } else {
       setActiveTab(tabId);
     }
   };
-
-  const tabItems = [
-    { id: "home", label: "Home", icon: Home },
-    { id: "lobby", label: "Lobby", icon: Users },
-    { id: "store", label: "Store", icon: ShoppingBag },
-    { id: "market", label: "Market", icon: CreditCard },
-    { id: "locker", label: "Locker", icon: Package },
-    { id: "coins", label: "Coins", icon: Coins },
-    { id: "pass", label: "Pass", icon: Trophy },
-  ];
-
-  return (
-    <div className="min-h-screen bg-background text-foreground dark">
+  const tabItems = [{
+    id: "home",
+    label: "Home",
+    icon: Home
+  }, {
+    id: "lobby",
+    label: "Lobby",
+    icon: Users
+  }, {
+    id: "store",
+    label: "Store",
+    icon: ShoppingBag
+  }, {
+    id: "market",
+    label: "Market",
+    icon: CreditCard
+  }, {
+    id: "locker",
+    label: "Locker",
+    icon: Package
+  }, {
+    id: "coins",
+    label: "Coins",
+    icon: Coins
+  }, {
+    id: "pass",
+    label: "Pass",
+    icon: Trophy
+  }];
+  return <div className="min-h-screen bg-background text-foreground dark">
       {/* Header Navigation */}
       <header className="bg-card border-b border-border px-6 py-4">
         <div className="flex items-center justify-between">
           <nav className="flex items-center space-x-8">
-            {tabItems.map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => handleTabClick(tab.id)}
-                className={`flex items-center space-x-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  activeTab === tab.id
-                    ? "bg-primary text-primary-foreground"
-                    : "text-muted-foreground hover:text-foreground hover:bg-accent"
-                }`}
-              >
+            {tabItems.map(tab => <button key={tab.id} onClick={() => handleTabClick(tab.id)} className={`flex items-center space-x-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${activeTab === tab.id ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground hover:bg-accent"}`}>
                 <tab.icon className="w-4 h-4" />
                 <span>{tab.label}</span>
-              </button>
-            ))}
+              </button>)}
           </nav>
           
           <div className="flex items-center space-x-4">
@@ -72,26 +79,6 @@ const Game = () => {
       <div className="flex min-h-[calc(100vh-80px)]">
         {/* Left Sidebar - User Profile */}
         <aside className="w-80 bg-card border-r border-border p-6 space-y-6">
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-base flex items-center space-x-2">
-                <Trophy className="w-4 h-4" />
-                <span>Progress</span>
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-center py-4">
-                <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-3">
-                  <span className="text-2xl font-bold text-primary-foreground">0</span>
-                </div>
-                <h3 className="font-semibold text-lg">Level 0: Recruit</h3>
-                <p className="text-sm text-muted-foreground mt-1">Complete objectives to level up</p>
-                <Progress value={0} className="mt-4" />
-                <p className="text-xs text-muted-foreground mt-2">0/100 XP</p>
-              </div>
-            </CardContent>
-          </Card>
-          
           <Card>
             <CardHeader>
               <CardTitle className="text-base flex items-center space-x-2">
@@ -171,10 +158,9 @@ const Game = () => {
           <div className="grid grid-cols-12 gap-6 h-full">
             {/* Large Welcome Card */}
             <Card className="col-span-8 row-span-2 bg-gradient-to-br from-blue-600/80 to-purple-700/80 text-white border-0 relative overflow-hidden">
-              <div 
-                className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-                style={{ backgroundImage: 'url(/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png)' }}
-              />
+              <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
+              backgroundImage: 'url(/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png)'
+            }} />
               <div className="absolute inset-0 bg-gradient-to-br from-blue-900/60 to-purple-900/60" />
               <CardContent className="p-8 h-full flex flex-col justify-end relative z-10">
                 <div>
@@ -275,15 +261,13 @@ const Game = () => {
           
           <div className="text-center py-12">
             <Bell className="w-12 h-12 mx-auto text-muted-foreground mb-4 opacity-50" />
-            <p className="text-muted-foreground">No notifications yet</p>
+            <p className="text-muted-foreground">Buy & sell fighters</p>
             <p className="text-sm text-muted-foreground mt-2">
               You'll see game updates and important announcements here
             </p>
           </div>
         </aside>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default Game;
