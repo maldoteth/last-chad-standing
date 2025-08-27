@@ -85,7 +85,7 @@ const Game = () => {
       <div className="lg:flex lg:min-h-[calc(100vh-80px)]">
         
         {/* Mobile: Stack everything vertically */}
-        <div className="lg:hidden">
+        <div className="lg:hidden overflow-y-auto max-h-[calc(100vh-80px)]">
           {/* Hero Card - Portrait oriented for mobile */}
           <div className="p-4">
             <Card className="bg-gradient-to-b from-blue-600/90 to-purple-700/90 text-white border-0 relative overflow-hidden h-96">
