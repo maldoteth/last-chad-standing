@@ -11,7 +11,7 @@ const Game = () => {
   const [activeTab, setActiveTab] = useState("home");
   const [rightSidebarTab, setRightSidebarTab] = useState("notifications");
   const [userCoins] = useState(12500);
-  const [visiblePlayers, setVisiblePlayers] = useState(7);
+  const [visiblePlayers, setVisiblePlayers] = useState(10);
   const { toast } = useToast();
   const handleTabClick = (tabId: string) => {
     if (tabId === "lobby") {
@@ -480,7 +480,10 @@ const Game = () => {
                     { rank: 4, name: "TokenSlayer", level: 38, points: 13780, avatar: "🗡️" },
                     { rank: 5, name: "NFTChampion", level: 37, points: 13240, avatar: "🏆" },
                     { rank: 6, name: "DeFiGamer", level: 35, points: 12890, avatar: "💎" },
-                    { rank: 7, name: "MetaPlayer", level: 34, points: 12450, avatar: "🎮" }
+                    { rank: 7, name: "MetaPlayer", level: 34, points: 12450, avatar: "🎮" },
+                    { rank: 8, name: "Web3Hero", level: 32, points: 12120, avatar: "🚀" },
+                    { rank: 9, name: "CoinMaster", level: 30, points: 11780, avatar: "💰" },
+                    { rank: 10, name: "BlockHero", level: 29, points: 11340, avatar: "⭐" }
                   ].slice(0, visiblePlayers).map((player) => (
                     <div key={player.rank} className="flex items-center space-x-3 p-3 rounded-lg hover:bg-muted/50 transition-colors">
                       <div className="flex-shrink-0 w-8 text-center">
