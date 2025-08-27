@@ -64,11 +64,10 @@ const Game = () => {
       {/* Header with coins and avatar - simplified for mobile */}
       <header className="bg-card lg:border-b border-border px-4 py-3 lg:px-6 lg:py-4">
         <div className="flex items-center justify-between">
-          <img src="/lovable-uploads/ef3aca91-a372-4313-aa94-3c2dcf946dd6.png" alt="LCS Logo" className="h-8 lg:hidden" />
+          <img src="/lovable-uploads/ef3aca91-a372-4313-aa94-3c2dcf946dd6.png" alt="LCS Logo" className="h-8 lg:h-10" />
           
           {/* Desktop Navigation - hidden on mobile */}
-          <div className="hidden lg:flex items-center space-x-8">
-            <img src="/lovable-uploads/ef3aca91-a372-4313-aa94-3c2dcf946dd6.png" alt="LCS Logo" className="h-10" />
+          <div className="hidden lg:flex items-center justify-center flex-1">
             <nav className="flex items-center space-x-8">
             {tabItems.map(tab => <button key={tab.id} onClick={() => handleTabClick(tab.id)} className={`flex items-center space-x-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${activeTab === tab.id ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground hover:bg-accent"}`}>
                 <tab.icon className="w-4 h-4" />
