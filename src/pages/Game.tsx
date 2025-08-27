@@ -229,7 +229,7 @@ const Game = () => {
                     { icon: TrendingUp, text: "Trade 3 days in a row", progress: "0/3", bg: "bg-orange-500" },
                     { icon: UserPlus, text: "Invite 3 friends", progress: "0/3", bg: "bg-blue-500" }
                   ].map((obj, idx) => (
-                    <div key={idx} className="flex items-center justify-between p-3 bg-accent/30 rounded-lg">
+                    <div key={idx} className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
                       <div className="flex items-center space-x-3">
                         <div className={`w-6 h-6 ${obj.bg} rounded-full flex items-center justify-center`}>
                           <obj.icon className="w-3 h-3 text-white" />
@@ -281,7 +281,7 @@ const Game = () => {
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
-                  <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg">
+                  <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
                     <div className="flex items-center space-x-3">
                       <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
                         <Package className="w-4 h-4 text-primary-foreground" />
@@ -293,7 +293,7 @@ const Game = () => {
                     </div>
                     <ChevronRight className="w-4 h-4 text-muted-foreground" />
                   </div>
-                  <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg">
+                  <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
                     <div className="flex items-center space-x-3">
                       <div className="w-8 h-8 bg-secondary rounded-full flex items-center justify-center">
                         <ShoppingBag className="w-4 h-4 text-secondary-foreground" />
@@ -305,7 +305,7 @@ const Game = () => {
                     </div>
                     <ChevronRight className="w-4 h-4 text-muted-foreground" />
                   </div>
-                  <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg">
+                  <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
                     <div className="flex items-center space-x-3">
                       <div className="w-8 h-8 bg-destructive rounded-full flex items-center justify-center">
                         <CreditCard className="w-4 h-4 text-destructive-foreground" />
@@ -317,7 +317,7 @@ const Game = () => {
                     </div>
                     <ChevronRight className="w-4 h-4 text-muted-foreground" />
                   </div>
-                  <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg">
+                  <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
                     <div className="flex items-center space-x-3">
                       <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center">
                         <TrendingUp className="w-4 h-4 text-white" />
@@ -329,7 +329,7 @@ const Game = () => {
                     </div>
                     <ChevronRight className="w-4 h-4 text-muted-foreground" />
                   </div>
-                  <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg">
+                  <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
                     <div className="flex items-center space-x-3">
                       <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
                         <UserPlus className="w-4 h-4 text-white" />
