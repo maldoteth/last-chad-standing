@@ -9,7 +9,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Progress } from "@/components/ui/progress";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Coins, ShoppingBag, Users, Package, CreditCard, Trophy, Star, Target, ChevronRight, Bell, Play, Home, TrendingUp, UserPlus, Medal, LogOut, Settings, Info } from "lucide-react";
+import { Coins, ShoppingBag, Users, Package, CreditCard, Trophy, Star, Target, ChevronRight, Bell, Play, Home, TrendingUp, UserPlus, Medal, LogOut, Settings, Info, Gift } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 const Game = () => {
   const [activeTab, setActiveTab] = useState("home");
@@ -252,7 +252,10 @@ const Game = () => {
                   backgroundSize: '4px 4px'
                 }} />
                 <CardContent className="p-4">
-                  <h3 className="text-sm font-bold mb-2">Open Packs</h3>
+                  <div className="flex items-center space-x-1 mb-2">
+                    <Gift className="w-4 h-4" />
+                    <span className="text-xs font-medium">Open Packs</span>
+                  </div>
                   <div className="space-y-1 mb-3">
                     <div className="flex items-center justify-between">
                       <span className="text-xs text-yellow-300 font-semibold">GOLD</span>
@@ -570,7 +573,10 @@ const Game = () => {
                   backgroundSize: '4px 4px'
                 }} />
                 <CardContent className="p-6">
-                  <h3 className="text-lg font-bold mb-4">Open Packs</h3>
+                  <div className="flex items-center space-x-2 mb-4">
+                    <Gift className="w-5 h-5" />
+                    <span className="text-sm font-medium">Open Packs</span>
+                  </div>
                   <div className="space-y-2 mb-4">
                     <div className="flex items-center justify-between">
                       <span className="text-sm text-yellow-300 font-semibold">GOLD</span>
