@@ -11,9 +11,8 @@ const Game = () => {
   const [activeTab, setActiveTab] = useState("home");
   const [rightSidebarTab, setRightSidebarTab] = useState("notifications");
   const [userCoins] = useState(12500);
-  const {
-    toast
-  } = useToast();
+  const [visiblePlayers, setVisiblePlayers] = useState(7);
+  const { toast } = useToast();
   const handleTabClick = (tabId: string) => {
     if (tabId === "lobby") {
       toast({
@@ -461,8 +460,8 @@ const Game = () => {
                 </TabsTrigger>
               </TabsList>
               
-              <TabsContent value="notifications" className="mt-6 min-h-[480px] flex items-center justify-center">
-                <div className="text-center">
+              <TabsContent value="notifications" className="mt-6">
+                <div className="text-center py-8">
                   <Bell className="w-12 h-12 mx-auto text-muted-foreground mb-4 opacity-50" />
                   <p className="text-muted-foreground">No notifications yet</p>
                   <p className="text-sm text-muted-foreground mt-2">
@@ -471,9 +470,9 @@ const Game = () => {
                 </div>
               </TabsContent>
               
-              <TabsContent value="rankings" className="mt-6 min-h-[480px]">
-                <div className="space-y-4 h-full overflow-y-auto">
-                  <h3 className="text-lg font-semibold text-center mb-4">Top Players</h3>
+              <TabsContent value="rankings" className="mt-6">
+                <h3 className="text-lg font-semibold text-center mb-4">Top Players</h3>
+                <div className="max-h-[300px] overflow-y-auto space-y-2">
                   {[
                     { rank: 1, name: "CryptoKing", level: 45, points: 15420, avatar: "👑" },
                     { rank: 2, name: "BlockMaster", level: 43, points: 14890, avatar: "⚔️" },
@@ -481,11 +480,8 @@ const Game = () => {
                     { rank: 4, name: "TokenSlayer", level: 38, points: 13780, avatar: "🗡️" },
                     { rank: 5, name: "NFTChampion", level: 37, points: 13240, avatar: "🏆" },
                     { rank: 6, name: "DeFiGamer", level: 35, points: 12890, avatar: "💎" },
-                    { rank: 7, name: "MetaPlayer", level: 34, points: 12450, avatar: "🎮" },
-                    { rank: 8, name: "Web3Hero", level: 32, points: 12120, avatar: "🚀" },
-                    { rank: 9, name: "CoinMaster", level: 30, points: 11780, avatar: "💰" },
-                    { rank: 10, name: "BlockHero", level: 29, points: 11340, avatar: "⭐" }
-                  ].map((player) => (
+                    { rank: 7, name: "MetaPlayer", level: 34, points: 12450, avatar: "🎮" }
+                  ].slice(0, visiblePlayers).map((player) => (
                     <div key={player.rank} className="flex items-center space-x-3 p-3 rounded-lg hover:bg-muted/50 transition-colors">
                       <div className="flex-shrink-0 w-8 text-center">
                         {player.rank <= 3 ? (
