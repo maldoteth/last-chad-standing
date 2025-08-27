@@ -375,7 +375,7 @@ const Game = () => {
                   <p className="text-blue-100 mb-6">
                     Get ready to play the first ever MMA battle royale
                   </p>
-                    <Button variant="secondary" size="lg" className="bg-white text-black hover:bg-blue-50">
+                    <Button variant="secondary" size="lg" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 transition-all duration-300">
                       <Play className="w-4 h-4 mr-2" />
                       How to play
                     </Button>
@@ -429,7 +429,7 @@ const Game = () => {
                       <span className="text-sm">x0</span>
                     </div>
                   </div>
-                  <Button variant="secondary" size="sm" className="bg-gray-100 text-black hover:bg-white w-full relative z-10">
+                  <Button variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 w-full relative z-10 transition-all duration-300">
                     Buy Now
                   </Button>
                 </CardContent>
@@ -453,7 +453,7 @@ const Game = () => {
                       <p className="text-sm text-gray-300">Build your dream team</p>
                     </div>
                   </div>
-                  <Button variant="secondary" size="sm" className="w-full bg-gray-100 text-black hover:bg-white">
+                  <Button variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 w-full transition-all duration-300">
                     Start Building
                   </Button>
                 </CardContent>
@@ -476,7 +476,7 @@ const Game = () => {
                       <p className="text-sm text-gray-300">Buy & sell fighters</p>
                     </div>
                   </div>
-                  <Button variant="secondary" size="sm" className="w-full bg-gray-100 text-black hover:bg-white">
+                  <Button variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 w-full transition-all duration-300">
                     Browse Market
                   </Button>
                 </CardContent>
