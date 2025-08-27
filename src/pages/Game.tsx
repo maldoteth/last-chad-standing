@@ -801,7 +801,6 @@ const Game = () => {
                     <ShoppingBag className="w-8 h-8 text-primary" />
                     <div>
                       <h1 className="text-3xl font-bold">LCS Store</h1>
-                      <p className="text-muted-foreground">Customize your gaming experience</p>
                     </div>
                   </div>
                 </div>
