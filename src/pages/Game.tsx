@@ -4,13 +4,14 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Progress } from "@/components/ui/progress";
-import { Coins, ShoppingBag, Users, Package, CreditCard, Trophy, Star, Target, ChevronRight, Bell, Play } from "lucide-react";
+import { Coins, ShoppingBag, Users, Package, CreditCard, Trophy, Star, Target, ChevronRight, Bell, Play, Home } from "lucide-react";
 
 const Game = () => {
-  const [activeTab, setActiveTab] = useState("lobby");
+  const [activeTab, setActiveTab] = useState("home");
   const [userCoins] = useState(12500);
 
   const tabItems = [
+    { id: "home", label: "Home", icon: Home },
     { id: "lobby", label: "Lobby", icon: Users },
     { id: "store", label: "Store", icon: ShoppingBag },
     { id: "market", label: "Market", icon: CreditCard },
