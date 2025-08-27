@@ -815,75 +815,61 @@ const Game = () => {
                 </div>
               </TabsContent>
               
-              <TabsContent value="rankings" className="overflow-y-auto space-y-2 scrollbar-none max-h-[580px] -mt-2 relative">
+              <TabsContent value="rankings" className="overflow-y-auto space-y-2 scrollbar-none max-h-[580px] -mt-2">
                 <p className="text-sm text-muted-foreground text-center pb-2 pt-6">Weekly prize pool: $0</p>
-                <div className="relative">
-                  {[
-                    { rank: 1, name: "CryptoKing", level: 45, points: 15420, avatar: "👑" },
-                    { rank: 2, name: "BlockMaster", level: 43, points: 14890, avatar: "⚔️" },
-                    { rank: 3, name: "ChainWarrior", level: 41, points: 14320, avatar: "🛡️" },
-                    { rank: 4, name: "TokenSlayer", level: 38, points: 13780, avatar: "🗡️" },
-                    { rank: 5, name: "NFTChampion", level: 37, points: 13240, avatar: "🏆" },
-                    { rank: 6, name: "DeFiGamer", level: 35, points: 12890, avatar: "💎" },
-                    { rank: 7, name: "MetaPlayer", level: 34, points: 12450, avatar: "🎮" },
-                    { rank: 8, name: "Web3Hero", level: 32, points: 12120, avatar: "🚀" },
-                    { rank: 9, name: "CoinMaster", level: 30, points: 11780, avatar: "💰" },
-                    { rank: 10, name: "BlockHero", level: 29, points: 11340, avatar: "⭐" },
-                    { rank: 11, name: "SmartTrader", level: 28, points: 10920, avatar: "🧠" },
-                    { rank: 12, name: "CyberNinja", level: 27, points: 10540, avatar: "🥷" },
-                    { rank: 13, name: "QuantumGamer", level: 26, points: 10180, avatar: "⚡" },
-                    { rank: 14, name: "PixelMaster", level: 25, points: 9840, avatar: "🎨" },
-                    { rank: 15, name: "CodeWarrior", level: 24, points: 9520, avatar: "💻" },
-                    { rank: 16, name: "AlgoTrader", level: 23, points: 9210, avatar: "📈" },
-                    { rank: 17, name: "BitCrusher", level: 22, points: 8920, avatar: "🔨" },
-                    { rank: 18, name: "EtherLord", level: 21, points: 8650, avatar: "⚡" },
-                    { rank: 19, name: "GameChanger", level: 20, points: 8390, avatar: "🎯" },
-                    { rank: 20, name: "TechSavvy", level: 19, points: 8140, avatar: "🔧" },
-                    { rank: 21, name: "DigitalNomad", level: 18, points: 7910, avatar: "🌐" },
-                    { rank: 22, name: "CryptoSage", level: 17, points: 7690, avatar: "🧙‍♂️" },
-                    { rank: 23, name: "BlockBuilder", level: 16, points: 7480, avatar: "🏗️" },
-                    { rank: 24, name: "TokenHunter", level: 15, points: 7280, avatar: "🎣" },
-                    { rank: 25, name: "ChainLink", level: 14, points: 7090, avatar: "🔗" }
-                  ].map((player, index) => (
-                    <div 
-                      key={player.rank} 
-                      className={`flex items-center space-x-3 p-3 rounded-lg hover:bg-muted/50 transition-colors ${
-                        index >= 8 ? `animate-fade-in` : ''
-                      }`}
-                      style={{
-                        filter: index >= 8 ? `blur(${Math.min((index - 7) * 0.5, 4)}px)` : 'none',
-                        opacity: index >= 8 ? Math.max(1 - (index - 7) * 0.08, 0.3) : 1
-                      }}
-                    >
-                      <div className="flex-shrink-0 w-8 text-center">
-                        {player.rank <= 3 ? (
-                          <Medal className={`w-5 h-5 ${
-                            player.rank === 1 ? 'text-yellow-400' : 
-                            player.rank === 2 ? 'text-gray-300' : 
-                            'text-amber-600'
-                          }`} />
-                        ) : (
-                          <span className="text-sm font-medium text-muted-foreground">#{player.rank}</span>
-                        )}
-                      </div>
-                      
-                      <Avatar className="w-8 h-8">
-                        <AvatarFallback className="text-sm">{player.avatar}</AvatarFallback>
-                      </Avatar>
-                      
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center justify-between">
-                          <p className="text-sm font-medium truncate">{player.name}</p>
-                          <Badge variant="outline" className="text-xs">Lv.{player.level}</Badge>
-                        </div>
-                        <p className="text-xs text-muted-foreground">{player.points.toLocaleString()} XP</p>
-                      </div>
+                {[
+                  { rank: 1, name: "CryptoKing", level: 45, points: 15420, avatar: "👑" },
+                  { rank: 2, name: "BlockMaster", level: 43, points: 14890, avatar: "⚔️" },
+                  { rank: 3, name: "ChainWarrior", level: 41, points: 14320, avatar: "🛡️" },
+                  { rank: 4, name: "TokenSlayer", level: 38, points: 13780, avatar: "🗡️" },
+                  { rank: 5, name: "NFTChampion", level: 37, points: 13240, avatar: "🏆" },
+                  { rank: 6, name: "DeFiGamer", level: 35, points: 12890, avatar: "💎" },
+                  { rank: 7, name: "MetaPlayer", level: 34, points: 12450, avatar: "🎮" },
+                  { rank: 8, name: "Web3Hero", level: 32, points: 12120, avatar: "🚀" },
+                  { rank: 9, name: "CoinMaster", level: 30, points: 11780, avatar: "💰" },
+                  { rank: 10, name: "BlockHero", level: 29, points: 11340, avatar: "⭐" },
+                  { rank: 11, name: "SmartTrader", level: 28, points: 10920, avatar: "🧠" },
+                  { rank: 12, name: "CyberNinja", level: 27, points: 10540, avatar: "🥷" },
+                  { rank: 13, name: "QuantumGamer", level: 26, points: 10180, avatar: "⚡" },
+                  { rank: 14, name: "PixelMaster", level: 25, points: 9840, avatar: "🎨" },
+                  { rank: 15, name: "CodeWarrior", level: 24, points: 9520, avatar: "💻" },
+                  { rank: 16, name: "AlgoTrader", level: 23, points: 9210, avatar: "📈" },
+                  { rank: 17, name: "BitCrusher", level: 22, points: 8920, avatar: "🔨" },
+                  { rank: 18, name: "EtherLord", level: 21, points: 8650, avatar: "⚡" },
+                  { rank: 19, name: "GameChanger", level: 20, points: 8390, avatar: "🎯" },
+                  { rank: 20, name: "TechSavvy", level: 19, points: 8140, avatar: "🔧" },
+                  { rank: 21, name: "DigitalNomad", level: 18, points: 7910, avatar: "🌐" },
+                  { rank: 22, name: "CryptoSage", level: 17, points: 7690, avatar: "🧙‍♂️" },
+                  { rank: 23, name: "BlockBuilder", level: 16, points: 7480, avatar: "🏗️" },
+                  { rank: 24, name: "TokenHunter", level: 15, points: 7280, avatar: "🎣" },
+                  { rank: 25, name: "ChainLink", level: 14, points: 7090, avatar: "🔗" }
+                ].map((player) => (
+                  <div key={player.rank} className="flex items-center space-x-3 p-3 rounded-lg hover:bg-muted/50 transition-colors">
+                    <div className="flex-shrink-0 w-8 text-center">
+                      {player.rank <= 3 ? (
+                        <Medal className={`w-5 h-5 ${
+                          player.rank === 1 ? 'text-yellow-400' : 
+                          player.rank === 2 ? 'text-gray-300' : 
+                          'text-amber-600'
+                        }`} />
+                      ) : (
+                        <span className="text-sm font-medium text-muted-foreground">#{player.rank}</span>
+                      )}
                     </div>
-                  ))}
-                  
-                  {/* Gradient blur overlay for bottom fade effect */}
-                  <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-card via-card/80 to-transparent pointer-events-none" />
-                </div>
+                    
+                    <Avatar className="w-8 h-8">
+                      <AvatarFallback className="text-sm">{player.avatar}</AvatarFallback>
+                    </Avatar>
+                    
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center justify-between">
+                        <p className="text-sm font-medium truncate">{player.name}</p>
+                        <Badge variant="outline" className="text-xs">Lv.{player.level}</Badge>
+                      </div>
+                      <p className="text-xs text-muted-foreground">{player.points.toLocaleString()} XP</p>
+                    </div>
+                  </div>
+                ))}
               </TabsContent>
             </Tabs>
           </aside>
