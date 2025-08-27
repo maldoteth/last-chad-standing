@@ -893,7 +893,6 @@ const Game = () => {
                     <Package className="w-8 h-8 text-primary" />
                     <div>
                       <h1 className="text-3xl font-bold">My Locker</h1>
-                      <p className="text-muted-foreground">Your collection of owned items</p>
                     </div>
                   </div>
                 </div>
