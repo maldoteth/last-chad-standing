@@ -884,6 +884,96 @@ const Game = () => {
                 </div>
               </div>
             )}
+
+            {activeTab === "locker" && (
+              <div className="space-y-6 max-w-4xl">
+                {/* Locker Header */}
+                <div className="text-center">
+                  <div className="flex items-center justify-center space-x-3 mb-4">
+                    <Package className="w-8 h-8 text-primary" />
+                    <div>
+                      <h1 className="text-3xl font-bold">My Locker</h1>
+                      <p className="text-muted-foreground">Your collection of owned items</p>
+                    </div>
+                  </div>
+                </div>
+
+                {!authenticated ? (
+                  <Card className="bg-card border border-border">
+                    <CardContent className="p-8 text-center">
+                      <Package className="w-16 h-16 mx-auto text-muted-foreground/50 mb-4" />
+                      <h3 className="text-lg font-semibold mb-2">Login to View Your Locker</h3>
+                      <p className="text-muted-foreground mb-4">Connect your wallet to see your owned items</p>
+                      <Button onClick={login} className="bg-primary hover:bg-primary/90">
+                        Login
+                      </Button>
+                    </CardContent>
+                  </Card>
+                ) : (
+                  <div className="space-y-6">
+                    {/* Skins Category */}
+                    <Card className="bg-gradient-to-br from-blue-600/20 to-purple-700/20 border border-blue-600/30">
+                      <CardHeader>
+                        <CardTitle className="flex items-center justify-between">
+                          <span>Skins</span>
+                          <Badge variant="secondary">0 owned</Badge>
+                        </CardTitle>
+                        <CardDescription>Your character skins</CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="text-center py-12">
+                          <div className="w-16 h-16 bg-muted/50 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <Package className="w-8 h-8 text-muted-foreground/50" />
+                          </div>
+                          <p className="text-muted-foreground">No skins owned yet</p>
+                          <p className="text-sm text-muted-foreground/70 mt-1">Visit the store to purchase character skins</p>
+                        </div>
+                      </CardContent>
+                    </Card>
+
+                    {/* Accessories Category */}
+                    <Card className="bg-gradient-to-br from-green-600/20 to-blue-700/20 border border-green-600/30">
+                      <CardHeader>
+                        <CardTitle className="flex items-center justify-between">
+                          <span>Accessories</span>
+                          <Badge variant="secondary">0 owned</Badge>
+                        </CardTitle>
+                        <CardDescription>Your accessories collection</CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="text-center py-12">
+                          <div className="w-16 h-16 bg-muted/50 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <Package className="w-8 h-8 text-muted-foreground/50" />
+                          </div>
+                          <p className="text-muted-foreground">No accessories owned yet</p>
+                          <p className="text-sm text-muted-foreground/70 mt-1">Visit the store to purchase shoes, backpacks, and hats</p>
+                        </div>
+                      </CardContent>
+                    </Card>
+
+                    {/* Mobility Category */}
+                    <Card className="bg-gradient-to-br from-orange-600/20 to-red-700/20 border border-orange-600/30">
+                      <CardHeader>
+                        <CardTitle className="flex items-center justify-between">
+                          <span>Mobility</span>
+                          <Badge variant="secondary">0 owned</Badge>
+                        </CardTitle>
+                        <CardDescription>Your vehicles collection</CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="text-center py-12">
+                          <div className="w-16 h-16 bg-muted/50 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <Package className="w-8 h-8 text-muted-foreground/50" />
+                          </div>
+                          <p className="text-muted-foreground">No vehicles owned yet</p>
+                          <p className="text-sm text-muted-foreground/70 mt-1">Visit the store to purchase cars, golf buggies, and more</p>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </div>
+                )}
+              </div>
+            )}
           </main>
 
           {/* Right Sidebar - Desktop only */}
