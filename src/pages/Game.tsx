@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Progress } from "@/components/ui/progress";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogDescription } from "@/components/ui/dialog";
 import { Coins, ShoppingBag, Users, Package, CreditCard, Trophy, Star, Target, ChevronRight, Bell, Play, Home, TrendingUp, UserPlus, Medal, LogOut, Settings, Info, Gift } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 const Game = () => {
@@ -217,7 +217,7 @@ const Game = () => {
                               Show Quests
                             </Button>
                           </DialogTrigger>
-                          <DialogContent className="sm:max-w-md bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
+                          <DialogContent className="sm:max-w-md bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden z-[100]">
                             {/* Metallic base layer */}
                             <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
                             
@@ -228,6 +228,7 @@ const Game = () => {
                             <div className="relative z-10">
                               <DialogHeader>
                                 <DialogTitle className="text-white">Available Quests</DialogTitle>
+                                <DialogDescription className="text-gray-300">Complete these quests to earn XP and unlock rewards</DialogDescription>
                               </DialogHeader>
                               <div className="space-y-3">
                                 <div className="flex items-center justify-between p-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg">
@@ -684,6 +685,7 @@ const Game = () => {
                         <div className="relative z-10">
                           <DialogHeader>
                             <DialogTitle className="text-white">Available Quests</DialogTitle>
+                            <DialogDescription className="text-gray-300">Complete these quests to earn XP and unlock rewards</DialogDescription>
                           </DialogHeader>
                           <div className="space-y-3">
                             <div className="flex items-center justify-between p-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg">
