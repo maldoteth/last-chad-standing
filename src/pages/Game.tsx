@@ -758,7 +758,7 @@ const Game = () => {
                         <Users className="w-5 h-5 text-white" />
                       </div>
                       <div>
-                        <h3 className="font-semibold text-white">Build your roster</h3>
+                        <h3 className="font-semibold text-white">Roster</h3>
                         <p className="text-sm text-gray-300">Pick your prizefighters</p>
                       </div>
                     </div>
