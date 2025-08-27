@@ -200,12 +200,15 @@ const Game = () => {
                 {/* Action Cards Grid - 2 columns on mobile */}
                 <div className="px-4 pb-4">
                   <div className="grid grid-cols-2 gap-3">
-                    <Card className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
-                      {/* Metallic base layer */}
-                      <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
-                      
-                      {/* Metallic shine overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-400/10 to-transparent transform -skew-x-12" />
+                    <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
+                      <div className="absolute inset-0" style={{
+                        backgroundImage: `
+                          linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
+                          linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
+                        `,
+                        backgroundSize: '4px 4px'
+                      }} />
                       <CardContent className="p-4 flex flex-col h-full">
                         <div className="flex items-center space-x-1 mb-2">
                           <Trophy className="w-4 h-4 text-white" />
@@ -630,12 +633,15 @@ const Game = () => {
                 </Card>
 
                 {/* Tournament Complete Card */}
-                <Card className="col-span-4 bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
-                  {/* Metallic base layer */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
-                  
-                  {/* Metallic shine overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-400/10 to-transparent transform -skew-x-12" />
+                <Card className="col-span-4 bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
+                  <div className="absolute inset-0" style={{
+                    backgroundImage: `
+                      linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
+                      linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
+                    `,
+                    backgroundSize: '4px 4px'
+                  }} />
                   <CardContent className="p-6">
                     <div className="flex items-center space-x-2 mb-4">
                       <Trophy className="w-5 h-5 text-white" />
