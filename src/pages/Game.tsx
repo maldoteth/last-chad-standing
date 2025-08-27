@@ -156,7 +156,7 @@ const Game = () => {
                 style={{ backgroundImage: 'url(/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png)' }}
               />
               <div className="absolute inset-0 bg-gradient-to-br from-blue-900/60 to-purple-900/60" />
-              <CardContent className="p-8 h-full flex flex-col justify-between relative z-10">
+              <CardContent className="p-8 h-full flex flex-col justify-end relative z-10">
                 <div>
                   <h2 className="text-3xl font-bold mb-2">Welcome to LCS</h2>
                   <p className="text-blue-100 mb-6">
