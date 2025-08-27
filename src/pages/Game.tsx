@@ -156,11 +156,11 @@ const Game = () => {
                   <h3 className="text-sm font-bold mb-2">Open Packs</h3>
                   <div className="space-y-1 mb-3">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs">PRO</span>
+                      <span className="text-xs text-yellow-300 font-semibold">PRO</span>
                       <span className="text-xs">x3</span>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="text-xs">EPIC</span>
+                      <span className="text-xs text-gray-300 font-semibold">EPIC</span>
                       <span className="text-xs">x1</span>
                     </div>
                   </div>
@@ -390,15 +390,15 @@ const Game = () => {
                   <h3 className="text-lg font-bold mb-4">Open Packs</h3>
                   <div className="space-y-2 mb-4">
                     <div className="flex items-center justify-between">
-                      <span className="text-sm">PRO</span>
+                      <span className="text-sm text-yellow-300 font-semibold">PRO</span>
                       <span className="text-sm">x3</span>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="text-sm">EPIC</span>
+                      <span className="text-sm text-gray-300 font-semibold">EPIC</span>
                       <span className="text-sm">x1</span>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="text-sm">LEGENDARY</span>
+                      <span className="text-sm bg-gradient-to-r from-purple-400 via-pink-400 to-yellow-400 bg-clip-text text-transparent font-bold">LEGENDARY</span>
                       <span className="text-sm">x0</span>
                     </div>
                   </div>
