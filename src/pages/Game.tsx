@@ -189,15 +189,21 @@ const Game = () => {
           {/* Quick Actions */}
           <div className="px-4 pb-4">
             <div className="grid grid-cols-1 gap-3">
-              <Card className="bg-card">
-                <CardContent className="p-4">
+              <Card className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
+                {/* Metallic base layer */}
+                <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
+                
+                {/* Metallic shine overlay */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-400/10 to-transparent transform -skew-x-12" />
+                
+                <CardContent className="p-4 relative z-10">
                   <div className="flex flex-col items-center text-center space-y-3 mb-3">
-                    <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
-                      <Users className="w-4 h-4 text-primary-foreground" />
+                    <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
+                      <Users className="w-4 h-4 text-white" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-sm">Squad Builder</h3>
-                      <p className="text-xs text-muted-foreground">Build your dream team</p>
+                      <h3 className="font-semibold text-sm text-white">Squad Builder</h3>
+                      <p className="text-xs text-gray-300">Build your dream team</p>
                     </div>
                   </div>
                   <Button variant="outline" size="sm" className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 transition-all duration-300">
@@ -206,15 +212,21 @@ const Game = () => {
                 </CardContent>
               </Card>
 
-              <Card className="bg-card">
-                <CardContent className="p-4">
+              <Card className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
+                {/* Metallic base layer */}
+                <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
+                
+                {/* Metallic shine overlay */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-400/10 to-transparent transform -skew-x-12" />
+                
+                <CardContent className="p-4 relative z-10">
                   <div className="flex flex-col items-center text-center space-y-3 mb-3">
-                    <div className="w-8 h-8 bg-secondary rounded-full flex items-center justify-center">
-                      <CreditCard className="w-4 h-4 text-secondary-foreground" />
+                    <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
+                      <CreditCard className="w-4 h-4 text-white" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-sm">Transfer Market</h3>
-                      <p className="text-xs text-muted-foreground">Buy & sell fighters</p>
+                      <h3 className="font-semibold text-sm text-white">Transfer Market</h3>
+                      <p className="text-xs text-gray-300">Buy & sell fighters</p>
                     </div>
                   </div>
                   <Button variant="outline" size="sm" className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 transition-all duration-300">
