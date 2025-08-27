@@ -526,7 +526,7 @@ const Game = () => {
                         Show Quests
                       </Button>
                     </DialogTrigger>
-                    <DialogContent className="sm:max-w-md bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
+                    <DialogContent className="sm:max-w-md bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden z-[100]">
                       {/* Metallic base layer */}
                       <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
                       
