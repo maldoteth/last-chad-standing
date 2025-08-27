@@ -200,7 +200,7 @@ const Game = () => {
                 {/* Action Cards Grid - 2 columns on mobile */}
                 <div className="px-4 pb-4">
                   <div className="grid grid-cols-2 gap-3">
-                    <Card className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
+                    <Card className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden h-36">
                       {/* Metallic base layer */}
                       <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
                       
@@ -237,7 +237,7 @@ const Game = () => {
                                 Hide
                               </Button>
                             </div>
-                            <ScrollArea className="flex-1 pr-2">
+                            <ScrollArea className="h-20 pr-2">
                               <div className="space-y-2">
                                 <div className="flex items-center justify-between p-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg">
                                   <span className="text-xs font-medium text-white">Connect X</span>
@@ -663,7 +663,7 @@ const Game = () => {
                 </Card>
 
                 {/* Tournament Complete Card */}
-                <Card className="col-span-4 bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
+                <Card className="col-span-4 bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden h-48">
                   {/* Metallic base layer */}
                   <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
                   
@@ -700,7 +700,7 @@ const Game = () => {
                             Hide
                           </Button>
                         </div>
-                        <ScrollArea className="flex-1 pr-2">
+                        <ScrollArea className="h-32 pr-2">
                           <div className="space-y-3">
                             <div className="flex items-center justify-between p-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg">
                               <span className="text-sm font-medium text-white">Connect X</span>
