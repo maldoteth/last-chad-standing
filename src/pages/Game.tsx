@@ -56,7 +56,7 @@ const Game = () => {
       {/* Mobile/Tablet optimized layout */}
       
       {/* Header with coins and avatar - simplified for mobile */}
-      <header className="bg-card border-b border-border px-4 py-3 lg:px-6 lg:py-4">
+      <header className="bg-card lg:border-b border-border px-4 py-3 lg:px-6 lg:py-4">
         <div className="flex items-center justify-between">
           <img src="/lovable-uploads/91245c4e-58e3-4f3e-9c11-44ed9eba5ac6.png" alt="Last Chad Standing" className="h-8 lg:hidden" />
           
