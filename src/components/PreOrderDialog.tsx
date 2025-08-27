@@ -144,7 +144,7 @@ const PreOrderDialog = ({
           <Button onClick={handlePreOrder} disabled={!selectedTier} className="bg-cyan-400 text-black hover:bg-cyan-300 font-exo font-semibold px-8 py-3 disabled:opacity-50 disabled:cursor-not-allowed">
             {selectedTier ? 'Pre-Order Now' : 'Select a Package'}
           </Button>
-          <p className="text-xs text-slate-400 mt-3">Secure payment processing • 14-day money-back guarantee</p>
+          <p className="text-xs text-slate-400 mt-3">Secure payment processing</p>
           <div className="mt-4 flex justify-center">
             <img 
               src="/lovable-uploads/7d84dfb4-4db3-4adb-87f0-36f33c0f8daa.png" 
