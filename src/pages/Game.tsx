@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -9,6 +10,18 @@ import { Coins, ShoppingBag, Users, Package, CreditCard, Trophy, Star, Target, C
 const Game = () => {
   const [activeTab, setActiveTab] = useState("home");
   const [userCoins] = useState(12500);
+  const { toast } = useToast();
+
+  const handleTabClick = (tabId: string) => {
+    if (tabId === "lobby") {
+      toast({
+        title: "Coming Soon",
+        description: "The lobby feature is currently under development.",
+      });
+    } else {
+      setActiveTab(tabId);
+    }
+  };
 
   const tabItems = [
     { id: "home", label: "Home", icon: Home },
@@ -29,7 +42,7 @@ const Game = () => {
             {tabItems.map((tab) => (
               <button
                 key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
+                onClick={() => handleTabClick(tab.id)}
                 className={`flex items-center space-x-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
                   activeTab === tab.id
                     ? "bg-primary text-primary-foreground"
