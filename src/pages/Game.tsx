@@ -497,6 +497,7 @@ const Game = () => {
               </TabsContent>
               
               <TabsContent value="rankings" className="overflow-y-auto space-y-2 scrollbar-none max-h-[580px] -mt-2">
+                <p className="text-sm text-muted-foreground text-center py-2">Weekly prize pool: $0</p>
                 {[
                   { rank: 1, name: "CryptoKing", level: 45, points: 15420, avatar: "👑" },
                   { rank: 2, name: "BlockMaster", level: 43, points: 14890, avatar: "⚔️" },
