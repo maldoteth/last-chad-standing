@@ -57,7 +57,7 @@ const Game = () => {
           
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-2 bg-muted px-3 py-2 rounded-lg">
-              <Coins className="w-4 h-4 text-yellow-500" />
+              <img src="/lovable-uploads/4ab5b809-ec42-4474-b698-a64f8b2514d1.png" alt="LCS Coin" className="w-4 h-4" />
               <span className="font-semibold">{userCoins.toLocaleString()}</span>
             </div>
             <Avatar className="w-8 h-8">
