@@ -782,7 +782,7 @@ const Game = () => {
                       </div>
                       <div>
                         <h3 className="font-semibold text-white">Transfer Market</h3>
-                        <p className="text-sm text-gray-300">Buy & sell fighters</p>
+                        <p className="text-sm text-gray-300">Buy, sell, list or just browse</p>
                       </div>
                     </div>
                     <Button variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 w-full transition-all duration-300">
