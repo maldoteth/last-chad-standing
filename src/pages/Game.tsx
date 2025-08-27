@@ -29,7 +29,8 @@ const Game = () => {
     if (tabId === "lobby") {
       toast({
         title: "Coming Soon",
-        description: "The lobby feature is currently under development."
+        description: "The lobby feature is currently under development.",
+        duration: 4200
       });
     } else {
       setActiveTab(tabId);
@@ -160,7 +161,8 @@ const Game = () => {
                             className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 transition-all duration-300"
                             onClick={() => toast({
                               title: "Coming Soon",
-                              description: "The game will be available soon!"
+                              description: "The game will be available soon!",
+                              duration: 4200
                             })}
                           >
                             <Play className="w-4 h-4 mr-2" />
@@ -217,7 +219,8 @@ const Game = () => {
                           className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 text-xs h-7 relative z-10 transition-all duration-300"
                           onClick={() => toast({
                             title: "Coming Soon",
-                            description: "Quests are coming soon!"
+                            description: "Quests are coming soon!",
+                            duration: 4200
                           })}
                         >
                           Show Quests
@@ -614,7 +617,8 @@ const Game = () => {
                           className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 transition-all duration-300"
                           onClick={() => toast({
                             title: "Coming Soon",
-                            description: "The game will be available soon!"
+                            description: "The game will be available soon!",
+                            duration: 4200
                           })}
                         >
                           <Play className="w-4 h-4 mr-2" />
@@ -645,7 +649,8 @@ const Game = () => {
                       className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 w-full relative z-10 transition-all duration-300"
                       onClick={() => toast({
                         title: "Coming Soon",
-                        description: "Quests are coming soon!"
+                        description: "Quests are coming soon!",
+                        duration: 4200
                       })}
                     >
                       Show Quests
