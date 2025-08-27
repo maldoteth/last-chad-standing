@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Progress } from "@/components/ui/progress";
-import { Coins, ShoppingBag, Users, Package, CreditCard, Trophy, Star, Target, ChevronRight, Bell, Play, Home } from "lucide-react";
+import { Coins, ShoppingBag, Users, Package, CreditCard, Trophy, Star, Target, ChevronRight, Bell, Play, Home, TrendingUp, UserPlus } from "lucide-react";
 
 const Game = () => {
   const [activeTab, setActiveTab] = useState("home");
@@ -84,10 +84,10 @@ const Game = () => {
                 <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg">
                   <div className="flex items-center space-x-3">
                     <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
-                      <Trophy className="w-4 h-4 text-primary-foreground" />
+                      <Package className="w-4 h-4 text-primary-foreground" />
                     </div>
                     <div>
-                      <p className="text-sm font-medium">Win 3 matches</p>
+                      <p className="text-sm font-medium">Open 3 packs</p>
                       <p className="text-xs text-muted-foreground">0/3</p>
                     </div>
                   </div>
@@ -96,11 +96,47 @@ const Game = () => {
                 <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg">
                   <div className="flex items-center space-x-3">
                     <div className="w-8 h-8 bg-secondary rounded-full flex items-center justify-center">
-                      <Star className="w-4 h-4 text-secondary-foreground" />
+                      <ShoppingBag className="w-4 h-4 text-secondary-foreground" />
                     </div>
                     <div>
-                      <p className="text-sm font-medium">Score 5 goals</p>
-                      <p className="text-xs text-muted-foreground">0/5</p>
+                      <p className="text-sm font-medium">Buy 3 players</p>
+                      <p className="text-xs text-muted-foreground">0/3</p>
+                    </div>
+                  </div>
+                  <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                </div>
+                <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-8 h-8 bg-destructive rounded-full flex items-center justify-center">
+                      <CreditCard className="w-4 h-4 text-destructive-foreground" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium">Sell 3 players</p>
+                      <p className="text-xs text-muted-foreground">0/3</p>
+                    </div>
+                  </div>
+                  <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                </div>
+                <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center">
+                      <TrendingUp className="w-4 h-4 text-white" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium">Trade 3 days in a row</p>
+                      <p className="text-xs text-muted-foreground">0/3</p>
+                    </div>
+                  </div>
+                  <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                </div>
+                <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+                      <UserPlus className="w-4 h-4 text-white" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium">Invite 3 friends</p>
+                      <p className="text-xs text-muted-foreground">0/3</p>
                     </div>
                   </div>
                   <ChevronRight className="w-4 h-4 text-muted-foreground" />
