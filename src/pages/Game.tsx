@@ -10,7 +10,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 const Game = () => {
   const [activeTab, setActiveTab] = useState("home");
   const [rightSidebarTab, setRightSidebarTab] = useState("notifications");
-  const [userCoins] = useState(12500);
+  const [userCoins] = useState(0);
   const [visiblePlayers, setVisiblePlayers] = useState(10);
   const { toast } = useToast();
   const handleTabClick = (tabId: string) => {
