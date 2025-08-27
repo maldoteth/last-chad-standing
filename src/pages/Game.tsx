@@ -19,7 +19,13 @@ const Game = () => {
   const { toast } = useToast();
   const { login, logout, authenticated, user } = usePrivy();
   const navigate = useNavigate();
+
+  // Debug logging for activeTab changes
+  console.log('Current activeTab:', activeTab);
   const handleTabClick = (tabId: string) => {
+    console.log('Tab clicked:', tabId);
+    console.log('Current activeTab before:', activeTab);
+    
     if (tabId === "lobby") {
       toast({
         title: "Coming Soon",
@@ -27,6 +33,7 @@ const Game = () => {
       });
     } else {
       setActiveTab(tabId);
+      console.log('Setting activeTab to:', tabId);
     }
   };
   const tabItems = [{
