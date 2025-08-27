@@ -461,18 +461,18 @@ const Game = () => {
                 </TabsTrigger>
               </TabsList>
               
-              <TabsContent value="notifications" className="mt-6">
-                <div className="text-center py-12">
+              <TabsContent value="notifications" className="mt-6 min-h-[480px] flex items-center justify-center">
+                <div className="text-center">
                   <Bell className="w-12 h-12 mx-auto text-muted-foreground mb-4 opacity-50" />
-                  <p className="text-muted-foreground">Buy & sell fighters</p>
+                  <p className="text-muted-foreground">No notifications yet</p>
                   <p className="text-sm text-muted-foreground mt-2">
                     You'll see game updates and important announcements here
                   </p>
                 </div>
               </TabsContent>
               
-              <TabsContent value="rankings" className="mt-6">
-                <div className="space-y-4">
+              <TabsContent value="rankings" className="mt-6 min-h-[480px]">
+                <div className="space-y-4 h-full overflow-y-auto">
                   <h3 className="text-lg font-semibold text-center mb-4">Top Players</h3>
                   {[
                     { rank: 1, name: "CryptoKing", level: 45, points: 15420, avatar: "👑" },
