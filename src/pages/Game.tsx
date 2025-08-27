@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { usePrivy } from '@privy-io/react-auth';
+import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -16,6 +17,7 @@ const Game = () => {
   const [visiblePlayers, setVisiblePlayers] = useState(10);
   const { toast } = useToast();
   const { login, logout, authenticated, user } = usePrivy();
+  const navigate = useNavigate();
   const handleTabClick = (tabId: string) => {
     if (tabId === "lobby") {
       toast({
@@ -130,10 +132,15 @@ const Game = () => {
                   <p className="text-blue-100 mb-4 text-sm">
                     Start your journey in the ultimate crypto gaming experience
                   </p>
-                  <Button variant="secondary" size="default" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 transition-all duration-300">
-                    <Play className="w-4 h-4 mr-2" />
-                    How to play
-                  </Button>
+                   <Button 
+                     variant="secondary" 
+                     size="default" 
+                     className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 transition-all duration-300"
+                     onClick={() => navigate('/docs')}
+                   >
+                     <Play className="w-4 h-4 mr-2" />
+                     How to play
+                   </Button>
                 </div>
               </CardContent>
             </Card>
@@ -414,10 +421,15 @@ const Game = () => {
                   <p className="text-blue-100 mb-6">
                     Get ready to play the first ever MMA battle royale
                   </p>
-                    <Button variant="secondary" size="lg" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 transition-all duration-300">
-                      <Play className="w-4 h-4 mr-2" />
-                      How to play
-                    </Button>
+                     <Button 
+                       variant="secondary" 
+                       size="lg" 
+                       className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 transition-all duration-300"
+                       onClick={() => navigate('/docs')}
+                     >
+                       <Play className="w-4 h-4 mr-2" />
+                       How to play
+                     </Button>
                   </div>
                 </CardContent>
               </Card>
