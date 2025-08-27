@@ -177,7 +177,7 @@ const Game = () => {
             <div className="grid grid-cols-1 gap-3">
               <Card className="bg-card">
                 <CardContent className="p-4">
-                  <div className="flex items-center space-x-3 mb-3">
+                  <div className="flex flex-col items-center text-center space-y-3 mb-3">
                     <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
                       <Users className="w-4 h-4 text-primary-foreground" />
                     </div>
@@ -194,7 +194,7 @@ const Game = () => {
 
               <Card className="bg-card">
                 <CardContent className="p-4">
-                  <div className="flex items-center space-x-3 mb-3">
+                  <div className="flex flex-col items-center text-center space-y-3 mb-3">
                     <div className="w-8 h-8 bg-secondary rounded-full flex items-center justify-center">
                       <CreditCard className="w-4 h-4 text-secondary-foreground" />
                     </div>
@@ -411,7 +411,7 @@ const Game = () => {
               {/* Additional Cards */}
               <Card className="col-span-6 bg-card">
                 <CardContent className="p-6">
-                  <div className="flex items-center space-x-3 mb-4">
+                  <div className="flex flex-col items-center text-center space-y-3 mb-4">
                     <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
                       <Users className="w-5 h-5 text-primary-foreground" />
                     </div>
@@ -420,7 +420,7 @@ const Game = () => {
                       <p className="text-sm text-muted-foreground">Build your dream team</p>
                     </div>
                   </div>
-                  <Button variant="outline" size="sm">
+                  <Button variant="outline" size="sm" className="w-full">
                     Start Building
                   </Button>
                 </CardContent>
@@ -428,7 +428,7 @@ const Game = () => {
 
               <Card className="col-span-6 bg-card">
                 <CardContent className="p-6">
-                  <div className="flex items-center space-x-3 mb-4">
+                  <div className="flex flex-col items-center text-center space-y-3 mb-4">
                     <div className="w-10 h-10 bg-secondary rounded-full flex items-center justify-center">
                       <CreditCard className="w-5 h-5 text-secondary-foreground" />
                     </div>
@@ -437,7 +437,7 @@ const Game = () => {
                       <p className="text-sm text-muted-foreground">Buy & sell fighters</p>
                     </div>
                   </div>
-                  <Button variant="outline" size="sm">
+                  <Button variant="outline" size="sm" className="w-full">
                     Browse Market
                   </Button>
                 </CardContent>
