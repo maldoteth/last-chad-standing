@@ -546,7 +546,7 @@ const Game = () => {
                         <p className="text-sm font-medium truncate">{player.name}</p>
                         <Badge variant="outline" className="text-xs">Lv.{player.level}</Badge>
                       </div>
-                      <p className="text-xs text-muted-foreground">{player.points.toLocaleString()} pts</p>
+                      <p className="text-xs text-muted-foreground">{player.points.toLocaleString()} XP</p>
                     </div>
                   </div>
                 ))}
