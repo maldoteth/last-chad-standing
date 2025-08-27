@@ -75,6 +75,26 @@ const Game = () => {
           <Card>
             <CardHeader>
               <CardTitle className="text-base flex items-center space-x-2">
+                <Trophy className="w-4 h-4" />
+                <span>Progress</span>
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-center py-4">
+                <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-3">
+                  <span className="text-2xl font-bold text-primary-foreground">0</span>
+                </div>
+                <h3 className="font-semibold text-lg">Level 0: Recruit</h3>
+                <p className="text-sm text-muted-foreground mt-1">Complete objectives to level up</p>
+                <Progress value={0} className="mt-4" />
+                <p className="text-xs text-muted-foreground mt-2">0/100 XP</p>
+              </div>
+            </CardContent>
+          </Card>
+          
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-base flex items-center space-x-2">
                 <Target className="w-4 h-4" />
                 <span>Objectives</span>
               </CardTitle>
