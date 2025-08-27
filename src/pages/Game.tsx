@@ -296,7 +296,7 @@ const Game = () => {
                       <Users className="w-4 h-4 text-white" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-sm text-white">Squad Builder</h3>
+                      <h3 className="font-semibold text-sm text-white">Build your roster</h3>
                       <p className="text-xs text-gray-300">Build your dream team</p>
                     </div>
                   </div>
@@ -613,7 +613,7 @@ const Game = () => {
                       <Users className="w-5 h-5 text-white" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-white">Squad Builder</h3>
+                      <h3 className="font-semibold text-white">Build your roster</h3>
                       <p className="text-sm text-gray-300">Build your dream team</p>
                     </div>
                   </div>
