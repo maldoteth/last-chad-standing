@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Progress } from "@/components/ui/progress";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { ScrollArea } from "@/components/ui/scroll-area";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogDescription } from "@/components/ui/dialog";
 import { Coins, ShoppingBag, Users, Package, CreditCard, Trophy, Star, Target, ChevronRight, Bell, Play, Home, TrendingUp, UserPlus, Medal, LogOut, Settings, Info, Gift } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 const Game = () => {
@@ -16,8 +16,6 @@ const Game = () => {
   const [rightSidebarTab, setRightSidebarTab] = useState("rankings");
   const [userCoins] = useState(0);
   const [visiblePlayers, setVisiblePlayers] = useState(10);
-  const [showMobileQuests, setShowMobileQuests] = useState(false);
-  const [showDesktopQuests, setShowDesktopQuests] = useState(false);
   const { toast } = useToast();
   const { login, logout, authenticated, user } = usePrivy();
   const navigate = useNavigate();
@@ -200,7 +198,7 @@ const Game = () => {
                 {/* Action Cards Grid - 2 columns on mobile */}
                 <div className="px-4 pb-4">
                   <div className="grid grid-cols-2 gap-3">
-                    <Card className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden h-36">
+                    <Card className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
                       {/* Metallic base layer */}
                       <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
                       
@@ -211,54 +209,48 @@ const Game = () => {
                           <Trophy className="w-4 h-4 text-white" />
                           <span className="text-xs font-medium text-white">Quests!</span>
                         </div>
-                        {!showMobileQuests ? (
-                          <>
-                            <h3 className="text-sm font-bold mb-1">Smash that XP</h3>
-                            <p className="text-gray-300 text-xs mb-3 flex-1">by completing all quests</p>
-                            <Button 
-                              variant="secondary" 
-                              size="sm" 
-                              className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 text-xs h-7 relative z-10 transition-all duration-300"
-                              onClick={() => setShowMobileQuests(true)}
-                            >
+                        <h3 className="text-sm font-bold mb-1">Smash that XP</h3>
+                        <p className="text-gray-300 text-xs mb-3 flex-1">by completing all quests</p>
+                        <Dialog>
+                          <DialogTrigger asChild>
+                            <Button variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 text-xs h-7 relative z-10 transition-all duration-300">
                               Show Quests
                             </Button>
-                          </>
-                        ) : (
-                          <>
-                            <div className="flex items-center justify-between mb-2">
-                              <span className="text-xs text-gray-300">Complete these quests to earn XP</span>
-                              <Button 
-                                variant="ghost" 
-                                size="sm" 
-                                className="text-white hover:bg-white/10 text-xs h-6 px-2"
-                                onClick={() => setShowMobileQuests(false)}
-                              >
-                                Hide
-                              </Button>
-                            </div>
-                            <ScrollArea className="h-20 pr-2">
-                              <div className="space-y-2">
-                                <div className="flex items-center justify-between p-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg">
-                                  <span className="text-xs font-medium text-white">Connect X</span>
+                          </DialogTrigger>
+                          <DialogContent className="sm:max-w-md bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden z-[100]">
+                            {/* Metallic base layer */}
+                            <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
+                            
+                            {/* Metallic shine overlay */}
+                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-400/10 to-transparent transform -skew-x-12" />
+                            
+                            {/* Content wrapper */}
+                            <div className="relative z-10">
+                              <DialogHeader>
+                                <DialogTitle className="text-white">Available Quests</DialogTitle>
+                                <DialogDescription className="text-gray-300">Complete these quests to earn XP and unlock rewards</DialogDescription>
+                              </DialogHeader>
+                              <div className="space-y-3">
+                                <div className="flex items-center justify-between p-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg">
+                                  <span className="text-sm font-medium text-white">Connect X</span>
                                   <Badge variant="outline" className="text-xs border-white/30 text-white">+50 XP</Badge>
                                 </div>
-                                <div className="flex items-center justify-between p-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg">
-                                  <span className="text-xs font-medium text-white">Connect Insta</span>
+                                <div className="flex items-center justify-between p-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg">
+                                  <span className="text-sm font-medium text-white">Connect Insta</span>
                                   <Badge variant="outline" className="text-xs border-white/30 text-white">+50 XP</Badge>
                                 </div>
-                                <div className="flex items-center justify-between p-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg">
-                                  <span className="text-xs font-medium text-white">Follow X page</span>
+                                <div className="flex items-center justify-between p-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg">
+                                  <span className="text-sm font-medium text-white">Follow X page</span>
                                   <Badge variant="outline" className="text-xs border-white/30 text-white">+25 XP</Badge>
                                 </div>
-                                <div className="flex items-center justify-between p-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg">
-                                  <span className="text-xs font-medium text-white">Follow Insta page</span>
+                                <div className="flex items-center justify-between p-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg">
+                                  <span className="text-sm font-medium text-white">Follow Insta page</span>
                                   <Badge variant="outline" className="text-xs border-white/30 text-white">+25 XP</Badge>
                                 </div>
                               </div>
-                            </ScrollArea>
-                          </>
-                        )}
+                            </div>
+                          </DialogContent>
+                        </Dialog>
                       </CardContent>
                     </Card>
 
@@ -663,44 +655,38 @@ const Game = () => {
                 </Card>
 
                 {/* Tournament Complete Card */}
-                <Card className="col-span-4 bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden h-48">
+                <Card className="col-span-4 bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
                   {/* Metallic base layer */}
                   <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
                   
                   {/* Metallic shine overlay */}
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-400/10 to-transparent transform -skew-x-12" />
-                  <CardContent className="p-6 flex flex-col h-full">
+                  <CardContent className="p-6">
                     <div className="flex items-center space-x-2 mb-4">
                       <Trophy className="w-5 h-5 text-white" />
                       <span className="text-sm font-medium text-white">Quests!</span>
                     </div>
-                    {!showDesktopQuests ? (
-                      <>
-                        <h3 className="text-lg font-bold mb-2">Smash that XP</h3>
-                        <p className="text-gray-300 text-sm mb-4 flex-1">by completing all quests</p>
-                        <Button 
-                          variant="secondary" 
-                          size="sm" 
-                          className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 w-full relative z-10 transition-all duration-300"
-                          onClick={() => setShowDesktopQuests(true)}
-                        >
+                    <h3 className="text-lg font-bold mb-2">Smash that XP</h3>
+                    <p className="text-gray-300 text-sm mb-4">by completing all quests</p>
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <Button variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 w-full relative z-10 transition-all duration-300">
                           Show Quests
                         </Button>
-                      </>
-                    ) : (
-                      <>
-                        <div className="flex items-center justify-between mb-4">
-                          <span className="text-sm text-gray-300">Complete these quests to earn XP</span>
-                          <Button 
-                            variant="ghost" 
-                            size="sm" 
-                            className="text-white hover:bg-white/10 text-sm h-8 px-3"
-                            onClick={() => setShowDesktopQuests(false)}
-                          >
-                            Hide
-                          </Button>
-                        </div>
-                        <ScrollArea className="h-32 pr-2">
+                      </DialogTrigger>
+                      <DialogContent className="sm:max-w-md bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden z-[100]">
+                        {/* Metallic base layer */}
+                        <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
+                        
+                        {/* Metallic shine overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-400/10 to-transparent transform -skew-x-12" />
+                        
+                        {/* Content wrapper */}
+                        <div className="relative z-10">
+                          <DialogHeader>
+                            <DialogTitle className="text-white">Available Quests</DialogTitle>
+                            <DialogDescription className="text-gray-300">Complete these quests to earn XP and unlock rewards</DialogDescription>
+                          </DialogHeader>
                           <div className="space-y-3">
                             <div className="flex items-center justify-between p-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg">
                               <span className="text-sm font-medium text-white">Connect X</span>
@@ -719,9 +705,9 @@ const Game = () => {
                               <Badge variant="outline" className="text-xs border-white/30 text-white">+25 XP</Badge>
                             </div>
                           </div>
-                        </ScrollArea>
-                      </>
-                    )}
+                        </div>
+                      </DialogContent>
+                    </Dialog>
                   </CardContent>
                 </Card>
 
