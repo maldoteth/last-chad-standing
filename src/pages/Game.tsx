@@ -181,12 +181,12 @@ const Game = () => {
                 <CardContent className="p-4">
                   <div className="flex items-center space-x-1 mb-2">
                     <Trophy className="w-4 h-4" />
-                    <span className="text-xs font-medium">Tournament!</span>
+                    <span className="text-xs font-medium">Quests!</span>
                   </div>
-                  <h3 className="text-sm font-bold mb-1">Weekend League</h3>
-                  <p className="text-gray-300 text-xs mb-3">Dec 16 - Dec 18</p>
+                  <h3 className="text-sm font-bold mb-1">Smash that XP</h3>
+                  <p className="text-gray-300 text-xs mb-3">by completing all quests</p>
                   <Button variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 text-xs h-7 relative z-10 transition-all duration-300">
-                    View winners
+                    Show Quests
                   </Button>
                 </CardContent>
               </Card>
@@ -444,12 +444,12 @@ const Game = () => {
                 <CardContent className="p-6">
                   <div className="flex items-center space-x-2 mb-4">
                     <Trophy className="w-5 h-5" />
-                    <span className="text-sm font-medium">Tournament Complete!</span>
+                    <span className="text-sm font-medium">Quests!</span>
                   </div>
-                  <h3 className="text-lg font-bold mb-2">Weekend League</h3>
-                  <p className="text-gray-300 text-sm mb-4">Dec 16 - Dec 18</p>
+                  <h3 className="text-lg font-bold mb-2">Smash that XP</h3>
+                  <p className="text-gray-300 text-sm mb-4">by completing all quests</p>
                   <Button variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 w-full relative z-10 transition-all duration-300">
-                    Reveal winners
+                    Show Quests
                   </Button>
                 </CardContent>
               </Card>
