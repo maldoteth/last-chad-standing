@@ -118,13 +118,13 @@ const Game = () => {
     label: "Store",
     icon: ShoppingBag
   }, {
-    id: "lobby",
-    label: "Lobby",
-    icon: Users
-  }, {
     id: "market",
     label: "Market",
     icon: CreditCard
+  }, {
+    id: "lobby",
+    label: "Lobby",
+    icon: Users
   }, {
     id: "locker",
     label: "Locker",
