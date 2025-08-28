@@ -803,7 +803,7 @@ const Game = () => {
                                       Buy
                                     </Button>
                                   </DrawerTrigger>
-                                  <DrawerContent className="bg-black/90 backdrop-blur-md border-t border-white/20 text-white">
+                                  <DrawerContent className="bg-white/10 backdrop-blur-md border-t border-white/20 text-white transition-all duration-300">
                                     <DrawerHeader>
                                       <DrawerTitle className="text-white text-center">Purchase {item.name}</DrawerTitle>
                                     </DrawerHeader>
@@ -901,7 +901,7 @@ const Game = () => {
                                       Buy
                                     </Button>
                                   </DrawerTrigger>
-                                  <DrawerContent className="bg-black/90 backdrop-blur-md border-t border-white/20 text-white">
+                                  <DrawerContent className="bg-white/10 backdrop-blur-md border-t border-white/20 text-white transition-all duration-300">
                                     <DrawerHeader>
                                       <DrawerTitle className="text-white text-center">Purchase {item.name}</DrawerTitle>
                                     </DrawerHeader>
@@ -999,7 +999,7 @@ const Game = () => {
                                       Buy
                                     </Button>
                                   </DrawerTrigger>
-                                  <DrawerContent className="bg-black/90 backdrop-blur-md border-t border-white/20 text-white">
+                                  <DrawerContent className="bg-white/10 backdrop-blur-md border-t border-white/20 text-white transition-all duration-300">
                                     <DrawerHeader>
                                       <DrawerTitle className="text-white text-center">Purchase {item.name}</DrawerTitle>
                                     </DrawerHeader>
@@ -1097,7 +1097,7 @@ const Game = () => {
                                       Buy
                                     </Button>
                                   </DrawerTrigger>
-                                  <DrawerContent className="bg-black/90 backdrop-blur-md border-t border-white/20 text-white">
+                                  <DrawerContent className="bg-white/10 backdrop-blur-md border-t border-white/20 text-white transition-all duration-300">
                                     <DrawerHeader>
                                       <DrawerTitle className="text-white text-center">Purchase {item.name}</DrawerTitle>
                                     </DrawerHeader>
