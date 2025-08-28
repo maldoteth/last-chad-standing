@@ -692,7 +692,7 @@ const Game = () => {
                           <Filter className="w-4 h-4" />
                         </Button>
                       </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end" className="w-48 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
+                      <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
                         <DropdownMenuItem 
                           onClick={() => setSelectedRarity("all")} 
                           className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "all" ? "bg-white/20" : ""}`}
@@ -1778,7 +1778,7 @@ const Game = () => {
                           <Filter className="w-4 h-4" />
                         </Button>
                       </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end" className="w-48 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
+                      <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
                         <DropdownMenuItem 
                           onClick={() => setSelectedRarity("all")} 
                           className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "all" ? "bg-white/20" : ""}`}
@@ -1885,7 +1885,7 @@ const Game = () => {
                                       Buy
                                     </Button>
                                   </DropdownMenuTrigger>
-                                  <DropdownMenuContent align="end" className="w-48 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
+                                  <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
                                     <DropdownMenuItem 
                                       onClick={() => handlePurchase(item.id, item.name, item.price)}
                                       className="flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10"
@@ -1970,7 +1970,7 @@ const Game = () => {
                                       Buy
                                     </Button>
                                   </DropdownMenuTrigger>
-                                  <DropdownMenuContent align="end" className="w-48 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
+                                  <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
                                     <DropdownMenuItem 
                                       onClick={() => handlePurchase(item.id, item.name, item.price)}
                                       className="flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10"
@@ -2055,7 +2055,7 @@ const Game = () => {
                                       Buy
                                     </Button>
                                   </DropdownMenuTrigger>
-                                  <DropdownMenuContent align="end" className="w-48 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
+                                  <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
                                     <DropdownMenuItem 
                                       onClick={() => handlePurchase(item.id, item.name, item.price)}
                                       className="flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10"
@@ -2140,7 +2140,7 @@ const Game = () => {
                                       Buy
                                     </Button>
                                   </DropdownMenuTrigger>
-                                  <DropdownMenuContent align="end" className="w-48 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
+                                  <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
                                     <DropdownMenuItem 
                                       onClick={() => handlePurchase(item.id, item.name, item.price)}
                                       className="flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10"
@@ -2469,7 +2469,7 @@ const Game = () => {
                                       Buy Now
                                     </Button>
                                   </DropdownMenuTrigger>
-                                  <DropdownMenuContent align="end" className="w-48 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
+                                  <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
                                     <DropdownMenuItem 
                                       onClick={() => toast({
                                         title: "Purchase Initiated",
