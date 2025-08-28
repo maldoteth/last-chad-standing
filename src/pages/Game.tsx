@@ -367,7 +367,7 @@ const Game = () => {
       {/* Mobile/Tablet optimized layout */}
       
       {/* Header with coins and avatar - simplified for mobile */}
-      <header className="bg-card lg:border-b border-border px-4 py-3 lg:px-6 lg:py-4">
+      <header className="bg-black lg:border-b border-border px-4 py-3 lg:px-6 lg:py-4">
         <div className="flex items-center justify-between">
           <img src="/lovable-uploads/ef3aca91-a372-4313-aa94-3c2dcf946dd6.png" alt="LCS Logo" className="h-8 lg:h-10" />
           
@@ -452,7 +452,7 @@ const Game = () => {
 
                 {/* Progress Card */}
                 <div className="px-4 pb-4">
-                  <Card>
+                  <Card className="bg-black border-gray-700">
                     <CardHeader className="pb-3">
                       <CardTitle className="text-base flex items-center space-x-2">
                         <Star className="w-4 h-4" />
@@ -591,7 +591,7 @@ const Game = () => {
 
                 {/* Objectives - Collapsible on mobile */}
                 <div className="px-4 pb-4">
-                  <Card>
+                  <Card className="bg-black border-gray-700">
                     <CardHeader className="pb-3">
                       <CardTitle className="text-base flex items-center space-x-2">
                         <Target className="w-4 h-4" />
@@ -1207,8 +1207,8 @@ const Game = () => {
         {/* Desktop Layout - Hidden on mobile */}
         <div className="hidden lg:flex lg:min-h-screen w-full">
           {/* Left Sidebar - Desktop only */}
-          <aside className="w-80 bg-card border-r border-border p-6 space-y-6 overflow-y-auto h-screen">
-            <Card>
+          <aside className="w-80 bg-black border-r border-border p-6 space-y-6 overflow-y-auto h-screen">
+            <Card className="bg-black border-gray-700">
               <CardHeader>
                 <CardTitle className="text-base flex items-center space-x-2">
                   <Star className="w-4 h-4" />
@@ -1228,7 +1228,7 @@ const Game = () => {
               </CardContent>
             </Card>
 
-            <Card>
+            <Card className="bg-black border-gray-700">
               <CardHeader>
                 <CardTitle className="text-base flex items-center space-x-2">
                   <Target className="w-4 h-4" />
@@ -2023,7 +2023,7 @@ const Game = () => {
                   </div>
                 </div>
 
-                {!authenticated ? <Card className="bg-card border border-border">
+                {!authenticated ? <Card className="bg-black border-gray-700">
                     <CardContent className="p-8 text-center">
                       <Package className="w-16 h-16 mx-auto text-muted-foreground/50 mb-4" />
                       <h3 className="text-lg font-semibold mb-2">Login to View Your Locker</h3>
@@ -2097,7 +2097,7 @@ const Game = () => {
           </main>
 
           {/* Right Sidebar - Desktop only */}
-          <aside className="w-80 bg-card border-l border-border p-6 flex flex-col h-screen overflow-y-auto">
+          <aside className="w-80 bg-black border-l border-border p-6 flex flex-col h-screen overflow-y-auto">
             <Tabs value={rightSidebarTab} onValueChange={setRightSidebarTab} className="w-full flex flex-col h-full">
               <TabsList className="grid w-full grid-cols-2 flex-shrink-0">
                 <TabsTrigger value="notifications" className="flex items-center gap-2">
@@ -2295,7 +2295,7 @@ const Game = () => {
       </div>
 
       {/* Mobile Bottom Navigation */}
-      <nav className="lg:hidden fixed bottom-0 left-0 right-0 bg-card border-t border-border px-4 py-2 z-50">
+      <nav className="lg:hidden fixed bottom-0 left-0 right-0 bg-black border-t border-border px-4 py-2 z-50">
         <div className="flex items-center justify-around">
           {tabItems.slice(0, 5).map(tab => <button key={tab.id} onClick={() => handleTabClick(tab.id)} className={`flex flex-col items-center space-y-1 px-2 py-1 rounded-lg transition-colors ${activeTab === tab.id ? "text-primary" : "text-muted-foreground"}`}>
               <tab.icon className="w-5 h-5" />
