@@ -1086,7 +1086,7 @@ const Game = () => {
           </aside>
 
           {/* Center Content - Desktop Layout */}
-          <main className="flex-1 p-6 overflow-y-auto">
+          <main className="flex-1 p-6 overflow-y-auto h-screen">
             {activeTab === "home" && (
               <div className="grid grid-cols-12 gap-6 h-full min-h-0">
                 {/* Large Welcome Card */}
