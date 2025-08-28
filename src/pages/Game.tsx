@@ -1879,9 +1879,33 @@ const Game = () => {
                                   <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4" />
                                   <span className="text-sm font-bold text-white">{item.price.toLocaleString()}</span>
                                 </div>
-                                <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-7 px-3">
-                                  Buy
-                                </Button>
+                                <DropdownMenu>
+                                  <DropdownMenuTrigger asChild>
+                                    <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-7 px-3">
+                                      Buy
+                                    </Button>
+                                  </DropdownMenuTrigger>
+                                  <DropdownMenuContent align="end" className="w-48 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
+                                    <DropdownMenuItem 
+                                      onClick={() => handlePurchase(item.id, item.name, item.price)}
+                                      className="flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10"
+                                    >
+                                      <Coins className="w-4 h-4" />
+                                      <span>Buy with Coin Balance</span>
+                                    </DropdownMenuItem>
+                                    <DropdownMenuItem 
+                                      onClick={() => toast({
+                                        title: "Card Payment",
+                                        description: "Card payment option coming soon!",
+                                        duration: 3000
+                                      })}
+                                      className="flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10"
+                                    >
+                                      <CreditCard className="w-4 h-4" />
+                                      <span>Buy with Card</span>
+                                    </DropdownMenuItem>
+                                  </DropdownMenuContent>
+                                </DropdownMenu>
                               </div>
                             </CardContent>
                           </Card>)}
