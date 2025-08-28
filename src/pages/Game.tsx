@@ -100,8 +100,8 @@ const Game = () => {
     
     if (tabId === "lobby") {
       toast({
-        title: "Coming Soon",
-        description: "The lobby feature is currently under development.",
+        title: "Game releasing soon!",
+        description: "",
         duration: 4200
       });
     } else {
