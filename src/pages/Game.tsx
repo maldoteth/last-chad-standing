@@ -3,15 +3,17 @@ import { useToast } from "@/hooks/use-toast";
 import { usePrivy } from '@privy-io/react-auth';
 import { useNavigate } from "react-router-dom";
 import { useStore } from "@/hooks/useStore";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Progress } from "@/components/ui/progress";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerTrigger, DrawerClose } from "@/components/ui/drawer";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogDescription } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Coins, ShoppingBag, Users, Package, CreditCard, Trophy, Star, Target, ChevronRight, Bell, Play, Home, TrendingUp, UserPlus, Medal, LogOut, Settings, Info, Gift, BarChart3, LineChart, ArrowUpRight, ArrowDownRight, Search, Filter, Gamepad, Instagram, Layers, BookOpen, Youtube } from "lucide-react";
+import { Coins, ShoppingBag, Users, Package, CreditCard, Trophy, Star, Target, ChevronRight, Bell, Play, Home, TrendingUp, UserPlus, Medal, LogOut, Settings, Info, Gift, BarChart3, LineChart, ArrowUpRight, ArrowDownRight, Search, Filter, Gamepad, Instagram, Layers, BookOpen, Youtube, X } from "lucide-react";
 import { ResponsiveContainer, LineChart as RechartsLineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, PieChart, Pie, Cell, BarChart, Bar, Area, AreaChart } from 'recharts';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 const Game = () => {
@@ -22,6 +24,7 @@ const Game = () => {
   const [userCoins] = useState(0);
   const [visiblePlayers, setVisiblePlayers] = useState(10);
   const [selectedRarity, setSelectedRarity] = useState("all");
+  const isMobile = useIsMobile();
   const {
     toast
   } = useToast();
@@ -793,33 +796,46 @@ const Game = () => {
                                   <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
                                   <span className="text-xs font-bold text-white">{item.price.toLocaleString()}</span>
                                 </div>
-                                <DropdownMenu>
-                                  <DropdownMenuTrigger asChild>
+                                <Drawer>
+                                  <DrawerTrigger asChild>
                                     <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
                                       <ShoppingBag className="mr-1 h-2 w-2" />
-                                      {authenticated ? 'Buy' : 'Login'}
-                                      {authenticated && <ChevronRight className="ml-1 h-2 w-2" />}
+                                      Buy
                                     </Button>
-                                  </DropdownMenuTrigger>
-                                  {authenticated && (
-                                    <DropdownMenuContent className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
-                                      <DropdownMenuItem 
-                                        className="hover:bg-white/10 cursor-pointer"
-                                        onClick={() => handlePurchase(`skin-${idx}`, item.name, item.price)}
+                                  </DrawerTrigger>
+                                  <DrawerContent className="bg-black/90 backdrop-blur-md border-t border-white/20 text-white">
+                                    <DrawerHeader>
+                                      <DrawerTitle className="text-white text-center">Purchase {item.name}</DrawerTitle>
+                                    </DrawerHeader>
+                                    <div className="p-4 space-y-3">
+                                      <Button 
+                                        className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20"
+                                        onClick={() => {
+                                          if (authenticated) {
+                                            handlePurchase(`skin-${idx}`, item.name, item.price);
+                                          } else {
+                                            login();
+                                          }
+                                        }}
                                       >
-                                        <Coins className="mr-2 h-3 w-3" />
+                                        <Coins className="mr-2 h-4 w-4" />
                                         Buy With Coins
-                                      </DropdownMenuItem>
-                                      <DropdownMenuItem 
-                                        className="hover:bg-white/10 cursor-pointer"
+                                      </Button>
+                                      <Button 
+                                        className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20"
                                         onClick={() => {/* TODO: Implement card payment */}}
                                       >
-                                        <CreditCard className="mr-2 h-3 w-3" />
+                                        <CreditCard className="mr-2 h-4 w-4" />
                                         Buy with Card
-                                      </DropdownMenuItem>
-                                    </DropdownMenuContent>
-                                  )}
-                                </DropdownMenu>
+                                      </Button>
+                                      <DrawerClose asChild>
+                                        <Button variant="outline" className="w-full border-white/20 text-white hover:bg-white/10">
+                                          Cancel
+                                        </Button>
+                                      </DrawerClose>
+                                    </div>
+                                  </DrawerContent>
+                                </Drawer>
                               </div>
                             </CardContent>
                           </Card>)}
@@ -878,33 +894,46 @@ const Game = () => {
                                   <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
                                   <span className="text-xs font-bold text-white">{item.price.toLocaleString()}</span>
                                 </div>
-                                <DropdownMenu>
-                                  <DropdownMenuTrigger asChild>
+                                <Drawer>
+                                  <DrawerTrigger asChild>
                                     <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
                                       <ShoppingBag className="mr-1 h-2 w-2" />
-                                      {authenticated ? 'Buy' : 'Login'}
-                                      {authenticated && <ChevronRight className="ml-1 h-2 w-2" />}
+                                      Buy
                                     </Button>
-                                  </DropdownMenuTrigger>
-                                  {authenticated && (
-                                    <DropdownMenuContent className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
-                                      <DropdownMenuItem 
-                                        className="hover:bg-white/10 cursor-pointer"
-                                        onClick={() => handlePurchase(`accessory-${idx}`, item.name, item.price)}
+                                  </DrawerTrigger>
+                                  <DrawerContent className="bg-black/90 backdrop-blur-md border-t border-white/20 text-white">
+                                    <DrawerHeader>
+                                      <DrawerTitle className="text-white text-center">Purchase {item.name}</DrawerTitle>
+                                    </DrawerHeader>
+                                    <div className="p-4 space-y-3">
+                                      <Button 
+                                        className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20"
+                                        onClick={() => {
+                                          if (authenticated) {
+                                            handlePurchase(`accessory-${idx}`, item.name, item.price);
+                                          } else {
+                                            login();
+                                          }
+                                        }}
                                       >
-                                        <Coins className="mr-2 h-3 w-3" />
+                                        <Coins className="mr-2 h-4 w-4" />
                                         Buy With Coins
-                                      </DropdownMenuItem>
-                                      <DropdownMenuItem 
-                                        className="hover:bg-white/10 cursor-pointer"
+                                      </Button>
+                                      <Button 
+                                        className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20"
                                         onClick={() => {/* TODO: Implement card payment */}}
                                       >
-                                        <CreditCard className="mr-2 h-3 w-3" />
+                                        <CreditCard className="mr-2 h-4 w-4" />
                                         Buy with Card
-                                      </DropdownMenuItem>
-                                    </DropdownMenuContent>
-                                  )}
-                                </DropdownMenu>
+                                      </Button>
+                                      <DrawerClose asChild>
+                                        <Button variant="outline" className="w-full border-white/20 text-white hover:bg-white/10">
+                                          Cancel
+                                        </Button>
+                                      </DrawerClose>
+                                    </div>
+                                  </DrawerContent>
+                                </Drawer>
                               </div>
                             </CardContent>
                           </Card>)}
@@ -963,33 +992,46 @@ const Game = () => {
                                   <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
                                   <span className="text-xs font-bold text-white">{item.price.toLocaleString()}</span>
                                 </div>
-                                <DropdownMenu>
-                                  <DropdownMenuTrigger asChild>
+                                <Drawer>
+                                  <DrawerTrigger asChild>
                                     <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
                                       <ShoppingBag className="mr-1 h-2 w-2" />
-                                      {authenticated ? 'Buy' : 'Login'}
-                                      {authenticated && <ChevronRight className="ml-1 h-2 w-2" />}
+                                      Buy
                                     </Button>
-                                  </DropdownMenuTrigger>
-                                  {authenticated && (
-                                    <DropdownMenuContent className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
-                                      <DropdownMenuItem 
-                                        className="hover:bg-white/10 cursor-pointer"
-                                        onClick={() => handlePurchase(`mobility-${idx}`, item.name, item.price)}
+                                  </DrawerTrigger>
+                                  <DrawerContent className="bg-black/90 backdrop-blur-md border-t border-white/20 text-white">
+                                    <DrawerHeader>
+                                      <DrawerTitle className="text-white text-center">Purchase {item.name}</DrawerTitle>
+                                    </DrawerHeader>
+                                    <div className="p-4 space-y-3">
+                                      <Button 
+                                        className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20"
+                                        onClick={() => {
+                                          if (authenticated) {
+                                            handlePurchase(`mobility-${idx}`, item.name, item.price);
+                                          } else {
+                                            login();
+                                          }
+                                        }}
                                       >
-                                        <Coins className="mr-2 h-3 w-3" />
+                                        <Coins className="mr-2 h-4 w-4" />
                                         Buy With Coins
-                                      </DropdownMenuItem>
-                                      <DropdownMenuItem 
-                                        className="hover:bg-white/10 cursor-pointer"
+                                      </Button>
+                                      <Button 
+                                        className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20"
                                         onClick={() => {/* TODO: Implement card payment */}}
                                       >
-                                        <CreditCard className="mr-2 h-3 w-3" />
+                                        <CreditCard className="mr-2 h-4 w-4" />
                                         Buy with Card
-                                      </DropdownMenuItem>
-                                    </DropdownMenuContent>
-                                  )}
-                                </DropdownMenu>
+                                      </Button>
+                                      <DrawerClose asChild>
+                                        <Button variant="outline" className="w-full border-white/20 text-white hover:bg-white/10">
+                                          Cancel
+                                        </Button>
+                                      </DrawerClose>
+                                    </div>
+                                  </DrawerContent>
+                                </Drawer>
                               </div>
                             </CardContent>
                           </Card>)}
@@ -1048,33 +1090,46 @@ const Game = () => {
                                   <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
                                   <span className="text-xs font-bold text-white">{item.price.toLocaleString()}</span>
                                 </div>
-                                <DropdownMenu>
-                                  <DropdownMenuTrigger asChild>
+                                <Drawer>
+                                  <DrawerTrigger asChild>
                                     <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
                                       <ShoppingBag className="mr-1 h-2 w-2" />
-                                      {authenticated ? 'Buy' : 'Login'}
-                                      {authenticated && <ChevronRight className="ml-1 h-2 w-2" />}
+                                      Buy
                                     </Button>
-                                  </DropdownMenuTrigger>
-                                  {authenticated && (
-                                    <DropdownMenuContent className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
-                                      <DropdownMenuItem 
-                                        className="hover:bg-white/10 cursor-pointer"
-                                        onClick={() => handlePurchase(`pack-${idx}`, item.name, item.price)}
+                                  </DrawerTrigger>
+                                  <DrawerContent className="bg-black/90 backdrop-blur-md border-t border-white/20 text-white">
+                                    <DrawerHeader>
+                                      <DrawerTitle className="text-white text-center">Purchase {item.name}</DrawerTitle>
+                                    </DrawerHeader>
+                                    <div className="p-4 space-y-3">
+                                      <Button 
+                                        className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20"
+                                        onClick={() => {
+                                          if (authenticated) {
+                                            handlePurchase(`pack-${idx}`, item.name, item.price);
+                                          } else {
+                                            login();
+                                          }
+                                        }}
                                       >
-                                        <Coins className="mr-2 h-3 w-3" />
+                                        <Coins className="mr-2 h-4 w-4" />
                                         Buy With Coins
-                                      </DropdownMenuItem>
-                                      <DropdownMenuItem 
-                                        className="hover:bg-white/10 cursor-pointer"
+                                      </Button>
+                                      <Button 
+                                        className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20"
                                         onClick={() => {/* TODO: Implement card payment */}}
                                       >
-                                        <CreditCard className="mr-2 h-3 w-3" />
+                                        <CreditCard className="mr-2 h-4 w-4" />
                                         Buy with Card
-                                      </DropdownMenuItem>
-                                    </DropdownMenuContent>
-                                  )}
-                                </DropdownMenu>
+                                      </Button>
+                                      <DrawerClose asChild>
+                                        <Button variant="outline" className="w-full border-white/20 text-white hover:bg-white/10">
+                                          Cancel
+                                        </Button>
+                                      </DrawerClose>
+                                    </div>
+                                  </DrawerContent>
+                                </Drawer>
                               </div>
                             </CardContent>
                           </Card>)}
