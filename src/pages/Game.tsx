@@ -799,8 +799,7 @@ const Game = () => {
                                 <Drawer>
                                   <DrawerTrigger asChild>
                                      <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
-                                       <ShoppingBag className={`${isMobile ? 'h-3 w-3' : 'mr-1 h-2 w-2'}`} />
-                                       {!isMobile && "Buy"}
+                                       <ShoppingBag className="h-3 w-3" />
                                      </Button>
                                   </DrawerTrigger>
                                   <DrawerContent className="bg-white/10 backdrop-blur-md border-t border-white/20 text-white transition-all duration-300">
@@ -897,8 +896,7 @@ const Game = () => {
                                 <Drawer>
                                   <DrawerTrigger asChild>
                                      <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
-                                       <ShoppingBag className={`${isMobile ? 'h-3 w-3' : 'mr-1 h-2 w-2'}`} />
-                                       {!isMobile && "Buy"}
+                                       <ShoppingBag className="h-3 w-3" />
                                      </Button>
                                   </DrawerTrigger>
                                   <DrawerContent className="bg-white/10 backdrop-blur-md border-t border-white/20 text-white transition-all duration-300">
@@ -995,8 +993,7 @@ const Game = () => {
                                 <Drawer>
                                   <DrawerTrigger asChild>
                                      <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
-                                       <ShoppingBag className={`${isMobile ? 'h-3 w-3' : 'mr-1 h-2 w-2'}`} />
-                                       {!isMobile && "Buy"}
+                                       <ShoppingBag className="h-3 w-3" />
                                      </Button>
                                   </DrawerTrigger>
                                   <DrawerContent className="bg-white/10 backdrop-blur-md border-t border-white/20 text-white transition-all duration-300">
@@ -1093,8 +1090,7 @@ const Game = () => {
                                 <Drawer>
                                   <DrawerTrigger asChild>
                                      <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
-                                       <ShoppingBag className={`${isMobile ? 'h-3 w-3' : 'mr-1 h-2 w-2'}`} />
-                                       {!isMobile && "Buy"}
+                                       <ShoppingBag className="h-3 w-3" />
                                      </Button>
                                   </DrawerTrigger>
                                   <DrawerContent className="bg-white/10 backdrop-blur-md border-t border-white/20 text-white transition-all duration-300">
