@@ -1089,9 +1089,9 @@ const Game = () => {
               {/* Prominent Logo */}
               <div className="flex justify-center mt-6">
                 <img 
-                  src="/lovable-uploads/7be743c8-5f8f-4016-a88a-c5e7edf73e2e.png" 
+                  src="/lovable-uploads/885f4a61-92f8-40e3-8733-2ba3b2534e16.png" 
                   alt="Logo" 
-                  className="w-16 h-16 opacity-90 hover:opacity-100 transition-opacity duration-300" 
+                  className="h-16 object-contain opacity-90 hover:opacity-100 transition-opacity duration-300" 
                 />
               </div>
             </div>
