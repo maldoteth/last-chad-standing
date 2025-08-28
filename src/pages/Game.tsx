@@ -1690,7 +1690,7 @@ const Game = () => {
             </Card>
             
             {/* Social Links */}
-            <div className="mt-auto pt-6">
+            <div className="mt-auto pt-4">
               <div className="flex items-center justify-center gap-4">
                 <a href="https://x.com/lcs_game" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
                   <img src="/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png" alt="X" className="w-5 h-5" />
