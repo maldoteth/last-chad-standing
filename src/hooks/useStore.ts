@@ -16,6 +16,7 @@ export interface StoreItem {
 
 export interface UserBalance {
   coins: number;
+  xp: number;
 }
 
 export interface UserInventoryItem {
@@ -30,7 +31,7 @@ export const useStore = () => {
   const { user } = usePrivy();
   const { toast } = useToast();
   const [storeItems, setStoreItems] = useState<StoreItem[]>([]);
-  const [userBalance, setUserBalance] = useState<UserBalance>({ coins: 0 });
+  const [userBalance, setUserBalance] = useState<UserBalance>({ coins: 0, xp: 0 });
   const [userInventory, setUserInventory] = useState<UserInventoryItem[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -56,7 +57,7 @@ export const useStore = () => {
 
     const { data, error } = await supabase
       .from('user_balances')
-      .select('coins')
+      .select('coins, xp')
       .eq('user_id', user.id)
       .maybeSingle();
 
@@ -69,8 +70,8 @@ export const useStore = () => {
       // Create initial balance for new user
       const { data: newBalance, error: insertError } = await supabase
         .from('user_balances')
-        .insert({ user_id: user.id, coins: 1000 })
-        .select('coins')
+        .insert({ user_id: user.id, coins: 1000, xp: 0 })
+        .select('coins, xp')
         .single();
 
       if (insertError) {
@@ -78,9 +79,9 @@ export const useStore = () => {
         return;
       }
 
-      setUserBalance({ coins: newBalance.coins });
+      setUserBalance({ coins: newBalance.coins, xp: newBalance.xp });
     } else {
-      setUserBalance({ coins: data.coins });
+      setUserBalance({ coins: data.coins, xp: data.xp });
     }
   };
 
@@ -165,7 +166,7 @@ export const useStore = () => {
       }
 
       // Update local state
-      setUserBalance({ coins: userBalance.coins - price });
+      setUserBalance({ coins: userBalance.coins - price, xp: userBalance.xp });
       await fetchUserInventory();
 
       toast({

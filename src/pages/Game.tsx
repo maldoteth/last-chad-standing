@@ -11,6 +11,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Progress } from "@/components/ui/progress";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { SettingsDialog } from "@/components/SettingsDialog";
+import { ProgressBar } from "@/components/ProgressBar";
 import { useProfile } from "@/hooks/useProfile";
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerTrigger, DrawerClose } from "@/components/ui/drawer";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogDescription } from "@/components/ui/dialog";
@@ -39,7 +40,7 @@ const Game = () => {
     user
   } = usePrivy();
   const navigate = useNavigate();
-  const { purchaseItem } = useStore();
+  const { purchaseItem, userBalance } = useStore();
   const { profile } = useProfile();
 
   // Handle purchase function
@@ -436,7 +437,20 @@ const Game = () => {
                     </AvatarFallback>
                   </Avatar>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-56 bg-card border border-border z-50">
+                <DropdownMenuContent align="end" className="w-64 bg-card border border-border z-50">
+                  <div className="px-3 py-2">
+                    <div className="flex flex-col space-y-1">
+                      <p className="text-sm font-medium leading-none">
+                        {profile?.username || 'Anonymous'}
+                      </p>
+                      <p className="text-xs leading-none text-muted-foreground">
+                        {user?.email?.address}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="px-3 py-2 border-t border-border">
+                    <ProgressBar xp={userBalance?.xp || 0} />
+                  </div>
                   <DropdownMenuItem 
                     onClick={() => setSettingsOpen(true)}
                     className="flex items-center space-x-2 cursor-pointer"
