@@ -6,6 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import { adminLogin } from '@/lib/adminAuth';
+import { AdminSetup } from '@/components/AdminSetup';
 
 export const AdminLogin = () => {
   const [email, setEmail] = useState('');
@@ -82,6 +83,8 @@ export const AdminLogin = () => {
           </form>
         </CardContent>
       </Card>
+      
+      <AdminSetup />
     </div>
   );
 };
