@@ -14,6 +14,7 @@ import { ResponsiveContainer, LineChart as RechartsLineChart, Line, XAxis, YAxis
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 const Game = () => {
   const [activeTab, setActiveTab] = useState("home");
+  const [gainersTimeFilter, setGainersTimeFilter] = useState("daily");
   const [rightSidebarTab, setRightSidebarTab] = useState("rankings");
   const [userCoins] = useState(0);
   const [visiblePlayers, setVisiblePlayers] = useState(10);
@@ -42,13 +43,38 @@ const Game = () => {
     { name: "Fire Storm", team: "Flame Dragons", position: "Assault", price: 8900, change: 9.6, trend: "up", image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png" }
   ];
 
-  const topGainers = [
-    { name: "Cyber Phantom", team: "Neon Guardians", position: "Stealth", price: 5200, change: 24.8, image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png" },
-    { name: "Quantum Leap", team: "Future Force", position: "Mobility", price: 4800, change: 19.3, image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png" },
-    { name: "Void Walker", team: "Dark Matter", position: "Phantom", price: 6100, change: 17.5, image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png" },
-    { name: "Solar Flare", team: "Sun Blazers", position: "Energy", price: 5500, change: 16.2, image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png" },
-    { name: "Storm Breaker", team: "Wind Riders", position: "Force", price: 4900, change: 15.9, image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png" }
-  ];
+  const topGainersData = {
+    daily: [
+      { name: "Cyber Phantom", team: "Neon Guardians", position: "Stealth", price: 5200, change: 24.8, image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png" },
+      { name: "Quantum Leap", team: "Future Force", position: "Mobility", price: 4800, change: 19.3, image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png" },
+      { name: "Void Walker", team: "Dark Matter", position: "Phantom", price: 6100, change: 17.5, image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png" },
+      { name: "Solar Flare", team: "Sun Blazers", position: "Energy", price: 5500, change: 16.2, image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png" },
+      { name: "Storm Breaker", team: "Wind Riders", position: "Force", price: 4900, change: 15.9, image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png" }
+    ],
+    weekly: [
+      { name: "Lightning Strike", team: "Thunder Hawks", position: "Speed", price: 7300, change: 45.2, image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png" },
+      { name: "Iron Forge", team: "Steel Warriors", position: "Tank", price: 6800, change: 38.7, image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png" },
+      { name: "Phoenix Wing", team: "Fire Eagles", position: "Assault", price: 5900, change: 33.1, image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png" },
+      { name: "Frost Bite", team: "Ice Wolves", position: "Control", price: 6400, change: 29.8, image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png" },
+      { name: "Earth Shaker", team: "Ground Force", position: "Heavy", price: 7100, change: 27.3, image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png" }
+    ],
+    monthly: [
+      { name: "Titan Crusher", team: "Mega Corps", position: "Destroyer", price: 9200, change: 89.4, image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png" },
+      { name: "Shadow Master", team: "Dark Legion", position: "Assassin", price: 8500, change: 76.8, image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png" },
+      { name: "Plasma Cannon", team: "Energy Corps", position: "Artillery", price: 8900, change: 69.5, image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png" },
+      { name: "Void Reaper", team: "Space Raiders", position: "Elite", price: 9800, change: 62.1, image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png" },
+      { name: "Storm Lord", team: "Weather Gods", position: "Legendary", price: 10500, change: 58.7, image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png" }
+    ],
+    alltime: [
+      { name: "Apex Legend", team: "Ultimate Force", position: "Champion", price: 15000, change: 234.7, image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png" },
+      { name: "God Slayer", team: "Divine Army", position: "Mythic", price: 13500, change: 189.3, image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png" },
+      { name: "Universe Destroyer", team: "Cosmic Force", position: "Godlike", price: 14200, change: 156.8, image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png" },
+      { name: "Reality Bender", team: "Quantum Lords", position: "Transcendent", price: 12800, change: 142.5, image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png" },
+      { name: "Infinite Power", team: "Eternal Guardians", position: "Supreme", price: 16000, change: 198.9, image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png" }
+    ]
+  };
+
+  const topGainers = topGainersData[gainersTimeFilter];
 
   const allPlayers = [
     { name: "Shadow Strike", team: "Crimson Hawks", position: "Striker", price: 8500, lastSale: 7500, trend: "up", image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png" },
@@ -681,10 +707,34 @@ const Game = () => {
                       backgroundSize: '4px 4px'
                     }} />
                     <CardHeader className="pb-3 relative z-10">
-                      <CardTitle className="text-base flex items-center space-x-2 text-white">
-                        <ArrowUpRight className="w-4 h-4 text-green-400" />
-                        <span>Top Gainers</span>
-                      </CardTitle>
+                      <div className="flex items-center justify-between mb-2">
+                        <CardTitle className="text-base flex items-center space-x-2 text-white">
+                          <ArrowUpRight className="w-4 h-4 text-green-400" />
+                          <span>Top Gainers</span>
+                        </CardTitle>
+                      </div>
+                      <div className="flex space-x-1">
+                        {[
+                          { key: "daily", label: "24H" },
+                          { key: "weekly", label: "7D" },
+                          { key: "monthly", label: "30D" },
+                          { key: "alltime", label: "All" }
+                        ].map((filter) => (
+                          <Button
+                            key={filter.key}
+                            variant={gainersTimeFilter === filter.key ? "secondary" : "ghost"}
+                            size="sm"
+                            className={`text-xs h-6 px-2 ${
+                              gainersTimeFilter === filter.key 
+                                ? "bg-white/20 text-white border-white/30" 
+                                : "bg-white/5 text-gray-300 hover:bg-white/10 hover:text-white"
+                            }`}
+                            onClick={() => setGainersTimeFilter(filter.key)}
+                          >
+                            {filter.label}
+                          </Button>
+                        ))}
+                      </div>
                     </CardHeader>
                     <CardContent className="relative z-10">
                       <div className="space-y-2">
@@ -1386,10 +1436,34 @@ const Game = () => {
                       backgroundSize: '4px 4px'
                     }} />
                     <CardHeader className="relative z-10">
-                      <CardTitle className="text-lg flex items-center space-x-2 text-white">
-                        <ArrowUpRight className="w-5 h-5 text-green-400" />
-                        <span>Top Gainers</span>
-                      </CardTitle>
+                      <div className="flex items-center justify-between mb-3">
+                        <CardTitle className="text-lg flex items-center space-x-2 text-white">
+                          <ArrowUpRight className="w-5 h-5 text-green-400" />
+                          <span>Top Gainers</span>
+                        </CardTitle>
+                      </div>
+                      <div className="flex space-x-2">
+                        {[
+                          { key: "daily", label: "Daily" },
+                          { key: "weekly", label: "Weekly" },
+                          { key: "monthly", label: "Monthly" },
+                          { key: "alltime", label: "All Time" }
+                        ].map((filter) => (
+                          <Button
+                            key={filter.key}
+                            variant={gainersTimeFilter === filter.key ? "secondary" : "ghost"}
+                            size="sm"
+                            className={`text-xs ${
+                              gainersTimeFilter === filter.key 
+                                ? "bg-white/20 text-white border-white/30" 
+                                : "bg-white/5 text-gray-300 hover:bg-white/10 hover:text-white"
+                            }`}
+                            onClick={() => setGainersTimeFilter(filter.key)}
+                          >
+                            {filter.label}
+                          </Button>
+                        ))}
+                      </div>
                     </CardHeader>
                     <CardContent className="relative z-10">
                       <div className="space-y-3">
