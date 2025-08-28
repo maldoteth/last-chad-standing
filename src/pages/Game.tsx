@@ -1560,45 +1560,45 @@ const Game = () => {
                           <Filter className="w-4 h-4" />
                         </Button>
                       </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end" className="w-48 bg-card border border-border z-50">
+                      <DropdownMenuContent align="end" className="w-48 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
                         <DropdownMenuItem 
                           onClick={() => setSelectedRarity("all")} 
-                          className={`flex items-center space-x-2 cursor-pointer ${selectedRarity === "all" ? "bg-accent" : ""}`}
+                          className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "all" ? "bg-white/20" : ""}`}
                         >
                           <div className="w-3 h-3 rounded-full bg-gray-500" />
                           <span>All Rarities</span>
                         </DropdownMenuItem>
                         <DropdownMenuItem 
                           onClick={() => setSelectedRarity("green")} 
-                          className={`flex items-center space-x-2 cursor-pointer ${selectedRarity === "green" ? "bg-accent" : ""}`}
+                          className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "green" ? "bg-white/20" : ""}`}
                         >
                           <div className="w-3 h-3 rounded-full bg-green-500" />
                           <span>Green</span>
                         </DropdownMenuItem>
                         <DropdownMenuItem 
                           onClick={() => setSelectedRarity("blue")} 
-                          className={`flex items-center space-x-2 cursor-pointer ${selectedRarity === "blue" ? "bg-accent" : ""}`}
+                          className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "blue" ? "bg-white/20" : ""}`}
                         >
                           <div className="w-3 h-3 rounded-full bg-blue-500" />
                           <span>Blue</span>
                         </DropdownMenuItem>
                         <DropdownMenuItem 
                           onClick={() => setSelectedRarity("silver")} 
-                          className={`flex items-center space-x-2 cursor-pointer ${selectedRarity === "silver" ? "bg-accent" : ""}`}
+                          className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "silver" ? "bg-white/20" : ""}`}
                         >
                           <div className="w-3 h-3 rounded-full bg-gray-300" />
                           <span>Silver</span>
                         </DropdownMenuItem>
                         <DropdownMenuItem 
                           onClick={() => setSelectedRarity("gold")} 
-                          className={`flex items-center space-x-2 cursor-pointer ${selectedRarity === "gold" ? "bg-accent" : ""}`}
+                          className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "gold" ? "bg-white/20" : ""}`}
                         >
                           <div className="w-3 h-3 rounded-full bg-yellow-400" />
                           <span>Gold</span>
                         </DropdownMenuItem>
                         <DropdownMenuItem 
                           onClick={() => setSelectedRarity("special")} 
-                          className={`flex items-center space-x-2 cursor-pointer ${selectedRarity === "special" ? "bg-accent" : ""}`}
+                          className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "special" ? "bg-white/20" : ""}`}
                         >
                           <div className="w-3 h-3 rounded-full bg-gradient-to-r from-purple-400 via-pink-400 to-yellow-400" />
                           <span>Special</span>
