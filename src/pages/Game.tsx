@@ -1084,9 +1084,6 @@ const Game = () => {
                 <a href="https://youtube.com/@lastchadstanding" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
                   <Youtube className="w-5 h-5" />
                 </a>
-                <a href="https://www.tiktok.com/@lastchadstanding" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
-                  <img src="/lovable-uploads/tiktok-logo.png" alt="TikTok" className="w-5 h-5" />
-                </a>
               </div>
             </div>
           </aside>
