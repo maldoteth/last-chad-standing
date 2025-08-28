@@ -52,6 +52,8 @@ export const isAdminAuthenticated = (): boolean => {
 // Admin login function
 export const adminLogin = async (email: string, password: string): Promise<LoginResult> => {
   try {
+    console.log('Admin login attempt for:', email);
+    
     // Fetch admin user from database
     const { data: adminUsers, error } = await supabase
       .from('admin_users')
@@ -59,24 +61,33 @@ export const adminLogin = async (email: string, password: string): Promise<Login
       .eq('email', email.toLowerCase())
       .limit(1);
 
+    console.log('Database query result:', { adminUsers, error });
+
     if (error) {
       console.error('Database error:', error);
       return { success: false, error: 'Database error occurred' };
     }
 
     if (!adminUsers || adminUsers.length === 0) {
+      console.log('No admin user found');
       return { success: false, error: 'Invalid credentials' };
     }
 
     const adminUser = adminUsers[0] as AdminUser;
+    console.log('Found admin user:', adminUser.email);
+    console.log('Stored hash:', adminUser.password_hash);
 
     // Verify password
+    console.log('Comparing password:', password);
     const isValidPassword = await bcrypt.compare(password, adminUser.password_hash);
+    console.log('Password comparison result:', isValidPassword);
     
     if (!isValidPassword) {
+      console.log('Password verification failed');
       return { success: false, error: 'Invalid credentials' };
     }
 
+    console.log('Login successful, setting session');
     // Set session
     setAdminSession(adminUser);
     
