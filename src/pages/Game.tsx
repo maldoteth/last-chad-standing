@@ -24,6 +24,7 @@ const Game = () => {
   const [userCoins] = useState(0);
   const [visiblePlayers, setVisiblePlayers] = useState(10);
   const [selectedRarity, setSelectedRarity] = useState("all");
+  const [selectedCategory, setSelectedCategory] = useState("all");
   const isMobile = useIsMobile();
   const {
     toast
@@ -680,6 +681,49 @@ const Game = () => {
             {activeTab === "store" && <div className="p-4 space-y-6">
                 {/* Store Header */}
                 <div className="text-center relative">
+                  {/* Category Filter - positioned in top left */}
+                  <div className="absolute top-0 left-0">
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button variant="ghost" size="sm" className="text-white hover:bg-white/10">
+                          <Layers className="w-4 h-4" />
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
+                        <DropdownMenuItem 
+                          onClick={() => setSelectedCategory("all")} 
+                          className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "all" ? "bg-white/20" : ""}`}
+                        >
+                          <span>All Categories</span>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem 
+                          onClick={() => setSelectedCategory("skins")} 
+                          className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "skins" ? "bg-white/20" : ""}`}
+                        >
+                          <span>Skins</span>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem 
+                          onClick={() => setSelectedCategory("accessories")} 
+                          className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "accessories" ? "bg-white/20" : ""}`}
+                        >
+                          <span>Accessories</span>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem 
+                          onClick={() => setSelectedCategory("mobility")} 
+                          className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "mobility" ? "bg-white/20" : ""}`}
+                        >
+                          <span>Mobility</span>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem 
+                          onClick={() => setSelectedCategory("packs")} 
+                          className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "packs" ? "bg-white/20" : ""}`}
+                        >
+                          <span>Packs</span>
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </div>
+                  
                   <div className="flex items-center justify-center space-x-3 mb-4">
                     <ShoppingBag className="w-8 h-8 text-primary" />
                      <div>
@@ -746,6 +790,7 @@ const Game = () => {
                 {/* Categories */}
                 <div className="space-y-4">
                   {/* Skins Category */}
+                  {(selectedCategory === "all" || selectedCategory === "skins") && (
                   <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                     <div className="absolute inset-0" style={{
@@ -840,11 +885,13 @@ const Game = () => {
                             </CardContent>
                           </Card>)}
                       </div>
-                    </CardContent>
-                  </Card>
+                     </CardContent>
+                   </Card>
+                   )}
 
-                  {/* Accessories Category */}
-                  <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                   {/* Accessories Category */}
+                   {(selectedCategory === "all" || selectedCategory === "accessories") && (
+                   <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                     <div className="absolute inset-0" style={{
                   backgroundImage: `
@@ -938,11 +985,13 @@ const Game = () => {
                             </CardContent>
                           </Card>)}
                       </div>
-                    </CardContent>
-                  </Card>
+                     </CardContent>
+                   </Card>
+                   )}
 
-                  {/* Mobility Category */}
-                  <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                   {/* Mobility Category */}
+                   {(selectedCategory === "all" || selectedCategory === "mobility") && (
+                   <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                     <div className="absolute inset-0" style={{
                   backgroundImage: `
@@ -1036,11 +1085,13 @@ const Game = () => {
                             </CardContent>
                           </Card>)}
                       </div>
-                    </CardContent>
-                  </Card>
+                     </CardContent>
+                   </Card>
+                   )}
 
-                  {/* Packs Category */}
-                  <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                   {/* Packs Category */}
+                   {(selectedCategory === "all" || selectedCategory === "packs") && (
+                   <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                     <div className="absolute inset-0" style={{
                   backgroundImage: `
@@ -1134,10 +1185,11 @@ const Game = () => {
                             </CardContent>
                           </Card>)}
                       </div>
-                    </CardContent>
-                  </Card>
-                </div>
-              </div>}
+                     </CardContent>
+                   </Card>
+                   )}
+                 </div>
+               </div>}
 
             {activeTab === "market" && <div className="p-4 space-y-6">
                 {/* Market Header */}
