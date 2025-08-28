@@ -19,75 +19,9 @@ const Game = () => {
   const [rightSidebarTab, setRightSidebarTab] = useState("rankings");
   const [userCoins] = useState(0);
   const [visiblePlayers, setVisiblePlayers] = useState(10);
-  
-  // Rarity filters for each store category
-  const [skinRarityFilter, setSkinRarityFilter] = useState("all");
-  const [accessoryRarityFilter, setAccessoryRarityFilter] = useState("all");
-  const [mobilityRarityFilter, setMobilityRarityFilter] = useState("all");
-  const [packRarityFilter, setPackRarityFilter] = useState("all");
-  
   const {
     toast
   } = useToast();
-  
-  // Define store items with rarity system
-  const skinItems = [
-    { name: "Cyber Warrior", price: 2500, rarity: "special", image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png" },
-    { name: "Shadow Assassin", price: 1800, rarity: "gold", image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png" },
-    { name: "Battle Mage", price: 1200, rarity: "silver", image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png" },
-    { name: "Iron Guardian", price: 800, rarity: "blue", image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png" },
-    { name: "Scout Rookie", price: 400, rarity: "green", image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png" }
-  ];
-
-  const accessoryItems = [
-    { name: "Neon Sneakers", price: 600, rarity: "gold", image: "/lovable-uploads/69c61fed-9ccd-43d2-bab5-17c6c0db05b4.png" },
-    { name: "Combat Backpack", price: 450, rarity: "silver", image: "/lovable-uploads/7311683b-ea99-4dd9-9b1f-89d96742eff0.png" },
-    { name: "Tactical Helmet", price: 800, rarity: "gold", image: "/lovable-uploads/69c61fed-9ccd-43d2-bab5-17c6c0db05b4.png" },
-    { name: "Power Gloves", price: 300, rarity: "blue", image: "/lovable-uploads/7311683b-ea99-4dd9-9b1f-89d96742eff0.png" },
-    { name: "Basic Boots", price: 150, rarity: "green", image: "/lovable-uploads/69c61fed-9ccd-43d2-bab5-17c6c0db05b4.png" }
-  ];
-
-  const mobilityItems = [
-    { name: "Cyber Car", price: 5000, rarity: "special", image: "/lovable-uploads/84ab9eed-00bc-425c-a953-3ea0478e464d.png" },
-    { name: "Speed Buggy", price: 3200, rarity: "gold", image: "/lovable-uploads/896892f1-7ebc-4852-acea-80dcdbf7c545.png" },
-    { name: "Hover Board", price: 2000, rarity: "silver", image: "/lovable-uploads/84ab9eed-00bc-425c-a953-3ea0478e464d.png" },
-    { name: "Motor Bike", price: 1200, rarity: "blue", image: "/lovable-uploads/896892f1-7ebc-4852-acea-80dcdbf7c545.png" },
-    { name: "Skateboard", price: 500, rarity: "green", image: "/lovable-uploads/84ab9eed-00bc-425c-a953-3ea0478e464d.png" }
-  ];
-
-  const packItems = [
-    { name: "Special Pack", price: 2000, rarity: "special", image: "/lovable-uploads/745baeae-f05a-4a2a-828f-45aed6d05972.png" },
-    { name: "Gold Pack", price: 1500, rarity: "gold", image: "/lovable-uploads/10b201c5-4459-46db-8a74-f056acdf247b.png" },
-    { name: "Silver Pack", price: 1000, rarity: "silver", image: "/lovable-uploads/745baeae-f05a-4a2a-828f-45aed6d05972.png" },
-    { name: "Blue Pack", price: 600, rarity: "blue", image: "/lovable-uploads/10b201c5-4459-46db-8a74-f056acdf247b.png" },
-    { name: "Starter Pack", price: 300, rarity: "green", image: "/lovable-uploads/745baeae-f05a-4a2a-828f-45aed6d05972.png" }
-  ];
-
-  // Filter functions
-  const getFilteredItems = (items: any[], filter: string) => {
-    if (filter === "all") return items;
-    return items.filter(item => item.rarity === filter);
-  };
-
-  const getRarityColor = (rarity: string) => {
-    switch (rarity) {
-      case "special": return "text-purple-400";
-      case "gold": return "text-yellow-400";
-      case "silver": return "text-gray-400";
-      case "blue": return "text-blue-400";
-      case "green": return "text-green-400";
-      default: return "text-gray-400";
-    }
-  };
-
-  const rarityOptions = [
-    { key: "all", label: "All" },
-    { key: "special", label: "Special" },
-    { key: "gold", label: "Gold" },
-    { key: "silver", label: "Silver" },
-    { key: "blue", label: "Blue" },
-    { key: "green", label: "Green" }
-  ];
   const {
     login,
     logout,
@@ -736,44 +670,29 @@ const Game = () => {
                     <CardHeader className="relative z-10">
                       <CardTitle className="flex items-center justify-between text-white">
                         <span>Skins</span>
-                        <Badge variant="secondary">{getFilteredItems(skinItems, skinRarityFilter).length} items</Badge>
+                        <Badge variant="secondary">4 items</Badge>
                       </CardTitle>
                       <CardDescription className="text-gray-300">Characters to play in game</CardDescription>
-                      
-                      {/* Rarity Filter */}
-                      <div className="flex flex-wrap gap-1 mt-2">
-                        {rarityOptions.map(option => (
-                          <Button
-                            key={option.key}
-                            variant={skinRarityFilter === option.key ? "secondary" : "ghost"}
-                            size="sm"
-                            className={`text-xs h-6 px-2 ${
-                              skinRarityFilter === option.key 
-                                ? "bg-white/20 text-white border-white/30" 
-                                : "bg-white/5 text-gray-300 hover:bg-white/10 hover:text-white"
-                            }`}
-                            onClick={() => setSkinRarityFilter(option.key)}
-                          >
-                            {option.label}
-                          </Button>
-                        ))}
-                      </div>
                     </CardHeader>
                     <CardContent>
                       <div className="grid grid-cols-2 gap-3">
-                        {getFilteredItems(skinItems, skinRarityFilter).slice(0, 4).map((item, idx) => 
-                          <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
+                        {[{
+                    name: "Cyber Warrior",
+                    price: 2500,
+                    rarity: "legendary",
+                    image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
+                  }, {
+                    name: "Shadow Assassin",
+                    price: 1800,
+                    rarity: "epic",
+                    image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png"
+                  }].map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
                             <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
                             <CardContent className="p-3 relative z-10">
                               <div className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden">
                                 <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
                               </div>
                               <h3 className="font-semibold text-xs text-white mb-1">{item.name}</h3>
-                              <div className="flex items-center justify-between mb-1">
-                                <span className={`text-xs font-medium ${getRarityColor(item.rarity)}`}>
-                                  {item.rarity.charAt(0).toUpperCase() + item.rarity.slice(1)}
-                                </span>
-                              </div>
                               <div className="flex items-center justify-between">
                                 <div className="flex items-center space-x-1">
                                   <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
@@ -784,8 +703,7 @@ const Game = () => {
                                 </Button>
                               </div>
                             </CardContent>
-                          </Card>
-                        )}
+                          </Card>)}
                       </div>
                     </CardContent>
                   </Card>
@@ -803,59 +721,10 @@ const Game = () => {
                     <CardHeader className="relative z-10">
                       <CardTitle className="flex items-center justify-between text-white">
                         <span>Accessories</span>
-                        <Badge variant="secondary">{getFilteredItems(accessoryItems, accessoryRarityFilter).length} items</Badge>
+                        <Badge variant="secondary">4 items</Badge>
                       </CardTitle>
                       <CardDescription className="text-gray-300">Shoes, backpacks, hats</CardDescription>
-                      
-                      {/* Rarity Filter */}
-                      <div className="flex flex-wrap gap-1 mt-2">
-                        {rarityOptions.map(option => (
-                          <Button
-                            key={option.key}
-                            variant={accessoryRarityFilter === option.key ? "secondary" : "ghost"}
-                            size="sm"
-                            className={`text-xs h-6 px-2 ${
-                              accessoryRarityFilter === option.key 
-                                ? "bg-white/20 text-white border-white/30" 
-                                : "bg-white/5 text-gray-300 hover:bg-white/10 hover:text-white"
-                            }`}
-                            onClick={() => setAccessoryRarityFilter(option.key)}
-                          >
-                            {option.label}
-                          </Button>
-                        ))}
-                      </div>
                     </CardHeader>
-                    <CardContent>
-                      <div className="grid grid-cols-2 gap-3">
-                        {getFilteredItems(accessoryItems, accessoryRarityFilter).slice(0, 4).map((item, idx) => 
-                          <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
-                            <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
-                            <CardContent className="p-3 relative z-10">
-                              <div className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden">
-                                <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
-                              </div>
-                              <h3 className="font-semibold text-xs text-white mb-1">{item.name}</h3>
-                              <div className="flex items-center justify-between mb-1">
-                                <span className={`text-xs font-medium ${getRarityColor(item.rarity)}`}>
-                                  {item.rarity.charAt(0).toUpperCase() + item.rarity.slice(1)}
-                                </span>
-                              </div>
-                              <div className="flex items-center justify-between">
-                                <div className="flex items-center space-x-1">
-                                  <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
-                                  <span className="text-xs font-bold text-white">{item.price.toLocaleString()}</span>
-                                </div>
-                                <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
-                                  Buy
-                                </Button>
-                              </div>
-                            </CardContent>
-                          </Card>
-                        )}
-                      </div>
-                    </CardContent>
-                  </Card>
                     <CardContent>
                       <div className="grid grid-cols-2 gap-3">
                         {[{
@@ -901,44 +770,27 @@ const Game = () => {
                     <CardHeader className="relative z-10">
                       <CardTitle className="flex items-center justify-between text-white">
                         <span>Mobility</span>
-                        <Badge variant="secondary">{getFilteredItems(mobilityItems, mobilityRarityFilter).length} items</Badge>
+                        <Badge variant="secondary">4 items</Badge>
                       </CardTitle>
                       <CardDescription className="text-gray-300">Cars, golf buggies, etc</CardDescription>
-                      
-                      {/* Rarity Filter */}
-                      <div className="flex flex-wrap gap-1 mt-2">
-                        {rarityOptions.map(option => (
-                          <Button
-                            key={option.key}
-                            variant={mobilityRarityFilter === option.key ? "secondary" : "ghost"}
-                            size="sm"
-                            className={`text-xs h-6 px-2 ${
-                              mobilityRarityFilter === option.key 
-                                ? "bg-white/20 text-white border-white/30" 
-                                : "bg-white/5 text-gray-300 hover:bg-white/10 hover:text-white"
-                            }`}
-                            onClick={() => setMobilityRarityFilter(option.key)}
-                          >
-                            {option.label}
-                          </Button>
-                        ))}
-                      </div>
                     </CardHeader>
                     <CardContent>
                       <div className="grid grid-cols-2 gap-3">
-                        {getFilteredItems(mobilityItems, mobilityRarityFilter).slice(0, 4).map((item, idx) => 
-                          <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
+                        {[{
+                    name: "Cyber Car",
+                    price: 5000,
+                    image: "/lovable-uploads/84ab9eed-00bc-425c-a953-3ea0478e464d.png"
+                  }, {
+                    name: "Speed Buggy",
+                    price: 3200,
+                    image: "/lovable-uploads/896892f1-7ebc-4852-acea-80dcdbf7c545.png"
+                  }].map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
                             <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
                             <CardContent className="p-3 relative z-10">
                               <div className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden">
                                 <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
                               </div>
                               <h3 className="font-semibold text-xs text-white mb-1">{item.name}</h3>
-                              <div className="flex items-center justify-between mb-1">
-                                <span className={`text-xs font-medium ${getRarityColor(item.rarity)}`}>
-                                  {item.rarity.charAt(0).toUpperCase() + item.rarity.slice(1)}
-                                </span>
-                              </div>
                               <div className="flex items-center justify-between">
                                 <div className="flex items-center space-x-1">
                                   <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
@@ -949,8 +801,7 @@ const Game = () => {
                                 </Button>
                               </div>
                             </CardContent>
-                          </Card>
-                        )}
+                          </Card>)}
                       </div>
                     </CardContent>
                   </Card>
@@ -968,44 +819,35 @@ const Game = () => {
                     <CardHeader className="relative z-10">
                       <CardTitle className="flex items-center justify-between text-white">
                         <span>Packs</span>
-                        <Badge variant="secondary">{getFilteredItems(packItems, packRarityFilter).length} items</Badge>
+                        <Badge variant="secondary">4 items</Badge>
                       </CardTitle>
                       <CardDescription className="text-gray-300">Mystery packs with exclusive rewards</CardDescription>
-                      
-                      {/* Rarity Filter */}
-                      <div className="flex flex-wrap gap-1 mt-2">
-                        {rarityOptions.map(option => (
-                          <Button
-                            key={option.key}
-                            variant={packRarityFilter === option.key ? "secondary" : "ghost"}
-                            size="sm"
-                            className={`text-xs h-6 px-2 ${
-                              packRarityFilter === option.key 
-                                ? "bg-white/20 text-white border-white/30" 
-                                : "bg-white/5 text-gray-300 hover:bg-white/10 hover:text-white"
-                            }`}
-                            onClick={() => setPackRarityFilter(option.key)}
-                          >
-                            {option.label}
-                          </Button>
-                        ))}
-                      </div>
                     </CardHeader>
                     <CardContent>
                       <div className="grid grid-cols-2 gap-3">
-                        {getFilteredItems(packItems, packRarityFilter).slice(0, 4).map((item, idx) => 
-                          <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
+                        {[{
+                    name: "Silver Pack",
+                    price: 1000,
+                    image: "/lovable-uploads/745baeae-f05a-4a2a-828f-45aed6d05972.png"
+                  }, {
+                    name: "Gold Pack",
+                    price: 2000,
+                    image: "/lovable-uploads/77a6c004-93ed-49ee-a5d0-6056ee852612.png"
+                  }, {
+                    name: "Special Pack 1",
+                    price: 3500,
+                    image: "/lovable-uploads/319fe799-d5a0-4338-a0d4-53b1b1e3fe1a.png"
+                  }, {
+                    name: "Special Pack 2",
+                    price: 5000,
+                    image: "/lovable-uploads/b31c9ab4-6dcf-4a77-bdf6-7e82e5a8c66a.png"
+                  }].slice(0, 2).map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
                             <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
                             <CardContent className="p-3 relative z-10">
                               <div className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden">
                                 <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
                               </div>
                               <h3 className="font-semibold text-xs text-white mb-1">{item.name}</h3>
-                              <div className="flex items-center justify-between mb-1">
-                                <span className={`text-xs font-medium ${getRarityColor(item.rarity)}`}>
-                                  {item.rarity.charAt(0).toUpperCase() + item.rarity.slice(1)}
-                                </span>
-                              </div>
                               <div className="flex items-center justify-between">
                                 <div className="flex items-center space-x-1">
                                   <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
@@ -1016,8 +858,7 @@ const Game = () => {
                                 </Button>
                               </div>
                             </CardContent>
-                          </Card>
-                        )}
+                          </Card>)}
                       </div>
                     </CardContent>
                   </Card>
@@ -1720,28 +1561,9 @@ const Game = () => {
                     <CardHeader className="relative z-10">
                       <CardTitle className="flex items-center justify-between text-white">
                         <span>Skins</span>
-                        <Badge variant="secondary">{getFilteredItems(skinItems, skinRarityFilter).length} items</Badge>
+                        <Badge variant="secondary">4 items</Badge>
                       </CardTitle>
                       <CardDescription className="text-gray-300">Characters to play in game</CardDescription>
-                      
-                      {/* Rarity Filter */}
-                      <div className="flex flex-wrap gap-1 mt-2">
-                        {rarityOptions.map(option => (
-                          <Button
-                            key={option.key}
-                            variant={skinRarityFilter === option.key ? "secondary" : "ghost"}
-                            size="sm"
-                            className={`text-xs h-6 px-2 ${
-                              skinRarityFilter === option.key 
-                                ? "bg-white/20 text-white border-white/30" 
-                                : "bg-white/5 text-gray-300 hover:bg-white/10 hover:text-white"
-                            }`}
-                            onClick={() => setSkinRarityFilter(option.key)}
-                          >
-                            {option.label}
-                          </Button>
-                        ))}
-                      </div>
                     </CardHeader>
                     <CardContent>
                       <div className="grid grid-cols-4 gap-4">
