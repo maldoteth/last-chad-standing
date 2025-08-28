@@ -829,7 +829,7 @@ const Game = () => {
                                         Buy with Card
                                       </Button>
                                       <DrawerClose asChild>
-                                        <Button variant="outline" className="w-full border-white/20 text-white hover:bg-white/10">
+                                         <Button variant="outline" className="w-full border-white/20 text-white hover:bg-white/10 hover:text-white">
                                           Cancel
                                         </Button>
                                       </DrawerClose>
@@ -927,7 +927,7 @@ const Game = () => {
                                         Buy with Card
                                       </Button>
                                       <DrawerClose asChild>
-                                        <Button variant="outline" className="w-full border-white/20 text-white hover:bg-white/10">
+                                         <Button variant="outline" className="w-full border-white/20 text-white hover:bg-white/10 hover:text-white">
                                           Cancel
                                         </Button>
                                       </DrawerClose>
@@ -1025,7 +1025,7 @@ const Game = () => {
                                         Buy with Card
                                       </Button>
                                       <DrawerClose asChild>
-                                        <Button variant="outline" className="w-full border-white/20 text-white hover:bg-white/10">
+                                         <Button variant="outline" className="w-full border-white/20 text-white hover:bg-white/10 hover:text-white">
                                           Cancel
                                         </Button>
                                       </DrawerClose>
@@ -1123,7 +1123,7 @@ const Game = () => {
                                         Buy with Card
                                       </Button>
                                       <DrawerClose asChild>
-                                        <Button variant="outline" className="w-full border-white/20 text-white hover:bg-white/10">
+                                        <Button variant="outline" className="w-full border-white/20 text-white hover:bg-white/10 hover:text-white">
                                           Cancel
                                         </Button>
                                       </DrawerClose>
