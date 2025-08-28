@@ -319,11 +319,11 @@ const Game = () => {
                         </div>
                         <div className="space-y-1 mb-3">
                           <div className="flex items-center justify-between">
-                            <span className="text-xs text-yellow-300 font-semibold">GOLD</span>
+                            <span className="text-xs text-gray-300 font-semibold">SILVER</span>
                             <span className="text-xs">x0</span>
                           </div>
                           <div className="flex items-center justify-between">
-                            <span className="text-xs text-gray-300 font-semibold">SILVER</span>
+                            <span className="text-xs text-yellow-300 font-semibold">GOLD</span>
                             <span className="text-xs">x0</span>
                           </div>
                           <div className="flex items-center justify-between">
@@ -1164,11 +1164,11 @@ const Game = () => {
                     </div>
                     <div className="space-y-2 mb-4">
                       <div className="flex items-center justify-between">
-                        <span className="text-sm text-yellow-300 font-semibold">GOLD</span>
+                        <span className="text-sm text-gray-300 font-semibold">SILVER</span>
                         <span className="text-sm">x0</span>
                       </div>
                       <div className="flex items-center justify-between">
-                        <span className="text-sm text-gray-300 font-semibold">SILVER</span>
+                        <span className="text-sm text-yellow-300 font-semibold">GOLD</span>
                         <span className="text-sm">x0</span>
                       </div>
                       <div className="flex items-center justify-between">
