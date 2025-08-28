@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { usePrivy } from '@privy-io/react-auth';
 import { useNavigate } from "react-router-dom";
 import { supabase } from '@/integrations/supabase/client';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -11,18 +10,19 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, Plus, Edit, Trash2, Save, X } from "lucide-react";
+import { ArrowLeft, Plus, Edit, Trash2, Save, X, LogOut } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { StoreItem } from "@/hooks/useStore";
+import { isAdminAuthenticated, adminLogout, getAdminSession } from '@/lib/adminAuth';
 
 const Admin = () => {
-  const { authenticated, user } = usePrivy();
   const navigate = useNavigate();
   const { toast } = useToast();
   const [storeItems, setStoreItems] = useState<StoreItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingItem, setEditingItem] = useState<StoreItem | null>(null);
+  const [adminSession, setAdminSession] = useState<any>(null);
   const [formData, setFormData] = useState({
     name: '',
     description: '',
@@ -34,12 +34,13 @@ const Admin = () => {
   });
 
   useEffect(() => {
-    if (!authenticated) {
-      navigate('/store');
+    if (!isAdminAuthenticated()) {
+      navigate('/admin/login');
       return;
     }
+    setAdminSession(getAdminSession());
     fetchStoreItems();
-  }, [authenticated, navigate]);
+  }, [navigate]);
 
   const fetchStoreItems = async () => {
     const { data, error } = await supabase
@@ -176,7 +177,16 @@ const Admin = () => {
     fetchStoreItems();
   };
 
-  if (!authenticated) return null;
+  const handleLogout = () => {
+    adminLogout();
+    toast({
+      title: "Logged out",
+      description: "You have been logged out of the admin panel",
+    });
+    navigate('/admin/login');
+  };
+
+  if (!isAdminAuthenticated()) return null;
 
   return (
     <div className="min-h-screen bg-background">
@@ -191,112 +201,126 @@ const Admin = () => {
             <h1 className="text-2xl font-bold">Admin Panel</h1>
           </div>
 
-          <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-            <DialogTrigger asChild>
-              <Button onClick={resetForm}>
-                <Plus className="w-4 h-4 mr-2" />
-                Add Item
-              </Button>
-            </DialogTrigger>
-            <DialogContent className="max-w-md">
-              <DialogHeader>
-                <DialogTitle>
-                  {editingItem ? 'Edit Item' : 'Add New Item'}
-                </DialogTitle>
-              </DialogHeader>
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <Label htmlFor="name">Name</Label>
-                  <Input
-                    id="name"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    required
-                  />
-                </div>
-
-                <div>
-                  <Label htmlFor="description">Description</Label>
-                  <Textarea
-                    id="description"
-                    value={formData.description}
-                    onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                    rows={3}
-                  />
-                </div>
-
-                <div className="grid grid-cols-2 gap-4">
+          <div className="flex items-center space-x-4">
+            <span className="text-sm text-muted-foreground">
+              Welcome, {adminSession?.email}
+            </span>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleLogout}
+              className="flex items-center space-x-2"
+            >
+              <LogOut className="w-4 h-4" />
+              <span>Logout</span>
+            </Button>
+            <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+              <DialogTrigger asChild>
+                <Button onClick={resetForm}>
+                  <Plus className="w-4 h-4 mr-2" />
+                  Add Item
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="max-w-md">
+                <DialogHeader>
+                  <DialogTitle>
+                    {editingItem ? 'Edit Item' : 'Add New Item'}
+                  </DialogTitle>
+                </DialogHeader>
+                <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
-                    <Label htmlFor="price">Price</Label>
+                    <Label htmlFor="name">Name</Label>
                     <Input
-                      id="price"
-                      type="number"
-                      min="0"
-                      value={formData.price}
-                      onChange={(e) => setFormData({ ...formData, price: e.target.value })}
+                      id="name"
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       required
                     />
                   </div>
 
                   <div>
-                    <Label htmlFor="category">Category</Label>
+                    <Label htmlFor="description">Description</Label>
+                    <Textarea
+                      id="description"
+                      value={formData.description}
+                      onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                      rows={3}
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <Label htmlFor="price">Price</Label>
+                      <Input
+                        id="price"
+                        type="number"
+                        min="0"
+                        value={formData.price}
+                        onChange={(e) => setFormData({ ...formData, price: e.target.value })}
+                        required
+                      />
+                    </div>
+
+                    <div>
+                      <Label htmlFor="category">Category</Label>
+                      <Select
+                        value={formData.category}
+                        onValueChange={(value) => setFormData({ ...formData, category: value })}
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select category" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="skins">Skins</SelectItem>
+                          <SelectItem value="accessories">Accessories</SelectItem>
+                          <SelectItem value="mobility">Mobility</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+
+                  <div>
+                    <Label htmlFor="rarity">Rarity</Label>
                     <Select
-                      value={formData.category}
-                      onValueChange={(value) => setFormData({ ...formData, category: value })}
+                      value={formData.rarity}
+                      onValueChange={(value) => setFormData({ ...formData, rarity: value })}
                     >
                       <SelectTrigger>
-                        <SelectValue placeholder="Select category" />
+                        <SelectValue placeholder="Select rarity" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="skins">Skins</SelectItem>
-                        <SelectItem value="accessories">Accessories</SelectItem>
-                        <SelectItem value="mobility">Mobility</SelectItem>
+                        <SelectItem value="common">Common</SelectItem>
+                        <SelectItem value="rare">Rare</SelectItem>
+                        <SelectItem value="epic">Epic</SelectItem>
+                        <SelectItem value="legendary">Legendary</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
-                </div>
 
-                <div>
-                  <Label htmlFor="rarity">Rarity</Label>
-                  <Select
-                    value={formData.rarity}
-                    onValueChange={(value) => setFormData({ ...formData, rarity: value })}
-                  >
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select rarity" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="common">Common</SelectItem>
-                      <SelectItem value="rare">Rare</SelectItem>
-                      <SelectItem value="epic">Epic</SelectItem>
-                      <SelectItem value="legendary">Legendary</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
+                  <div>
+                    <Label htmlFor="image_url">Image URL</Label>
+                    <Input
+                      id="image_url"
+                      value={formData.image_url}
+                      onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
+                      placeholder="/lovable-uploads/..."
+                    />
+                  </div>
 
-                <div>
-                  <Label htmlFor="image_url">Image URL</Label>
-                  <Input
-                    id="image_url"
-                    value={formData.image_url}
-                    onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
-                    placeholder="/lovable-uploads/..."
-                  />
-                </div>
-
-                <div className="flex justify-end space-x-2">
-                  <Button type="button" variant="outline" onClick={() => setIsDialogOpen(false)}>
-                    <X className="w-4 h-4 mr-2" />
-                    Cancel
-                  </Button>
-                  <Button type="submit">
-                    <Save className="w-4 h-4 mr-2" />
-                    {editingItem ? 'Update' : 'Create'}
-                  </Button>
-                </div>
-              </form>
-            </DialogContent>
-          </Dialog>
+                  <div className="flex justify-end space-x-2">
+                    <Button type="button" variant="outline" onClick={() => setIsDialogOpen(false)}>
+                      <X className="w-4 h-4 mr-2" />
+                      Cancel
+                    </Button>
+                    <Button type="submit">
+                      <Save className="w-4 h-4 mr-2" />
+                      {editingItem ? 'Update' : 'Create'}
+                    </Button>
+                  </div>
+                </form>
+              </DialogContent>
+            </Dialog>
+          </div>
         </div>
       </header>
 
