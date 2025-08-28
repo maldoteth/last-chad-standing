@@ -133,10 +133,6 @@ const Game = () => {
     id: "coins",
     label: "Coins",
     icon: Coins
-  }, {
-    id: "pass",
-    label: "Pass",
-    icon: Trophy
   }];
   return <div className="min-h-screen bg-background text-foreground dark">
       {/* Mobile/Tablet optimized layout */}
