@@ -1622,18 +1622,18 @@ const Game = () => {
         <div className="hidden lg:flex lg:min-h-screen w-full">
           {/* Left Sidebar - Desktop only */}
           <aside className="w-80 bg-black border-r border-border p-6 space-y-6 overflow-y-auto h-screen">
-            <Card className="bg-black border-gray-700">
-              <CardHeader>
-                <CardTitle className="text-base flex items-center space-x-2">
-                  <Star className="w-4 h-4" />
-                  <span>Progress</span>
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  <HoverCard>
-                    <HoverCardTrigger asChild>
-                      <div className="cursor-pointer">
+            <HoverCard>
+              <HoverCardTrigger asChild>
+                <Card className="bg-black border-gray-700 cursor-pointer hover:border-gray-600 transition-colors">
+                  <CardHeader>
+                    <CardTitle className="text-base flex items-center space-x-2">
+                      <Star className="w-4 h-4" />
+                      <span>Progress</span>
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-4">
+                      <div>
                         <div className="flex items-center justify-between mb-2">
                           <span className="text-sm font-medium">
                             {getCurrentLevel(userBalance?.xp || 0).name}
@@ -1644,53 +1644,53 @@ const Game = () => {
                         </div>
                         <Progress value={getProgressToNextLevel(userBalance?.xp || 0).percentage} className="h-2" />
                       </div>
-                    </HoverCardTrigger>
-                    <HoverCardContent 
-                      className="w-80 p-4 bg-black/90 backdrop-blur-md border border-white/20 text-white z-50"
-                      side="right"
-                      align="start"
-                    >
-                      <div className="space-y-3">
-                        <h4 className="font-semibold text-sm">XP Progress Levels</h4>
-                        <div className="space-y-2 max-h-60 overflow-y-auto">
-                          {LEVELS.map((level, index) => {
-                            const isCurrentLevel = getCurrentLevel(userBalance?.xp || 0).name === level.name;
-                            const isUnlocked = (userBalance?.xp || 0) >= level.minXp;
-                            
-                            return (
-                              <div 
-                                key={index}
-                                className={`flex items-center justify-between p-2 rounded-md transition-colors ${
-                                  isCurrentLevel 
-                                    ? 'bg-primary/20 border border-primary/30' 
-                                    : isUnlocked 
-                                    ? 'bg-white/5 hover:bg-white/10' 
-                                    : 'bg-gray-800/50 opacity-60'
-                                }`}
-                              >
-                                <div className="flex items-center space-x-2">
-                                  <div className={`w-2 h-2 rounded-full ${
-                                    isCurrentLevel ? 'bg-primary' : isUnlocked ? 'bg-green-400' : 'bg-gray-500'
-                                  }`} />
-                                  <span className={`text-sm font-medium ${
-                                    isCurrentLevel ? 'text-primary' : 'text-white'
-                                  }`}>
-                                    {level.name}
-                                  </span>
-                                </div>
-                                <span className="text-xs text-gray-300">
-                                  {level.minXp === 0 ? '0' : level.minXp.toLocaleString()}-{level.maxXp === Infinity ? '∞' : level.maxXp.toLocaleString()} XP
-                                </span>
-                              </div>
-                            );
-                          })}
+                    </div>
+                  </CardContent>
+                </Card>
+              </HoverCardTrigger>
+              <HoverCardContent 
+                className="w-80 p-4 bg-black/90 backdrop-blur-md border border-white/20 text-white z-50"
+                side="right"
+                align="start"
+              >
+                <div className="space-y-3">
+                  <h4 className="font-semibold text-sm">XP Progress Levels</h4>
+                  <div className="space-y-2 max-h-60 overflow-y-auto">
+                    {LEVELS.map((level, index) => {
+                      const isCurrentLevel = getCurrentLevel(userBalance?.xp || 0).name === level.name;
+                      const isUnlocked = (userBalance?.xp || 0) >= level.minXp;
+                      
+                      return (
+                        <div 
+                          key={index}
+                          className={`flex items-center justify-between p-2 rounded-md transition-colors ${
+                            isCurrentLevel 
+                              ? 'bg-primary/20 border border-primary/30' 
+                              : isUnlocked 
+                              ? 'bg-white/5 hover:bg-white/10' 
+                              : 'bg-gray-800/50 opacity-60'
+                          }`}
+                        >
+                          <div className="flex items-center space-x-2">
+                            <div className={`w-2 h-2 rounded-full ${
+                              isCurrentLevel ? 'bg-primary' : isUnlocked ? 'bg-green-400' : 'bg-gray-500'
+                            }`} />
+                            <span className={`text-sm font-medium ${
+                              isCurrentLevel ? 'text-primary' : 'text-white'
+                            }`}>
+                              {level.name}
+                            </span>
+                          </div>
+                          <span className="text-xs text-gray-300">
+                            {level.minXp === 0 ? '0' : level.minXp.toLocaleString()}-{level.maxXp === Infinity ? '∞' : level.maxXp.toLocaleString()} XP
+                          </span>
                         </div>
-                      </div>
-                    </HoverCardContent>
-                  </HoverCard>
+                      );
+                    })}
+                  </div>
                 </div>
-              </CardContent>
-            </Card>
+              </HoverCardContent>
+            </HoverCard>
 
             <Card className="bg-black border-gray-700">
               <CardHeader>
