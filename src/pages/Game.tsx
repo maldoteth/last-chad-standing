@@ -514,7 +514,7 @@ const Game = () => {
                       <CardContent className="p-4">
                         <div className="flex items-center space-x-1 mb-2">
                           <Gift className="w-4 h-4" />
-                          <span className="text-xs font-medium">Open Packs</span>
+                          <span className="text-xs font-medium">Packs</span>
                         </div>
                         <div className="space-y-1 mb-3">
                           <div className="flex items-center justify-between">
@@ -1354,7 +1354,7 @@ const Game = () => {
                   <CardContent className="p-6">
                     <div className="flex items-center space-x-2 mb-4">
                       <Gift className="w-5 h-5" />
-                      <span className="text-sm font-medium">Open Packs</span>
+                      <span className="text-sm font-medium">Packs</span>
                     </div>
                     <div className="space-y-2 mb-4">
                       <div className="flex items-center justify-between">
