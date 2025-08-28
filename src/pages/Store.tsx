@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useStore } from "@/hooks/useStore";
+import { useProfile } from "@/hooks/useProfile";
 
 const Store = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -18,6 +19,7 @@ const Store = () => {
   const { login, logout, authenticated, user } = usePrivy();
   const navigate = useNavigate();
   const { storeItems, userBalance, loading, purchaseItem } = useStore();
+  const { profile } = useProfile();
 
   const getRarityColor = (rarity: string) => {
     switch (rarity) {
@@ -117,8 +119,11 @@ const Store = () => {
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Avatar className="w-7 h-7 lg:w-8 lg:h-8 cursor-pointer">
-                    <AvatarImage src="/placeholder.svg" />
-                    <AvatarFallback>{user?.email?.address?.charAt(0).toUpperCase() || "U"}</AvatarFallback>
+                    <AvatarImage src={profile?.avatar_url || "/placeholder.svg"} />
+                    <AvatarFallback>
+                      {profile?.username?.charAt(0).toUpperCase() || 
+                       user?.email?.address?.charAt(0).toUpperCase() || "U"}
+                    </AvatarFallback>
                   </Avatar>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-56 bg-card border border-border z-50">

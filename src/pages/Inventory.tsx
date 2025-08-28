@@ -9,11 +9,13 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ArrowLeft, Package, Calendar, Star } from "lucide-react";
 import { UserInventoryItem } from "@/hooks/useStore";
 import { useToast } from "@/hooks/use-toast";
+import { useProfile } from "@/hooks/useProfile";
 
 const Inventory = () => {
   const { authenticated, user } = usePrivy();
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { profile } = useProfile();
   const [inventory, setInventory] = useState<UserInventoryItem[]>([]);
   const [transactions, setTransactions] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
@@ -106,10 +108,15 @@ const Inventory = () => {
 
           <div className="flex items-center space-x-2">
             <Avatar className="w-8 h-8">
-              <AvatarImage src="/placeholder.svg" />
-              <AvatarFallback>{user?.email?.address?.charAt(0).toUpperCase() || "U"}</AvatarFallback>
+              <AvatarImage src={profile?.avatar_url || "/placeholder.svg"} />
+              <AvatarFallback>
+                {profile?.username?.charAt(0).toUpperCase() || 
+                 user?.email?.address?.charAt(0).toUpperCase() || "U"}
+              </AvatarFallback>
             </Avatar>
-            <span className="text-sm font-medium">{user?.email?.address}</span>
+            <span className="text-sm font-medium">
+              {profile?.username || user?.email?.address}
+            </span>
           </div>
         </div>
       </header>

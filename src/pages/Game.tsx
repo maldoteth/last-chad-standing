@@ -10,6 +10,8 @@ import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Progress } from "@/components/ui/progress";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { SettingsDialog } from "@/components/SettingsDialog";
+import { useProfile } from "@/hooks/useProfile";
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerTrigger, DrawerClose } from "@/components/ui/drawer";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogDescription } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -25,6 +27,7 @@ const Game = () => {
   const [visiblePlayers, setVisiblePlayers] = useState(10);
   const [selectedRarity, setSelectedRarity] = useState("all");
   const [selectedCategory, setSelectedCategory] = useState("all");
+  const [settingsOpen, setSettingsOpen] = useState(false);
   const isMobile = useIsMobile();
   const {
     toast
@@ -37,6 +40,7 @@ const Game = () => {
   } = usePrivy();
   const navigate = useNavigate();
   const { purchaseItem } = useStore();
+  const { profile } = useProfile();
 
   // Handle purchase function
   const handlePurchase = async (itemId: string, itemName: string, price: number) => {
@@ -425,12 +429,18 @@ const Game = () => {
             {authenticated ? <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Avatar className="w-7 h-7 lg:w-8 lg:h-8 cursor-pointer">
-                    <AvatarImage src="/placeholder.svg" />
-                    <AvatarFallback>{user?.email?.address?.charAt(0).toUpperCase() || "U"}</AvatarFallback>
+                    <AvatarImage src={profile?.avatar_url || "/placeholder.svg"} />
+                    <AvatarFallback>
+                      {profile?.username?.charAt(0).toUpperCase() || 
+                       user?.email?.address?.charAt(0).toUpperCase() || "U"}
+                    </AvatarFallback>
                   </Avatar>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-56 bg-card border border-border z-50">
-                  <DropdownMenuItem className="flex items-center space-x-2 cursor-pointer">
+                  <DropdownMenuItem 
+                    onClick={() => setSettingsOpen(true)}
+                    className="flex items-center space-x-2 cursor-pointer"
+                  >
                     <Settings className="w-4 h-4" />
                     <span>Settings</span>
                   </DropdownMenuItem>
@@ -2972,6 +2982,8 @@ const Game = () => {
             </button>)}
         </div>
       </nav>
+      
+      <SettingsDialog open={settingsOpen} onOpenChange={setSettingsOpen} />
     </div>;
 };
 export default Game;
