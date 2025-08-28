@@ -923,14 +923,45 @@ const Game = () => {
                 backgroundSize: '4px 4px'
               }} />
                     <CardHeader className="pb-3 relative z-10">
-                      <CardTitle className="text-base flex items-center space-x-2 text-white">
-                        <TrendingUp className="w-4 h-4" />
-                        <span>Trending</span>
-                      </CardTitle>
+                      <div className="flex items-center justify-between mb-2">
+                        <CardTitle className="text-base flex items-center space-x-2 text-white">
+                          <TrendingUp className="w-4 h-4" />
+                          <span>Trending</span>
+                        </CardTitle>
+                      </div>
+                      <div className="flex space-x-1">
+                        {[{
+                      key: "daily",
+                      label: "24H"
+                    }, {
+                      key: "weekly",
+                      label: "7D"
+                    }, {
+                      key: "monthly",
+                      label: "30D"
+                    }, {
+                      key: "all time",
+                      label: "All"
+                    }].map(filter => (
+                          <Button
+                            key={filter.key}
+                            variant={trendingTimeFilter === filter.key ? "secondary" : "ghost"}
+                            size="sm"
+                            className={`text-xs h-6 px-2 ${
+                              trendingTimeFilter === filter.key 
+                                ? "bg-white/20 text-white border-white/30" 
+                                : "bg-white/5 text-gray-300 hover:bg-white/10 hover:text-white"
+                            }`}
+                            onClick={() => setTrendingTimeFilter(filter.key)}
+                          >
+                            {filter.label}
+                          </Button>
+                        ))}
+                      </div>
                     </CardHeader>
                     <CardContent className="relative z-10">
                       <div className="space-y-2">
-                        {trendingPlayers.slice(0, 3).map((player, idx) => <div key={idx} className="flex items-center space-x-3 p-2 bg-white/5 rounded-lg">
+                        {trendingPlayers.map((player, idx) => <div key={idx} className="flex items-center space-x-3 p-2 bg-white/5 rounded-lg">
                             <div className="w-8 h-8 rounded-full overflow-hidden">
                               <img src={player.image} alt={player.name} className="w-full h-full object-cover" />
                             </div>
@@ -992,7 +1023,7 @@ const Game = () => {
                     </CardHeader>
                     <CardContent className="relative z-10">
                       <div className="space-y-2">
-                        {topGainers.slice(0, 3).map((player, idx) => <div key={idx} className="flex items-center space-x-3 p-2 bg-white/5 rounded-lg">
+                        {topGainers.map((player, idx) => <div key={idx} className="flex items-center space-x-3 p-2 bg-white/5 rounded-lg">
                             <div className="w-8 h-8 rounded-full overflow-hidden">
                               <img src={player.image} alt={player.name} className="w-full h-full object-cover" />
                             </div>
