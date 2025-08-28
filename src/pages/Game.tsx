@@ -972,7 +972,7 @@ const Game = () => {
         {/* Desktop Layout - Hidden on mobile */}
         <div className="hidden lg:flex lg:min-h-screen w-full">
           {/* Left Sidebar - Desktop only */}
-          <aside className="w-80 bg-card border-r border-border p-6 space-y-6">
+          <aside className="w-80 bg-card border-r border-border p-6 space-y-6 overflow-y-auto h-screen">
             <Card>
               <CardHeader>
                 <CardTitle className="text-base flex items-center space-x-2">
@@ -1789,7 +1789,7 @@ const Game = () => {
           </main>
 
           {/* Right Sidebar - Desktop only */}
-          <aside className="w-80 bg-card border-l border-border p-6 flex flex-col h-screen">
+          <aside className="w-80 bg-card border-l border-border p-6 flex flex-col h-screen overflow-y-auto">
             <Tabs value={rightSidebarTab} onValueChange={setRightSidebarTab} className="w-full flex flex-col h-full">
               <TabsList className="grid w-full grid-cols-2 flex-shrink-0">
                 <TabsTrigger value="notifications" className="flex items-center gap-2">
