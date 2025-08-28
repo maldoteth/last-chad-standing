@@ -1364,8 +1364,8 @@ const Game = () => {
                 </Card>
 
                 {/* Tournament Complete Card */}
-                <Card className="col-span-4 bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
+                <Card className="col-span-4 bg-gradient-to-br from-blue-900 via-blue-950 to-blue-800 text-white border border-blue-700/50 shadow-2xl relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-800/20 via-transparent to-blue-900/30" />
                   <div className="absolute inset-0" style={{
                 backgroundImage: `
                       linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
