@@ -2100,11 +2100,11 @@ const Game = () => {
           <aside className="w-80 bg-black border-l border-border p-6 flex flex-col h-screen overflow-y-auto">
             <Tabs value={rightSidebarTab} onValueChange={setRightSidebarTab} className="w-full flex flex-col h-full">
               <TabsList className="grid w-full grid-cols-2 flex-shrink-0 bg-black">
-                <TabsTrigger value="notifications" className="flex items-center gap-2">
+                <TabsTrigger value="notifications" className="flex items-center gap-2 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-primary after:transition-transform after:duration-300 after:scale-x-0 data-[state=active]:after:scale-x-100">
                   <Bell className="w-4 h-4" />
                   Notifications
                 </TabsTrigger>
-                <TabsTrigger value="rankings" className="flex items-center gap-2">
+                <TabsTrigger value="rankings" className="flex items-center gap-2 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-primary after:transition-transform after:duration-300 after:scale-x-0 data-[state=active]:after:scale-x-100">
                   <Medal className="w-4 h-4" />
                   Rankings
                 </TabsTrigger>
