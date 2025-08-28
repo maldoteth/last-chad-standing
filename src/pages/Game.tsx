@@ -15,6 +15,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 const Game = () => {
   const [activeTab, setActiveTab] = useState("home");
   const [gainersTimeFilter, setGainersTimeFilter] = useState("daily");
+  const [trendingTimeFilter, setTrendingTimeFilter] = useState("daily");
   const [rightSidebarTab, setRightSidebarTab] = useState("rankings");
   const [userCoins] = useState(0);
   const [visiblePlayers, setVisiblePlayers] = useState(10);
@@ -1844,10 +1845,29 @@ const Game = () => {
                   backgroundSize: '4px 4px'
                 }} />
                     <CardHeader className="relative z-10">
-                      <CardTitle className="text-lg flex items-center space-x-2 text-white">
-                        <TrendingUp className="w-5 h-5" />
-                        <span>Trending</span>
-                      </CardTitle>
+                      <div className="flex items-center justify-between mb-3">
+                        <CardTitle className="text-lg flex items-center space-x-2 text-white">
+                          <TrendingUp className="w-5 h-5" />
+                          <span>Trending</span>
+                        </CardTitle>
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        {['daily', 'weekly', 'monthly', 'all time'].map((period) => (
+                          <Button
+                            key={period}
+                            variant={trendingTimeFilter === period ? "secondary" : "ghost"}
+                            size="sm"
+                            onClick={() => setTrendingTimeFilter(period)}
+                            className={`text-xs px-3 py-1 h-7 ${
+                              trendingTimeFilter === period 
+                                ? "bg-white/20 text-white border-white/30" 
+                                : "bg-white/5 text-gray-300 hover:bg-white/10 hover:text-white"
+                            }`}
+                          >
+                            {period.charAt(0).toUpperCase() + period.slice(1)}
+                          </Button>
+                        ))}
+                      </div>
                     </CardHeader>
                     <CardContent className="relative z-10">
                       <div className="space-y-3">
