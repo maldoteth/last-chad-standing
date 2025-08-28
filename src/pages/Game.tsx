@@ -2013,7 +2013,7 @@ const Game = () => {
                 </div>
               </TabsContent>
               
-              <TabsContent value="rankings" className="overflow-y-auto space-y-2 scrollbar-none max-h-[580px] -mt-2">
+              <TabsContent value="rankings" className="overflow-y-auto space-y-2 max-h-[580px] -mt-2 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
                 <p className="text-sm text-muted-foreground text-center pb-2 pt-6">Weekly prize pool: $0</p>
                 {[{
                 rank: 1,
