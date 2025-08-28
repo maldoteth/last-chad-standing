@@ -1088,11 +1088,18 @@ const Game = () => {
               
               {/* Prominent Logo */}
               <div className="flex justify-center mt-6">
-                <img 
-                  src="/lovable-uploads/885f4a61-92f8-40e3-8733-2ba3b2534e16.png" 
-                  alt="Logo" 
-                  className="h-16 object-contain opacity-90 hover:opacity-100 transition-opacity duration-300" 
-                />
+                <a 
+                  href="https://dehub.io/lcs"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block"
+                >
+                  <img 
+                    src="/lovable-uploads/885f4a61-92f8-40e3-8733-2ba3b2534e16.png" 
+                    alt="Logo" 
+                    className="h-16 object-contain opacity-90 hover:opacity-100 transition-opacity duration-300 cursor-pointer" 
+                  />
+                </a>
               </div>
             </div>
           </aside>
