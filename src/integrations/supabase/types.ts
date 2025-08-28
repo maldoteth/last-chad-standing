@@ -119,6 +119,7 @@ export type Database = {
           id: string
           updated_at: string
           user_id: string
+          xp: number
         }
         Insert: {
           coins?: number
@@ -126,6 +127,7 @@ export type Database = {
           id?: string
           updated_at?: string
           user_id: string
+          xp?: number
         }
         Update: {
           coins?: number
@@ -133,6 +135,7 @@ export type Database = {
           id?: string
           updated_at?: string
           user_id?: string
+          xp?: number
         }
         Relationships: []
       }
