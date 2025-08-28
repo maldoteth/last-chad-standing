@@ -808,7 +808,7 @@ const Game = () => {
                                         onClick={() => handlePurchase(`skin-${idx}`, item.name, item.price)}
                                       >
                                         <Coins className="mr-2 h-3 w-3" />
-                                        Buy with Coin Balance
+                                        Buy With Coins
                                       </DropdownMenuItem>
                                       <DropdownMenuItem 
                                         className="hover:bg-white/10 cursor-pointer"
@@ -893,7 +893,7 @@ const Game = () => {
                                         onClick={() => handlePurchase(`accessory-${idx}`, item.name, item.price)}
                                       >
                                         <Coins className="mr-2 h-3 w-3" />
-                                        Buy with Coin Balance
+                                        Buy With Coins
                                       </DropdownMenuItem>
                                       <DropdownMenuItem 
                                         className="hover:bg-white/10 cursor-pointer"
@@ -978,7 +978,7 @@ const Game = () => {
                                         onClick={() => handlePurchase(`mobility-${idx}`, item.name, item.price)}
                                       >
                                         <Coins className="mr-2 h-3 w-3" />
-                                        Buy with Coin Balance
+                                        Buy With Coins
                                       </DropdownMenuItem>
                                       <DropdownMenuItem 
                                         className="hover:bg-white/10 cursor-pointer"
@@ -1063,7 +1063,7 @@ const Game = () => {
                                         onClick={() => handlePurchase(`pack-${idx}`, item.name, item.price)}
                                       >
                                         <Coins className="mr-2 h-3 w-3" />
-                                        Buy with Coin Balance
+                                        Buy With Coins
                                       </DropdownMenuItem>
                                       <DropdownMenuItem 
                                         className="hover:bg-white/10 cursor-pointer"
@@ -1891,7 +1891,7 @@ const Game = () => {
                                       className="flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10"
                                     >
                                       <Coins className="w-4 h-4" />
-                                      <span>Buy with Coin Balance</span>
+                                      <span>Buy With Coins</span>
                                     </DropdownMenuItem>
                                     <DropdownMenuItem 
                                       onClick={() => toast({
@@ -1976,7 +1976,7 @@ const Game = () => {
                                       className="flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10"
                                     >
                                       <Coins className="w-4 h-4" />
-                                      <span>Buy with Coin Balance</span>
+                                      <span>Buy With Coins</span>
                                     </DropdownMenuItem>
                                     <DropdownMenuItem 
                                       onClick={() => toast({
@@ -2061,7 +2061,7 @@ const Game = () => {
                                       className="flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10"
                                     >
                                       <Coins className="w-4 h-4" />
-                                      <span>Buy with Coin Balance</span>
+                                      <span>Buy With Coins</span>
                                     </DropdownMenuItem>
                                     <DropdownMenuItem 
                                       onClick={() => toast({
@@ -2146,7 +2146,7 @@ const Game = () => {
                                       className="flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10"
                                     >
                                       <Coins className="w-4 h-4" />
-                                      <span>Buy with Coin Balance</span>
+                                      <span>Buy With Coins</span>
                                     </DropdownMenuItem>
                                     <DropdownMenuItem 
                                       onClick={() => toast({
@@ -2479,7 +2479,7 @@ const Game = () => {
                                       className="flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10"
                                     >
                                       <Coins className="w-4 h-4" />
-                                      <span>Buy with Coin Balance</span>
+                                      <span>Buy With Coins</span>
                                     </DropdownMenuItem>
                                     <DropdownMenuItem 
                                       onClick={() => toast({
