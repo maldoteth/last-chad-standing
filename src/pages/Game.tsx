@@ -697,7 +697,7 @@ const Game = () => {
                           onClick={() => setSelectedRarity("all")} 
                           className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "all" ? "bg-white/20" : ""}`}
                         >
-                          <div className="w-3 h-3 rounded-full bg-gray-500" />
+                          <div className="w-3 h-3 rounded-full bg-black" />
                           <span>All Rarities</span>
                         </DropdownMenuItem>
                         <DropdownMenuItem 
@@ -1783,7 +1783,7 @@ const Game = () => {
                           onClick={() => setSelectedRarity("all")} 
                           className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "all" ? "bg-white/20" : ""}`}
                         >
-                          <div className="w-3 h-3 rounded-full bg-gray-500" />
+                          <div className="w-3 h-3 rounded-full bg-black" />
                           <span>All Rarities</span>
                         </DropdownMenuItem>
                         <DropdownMenuItem 
