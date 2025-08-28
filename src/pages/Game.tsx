@@ -2099,7 +2099,7 @@ const Game = () => {
           {/* Right Sidebar - Desktop only */}
           <aside className="w-80 bg-black border-l border-border p-6 flex flex-col h-screen overflow-y-auto">
             <Tabs value={rightSidebarTab} onValueChange={setRightSidebarTab} className="w-full flex flex-col h-full">
-              <TabsList className="grid w-full grid-cols-2 flex-shrink-0">
+              <TabsList className="grid w-full grid-cols-2 flex-shrink-0 bg-black">
                 <TabsTrigger value="notifications" className="flex items-center gap-2">
                   <Bell className="w-4 h-4" />
                   Notifications
@@ -2110,7 +2110,7 @@ const Game = () => {
                 </TabsTrigger>
               </TabsList>
               
-              <TabsContent value="notifications">
+              <TabsContent value="notifications" className="bg-black">
                 <div className="text-center py-8 flex-1 flex flex-col justify-center">
                   <Bell className="w-12 h-12 mx-auto text-muted-foreground mb-4 opacity-50" />
                   <p className="text-sm text-muted-foreground mt-2">
@@ -2119,7 +2119,7 @@ const Game = () => {
                 </div>
               </TabsContent>
               
-              <TabsContent value="rankings" className="overflow-y-auto space-y-2 max-h-[580px] -mt-2 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+              <TabsContent value="rankings" className="overflow-y-auto space-y-2 max-h-[580px] -mt-2 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] bg-black">
                 <p className="text-sm text-muted-foreground text-center pb-2 pt-6">Weekly prize pool: $0</p>
                 {[{
                 rank: 1,
