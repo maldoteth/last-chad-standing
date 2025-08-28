@@ -658,13 +658,21 @@ const Game = () => {
                 {/* Categories */}
                 <div className="space-y-4">
                   {/* Skins Category */}
-                  <Card className="bg-gradient-to-br from-blue-600/20 to-purple-700/20 border border-blue-600/30">
-                    <CardHeader>
-                      <CardTitle className="flex items-center justify-between">
+                  <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
+                    <div className="absolute inset-0" style={{
+                  backgroundImage: `
+                        linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
+                        linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
+                      `,
+                  backgroundSize: '4px 4px'
+                }} />
+                    <CardHeader className="relative z-10">
+                      <CardTitle className="flex items-center justify-between text-white">
                         <span>Skins</span>
                         <Badge variant="secondary">4 items</Badge>
                       </CardTitle>
-                      <CardDescription>Characters to play in game</CardDescription>
+                      <CardDescription className="text-gray-300">Characters to play in game</CardDescription>
                     </CardHeader>
                     <CardContent>
                       <div className="grid grid-cols-2 gap-3">
@@ -701,13 +709,21 @@ const Game = () => {
                   </Card>
 
                   {/* Accessories Category */}
-                  <Card className="bg-gradient-to-br from-green-600/20 to-blue-700/20 border border-green-600/30">
-                    <CardHeader>
-                      <CardTitle className="flex items-center justify-between">
+                  <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
+                    <div className="absolute inset-0" style={{
+                  backgroundImage: `
+                        linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
+                        linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
+                      `,
+                  backgroundSize: '4px 4px'
+                }} />
+                    <CardHeader className="relative z-10">
+                      <CardTitle className="flex items-center justify-between text-white">
                         <span>Accessories</span>
                         <Badge variant="secondary">4 items</Badge>
                       </CardTitle>
-                      <CardDescription>Shoes, backpacks, hats</CardDescription>
+                      <CardDescription className="text-gray-300">Shoes, backpacks, hats</CardDescription>
                     </CardHeader>
                     <CardContent>
                       <div className="grid grid-cols-2 gap-3">
@@ -742,13 +758,21 @@ const Game = () => {
                   </Card>
 
                   {/* Mobility Category */}
-                  <Card className="bg-gradient-to-br from-orange-600/20 to-red-700/20 border border-orange-600/30">
-                    <CardHeader>
-                      <CardTitle className="flex items-center justify-between">
+                  <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
+                    <div className="absolute inset-0" style={{
+                  backgroundImage: `
+                        linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
+                        linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
+                      `,
+                  backgroundSize: '4px 4px'
+                }} />
+                    <CardHeader className="relative z-10">
+                      <CardTitle className="flex items-center justify-between text-white">
                         <span>Mobility</span>
                         <Badge variant="secondary">4 items</Badge>
                       </CardTitle>
-                      <CardDescription>Cars, golf buggies, etc</CardDescription>
+                      <CardDescription className="text-gray-300">Cars, golf buggies, etc</CardDescription>
                     </CardHeader>
                     <CardContent>
                       <div className="grid grid-cols-2 gap-3">
@@ -783,13 +807,21 @@ const Game = () => {
                   </Card>
 
                   {/* Packs Category */}
-                  <Card className="bg-gradient-to-br from-purple-600/20 to-pink-700/20 border border-purple-600/30">
-                    <CardHeader>
-                      <CardTitle className="flex items-center justify-between">
+                  <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
+                    <div className="absolute inset-0" style={{
+                  backgroundImage: `
+                        linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
+                        linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
+                      `,
+                  backgroundSize: '4px 4px'
+                }} />
+                    <CardHeader className="relative z-10">
+                      <CardTitle className="flex items-center justify-between text-white">
                         <span>Packs</span>
                         <Badge variant="secondary">4 items</Badge>
                       </CardTitle>
-                      <CardDescription>Mystery packs with exclusive rewards</CardDescription>
+                      <CardDescription className="text-gray-300">Mystery packs with exclusive rewards</CardDescription>
                     </CardHeader>
                     <CardContent>
                       <div className="grid grid-cols-2 gap-3">
