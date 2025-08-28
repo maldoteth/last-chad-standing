@@ -2119,7 +2119,7 @@ const Game = () => {
                 </div>
               </TabsContent>
               
-              <TabsContent value="rankings" className="overflow-y-auto space-y-2 max-h-[580px] -mt-2 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] bg-black">
+              <TabsContent value="rankings" className="flex-1 overflow-y-auto space-y-2 -mt-2 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] bg-black">
                 <p className="text-sm text-muted-foreground text-center pb-2 pt-6">Weekly prize pool: $0</p>
                 {[{
                 rank: 1,
