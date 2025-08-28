@@ -19,6 +19,7 @@ const Game = () => {
   const [rightSidebarTab, setRightSidebarTab] = useState("rankings");
   const [userCoins] = useState(0);
   const [visiblePlayers, setVisiblePlayers] = useState(10);
+  const [selectedRarity, setSelectedRarity] = useState("all");
   const {
     toast
   } = useToast();
@@ -322,6 +323,12 @@ const Game = () => {
   }].sort((a, b) => b.price - a.price);
   const currentMarketValue = marketValueData[marketValueData.length - 1]?.value || 0;
   const currentListings = Math.round(listingsData[listingsData.length - 1]?.listings || 0);
+
+  // Filter function for store items
+  const filterItemsByRarity = (items: any[]) => {
+    if (selectedRarity === "all") return items;
+    return items.filter(item => item.rarity === selectedRarity);
+  };
 
   // Debug logging for activeTab changes
   console.log('Current activeTab:', activeTab);
@@ -1537,12 +1544,67 @@ const Game = () => {
 
             {activeTab === "store" && <div className="space-y-6 max-w-4xl">
                 {/* Store Header */}
-                <div className="text-center">
+                <div className="text-center relative">
                   <div className="flex items-center justify-center space-x-3 mb-4">
                     <ShoppingBag className="w-8 h-8 text-primary" />
                     <div>
                       <h1 className="text-3xl font-bold">LCS Store</h1>
                     </div>
+                  </div>
+                  
+                  {/* Filter Dropdown - positioned in top right */}
+                  <div className="absolute top-0 right-0">
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button variant="ghost" size="sm" className="text-white hover:bg-white/10">
+                          <Filter className="w-4 h-4" />
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="end" className="w-48 bg-card border border-border z-50">
+                        <DropdownMenuItem 
+                          onClick={() => setSelectedRarity("all")} 
+                          className={`flex items-center space-x-2 cursor-pointer ${selectedRarity === "all" ? "bg-accent" : ""}`}
+                        >
+                          <div className="w-3 h-3 rounded-full bg-gray-500" />
+                          <span>All Rarities</span>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem 
+                          onClick={() => setSelectedRarity("green")} 
+                          className={`flex items-center space-x-2 cursor-pointer ${selectedRarity === "green" ? "bg-accent" : ""}`}
+                        >
+                          <div className="w-3 h-3 rounded-full bg-green-500" />
+                          <span>Green</span>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem 
+                          onClick={() => setSelectedRarity("blue")} 
+                          className={`flex items-center space-x-2 cursor-pointer ${selectedRarity === "blue" ? "bg-accent" : ""}`}
+                        >
+                          <div className="w-3 h-3 rounded-full bg-blue-500" />
+                          <span>Blue</span>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem 
+                          onClick={() => setSelectedRarity("silver")} 
+                          className={`flex items-center space-x-2 cursor-pointer ${selectedRarity === "silver" ? "bg-accent" : ""}`}
+                        >
+                          <div className="w-3 h-3 rounded-full bg-gray-300" />
+                          <span>Silver</span>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem 
+                          onClick={() => setSelectedRarity("gold")} 
+                          className={`flex items-center space-x-2 cursor-pointer ${selectedRarity === "gold" ? "bg-accent" : ""}`}
+                        >
+                          <div className="w-3 h-3 rounded-full bg-yellow-400" />
+                          <span>Gold</span>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem 
+                          onClick={() => setSelectedRarity("special")} 
+                          className={`flex items-center space-x-2 cursor-pointer ${selectedRarity === "special" ? "bg-accent" : ""}`}
+                        >
+                          <div className="w-3 h-3 rounded-full bg-gradient-to-r from-purple-400 via-pink-400 to-yellow-400" />
+                          <span>Special</span>
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
                   </div>
                 </div>
 
@@ -1565,29 +1627,29 @@ const Game = () => {
                       </CardTitle>
                       <CardDescription className="text-gray-300">Characters to play in game</CardDescription>
                     </CardHeader>
-                    <CardContent>
-                      <div className="grid grid-cols-4 gap-4">
-                        {[{
-                      name: "Cyber Warrior",
-                      price: 2500,
-                      rarity: "legendary",
-                      image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
-                    }, {
-                      name: "Shadow Assassin",
-                      price: 1800,
-                      rarity: "epic",
-                      image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png"
-                    }, {
-                      name: "Battle Mage",
-                      price: 2200,
-                      rarity: "legendary",
-                      image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
-                    }, {
-                      name: "Iron Guardian",
-                      price: 1500,
-                      rarity: "rare",
-                      image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png"
-                    }].map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
+                     <CardContent>
+                       <div className="grid grid-cols-4 gap-4">
+                         {filterItemsByRarity([{
+                       name: "Cyber Warrior",
+                       price: 2500,
+                       rarity: "gold",
+                       image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
+                     }, {
+                       name: "Shadow Assassin",
+                       price: 1800,
+                       rarity: "blue",
+                       image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png"
+                     }, {
+                       name: "Battle Mage",
+                       price: 2200,
+                       rarity: "silver",
+                       image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
+                     }, {
+                       name: "Iron Guardian",
+                       price: 1500,
+                       rarity: "green",
+                       image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png"
+                     }]).map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
                             <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
                             <CardContent className="p-4 relative z-10">
                               <div className="aspect-square bg-gray-800/50 rounded-lg mb-3 overflow-hidden">
@@ -1626,25 +1688,29 @@ const Game = () => {
                       </CardTitle>
                       <CardDescription className="text-gray-300">Shoes, backpacks, hats</CardDescription>
                     </CardHeader>
-                    <CardContent>
-                      <div className="grid grid-cols-4 gap-4">
-                        {[{
-                      name: "Neon Sneakers",
-                      price: 600,
-                      image: "/lovable-uploads/69c61fed-9ccd-43d2-bab5-17c6c0db05b4.png"
-                    }, {
-                      name: "Combat Backpack",
-                      price: 450,
-                      image: "/lovable-uploads/7311683b-ea99-4dd9-9b1f-89d96742eff0.png"
-                    }, {
-                      name: "Tactical Helmet",
-                      price: 750,
-                      image: "/lovable-uploads/69c61fed-9ccd-43d2-bab5-17c6c0db05b4.png"
-                    }, {
-                      name: "Power Gloves",
-                      price: 550,
-                      image: "/lovable-uploads/7311683b-ea99-4dd9-9b1f-89d96742eff0.png"
-                    }].map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
+                     <CardContent>
+                       <div className="grid grid-cols-4 gap-4">
+                         {filterItemsByRarity([{
+                       name: "Neon Sneakers",
+                       price: 600,
+                       rarity: "blue",
+                       image: "/lovable-uploads/69c61fed-9ccd-43d2-bab5-17c6c0db05b4.png"
+                     }, {
+                       name: "Combat Backpack",
+                       price: 450,
+                       rarity: "green",
+                       image: "/lovable-uploads/7311683b-ea99-4dd9-9b1f-89d96742eff0.png"
+                     }, {
+                       name: "Tactical Helmet",
+                       price: 750,
+                       rarity: "special",
+                       image: "/lovable-uploads/69c61fed-9ccd-43d2-bab5-17c6c0db05b4.png"
+                     }, {
+                       name: "Power Gloves",
+                       price: 550,
+                       rarity: "silver",
+                       image: "/lovable-uploads/7311683b-ea99-4dd9-9b1f-89d96742eff0.png"
+                     }]).map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
                             <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
                             <CardContent className="p-4 relative z-10">
                               <div className="aspect-square bg-gray-800/50 rounded-lg mb-3 overflow-hidden">
@@ -1683,25 +1749,29 @@ const Game = () => {
                       </CardTitle>
                       <CardDescription className="text-gray-300">Cars, golf buggies, etc</CardDescription>
                     </CardHeader>
-                    <CardContent>
-                      <div className="grid grid-cols-4 gap-4">
-                        {[{
-                      name: "Cyber Car",
-                      price: 5000,
-                      image: "/lovable-uploads/84ab9eed-00bc-425c-a953-3ea0478e464d.png"
-                    }, {
-                      name: "Speed Buggy",
-                      price: 3200,
-                      image: "/lovable-uploads/896892f1-7ebc-4852-acea-80dcdbf7c545.png"
-                    }, {
-                      name: "Hover Bike",
-                      price: 4500,
-                      image: "/lovable-uploads/84ab9eed-00bc-425c-a953-3ea0478e464d.png"
-                    }, {
-                      name: "Stealth Jet",
-                      price: 8000,
-                      image: "/lovable-uploads/896892f1-7ebc-4852-acea-80dcdbf7c545.png"
-                    }].map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
+                     <CardContent>
+                       <div className="grid grid-cols-4 gap-4">
+                         {filterItemsByRarity([{
+                       name: "Cyber Car",
+                       price: 5000,
+                       rarity: "gold",
+                       image: "/lovable-uploads/84ab9eed-00bc-425c-a953-3ea0478e464d.png"
+                     }, {
+                       name: "Speed Buggy",
+                       price: 3200,
+                       rarity: "silver",
+                       image: "/lovable-uploads/896892f1-7ebc-4852-acea-80dcdbf7c545.png"
+                     }, {
+                       name: "Hover Bike",
+                       price: 4500,
+                       rarity: "blue",
+                       image: "/lovable-uploads/84ab9eed-00bc-425c-a953-3ea0478e464d.png"
+                     }, {
+                       name: "Stealth Jet",
+                       price: 8000,
+                       rarity: "special",
+                       image: "/lovable-uploads/896892f1-7ebc-4852-acea-80dcdbf7c545.png"
+                     }]).map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
                             <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
                             <CardContent className="p-4 relative z-10">
                               <div className="aspect-square bg-gray-800/50 rounded-lg mb-3 overflow-hidden">
@@ -1740,25 +1810,29 @@ const Game = () => {
                       </CardTitle>
                       <CardDescription className="text-gray-300">Mystery packs with exclusive rewards</CardDescription>
                     </CardHeader>
-                    <CardContent>
-                      <div className="grid grid-cols-4 gap-4">
-                        {[{
-                      name: "Silver Pack",
-                      price: 1000,
-                      image: "/lovable-uploads/745baeae-f05a-4a2a-828f-45aed6d05972.png"
-                    }, {
-                      name: "Gold Pack",
-                      price: 2000,
-                      image: "/lovable-uploads/77a6c004-93ed-49ee-a5d0-6056ee852612.png"
-                    }, {
-                      name: "Special Pack 1",
-                      price: 3500,
-                      image: "/lovable-uploads/319fe799-d5a0-4338-a0d4-53b1b1e3fe1a.png"
-                    }, {
-                      name: "Special Pack 2",
-                      price: 5000,
-                      image: "/lovable-uploads/b31c9ab4-6dcf-4a77-bdf6-7e82e5a8c66a.png"
-                    }].map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
+                     <CardContent>
+                       <div className="grid grid-cols-4 gap-4">
+                         {filterItemsByRarity([{
+                       name: "Silver Pack",
+                       price: 1000,
+                       rarity: "silver",
+                       image: "/lovable-uploads/745baeae-f05a-4a2a-828f-45aed6d05972.png"
+                     }, {
+                       name: "Gold Pack",
+                       price: 2000,
+                       rarity: "gold",
+                       image: "/lovable-uploads/77a6c004-93ed-49ee-a5d0-6056ee852612.png"
+                     }, {
+                       name: "Special Pack 1",
+                       price: 3500,
+                       rarity: "special",
+                       image: "/lovable-uploads/319fe799-d5a0-4338-a0d4-53b1b1e3fe1a.png"
+                     }, {
+                       name: "Special Pack 2",
+                       price: 5000,
+                       rarity: "special",
+                       image: "/lovable-uploads/b31c9ab4-6dcf-4a77-bdf6-7e82e5a8c66a.png"
+                     }]).map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
                             <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
                             <CardContent className="p-4 relative z-10">
                               <div className="aspect-square bg-gray-800/50 rounded-lg mb-3 overflow-hidden">
