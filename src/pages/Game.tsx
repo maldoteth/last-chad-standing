@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { usePrivy } from '@privy-io/react-auth';
 import { useNavigate } from "react-router-dom";
+import { useStore } from "@/hooks/useStore";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -31,6 +32,27 @@ const Game = () => {
     user
   } = usePrivy();
   const navigate = useNavigate();
+  const { purchaseItem } = useStore();
+
+  // Handle purchase function
+  const handlePurchase = async (itemId: string, itemName: string, price: number) => {
+    if (!authenticated) {
+      toast({
+        title: "Please log in",
+        description: "You need to be logged in to make purchases.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    const success = await purchaseItem(itemId, itemName, price);
+    if (success) {
+      toast({
+        title: "Purchase successful!",
+        description: `You purchased ${itemName} for ${price} coins.`,
+      });
+    }
+  };
 
   // Mock data for market analytics
   const marketValueData = Array.from({
@@ -771,9 +793,33 @@ const Game = () => {
                                   <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
                                   <span className="text-xs font-bold text-white">{item.price.toLocaleString()}</span>
                                 </div>
-                                <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
-                                  Buy
-                                </Button>
+                                <DropdownMenu>
+                                  <DropdownMenuTrigger asChild>
+                                    <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
+                                      <ShoppingBag className="mr-1 h-2 w-2" />
+                                      {authenticated ? 'Buy' : 'Login'}
+                                      {authenticated && <ChevronRight className="ml-1 h-2 w-2" />}
+                                    </Button>
+                                  </DropdownMenuTrigger>
+                                  {authenticated && (
+                                    <DropdownMenuContent className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
+                                      <DropdownMenuItem 
+                                        className="hover:bg-white/10 cursor-pointer"
+                                        onClick={() => handlePurchase(`skin-${idx}`, item.name, item.price)}
+                                      >
+                                        <Coins className="mr-2 h-3 w-3" />
+                                        Buy with Coin Balance
+                                      </DropdownMenuItem>
+                                      <DropdownMenuItem 
+                                        className="hover:bg-white/10 cursor-pointer"
+                                        onClick={() => {/* TODO: Implement card payment */}}
+                                      >
+                                        <CreditCard className="mr-2 h-3 w-3" />
+                                        Buy with Card
+                                      </DropdownMenuItem>
+                                    </DropdownMenuContent>
+                                  )}
+                                </DropdownMenu>
                               </div>
                             </CardContent>
                           </Card>)}
@@ -832,9 +878,33 @@ const Game = () => {
                                   <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
                                   <span className="text-xs font-bold text-white">{item.price.toLocaleString()}</span>
                                 </div>
-                                <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
-                                  Buy
-                                </Button>
+                                <DropdownMenu>
+                                  <DropdownMenuTrigger asChild>
+                                    <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
+                                      <ShoppingBag className="mr-1 h-2 w-2" />
+                                      {authenticated ? 'Buy' : 'Login'}
+                                      {authenticated && <ChevronRight className="ml-1 h-2 w-2" />}
+                                    </Button>
+                                  </DropdownMenuTrigger>
+                                  {authenticated && (
+                                    <DropdownMenuContent className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
+                                      <DropdownMenuItem 
+                                        className="hover:bg-white/10 cursor-pointer"
+                                        onClick={() => handlePurchase(`accessory-${idx}`, item.name, item.price)}
+                                      >
+                                        <Coins className="mr-2 h-3 w-3" />
+                                        Buy with Coin Balance
+                                      </DropdownMenuItem>
+                                      <DropdownMenuItem 
+                                        className="hover:bg-white/10 cursor-pointer"
+                                        onClick={() => {/* TODO: Implement card payment */}}
+                                      >
+                                        <CreditCard className="mr-2 h-3 w-3" />
+                                        Buy with Card
+                                      </DropdownMenuItem>
+                                    </DropdownMenuContent>
+                                  )}
+                                </DropdownMenu>
                               </div>
                             </CardContent>
                           </Card>)}
@@ -893,9 +963,33 @@ const Game = () => {
                                   <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
                                   <span className="text-xs font-bold text-white">{item.price.toLocaleString()}</span>
                                 </div>
-                                <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
-                                  Buy
-                                </Button>
+                                <DropdownMenu>
+                                  <DropdownMenuTrigger asChild>
+                                    <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
+                                      <ShoppingBag className="mr-1 h-2 w-2" />
+                                      {authenticated ? 'Buy' : 'Login'}
+                                      {authenticated && <ChevronRight className="ml-1 h-2 w-2" />}
+                                    </Button>
+                                  </DropdownMenuTrigger>
+                                  {authenticated && (
+                                    <DropdownMenuContent className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
+                                      <DropdownMenuItem 
+                                        className="hover:bg-white/10 cursor-pointer"
+                                        onClick={() => handlePurchase(`mobility-${idx}`, item.name, item.price)}
+                                      >
+                                        <Coins className="mr-2 h-3 w-3" />
+                                        Buy with Coin Balance
+                                      </DropdownMenuItem>
+                                      <DropdownMenuItem 
+                                        className="hover:bg-white/10 cursor-pointer"
+                                        onClick={() => {/* TODO: Implement card payment */}}
+                                      >
+                                        <CreditCard className="mr-2 h-3 w-3" />
+                                        Buy with Card
+                                      </DropdownMenuItem>
+                                    </DropdownMenuContent>
+                                  )}
+                                </DropdownMenu>
                               </div>
                             </CardContent>
                           </Card>)}
@@ -954,9 +1048,33 @@ const Game = () => {
                                   <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
                                   <span className="text-xs font-bold text-white">{item.price.toLocaleString()}</span>
                                 </div>
-                                <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
-                                  Buy
-                                </Button>
+                                <DropdownMenu>
+                                  <DropdownMenuTrigger asChild>
+                                    <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
+                                      <ShoppingBag className="mr-1 h-2 w-2" />
+                                      {authenticated ? 'Buy' : 'Login'}
+                                      {authenticated && <ChevronRight className="ml-1 h-2 w-2" />}
+                                    </Button>
+                                  </DropdownMenuTrigger>
+                                  {authenticated && (
+                                    <DropdownMenuContent className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
+                                      <DropdownMenuItem 
+                                        className="hover:bg-white/10 cursor-pointer"
+                                        onClick={() => handlePurchase(`pack-${idx}`, item.name, item.price)}
+                                      >
+                                        <Coins className="mr-2 h-3 w-3" />
+                                        Buy with Coin Balance
+                                      </DropdownMenuItem>
+                                      <DropdownMenuItem 
+                                        className="hover:bg-white/10 cursor-pointer"
+                                        onClick={() => {/* TODO: Implement card payment */}}
+                                      >
+                                        <CreditCard className="mr-2 h-3 w-3" />
+                                        Buy with Card
+                                      </DropdownMenuItem>
+                                    </DropdownMenuContent>
+                                  )}
+                                </DropdownMenu>
                               </div>
                             </CardContent>
                           </Card>)}
