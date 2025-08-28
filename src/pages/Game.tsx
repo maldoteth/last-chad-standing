@@ -2023,14 +2023,22 @@ const Game = () => {
                   </div>
                 </div>
 
-                {!authenticated ? <Card className="bg-black border-gray-700">
-                    <CardContent className="p-8 text-center">
-                      <Package className="w-16 h-16 mx-auto text-muted-foreground/50 mb-4" />
-                      <h3 className="text-lg font-semibold mb-2">Login to View Your Locker</h3>
-                      <p className="text-muted-foreground mb-4">Connect your wallet to see your owned items</p>
-                      <Button onClick={login} className="bg-primary hover:bg-primary/90">
-                        Login
-                      </Button>
+                {!authenticated ? <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
+                    <div className="absolute inset-0" style={{
+              backgroundImage: `
+                        linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
+                        linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
+                      `,
+              backgroundSize: '4px 4px'
+            }} />
+                    <CardContent className="p-6 text-center relative z-10">
+                       <Package className="w-16 h-16 mx-auto text-gray-400 mb-4" />
+                       <h3 className="text-lg font-semibold mb-2 text-white">Login to View Your Locker</h3>
+                       <p className="text-gray-300 mb-4">Connect your wallet to see your owned items</p>
+                       <Button onClick={login} variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30">
+                         Login
+                       </Button>
                     </CardContent>
                   </Card> : <div className="space-y-6">
                     {/* Desktop Skins Category */}
