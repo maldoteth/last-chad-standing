@@ -649,10 +649,9 @@ const Game = () => {
                 <div className="text-center">
                   <div className="flex items-center justify-center space-x-3 mb-4">
                     <ShoppingBag className="w-8 h-8 text-primary" />
-                    <div>
-                      <h1 className="text-2xl font-bold">LCS Store</h1>
-                      <p className="text-muted-foreground text-sm">Customize your gaming experience</p>
-                    </div>
+                     <div>
+                       <h1 className="text-2xl font-bold">LCS Store</h1>
+                     </div>
                   </div>
                 </div>
 
@@ -839,10 +838,9 @@ const Game = () => {
                 <div className="text-center">
                   <div className="flex items-center justify-center space-x-3 mb-4">
                     <CreditCard className="w-8 h-8 text-primary" />
-                    <div>
-                      <h1 className="text-2xl font-bold">Transfer Market</h1>
-                      <p className="text-muted-foreground text-sm">Buy, sell, and trade fighters</p>
-                    </div>
+                     <div>
+                       <h1 className="text-2xl font-bold">Transfer Market</h1>
+                     </div>
                   </div>
                 </div>
 
