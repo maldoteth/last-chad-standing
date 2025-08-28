@@ -849,6 +849,127 @@ const Game = () => {
                 </Card>
               </div>
             )}
+
+            {activeTab === "locker" && (
+              <div className="p-4 space-y-6">
+                {/* Mobile Locker Header */}
+                <div className="text-center">
+                  <div className="flex items-center justify-center space-x-3 mb-4">
+                    <Package className="w-8 h-8 text-primary" />
+                    <div>
+                      <h1 className="text-2xl font-bold">My Locker</h1>
+                    </div>
+                  </div>
+                </div>
+
+                {!authenticated ? (
+                  <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
+                    <div className="absolute inset-0" style={{
+                      backgroundImage: `
+                        linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
+                        linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
+                      `,
+                      backgroundSize: '4px 4px'
+                    }} />
+                    <CardContent className="p-6 text-center relative z-10">
+                      <Package className="w-16 h-16 mx-auto text-gray-400 mb-4" />
+                      <h3 className="text-lg font-semibold mb-2 text-white">Login to View Your Locker</h3>
+                      <p className="text-gray-300 mb-4">Connect your wallet to see your owned items</p>
+                      <Button onClick={login} variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30">
+                        Login
+                      </Button>
+                    </CardContent>
+                  </Card>
+                ) : (
+                  <div className="space-y-4">
+                    {/* Mobile Skins Category */}
+                    <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
+                      <div className="absolute inset-0" style={{
+                        backgroundImage: `
+                          linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
+                          linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
+                        `,
+                        backgroundSize: '4px 4px'
+                      }} />
+                      <CardHeader className="relative z-10 pb-3">
+                        <CardTitle className="flex items-center justify-between text-white text-lg">
+                          <span>Skins</span>
+                          <Badge variant="secondary" className="bg-white/10 text-white border-white/20">0 owned</Badge>
+                        </CardTitle>
+                        <CardDescription className="text-gray-300">Your character skins</CardDescription>
+                      </CardHeader>
+                      <CardContent className="relative z-10">
+                        <div className="text-center py-8">
+                          <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <Package className="w-6 h-6 text-gray-400" />
+                          </div>
+                          <p className="text-gray-300 text-sm">No skins owned yet</p>
+                          <p className="text-xs text-gray-400 mt-1">Visit the store to purchase character skins</p>
+                        </div>
+                      </CardContent>
+                    </Card>
+
+                    {/* Mobile Accessories Category */}
+                    <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
+                      <div className="absolute inset-0" style={{
+                        backgroundImage: `
+                          linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
+                          linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
+                        `,
+                        backgroundSize: '4px 4px'
+                      }} />
+                      <CardHeader className="relative z-10 pb-3">
+                        <CardTitle className="flex items-center justify-between text-white text-lg">
+                          <span>Accessories</span>
+                          <Badge variant="secondary" className="bg-white/10 text-white border-white/20">0 owned</Badge>
+                        </CardTitle>
+                        <CardDescription className="text-gray-300">Your accessories collection</CardDescription>
+                      </CardHeader>
+                      <CardContent className="relative z-10">
+                        <div className="text-center py-8">
+                          <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <Package className="w-6 h-6 text-gray-400" />
+                          </div>
+                          <p className="text-gray-300 text-sm">No accessories owned yet</p>
+                          <p className="text-xs text-gray-400 mt-1">Visit the store to purchase shoes, backpacks, and hats</p>
+                        </div>
+                      </CardContent>
+                    </Card>
+
+                    {/* Mobile Mobility Category */}
+                    <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
+                      <div className="absolute inset-0" style={{
+                        backgroundImage: `
+                          linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
+                          linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
+                        `,
+                        backgroundSize: '4px 4px'
+                      }} />
+                      <CardHeader className="relative z-10 pb-3">
+                        <CardTitle className="flex items-center justify-between text-white text-lg">
+                          <span>Mobility</span>
+                          <Badge variant="secondary" className="bg-white/10 text-white border-white/20">0 owned</Badge>
+                        </CardTitle>
+                        <CardDescription className="text-gray-300">Your vehicles collection</CardDescription>
+                      </CardHeader>
+                      <CardContent className="relative z-10">
+                        <div className="text-center py-8">
+                          <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <Package className="w-6 h-6 text-gray-400" />
+                          </div>
+                          <p className="text-gray-300 text-sm">No vehicles owned yet</p>
+                          <p className="text-xs text-gray-400 mt-1">Visit the store to purchase bikes, cars, and hovercrafts</p>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </div>
+                )}
+              </div>
+            )}
           
         </div>
 
@@ -1584,7 +1705,7 @@ const Game = () => {
 
             {activeTab === "locker" && (
               <div className="space-y-6 max-w-4xl">
-                {/* Locker Header */}
+                {/* Desktop Locker Header */}
                 <div className="text-center">
                   <div className="flex items-center justify-center space-x-3 mb-4">
                     <Package className="w-8 h-8 text-primary" />
@@ -1607,7 +1728,7 @@ const Game = () => {
                   </Card>
                 ) : (
                   <div className="space-y-6">
-                    {/* Skins Category */}
+                    {/* Desktop Skins Category */}
                     <Card className="bg-gradient-to-br from-blue-600/20 to-purple-700/20 border border-blue-600/30">
                       <CardHeader>
                         <CardTitle className="flex items-center justify-between">
@@ -1627,7 +1748,7 @@ const Game = () => {
                       </CardContent>
                     </Card>
 
-                    {/* Accessories Category */}
+                    {/* Desktop Accessories Category */}
                     <Card className="bg-gradient-to-br from-green-600/20 to-blue-700/20 border border-green-600/30">
                       <CardHeader>
                         <CardTitle className="flex items-center justify-between">
@@ -1647,7 +1768,7 @@ const Game = () => {
                       </CardContent>
                     </Card>
 
-                    {/* Mobility Category */}
+                    {/* Desktop Mobility Category */}
                     <Card className="bg-gradient-to-br from-orange-600/20 to-red-700/20 border border-orange-600/30">
                       <CardHeader>
                         <CardTitle className="flex items-center justify-between">
