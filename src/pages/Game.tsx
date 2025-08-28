@@ -1091,7 +1091,7 @@ const Game = () => {
                 <img 
                   src="/lovable-uploads/7be743c8-5f8f-4016-a88a-c5e7edf73e2e.png" 
                   alt="Logo" 
-                  className="w-24 h-24 opacity-90 hover:opacity-100 transition-opacity duration-300" 
+                  className="w-16 h-16 opacity-90 hover:opacity-100 transition-opacity duration-300" 
                 />
               </div>
             </div>
