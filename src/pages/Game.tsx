@@ -781,6 +781,55 @@ const Game = () => {
                       </div>
                     </CardContent>
                   </Card>
+
+                  {/* Packs Category */}
+                  <Card className="bg-gradient-to-br from-purple-600/20 to-pink-700/20 border border-purple-600/30">
+                    <CardHeader>
+                      <CardTitle className="flex items-center justify-between">
+                        <span>Packs</span>
+                        <Badge variant="secondary">4 items</Badge>
+                      </CardTitle>
+                      <CardDescription>Mystery packs with exclusive rewards</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="grid grid-cols-2 gap-3">
+                        {[{
+                    name: "Silver Pack",
+                    price: 1000,
+                    image: "/lovable-uploads/745baeae-f05a-4a2a-828f-45aed6d05972.png"
+                  }, {
+                    name: "Gold Pack",
+                    price: 2000,
+                    image: "/lovable-uploads/77a6c004-93ed-49ee-a5d0-6056ee852612.png"
+                  }, {
+                    name: "Special Pack 1",
+                    price: 3500,
+                    image: "/lovable-uploads/319fe799-d5a0-4338-a0d4-53b1b1e3fe1a.png"
+                  }, {
+                    name: "Special Pack 2",
+                    price: 5000,
+                    image: "/lovable-uploads/b31c9ab4-6dcf-4a77-bdf6-7e82e5a8c66a.png"
+                  }].slice(0, 2).map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
+                            <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
+                            <CardContent className="p-3 relative z-10">
+                              <div className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden">
+                                <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+                              </div>
+                              <h3 className="font-semibold text-xs text-white mb-1">{item.name}</h3>
+                              <div className="flex items-center justify-between">
+                                <div className="flex items-center space-x-1">
+                                  <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
+                                  <span className="text-xs font-bold text-white">{item.price.toLocaleString()}</span>
+                                </div>
+                                <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
+                                  Buy
+                                </Button>
+                              </div>
+                            </CardContent>
+                          </Card>)}
+                      </div>
+                    </CardContent>
+                  </Card>
                 </div>
               </div>}
 
@@ -1590,6 +1639,63 @@ const Game = () => {
                       name: "Stealth Jet",
                       price: 8000,
                       image: "/lovable-uploads/896892f1-7ebc-4852-acea-80dcdbf7c545.png"
+                    }].map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
+                            <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
+                            <CardContent className="p-4 relative z-10">
+                              <div className="aspect-square bg-gray-800/50 rounded-lg mb-3 overflow-hidden">
+                                <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+                              </div>
+                              <h3 className="font-semibold text-sm text-white mb-2">{item.name}</h3>
+                              <div className="flex items-center justify-between">
+                                <div className="flex items-center space-x-1">
+                                  <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4" />
+                                  <span className="text-sm font-bold text-white">{item.price.toLocaleString()}</span>
+                                </div>
+                                <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-7 px-3">
+                                  Buy
+                                </Button>
+                              </div>
+                            </CardContent>
+                          </Card>)}
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  {/* Packs Category */}
+                  <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
+                    <div className="absolute inset-0" style={{
+                  backgroundImage: `
+                        linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
+                        linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
+                      `,
+                  backgroundSize: '4px 4px'
+                }} />
+                    <CardHeader className="relative z-10">
+                      <CardTitle className="flex items-center justify-between text-white">
+                        <span>Packs</span>
+                        <Badge variant="secondary">4 items</Badge>
+                      </CardTitle>
+                      <CardDescription className="text-gray-300">Mystery packs with exclusive rewards</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="grid grid-cols-4 gap-4">
+                        {[{
+                      name: "Silver Pack",
+                      price: 1000,
+                      image: "/lovable-uploads/745baeae-f05a-4a2a-828f-45aed6d05972.png"
+                    }, {
+                      name: "Gold Pack",
+                      price: 2000,
+                      image: "/lovable-uploads/77a6c004-93ed-49ee-a5d0-6056ee852612.png"
+                    }, {
+                      name: "Special Pack 1",
+                      price: 3500,
+                      image: "/lovable-uploads/319fe799-d5a0-4338-a0d4-53b1b1e3fe1a.png"
+                    }, {
+                      name: "Special Pack 2",
+                      price: 5000,
+                      image: "/lovable-uploads/b31c9ab4-6dcf-4a77-bdf6-7e82e5a8c66a.png"
                     }].map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
                             <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
                             <CardContent className="p-4 relative z-10">
