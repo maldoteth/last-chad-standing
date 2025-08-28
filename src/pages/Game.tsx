@@ -705,28 +705,28 @@ const Game = () => {
                           className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "green" ? "bg-white/20" : ""}`}
                         >
                           <div className="w-3 h-3 rounded-full bg-green-500" />
-                          <span>Green</span>
+                          <span>Regular</span>
                         </DropdownMenuItem>
                         <DropdownMenuItem 
                           onClick={() => setSelectedRarity("blue")} 
                           className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "blue" ? "bg-white/20" : ""}`}
                         >
                           <div className="w-3 h-3 rounded-full bg-blue-500" />
-                          <span>Blue</span>
+                          <span>Rare</span>
                         </DropdownMenuItem>
                         <DropdownMenuItem 
                           onClick={() => setSelectedRarity("silver")} 
                           className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "silver" ? "bg-white/20" : ""}`}
                         >
                           <div className="w-3 h-3 rounded-full bg-gray-300" />
-                          <span>Silver</span>
+                          <span>Legendary</span>
                         </DropdownMenuItem>
                         <DropdownMenuItem 
                           onClick={() => setSelectedRarity("gold")} 
                           className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "gold" ? "bg-white/20" : ""}`}
                         >
                           <div className="w-3 h-3 rounded-full bg-yellow-400" />
-                          <span>Gold</span>
+                          <span>Mythical</span>
                         </DropdownMenuItem>
                         <DropdownMenuItem 
                           onClick={() => setSelectedRarity("special")} 
@@ -1791,28 +1791,28 @@ const Game = () => {
                           className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "green" ? "bg-white/20" : ""}`}
                         >
                           <div className="w-3 h-3 rounded-full bg-green-500" />
-                          <span>Green</span>
+                          <span>Regular</span>
                         </DropdownMenuItem>
                         <DropdownMenuItem 
                           onClick={() => setSelectedRarity("blue")} 
                           className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "blue" ? "bg-white/20" : ""}`}
                         >
                           <div className="w-3 h-3 rounded-full bg-blue-500" />
-                          <span>Blue</span>
+                          <span>Rare</span>
                         </DropdownMenuItem>
                         <DropdownMenuItem 
                           onClick={() => setSelectedRarity("silver")} 
                           className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "silver" ? "bg-white/20" : ""}`}
                         >
                           <div className="w-3 h-3 rounded-full bg-gray-300" />
-                          <span>Silver</span>
+                          <span>Legendary</span>
                         </DropdownMenuItem>
                         <DropdownMenuItem 
                           onClick={() => setSelectedRarity("gold")} 
                           className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "gold" ? "bg-white/20" : ""}`}
                         >
                           <div className="w-3 h-3 rounded-full bg-yellow-400" />
-                          <span>Gold</span>
+                          <span>Mythical</span>
                         </DropdownMenuItem>
                         <DropdownMenuItem 
                           onClick={() => setSelectedRarity("special")} 
