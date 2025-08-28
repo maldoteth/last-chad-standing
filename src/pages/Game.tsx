@@ -1084,6 +1084,9 @@ const Game = () => {
                 <a href="https://youtube.com/@lastchadstanding" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
                   <Youtube className="w-6 h-6" />
                 </a>
+                <a href="https://dehub.io/lcs" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                  <img src="/lovable-uploads/66175b5e-a0af-40c3-920a-5daadbcf8d97.png" alt="DeHub" className="w-6 h-6" />
+                </a>
               </div>
             </div>
           </aside>
