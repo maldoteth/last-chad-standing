@@ -122,13 +122,13 @@ const Game = () => {
     label: "Market",
     icon: CreditCard
   }, {
-    id: "lobby",
-    label: "Lobby",
-    icon: Users
-  }, {
     id: "locker",
     label: "Locker",
     icon: Package
+  }, {
+    id: "lobby",
+    label: "Lobby",
+    icon: Users
   }, {
     id: "coins",
     label: "Coins",
