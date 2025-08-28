@@ -636,8 +636,8 @@ const Game = () => {
                               <Area 
                                 type="monotone" 
                                 dataKey="listings" 
-                                stroke="hsl(var(--secondary))"
-                                fill="hsl(var(--secondary))"
+                                stroke="hsl(var(--primary))"
+                                fill="hsl(var(--primary))"
                                 fillOpacity={0.2}
                                 strokeWidth={1}
                               />
@@ -1486,8 +1486,8 @@ const Game = () => {
                             <Area 
                               type="monotone" 
                               dataKey="listings" 
-                              stroke="hsl(var(--secondary))"
-                              fill="hsl(var(--secondary))"
+                              stroke="hsl(var(--primary))"
+                              fill="hsl(var(--primary))"
                               fillOpacity={0.3}
                               strokeWidth={2}
                             />
