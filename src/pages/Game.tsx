@@ -1400,7 +1400,6 @@ const Game = () => {
                     <CreditCard className="w-8 h-8 text-primary" />
                     <div>
                       <h1 className="text-3xl font-bold">Transfer Market</h1>
-                      <p className="text-muted-foreground">Buy, sell, and trade fighters</p>
                     </div>
                   </div>
                 </div>
