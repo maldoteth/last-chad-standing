@@ -9,7 +9,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Progress } from "@/components/ui/progress";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogDescription } from "@/components/ui/dialog";
-import { Coins, ShoppingBag, Users, Package, CreditCard, Trophy, Star, Target, ChevronRight, Bell, Play, Home, TrendingUp, UserPlus, Medal, LogOut, Settings, Info, Gift } from "lucide-react";
+import { Coins, ShoppingBag, Users, Package, CreditCard, Trophy, Star, Target, ChevronRight, Bell, Play, Home, TrendingUp, UserPlus, Medal, LogOut, Settings, Info, Gift, BarChart3, LineChart, ArrowUpRight, ArrowDownRight, Search, Filter } from "lucide-react";
+import { ResponsiveContainer, LineChart as RechartsLineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, PieChart, Pie, Cell, BarChart, Bar, Area, AreaChart } from 'recharts';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 const Game = () => {
   const [activeTab, setActiveTab] = useState("home");
@@ -19,6 +20,51 @@ const Game = () => {
   const { toast } = useToast();
   const { login, logout, authenticated, user } = usePrivy();
   const navigate = useNavigate();
+
+  // Mock data for market analytics
+  const marketValueData = Array.from({ length: 30 }, (_, i) => ({
+    day: i + 1,
+    value: 125000 + Math.sin(i * 0.3) * 15000 + Math.random() * 10000,
+    date: new Date(Date.now() - (29 - i) * 24 * 60 * 60 * 1000).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+  }));
+
+  const listingsData = Array.from({ length: 30 }, (_, i) => ({
+    day: i + 1,
+    listings: 450 + Math.cos(i * 0.4) * 50 + Math.random() * 30,
+    date: new Date(Date.now() - (29 - i) * 24 * 60 * 60 * 1000).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+  }));
+
+  const trendingPlayers = [
+    { name: "Shadow Strike", team: "Crimson Hawks", position: "Striker", price: 8500, change: 12.5, trend: "up", image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png" },
+    { name: "Iron Fist", team: "Steel Wolves", position: "Tank", price: 7200, change: -8.3, trend: "down", image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png" },
+    { name: "Lightning Bolt", team: "Thunder Birds", position: "Speed", price: 9100, change: 15.7, trend: "up", image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png" },
+    { name: "Stone Wall", team: "Mountain Lions", position: "Defense", price: 6800, change: -4.2, trend: "down", image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png" },
+    { name: "Fire Storm", team: "Flame Dragons", position: "Assault", price: 8900, change: 9.6, trend: "up", image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png" }
+  ];
+
+  const topGainers = [
+    { name: "Cyber Phantom", team: "Neon Guardians", position: "Stealth", price: 5200, change: 24.8, image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png" },
+    { name: "Quantum Leap", team: "Future Force", position: "Mobility", price: 4800, change: 19.3, image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png" },
+    { name: "Void Walker", team: "Dark Matter", position: "Phantom", price: 6100, change: 17.5, image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png" },
+    { name: "Solar Flare", team: "Sun Blazers", position: "Energy", price: 5500, change: 16.2, image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png" },
+    { name: "Storm Breaker", team: "Wind Riders", position: "Force", price: 4900, change: 15.9, image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png" }
+  ];
+
+  const allPlayers = [
+    { name: "Shadow Strike", team: "Crimson Hawks", position: "Striker", price: 8500, lastSale: 7500, trend: "up", image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png" },
+    { name: "Fire Storm", team: "Flame Dragons", position: "Assault", price: 8900, lastSale: 8100, trend: "up", image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png" },
+    { name: "Lightning Bolt", team: "Thunder Birds", position: "Speed", price: 9100, lastSale: 7900, trend: "up", image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png" },
+    { name: "Iron Fist", team: "Steel Wolves", position: "Tank", price: 7200, lastSale: 7850, trend: "down", image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png" },
+    { name: "Stone Wall", team: "Mountain Lions", position: "Defense", price: 6800, lastSale: 7100, trend: "down", image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png" },
+    { name: "Void Walker", team: "Dark Matter", position: "Phantom", price: 6100, lastSale: 5200, trend: "up", image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png" },
+    { name: "Solar Flare", team: "Sun Blazers", position: "Energy", price: 5500, lastSale: 4750, trend: "up", image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png" },
+    { name: "Cyber Phantom", team: "Neon Guardians", position: "Stealth", price: 5200, lastSale: 4100, trend: "up", image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png" },
+    { name: "Storm Breaker", team: "Wind Riders", position: "Force", price: 4900, lastSale: 4200, trend: "up", image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png" },
+    { name: "Quantum Leap", team: "Future Force", position: "Mobility", price: 4800, lastSale: 4000, trend: "up", image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png" }
+  ].sort((a, b) => b.price - a.price);
+
+  const currentMarketValue = marketValueData[marketValueData.length - 1]?.value || 0;
+  const currentListings = Math.round(listingsData[listingsData.length - 1]?.listings || 0);
 
   // Debug logging for activeTab changes
   console.log('Current activeTab:', activeTab);
@@ -487,6 +533,272 @@ const Game = () => {
                 </div>
               </div>
             )}
+
+            {activeTab === "market" && (
+              <div className="p-4 space-y-6">
+                {/* Market Header */}
+                <div className="text-center">
+                  <div className="flex items-center justify-center space-x-3 mb-4">
+                    <CreditCard className="w-8 h-8 text-primary" />
+                    <div>
+                      <h1 className="text-2xl font-bold">Transfer Market</h1>
+                      <p className="text-muted-foreground text-sm">Buy, sell, and trade fighters</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Market Stats Cards */}
+                <div className="grid grid-cols-2 gap-3 mb-6">
+                  {/* Total Market Value */}
+                  <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
+                    <div className="absolute inset-0" style={{
+                      backgroundImage: `
+                        linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
+                        linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
+                      `,
+                      backgroundSize: '4px 4px'
+                    }} />
+                    <CardContent className="p-4 relative z-10">
+                      <div className="flex items-center space-x-2 mb-2">
+                        <BarChart3 className="w-4 h-4 text-white" />
+                        <span className="text-xs font-medium text-white">Market Cap</span>
+                      </div>
+                      <div className="space-y-1">
+                        <div className="flex items-center space-x-1">
+                          <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
+                          <span className="text-sm font-bold text-white">{currentMarketValue.toLocaleString('en-US', { maximumFractionDigits: 0 })}</span>
+                        </div>
+                        <div className="h-12">
+                          <ResponsiveContainer width="100%" height="100%">
+                            <AreaChart data={marketValueData.slice(-7)}>
+                              <Area 
+                                type="monotone" 
+                                dataKey="value" 
+                                stroke="hsl(var(--primary))"
+                                fill="hsl(var(--primary))"
+                                fillOpacity={0.2}
+                                strokeWidth={1}
+                              />
+                            </AreaChart>
+                          </ResponsiveContainer>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  {/* Active Listings */}
+                  <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
+                    <div className="absolute inset-0" style={{
+                      backgroundImage: `
+                        linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
+                        linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
+                      `,
+                      backgroundSize: '4px 4px'
+                    }} />
+                    <CardContent className="p-4 relative z-10">
+                      <div className="flex items-center space-x-2 mb-2">
+                        <LineChart className="w-4 h-4 text-white" />
+                        <span className="text-xs font-medium text-white">Live Listings</span>
+                      </div>
+                      <div className="space-y-1">
+                        <span className="text-sm font-bold text-white">{currentListings}</span>
+                        <div className="h-12">
+                          <ResponsiveContainer width="100%" height="100%">
+                            <AreaChart data={listingsData.slice(-7)}>
+                              <Area 
+                                type="monotone" 
+                                dataKey="listings" 
+                                stroke="hsl(var(--secondary))"
+                                fill="hsl(var(--secondary))"
+                                fillOpacity={0.2}
+                                strokeWidth={1}
+                              />
+                            </AreaChart>
+                          </ResponsiveContainer>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+
+                {/* Trending & Gainers */}
+                <div className="space-y-4">
+                  {/* Trending */}
+                  <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
+                    <div className="absolute inset-0" style={{
+                      backgroundImage: `
+                        linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
+                        linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
+                      `,
+                      backgroundSize: '4px 4px'
+                    }} />
+                    <CardHeader className="pb-3 relative z-10">
+                      <CardTitle className="text-base flex items-center space-x-2 text-white">
+                        <TrendingUp className="w-4 h-4" />
+                        <span>Trending</span>
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="relative z-10">
+                      <div className="space-y-2">
+                        {trendingPlayers.slice(0, 3).map((player, idx) => (
+                          <div key={idx} className="flex items-center space-x-3 p-2 bg-white/5 rounded-lg">
+                            <div className="w-8 h-8 rounded-full overflow-hidden">
+                              <img src={player.image} alt={player.name} className="w-full h-full object-cover" />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center justify-between">
+                                <p className="text-xs font-semibold text-white truncate">{player.name}</p>
+                                <div className="flex items-center space-x-1">
+                                  <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
+                                  <span className="text-xs font-bold text-white">{player.price.toLocaleString()}</span>
+                                </div>
+                              </div>
+                              <div className="flex items-center justify-between">
+                                <p className="text-xs text-gray-400">{player.team}</p>
+                                <div className={`flex items-center space-x-1 ${player.trend === 'up' ? 'text-green-400' : 'text-red-400'}`}>
+                                  {player.trend === 'up' ? <ArrowUpRight className="w-3 h-3" /> : <ArrowDownRight className="w-3 h-3" />}
+                                  <span className="text-xs font-medium">{Math.abs(player.change)}%</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  {/* Top Gainers */}
+                  <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
+                    <div className="absolute inset-0" style={{
+                      backgroundImage: `
+                        linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
+                        linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
+                      `,
+                      backgroundSize: '4px 4px'
+                    }} />
+                    <CardHeader className="pb-3 relative z-10">
+                      <CardTitle className="text-base flex items-center space-x-2 text-white">
+                        <ArrowUpRight className="w-4 h-4 text-green-400" />
+                        <span>Top Gainers</span>
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="relative z-10">
+                      <div className="space-y-2">
+                        {topGainers.slice(0, 3).map((player, idx) => (
+                          <div key={idx} className="flex items-center space-x-3 p-2 bg-white/5 rounded-lg">
+                            <div className="w-8 h-8 rounded-full overflow-hidden">
+                              <img src={player.image} alt={player.name} className="w-full h-full object-cover" />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center justify-between">
+                                <p className="text-xs font-semibold text-white truncate">{player.name}</p>
+                                <div className="flex items-center space-x-1">
+                                  <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
+                                  <span className="text-xs font-bold text-white">{player.price.toLocaleString()}</span>
+                                </div>
+                              </div>
+                              <div className="flex items-center justify-between">
+                                <p className="text-xs text-gray-400">{player.team}</p>
+                                <div className="flex items-center space-x-1 text-green-400">
+                                  <ArrowUpRight className="w-3 h-3" />
+                                  <span className="text-xs font-medium">+{player.change}%</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+
+                {/* All Players List */}
+                <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
+                  <div className="absolute inset-0" style={{
+                    backgroundImage: `
+                      linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
+                      linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
+                    `,
+                    backgroundSize: '4px 4px'
+                  }} />
+                  <CardHeader className="pb-3 relative z-10">
+                    <CardTitle className="text-base flex items-center justify-between text-white">
+                      <span>All Players</span>
+                      <div className="flex items-center space-x-2">
+                        <Button variant="outline" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
+                          <Search className="w-3 h-3 mr-1" />
+                          Search
+                        </Button>
+                        <Button variant="outline" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
+                          <Filter className="w-3 h-3 mr-1" />
+                          Filter
+                        </Button>
+                      </div>
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="relative z-10">
+                    <div className="space-y-2">
+                      {allPlayers.slice(0, visiblePlayers).map((player, idx) => (
+                        <div key={idx} className="flex items-center space-x-3 p-3 bg-white/5 rounded-lg hover:bg-white/10 transition-colors">
+                          <div className="w-10 h-10 rounded-full overflow-hidden">
+                            <img src={player.image} alt={player.name} className="w-full h-full object-cover" />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center justify-between mb-1">
+                              <p className="text-sm font-semibold text-white truncate">{player.name}</p>
+                              <div className="flex items-center space-x-1">
+                                <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4" />
+                                <span className="text-sm font-bold text-white">{player.price.toLocaleString()}</span>
+                              </div>
+                            </div>
+                            <div className="flex items-center justify-between">
+                              <div>
+                                <p className="text-xs text-gray-400">{player.team} • {player.position}</p>
+                                <p className="text-xs text-gray-500">Last: {player.lastSale.toLocaleString()}</p>
+                              </div>
+                              <div className="flex items-center space-x-2">
+                                <div className={`flex items-center space-x-1 ${player.trend === 'up' ? 'text-green-400' : 'text-red-400'}`}>
+                                  {player.trend === 'up' ? <ArrowUpRight className="w-3 h-3" /> : <ArrowDownRight className="w-3 h-3" />}
+                                </div>
+                                <Button 
+                                  variant="outline" 
+                                  size="sm" 
+                                  className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2"
+                                  onClick={() => toast({
+                                    title: "Purchase Initiated",
+                                    description: `Attempting to buy ${player.name} for ${player.price.toLocaleString()} coins`,
+                                    duration: 3000
+                                  })}
+                                >
+                                  Buy
+                                </Button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                    
+                    {visiblePlayers < allPlayers.length && (
+                      <div className="mt-4 text-center">
+                        <Button 
+                          variant="outline" 
+                          className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20"
+                          onClick={() => setVisiblePlayers(prev => Math.min(prev + 10, allPlayers.length))}
+                        >
+                          Load More Players
+                        </Button>
+                      </div>
+                    )}
+                  </CardContent>
+                </Card>
+              </div>
+            )}
           
         </div>
 
@@ -906,6 +1218,293 @@ const Game = () => {
                     </CardContent>
                   </Card>
                 </div>
+              </div>
+            )}
+
+            {activeTab === "market" && (
+              <div className="space-y-6 max-w-6xl">
+                {/* Market Header */}
+                <div className="text-center">
+                  <div className="flex items-center justify-center space-x-3 mb-6">
+                    <CreditCard className="w-8 h-8 text-primary" />
+                    <div>
+                      <h1 className="text-3xl font-bold">Transfer Market</h1>
+                      <p className="text-muted-foreground">Buy, sell, and trade fighters</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Market Analytics Dashboard */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                  {/* Total Market Value Chart */}
+                  <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
+                    <div className="absolute inset-0" style={{
+                      backgroundImage: `
+                        linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
+                        linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
+                      `,
+                      backgroundSize: '4px 4px'
+                    }} />
+                    <CardHeader className="relative z-10">
+                      <CardTitle className="text-lg flex items-center space-x-2 text-white">
+                        <BarChart3 className="w-5 h-5" />
+                        <span>Total Market Value</span>
+                      </CardTitle>
+                      <CardDescription className="text-gray-300">
+                        <div className="flex items-center space-x-2">
+                          <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4" />
+                          <span className="text-xl font-bold text-white">{currentMarketValue.toLocaleString('en-US', { maximumFractionDigits: 0 })}</span>
+                        </div>
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent className="relative z-10">
+                      <div className="h-48">
+                        <ResponsiveContainer width="100%" height="100%">
+                          <AreaChart data={marketValueData}>
+                            <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
+                            <XAxis dataKey="date" tick={{ fontSize: 12, fill: 'rgba(255,255,255,0.7)' }} />
+                            <YAxis tick={{ fontSize: 12, fill: 'rgba(255,255,255,0.7)' }} />
+                            <Tooltip 
+                              labelStyle={{ color: '#000' }}
+                              contentStyle={{ backgroundColor: 'rgba(0,0,0,0.8)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '8px' }}
+                            />
+                            <Area 
+                              type="monotone" 
+                              dataKey="value" 
+                              stroke="hsl(var(--primary))"
+                              fill="hsl(var(--primary))"
+                              fillOpacity={0.3}
+                              strokeWidth={2}
+                            />
+                          </AreaChart>
+                        </ResponsiveContainer>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  {/* Live Listings Chart */}
+                  <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
+                    <div className="absolute inset-0" style={{
+                      backgroundImage: `
+                        linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
+                        linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
+                      `,
+                      backgroundSize: '4px 4px'
+                    }} />
+                    <CardHeader className="relative z-10">
+                      <CardTitle className="text-lg flex items-center space-x-2 text-white">
+                        <LineChart className="w-5 h-5" />
+                        <span>Live Transfer Listings</span>
+                      </CardTitle>
+                      <CardDescription className="text-gray-300">
+                        <span className="text-xl font-bold text-white">{currentListings} active listings</span>
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent className="relative z-10">
+                      <div className="h-48">
+                        <ResponsiveContainer width="100%" height="100%">
+                          <AreaChart data={listingsData}>
+                            <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
+                            <XAxis dataKey="date" tick={{ fontSize: 12, fill: 'rgba(255,255,255,0.7)' }} />
+                            <YAxis tick={{ fontSize: 12, fill: 'rgba(255,255,255,0.7)' }} />
+                            <Tooltip 
+                              labelStyle={{ color: '#000' }}
+                              contentStyle={{ backgroundColor: 'rgba(0,0,0,0.8)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '8px' }}
+                            />
+                            <Area 
+                              type="monotone" 
+                              dataKey="listings" 
+                              stroke="hsl(var(--secondary))"
+                              fill="hsl(var(--secondary))"
+                              fillOpacity={0.3}
+                              strokeWidth={2}
+                            />
+                          </AreaChart>
+                        </ResponsiveContainer>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+
+                {/* Trending & Gainers Section */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                  {/* Trending List */}
+                  <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
+                    <div className="absolute inset-0" style={{
+                      backgroundImage: `
+                        linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
+                        linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
+                      `,
+                      backgroundSize: '4px 4px'
+                    }} />
+                    <CardHeader className="relative z-10">
+                      <CardTitle className="text-lg flex items-center space-x-2 text-white">
+                        <TrendingUp className="w-5 h-5" />
+                        <span>Trending</span>
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="relative z-10">
+                      <div className="space-y-3">
+                        {trendingPlayers.map((player, idx) => (
+                          <div key={idx} className="flex items-center space-x-3 p-3 bg-white/5 rounded-lg hover:bg-white/10 transition-colors">
+                            <div className="w-12 h-12 rounded-full overflow-hidden">
+                              <img src={player.image} alt={player.name} className="w-full h-full object-cover" />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center justify-between mb-1">
+                                <p className="text-sm font-semibold text-white truncate">{player.name}</p>
+                                <div className="flex items-center space-x-1">
+                                  <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4" />
+                                  <span className="text-sm font-bold text-white">{player.price.toLocaleString()}</span>
+                                </div>
+                              </div>
+                              <div className="flex items-center justify-between">
+                                <p className="text-xs text-gray-400">{player.team} • {player.position}</p>
+                                <div className={`flex items-center space-x-1 ${player.trend === 'up' ? 'text-green-400' : 'text-red-400'}`}>
+                                  {player.trend === 'up' ? <ArrowUpRight className="w-3 h-3" /> : <ArrowDownRight className="w-3 h-3" />}
+                                  <span className="text-xs font-medium">{player.trend === 'up' ? '+' : ''}{player.change}%</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  {/* Top Gainers List */}
+                  <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
+                    <div className="absolute inset-0" style={{
+                      backgroundImage: `
+                        linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
+                        linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
+                      `,
+                      backgroundSize: '4px 4px'
+                    }} />
+                    <CardHeader className="relative z-10">
+                      <CardTitle className="text-lg flex items-center space-x-2 text-white">
+                        <ArrowUpRight className="w-5 h-5 text-green-400" />
+                        <span>Top Gainers</span>
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="relative z-10">
+                      <div className="space-y-3">
+                        {topGainers.map((player, idx) => (
+                          <div key={idx} className="flex items-center space-x-3 p-3 bg-white/5 rounded-lg hover:bg-white/10 transition-colors">
+                            <div className="w-12 h-12 rounded-full overflow-hidden">
+                              <img src={player.image} alt={player.name} className="w-full h-full object-cover" />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center justify-between mb-1">
+                                <p className="text-sm font-semibold text-white truncate">{player.name}</p>
+                                <div className="flex items-center space-x-1">
+                                  <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4" />
+                                  <span className="text-sm font-bold text-white">{player.price.toLocaleString()}</span>
+                                </div>
+                              </div>
+                              <div className="flex items-center justify-between">
+                                <p className="text-xs text-gray-400">{player.team} • {player.position}</p>
+                                <div className="flex items-center space-x-1 text-green-400">
+                                  <ArrowUpRight className="w-3 h-3" />
+                                  <span className="text-xs font-medium">+{player.change}%</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+
+                {/* All Players List */}
+                <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
+                  <div className="absolute inset-0" style={{
+                    backgroundImage: `
+                      linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
+                      linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
+                    `,
+                    backgroundSize: '4px 4px'
+                  }} />
+                  <CardHeader className="relative z-10">
+                    <CardTitle className="text-lg flex items-center justify-between text-white">
+                      <span>All Players - Most Expensive First</span>
+                      <div className="flex items-center space-x-2">
+                        <Button variant="outline" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-8 px-3">
+                          <Search className="w-3 h-3 mr-1" />
+                          Search
+                        </Button>
+                        <Button variant="outline" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-8 px-3">
+                          <Filter className="w-3 h-3 mr-1" />
+                          Filter
+                        </Button>
+                      </div>
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="relative z-10">
+                    <div className="space-y-3">
+                      {allPlayers.slice(0, visiblePlayers).map((player, idx) => (
+                        <div key={idx} className="flex items-center space-x-4 p-4 bg-white/5 rounded-lg hover:bg-white/10 transition-colors">
+                          <div className="w-16 h-16 rounded-full overflow-hidden">
+                            <img src={player.image} alt={player.name} className="w-full h-full object-cover" />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center justify-between mb-2">
+                              <p className="text-lg font-semibold text-white truncate">{player.name}</p>
+                              <div className="flex items-center space-x-2">
+                                <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-5 h-5" />
+                                <span className="text-lg font-bold text-white">{player.price.toLocaleString()}</span>
+                              </div>
+                            </div>
+                            <div className="flex items-center justify-between">
+                              <div>
+                                <p className="text-sm text-gray-400">{player.team} • {player.position}</p>
+                                <p className="text-xs text-gray-500">Last sale: {player.lastSale.toLocaleString()}</p>
+                              </div>
+                              <div className="flex items-center space-x-3">
+                                <div className={`flex items-center space-x-1 ${player.trend === 'up' ? 'text-green-400' : 'text-red-400'}`}>
+                                  {player.trend === 'up' ? <ArrowUpRight className="w-4 h-4" /> : <ArrowDownRight className="w-4 h-4" />}
+                                  <span className="text-sm font-medium">
+                                    {((player.price - player.lastSale) / player.lastSale * 100).toFixed(1)}%
+                                  </span>
+                                </div>
+                                <Button 
+                                  variant="outline" 
+                                  size="sm" 
+                                  className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20"
+                                  onClick={() => toast({
+                                    title: "Purchase Initiated",
+                                    description: `Attempting to buy ${player.name} for ${player.price.toLocaleString()} coins`,
+                                    duration: 3000
+                                  })}
+                                >
+                                  Buy Now
+                                </Button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                    
+                    {visiblePlayers < allPlayers.length && (
+                      <div className="mt-6 text-center">
+                        <Button 
+                          variant="outline" 
+                          className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20"
+                          onClick={() => setVisiblePlayers(prev => Math.min(prev + 10, allPlayers.length))}
+                        >
+                          Load More Players ({allPlayers.length - visiblePlayers} remaining)
+                        </Button>
+                      </div>
+                    )}
+                  </CardContent>
+                </Card>
               </div>
             )}
 
