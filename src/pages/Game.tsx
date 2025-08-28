@@ -9,6 +9,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Progress } from "@/components/ui/progress";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogDescription } from "@/components/ui/dialog";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { Coins, ShoppingBag, Users, Package, CreditCard, Trophy, Star, Target, ChevronRight, Bell, Play, Home, TrendingUp, UserPlus, Medal, LogOut, Settings, Info, Gift, BarChart3, LineChart, ArrowUpRight, ArrowDownRight, Search, Filter, Gamepad, Instagram, Layers, BookOpen, Youtube } from "lucide-react";
 import { ResponsiveContainer, LineChart as RechartsLineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, PieChart, Pie, Cell, BarChart, Bar, Area, AreaChart } from 'recharts';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -1493,8 +1494,10 @@ const Game = () => {
           </aside>
 
           {/* Center Content - Desktop Layout */}
-          <main className="flex-1 p-6 overflow-y-auto h-screen">
-            {activeTab === "home" && <div className="grid grid-cols-12 gap-6 h-full min-h-0">
+          <main className="flex-1 h-screen">
+            {activeTab === "home" && <ScrollArea className="h-full">
+                <div className="p-6">
+                  <div className="grid grid-cols-12 gap-6 h-full min-h-0">
                 {/* Large Welcome Card */}
                 <Card className="col-span-8 row-span-2 bg-gradient-to-br from-blue-600/80 to-purple-700/80 text-white border-0 relative overflow-hidden">
                   <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
@@ -1633,9 +1636,13 @@ const Game = () => {
                     </Button>
                   </CardContent>
                 </Card>
-              </div>}
+              </div>
+                </div>
+              </ScrollArea>}
 
-            {activeTab === "store" && <div className="space-y-6 max-w-4xl">
+            {activeTab === "store" && <ScrollArea className="h-full">
+                <div className="p-6">
+                  <div className="space-y-6 max-w-4xl">
                 {/* Store Header */}
                 <div className="text-center relative">
                   <div className="flex items-center justify-center space-x-3 mb-4">
@@ -1946,10 +1953,14 @@ const Game = () => {
                       </div>
                     </CardContent>
                   </Card>
+                 </div>
+               </div>
                 </div>
-              </div>}
+              </ScrollArea>}
 
-            {activeTab === "market" && <div className="space-y-6 max-w-6xl">
+            {activeTab === "market" && <ScrollArea className="h-full">
+                <div className="p-6">
+                  <div className="space-y-6 max-w-6xl">
                 {/* Market Header */}
                 <div className="text-center">
                   <div className="flex items-center justify-center space-x-3 mb-6">
@@ -2257,10 +2268,14 @@ const Game = () => {
                         </Button>
                       </div>}
                   </CardContent>
-                </Card>
-              </div>}
+                 </Card>
+               </div>
+                </div>  
+              </ScrollArea>}
 
-            {activeTab === "locker" && <div className="space-y-6 max-w-4xl">
+            {activeTab === "locker" && <ScrollArea className="h-full">
+                <div className="p-6">
+                  <div className="space-y-6 max-w-4xl">
                 {/* Desktop Locker Header */}
                 <div className="text-center">
                   <div className="flex items-center justify-center space-x-3 mb-4">
@@ -2348,8 +2363,10 @@ const Game = () => {
                         </div>
                       </CardContent>
                     </Card>
-                  </div>}
-              </div>}
+                   </div>}
+               </div>
+                </div>
+              </ScrollArea>}
           </main>
 
           {/* Right Sidebar - Desktop only */}
