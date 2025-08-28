@@ -798,10 +798,9 @@ const Game = () => {
                                 </div>
                                 <Drawer>
                                   <DrawerTrigger asChild>
-                                    <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
-                                      <ShoppingBag className="mr-1 h-2 w-2" />
-                                      Buy
-                                    </Button>
+                                     <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
+                                       <ShoppingBag className="h-3 w-3" />
+                                     </Button>
                                   </DrawerTrigger>
                                   <DrawerContent className="bg-white/10 backdrop-blur-md border-t border-white/20 text-white transition-all duration-300">
                                     <DrawerHeader>
@@ -896,10 +895,9 @@ const Game = () => {
                                 </div>
                                 <Drawer>
                                   <DrawerTrigger asChild>
-                                    <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
-                                      <ShoppingBag className="mr-1 h-2 w-2" />
-                                      Buy
-                                    </Button>
+                                     <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
+                                       <ShoppingBag className="h-3 w-3" />
+                                     </Button>
                                   </DrawerTrigger>
                                   <DrawerContent className="bg-white/10 backdrop-blur-md border-t border-white/20 text-white transition-all duration-300">
                                     <DrawerHeader>
@@ -994,10 +992,9 @@ const Game = () => {
                                 </div>
                                 <Drawer>
                                   <DrawerTrigger asChild>
-                                    <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
-                                      <ShoppingBag className="mr-1 h-2 w-2" />
-                                      Buy
-                                    </Button>
+                                     <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
+                                       <ShoppingBag className="h-3 w-3" />
+                                     </Button>
                                   </DrawerTrigger>
                                   <DrawerContent className="bg-white/10 backdrop-blur-md border-t border-white/20 text-white transition-all duration-300">
                                     <DrawerHeader>
@@ -1092,10 +1089,9 @@ const Game = () => {
                                 </div>
                                 <Drawer>
                                   <DrawerTrigger asChild>
-                                    <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
-                                      <ShoppingBag className="mr-1 h-2 w-2" />
-                                      Buy
-                                    </Button>
+                                     <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
+                                       <ShoppingBag className="h-3 w-3" />
+                                     </Button>
                                   </DrawerTrigger>
                                   <DrawerContent className="bg-white/10 backdrop-blur-md border-t border-white/20 text-white transition-all duration-300">
                                     <DrawerHeader>
