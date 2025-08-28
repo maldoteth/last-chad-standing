@@ -363,7 +363,7 @@ const Game = () => {
     label: "Coins",
     icon: Coins
   }];
-  return <div className="min-h-screen bg-background text-foreground dark">
+  return <div className="min-h-screen bg-black text-foreground dark">
       {/* Mobile/Tablet optimized layout */}
       
       {/* Header with coins and avatar - simplified for mobile */}
