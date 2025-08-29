@@ -3343,13 +3343,17 @@ const Game = () => {
                           fontSize: 12,
                           fill: 'rgba(255,255,255,0.7)'
                         }} />
-                            <Tooltip labelStyle={{
-                          color: '#000'
-                        }} contentStyle={{
-                          backgroundColor: 'rgba(0,0,0,0.8)',
-                          border: '1px solid rgba(255,255,255,0.2)',
-                          borderRadius: '8px'
-                        }} />
+                            <Tooltip 
+                              labelStyle={{
+                                color: '#000'
+                              }} 
+                              contentStyle={{
+                                backgroundColor: 'rgba(0,0,0,0.8)',
+                                border: '1px solid rgba(255,255,255,0.2)',
+                                borderRadius: '8px'
+                              }}
+                              formatter={(value) => [Number(value).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }), 'Market Value']}
+                            />
                             <Area type="monotone" dataKey="value" stroke="hsl(var(--primary))" fill="hsl(var(--primary))" fillOpacity={0.3} strokeWidth={2} />
                           </AreaChart>
                         </ResponsiveContainer>
