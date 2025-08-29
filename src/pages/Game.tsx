@@ -816,122 +816,193 @@ const Game = () => {
                       <CardTitle className="text-base flex items-center justify-between">
                         <div className="flex items-center space-x-2">
                           <Target className="w-4 h-4" />
-                          <span>{objectivesView === "weekly" ? "Weekly" : "Daily"} Objectives</span>
+                          <span>{objectivesView === "weekly" ? "Weekly" : objectivesView === "daily" ? "Daily" : "Quests"} Objectives</span>
                         </div>
                         <Button 
                           variant="ghost" 
                           size="sm" 
                           className="h-6 w-6 p-0 hover:bg-white/10"
-                          onClick={() => setObjectivesView(objectivesView === "weekly" ? "daily" : "weekly")}
+                          onClick={() => {
+                            if (objectivesView === "weekly") {
+                              setObjectivesView("daily");
+                            } else if (objectivesView === "daily") {
+                              setObjectivesView("quests");
+                            } else {
+                              setObjectivesView("weekly");
+                            }
+                          }}
                         >
                           <RotateCcw className="w-4 h-4" />
                         </Button>
                       </CardTitle>
                     </CardHeader>
                     <CardContent>
-                      {objectivesView === "weekly" ? (
-                        <div className="space-y-3">
-                          <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
-                            <div className="flex items-center space-x-3">
-                              <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
-                                <Package className="w-4 h-4 text-primary-foreground" />
-                              </div>
-                              <div>
-                                <p className="text-sm font-medium">Open 3 packs</p>
-                                <p className="text-xs text-muted-foreground">0/3 • 10 XP</p>
-                              </div>
-                            </div>
-                            <ChevronRight className="w-4 h-4 text-muted-foreground" />
-                          </div>
-                          <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
-                            <div className="flex items-center space-x-3">
-                              <div className="w-8 h-8 bg-secondary rounded-full flex items-center justify-center">
-                                <ShoppingBag className="w-4 h-4 text-secondary-foreground" />
-                              </div>
-                              <div>
-                                <p className="text-sm font-medium">Buy 3 fighters</p>
-                                <p className="text-xs text-muted-foreground">0/3 • 10 XP</p>
-                              </div>
-                            </div>
-                            <ChevronRight className="w-4 h-4 text-muted-foreground" />
-                          </div>
-                          <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
-                            <div className="flex items-center space-x-3">
-                              <div className="w-8 h-8 bg-destructive rounded-full flex items-center justify-center">
-                                <CreditCard className="w-4 h-4 text-destructive-foreground" />
-                              </div>
-                              <div>
-                                <p className="text-sm font-medium">Sell 3 fighters</p>
-                                <p className="text-xs text-muted-foreground">0/3 • 10 XP</p>
-                              </div>
-                            </div>
-                            <ChevronRight className="w-4 h-4 text-muted-foreground" />
-                          </div>
-                          <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
-                            <div className="flex items-center space-x-3">
-                              <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center">
-                                <TrendingUp className="w-4 h-4 text-white" />
-                              </div>
-                              <div>
-                                <p className="text-sm font-medium">Trade 3 days in a row</p>
-                                <p className="text-xs text-muted-foreground">0/3 • 10 XP</p>
-                              </div>
-                            </div>
-                            <ChevronRight className="w-4 h-4 text-muted-foreground" />
-                          </div>
-                          <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
-                            <div className="flex items-center space-x-3">
-                              <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
-                                <UserPlus className="w-4 h-4 text-white" />
-                              </div>
-                              <div>
-                                <p className="text-sm font-medium">Invite 3 friends</p>
-                                <p className="text-xs text-muted-foreground">0/3 • 10 XP</p>
-                              </div>
-                            </div>
-                            <ChevronRight className="w-4 h-4 text-muted-foreground" />
-                          </div>
+                {objectivesView === "weekly" ? (
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+                          <Package className="w-4 h-4 text-primary-foreground" />
                         </div>
-                      ) : (
-                        <div className="space-y-3">
-                          <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
-                            <div className="flex items-center space-x-3">
-                              <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
-                                <Play className="w-4 h-4 text-primary-foreground" />
-                              </div>
-                              <div>
-                                <p className="text-sm font-medium">Play 1 game</p>
-                                <p className="text-xs text-muted-foreground">0/1 • 5 XP</p>
-                              </div>
-                            </div>
-                            <ChevronRight className="w-4 h-4 text-muted-foreground" />
-                          </div>
-                          <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
-                            <div className="flex items-center space-x-3">
-                              <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
-                                <Medal className="w-4 h-4 text-white" />
-                              </div>
-                              <div>
-                                <p className="text-sm font-medium">Win 1 match</p>
-                                <p className="text-xs text-muted-foreground">0/1 • 5 XP</p>
-                              </div>
-                            </div>
-                            <ChevronRight className="w-4 h-4 text-muted-foreground" />
-                          </div>
-                          <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
-                            <div className="flex items-center space-x-3">
-                              <div className="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center">
-                                <Gift className="w-4 h-4 text-white" />
-                              </div>
-                              <div>
-                                <p className="text-sm font-medium">Collect daily login bonus</p>
-                                <p className="text-xs text-muted-foreground">0/1 • 2 XP</p>
-                              </div>
-                            </div>
-                            <ChevronRight className="w-4 h-4 text-muted-foreground" />
-                          </div>
+                        <div>
+                          <p className="text-sm font-medium">Open 3 packs</p>
+                          <p className="text-xs text-muted-foreground">0/3 • 10 XP</p>
                         </div>
-                      )}
+                      </div>
+                      <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                    </div>
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-8 h-8 bg-secondary rounded-full flex items-center justify-center">
+                          <ShoppingBag className="w-4 h-4 text-secondary-foreground" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium">Buy 3 fighters</p>
+                          <p className="text-xs text-muted-foreground">0/3 • 10 XP</p>
+                        </div>
+                      </div>
+                      <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                    </div>
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-8 h-8 bg-destructive rounded-full flex items-center justify-center">
+                          <CreditCard className="w-4 h-4 text-destructive-foreground" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium">Sell 3 fighters</p>
+                          <p className="text-xs text-muted-foreground">0/3 • 10 XP</p>
+                        </div>
+                      </div>
+                      <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                    </div>
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center">
+                          <TrendingUp className="w-4 h-4 text-white" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium">Trade 3 days in a row</p>
+                          <p className="text-xs text-muted-foreground">0/3 • 10 XP</p>
+                        </div>
+                      </div>
+                      <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                    </div>
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+                          <UserPlus className="w-4 h-4 text-white" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium">Invite 3 friends</p>
+                          <p className="text-xs text-muted-foreground">0/3 • 10 XP</p>
+                        </div>
+                      </div>
+                      <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                    </div>
+                  </div>
+                ) : objectivesView === "daily" ? (
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+                          <Play className="w-4 h-4 text-primary-foreground" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium">Play 1 game</p>
+                          <p className="text-xs text-muted-foreground">0/1 • 5 XP</p>
+                        </div>
+                      </div>
+                      <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                    </div>
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                          <Medal className="w-4 h-4 text-white" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium">Win 1 match</p>
+                          <p className="text-xs text-muted-foreground">0/1 • 5 XP</p>
+                        </div>
+                      </div>
+                      <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                    </div>
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center">
+                          <Gift className="w-4 h-4 text-white" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium">Collect daily login bonus</p>
+                          <p className="text-xs text-muted-foreground">0/1 • 2 XP</p>
+                        </div>
+                      </div>
+                      <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                    </div>
+                  </div>
+                ) : (
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-8 h-8 bg-sky-500 rounded-full flex items-center justify-center">
+                          <X className="w-4 h-4 text-white" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium">Connect X</p>
+                          <p className="text-xs text-muted-foreground">0/1 • 25 XP</p>
+                        </div>
+                      </div>
+                      <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                    </div>
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-8 h-8 bg-pink-500 rounded-full flex items-center justify-center">
+                          <Instagram className="w-4 h-4 text-white" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium">Connect Instagram</p>
+                          <p className="text-xs text-muted-foreground">0/1 • 25 XP</p>
+                        </div>
+                      </div>
+                      <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                    </div>
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-8 h-8 bg-sky-600 rounded-full flex items-center justify-center">
+                          <UserPlus className="w-4 h-4 text-white" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium">Follow X</p>
+                          <p className="text-xs text-muted-foreground">0/1 • 15 XP</p>
+                        </div>
+                      </div>
+                      <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                    </div>
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-8 h-8 bg-pink-600 rounded-full flex items-center justify-center">
+                          <UserPlus className="w-4 h-4 text-white" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium">Follow Instagram</p>
+                          <p className="text-xs text-muted-foreground">0/1 • 15 XP</p>
+                        </div>
+                      </div>
+                      <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                    </div>
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center">
+                          <Star className="w-4 h-4 text-white" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium">Post about $LCS / #LCS</p>
+                          <p className="text-xs text-muted-foreground">0/1 • 50 XP</p>
+                        </div>
+                      </div>
+                      <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                    </div>
+                  </div>
+                )}
                     </CardContent>
                   </Card>
                 </div>
@@ -2054,13 +2125,21 @@ const Game = () => {
                 <CardTitle className="text-base flex items-center justify-between">
                   <div className="flex items-center space-x-2">
                     <Target className="w-4 h-4" />
-                    <span>{objectivesView === "weekly" ? "Weekly" : "Daily"} Objectives</span>
+                    <span>{objectivesView === "weekly" ? "Weekly" : objectivesView === "daily" ? "Daily" : "Quests"} Objectives</span>
                   </div>
                   <Button 
                     variant="ghost" 
                     size="sm" 
                     className="h-6 w-6 p-0 hover:bg-white/10"
-                    onClick={() => setObjectivesView(objectivesView === "weekly" ? "daily" : "weekly")}
+                    onClick={() => {
+                      if (objectivesView === "weekly") {
+                        setObjectivesView("daily");
+                      } else if (objectivesView === "daily") {
+                        setObjectivesView("quests");
+                      } else {
+                        setObjectivesView("weekly");
+                      }
+                    }}
                   >
                     <RotateCcw className="w-4 h-4" />
                   </Button>
