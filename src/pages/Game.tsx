@@ -2508,7 +2508,7 @@ const Game = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
                   <CardContent className="p-8 h-full flex flex-col justify-end relative z-10">
                     <div>
-                      <h2 className="text-3xl font-bold mb-2">Last Chad Standing</h2>
+                      <h2 className="text-3xl font-bold mb-2">Welcome to LCS</h2>
                       <div className="flex space-x-4">
                         <Button variant="secondary" size="default" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 transition-all duration-300" onClick={() => navigate('/docs')}>
                           <Info className="w-4 h-4 mr-2" />
