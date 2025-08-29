@@ -1089,7 +1089,7 @@ const Game = () => {
                      rarity: "green",
                       image: "/lovable-uploads/1efc1553-007a-4b38-a982-79d9f5abbfa1.png"
                    }, {
-                     name: "Tactical Helmet",
+                     name: "Based Chad's White Vest",
                      price: 750,
                      rarity: "special",
                      image: "/lovable-uploads/69c61fed-9ccd-43d2-bab5-17c6c0db05b4.png"
@@ -2584,7 +2584,7 @@ const Game = () => {
                        rarity: "green",
                         image: "/lovable-uploads/1efc1553-007a-4b38-a982-79d9f5abbfa1.png"
                      }, {
-                       name: "Tactical Helmet",
+                        name: "Based Chad's White Vest",
                        price: 750,
                        rarity: "special",
                        image: "/lovable-uploads/69c61fed-9ccd-43d2-bab5-17c6c0db05b4.png"
