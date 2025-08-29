@@ -2150,9 +2150,37 @@ const Game = () => {
                         <span className="text-sm">x0</span>
                       </div>
                     </div>
-                    <Button variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 w-full relative z-10 transition-all duration-300">
-                      Buy Now
-                    </Button>
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 w-full relative z-10 transition-all duration-300">
+                          Buy Now
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
+                        <DropdownMenuItem 
+                          onClick={() => toast({
+                            title: "Purchase Initiated",
+                            description: "Attempting to buy pack with coins",
+                            duration: 3000
+                          })}
+                          className="flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10"
+                        >
+                          <Coins className="w-4 h-4" />
+                          <span>Buy With Coins</span>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem 
+                          onClick={() => toast({
+                            title: "Card Payment",
+                            description: "Card payment option coming soon!",
+                            duration: 3000
+                          })}
+                          className="flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10"
+                        >
+                          <CreditCard className="w-4 h-4" />
+                          <span>Buy with Card</span>
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
                   </CardContent>
                 </Card>
 
