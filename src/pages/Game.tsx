@@ -1084,7 +1084,7 @@ const Game = () => {
                      rarity: "blue",
                      image: "/lovable-uploads/69c61fed-9ccd-43d2-bab5-17c6c0db05b4.png"
                    }, {
-                     name: "Combat Backpack",
+                      name: "Blue Wing Suit",
                      price: 450,
                      rarity: "green",
                      image: "/lovable-uploads/7311683b-ea99-4dd9-9b1f-89d96742eff0.png"
@@ -2579,7 +2579,7 @@ const Game = () => {
                        rarity: "blue",
                        image: "/lovable-uploads/69c61fed-9ccd-43d2-bab5-17c6c0db05b4.png"
                      }, {
-                       name: "Combat Backpack",
+                       name: "Blue Wing Suit",
                        price: 450,
                        rarity: "green",
                        image: "/lovable-uploads/7311683b-ea99-4dd9-9b1f-89d96742eff0.png"
