@@ -2506,7 +2506,7 @@ const Game = () => {
                 {/* Large Welcome Card */}
                 <Card className="col-span-8 row-span-2 bg-gradient-to-br from-blue-600/80 to-purple-700/80 text-white border-0 relative overflow-hidden">
                   <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
-                backgroundImage: 'url(/lovable-uploads/92fa39e7-da40-4569-b66e-2844dde663c6.png)'
+                backgroundImage: 'url(/lovable-uploads/8c2f941a-58db-43db-9b99-afb13cd3c36b.png)'
               }} />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
                   <CardContent className="p-8 h-full flex flex-col justify-end relative z-10">
