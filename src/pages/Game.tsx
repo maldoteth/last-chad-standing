@@ -1461,7 +1461,7 @@ const Game = () => {
                     <CardHeader className="relative z-10">
                       <CardTitle className="flex items-center justify-between text-white">
                         <span>Emotes</span>
-                        <Badge variant="secondary">5 items</Badge>
+                         <Badge variant="secondary">4 items</Badge>
                       </CardTitle>
                       
                     </CardHeader>
@@ -3117,7 +3117,7 @@ const Game = () => {
                     <CardHeader className="relative z-10">
                       <CardTitle className="flex items-center justify-between text-white">
                         <span>Emotes</span>
-                        <Badge variant="secondary">5 items</Badge>
+                        <Badge variant="secondary">4 items</Badge>
                       </CardTitle>
                     </CardHeader>
                      <CardContent>
