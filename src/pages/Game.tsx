@@ -1481,15 +1481,19 @@ const Game = () => {
                      rarity: "gold",
                      image: "👊"
                    }, {
-                     name: "Squeaky Dance",
-                     price: 2500,
-                     rarity: "special",
-                     image: "💃"
+                      name: "Squeaky Dance",
+                      price: 2500,
+                      rarity: "special",
+                      image: "/lovable-uploads/12c90a89-5880-412c-85dc-6f52abc127b8.png"
                    }]).map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
                             <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
                             <CardContent className="p-3 relative z-10">
                               <div className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden flex items-center justify-center">
-                                <div className="text-4xl">{item.image}</div>
+                                 {item.image.startsWith('/') || item.image.startsWith('http') ? (
+                                   <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+                                 ) : (
+                                   <div className="text-4xl">{item.image}</div>
+                                 )}
                               </div>
                               <h3 className="font-semibold text-xs text-white mb-1">{item.name}</h3>
                               <div className="flex items-center justify-between">
@@ -3124,12 +3128,16 @@ const Game = () => {
                         name: "Squeaky Dance",
                         price: 2500,
                         rarity: "special",
-                        image: "💃"
+                        image: "/lovable-uploads/12c90a89-5880-412c-85dc-6f52abc127b8.png"
                       }]).map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
                             <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
                             <CardContent className="p-4 relative z-10">
                               <div className="aspect-square bg-gray-800/50 rounded-lg mb-3 overflow-hidden flex items-center justify-center">
-                                <div className="text-6xl">{item.image}</div>
+                                 {item.image.startsWith('/') || item.image.startsWith('http') ? (
+                                   <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+                                 ) : (
+                                   <div className="text-6xl">{item.image}</div>
+                                 )}
                               </div>
                               <h3 className="font-semibold text-sm text-white mb-2">{item.name}</h3>
                               <div className="flex items-center justify-between">
