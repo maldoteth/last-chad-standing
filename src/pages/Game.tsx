@@ -1087,7 +1087,7 @@ const Game = () => {
                       name: "Blue Wing Suit",
                      price: 450,
                      rarity: "green",
-                     image: "/lovable-uploads/7311683b-ea99-4dd9-9b1f-89d96742eff0.png"
+                      image: "/lovable-uploads/1efc1553-007a-4b38-a982-79d9f5abbfa1.png"
                    }, {
                      name: "Tactical Helmet",
                      price: 750,
@@ -2582,7 +2582,7 @@ const Game = () => {
                        name: "Blue Wing Suit",
                        price: 450,
                        rarity: "green",
-                       image: "/lovable-uploads/7311683b-ea99-4dd9-9b1f-89d96742eff0.png"
+                        image: "/lovable-uploads/1efc1553-007a-4b38-a982-79d9f5abbfa1.png"
                      }, {
                        name: "Tactical Helmet",
                        price: 750,
