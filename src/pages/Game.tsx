@@ -1065,6 +1065,12 @@ const Game = () => {
                           <span>Mobility</span>
                         </DropdownMenuItem>
                         <DropdownMenuItem 
+                          onClick={() => setSelectedCategory("emotes")} 
+                          className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "emotes" ? "bg-white/20" : ""}`}
+                        >
+                          <span>Emotes</span>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem 
                           onClick={() => setSelectedCategory("packs")} 
                           className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "packs" ? "bg-white/20" : ""}`}
                         >
@@ -1408,6 +1414,106 @@ const Game = () => {
                                         onClick={() => {
                                           if (authenticated) {
                                             handlePurchase(`mobility-${idx}`, item.name, item.price);
+                                          } else {
+                                            login();
+                                          }
+                                        }}
+                                      >
+                                        <Coins className="mr-2 h-4 w-4" />
+                                        Buy With Coins
+                                      </Button>
+                                      <Button 
+                                        className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20"
+                                        onClick={() => {/* TODO: Implement card payment */}}
+                                      >
+                                        <CreditCard className="mr-2 h-4 w-4" />
+                                        Buy with Card
+                                      </Button>
+                                      <DrawerClose asChild>
+                                         <Button variant="outline" className="w-full border-white/20 text-white hover:bg-white/10 hover:text-white">
+                                          Cancel
+                                        </Button>
+                                      </DrawerClose>
+                                    </div>
+                                  </DrawerContent>
+                                </Drawer>
+                              </div>
+                            </CardContent>
+                          </Card>)}
+                      </div>
+                     </CardContent>
+                   </Card>
+                   )}
+
+                   {/* Emotes Category */}
+                   {(selectedCategory === "all" || selectedCategory === "emotes") && (
+                   <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
+                    <div className="absolute inset-0" style={{
+                  backgroundImage: `
+                        linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
+                        linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
+                      `,
+                  backgroundSize: '4px 4px'
+                }} />
+                    <CardHeader className="relative z-10">
+                      <CardTitle className="flex items-center justify-between text-white">
+                        <span>Emotes</span>
+                        <Badge variant="secondary">4 items</Badge>
+                      </CardTitle>
+                      
+                    </CardHeader>
+                    <CardContent>
+                       <div className="grid grid-cols-2 gap-3">
+                         {filterItemsByRarity([{
+                     name: "Flex",
+                     price: 800,
+                     rarity: "blue",
+                     image: "🤳"
+                   }, {
+                     name: "Shush",
+                     price: 1200,
+                     rarity: "silver",
+                     image: "🤫"
+                   }, {
+                     name: "Fists Up",
+                     price: 1800,
+                     rarity: "gold",
+                     image: "👊"
+                   }, {
+                     name: "Squeaky Dance",
+                     price: 2500,
+                     rarity: "special",
+                     image: "💃"
+                   }]).map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
+                            <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
+                            <CardContent className="p-3 relative z-10">
+                              <div className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden flex items-center justify-center">
+                                <div className="text-4xl">{item.image}</div>
+                              </div>
+                              <h3 className="font-semibold text-xs text-white mb-1">{item.name}</h3>
+                              <div className="flex items-center justify-between">
+                                <div className="flex items-center space-x-1">
+                                  <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
+                                  <span className="text-xs font-bold text-white">{item.price.toLocaleString()}</span>
+                                </div>
+                                <Drawer>
+                                  <DrawerTrigger asChild>
+                                     <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
+                                       <ShoppingBag className={`${isMobile ? 'h-3 w-3' : 'mr-1 h-2 w-2'}`} />
+                                       {!isMobile && "Buy"}
+                                     </Button>
+                                  </DrawerTrigger>
+                                   <DrawerContent className="bg-black/10 backdrop-blur-md border-t border-white/20 text-white transition-all duration-300">
+                                    <DrawerHeader>
+                                      <DrawerTitle className="text-white text-center">Purchase {item.name}</DrawerTitle>
+                                    </DrawerHeader>
+                                    <div className="p-4 space-y-3">
+                                      <Button 
+                                        className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20"
+                                        onClick={() => {
+                                          if (authenticated) {
+                                            handlePurchase(`emote-${idx}`, item.name, item.price);
                                           } else {
                                             login();
                                           }
@@ -2642,6 +2748,12 @@ const Game = () => {
                           <span>Mobility</span>
                         </DropdownMenuItem>
                         <DropdownMenuItem 
+                          onClick={() => setSelectedCategory("emotes")} 
+                          className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "emotes" ? "bg-white/20" : ""}`}
+                        >
+                          <span>Emotes</span>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem 
                           onClick={() => setSelectedCategory("packs")} 
                           className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "packs" ? "bg-white/20" : ""}`}
                         >
@@ -2948,6 +3060,92 @@ const Game = () => {
                                   <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
                                     <DropdownMenuItem 
                                       onClick={() => handlePurchase(item.id, item.name, item.price)}
+                                      className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300"
+                                    >
+                                      <Coins className="w-4 h-4" />
+                                      <span>Buy With Coins</span>
+                                    </DropdownMenuItem>
+                                    <DropdownMenuItem 
+                                      onClick={() => toast({
+                                        title: "Card Payment",
+                                        description: "Card payment option coming soon!",
+                                        duration: 3000
+                                      })}
+                                      className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300"
+                                    >
+                                      <CreditCard className="w-4 h-4" />
+                                      <span>Buy with Card</span>
+                                    </DropdownMenuItem>
+                                  </DropdownMenuContent>
+                                </DropdownMenu>
+                              </div>
+                            </CardContent>
+                          </Card>)}
+                      </div>
+                     </CardContent>
+                   </Card>
+                   )}
+
+                   {/* Emotes Category */}
+                   {(selectedCategory === "all" || selectedCategory === "emotes") && (
+                   <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
+                    <div className="absolute inset-0" style={{
+                  backgroundImage: `
+                        linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
+                        linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
+                      `,
+                  backgroundSize: '4px 4px'
+                }} />
+                    <CardHeader className="relative z-10">
+                      <CardTitle className="flex items-center justify-between text-white">
+                        <span>Emotes</span>
+                        <Badge variant="secondary">4 items</Badge>
+                      </CardTitle>
+                    </CardHeader>
+                     <CardContent>
+                       <div className="grid grid-cols-4 gap-4">
+                         {filterItemsByRarity([{
+                        name: "Flex",
+                        price: 800,
+                        rarity: "blue",
+                        image: "🤳"
+                      }, {
+                        name: "Shush",
+                        price: 1200,
+                        rarity: "silver",
+                        image: "🤫"
+                      }, {
+                        name: "Fists Up",
+                        price: 1800,
+                        rarity: "gold",
+                        image: "👊"
+                      }, {
+                        name: "Squeaky Dance",
+                        price: 2500,
+                        rarity: "special",
+                        image: "💃"
+                      }]).map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
+                            <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
+                            <CardContent className="p-4 relative z-10">
+                              <div className="aspect-square bg-gray-800/50 rounded-lg mb-3 overflow-hidden flex items-center justify-center">
+                                <div className="text-6xl">{item.image}</div>
+                              </div>
+                              <h3 className="font-semibold text-sm text-white mb-2">{item.name}</h3>
+                              <div className="flex items-center justify-between">
+                                <div className="flex items-center space-x-1">
+                                  <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4" />
+                                  <span className="text-sm font-bold text-white">{item.price.toLocaleString()}</span>
+                                </div>
+                                <DropdownMenu>
+                                  <DropdownMenuTrigger asChild>
+                                    <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-7 px-3">
+                                      Buy
+                                    </Button>
+                                  </DropdownMenuTrigger>
+                                  <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
+                                    <DropdownMenuItem 
+                                      onClick={() => handlePurchase(`emote-${idx}`, item.name, item.price)}
                                       className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300"
                                     >
                                       <Coins className="w-4 h-4" />
