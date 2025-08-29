@@ -995,7 +995,7 @@ const Game = () => {
                           <Star className="w-4 h-4 text-white" />
                         </div>
                         <div>
-                          <p className="text-sm font-medium">Post about $LCS / #LCS</p>
+                          <p className="text-sm font-medium">Post about $LCS</p>
                           <p className="text-xs text-muted-foreground">0/1 • 50 XP</p>
                         </div>
                       </div>
