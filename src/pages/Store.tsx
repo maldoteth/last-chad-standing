@@ -319,14 +319,14 @@ const Store = () => {
                       {authenticated && (
                         <DropdownMenuContent align="end" className="w-full bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
                           <DropdownMenuItem 
-                            className="hover:bg-white/10 cursor-pointer"
+                            className="cursor-pointer transition-all duration-300 data-[highlighted]:bg-gradient-to-r data-[highlighted]:from-white/5 data-[highlighted]:via-white/10 data-[highlighted]:to-white/5 data-[highlighted]:backdrop-blur-sm data-[highlighted]:border-l-2 data-[highlighted]:border-white/20"
                             onClick={() => handlePurchase(item.id, item.name, item.price)}
                           >
                             <Coins className="mr-2 h-4 w-4" />
                             Buy with Coin Balance
                           </DropdownMenuItem>
                           <DropdownMenuItem 
-                            className="hover:bg-white/10 cursor-pointer"
+                            className="cursor-pointer transition-all duration-300 data-[highlighted]:bg-gradient-to-r data-[highlighted]:from-white/5 data-[highlighted]:via-white/10 data-[highlighted]:to-white/5 data-[highlighted]:backdrop-blur-sm data-[highlighted]:border-l-2 data-[highlighted]:border-white/20"
                             onClick={() => {/* TODO: Implement card payment */}}
                           >
                             <CreditCard className="mr-2 h-4 w-4" />
