@@ -1169,16 +1169,11 @@ const Game = () => {
                     </CardHeader>
                     <CardContent>
                        <div className="grid grid-cols-2 gap-3">
-                          {filterItemsByRarity([{
+                         {filterItemsByRarity([{
                      name: "Cyber Warrior",
                      price: 2500,
                      rarity: "gold",
                      image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
-                   }, {
-                      name: "Irish King",
-                      price: 3200,
-                      rarity: "gold",
-                      image: irishKingSkin
                    }, {
                       name: "Stani Eagle",
                       price: 1800,
