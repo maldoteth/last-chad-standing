@@ -1082,7 +1082,7 @@ const Game = () => {
                       name: "Red Wing Suit",
                      price: 600,
                      rarity: "blue",
-                     image: "/lovable-uploads/69c61fed-9ccd-43d2-bab5-17c6c0db05b4.png"
+                      image: "/lovable-uploads/2eec4a9a-97d3-4ba4-9508-2eeef0011139.png"
                    }, {
                       name: "Blue Wing Suit",
                      price: 450,
@@ -2577,7 +2577,7 @@ const Game = () => {
                        name: "Red Wing Suit",
                        price: 600,
                        rarity: "blue",
-                       image: "/lovable-uploads/69c61fed-9ccd-43d2-bab5-17c6c0db05b4.png"
+                        image: "/lovable-uploads/2eec4a9a-97d3-4ba4-9508-2eeef0011139.png"
                      }, {
                        name: "Blue Wing Suit",
                        price: 450,
