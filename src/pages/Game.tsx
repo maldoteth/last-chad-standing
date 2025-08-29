@@ -14,7 +14,7 @@ import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/h
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { ProgressBar } from "@/components/ProgressBar";
 import { useProfile } from "@/hooks/useProfile";
-import { LEVELS, getCurrentLevel, getProgressToNextLevel } from "@/lib/progressSystem";
+import { getAllLevelsForDisplay, getCurrentLevel, getProgressToNextLevel } from "@/lib/progressSystem";
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerTrigger, DrawerClose } from "@/components/ui/drawer";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogDescription } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -586,7 +586,7 @@ const Game = () => {
                         <div className="space-y-3">
                           <h4 className="font-semibold text-sm">XP Progress Levels</h4>
                           <div className="space-y-2 max-h-60 overflow-y-auto">
-                            {LEVELS.map((level, index) => {
+                            {getAllLevelsForDisplay().map((level, index) => {
                               const isCurrentLevel = getCurrentLevel(userBalance?.xp || 0).name === level.name;
                               const isUnlocked = (userBalance?.xp || 0) >= level.minXp;
                               
@@ -2097,7 +2097,7 @@ const Game = () => {
                           <div className="space-y-3">
                             <h4 className="font-semibold text-sm">XP Progress Levels</h4>
                             <div className="space-y-2 max-h-60 overflow-y-auto">
-                              {LEVELS.map((level, index) => {
+                              {getAllLevelsForDisplay().map((level, index) => {
                                 const isCurrentLevel = getCurrentLevel(userBalance?.xp || 0).name === level.name;
                                 const isUnlocked = (userBalance?.xp || 0) >= level.minXp;
                                 
@@ -2137,7 +2137,7 @@ const Game = () => {
                       <div className="space-y-3">
                         <h4 className="font-semibold text-sm">XP Progress Levels</h4>
                         <div className="space-y-2 max-h-60 overflow-y-auto">
-                          {LEVELS.map((level, index) => {
+                          {getAllLevelsForDisplay().map((level, index) => {
                             const isCurrentLevel = getCurrentLevel(userBalance?.xp || 0).name === level.name;
                             const isUnlocked = (userBalance?.xp || 0) >= level.minXp;
                             
@@ -2192,7 +2192,7 @@ const Game = () => {
                           <div className="space-y-3">
                             <h4 className="font-semibold text-sm">XP Progress Levels</h4>
                             <div className="space-y-2 max-h-60 overflow-y-auto">
-                              {LEVELS.map((level, index) => {
+                              {getAllLevelsForDisplay().map((level, index) => {
                                 const isCurrentLevel = getCurrentLevel(userBalance?.xp || 0).name === level.name;
                                 const isUnlocked = (userBalance?.xp || 0) >= level.minXp;
                                 
