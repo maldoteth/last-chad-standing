@@ -1287,7 +1287,7 @@ const Game = () => {
                       name: "Gold Pack",
                       price: 2000,
                       rarity: "gold",
-                      image: "/lovable-uploads/c4d89b50-9bf5-44a2-a51f-88febb52c38d.png"
+                      image: "/lovable-uploads/291c5734-f144-47b0-9f49-915999e921b0.png"
                    }, {
                       name: "Special Pack 1",
                       price: 3500,
@@ -2754,7 +2754,7 @@ const Game = () => {
                         name: "Gold Pack",
                         price: 2000,
                         rarity: "gold",
-                        image: "/lovable-uploads/c4d89b50-9bf5-44a2-a51f-88febb52c38d.png"
+                        image: "/lovable-uploads/291c5734-f144-47b0-9f49-915999e921b0.png"
                      }, {
                         name: "Special Pack 1",
                         price: 3500,
