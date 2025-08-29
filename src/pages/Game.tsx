@@ -2102,7 +2102,7 @@ const Game = () => {
                       variant="secondary" 
                       size="sm" 
                       className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 w-full transition-all duration-300"
-                      onClick={() => navigate('/inventory')}
+                      onClick={() => navigate('/store')}
                     >
                       Start Building
                     </Button>
