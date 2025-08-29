@@ -512,27 +512,79 @@ const Game = () => {
                   </Card>
                 </div>
 
-                {/* Progress Card */}
+                {/* Progress Card - Mobile with Popover */}
                 <div className="px-4 pb-4">
-                  <Card className="bg-black border-gray-700">
-                    <CardHeader className="pb-3">
-                      <CardTitle className="text-base flex items-center space-x-2">
-                        <Star className="w-4 h-4" />
-                        <span>Progress</span>
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="space-y-3">
-                        <div>
-                          <div className="flex items-center justify-between mb-2">
-                            <span className="text-sm font-medium">Level 0: Recruit</span>
-                            <span className="text-xs text-muted-foreground">0/100 XP</span>
+                  <div className="relative">
+                    {/* Mobile: Popover */}
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Card className="bg-black border-gray-700 cursor-pointer hover:border-gray-600 transition-colors">
+                          <CardHeader className="pb-3">
+                            <CardTitle className="text-base flex items-center justify-between">
+                              <div className="flex items-center space-x-2">
+                                <Star className="w-4 h-4" />
+                                <span>Progress</span>
+                              </div>
+                              <Info className="w-4 h-4 text-muted-foreground" />
+                            </CardTitle>
+                          </CardHeader>
+                          <CardContent>
+                            <div className="space-y-3">
+                              <div>
+                                <div className="flex items-center justify-between mb-2">
+                                  <span className="text-sm font-medium">
+                                    {getCurrentLevel(userBalance?.xp || 0).name}
+                                  </span>
+                                  <span className="text-xs text-muted-foreground">
+                                    {userBalance?.xp || 0} XP
+                                  </span>
+                                </div>
+                                <Progress value={getProgressToNextLevel(userBalance?.xp || 0).percentage} className="h-2" />
+                              </div>
+                            </div>
+                          </CardContent>
+                        </Card>
+                      </PopoverTrigger>
+                      <PopoverContent 
+                        className="w-80 p-4 bg-black/90 backdrop-blur-md border border-white/20 text-white z-50"
+                        side="top"
+                        align="center"
+                      >
+                        <div className="space-y-3">
+                          <h4 className="font-semibold text-sm">XP Progress Levels</h4>
+                          <div className="space-y-2 max-h-60 overflow-y-auto">
+                            {LEVELS.map((level, index) => {
+                              const isCurrentLevel = getCurrentLevel(userBalance?.xp || 0).name === level.name;
+                              const isUnlocked = (userBalance?.xp || 0) >= level.minXp;
+                              
+                              return (
+                                <div 
+                                  key={index}
+                                  className={`flex items-center justify-between p-2 rounded-md transition-colors ${
+                                    isCurrentLevel 
+                                      ? 'bg-primary/20 border border-primary/30' 
+                                      : isUnlocked 
+                                      ? 'bg-white/5 hover:bg-white/10' 
+                                      : 'bg-gray-800/50 opacity-60'
+                                  }`}
+                                >
+                                  <div className="flex items-center space-x-2">
+                                    <div className={`w-2 h-2 rounded-full ${
+                                      isCurrentLevel ? 'bg-primary' : isUnlocked ? 'bg-green-400' : 'bg-gray-500'
+                                    }`} />
+                                    <span className="text-sm font-medium">{level.name}</span>
+                                  </div>
+                                  <span className="text-xs text-gray-400">
+                                    {level.maxXp === Infinity ? `${level.minXp.toLocaleString()}+ XP` : `${level.minXp.toLocaleString()}-${level.maxXp.toLocaleString()} XP`}
+                                  </span>
+                                </div>
+                              );
+                            })}
                           </div>
-                          <Progress value={0} className="h-2" />
                         </div>
-                      </div>
-                    </CardContent>
-                  </Card>
+                      </PopoverContent>
+                    </Popover>
+                  </div>
                 </div>
 
                 {/* Action Cards Grid - 2 columns on mobile */}
