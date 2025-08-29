@@ -23,7 +23,7 @@ import { ResponsiveContainer, LineChart as RechartsLineChart, Line, XAxis, YAxis
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import cyberWarriorSkin from "@/assets/cyber-warrior-skin.png";
 import irishKingSkin from "@/assets/irish-king-skin.png";
-import staniEagleSkin from "@/assets/stani-eagle-skin.png";
+const staniEagleSkin = "/lovable-uploads/ce52b724-438e-4fa5-8618-de460cf2d7fb.png";
 import bonesSkin from "@/assets/bones-skin.png";
 import latinLegendSkin from "@/assets/latin-legend-skin.png";
 const Game = () => {
