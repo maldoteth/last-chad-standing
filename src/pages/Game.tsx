@@ -37,6 +37,7 @@ const Game = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [settingsExpanded, setSettingsExpanded] = useState(false);
   const [objectivesView, setObjectivesView] = useState("weekly");
+  const [isObjectivesGlowing, setIsObjectivesGlowing] = useState(false);
   const objectivesRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
   const {
@@ -2253,7 +2254,7 @@ const Game = () => {
               )}
             </div>
 
-            <Card className="bg-black border-gray-700">
+            <Card className={`bg-black border-gray-700 transition-all duration-500 ease-in-out ${isObjectivesGlowing ? 'ring-1 ring-primary/30 shadow-lg shadow-primary/20' : ''}`}>
               <CardHeader>
                 <CardTitle className="text-base flex items-center justify-between">
                   <div className="flex items-center space-x-2">
@@ -2552,9 +2553,10 @@ const Game = () => {
                     <p className="text-gray-300 text-sm mb-4">by completing all quests</p>
                     <Button variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 w-full relative z-10 transition-all duration-300" onClick={() => {
                       setObjectivesView("quests");
+                      setIsObjectivesGlowing(true);
                       setTimeout(() => {
-                        objectivesRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                      }, 100);
+                        setIsObjectivesGlowing(false);
+                      }, 2000);
                     }}>
                       Show Quests
                     </Button>
