@@ -2658,7 +2658,7 @@ const Game = () => {
                         name: "The Coupé Tank",
                        price: 5000,
                        rarity: "gold",
-                       image: "/lovable-uploads/84ab9eed-00bc-425c-a953-3ea0478e464d.png"
+                        image: "/lovable-uploads/1c6b707c-97a6-4381-bc54-de63a7cf8a31.png"
                      }, {
                        name: "Speed Buggy",
                        price: 3200,
