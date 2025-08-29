@@ -25,6 +25,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import cyberWarriorSkin from "@/assets/cyber-warrior-skin.png";
 import irishKingSkin from "@/assets/irish-king-skin.png";
 import staniEagleSkin from "@/assets/stani-eagle-skin.png";
+import bonesSkin from "@/assets/bones-skin.png";
 const Game = () => {
   const [activeTab, setActiveTab] = useState("home");
   const [gainersTimeFilter, setGainersTimeFilter] = useState("daily");
@@ -987,10 +988,10 @@ const Game = () => {
                       rarity: "blue",
                       image: staniEagleSkin
                    }, {
-                     name: "Battle Mage",
-                     price: 2200,
-                     rarity: "silver",
-                     image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
+                      name: "Bones",
+                      price: 2200,
+                      rarity: "silver",
+                      image: bonesSkin
                    }, {
                      name: "Iron Guardian",
                      price: 1500,
@@ -2496,10 +2497,10 @@ const Game = () => {
                         rarity: "blue",
                         image: staniEagleSkin
                      }, {
-                       name: "Battle Mage",
-                       price: 2200,
-                       rarity: "silver",
-                       image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
+                        name: "Bones",
+                        price: 2200,
+                        rarity: "silver",
+                        image: bonesSkin
                      }, {
                        name: "Iron Guardian",
                        price: 1500,
