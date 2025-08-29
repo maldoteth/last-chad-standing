@@ -692,22 +692,22 @@ const Game = () => {
                               <div className="p-4 space-y-3">
                                 <Button 
                                   className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20"
-                                  onClick={() => toast({
-                                    title: "Purchase Initiated",
-                                    description: "Attempting to buy pack with coins",
-                                    duration: 3000
-                                  })}
+                                   onClick={() => toast({
+                                     title: "Coming Soon",
+                                     description: "Coin purchases coming soon!",
+                                     duration: 3000
+                                   })}
                                 >
                                   <Coins className="mr-2 h-4 w-4" />
                                   Buy With Coins
                                 </Button>
                                 <Button 
                                   className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20"
-                                  onClick={() => toast({
-                                    title: "Card Payment",
-                                    description: "Card payment option coming soon!",
-                                    duration: 3000
-                                  })}
+                                   onClick={() => toast({
+                                     title: "Coming Soon",
+                                     description: "Card payments coming soon!",
+                                     duration: 3000
+                                   })}
                                 >
                                   <CreditCard className="mr-2 h-4 w-4" />
                                   Buy with Card
@@ -729,22 +729,22 @@ const Game = () => {
                             </DropdownMenuTrigger>
                             <DropdownMenuContent align="center" className="w-full bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
                               <DropdownMenuItem 
-                                onClick={() => toast({
-                                  title: "Purchase Initiated",
-                                  description: "Attempting to buy pack with coins",
-                                  duration: 3000
-                                })}
+                               onClick={() => toast({
+                                   title: "Coming Soon",
+                                   description: "Coin purchases coming soon!",
+                                   duration: 3000
+                                 })}
                                 className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300"
                               >
                                 <Coins className="w-4 h-4" />
                                 <span>Buy With Coins</span>
                               </DropdownMenuItem>
                               <DropdownMenuItem 
-                                onClick={() => toast({
-                                  title: "Card Payment",
-                                  description: "Card payment option coming soon!",
-                                  duration: 3000
-                                })}
+                               onClick={() => toast({
+                                   title: "Coming Soon", 
+                                   description: "Card payments coming soon!",
+                                   duration: 3000
+                                 })}
                                 className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300"
                               >
                                 <CreditCard className="w-4 h-4" />
@@ -1215,20 +1215,22 @@ const Game = () => {
                                     <div className="p-4 space-y-3">
                                       <Button 
                                         className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20"
-                                        onClick={() => {
-                                          if (authenticated) {
-                                            handlePurchase(`skin-${idx}`, item.name, item.price);
-                                          } else {
-                                            login();
-                                          }
-                                        }}
+                                         onClick={() => toast({
+                                           title: "Coming Soon",
+                                           description: "Coin purchases coming soon!",
+                                           duration: 3000
+                                         })}
                                       >
                                         <Coins className="mr-2 h-4 w-4" />
                                         Buy With Coins
                                       </Button>
                                       <Button 
                                         className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20"
-                                        onClick={() => {/* TODO: Implement card payment */}}
+                                         onClick={() => toast({
+                                           title: "Coming Soon",
+                                           description: "Card payments coming soon!",
+                                           duration: 3000
+                                         })}
                                       >
                                         <CreditCard className="mr-2 h-4 w-4" />
                                         Buy with Card
@@ -1315,13 +1317,11 @@ const Game = () => {
                                     <div className="p-4 space-y-3">
                                       <Button 
                                         className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20"
-                                        onClick={() => {
-                                          if (authenticated) {
-                                            handlePurchase(`accessory-${idx}`, item.name, item.price);
-                                          } else {
-                                            login();
-                                          }
-                                        }}
+                                         onClick={() => toast({
+                                           title: "Coming Soon",
+                                           description: "Coin purchases coming soon!",
+                                           duration: 3000
+                                         })}
                                       >
                                         <Coins className="mr-2 h-4 w-4" />
                                         Buy With Coins
@@ -1415,13 +1415,11 @@ const Game = () => {
                                     <div className="p-4 space-y-3">
                                       <Button 
                                         className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20"
-                                        onClick={() => {
-                                          if (authenticated) {
-                                            handlePurchase(`mobility-${idx}`, item.name, item.price);
-                                          } else {
-                                            login();
-                                          }
-                                        }}
+                                         onClick={() => toast({
+                                           title: "Coming Soon",
+                                           description: "Coin purchases coming soon!",
+                                           duration: 3000
+                                         })}
                                       >
                                         <Coins className="mr-2 h-4 w-4" />
                                         Buy With Coins
@@ -1519,13 +1517,11 @@ const Game = () => {
                                     <div className="p-4 space-y-3">
                                       <Button 
                                         className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20"
-                                        onClick={() => {
-                                          if (authenticated) {
-                                            handlePurchase(`emote-${idx}`, item.name, item.price);
-                                          } else {
-                                            login();
-                                          }
-                                        }}
+                                         onClick={() => toast({
+                                           title: "Coming Soon",
+                                           description: "Coin purchases coming soon!",
+                                           duration: 3000
+                                         })}
                                       >
                                         <Coins className="mr-2 h-4 w-4" />
                                         Buy With Coins
@@ -1619,13 +1615,11 @@ const Game = () => {
                                     <div className="p-4 space-y-3">
                                       <Button 
                                         className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20"
-                                        onClick={() => {
-                                          if (authenticated) {
-                                            handlePurchase(`pack-${idx}`, item.name, item.price);
-                                          } else {
-                                            login();
-                                          }
-                                        }}
+                                         onClick={() => toast({
+                                           title: "Coming Soon",
+                                           description: "Coin purchases coming soon!",
+                                           duration: 3000
+                                         })}
                                       >
                                         <Coins className="mr-2 h-4 w-4" />
                                         Buy With Coins
@@ -2606,22 +2600,22 @@ const Game = () => {
                           <div className="p-4 space-y-3">
                             <Button 
                               className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20"
-                              onClick={() => toast({
-                                title: "Purchase Initiated",
-                                description: "Attempting to buy pack with coins",
-                                duration: 3000
-                              })}
+                               onClick={() => toast({
+                                 title: "Coming Soon",
+                                 description: "Coin purchases coming soon!",
+                                 duration: 3000
+                               })}
                             >
                               <Coins className="mr-2 h-4 w-4" />
                               Buy With Coins
                             </Button>
                             <Button 
                               className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20"
-                              onClick={() => toast({
-                                title: "Card Payment",
-                                description: "Card payment option coming soon!",
-                                duration: 3000
-                              })}
+                               onClick={() => toast({
+                                 title: "Coming Soon",
+                                 description: "Card payments coming soon!",
+                                 duration: 3000
+                               })}
                             >
                               <CreditCard className="mr-2 h-4 w-4" />
                               Buy with Card
@@ -2643,22 +2637,22 @@ const Game = () => {
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="center" className="w-full bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
                           <DropdownMenuItem 
-                            onClick={() => toast({
-                              title: "Purchase Initiated",
-                              description: "Attempting to buy pack with coins",
-                              duration: 3000
-                            })}
+                             onClick={() => toast({
+                               title: "Coming Soon",
+                               description: "Coin purchases coming soon!",
+                               duration: 3000
+                             })}
                             className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300"
                           >
                             <Coins className="w-4 h-4" />
                             <span>Buy With Coins</span>
                           </DropdownMenuItem>
                           <DropdownMenuItem 
-                            onClick={() => toast({
-                              title: "Card Payment",
-                              description: "Card payment option coming soon!",
-                              duration: 3000
-                            })}
+                             onClick={() => toast({
+                               title: "Coming Soon",
+                               description: "Card payments coming soon!",
+                               duration: 3000
+                             })}
                             className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300"
                           >
                             <CreditCard className="w-4 h-4" />
@@ -2898,18 +2892,22 @@ const Game = () => {
                                   </DropdownMenuTrigger>
                                   <DropdownMenuContent align="start" className="w-full lg:w-full bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
                                     <DropdownMenuItem 
-                                      onClick={() => handlePurchase(item.id, item.name, item.price)}
+                                       onClick={() => toast({
+                                         title: "Coming Soon",
+                                         description: "Coin purchases coming soon!",
+                                         duration: 3000
+                                       })}
                                       className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300"
                                     >
                                       <Coins className="w-4 h-4" />
                                       <span>Buy With Coins</span>
                                     </DropdownMenuItem>
                                     <DropdownMenuItem 
-                                      onClick={() => toast({
-                                        title: "Card Payment",
-                                        description: "Card payment option coming soon!",
-                                        duration: 3000
-                                      })}
+                                       onClick={() => toast({
+                                         title: "Coming Soon",
+                                         description: "Card payments coming soon!",
+                                         duration: 3000
+                                       })}
                                       className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300"
                                     >
                                       <CreditCard className="w-4 h-4" />
@@ -2984,18 +2982,22 @@ const Game = () => {
                                   </DropdownMenuTrigger>
                                   <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
                                     <DropdownMenuItem 
-                                      onClick={() => handlePurchase(item.id, item.name, item.price)}
+                                       onClick={() => toast({
+                                         title: "Coming Soon",
+                                         description: "Coin purchases coming soon!",
+                                         duration: 3000
+                                       })}
                                       className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300"
                                     >
                                       <Coins className="w-4 h-4" />
                                       <span>Buy With Coins</span>
                                     </DropdownMenuItem>
                                     <DropdownMenuItem 
-                                      onClick={() => toast({
-                                        title: "Card Payment",
-                                        description: "Card payment option coming soon!",
-                                        duration: 3000
-                                      })}
+                                       onClick={() => toast({
+                                         title: "Coming Soon",
+                                         description: "Card payments coming soon!",
+                                         duration: 3000
+                                       })}
                                       className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300"
                                     >
                                       <CreditCard className="w-4 h-4" />
@@ -3070,18 +3072,22 @@ const Game = () => {
                                   </DropdownMenuTrigger>
                                   <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
                                     <DropdownMenuItem 
-                                      onClick={() => handlePurchase(item.id, item.name, item.price)}
+                                       onClick={() => toast({
+                                         title: "Coming Soon",
+                                         description: "Coin purchases coming soon!",
+                                         duration: 3000
+                                       })}
                                       className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300"
                                     >
                                       <Coins className="w-4 h-4" />
                                       <span>Buy With Coins</span>
                                     </DropdownMenuItem>
                                     <DropdownMenuItem 
-                                      onClick={() => toast({
-                                        title: "Card Payment",
-                                        description: "Card payment option coming soon!",
-                                        duration: 3000
-                                      })}
+                                       onClick={() => toast({
+                                         title: "Coming Soon",
+                                         description: "Card payments coming soon!",
+                                         duration: 3000
+                                       })}
                                       className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300"
                                     >
                                       <CreditCard className="w-4 h-4" />
@@ -3160,18 +3166,22 @@ const Game = () => {
                                   </DropdownMenuTrigger>
                                   <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
                                     <DropdownMenuItem 
-                                      onClick={() => handlePurchase(`emote-${idx}`, item.name, item.price)}
+                                       onClick={() => toast({
+                                         title: "Coming Soon",
+                                         description: "Coin purchases coming soon!",
+                                         duration: 3000
+                                       })}
                                       className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300"
                                     >
                                       <Coins className="w-4 h-4" />
                                       <span>Buy With Coins</span>
                                     </DropdownMenuItem>
                                     <DropdownMenuItem 
-                                      onClick={() => toast({
-                                        title: "Card Payment",
-                                        description: "Card payment option coming soon!",
-                                        duration: 3000
-                                      })}
+                                       onClick={() => toast({
+                                         title: "Coming Soon",
+                                         description: "Card payments coming soon!",
+                                         duration: 3000
+                                       })}
                                       className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300"
                                     >
                                       <CreditCard className="w-4 h-4" />
@@ -3246,18 +3256,22 @@ const Game = () => {
                                   </DropdownMenuTrigger>
                                   <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
                                     <DropdownMenuItem 
-                                      onClick={() => handlePurchase(item.id, item.name, item.price)}
+                                       onClick={() => toast({
+                                         title: "Coming Soon",
+                                         description: "Coin purchases coming soon!",
+                                         duration: 3000
+                                       })}
                                       className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300"
                                     >
                                       <Coins className="w-4 h-4" />
                                       <span>Buy With Coins</span>
                                     </DropdownMenuItem>
                                     <DropdownMenuItem 
-                                      onClick={() => toast({
-                                        title: "Card Payment",
-                                        description: "Card payment option coming soon!",
-                                        duration: 3000
-                                      })}
+                                       onClick={() => toast({
+                                         title: "Coming Soon",
+                                         description: "Card payments coming soon!",
+                                         duration: 3000
+                                       })}
                                       className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300"
                                     >
                                       <CreditCard className="w-4 h-4" />
@@ -3576,22 +3590,22 @@ const Game = () => {
                                   </DropdownMenuTrigger>
                                   <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
                                     <DropdownMenuItem 
-                                      onClick={() => toast({
-                                        title: "Purchase Initiated",
-                                        description: `Attempting to buy ${player.name} for ${player.price.toLocaleString()} coins`,
-                                        duration: 3000
-                                      })}
+                         onClick={() => toast({
+                           title: "Coming Soon",
+                           description: "Coin purchases coming soon!",
+                           duration: 3000
+                         })}
                                       className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300"
                                     >
                                       <Coins className="w-4 h-4" />
                                       <span>Buy With Coins</span>
                                     </DropdownMenuItem>
                                     <DropdownMenuItem 
-                                      onClick={() => toast({
-                                        title: "Card Payment",
-                                        description: "Card payment option coming soon!",
-                                        duration: 3000
-                                      })}
+                                       onClick={() => toast({
+                                         title: "Coming Soon",
+                                         description: "Card payments coming soon!",
+                                         duration: 3000
+                                       })}
                                       className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300"
                                     >
                                       <CreditCard className="w-4 h-4" />
