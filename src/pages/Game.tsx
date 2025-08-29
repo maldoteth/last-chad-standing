@@ -2209,7 +2209,7 @@ const Game = () => {
                       <ChevronRight className="w-4 h-4 text-muted-foreground" />
                     </div>
                   </div>
-                ) : (
+                ) : objectivesView === "daily" ? (
                   <div className="space-y-3">
                     <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
                       <div className="flex items-center space-x-3">
@@ -2267,6 +2267,69 @@ const Game = () => {
                         <div>
                           <p className="text-sm font-medium">Play with 1 friend</p>
                           <p className="text-xs text-muted-foreground">0/1 • 10 XP</p>
+                        </div>
+                      </div>
+                      <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                    </div>
+                  </div>
+                ) : (
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-8 h-8 bg-sky-500 rounded-full flex items-center justify-center">
+                          <X className="w-4 h-4 text-white" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium">Connect X</p>
+                          <p className="text-xs text-muted-foreground">0/1 • 25 XP</p>
+                        </div>
+                      </div>
+                      <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                    </div>
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-8 h-8 bg-pink-500 rounded-full flex items-center justify-center">
+                          <Instagram className="w-4 h-4 text-white" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium">Connect Instagram</p>
+                          <p className="text-xs text-muted-foreground">0/1 • 25 XP</p>
+                        </div>
+                      </div>
+                      <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                    </div>
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-8 h-8 bg-sky-600 rounded-full flex items-center justify-center">
+                          <UserPlus className="w-4 h-4 text-white" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium">Follow X</p>
+                          <p className="text-xs text-muted-foreground">0/1 • 15 XP</p>
+                        </div>
+                      </div>
+                      <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                    </div>
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-8 h-8 bg-pink-600 rounded-full flex items-center justify-center">
+                          <UserPlus className="w-4 h-4 text-white" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium">Follow Instagram</p>
+                          <p className="text-xs text-muted-foreground">0/1 • 15 XP</p>
+                        </div>
+                      </div>
+                      <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                    </div>
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center">
+                          <Star className="w-4 h-4 text-white" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium">Post about $LCS / #LCS</p>
+                          <p className="text-xs text-muted-foreground">0/1 • 50 XP</p>
                         </div>
                       </div>
                       <ChevronRight className="w-4 h-4 text-muted-foreground" />
