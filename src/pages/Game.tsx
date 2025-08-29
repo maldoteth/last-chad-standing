@@ -1294,7 +1294,7 @@ const Game = () => {
                       rarity: "special",
                       image: "/lovable-uploads/2149e9ad-919f-49ea-8be4-90f190387d39.png"
                    }, {
-                     name: "Special Pack 2",
+                     name: "Wild West Pack",
                      price: 5000,
                      rarity: "special",
                      image: "/lovable-uploads/b31c9ab4-6dcf-4a77-bdf6-7e82e5a8c66a.png"
@@ -2761,7 +2761,7 @@ const Game = () => {
                         rarity: "special",
                         image: "/lovable-uploads/2149e9ad-919f-49ea-8be4-90f190387d39.png"
                      }, {
-                       name: "Special Pack 2",
+                        name: "Wild West Pack",
                        price: 5000,
                        rarity: "special",
                        image: "/lovable-uploads/b31c9ab4-6dcf-4a77-bdf6-7e82e5a8c66a.png"
