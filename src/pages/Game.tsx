@@ -1094,7 +1094,7 @@ const Game = () => {
                      rarity: "special",
                       image: "/lovable-uploads/508d1509-e761-46c6-9f3a-f70e256f5a52.png"
                    }, {
-                     name: "Power Gloves",
+                      name: "Based Chad's Grey Vest",
                      price: 550,
                      rarity: "silver",
                      image: "/lovable-uploads/7311683b-ea99-4dd9-9b1f-89d96742eff0.png"
@@ -2589,7 +2589,7 @@ const Game = () => {
                        rarity: "special",
                        image: "/lovable-uploads/508d1509-e761-46c6-9f3a-f70e256f5a52.png"
                      }, {
-                       name: "Power Gloves",
+                       name: "Based Chad's Grey Vest",
                        price: 550,
                        rarity: "silver",
                        image: "/lovable-uploads/7311683b-ea99-4dd9-9b1f-89d96742eff0.png"
