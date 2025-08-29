@@ -25,7 +25,7 @@ import cyberWarriorSkin from "@/assets/cyber-warrior-skin.png";
 const irishKingSkin = "/lovable-uploads/4e815ce1-bf79-4b3d-887f-88248a86a9e2.png";
 const staniEagleSkin = "/lovable-uploads/37f256dc-415c-4032-82ad-db63f676284d.png";
 const bonesSkin = "/lovable-uploads/3ca10600-bbad-4fe7-a95c-eee64a8cffb4.png";
-const latinLegendSkin = "/lovable-uploads/a183a559-5706-427b-b0f3-9a528866edb9.png";
+const latinLegendSkin = "/lovable-uploads/f8acb5fa-02b0-488e-90fd-9e4a19b89924.png";
 const Game = () => {
   const [activeTab, setActiveTab] = useState("home");
   const [gainersTimeFilter, setGainersTimeFilter] = useState("daily");
