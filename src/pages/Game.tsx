@@ -960,51 +960,125 @@ const Game = () => {
                 <div className="px-4 pb-4">
                   <Card className="bg-black border-gray-700">
                     <CardHeader className="pb-3">
-                      <CardTitle className="text-base flex items-center space-x-2">
-                        <Target className="w-4 h-4" />
-                        <span>Weekly Objectives</span>
+                      <CardTitle className="text-base flex items-center justify-between">
+                        <div className="flex items-center space-x-2">
+                          <Target className="w-4 h-4" />
+                          <span>{objectivesView === "weekly" ? "Weekly" : "Daily"} Objectives</span>
+                        </div>
+                        <Button 
+                          variant="ghost" 
+                          size="sm" 
+                          className="h-6 w-6 p-0 hover:bg-white/10"
+                          onClick={() => setObjectivesView(objectivesView === "weekly" ? "daily" : "weekly")}
+                        >
+                          <ChevronRight className="w-4 h-4" />
+                        </Button>
                       </CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <div className="space-y-2">
-                        {[{
-                    icon: Package,
-                    text: "Open 3 packs",
-                    progress: "0/3",
-                    bg: "bg-primary"
-                  }, {
-                    icon: ShoppingBag,
-                    text: "Buy 3 fighters",
-                    progress: "0/3",
-                    bg: "bg-secondary"
-                  }, {
-                    icon: CreditCard,
-                    text: "Sell 3 fighters",
-                    progress: "0/3",
-                    bg: "bg-destructive"
-                  }, {
-                    icon: TrendingUp,
-                    text: "Trade 3 days in a row",
-                    progress: "0/3",
-                    bg: "bg-orange-500"
-                  }, {
-                    icon: UserPlus,
-                    text: "Invite 3 friends",
-                    progress: "0/3",
-                    bg: "bg-blue-500"
-                  }].map((obj, idx) => <div key={idx} className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
+                      {objectivesView === "weekly" ? (
+                        <div className="space-y-3">
+                          <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
                             <div className="flex items-center space-x-3">
-                              <div className={`w-6 h-6 ${obj.bg} rounded-full flex items-center justify-center`}>
-                                <obj.icon className="w-3 h-3 text-white" />
+                              <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+                                <Package className="w-4 h-4 text-primary-foreground" />
                               </div>
                               <div>
-                                <p className="text-sm font-medium">{obj.text}</p>
-                                <p className="text-xs text-muted-foreground">{obj.progress} • 10 XP</p>
+                                <p className="text-sm font-medium">Open 3 packs</p>
+                                <p className="text-xs text-muted-foreground">0/3 • 10 XP</p>
                               </div>
                             </div>
                             <ChevronRight className="w-4 h-4 text-muted-foreground" />
-                          </div>)}
-                      </div>
+                          </div>
+                          <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
+                            <div className="flex items-center space-x-3">
+                              <div className="w-8 h-8 bg-secondary rounded-full flex items-center justify-center">
+                                <ShoppingBag className="w-4 h-4 text-secondary-foreground" />
+                              </div>
+                              <div>
+                                <p className="text-sm font-medium">Buy 3 fighters</p>
+                                <p className="text-xs text-muted-foreground">0/3 • 10 XP</p>
+                              </div>
+                            </div>
+                            <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                          </div>
+                          <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
+                            <div className="flex items-center space-x-3">
+                              <div className="w-8 h-8 bg-destructive rounded-full flex items-center justify-center">
+                                <CreditCard className="w-4 h-4 text-destructive-foreground" />
+                              </div>
+                              <div>
+                                <p className="text-sm font-medium">Sell 3 fighters</p>
+                                <p className="text-xs text-muted-foreground">0/3 • 10 XP</p>
+                              </div>
+                            </div>
+                            <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                          </div>
+                          <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
+                            <div className="flex items-center space-x-3">
+                              <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center">
+                                <TrendingUp className="w-4 h-4 text-white" />
+                              </div>
+                              <div>
+                                <p className="text-sm font-medium">Trade 3 days in a row</p>
+                                <p className="text-xs text-muted-foreground">0/3 • 10 XP</p>
+                              </div>
+                            </div>
+                            <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                          </div>
+                          <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
+                            <div className="flex items-center space-x-3">
+                              <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+                                <UserPlus className="w-4 h-4 text-white" />
+                              </div>
+                              <div>
+                                <p className="text-sm font-medium">Invite 3 friends</p>
+                                <p className="text-xs text-muted-foreground">0/3 • 10 XP</p>
+                              </div>
+                            </div>
+                            <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="space-y-3">
+                          <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
+                            <div className="flex items-center space-x-3">
+                              <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+                                <Play className="w-4 h-4 text-primary-foreground" />
+                              </div>
+                              <div>
+                                <p className="text-sm font-medium">Play 1 game</p>
+                                <p className="text-xs text-muted-foreground">0/1 • 5 XP</p>
+                              </div>
+                            </div>
+                            <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                          </div>
+                          <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
+                            <div className="flex items-center space-x-3">
+                              <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                                <Medal className="w-4 h-4 text-white" />
+                              </div>
+                              <div>
+                                <p className="text-sm font-medium">Win 1 match</p>
+                                <p className="text-xs text-muted-foreground">0/1 • 5 XP</p>
+                              </div>
+                            </div>
+                            <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                          </div>
+                          <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
+                            <div className="flex items-center space-x-3">
+                              <div className="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center">
+                                <Gift className="w-4 h-4 text-white" />
+                              </div>
+                              <div>
+                                <p className="text-sm font-medium">Collect daily login bonus</p>
+                                <p className="text-xs text-muted-foreground">0/1 • 2 XP</p>
+                              </div>
+                            </div>
+                            <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                          </div>
+                        </div>
+                      )}
                     </CardContent>
                   </Card>
                 </div>
