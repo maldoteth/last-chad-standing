@@ -1469,7 +1469,7 @@ const Game = () => {
                      name: "Flex",
                      price: 800,
                      rarity: "blue",
-                     image: "🤳"
+                     image: "/lovable-uploads/f52e83c2-28b7-417e-90ac-757255d1759f.png"
                    }, {
                      name: "Shush",
                      price: 1200,
@@ -3113,7 +3113,7 @@ const Game = () => {
                         name: "Flex",
                         price: 800,
                         rarity: "blue",
-                        image: "🤳"
+                        image: "/lovable-uploads/f52e83c2-28b7-417e-90ac-757255d1759f.png"
                       }, {
                         name: "Shush",
                         price: 1200,
