@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { usePrivy } from '@privy-io/react-auth';
 import { useNavigate } from "react-router-dom";
@@ -9,17 +9,19 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Progress } from "@/components/ui/progress";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from "@/components/ui/dropdown-menu";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { SettingsDialog } from "@/components/SettingsDialog";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { ProgressBar } from "@/components/ProgressBar";
 import { useProfile } from "@/hooks/useProfile";
 import { LEVELS, getCurrentLevel, getProgressToNextLevel } from "@/lib/progressSystem";
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerTrigger, DrawerClose } from "@/components/ui/drawer";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogDescription } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Coins, ShoppingBag, Users, Package, CreditCard, Trophy, Star, Target, ChevronRight, Bell, Play, Home, TrendingUp, UserPlus, Medal, LogOut, Settings, Info, Gift, BarChart3, LineChart, ArrowUpRight, ArrowDownRight, Search, Filter, Gamepad, Instagram, Layers, BookOpen, Youtube, X } from "lucide-react";
+import { Coins, ShoppingBag, Users, Package, CreditCard, Trophy, Star, Target, ChevronRight, Bell, Play, Home, TrendingUp, UserPlus, Medal, LogOut, Settings, Info, Gift, BarChart3, LineChart, ArrowUpRight, ArrowDownRight, Search, Filter, Gamepad, Instagram, Layers, BookOpen, Youtube, X, Camera, Loader2 } from "lucide-react";
 import { ResponsiveContainer, LineChart as RechartsLineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, PieChart, Pie, Cell, BarChart, Bar, Area, AreaChart } from 'recharts';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import cyberWarriorSkin from "@/assets/cyber-warrior-skin.png";
@@ -36,7 +38,9 @@ const Game = () => {
   const [visiblePlayers, setVisiblePlayers] = useState(10);
   const [selectedRarity, setSelectedRarity] = useState("all");
   const [selectedCategory, setSelectedCategory] = useState("all");
-  const [settingsOpen, setSettingsOpen] = useState(false);
+  const [settingsExpanded, setSettingsExpanded] = useState(false);
+  const [username, setUsername] = useState("");
+  const [isUpdating, setIsUpdating] = useState(false);
   const [objectivesView, setObjectivesView] = useState("weekly");
   const isMobile = useIsMobile();
   const {
@@ -50,7 +54,14 @@ const Game = () => {
   } = usePrivy();
   const navigate = useNavigate();
   const { purchaseItem, userBalance } = useStore();
-  const { profile } = useProfile();
+  const { profile, loading, createProfile, updateProfile, uploadAvatar } = useProfile();
+
+  // Initialize username from profile
+  useEffect(() => {
+    if (profile) {
+      setUsername(profile.username || "");
+    }
+  }, [profile]);
 
   // Handle purchase function
   const handlePurchase = async (itemId: string, itemName: string, price: number) => {
@@ -69,6 +80,71 @@ const Game = () => {
         title: "Purchase successful!",
         description: `You purchased ${itemName} for ${price} coins.`,
       });
+    }
+  };
+
+  const handleUsernameUpdate = async () => {
+    if (!username.trim()) {
+      toast({
+        title: "Error",
+        description: "Username cannot be empty.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    try {
+      setIsUpdating(true);
+      
+      if (!profile) {
+        await createProfile();
+      }
+      
+      await updateProfile({ username: username.trim() });
+    } catch (error: any) {
+      if (error?.code === '23505') {
+        toast({
+          title: "Username taken",
+          description: "This username is already taken. Please choose another one.",
+          variant: "destructive",
+        });
+      }
+    } finally {
+      setIsUpdating(false);
+    }
+  };
+
+  const handleAvatarUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    // Validate file type
+    if (!file.type.startsWith('image/')) {
+      toast({
+        title: "Invalid file",
+        description: "Please select an image file.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Validate file size (5MB limit)
+    if (file.size > 5 * 1024 * 1024) {
+      toast({
+        title: "File too large",
+        description: "Please select an image smaller than 5MB.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    try {
+      if (!profile) {
+        await createProfile();
+      }
+      await uploadAvatar(file);
+    } catch (error) {
+      console.error('Avatar upload failed:', error);
     }
   };
 
@@ -412,7 +488,8 @@ const Game = () => {
     label: "Coins",
     icon: Coins
   }];
-  return <div className="min-h-screen bg-black text-foreground dark">
+  return (
+    <div className="min-h-screen bg-black text-foreground dark">
       {/* Mobile/Tablet optimized layout */}
       
       {/* Header with coins and avatar - simplified for mobile */}
@@ -446,7 +523,7 @@ const Game = () => {
                     </AvatarFallback>
                   </Avatar>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-64 bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden backdrop-blur-md z-50">
+                <DropdownMenuContent align="end" className="w-80 bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden backdrop-blur-md z-50">
                   {/* Liquid glass metallic background effects */}
                   <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                   <div className="absolute inset-0" style={{
@@ -471,16 +548,97 @@ const Game = () => {
                     <div className="px-3 py-2 border-t border-white/20">
                       <ProgressBar xp={userBalance?.xp || 0} />
                     </div>
+                    
+                    <DropdownMenuSeparator className="bg-white/20" />
+                    
+                    {/* Settings Section */}
+                    <Collapsible open={settingsExpanded} onOpenChange={setSettingsExpanded}>
+                      <CollapsibleTrigger asChild>
+                        <DropdownMenuItem className="flex items-center justify-between cursor-pointer text-white hover:bg-white/10 hover:text-white transition-all duration-300 w-full">
+                          <div className="flex items-center space-x-2">
+                            <Settings className="w-4 h-4" />
+                            <span>Settings</span>
+                          </div>
+                          <ChevronRight className={`w-4 h-4 transition-transform duration-200 ${settingsExpanded ? 'rotate-90' : ''}`} />
+                        </DropdownMenuItem>
+                      </CollapsibleTrigger>
+                      
+                      <CollapsibleContent className="space-y-4 px-3 pb-3">
+                        {/* Profile Picture Section */}
+                        <div className="flex flex-col items-center space-y-3 pt-2">
+                          <div className="relative">
+                            <div className="p-1 rounded-full bg-gradient-to-br from-white/20 via-white/10 to-transparent border border-white/20 backdrop-blur-md shadow-2xl">
+                              <Avatar className="h-16 w-16 bg-white/5 border-2 border-white/10">
+                                <AvatarImage src={profile?.avatar_url} alt={profile?.username || 'Anonymous'} />
+                                <AvatarFallback className="text-lg font-bold text-white bg-gradient-to-br from-gray-800 to-gray-900">
+                                  {(profile?.username || 'Anonymous').charAt(0).toUpperCase()}
+                                </AvatarFallback>
+                              </Avatar>
+                            </div>
+                            
+                            <label 
+                              htmlFor="avatar-upload" 
+                              className="absolute -bottom-1 -right-1 p-1.5 bg-white/10 backdrop-blur-md border border-white/20 rounded-full cursor-pointer hover:bg-white/20 transition-all duration-300 shadow-lg"
+                            >
+                              {loading ? (
+                                <Loader2 className="h-3 w-3 animate-spin text-white" />
+                              ) : (
+                                <Camera className="h-3 w-3 text-white" />
+                              )}
+                            </label>
+                            
+                            <input
+                              id="avatar-upload"
+                              type="file"
+                              accept="image/*"
+                              onChange={handleAvatarUpload}
+                              className="hidden"
+                              disabled={loading}
+                            />
+                          </div>
+                          
+                          <p className="text-xs text-gray-300 text-center">
+                            Click camera to upload new avatar
+                          </p>
+                        </div>
+
+                        {/* Username Section */}
+                        <div className="space-y-2">
+                          <Label htmlFor="username" className="text-white text-xs font-medium">Username</Label>
+                          <div className="flex space-x-2">
+                            <Input
+                              id="username"
+                              placeholder="Enter your username"
+                              value={username}
+                              onChange={(e) => setUsername(e.target.value)}
+                              disabled={loading || isUpdating}
+                              className="bg-white/5 backdrop-blur-md border border-white/20 text-white placeholder:text-gray-400 focus:border-white/40 focus:bg-white/10 transition-all duration-300 text-sm h-8"
+                            />
+                            <Button 
+                              onClick={handleUsernameUpdate}
+                              disabled={loading || isUpdating || !username.trim() || username === profile?.username}
+                              size="sm"
+                              className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 transition-all duration-300 px-3 h-8 text-xs"
+                            >
+                              {isUpdating ? (
+                                <Loader2 className="h-3 w-3 animate-spin" />
+                              ) : (
+                                'Save'
+                              )}
+                            </Button>
+                          </div>
+                        </div>
+                      </CollapsibleContent>
+                    </Collapsible>
+                    
+                    <DropdownMenuSeparator className="bg-white/20" />
+                    
                     <DropdownMenuItem 
-                      onClick={() => setSettingsOpen(true)}
+                      onClick={logout}
                       className="flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 hover:text-white transition-all duration-300"
                     >
-                      <Settings className="w-4 h-4" />
-                      <span>Settings</span>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => logout()} className="flex items-center space-x-2 cursor-pointer text-red-400 hover:text-red-300 hover:bg-red-500/10 transition-all duration-300">
                       <LogOut className="w-4 h-4" />
-                      <span>Sign out</span>
+                      <span>Sign Out</span>
                     </DropdownMenuItem>
                   </div>
                 </DropdownMenuContent>
@@ -3458,8 +3616,7 @@ const Game = () => {
             </button>)}
         </div>
       </nav>
-      
-      <SettingsDialog open={settingsOpen} onOpenChange={setSettingsOpen} />
-    </div>;
+    </div>
+  );
 };
 export default Game;
