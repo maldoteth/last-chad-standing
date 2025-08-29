@@ -32,6 +32,7 @@ const Game = () => {
   const [selectedRarity, setSelectedRarity] = useState("all");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const [objectivesView, setObjectivesView] = useState("weekly");
   const isMobile = useIsMobile();
   const {
     toast
@@ -1883,74 +1884,149 @@ const Game = () => {
 
             <Card className="bg-black border-gray-700">
               <CardHeader>
-                <CardTitle className="text-base flex items-center space-x-2">
-                  <Target className="w-4 h-4" />
-                  <span>Weekly Objectives</span>
+                <CardTitle className="text-base flex items-center justify-between">
+                  <div className="flex items-center space-x-2">
+                    <Target className="w-4 h-4" />
+                    <span>{objectivesView === "weekly" ? "Weekly" : "Daily"} Objectives</span>
+                  </div>
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    className="h-6 w-6 p-0 hover:bg-white/10"
+                    onClick={() => setObjectivesView(objectivesView === "weekly" ? "daily" : "weekly")}
+                  >
+                    <ChevronRight className="w-4 h-4" />
+                  </Button>
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
-                    <div className="flex items-center space-x-3">
-                      <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
-                        <Package className="w-4 h-4 text-primary-foreground" />
+                {objectivesView === "weekly" ? (
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+                          <Package className="w-4 h-4 text-primary-foreground" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium">Open 3 packs</p>
+                          <p className="text-xs text-muted-foreground">0/3 • 10 XP</p>
+                        </div>
                       </div>
-                      <div>
-                        <p className="text-sm font-medium">Open 3 packs</p>
-                        <p className="text-xs text-muted-foreground">0/3 • 10 XP</p>
-                      </div>
+                      <ChevronRight className="w-4 h-4 text-muted-foreground" />
                     </div>
-                    <ChevronRight className="w-4 h-4 text-muted-foreground" />
-                  </div>
-                  <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
-                    <div className="flex items-center space-x-3">
-                      <div className="w-8 h-8 bg-secondary rounded-full flex items-center justify-center">
-                        <ShoppingBag className="w-4 h-4 text-secondary-foreground" />
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-8 h-8 bg-secondary rounded-full flex items-center justify-center">
+                          <ShoppingBag className="w-4 h-4 text-secondary-foreground" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium">Buy 3 fighters</p>
+                          <p className="text-xs text-muted-foreground">0/3 • 10 XP</p>
+                        </div>
                       </div>
-                      <div>
-                        <p className="text-sm font-medium">Buy 3 fighters</p>
-                        <p className="text-xs text-muted-foreground">0/3 • 10 XP</p>
-                      </div>
+                      <ChevronRight className="w-4 h-4 text-muted-foreground" />
                     </div>
-                    <ChevronRight className="w-4 h-4 text-muted-foreground" />
-                  </div>
-                  <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
-                    <div className="flex items-center space-x-3">
-                      <div className="w-8 h-8 bg-destructive rounded-full flex items-center justify-center">
-                        <CreditCard className="w-4 h-4 text-destructive-foreground" />
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-8 h-8 bg-destructive rounded-full flex items-center justify-center">
+                          <CreditCard className="w-4 h-4 text-destructive-foreground" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium">Sell 3 fighters</p>
+                          <p className="text-xs text-muted-foreground">0/3 • 10 XP</p>
+                        </div>
                       </div>
-                      <div>
-                        <p className="text-sm font-medium">Sell 3 fighters</p>
-                        <p className="text-xs text-muted-foreground">0/3 • 10 XP</p>
-                      </div>
+                      <ChevronRight className="w-4 h-4 text-muted-foreground" />
                     </div>
-                    <ChevronRight className="w-4 h-4 text-muted-foreground" />
-                  </div>
-                  <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
-                    <div className="flex items-center space-x-3">
-                      <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center">
-                        <TrendingUp className="w-4 h-4 text-white" />
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center">
+                          <TrendingUp className="w-4 h-4 text-white" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium">Trade 3 days in a row</p>
+                          <p className="text-xs text-muted-foreground">0/3 • 10 XP</p>
+                        </div>
                       </div>
-                      <div>
-                        <p className="text-sm font-medium">Trade 3 days in a row</p>
-                        <p className="text-xs text-muted-foreground">0/3 • 10 XP</p>
-                      </div>
+                      <ChevronRight className="w-4 h-4 text-muted-foreground" />
                     </div>
-                    <ChevronRight className="w-4 h-4 text-muted-foreground" />
-                  </div>
-                  <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
-                    <div className="flex items-center space-x-3">
-                      <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
-                        <UserPlus className="w-4 h-4 text-white" />
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+                          <UserPlus className="w-4 h-4 text-white" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium">Invite 3 friends</p>
+                          <p className="text-xs text-muted-foreground">0/3 • 10 XP</p>
+                        </div>
                       </div>
-                      <div>
-                        <p className="text-sm font-medium">Invite 3 friends</p>
-                        <p className="text-xs text-muted-foreground">0/3 • 10 XP</p>
-                      </div>
+                      <ChevronRight className="w-4 h-4 text-muted-foreground" />
                     </div>
-                    <ChevronRight className="w-4 h-4 text-muted-foreground" />
                   </div>
-                </div>
+                ) : (
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+                          <Play className="w-4 h-4 text-primary-foreground" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium">Play 1 game</p>
+                          <p className="text-xs text-muted-foreground">0/1 • 5 XP</p>
+                        </div>
+                      </div>
+                      <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                    </div>
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-8 h-8 bg-secondary rounded-full flex items-center justify-center">
+                          <Gamepad className="w-4 h-4 text-secondary-foreground" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium">Play 2 games</p>
+                          <p className="text-xs text-muted-foreground">0/2 • 8 XP</p>
+                        </div>
+                      </div>
+                      <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                    </div>
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-8 h-8 bg-destructive rounded-full flex items-center justify-center">
+                          <Play className="w-4 h-4 text-destructive-foreground" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium">Play 3 games</p>
+                          <p className="text-xs text-muted-foreground">0/3 • 12 XP</p>
+                        </div>
+                      </div>
+                      <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                    </div>
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                          <Trophy className="w-4 h-4 text-white" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium">Win 1 game</p>
+                          <p className="text-xs text-muted-foreground">0/1 • 15 XP</p>
+                        </div>
+                      </div>
+                      <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                    </div>
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+                          <Users className="w-4 h-4 text-white" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium">Play with 1 friend</p>
+                          <p className="text-xs text-muted-foreground">0/1 • 10 XP</p>
+                        </div>
+                      </div>
+                      <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                    </div>
+                  </div>
+                )}
               </CardContent>
             </Card>
             
