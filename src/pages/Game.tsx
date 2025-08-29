@@ -27,7 +27,6 @@ import irishKingSkin from "@/assets/irish-king-skin.png";
 import staniEagleSkin from "@/assets/stani-eagle-skin.png";
 import bonesSkin from "@/assets/bones-skin.png";
 import latinLegendSkin from "@/assets/latin-legend-skin.png";
-import pitBike3D from "@/assets/pit-bike-jungle-3d.png";
 const Game = () => {
   const [activeTab, setActiveTab] = useState("home");
   const [gainersTimeFilter, setGainersTimeFilter] = useState("daily");
@@ -1193,7 +1192,7 @@ const Game = () => {
                       name: "Pit Bike",
                       price: 4500,
                       rarity: "blue",
-                      image: pitBike3D
+                      image: "/lovable-uploads/8c0bf943-2c5d-40b7-863f-93ba04863642.png"
                    }, {
                       name: "Pogo",
                       price: 8000,
@@ -2674,7 +2673,7 @@ const Game = () => {
                         name: "Pit Bike",
                         price: 4500,
                         rarity: "blue",
-                        image: pitBike3D
+                        image: "/lovable-uploads/8c0bf943-2c5d-40b7-863f-93ba04863642.png"
                      }, {
                         name: "Pogo",
                         price: 8000,
