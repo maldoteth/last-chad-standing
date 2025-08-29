@@ -22,7 +22,7 @@ import { Coins, ShoppingBag, Users, Package, CreditCard, Trophy, Star, Target, C
 import { ResponsiveContainer, LineChart as RechartsLineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, PieChart, Pie, Cell, BarChart, Bar, Area, AreaChart } from 'recharts';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import cyberWarriorSkin from "@/assets/cyber-warrior-skin.png";
-const irishKingSkin = "/lovable-uploads/90074343-883a-46e9-a55e-4376560d4d03.png";
+const irishKingSkin = "/lovable-uploads/4e815ce1-bf79-4b3d-887f-88248a86a9e2.png";
 const staniEagleSkin = "/lovable-uploads/37f256dc-415c-4032-82ad-db63f676284d.png";
 const bonesSkin = "/lovable-uploads/13bff6a8-5c37-4ca1-928f-3b3c98952224.png";
 import latinLegendSkin from "@/assets/latin-legend-skin.png";
