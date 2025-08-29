@@ -22,6 +22,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Coins, ShoppingBag, Users, Package, CreditCard, Trophy, Star, Target, ChevronRight, Bell, Play, Home, TrendingUp, UserPlus, Medal, LogOut, Settings, Info, Gift, BarChart3, LineChart, ArrowUpRight, ArrowDownRight, Search, Filter, Gamepad, Instagram, Layers, BookOpen, Youtube, X } from "lucide-react";
 import { ResponsiveContainer, LineChart as RechartsLineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, PieChart, Pie, Cell, BarChart, Bar, Area, AreaChart } from 'recharts';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import cyberWarriorSkin from "@/assets/cyber-warrior-skin.png";
 const Game = () => {
   const [activeTab, setActiveTab] = useState("home");
   const [gainersTimeFilter, setGainersTimeFilter] = useState("daily");
@@ -2483,10 +2484,10 @@ const Game = () => {
                      <CardContent>
                        <div className="grid grid-cols-4 gap-4">
                          {filterItemsByRarity([{
-                       name: "Cyber Warrior",
-                       price: 2500,
-                       rarity: "gold",
-                       image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
+                        name: "Cyber Warrior",
+                        price: 2500,
+                        rarity: "gold",
+                        image: cyberWarriorSkin
                      }, {
                        name: "Shadow Assassin",
                        price: 1800,
