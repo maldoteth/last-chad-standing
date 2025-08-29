@@ -1479,7 +1479,7 @@ const Game = () => {
                       name: "Fists Up",
                       price: 1800,
                       rarity: "gold",
-                      image: "/lovable-uploads/8d89d70f-1d0a-4cfe-ab23-f0065734304c.png"
+                      image: "/lovable-uploads/79162f7a-0435-4ead-b016-c20194bd1b0e.png"
                    }, {
                       name: "Squeaky Dance",
                       price: 2500,
@@ -3123,7 +3123,7 @@ const Game = () => {
                         name: "Fists Up",
                         price: 1800,
                         rarity: "gold",
-                        image: "/lovable-uploads/8d89d70f-1d0a-4cfe-ab23-f0065734304c.png"
+                        image: "/lovable-uploads/79162f7a-0435-4ead-b016-c20194bd1b0e.png"
                       }, {
                         name: "Squeaky Dance",
                         price: 2500,
