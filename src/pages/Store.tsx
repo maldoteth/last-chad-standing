@@ -184,11 +184,12 @@ const Store = () => {
             </div>
             
             <Tabs value={selectedCategory} onValueChange={setSelectedCategory} className="w-full lg:w-auto">
-              <TabsList className="grid w-full grid-cols-4 lg:w-auto">
+              <TabsList className="grid w-full grid-cols-5 lg:w-auto">
                 <TabsTrigger value="all">All</TabsTrigger>
                 <TabsTrigger value="skins">Skins</TabsTrigger>
                 <TabsTrigger value="accessories">Accessories</TabsTrigger>
                 <TabsTrigger value="mobility">Mobility</TabsTrigger>
+                <TabsTrigger value="emotes">Emotes</TabsTrigger>
               </TabsList>
             </Tabs>
           </div>
@@ -196,7 +197,7 @@ const Store = () => {
 
         {/* Categories Overview */}
         {selectedCategory === "all" && (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             <Card 
               className="cursor-pointer hover:shadow-lg transition-shadow"
               onClick={() => setSelectedCategory("skins")}
@@ -259,6 +260,24 @@ const Store = () => {
                     alt="Mobility Preview" 
                     className="w-full h-full object-cover rounded-lg"
                   />
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card 
+              className="cursor-pointer hover:shadow-lg transition-shadow"
+              onClick={() => setSelectedCategory("emotes")}
+            >
+              <CardHeader>
+                <CardTitle className="flex items-center justify-between">
+                  Emotes
+                  <Badge variant="secondary">{getCategoryCount("emotes")}</Badge>
+                </CardTitle>
+                <CardDescription>Express yourself in game</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="aspect-video bg-gradient-to-br from-yellow-600/20 to-pink-700/20 rounded-lg flex items-center justify-center">
+                  <div className="text-4xl">💪</div>
                 </div>
               </CardContent>
             </Card>
