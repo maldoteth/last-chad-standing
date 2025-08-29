@@ -1459,7 +1459,7 @@ const Game = () => {
                     <CardHeader className="relative z-10">
                       <CardTitle className="flex items-center justify-between text-white">
                         <span>Emotes</span>
-                        <Badge variant="secondary">4 items</Badge>
+                        <Badge variant="secondary">5 items</Badge>
                       </CardTitle>
                       
                     </CardHeader>
@@ -1480,12 +1480,17 @@ const Game = () => {
                       price: 1800,
                       rarity: "gold",
                       image: "/lovable-uploads/79162f7a-0435-4ead-b016-c20194bd1b0e.png"
-                   }, {
+                    }, {
                       name: "Squeaky Dance",
                       price: 2500,
                       rarity: "special",
                       image: "/lovable-uploads/5c8c027e-3baf-4550-96a9-ba0715d11506.png"
-                   }]).map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
+                    }, {
+                      name: "u want sum?",
+                      price: 1500,
+                      rarity: "gold",
+                      image: "/lovable-uploads/30d419b4-79a9-459c-b37b-42099ffd6273.png"
+                    }]).map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
                             <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
                             <CardContent className="p-3 relative z-10">
                               <div className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden flex items-center justify-center">
@@ -3104,7 +3109,7 @@ const Game = () => {
                     <CardHeader className="relative z-10">
                       <CardTitle className="flex items-center justify-between text-white">
                         <span>Emotes</span>
-                        <Badge variant="secondary">4 items</Badge>
+                        <Badge variant="secondary">5 items</Badge>
                       </CardTitle>
                     </CardHeader>
                      <CardContent>
@@ -3129,6 +3134,11 @@ const Game = () => {
                         price: 2500,
                         rarity: "special",
                         image: "/lovable-uploads/5c8c027e-3baf-4550-96a9-ba0715d11506.png"
+                      }, {
+                        name: "u want sum?",
+                        price: 1500,
+                        rarity: "gold",
+                        image: "/lovable-uploads/30d419b4-79a9-459c-b37b-42099ffd6273.png"
                       }]).map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
                             <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
                             <CardContent className="p-4 relative z-10">
