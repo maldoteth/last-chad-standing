@@ -2476,7 +2476,7 @@ const Game = () => {
                 }} />
                     <CardHeader className="relative z-10">
                       <CardTitle className="flex items-center justify-between text-white">
-                        <span>Skins</span>
+                         <span>Fighters</span>
                         <Badge variant="secondary">4 items</Badge>
                       </CardTitle>
                       <CardDescription className="text-gray-300">Characters to play in game</CardDescription>
