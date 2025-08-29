@@ -2125,7 +2125,7 @@ const Game = () => {
                 <CardTitle className="text-base flex items-center justify-between">
                   <div className="flex items-center space-x-2">
                     <Target className="w-4 h-4" />
-                    <span>{objectivesView === "weekly" ? "Weekly" : objectivesView === "daily" ? "Daily" : "Quests"} Objectives</span>
+                    <span>Quests</span>
                   </div>
                   <Button 
                     variant="ghost" 
