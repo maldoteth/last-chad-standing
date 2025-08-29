@@ -519,7 +519,7 @@ const Game = () => {
                 <div className="p-4">
                   <Card className="bg-gradient-to-b from-blue-600/90 to-purple-700/90 text-white border-0 relative overflow-hidden h-96">
                     <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
-                backgroundImage: 'url(/lovable-uploads/004c14c7-47be-4475-a399-ebd7cd848be1.png)',
+                backgroundImage: 'url(/lovable-uploads/f6f477af-5192-4b3f-9b7c-6bb2075c7e27.png)',
                 backgroundPosition: 'center top'
               }} />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
