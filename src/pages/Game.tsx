@@ -713,7 +713,7 @@ const Game = () => {
                                   description: "Attempting to buy pack with coins",
                                   duration: 3000
                                 })}
-                                className="flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10"
+                                className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300"
                               >
                                 <Coins className="w-4 h-4" />
                                 <span>Buy With Coins</span>
@@ -724,7 +724,7 @@ const Game = () => {
                                   description: "Card payment option coming soon!",
                                   duration: 3000
                                 })}
-                                className="flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10"
+                                className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300"
                               >
                                 <CreditCard className="w-4 h-4" />
                                 <span>Buy with Card</span>
@@ -2278,7 +2278,7 @@ const Game = () => {
                               description: "Attempting to buy pack with coins",
                               duration: 3000
                             })}
-                            className="flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10"
+                            className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300"
                           >
                             <Coins className="w-4 h-4" />
                             <span>Buy With Coins</span>
@@ -2289,7 +2289,7 @@ const Game = () => {
                               description: "Card payment option coming soon!",
                               duration: 3000
                             })}
-                            className="flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10"
+                            className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300"
                           >
                             <CreditCard className="w-4 h-4" />
                             <span>Buy with Card</span>
@@ -2524,7 +2524,7 @@ const Game = () => {
                                   <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
                                     <DropdownMenuItem 
                                       onClick={() => handlePurchase(item.id, item.name, item.price)}
-                                      className="flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10"
+                                      className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300"
                                     >
                                       <Coins className="w-4 h-4" />
                                       <span>Buy With Coins</span>
@@ -2535,7 +2535,7 @@ const Game = () => {
                                         description: "Card payment option coming soon!",
                                         duration: 3000
                                       })}
-                                      className="flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10"
+                                      className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300"
                                     >
                                       <CreditCard className="w-4 h-4" />
                                       <span>Buy with Card</span>
@@ -2611,7 +2611,7 @@ const Game = () => {
                                   <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
                                     <DropdownMenuItem 
                                       onClick={() => handlePurchase(item.id, item.name, item.price)}
-                                      className="flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10"
+                                      className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300"
                                     >
                                       <Coins className="w-4 h-4" />
                                       <span>Buy With Coins</span>
@@ -2622,7 +2622,7 @@ const Game = () => {
                                         description: "Card payment option coming soon!",
                                         duration: 3000
                                       })}
-                                      className="flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10"
+                                      className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300"
                                     >
                                       <CreditCard className="w-4 h-4" />
                                       <span>Buy with Card</span>
@@ -2698,7 +2698,7 @@ const Game = () => {
                                   <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
                                     <DropdownMenuItem 
                                       onClick={() => handlePurchase(item.id, item.name, item.price)}
-                                      className="flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10"
+                                      className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300"
                                     >
                                       <Coins className="w-4 h-4" />
                                       <span>Buy With Coins</span>
@@ -2709,7 +2709,7 @@ const Game = () => {
                                         description: "Card payment option coming soon!",
                                         duration: 3000
                                       })}
-                                      className="flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10"
+                                      className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300"
                                     >
                                       <CreditCard className="w-4 h-4" />
                                       <span>Buy with Card</span>
@@ -2785,7 +2785,7 @@ const Game = () => {
                                   <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
                                     <DropdownMenuItem 
                                       onClick={() => handlePurchase(item.id, item.name, item.price)}
-                                      className="flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10"
+                                      className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300"
                                     >
                                       <Coins className="w-4 h-4" />
                                       <span>Buy With Coins</span>
@@ -2796,7 +2796,7 @@ const Game = () => {
                                         description: "Card payment option coming soon!",
                                         duration: 3000
                                       })}
-                                      className="flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10"
+                                      className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300"
                                     >
                                       <CreditCard className="w-4 h-4" />
                                       <span>Buy with Card</span>
@@ -3119,7 +3119,7 @@ const Game = () => {
                                         description: `Attempting to buy ${player.name} for ${player.price.toLocaleString()} coins`,
                                         duration: 3000
                                       })}
-                                      className="flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10"
+                                      className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300"
                                     >
                                       <Coins className="w-4 h-4" />
                                       <span>Buy With Coins</span>
@@ -3130,7 +3130,7 @@ const Game = () => {
                                         description: "Card payment option coming soon!",
                                         duration: 3000
                                       })}
-                                      className="flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10"
+                                      className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300"
                                     >
                                       <CreditCard className="w-4 h-4" />
                                       <span>Buy with Card</span>
