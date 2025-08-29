@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { usePrivy } from "@privy-io/react-auth";
-import { useAccount } from "wagmi";
 import { Link } from "react-router-dom";
 import {
   Card,
@@ -26,25 +25,25 @@ import { GameItem } from "@/components/GameItem";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { BuyCurrencyDialog } from "@/components/BuyCurrencyDialog";
+import { Badge } from "@/components/ui/badge";
 
 type ObjectivesView = "daily" | "weekly" | "quests";
 
 const Game = () => {
-  const { address } = useAccount();
   const { ready, currency, xp, level } = useGame();
   const { inventory, loading } = useInventory();
-  const { privy } = usePrivy();
+  const { authenticated } = usePrivy();
   const [objectivesView, setObjectivesView] = useState<ObjectivesView>("quests");
   const { toast } = useToast();
 
   useEffect(() => {
-    if (!address) {
+    if (!authenticated) {
       toast({
-        title: "Connect your wallet to play!",
-        description: "You must connect your wallet to play the game.",
+        title: "Please log in to play!",
+        description: "You must be logged in to access the game.",
       });
     }
-  }, [address, toast]);
+  }, [authenticated, toast]);
 
   return (
     <div className="container relative">
@@ -53,7 +52,7 @@ const Game = () => {
           Game
         </h1>
         <div className="flex gap-2">
-          {privy?.authenticated ? (
+          {authenticated ? (
             <Button variant="secondary" asChild>
               <Link to="/inventory">
                 Inventory <Package2 className="w-4 h-4 ml-2" />
@@ -145,10 +144,27 @@ const Game = () => {
                 <Target className="w-5 h-5" />
                 {objectivesView === 'quests' ? 'Quests' : objectivesView === 'weekly' ? 'Weekly Objectives' : 'Daily Objectives'}
               </h3>
-              <div>
-                <p className="text-sm text-muted-foreground">
-                  No quests available yet. Check back later!
-                </p>
+              <div className="space-y-3">
+                <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
+                  <span className="text-sm font-medium">Connect X</span>
+                  <Badge variant="outline">Pending</Badge>
+                </div>
+                <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
+                  <span className="text-sm font-medium">Connect Instagram</span>
+                  <Badge variant="outline">Pending</Badge>
+                </div>
+                <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
+                  <span className="text-sm font-medium">Follow X</span>
+                  <Badge variant="outline">Pending</Badge>
+                </div>
+                <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
+                  <span className="text-sm font-medium">Follow Instagram</span>
+                  <Badge variant="outline">Pending</Badge>
+                </div>
+                <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
+                  <span className="text-sm font-medium">Post about $LCS</span>
+                  <Badge variant="outline">Pending</Badge>
+                </div>
               </div>
             </div>
           </TabsContent>
