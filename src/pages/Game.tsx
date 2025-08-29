@@ -23,6 +23,7 @@ import { Coins, ShoppingBag, Users, Package, CreditCard, Trophy, Star, Target, C
 import { ResponsiveContainer, LineChart as RechartsLineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, PieChart, Pie, Cell, BarChart, Bar, Area, AreaChart } from 'recharts';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import cyberWarriorSkin from "@/assets/cyber-warrior-skin.png";
+import irishKingSkin from "@/assets/irish-king-skin.png";
 const Game = () => {
   const [activeTab, setActiveTab] = useState("home");
   const [gainersTimeFilter, setGainersTimeFilter] = useState("daily");
@@ -2487,7 +2488,7 @@ const Game = () => {
                         name: "Irish King",
                         price: 2500,
                         rarity: "gold",
-                        image: cyberWarriorSkin
+                        image: irishKingSkin
                      }, {
                        name: "Shadow Assassin",
                        price: 1800,
