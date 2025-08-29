@@ -1292,7 +1292,7 @@ const Game = () => {
                       name: "Special Pack 1",
                       price: 3500,
                       rarity: "special",
-                      image: "/lovable-uploads/special-pack-end-of-summer.png"
+                      image: "/lovable-uploads/2149e9ad-919f-49ea-8be4-90f190387d39.png"
                    }, {
                      name: "Special Pack 2",
                      price: 5000,
@@ -2759,7 +2759,7 @@ const Game = () => {
                         name: "Special Pack 1",
                         price: 3500,
                         rarity: "special",
-                        image: "/lovable-uploads/special-pack-end-of-summer.png"
+                        image: "/lovable-uploads/2149e9ad-919f-49ea-8be4-90f190387d39.png"
                      }, {
                        name: "Special Pack 2",
                        price: 5000,
