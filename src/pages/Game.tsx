@@ -440,31 +440,43 @@ const Game = () => {
                     </AvatarFallback>
                   </Avatar>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-64 bg-card border border-border z-50">
-                  <div className="px-3 py-2">
-                    <div className="flex flex-col space-y-1">
-                      <p className="text-sm font-medium leading-none">
-                        {profile?.username || 'Anonymous'}
-                      </p>
-                      <p className="text-xs leading-none text-muted-foreground">
-                        {user?.email?.address}
-                      </p>
+                <DropdownMenuContent align="end" className="w-64 bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden backdrop-blur-md z-50">
+                  {/* Liquid glass metallic background effects */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
+                  <div className="absolute inset-0" style={{
+                    backgroundImage: `
+                      linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
+                      linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
+                    `,
+                    backgroundSize: '4px 4px'
+                  }} />
+                  
+                  <div className="relative z-10">
+                    <div className="px-3 py-2">
+                      <div className="flex flex-col space-y-1">
+                        <p className="text-sm font-medium leading-none text-white">
+                          {profile?.username || 'Anonymous'}
+                        </p>
+                        <p className="text-xs leading-none text-gray-300">
+                          {user?.email?.address}
+                        </p>
+                      </div>
                     </div>
+                    <div className="px-3 py-2 border-t border-white/20">
+                      <ProgressBar xp={userBalance?.xp || 0} />
+                    </div>
+                    <DropdownMenuItem 
+                      onClick={() => setSettingsOpen(true)}
+                      className="flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 hover:text-white transition-all duration-300"
+                    >
+                      <Settings className="w-4 h-4" />
+                      <span>Settings</span>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => logout()} className="flex items-center space-x-2 cursor-pointer text-red-400 hover:text-red-300 hover:bg-red-500/10 transition-all duration-300">
+                      <LogOut className="w-4 h-4" />
+                      <span>Sign out</span>
+                    </DropdownMenuItem>
                   </div>
-                  <div className="px-3 py-2 border-t border-border">
-                    <ProgressBar xp={userBalance?.xp || 0} />
-                  </div>
-                  <DropdownMenuItem 
-                    onClick={() => setSettingsOpen(true)}
-                    className="flex items-center space-x-2 cursor-pointer"
-                  >
-                    <Settings className="w-4 h-4" />
-                    <span>Settings</span>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => logout()} className="flex items-center space-x-2 cursor-pointer text-red-500 hover:text-red-600">
-                    <LogOut className="w-4 h-4" />
-                    <span>Sign out</span>
-                  </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu> : <Button onClick={login} variant="outline" size="sm">
                 Log In
