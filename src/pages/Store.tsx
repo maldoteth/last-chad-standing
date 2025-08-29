@@ -184,12 +184,13 @@ const Store = () => {
             </div>
             
             <Tabs value={selectedCategory} onValueChange={setSelectedCategory} className="w-full lg:w-auto">
-              <TabsList className="grid w-full grid-cols-5 lg:w-auto">
+              <TabsList className="grid w-full grid-cols-6 lg:w-auto">
                 <TabsTrigger value="all">All</TabsTrigger>
                 <TabsTrigger value="skins">Skins</TabsTrigger>
                 <TabsTrigger value="accessories">Accessories</TabsTrigger>
                 <TabsTrigger value="mobility">Mobility</TabsTrigger>
                 <TabsTrigger value="emotes">Emotes</TabsTrigger>
+                <TabsTrigger value="packs">Packs</TabsTrigger>
               </TabsList>
             </Tabs>
           </div>
@@ -197,7 +198,7 @@ const Store = () => {
 
         {/* Categories Overview */}
         {selectedCategory === "all" && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 mb-8">
             <Card 
               className="cursor-pointer hover:shadow-lg transition-shadow"
               onClick={() => setSelectedCategory("skins")}
@@ -278,6 +279,24 @@ const Store = () => {
               <CardContent>
                 <div className="aspect-video bg-gradient-to-br from-yellow-600/20 to-pink-700/20 rounded-lg flex items-center justify-center">
                   <div className="text-4xl">💪</div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card 
+              className="cursor-pointer hover:shadow-lg transition-shadow"
+              onClick={() => setSelectedCategory("packs")}
+            >
+              <CardHeader>
+                <CardTitle className="flex items-center justify-between">
+                  Packs
+                  <Badge variant="secondary">{getCategoryCount("packs")}</Badge>
+                </CardTitle>
+                <CardDescription>Item bundles and special deals</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="aspect-video bg-gradient-to-br from-purple-600/20 to-indigo-700/20 rounded-lg flex items-center justify-center">
+                  <div className="text-4xl">📦</div>
                 </div>
               </CardContent>
             </Card>
