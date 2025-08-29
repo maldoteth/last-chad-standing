@@ -1,46 +1,81 @@
-import { useState, useEffect } from "react";
-import { usePrivy } from "@privy-io/react-auth";
-import { supabase } from "@/integrations/supabase/client";
-import { toast } from "@/hooks/use-toast";
+import { useState, useEffect } from 'react';
+import { usePrivy } from '@privy-io/react-auth';
+import { supabase } from '@/integrations/supabase/client';
+import { toast } from '@/hooks/use-toast';
+import { getCurrentLevel } from '@/lib/progressSystem';
+import { useStore } from '@/hooks/useStore';
 
 interface UserProfile {
   id: string;
   user_id: string;
-  username: string | null;
-  avatar_url: string | null;
+  username: string;
+  avatar_url?: string;
   created_at: string;
   updated_at: string;
 }
 
+// Function to get tier icon based on XP
+const getTierIcon = (xp: number): string => {
+  if (xp >= 50000) return '👑'; // God Mode
+  if (xp >= 25000) return '💪'; // Giga Chad
+  if (xp >= 15000) return '🔥'; // Chad
+  if (xp >= 10000) return '⭐'; // Superstar
+  if (xp >= 7000) return '🏆'; // Champ
+  if (xp >= 4000) return '🥊'; // Pro
+  if (xp >= 2000) return '⚔️'; // Fighter
+  if (xp >= 1000) return '🏃'; // Athlete
+  if (xp >= 500) return '🤝'; // Sparrer
+  if (xp >= 100) return '🎯'; // Trainee
+  return '👤'; // Recruit
+};
+
 export const useProfile = () => {
-  const { user } = usePrivy();
+  const { user, authenticated } = usePrivy();
+  const { userBalance } = useStore();
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [loading, setLoading] = useState(false);
 
   const fetchProfile = async () => {
-    if (!user?.id) return;
+    if (!user?.id || !authenticated) return;
 
     try {
       setLoading(true);
+      
       const { data, error } = await supabase
         .from('user_profiles')
         .select('*')
         .eq('user_id', user.id)
         .maybeSingle();
 
-      if (error) throw error;
-      setProfile(data);
+      if (error && error.code !== 'PGRST116') {
+        console.error('Error fetching profile:', error);
+        return;
+      }
+
+      // Add tier icon as avatar_url based on current XP
+      if (data) {
+        const tierIcon = getTierIcon(userBalance?.xp || 0);
+        setProfile({
+          ...data,
+          avatar_url: tierIcon
+        });
+      }
     } catch (error) {
-      console.error('Error fetching profile:', error);
+      console.error('Error in fetchProfile:', error);
     } finally {
       setLoading(false);
     }
   };
 
   const createProfile = async () => {
-    if (!user?.id) return;
+    if (!user?.id || !authenticated) {
+      throw new Error('User must be authenticated to create profile');
+    }
 
     try {
+      setLoading(true);
+      
+      // The database will automatically generate a username via trigger
       const { data, error } = await supabase
         .from('user_profiles')
         .insert({
@@ -49,94 +84,60 @@ export const useProfile = () => {
         .select()
         .single();
 
-      if (error) throw error;
-      setProfile(data);
-      return data;
+      if (error) {
+        console.error('Error creating profile:', error);
+        throw error;
+      }
+
+      // Add tier icon as avatar_url
+      const tierIcon = getTierIcon(userBalance?.xp || 0);
+      const profileWithIcon = {
+        ...data,
+        avatar_url: tierIcon
+      };
+      
+      setProfile(profileWithIcon);
+      
+      toast({
+        title: "Profile created!",
+        description: `Welcome ${data.username}!`,
+      });
+
+      return profileWithIcon;
     } catch (error) {
       console.error('Error creating profile:', error);
       throw error;
-    }
-  };
-
-  const updateProfile = async (updates: { username?: string; avatar_url?: string }) => {
-    if (!user?.id) return;
-
-    try {
-      setLoading(true);
-      const { data, error } = await supabase
-        .from('user_profiles')
-        .update(updates)
-        .eq('user_id', user.id)
-        .select()
-        .single();
-
-      if (error) throw error;
-      setProfile(data);
-      toast({
-        title: "Profile updated",
-        description: "Your profile has been successfully updated.",
-      });
-      return data;
-    } catch (error) {
-      console.error('Error updating profile:', error);
-      toast({
-        title: "Error",
-        description: "Failed to update profile. Please try again.",
-        variant: "destructive",
-      });
-      throw error;
     } finally {
       setLoading(false);
     }
   };
 
-  const uploadAvatar = async (file: File) => {
-    if (!user?.id) return;
-
-    try {
-      setLoading(true);
-      const fileExt = file.name.split('.').pop();
-      const fileName = `${user.id}/avatar.${fileExt}`;
-
-      const { error: uploadError } = await supabase.storage
-        .from('profile-pictures')
-        .upload(fileName, file, {
-          upsert: true
-        });
-
-      if (uploadError) throw uploadError;
-
-      const { data } = supabase.storage
-        .from('profile-pictures')
-        .getPublicUrl(fileName);
-
-      await updateProfile({ avatar_url: data.publicUrl });
-      return data.publicUrl;
-    } catch (error) {
-      console.error('Error uploading avatar:', error);
-      toast({
-        title: "Error",
-        description: "Failed to upload avatar. Please try again.",
-        variant: "destructive",
-      });
-      throw error;
-    } finally {
-      setLoading(false);
+  // Update XP and refresh tier icon when user balance changes
+  useEffect(() => {
+    if (profile && userBalance) {
+      const newTierIcon = getTierIcon(userBalance.xp);
+      if (newTierIcon !== profile.avatar_url) {
+        setProfile(prev => prev ? {
+          ...prev,
+          avatar_url: newTierIcon
+        } : null);
+      }
     }
-  };
+  }, [userBalance?.xp, profile?.id]);
 
   useEffect(() => {
-    if (user?.id) {
+    if (authenticated && user?.id) {
       fetchProfile();
+    } else {
+      setProfile(null);
     }
-  }, [user?.id]);
+  }, [user?.id, authenticated]);
 
   return {
     profile,
     loading,
-    fetchProfile,
     createProfile,
-    updateProfile,
-    uploadAvatar,
+    fetchProfile,
+    // Removed functions: updateProfile, uploadAvatar
   };
 };
