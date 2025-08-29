@@ -912,24 +912,48 @@ const Game = () => {
                     </div>
                     <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
                       <div className="flex items-center space-x-3">
-                        <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
-                          <Medal className="w-4 h-4 text-white" />
+                        <div className="w-8 h-8 bg-secondary rounded-full flex items-center justify-center">
+                          <Gamepad className="w-4 h-4 text-secondary-foreground" />
                         </div>
                         <div>
-                          <p className="text-sm font-medium">Win 1 match</p>
-                          <p className="text-xs text-muted-foreground">0/1 • 5 XP</p>
+                          <p className="text-sm font-medium">Play 2 games</p>
+                          <p className="text-xs text-muted-foreground">0/2 • 8 XP</p>
                         </div>
                       </div>
                       <ChevronRight className="w-4 h-4 text-muted-foreground" />
                     </div>
                     <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
                       <div className="flex items-center space-x-3">
-                        <div className="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center">
-                          <Gift className="w-4 h-4 text-white" />
+                        <div className="w-8 h-8 bg-destructive rounded-full flex items-center justify-center">
+                          <Play className="w-4 h-4 text-destructive-foreground" />
                         </div>
                         <div>
-                          <p className="text-sm font-medium">Collect daily login bonus</p>
-                          <p className="text-xs text-muted-foreground">0/1 • 2 XP</p>
+                          <p className="text-sm font-medium">Play 3 games</p>
+                          <p className="text-xs text-muted-foreground">0/3 • 12 XP</p>
+                        </div>
+                      </div>
+                      <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                    </div>
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                          <Trophy className="w-4 h-4 text-white" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium">Win 1 game</p>
+                          <p className="text-xs text-muted-foreground">0/1 • 15 XP</p>
+                        </div>
+                      </div>
+                      <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                    </div>
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+                          <Users className="w-4 h-4 text-white" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium">Play with 1 friend</p>
+                          <p className="text-xs text-muted-foreground">0/1 • 10 XP</p>
                         </div>
                       </div>
                       <ChevronRight className="w-4 h-4 text-muted-foreground" />
