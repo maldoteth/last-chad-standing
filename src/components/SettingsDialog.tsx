@@ -101,30 +101,47 @@ export const SettingsDialog = ({ open, onOpenChange }: SettingsDialogProps) => {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-md">
-        <DialogHeader>
-          <DialogTitle>Profile Settings</DialogTitle>
+      <DialogContent className="sm:max-w-md bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+        {/* Liquid glass metallic background effects */}
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
+        <div className="absolute inset-0" style={{
+          backgroundImage: `
+            linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
+            linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
+          `,
+          backgroundSize: '4px 4px'
+        }} />
+        
+        <DialogHeader className="relative z-10">
+          <DialogTitle className="text-white text-xl font-bold flex items-center space-x-2">
+            <div className="w-6 h-6 bg-white/10 rounded-md flex items-center justify-center">
+              📦
+            </div>
+            <span>My Locker</span>
+          </DialogTitle>
         </DialogHeader>
         
-        <div className="space-y-6">
-          {/* Profile Picture Section */}
+        <div className="space-y-6 relative z-10">
+          {/* Profile Picture Section with metallic border */}
           <div className="flex flex-col items-center space-y-4">
             <div className="relative">
-              <Avatar className="h-24 w-24">
-                <AvatarImage src={avatarUrl} alt={displayName} />
-                <AvatarFallback className="text-lg">
-                  {displayName.charAt(0).toUpperCase()}
-                </AvatarFallback>
-              </Avatar>
+              <div className="p-1 rounded-full bg-gradient-to-br from-white/20 via-white/10 to-transparent border border-white/20 backdrop-blur-md shadow-2xl">
+                <Avatar className="h-24 w-24 bg-white/5 border-2 border-white/10">
+                  <AvatarImage src={avatarUrl} alt={displayName} />
+                  <AvatarFallback className="text-2xl font-bold text-white bg-gradient-to-br from-gray-800 to-gray-900">
+                    {displayName.charAt(0).toUpperCase()}
+                  </AvatarFallback>
+                </Avatar>
+              </div>
               
               <label 
                 htmlFor="avatar-upload" 
-                className="absolute -bottom-2 -right-2 p-2 bg-primary rounded-full cursor-pointer hover:bg-primary/90 transition-colors"
+                className="absolute -bottom-2 -right-2 p-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full cursor-pointer hover:bg-white/20 transition-all duration-300 shadow-lg"
               >
                 {loading ? (
-                  <Loader2 className="h-4 w-4 animate-spin text-primary-foreground" />
+                  <Loader2 className="h-4 w-4 animate-spin text-white" />
                 ) : (
-                  <Camera className="h-4 w-4 text-primary-foreground" />
+                  <Camera className="h-4 w-4 text-white" />
                 )}
               </label>
               
@@ -138,26 +155,28 @@ export const SettingsDialog = ({ open, onOpenChange }: SettingsDialogProps) => {
               />
             </div>
             
-            <p className="text-sm text-muted-foreground text-center">
+            <p className="text-sm text-gray-300 text-center">
               Click the camera icon to upload a new profile picture
             </p>
           </div>
 
-          {/* Username Section */}
-          <div className="space-y-2">
-            <Label htmlFor="username">Username</Label>
-            <div className="flex space-x-2">
+          {/* Username Section with glass input */}
+          <div className="space-y-3">
+            <Label htmlFor="username" className="text-white font-medium">Username</Label>
+            <div className="flex space-x-3">
               <Input
                 id="username"
                 placeholder="Enter your username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 disabled={loading || isUpdating}
+                className="bg-white/5 backdrop-blur-md border border-white/20 text-white placeholder:text-gray-400 focus:border-white/40 focus:bg-white/10 transition-all duration-300"
               />
               <Button 
                 onClick={handleUsernameUpdate}
                 disabled={loading || isUpdating || !username.trim() || username === profile?.username}
                 size="sm"
+                className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 transition-all duration-300 px-6"
               >
                 {isUpdating ? (
                   <Loader2 className="h-4 w-4 animate-spin" />
@@ -168,11 +187,15 @@ export const SettingsDialog = ({ open, onOpenChange }: SettingsDialogProps) => {
             </div>
           </div>
 
-          {/* Email Display */}
-          <div className="space-y-2">
-            <Label>Email</Label>
-            <Input value={user?.email?.address || ""} disabled className="bg-muted" />
-            <p className="text-xs text-muted-foreground">
+          {/* Email Display with glass effect */}
+          <div className="space-y-3">
+            <Label className="text-white font-medium">Email</Label>
+            <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-md p-3">
+              <div className="text-gray-300 text-sm">
+                {user?.email?.address || ""}
+              </div>
+            </div>
+            <p className="text-xs text-gray-400">
               Your email cannot be changed here
             </p>
           </div>
