@@ -9,6 +9,7 @@ import Documents from "./pages/Documents";
 import Blog from "./pages/Blog";
 import Game from "./pages/Game";
 import Store from "./pages/Store";
+import Market from "./pages/Market";
 import Admin from "./pages/Admin";
 import Inventory from "./pages/Inventory";
 import NotFound from "./pages/NotFound";
@@ -28,6 +29,7 @@ const App = () => (
           <Route path="/blog" element={<Blog />} />
           <Route path="/game" element={<Game />} />
           <Route path="/store" element={<Store />} />
+          <Route path="/market" element={<Market />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/inventory" element={<Inventory />} />
