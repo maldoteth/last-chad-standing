@@ -95,7 +95,7 @@ const Game = () => {
     length: 30
   }, (_, i) => ({
     day: i + 1,
-    listings: 450 + Math.cos(i * 0.4) * 50 + Math.random() * 30,
+    listings: Math.round(450 + Math.cos(i * 0.4) * 50 + Math.random() * 30),
     date: new Date(Date.now() - (29 - i) * 24 * 60 * 60 * 1000).toLocaleDateString('en-US', {
       month: 'short',
       day: 'numeric'
@@ -3385,17 +3385,24 @@ const Game = () => {
                           fontSize: 12,
                           fill: 'rgba(255,255,255,0.7)'
                         }} />
-                            <YAxis tick={{
-                          fontSize: 12,
-                          fill: 'rgba(255,255,255,0.7)'
-                        }} />
-                            <Tooltip labelStyle={{
-                          color: '#000'
-                        }} contentStyle={{
-                          backgroundColor: 'rgba(0,0,0,0.8)',
-                          border: '1px solid rgba(255,255,255,0.2)',
-                          borderRadius: '8px'
-                        }} />
+                            <YAxis 
+                              tick={{
+                                fontSize: 12,
+                                fill: 'rgba(255,255,255,0.7)'
+                              }}
+                              tickFormatter={(value) => Math.round(value).toString()}
+                            />
+                            <Tooltip 
+                              labelStyle={{
+                                color: '#000'
+                              }} 
+                              contentStyle={{
+                                backgroundColor: 'rgba(0,0,0,0.8)',
+                                border: '1px solid rgba(255,255,255,0.2)',
+                                borderRadius: '8px'
+                              }}
+                              formatter={(value) => [Math.round(Number(value)), 'Listings']}
+                            />
                             <Area type="monotone" dataKey="listings" stroke="hsl(var(--primary))" fill="hsl(var(--primary))" fillOpacity={0.3} strokeWidth={2} />
                           </AreaChart>
                         </ResponsiveContainer>
