@@ -1366,15 +1366,15 @@ const Game = () => {
                     <CardContent>
                        <div className="grid grid-cols-2 gap-3">
                          {filterItemsByRarity([{
-                     name: "Cyber Car",
+                     name: "The Coupé Tank",
                      price: 5000,
                      rarity: "gold",
-                     image: "/lovable-uploads/84ab9eed-00bc-425c-a953-3ea0478e464d.png"
+                     image: "/lovable-uploads/1c6b707c-97a6-4381-bc54-de63a7cf8a31.png"
                    }, {
                      name: "Speed Buggy",
                      price: 3200,
                      rarity: "silver",
-                     image: "/lovable-uploads/896892f1-7ebc-4852-acea-80dcdbf7c545.png"
+                     image: "/lovable-uploads/b64d7801-1284-4763-b115-ca3cfa8ff315.png"
                    }, {
                       name: "Pit Bike",
                       price: 4500,
