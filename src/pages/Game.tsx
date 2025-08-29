@@ -989,7 +989,7 @@ const Game = () => {
                       rarity: "blue",
                       image: staniEagleSkin
                    }, {
-                      name: "Bones",
+                       name: "Bonesy Bones",
                       price: 2200,
                       rarity: "silver",
                       image: bonesSkin
@@ -2498,7 +2498,7 @@ const Game = () => {
                         rarity: "blue",
                         image: staniEagleSkin
                      }, {
-                        name: "Bones",
+                        name: "Bonesy Bones",
                         price: 2200,
                         rarity: "silver",
                         image: bonesSkin
