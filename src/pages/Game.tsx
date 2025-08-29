@@ -1470,12 +1470,7 @@ const Game = () => {
                      price: 800,
                      rarity: "blue",
                      image: "/lovable-uploads/f52e83c2-28b7-417e-90ac-757255d1759f.png"
-                   }, {
-                     name: "Shush",
-                     price: 1200,
-                     rarity: "silver",
-                     image: "🤫"
-                   }, {
+                    }, {
                       name: "Fists Up",
                       price: 1800,
                       rarity: "gold",
@@ -3119,12 +3114,7 @@ const Game = () => {
                         price: 800,
                         rarity: "blue",
                         image: "/lovable-uploads/f52e83c2-28b7-417e-90ac-757255d1759f.png"
-                      }, {
-                        name: "Shush",
-                        price: 1200,
-                        rarity: "silver",
-                        image: "🤫"
-                      }, {
+                       }, {
                         name: "Fists Up",
                         price: 1800,
                         rarity: "gold",
