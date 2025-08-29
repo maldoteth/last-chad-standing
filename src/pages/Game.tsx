@@ -463,9 +463,9 @@ const Game = () => {
                         <p className="text-sm font-medium leading-none text-white">
                           {profile?.username || 'Anonymous'}
                         </p>
-                        <p className="text-xs leading-none text-gray-300">
-                          {user?.email?.address}
-                        </p>
+                         <p className="text-xs leading-none text-gray-200">
+                           {user?.email?.address}
+                         </p>
                       </div>
                     </div>
                     <div className="px-3 py-2 border-t border-white/20">
