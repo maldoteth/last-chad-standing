@@ -1,5 +1,5 @@
 import { Progress } from "@/components/ui/progress";
-import { getCurrentLevel, getProgressToNextLevel, getNextLevel } from "@/lib/progressSystem";
+import { getCurrentLevel, getProgressToNextLevel } from "@/lib/progressSystem";
 
 interface ProgressBarProps {
   xp: number;
@@ -9,13 +9,12 @@ interface ProgressBarProps {
 export function ProgressBar({ xp, className }: ProgressBarProps) {
   const currentLevel = getCurrentLevel(xp);
   const progress = getProgressToNextLevel(xp);
-  const nextLevel = getNextLevel(xp);
 
   return (
     <div className={`space-y-2 ${className}`}>
       <div className="flex justify-between items-center">
         <span className="text-sm font-medium text-foreground">
-          {currentLevel.name}
+          Level {currentLevel.level} - {currentLevel.name}
         </span>
         <span className="text-xs text-muted-foreground">
           {xp} XP
@@ -25,14 +24,8 @@ export function ProgressBar({ xp, className }: ProgressBarProps) {
       <Progress value={progress.percentage} className="h-2" />
       
       <div className="flex justify-between items-center text-xs text-muted-foreground">
-        {nextLevel ? (
-          <>
-            <span>{progress.current}/{progress.total} XP</span>
-            <span>Next: {nextLevel.name}</span>
-          </>
-        ) : (
-          <span className="text-primary font-medium">Max Level Reached!</span>
-        )}
+        <span>{progress.current}/{progress.total} XP</span>
+        <span>Next: Level {currentLevel.level + 1}</span>
       </div>
     </div>
   );

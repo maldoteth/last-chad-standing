@@ -1,47 +1,69 @@
 export interface Level {
+  level: number;
   name: string;
   minXp: number;
   maxXp: number;
 }
 
-export const LEVELS: Level[] = [
-  { name: "Recruit", minXp: 0, maxXp: 100 },
-  { name: "Trainee", minXp: 100, maxXp: 500 },
-  { name: "Sparrer", minXp: 500, maxXp: 1000 },
-  { name: "Athlete", minXp: 1000, maxXp: 2000 },
-  { name: "Fighter", minXp: 2000, maxXp: 4000 },
-  { name: "Pro", minXp: 4000, maxXp: 7000 },
-  { name: "Champ", minXp: 7000, maxXp: 10000 },
-  { name: "Superstar", minXp: 10000, maxXp: 15000 },
-  { name: "Chad", minXp: 15000, maxXp: 25000 },
-  { name: "Giga Chad", minXp: 25000, maxXp: 50000 },
-  { name: "God Mode", minXp: 50000, maxXp: Infinity },
+export const LEVEL_NAMES = [
+  "Recruit",
+  "Trainee", 
+  "Sparrer",
+  "Athlete",
+  "Fighter",
+  "Pro",
+  "Champ",
+  "Superstar",
+  "Chad",
+  "Giga Chad",
+  "God Mode"
 ];
 
+export function getLevelFromXP(xp: number): number {
+  return Math.floor(xp / 1000);
+}
+
+export function getLevelName(level: number): string {
+  return LEVEL_NAMES[level] || `Level ${level}`;
+}
+
 export function getCurrentLevel(xp: number): Level {
-  return LEVELS.find(level => xp >= level.minXp && xp < level.maxXp) || LEVELS[LEVELS.length - 1];
+  const level = getLevelFromXP(xp);
+  const name = getLevelName(level);
+  const minXp = level * 1000;
+  const maxXp = (level + 1) * 1000;
+  
+  return { level, name, minXp, maxXp };
 }
 
 export function getProgressToNextLevel(xp: number): { current: number; total: number; percentage: number } {
   const currentLevel = getCurrentLevel(xp);
-  
-  if (currentLevel.maxXp === Infinity) {
-    return { current: xp - currentLevel.minXp, total: 0, percentage: 100 };
-  }
-  
   const current = xp - currentLevel.minXp;
-  const total = currentLevel.maxXp - currentLevel.minXp;
+  const total = 1000; // Always 1000 XP per level
   const percentage = Math.min((current / total) * 100, 100);
   
   return { current, total, percentage };
 }
 
+export function getAllLevelsForDisplay(): Level[] {
+  // Generate levels for display (0-20 should cover most cases)
+  return Array.from({ length: 21 }, (_, index) => ({
+    level: index,
+    name: getLevelName(index),
+    minXp: index * 1000,
+    maxXp: (index + 1) * 1000
+  }));
+}
+
 export function getNextLevel(xp: number): Level | null {
-  const currentLevelIndex = LEVELS.findIndex(level => xp >= level.minXp && xp < level.maxXp);
+  const currentLevel = getCurrentLevel(xp);
+  const nextLevelNumber = currentLevel.level + 1;
+  const nextLevelName = getLevelName(nextLevelNumber);
   
-  if (currentLevelIndex === -1 || currentLevelIndex === LEVELS.length - 1) {
-    return null;
-  }
-  
-  return LEVELS[currentLevelIndex + 1];
+  return {
+    level: nextLevelNumber,
+    name: nextLevelName,
+    minXp: nextLevelNumber * 1000,
+    maxXp: (nextLevelNumber + 1) * 1000
+  };
 }
