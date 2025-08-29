@@ -3662,61 +3662,85 @@ const Game = () => {
                     </CardContent>
                   </Card> : <div className="space-y-6">
                     {/* Desktop Skins Category */}
-                    <Card className="bg-gradient-to-br from-blue-600/20 to-purple-700/20 border border-blue-600/30">
-                      <CardHeader>
-                        <CardTitle className="flex items-center justify-between">
+                    <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
+                      <div className="absolute inset-0" style={{
+                        backgroundImage: `
+                          linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
+                          linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
+                        `,
+                        backgroundSize: '4px 4px'
+                      }} />
+                      <CardHeader className="relative z-10">
+                        <CardTitle className="flex items-center justify-between text-white">
                           <span>Skins</span>
                           <Badge variant="secondary">0 owned</Badge>
                         </CardTitle>
-                        <CardDescription>Your character skins</CardDescription>
+                        <CardDescription className="text-gray-300">Your character skins</CardDescription>
                       </CardHeader>
-                      <CardContent>
+                      <CardContent className="relative z-10">
                         <div className="text-center py-12">
-                          <div className="w-16 h-16 bg-muted/50 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <Package className="w-8 h-8 text-muted-foreground/50" />
+                          <div className="w-16 h-16 bg-gray-800/50 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <Package className="w-8 h-8 text-gray-400" />
                           </div>
-                          <p className="text-muted-foreground">No skins owned yet</p>
-                          <p className="text-sm text-muted-foreground/70 mt-1">Visit the store to purchase character skins</p>
+                          <p className="text-gray-300">No skins owned yet</p>
+                          <p className="text-sm text-gray-400 mt-1">Visit the store to purchase character skins</p>
                         </div>
                       </CardContent>
                     </Card>
 
                     {/* Desktop Accessories Category */}
-                    <Card className="bg-gradient-to-br from-green-600/20 to-blue-700/20 border border-green-600/30">
-                      <CardHeader>
-                        <CardTitle className="flex items-center justify-between">
+                    <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
+                      <div className="absolute inset-0" style={{
+                        backgroundImage: `
+                          linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
+                          linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
+                        `,
+                        backgroundSize: '4px 4px'
+                      }} />
+                      <CardHeader className="relative z-10">
+                        <CardTitle className="flex items-center justify-between text-white">
                           <span>Accessories</span>
                           <Badge variant="secondary">0 owned</Badge>
                         </CardTitle>
-                        <CardDescription>Your accessories collection</CardDescription>
+                        <CardDescription className="text-gray-300">Your accessories collection</CardDescription>
                       </CardHeader>
-                      <CardContent>
+                      <CardContent className="relative z-10">
                         <div className="text-center py-12">
-                          <div className="w-16 h-16 bg-muted/50 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <Package className="w-8 h-8 text-muted-foreground/50" />
+                          <div className="w-16 h-16 bg-gray-800/50 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <Package className="w-8 h-8 text-gray-400" />
                           </div>
-                          <p className="text-muted-foreground">No accessories owned yet</p>
-                          <p className="text-sm text-muted-foreground/70 mt-1">Visit the store to purchase shoes, backpacks, and hats</p>
+                          <p className="text-gray-300">No accessories owned yet</p>
+                          <p className="text-sm text-gray-400 mt-1">Visit the store to purchase shoes, backpacks, and hats</p>
                         </div>
                       </CardContent>
                     </Card>
 
                     {/* Desktop Mobility Category */}
-                    <Card className="bg-gradient-to-br from-orange-600/20 to-red-700/20 border border-orange-600/30">
-                      <CardHeader>
-                        <CardTitle className="flex items-center justify-between">
+                    <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
+                      <div className="absolute inset-0" style={{
+                        backgroundImage: `
+                          linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
+                          linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
+                        `,
+                        backgroundSize: '4px 4px'
+                      }} />
+                      <CardHeader className="relative z-10">
+                        <CardTitle className="flex items-center justify-between text-white">
                           <span>Mobility</span>
                           <Badge variant="secondary">0 owned</Badge>
                         </CardTitle>
-                        <CardDescription>Your vehicles collection</CardDescription>
+                        <CardDescription className="text-gray-300">Your vehicles collection</CardDescription>
                       </CardHeader>
-                      <CardContent>
+                      <CardContent className="relative z-10">
                         <div className="text-center py-12">
-                          <div className="w-16 h-16 bg-muted/50 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <Package className="w-8 h-8 text-muted-foreground/50" />
+                          <div className="w-16 h-16 bg-gray-800/50 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <Package className="w-8 h-8 text-gray-400" />
                           </div>
-                          <p className="text-muted-foreground">No vehicles owned yet</p>
-                          <p className="text-sm text-muted-foreground/70 mt-1">Visit the store to purchase cars, golf buggies, and more</p>
+                          <p className="text-gray-300">No vehicles owned yet</p>
+                          <p className="text-sm text-gray-400 mt-1">Visit the store to purchase cars, golf buggies, and more</p>
                         </div>
                       </CardContent>
                     </Card>
