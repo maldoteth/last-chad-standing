@@ -1097,7 +1097,7 @@ const Game = () => {
                       name: "Based Chad's Grey Vest",
                      price: 550,
                      rarity: "silver",
-                     image: "/lovable-uploads/7311683b-ea99-4dd9-9b1f-89d96742eff0.png"
+                      image: "/lovable-uploads/3f128fbd-a10c-43a4-978a-6f2ab154ac82.png"
                    }]).map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
                             <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
                             <CardContent className="p-3 relative z-10">
@@ -2592,7 +2592,7 @@ const Game = () => {
                        name: "Based Chad's Grey Vest",
                        price: 550,
                        rarity: "silver",
-                       image: "/lovable-uploads/7311683b-ea99-4dd9-9b1f-89d96742eff0.png"
+                       image: "/lovable-uploads/3f128fbd-a10c-43a4-978a-6f2ab154ac82.png"
                      }]).map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
                             <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
                             <CardContent className="p-4 relative z-10">
