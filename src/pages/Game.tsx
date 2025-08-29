@@ -780,7 +780,7 @@ const Game = () => {
                             <p className="text-xs text-gray-300">Buy & sell fighters</p>
                           </div>
                         </div>
-                        <Button variant="outline" size="sm" className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 transition-all duration-300">
+                        <Button variant="outline" size="sm" className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 transition-all duration-300" onClick={() => setActiveTab("market")}>
                           Browse Market
                         </Button>
                       </CardContent>
