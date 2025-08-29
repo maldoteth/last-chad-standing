@@ -2156,7 +2156,7 @@ const Game = () => {
                           Buy Now
                         </Button>
                       </DropdownMenuTrigger>
-                      <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
+                      <DropdownMenuContent align="center" className="w-full bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
                         <DropdownMenuItem 
                           onClick={() => toast({
                             title: "Purchase Initiated",
