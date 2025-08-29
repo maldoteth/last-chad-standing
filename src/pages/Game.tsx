@@ -3754,151 +3754,151 @@ const Game = () => {
                 {[{
                 rank: 1,
                 name: "CryptoKing",
-                level: 45,
+                level: 15,
                 points: 15420,
                 avatar: "👑"
               }, {
                 rank: 2,
                 name: "BlockMaster",
-                level: 43,
+                level: 14,
                 points: 14890,
                 avatar: "⚔️"
               }, {
                 rank: 3,
                 name: "ChainWarrior",
-                level: 41,
+                level: 14,
                 points: 14320,
                 avatar: "🛡️"
               }, {
                 rank: 4,
                 name: "TokenSlayer",
-                level: 38,
+                level: 13,
                 points: 13780,
                 avatar: "🗡️"
               }, {
                 rank: 5,
                 name: "NFTChampion",
-                level: 37,
+                level: 13,
                 points: 13240,
                 avatar: "🏆"
               }, {
                 rank: 6,
                 name: "DeFiGamer",
-                level: 35,
+                level: 12,
                 points: 12890,
                 avatar: "💎"
               }, {
                 rank: 7,
                 name: "MetaPlayer",
-                level: 34,
+                level: 12,
                 points: 12450,
                 avatar: "🎮"
               }, {
                 rank: 8,
                 name: "Web3Hero",
-                level: 32,
+                level: 12,
                 points: 12120,
                 avatar: "🚀"
               }, {
                 rank: 9,
                 name: "CoinMaster",
-                level: 30,
+                level: 11,
                 points: 11780,
                 avatar: "💰"
               }, {
                 rank: 10,
                 name: "BlockHero",
-                level: 29,
+                level: 11,
                 points: 11340,
                 avatar: "⭐"
               }, {
                 rank: 11,
                 name: "SmartTrader",
-                level: 28,
+                level: 10,
                 points: 10920,
                 avatar: "🧠"
               }, {
                 rank: 12,
                 name: "CyberNinja",
-                level: 27,
+                level: 10,
                 points: 10540,
                 avatar: "🥷"
               }, {
                 rank: 13,
                 name: "QuantumGamer",
-                level: 26,
+                level: 10,
                 points: 10180,
                 avatar: "⚡"
               }, {
                 rank: 14,
                 name: "PixelMaster",
-                level: 25,
+                level: 9,
                 points: 9840,
                 avatar: "🎨"
               }, {
                 rank: 15,
                 name: "CodeWarrior",
-                level: 24,
+                level: 9,
                 points: 9520,
                 avatar: "💻"
               }, {
                 rank: 16,
                 name: "AlgoTrader",
-                level: 23,
+                level: 9,
                 points: 9210,
                 avatar: "📈"
               }, {
                 rank: 17,
                 name: "BitCrusher",
-                level: 22,
+                level: 8,
                 points: 8920,
                 avatar: "🔨"
               }, {
                 rank: 18,
                 name: "EtherLord",
-                level: 21,
+                level: 8,
                 points: 8650,
                 avatar: "⚡"
               }, {
                 rank: 19,
                 name: "GameChanger",
-                level: 20,
+                level: 8,
                 points: 8390,
                 avatar: "🎯"
               }, {
                 rank: 20,
                 name: "TechSavvy",
-                level: 19,
+                level: 8,
                 points: 8140,
                 avatar: "🔧"
               }, {
                 rank: 21,
                 name: "DigitalNomad",
-                level: 18,
+                level: 7,
                 points: 7910,
                 avatar: "🌐"
               }, {
                 rank: 22,
                 name: "CryptoSage",
-                level: 17,
+                level: 7,
                 points: 7690,
                 avatar: "🧙‍♂️"
               }, {
                 rank: 23,
                 name: "BlockBuilder",
-                level: 16,
+                level: 7,
                 points: 7480,
                 avatar: "🏗️"
               }, {
                 rank: 24,
                 name: "TokenHunter",
-                level: 15,
+                level: 7,
                 points: 7280,
                 avatar: "🎣"
               }, {
                 rank: 25,
                 name: "ChainLink",
-                level: 14,
+                level: 7,
                 points: 7090,
                 avatar: "🔗"
               }].map(player => <div key={player.rank} className="flex items-center space-x-3 p-3 rounded-lg hover:bg-muted/50 transition-colors">
