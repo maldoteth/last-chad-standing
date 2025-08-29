@@ -969,7 +969,7 @@ const Game = () => {
                         <span>Skins</span>
                         <Badge variant="secondary">4 items</Badge>
                       </CardTitle>
-                      <CardDescription className="text-gray-300">Characters to play in game</CardDescription>
+                      
                     </CardHeader>
                     <CardContent>
                        <div className="grid grid-cols-2 gap-3">
@@ -1069,7 +1069,7 @@ const Game = () => {
                         <span>Accessories</span>
                         <Badge variant="secondary">4 items</Badge>
                       </CardTitle>
-                      <CardDescription className="text-gray-300">Shoes, backpacks, hats</CardDescription>
+                      
                     </CardHeader>
                     <CardContent>
                        <div className="grid grid-cols-2 gap-3">
@@ -1169,7 +1169,7 @@ const Game = () => {
                         <span>Mobility</span>
                         <Badge variant="secondary">4 items</Badge>
                       </CardTitle>
-                      <CardDescription className="text-gray-300">Cars, golf buggies, etc</CardDescription>
+                      
                     </CardHeader>
                     <CardContent>
                        <div className="grid grid-cols-2 gap-3">
@@ -1269,7 +1269,7 @@ const Game = () => {
                         <span>Packs</span>
                         <Badge variant="secondary">4 items</Badge>
                       </CardTitle>
-                      <CardDescription className="text-gray-300">Mystery packs with exclusive rewards</CardDescription>
+                      
                     </CardHeader>
                     <CardContent>
                        <div className="grid grid-cols-2 gap-3">
@@ -1683,7 +1683,7 @@ const Game = () => {
                           <span>Skins</span>
                           <Badge variant="secondary" className="bg-white/10 text-white border-white/20">0 owned</Badge>
                         </CardTitle>
-                        <CardDescription className="text-gray-300">Your character skins</CardDescription>
+                        
                       </CardHeader>
                       <CardContent className="relative z-10">
                         <div className="text-center py-8">
@@ -1711,7 +1711,7 @@ const Game = () => {
                           <span>Accessories</span>
                           <Badge variant="secondary" className="bg-white/10 text-white border-white/20">0 owned</Badge>
                         </CardTitle>
-                        <CardDescription className="text-gray-300">Your accessories collection</CardDescription>
+                        
                       </CardHeader>
                       <CardContent className="relative z-10">
                         <div className="text-center py-8">
@@ -1739,7 +1739,7 @@ const Game = () => {
                           <span>Mobility</span>
                           <Badge variant="secondary" className="bg-white/10 text-white border-white/20">0 owned</Badge>
                         </CardTitle>
-                        <CardDescription className="text-gray-300">Your vehicles collection</CardDescription>
+                        
                       </CardHeader>
                       <CardContent className="relative z-10">
                         <div className="text-center py-8">
@@ -2479,7 +2479,6 @@ const Game = () => {
                          <span>Fighters</span>
                         <Badge variant="secondary">4 items</Badge>
                       </CardTitle>
-                      <CardDescription className="text-gray-300">Characters to play in game</CardDescription>
                     </CardHeader>
                      <CardContent>
                        <div className="grid grid-cols-4 gap-4">
@@ -2566,7 +2565,6 @@ const Game = () => {
                         <span>Accessories</span>
                         <Badge variant="secondary">4 items</Badge>
                       </CardTitle>
-                      <CardDescription className="text-gray-300">Shoes, backpacks, hats</CardDescription>
                     </CardHeader>
                      <CardContent>
                        <div className="grid grid-cols-4 gap-4">
@@ -2653,7 +2651,6 @@ const Game = () => {
                         <span>Mobility</span>
                         <Badge variant="secondary">4 items</Badge>
                       </CardTitle>
-                      <CardDescription className="text-gray-300">Cars, golf buggies, etc</CardDescription>
                     </CardHeader>
                      <CardContent>
                        <div className="grid grid-cols-4 gap-4">
@@ -2740,7 +2737,6 @@ const Game = () => {
                         <span>Packs</span>
                         <Badge variant="secondary">4 items</Badge>
                       </CardTitle>
-                      <CardDescription className="text-gray-300">Mystery packs with exclusive rewards</CardDescription>
                     </CardHeader>
                      <CardContent>
                        <div className="grid grid-cols-4 gap-4">
