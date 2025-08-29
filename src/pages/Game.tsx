@@ -968,7 +968,7 @@ const Game = () => {
                     <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
                       <div className="flex items-center space-x-3">
                         <div className="w-8 h-8 bg-sky-600 rounded-full flex items-center justify-center">
-                          <UserPlus className="w-4 h-4 text-white" />
+                          <img src="/lovable-uploads/292d2d28-a664-49b3-bc4a-2ef36371a6b8.png" alt="X logo" className="w-4 h-4" />
                         </div>
                         <div>
                           <p className="text-sm font-medium">Follow X</p>
@@ -2277,7 +2277,7 @@ const Game = () => {
                     <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
                       <div className="flex items-center space-x-3">
                         <div className="w-8 h-8 bg-sky-500 rounded-full flex items-center justify-center">
-                          <X className="w-4 h-4 text-white" />
+                          <img src="/lovable-uploads/292d2d28-a664-49b3-bc4a-2ef36371a6b8.png" alt="X logo" className="w-4 h-4" />
                         </div>
                         <div>
                           <p className="text-sm font-medium">Connect X</p>
@@ -2301,7 +2301,7 @@ const Game = () => {
                     <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
                       <div className="flex items-center space-x-3">
                         <div className="w-8 h-8 bg-sky-600 rounded-full flex items-center justify-center">
-                          <UserPlus className="w-4 h-4 text-white" />
+                          <img src="/lovable-uploads/292d2d28-a664-49b3-bc4a-2ef36371a6b8.png" alt="X logo" className="w-4 h-4" />
                         </div>
                         <div>
                           <p className="text-sm font-medium">Follow X</p>
