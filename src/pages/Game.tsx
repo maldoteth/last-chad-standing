@@ -2511,7 +2511,7 @@ const Game = () => {
                             <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
                             <CardContent className="p-4 relative z-10">
                               <div className="aspect-square bg-gray-800/50 rounded-lg mb-3 overflow-hidden">
-                                 <img src={item.image} alt={item.name} className="w-full h-full object-cover hover:scale-110 transition-transform duration-300 filter hover:brightness-110 hover:contrast-125 hover:saturate-150" />
+                                <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
                               </div>
                               <h3 className="font-semibold text-sm text-white mb-2">{item.name}</h3>
                               <div className="flex items-center justify-between">
