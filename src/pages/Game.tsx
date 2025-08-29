@@ -2659,11 +2659,11 @@ const Game = () => {
                        price: 5000,
                        rarity: "gold",
                         image: "/lovable-uploads/1c6b707c-97a6-4381-bc54-de63a7cf8a31.png"
-                     }, {
-                       name: "Speed Buggy",
-                       price: 3200,
-                       rarity: "silver",
-                       image: "/lovable-uploads/896892f1-7ebc-4852-acea-80dcdbf7c545.png"
+                      }, {
+                        name: "Speed Buggy",
+                        price: 3200,
+                        rarity: "silver",
+                        image: "/lovable-uploads/speed-buggy.png"
                      }, {
                        name: "Hover Bike",
                        price: 4500,
