@@ -194,9 +194,9 @@ const Admin = () => {
       <header className="bg-card border-b border-border px-4 py-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-4">
-            <Button variant="ghost" size="sm" onClick={() => navigate('/store')}>
+            <Button variant="ghost" size="sm" onClick={() => navigate('/game')}>
               <ArrowLeft className="w-4 h-4 mr-2" />
-              Back to Store
+              Back to Game
             </Button>
             <h1 className="text-2xl font-bold">Admin Panel</h1>
           </div>
