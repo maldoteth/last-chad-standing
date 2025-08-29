@@ -684,7 +684,7 @@ const Game = () => {
                             <p className="text-xs text-gray-300">Build your dream team</p>
                           </div>
                         </div>
-                        <Button variant="outline" size="sm" className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 transition-all duration-300">
+                        <Button variant="outline" size="sm" className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 transition-all duration-300" onClick={() => setActiveTab("store")}>
                           Start Building
                         </Button>
                       </CardContent>
@@ -2098,7 +2098,7 @@ const Game = () => {
                         <p className="text-sm text-gray-300">Pick your prizefighters</p>
                       </div>
                     </div>
-                    <Button variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 w-full transition-all duration-300">
+                    <Button variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 w-full transition-all duration-300" onClick={() => setActiveTab("store")}>
                       Start Building
                     </Button>
                   </CardContent>
