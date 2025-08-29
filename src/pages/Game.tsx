@@ -27,7 +27,7 @@ import irishKingSkin from "@/assets/irish-king-skin.png";
 import staniEagleSkin from "@/assets/stani-eagle-skin.png";
 import bonesSkin from "@/assets/bones-skin.png";
 import latinLegendSkin from "@/assets/latin-legend-skin.png";
-import hoverBike3D from "@/assets/realistic-hover-bike-jungle.png";
+import pitBike3D from "@/assets/pit-bike-jungle-3d.png";
 const Game = () => {
   const [activeTab, setActiveTab] = useState("home");
   const [gainersTimeFilter, setGainersTimeFilter] = useState("daily");
@@ -1190,10 +1190,10 @@ const Game = () => {
                      rarity: "silver",
                      image: "/lovable-uploads/896892f1-7ebc-4852-acea-80dcdbf7c545.png"
                    }, {
-                      name: "Hover Bike",
+                      name: "Pit Bike",
                       price: 4500,
                       rarity: "blue",
-                      image: hoverBike3D
+                      image: pitBike3D
                    }, {
                      name: "Stealth Jet",
                      price: 8000,
@@ -2671,10 +2671,10 @@ const Game = () => {
                         rarity: "silver",
                         image: "/lovable-uploads/b64d7801-1284-4763-b115-ca3cfa8ff315.png"
                      }, {
-                        name: "Hover Bike",
+                        name: "Pit Bike",
                         price: 4500,
                         rarity: "blue",
-                        image: hoverBike3D
+                        image: pitBike3D
                      }, {
                        name: "Stealth Jet",
                        price: 8000,
