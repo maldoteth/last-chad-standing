@@ -1079,7 +1079,7 @@ const Game = () => {
                     <CardContent>
                        <div className="grid grid-cols-2 gap-3">
                          {filterItemsByRarity([{
-                     name: "Neon Sneakers",
+                      name: "Red Wing Suit",
                      price: 600,
                      rarity: "blue",
                      image: "/lovable-uploads/69c61fed-9ccd-43d2-bab5-17c6c0db05b4.png"
@@ -2574,7 +2574,7 @@ const Game = () => {
                      <CardContent>
                        <div className="grid grid-cols-4 gap-4">
                          {filterItemsByRarity([{
-                       name: "Neon Sneakers",
+                       name: "Red Wing Suit",
                        price: 600,
                        rarity: "blue",
                        image: "/lovable-uploads/69c61fed-9ccd-43d2-bab5-17c6c0db05b4.png"
