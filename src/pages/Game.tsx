@@ -1279,10 +1279,10 @@ const Game = () => {
                     <CardContent>
                        <div className="grid grid-cols-2 gap-3">
                          {filterItemsByRarity([{
-                     name: "Silver Pack",
-                     price: 1000,
-                     rarity: "silver",
-                     image: "/lovable-uploads/745baeae-f05a-4a2a-828f-45aed6d05972.png"
+                      name: "Silver Pack",
+                      price: 1000,
+                      rarity: "silver",
+                      image: "/lovable-uploads/bfe0f4c7-c6ed-4c68-a02d-5fba2203e249.png"
                    }, {
                       name: "Gold Pack",
                       price: 2000,
@@ -2746,10 +2746,10 @@ const Game = () => {
                      <CardContent>
                        <div className="grid grid-cols-4 gap-4">
                          {filterItemsByRarity([{
-                       name: "Silver Pack",
-                       price: 1000,
-                       rarity: "silver",
-                       image: "/lovable-uploads/745baeae-f05a-4a2a-828f-45aed6d05972.png"
+                        name: "Silver Pack",
+                        price: 1000,
+                        rarity: "silver",
+                        image: "/lovable-uploads/bfe0f4c7-c6ed-4c68-a02d-5fba2203e249.png"
                      }, {
                         name: "Gold Pack",
                         price: 2000,
