@@ -21,7 +21,7 @@ import { LEVELS, getCurrentLevel, getProgressToNextLevel } from "@/lib/progressS
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerTrigger, DrawerClose } from "@/components/ui/drawer";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogDescription } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Coins, ShoppingBag, Users, Package, CreditCard, Trophy, Star, Target, ChevronRight, Bell, Play, Home, TrendingUp, UserPlus, Medal, LogOut, Settings, Info, Gift, BarChart3, LineChart, ArrowUpRight, ArrowDownRight, Search, Filter, Gamepad, Instagram, Layers, BookOpen, Youtube, X, Camera, Loader2 } from "lucide-react";
+import { Coins, ShoppingBag, Users, Package, CreditCard, Trophy, Star, Target, ChevronRight, Bell, Play, Home, TrendingUp, UserPlus, Medal, LogOut, Settings, Info, Gift, BarChart3, LineChart, ArrowUpRight, ArrowDownRight, Search, Filter, Gamepad, Instagram, Layers, BookOpen, Youtube, X, Camera, Loader2, RotateCcw } from "lucide-react";
 import { ResponsiveContainer, LineChart as RechartsLineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, PieChart, Pie, Cell, BarChart, Bar, Area, AreaChart } from 'recharts';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import cyberWarriorSkin from "@/assets/cyber-warrior-skin.png";
@@ -971,7 +971,7 @@ const Game = () => {
                           className="h-6 w-6 p-0 hover:bg-white/10"
                           onClick={() => setObjectivesView(objectivesView === "weekly" ? "daily" : "weekly")}
                         >
-                          <ChevronRight className="w-4 h-4" />
+                          <RotateCcw className="w-4 h-4" />
                         </Button>
                       </CardTitle>
                     </CardHeader>
@@ -2209,7 +2209,7 @@ const Game = () => {
                     className="h-6 w-6 p-0 hover:bg-white/10"
                     onClick={() => setObjectivesView(objectivesView === "weekly" ? "daily" : "weekly")}
                   >
-                    <ChevronRight className="w-4 h-4" />
+                    <RotateCcw className="w-4 h-4" />
                   </Button>
                 </CardTitle>
               </CardHeader>
