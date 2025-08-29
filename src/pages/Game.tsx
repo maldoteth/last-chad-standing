@@ -27,7 +27,7 @@ import irishKingSkin from "@/assets/irish-king-skin.png";
 import staniEagleSkin from "@/assets/stani-eagle-skin.png";
 import bonesSkin from "@/assets/bones-skin.png";
 import latinLegendSkin from "@/assets/latin-legend-skin.png";
-import hoverBike3D from "@/assets/hover-bike-3d.png";
+import hoverBike3D from "@/assets/realistic-hover-bike-jungle.png";
 const Game = () => {
   const [activeTab, setActiveTab] = useState("home");
   const [gainersTimeFilter, setGainersTimeFilter] = useState("daily");
