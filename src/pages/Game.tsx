@@ -28,7 +28,6 @@ import staniEagleSkin from "@/assets/stani-eagle-skin.png";
 import bonesSkin from "@/assets/bones-skin.png";
 import latinLegendSkin from "@/assets/latin-legend-skin.png";
 import pitBike3D from "@/assets/pit-bike-jungle-3d.png";
-import mmaPogo3D from "@/assets/mma-pogo-3d.png";
 const Game = () => {
   const [activeTab, setActiveTab] = useState("home");
   const [gainersTimeFilter, setGainersTimeFilter] = useState("daily");
@@ -1199,7 +1198,7 @@ const Game = () => {
                       name: "Pogo",
                       price: 8000,
                       rarity: "special",
-                      image: mmaPogo3D
+                      image: "/lovable-uploads/10a67a27-b0a7-4fbe-b4f2-7fc2474b98bb.png"
                    }]).map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
                             <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
                             <CardContent className="p-3 relative z-10">
@@ -2680,7 +2679,7 @@ const Game = () => {
                         name: "Pogo",
                         price: 8000,
                         rarity: "special",
-                        image: mmaPogo3D
+                        image: "/lovable-uploads/10a67a27-b0a7-4fbe-b4f2-7fc2474b98bb.png"
                      }]).map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
                             <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
                             <CardContent className="p-4 relative z-10">
