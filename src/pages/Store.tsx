@@ -317,7 +317,7 @@ const Store = () => {
                         </Button>
                       </DropdownMenuTrigger>
                       {authenticated && (
-                        <DropdownMenuContent className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
+                        <DropdownMenuContent align="center" className="w-full bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
                           <DropdownMenuItem 
                             className="hover:bg-white/10 cursor-pointer"
                             onClick={() => handlePurchase(item.id, item.name, item.price)}
