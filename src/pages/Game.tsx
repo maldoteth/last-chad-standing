@@ -24,7 +24,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import cyberWarriorSkin from "@/assets/cyber-warrior-skin.png";
 const irishKingSkin = "/lovable-uploads/b89275fa-d890-4582-99ad-55d35f85e6c5.png";
 const staniEagleSkin = "/lovable-uploads/37f256dc-415c-4032-82ad-db63f676284d.png";
-import bonesSkin from "@/assets/bones-skin.png";
+const bonesSkin = "/lovable-uploads/13bff6a8-5c37-4ca1-928f-3b3c98952224.png";
 import latinLegendSkin from "@/assets/latin-legend-skin.png";
 const Game = () => {
   const [activeTab, setActiveTab] = useState("home");
