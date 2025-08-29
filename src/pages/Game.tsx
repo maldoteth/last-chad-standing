@@ -1092,7 +1092,7 @@ const Game = () => {
                      name: "Based Chad's White Vest",
                      price: 750,
                      rarity: "special",
-                     image: "/lovable-uploads/69c61fed-9ccd-43d2-bab5-17c6c0db05b4.png"
+                      image: "/lovable-uploads/508d1509-e761-46c6-9f3a-f70e256f5a52.png"
                    }, {
                      name: "Power Gloves",
                      price: 550,
@@ -2587,7 +2587,7 @@ const Game = () => {
                         name: "Based Chad's White Vest",
                        price: 750,
                        rarity: "special",
-                       image: "/lovable-uploads/69c61fed-9ccd-43d2-bab5-17c6c0db05b4.png"
+                       image: "/lovable-uploads/508d1509-e761-46c6-9f3a-f70e256f5a52.png"
                      }, {
                        name: "Power Gloves",
                        price: 550,
