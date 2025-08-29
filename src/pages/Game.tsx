@@ -2485,7 +2485,7 @@ const Game = () => {
                      <CardContent>
                        <div className="grid grid-cols-4 gap-4">
                          {filterItemsByRarity([{
-                        name: "Irish King",
+                        name: "The Irish King",
                         price: 2500,
                         rarity: "gold",
                         image: irishKingSkin
