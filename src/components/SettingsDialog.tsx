@@ -186,19 +186,6 @@ export const SettingsDialog = ({ open, onOpenChange }: SettingsDialogProps) => {
               </Button>
             </div>
           </div>
-
-          {/* Email Display with glass effect */}
-          <div className="space-y-3">
-            <Label className="text-white font-medium">Email</Label>
-            <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-md p-3">
-              <div className="text-gray-300 text-sm">
-                {user?.email?.address || ""}
-              </div>
-            </div>
-            <p className="text-xs text-gray-400">
-              Your email cannot be changed here
-            </p>
-          </div>
         </div>
       </DialogContent>
     </Dialog>
