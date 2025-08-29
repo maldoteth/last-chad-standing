@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { usePrivy } from '@privy-io/react-auth';
 import { useNavigate } from "react-router-dom";
@@ -37,6 +37,7 @@ const Game = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [settingsExpanded, setSettingsExpanded] = useState(false);
   const [objectivesView, setObjectivesView] = useState("weekly");
+  const objectivesRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
   const {
     toast
@@ -637,7 +638,12 @@ const Game = () => {
                         </div>
                         <h3 className="text-sm font-bold mb-1">Smash that XP</h3>
                         <p className="text-gray-300 text-xs mb-3 flex-1">by completing all quests</p>
-                        <Button variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 text-xs h-7 relative z-10 transition-all duration-300" onClick={() => setObjectivesView("quests")}>
+                        <Button variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 text-xs h-7 relative z-10 transition-all duration-300" onClick={() => {
+                          setObjectivesView("quests");
+                          setTimeout(() => {
+                            objectivesRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                          }, 100);
+                        }}>
                           Show Quests
                         </Button>
                       </CardContent>
@@ -803,7 +809,7 @@ const Game = () => {
                 </div>
 
                 {/* Objectives - Collapsible on mobile */}
-                <div className="px-4 pb-4">
+                <div className="px-4 pb-4" ref={objectivesRef}>
                   <Card className="bg-black border-gray-700">
                     <CardHeader className="pb-3">
                       <CardTitle className="text-base flex items-center justify-between">
@@ -2544,7 +2550,12 @@ const Game = () => {
                     </div>
                     <h3 className="text-lg font-bold mb-2">Smash that XP</h3>
                     <p className="text-gray-300 text-sm mb-4">by completing all quests</p>
-                    <Button variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 w-full relative z-10 transition-all duration-300" onClick={() => setObjectivesView("quests")}>
+                    <Button variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 w-full relative z-10 transition-all duration-300" onClick={() => {
+                      setObjectivesView("quests");
+                      setTimeout(() => {
+                        objectivesRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                      }, 100);
+                    }}>
                       Show Quests
                     </Button>
                   </CardContent>
