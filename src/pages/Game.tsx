@@ -1284,10 +1284,10 @@ const Game = () => {
                      rarity: "silver",
                      image: "/lovable-uploads/745baeae-f05a-4a2a-828f-45aed6d05972.png"
                    }, {
-                     name: "Gold Pack",
-                     price: 2000,
-                     rarity: "gold",
-                     image: "/lovable-uploads/77a6c004-93ed-49ee-a5d0-6056ee852612.png"
+                      name: "Gold Pack",
+                      price: 2000,
+                      rarity: "gold",
+                      image: "/lovable-uploads/c4d89b50-9bf5-44a2-a51f-88febb52c38d.png"
                    }, {
                      name: "Special Pack 1",
                      price: 3500,
@@ -2751,10 +2751,10 @@ const Game = () => {
                        rarity: "silver",
                        image: "/lovable-uploads/745baeae-f05a-4a2a-828f-45aed6d05972.png"
                      }, {
-                       name: "Gold Pack",
-                       price: 2000,
-                       rarity: "gold",
-                       image: "/lovable-uploads/77a6c004-93ed-49ee-a5d0-6056ee852612.png"
+                        name: "Gold Pack",
+                        price: 2000,
+                        rarity: "gold",
+                        image: "/lovable-uploads/c4d89b50-9bf5-44a2-a51f-88febb52c38d.png"
                      }, {
                        name: "Special Pack 1",
                        price: 3500,
