@@ -1132,7 +1132,7 @@ const Game = () => {
                             <Layers className="w-4 h-4" />
                           </Button>
                         </DrawerTrigger>
-                        <DrawerContent className="bg-black/95 backdrop-blur-md border-white/20 text-white">
+                        <DrawerContent className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
                           <DrawerHeader>
                             <DrawerTitle>Filter by Category</DrawerTitle>
                           </DrawerHeader>
@@ -1247,7 +1247,7 @@ const Game = () => {
                             <Filter className="w-4 h-4" />
                           </Button>
                         </DrawerTrigger>
-                        <DrawerContent className="bg-black/95 backdrop-blur-md border-white/20 text-white">
+                        <DrawerContent className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
                           <DrawerHeader>
                             <DrawerTitle>Filter by Rarity</DrawerTitle>
                           </DrawerHeader>
@@ -2936,7 +2936,7 @@ const Game = () => {
                             <Layers className="w-4 h-4" />
                           </Button>
                         </DrawerTrigger>
-                        <DrawerContent className="bg-black/95 backdrop-blur-md border-white/20 text-white">
+                        <DrawerContent className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
                           <DrawerHeader>
                             <DrawerTitle>Filter by Category</DrawerTitle>
                           </DrawerHeader>
@@ -3051,7 +3051,7 @@ const Game = () => {
                             <Filter className="w-4 h-4" />
                           </Button>
                         </DrawerTrigger>
-                        <DrawerContent className="bg-black/95 backdrop-blur-md border-white/20 text-white">
+                        <DrawerContent className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
                           <DrawerHeader>
                             <DrawerTitle>Filter by Rarity</DrawerTitle>
                           </DrawerHeader>
