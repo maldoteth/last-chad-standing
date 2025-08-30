@@ -1247,7 +1247,7 @@ const Game = () => {
                     )}
                   </div>
                   
-                  <div className="flex items-center justify-center mb-4">
+                  <div className="flex items-center justify-center mb-6">
                      <div>
                        <h1 className="text-2xl font-bold">Store</h1>
                      </div>
@@ -3060,7 +3060,7 @@ const Game = () => {
                     )}
                   </div>
                   
-                  <div className="flex items-center justify-center mb-4">
+                  <div className="flex items-center justify-center mb-6">
                     <div>
                       <h1 className="text-3xl font-bold">Store</h1>
                     </div>
