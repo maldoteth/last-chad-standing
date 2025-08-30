@@ -3501,7 +3501,7 @@ const Game = () => {
                     <CardHeader className="relative z-10">
                       <CardTitle className="text-lg flex items-center space-x-2 text-white">
                         <LineChart className="w-5 h-5" />
-                        <span>Live Transfer Listings</span>
+                        <span>Live Listings</span>
                       </CardTitle>
                       <CardDescription className="text-gray-300">
                         <span className="text-xl font-bold text-white">{currentListings} active listings</span>
