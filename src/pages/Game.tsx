@@ -2176,9 +2176,9 @@ const Game = () => {
                                 <Search className="w-3 h-3" />
                               </Button>
                             </DrawerTrigger>
-                            <DrawerContent className="bg-black/10 backdrop-blur-xl border-t border-white/10 text-white">
+                             <DrawerContent className="bg-black/10 backdrop-blur-xl border-t border-white/10 text-white">
                               <DrawerHeader>
-                                <DrawerTitle>Search Market</DrawerTitle>
+                                <DrawerTitle>All Listings - Search Market</DrawerTitle>
                               </DrawerHeader>
                               <div className="px-4 pb-8">
                                 <Input
@@ -4231,7 +4231,7 @@ const Game = () => {
                               </DrawerHeader>
                               <div className="px-4 pb-8">
                                 <Input
-                                  placeholder="Search market..."
+                                  placeholder="Type Here"
                                   value={marketSearchQuery}
                                   onChange={(e) => setMarketSearchQuery(e.target.value)}
                                   className="bg-white/10 border-white/20 text-white placeholder:text-white/60"
@@ -4248,7 +4248,7 @@ const Game = () => {
                             </PopoverTrigger>
                             <PopoverContent className="w-64 bg-black/10 backdrop-blur-xl border border-white/10 text-white z-50">
                               <Input
-                                placeholder="Search market..."
+                                placeholder="Type Here"
                                 value={marketSearchQuery}
                                 onChange={(e) => setMarketSearchQuery(e.target.value)}
                                 className="bg-white/10 border-white/20 text-white placeholder:text-white/60"
