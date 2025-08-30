@@ -608,7 +608,7 @@ const Game = () => {
                                     <span className="text-sm font-medium">{level.name}</span>
                                   </div>
                                   <span className="text-xs text-gray-400">
-                                    {level.maxXp === Infinity ? `${level.minXp.toLocaleString()}+ XP` : `${level.minXp.toLocaleString()}-${level.maxXp.toLocaleString()} XP`}
+                                    {level.level >= 10 ? "10,000+ XP" : `${level.minXp.toLocaleString()}-${level.maxXp.toLocaleString()} XP`}
                                   </span>
                                 </div>
                               );
