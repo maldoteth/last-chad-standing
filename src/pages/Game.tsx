@@ -1135,7 +1135,7 @@ const Game = () => {
                 {/* Store Header */}
                 <div className="text-center relative sticky top-0 z-50 bg-gradient-to-b from-black via-black/70 to-black/40 backdrop-blur-md py-0.5 lg:py-1">
                   {/* Category Filter - positioned in top left */}
-                  <div className="absolute top-0 left-0">
+                  <div className="absolute top-0 left-0 pointer-events-auto z-[60]">
                     {isMobile ? <Drawer>
                         <DrawerTrigger asChild>
                            <Button variant="ghost" size="default" className="text-white hover:bg-white/10 w-18 h-18">
@@ -1169,11 +1169,11 @@ const Game = () => {
                         </DrawerContent>
                       </Drawer> : <DropdownMenu>
                         <DropdownMenuTrigger asChild>
-                           <Button variant="ghost" size="default" className="text-white hover:bg-white/10 w-18 h-18">
+                           <Button variant="ghost" size="default" className="text-white hover:bg-white/10 w-18 h-18 pointer-events-auto">
                              <Layers className="w-7 h-7" />
                           </Button>
                         </DropdownMenuTrigger>
-                        <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
+                        <DropdownMenuContent align="center" className="w-32 bg-black/90 backdrop-blur-md border border-white/20 text-white z-[70] pointer-events-auto">
                           <DropdownMenuItem onClick={() => setSelectedCategory("all")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "all" ? "bg-white/20" : ""}`}>
                             <span>📋 All</span>
                           </DropdownMenuItem>
