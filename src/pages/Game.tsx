@@ -477,10 +477,8 @@ const Game = () => {
             {authenticated ? <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Avatar className="w-7 h-7 lg:w-8 lg:h-8 cursor-pointer">
-                    <AvatarImage src={profile?.avatar_url || "/placeholder.svg"} />
-                    <AvatarFallback>
-                      {profile?.username?.charAt(0).toUpperCase() || 
-                       user?.email?.address?.charAt(0).toUpperCase() || "?"}
+                    <AvatarFallback className="text-lg">
+                      {profile?.avatar_url || getTierIcon(userBalance.xp)}
                     </AvatarFallback>
                   </Avatar>
                 </DropdownMenuTrigger>
