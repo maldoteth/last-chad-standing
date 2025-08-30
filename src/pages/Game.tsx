@@ -2182,7 +2182,7 @@ const Game = () => {
                               </DrawerHeader>
                               <div className="px-4 pb-8">
                                 <Input
-                                  placeholder="Search players..."
+                                  placeholder="type here"
                                   value={allPlayersSearchQuery}
                                   onChange={(e) => setAllPlayersSearchQuery(e.target.value)}
                                   className="bg-white/10 border-white/20 text-white placeholder:text-white/60"
