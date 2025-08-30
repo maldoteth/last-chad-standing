@@ -1257,12 +1257,12 @@ const Game = () => {
                       price: 1500,
                       rarity: "green",
                       image: latinLegendSkin
-                   }]).map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
-                            <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
-                            <CardContent className="p-3 relative z-10">
-                              <div className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden">
-                                <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
-                              </div>
+                    }]).map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden hover:scale-105 hover:shadow-3xl hover:border-gray-500/70 transition-all duration-300 cursor-pointer">
+                             <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
+                             <CardContent className="p-3 relative z-10">
+                               <div className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden">
+                                 <img src={item.image} alt={item.name} className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" />
+                               </div>
                               <h3 className="font-semibold text-xs text-white mb-1">{item.name}</h3>
                               <div className="flex items-center justify-between">
                                 <div className="flex items-center space-x-1">
@@ -1359,12 +1359,12 @@ const Game = () => {
                       price: 550,
                       rarity: "silver",
                        image: "/lovable-uploads/91375d1a-e829-4716-b3b6-833b58355bd9.png"
-                   }]).map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
-                            <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
-                            <CardContent className="p-3 relative z-10">
-                              <div className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden">
-                                <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
-                              </div>
+                    }]).map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden hover:scale-105 hover:shadow-3xl hover:border-gray-500/70 transition-all duration-300 cursor-pointer">
+                             <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
+                             <CardContent className="p-3 relative z-10">
+                               <div className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden">
+                                 <img src={item.image} alt={item.name} className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" />
+                               </div>
                               <h3 className="font-semibold text-xs text-white mb-1">{item.name}</h3>
                               <div className="flex items-center justify-between">
                                 <div className="flex items-center space-x-1">
@@ -1457,12 +1457,12 @@ const Game = () => {
                       price: 8000,
                       rarity: "special",
                       image: "/lovable-uploads/2877ff38-b9fd-4a5d-bca9-25b14f237997.png"
-                   }]).map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
-                            <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
-                            <CardContent className="p-3 relative z-10">
-                              <div className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden">
-                                <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
-                              </div>
+                    }]).map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden hover:scale-105 hover:shadow-3xl hover:border-gray-500/70 transition-all duration-300 cursor-pointer">
+                             <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
+                             <CardContent className="p-3 relative z-10">
+                               <div className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden">
+                                 <img src={item.image} alt={item.name} className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" />
+                               </div>
                               <h3 className="font-semibold text-xs text-white mb-1">{item.name}</h3>
                               <div className="flex items-center justify-between">
                                 <div className="flex items-center space-x-1">
@@ -1555,16 +1555,16 @@ const Game = () => {
                       price: 1500,
                       rarity: "gold",
                       image: "/lovable-uploads/30d419b4-79a9-459c-b37b-42099ffd6273.png"
-                    }]).map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
-                            <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
-                            <CardContent className="p-3 relative z-10">
-                              <div className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden flex items-center justify-center">
-                                 {item.image.startsWith('/') || item.image.startsWith('http') ? (
-                                   <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
-                                 ) : (
-                                   <div className="text-4xl">{item.image}</div>
-                                 )}
-                              </div>
+                     }]).map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden hover:scale-105 hover:shadow-3xl hover:border-gray-500/70 transition-all duration-300 cursor-pointer">
+                             <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
+                             <CardContent className="p-3 relative z-10">
+                               <div className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden flex items-center justify-center">
+                                  {item.image.startsWith('/') || item.image.startsWith('http') ? (
+                                    <img src={item.image} alt={item.name} className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" />
+                                  ) : (
+                                    <div className="text-4xl hover:scale-110 transition-transform duration-300">{item.image}</div>
+                                  )}
+                               </div>
                               <h3 className="font-semibold text-xs text-white mb-1">{item.name}</h3>
                               <div className="flex items-center justify-between">
                                 <div className="flex items-center space-x-1">
@@ -1657,12 +1657,12 @@ const Game = () => {
                      price: 5000,
                      rarity: "special",
                      image: "/lovable-uploads/5cf8ad93-f292-4e4c-b53c-eb0c4bc0f7be.png"
-                   }]).map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
-                            <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
-                            <CardContent className="p-3 relative z-10">
-                              <div className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden">
-                                <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
-                              </div>
+                    }]).map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden hover:scale-105 hover:shadow-3xl hover:border-gray-500/70 transition-all duration-300 cursor-pointer">
+                             <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
+                             <CardContent className="p-3 relative z-10">
+                               <div className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden">
+                                 <img src={item.image} alt={item.name} className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" />
+                               </div>
                               <h3 className="font-semibold text-xs text-white mb-1">{item.name}</h3>
                               <div className="flex items-center justify-between">
                                 <div className="flex items-center space-x-1">
