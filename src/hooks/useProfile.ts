@@ -14,19 +14,19 @@ interface UserProfile {
   updated_at: string;
 }
 
-// Function to get tier icon based on XP
+// Function to get tier icon based on XP (aligned with 1k-per-level system)
 const getTierIcon = (xp: number): string => {
-  if (xp >= 50000) return '👑'; // God Mode
-  if (xp >= 25000) return '💪'; // Giga Chad
-  if (xp >= 15000) return '🔥'; // Chad
-  if (xp >= 10000) return '⭐'; // Superstar
-  if (xp >= 7000) return '🏆'; // Champ
-  if (xp >= 4000) return '🥊'; // Pro
-  if (xp >= 2000) return '⚔️'; // Fighter
-  if (xp >= 1000) return '🏃'; // Athlete
-  if (xp >= 500) return '🤝'; // Sparrer
-  if (xp >= 100) return '🎯'; // Trainee
-  return '👤'; // Recruit
+  if (xp >= 10000) return '👑'; // God Mode (Level 10+)
+  if (xp >= 9000) return '💪'; // Giga Chad (Level 9)
+  if (xp >= 8000) return '🔥'; // Chad (Level 8)
+  if (xp >= 7000) return '⭐'; // Superstar (Level 7)
+  if (xp >= 6000) return '🏆'; // Champ (Level 6)
+  if (xp >= 5000) return '🥊'; // Pro (Level 5)
+  if (xp >= 4000) return '⚔️'; // Fighter (Level 4)
+  if (xp >= 3000) return '🏃'; // Athlete (Level 3)
+  if (xp >= 2000) return '🤝'; // Sparrer (Level 2)
+  if (xp >= 1000) return '🎯'; // Trainee (Level 1)
+  return '👤'; // Recruit (Level 0)
 };
 
 export const useProfile = () => {
