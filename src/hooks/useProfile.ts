@@ -69,13 +69,39 @@ export const useProfile = () => {
 
   const createProfile = async () => {
     if (!user?.id || !authenticated) {
+      console.error('createProfile: User not authenticated', { userId: user?.id, authenticated });
       throw new Error('User must be authenticated to create profile');
     }
 
     try {
       setLoading(true);
+      console.log('Creating profile for user:', user.id);
       
-      // The database will automatically generate a username via trigger
+      // Check if profile already exists
+      const { data: existingProfile, error: checkError } = await supabase
+        .from('user_profiles')
+        .select('*')
+        .eq('user_id', user.id)
+        .maybeSingle();
+
+      if (checkError && checkError.code !== 'PGRST116') {
+        console.error('Error checking existing profile:', checkError);
+        throw checkError;
+      }
+
+      if (existingProfile) {
+        console.log('Profile already exists:', existingProfile);
+        const tierIcon = getTierIcon(userBalance?.xp || 0);
+        const profileWithIcon = {
+          ...existingProfile,
+          avatar_url: tierIcon
+        };
+        setProfile(profileWithIcon);
+        return profileWithIcon;
+      }
+
+      // Create new profile - database will auto-generate username via trigger
+      console.log('Inserting new profile for user:', user.id);
       const { data, error } = await supabase
         .from('user_profiles')
         .insert({
@@ -85,9 +111,29 @@ export const useProfile = () => {
         .single();
 
       if (error) {
-        console.error('Error creating profile:', error);
+        console.error('Error creating profile - Supabase error:', error);
+        console.error('Error details:', {
+          code: error.code,
+          message: error.message,
+          details: error.details,
+          hint: error.hint
+        });
+        
+        toast({
+          title: "Profile creation failed",
+          description: `Error: ${error.message}. Please try logging out and back in.`,
+          variant: "destructive",
+        });
+        
         throw error;
       }
+
+      if (!data) {
+        console.error('No data returned from profile creation');
+        throw new Error('No data returned from profile creation');
+      }
+
+      console.log('Profile created successfully:', data);
 
       // Add tier icon as avatar_url
       const tierIcon = getTierIcon(userBalance?.xp || 0);
@@ -105,7 +151,14 @@ export const useProfile = () => {
 
       return profileWithIcon;
     } catch (error) {
-      console.error('Error creating profile:', error);
+      console.error('Error in createProfile function:', error);
+      
+      toast({
+        title: "Profile creation error",
+        description: "Failed to create your profile. Please try again or contact support.",
+        variant: "destructive",
+      });
+      
       throw error;
     } finally {
       setLoading(false);
