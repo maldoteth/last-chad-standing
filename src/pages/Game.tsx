@@ -2176,16 +2176,24 @@ const Game = () => {
                                 <Search className="w-3 h-3" />
                               </Button>
                             </DrawerTrigger>
-                            <DrawerContent className="bg-black/90 backdrop-blur-md border border-white/20 text-white">
-                              <DrawerHeader>
-                                <DrawerTitle>Search Players</DrawerTitle>
+                            <DrawerContent className="bg-gradient-to-br from-gray-900/90 via-black/80 to-gray-800/90 backdrop-blur-md border border-white/10 text-white relative overflow-hidden">
+                              <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
+                              <div className="absolute inset-0" style={{
+                                backgroundImage: `
+                                  linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
+                                  linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
+                                `,
+                                backgroundSize: '4px 4px'
+                              }} />
+                              <DrawerHeader className="relative z-10">
+                                <DrawerTitle className="text-white">Search Players</DrawerTitle>
                               </DrawerHeader>
-                              <div className="px-4 pb-8">
+                              <div className="px-4 pb-8 relative z-10">
                                 <Input
                                   placeholder="Search players..."
                                   value={allPlayersSearchQuery}
                                   onChange={(e) => setAllPlayersSearchQuery(e.target.value)}
-                                  className="bg-white/10 border-white/20 text-white placeholder:text-white/60"
+                                  className="bg-white/10 backdrop-blur-md border border-white/20 text-white placeholder:text-white/60 shadow-lg"
                                 />
                               </div>
                             </DrawerContent>
@@ -4225,16 +4233,24 @@ const Game = () => {
                                 <Search className="w-3 h-3" />
                               </Button>
                             </DrawerTrigger>
-                            <DrawerContent className="bg-black/90 backdrop-blur-md border border-white/20 text-white">
-                              <DrawerHeader>
-                                <DrawerTitle>Search Market</DrawerTitle>
+                            <DrawerContent className="bg-gradient-to-br from-gray-900/90 via-black/80 to-gray-800/90 backdrop-blur-md border border-white/10 text-white relative overflow-hidden">
+                              <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
+                              <div className="absolute inset-0" style={{
+                                backgroundImage: `
+                                  linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
+                                  linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
+                                `,
+                                backgroundSize: '4px 4px'
+                              }} />
+                              <DrawerHeader className="relative z-10">
+                                <DrawerTitle className="text-white">Search Market</DrawerTitle>
                               </DrawerHeader>
-                              <div className="px-4 pb-8">
+                              <div className="px-4 pb-8 relative z-10">
                                 <Input
                                   placeholder="Search market..."
                                   value={marketSearchQuery}
                                   onChange={(e) => setMarketSearchQuery(e.target.value)}
-                                  className="bg-white/10 border-white/20 text-white placeholder:text-white/60"
+                                  className="bg-white/10 backdrop-blur-md border border-white/20 text-white placeholder:text-white/60 shadow-lg"
                                 />
                               </div>
                             </DrawerContent>
