@@ -49,12 +49,12 @@ export function getProgressToNextLevel(xp: number): { current: number; total: nu
 }
 
 export function getAllLevelsForDisplay(): Level[] {
-  // Generate levels for display (0-20 should cover most cases)
-  return Array.from({ length: 21 }, (_, index) => ({
+  // Generate levels for display (0-10, stop at God Mode)
+  return Array.from({ length: 11 }, (_, index) => ({
     level: index,
     name: getLevelName(index),
     minXp: index * 1000,
-    maxXp: (index + 1) * 1000
+    maxXp: index === 10 ? Infinity : (index + 1) * 1000
   }));
 }
 
