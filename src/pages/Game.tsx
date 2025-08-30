@@ -4221,11 +4221,11 @@ const Game = () => {
                         {isMobile ? (
                           <Drawer open={isMarketSearchOpen} onOpenChange={setIsMarketSearchOpen}>
                             <DrawerTrigger asChild>
-                              <Button variant="ghost" size="sm" className="text-white hover:bg-white/10 h-8 px-2">
-                                <Search className="w-3 h-3" />
+                              <Button variant="ghost" size="default" className="text-white hover:bg-white/10 w-18 h-18">
+                                <Search className="w-7 h-7" />
                               </Button>
                             </DrawerTrigger>
-                            <DrawerContent className="bg-black/90 backdrop-blur-md border border-white/20 text-white">
+                            <DrawerContent className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
                               <DrawerHeader>
                                 <DrawerTitle>Search Market</DrawerTitle>
                               </DrawerHeader>
@@ -4242,11 +4242,11 @@ const Game = () => {
                         ) : (
                           <Popover open={isMarketSearchOpen} onOpenChange={setIsMarketSearchOpen}>
                             <PopoverTrigger asChild>
-                              <Button variant="ghost" size="sm" className="text-white hover:bg-white/10 h-8 px-2">
-                                <Search className="w-3 h-3" />
+                              <Button variant="ghost" size="default" className="text-white hover:bg-white/10 w-18 h-18">
+                                <Search className="w-7 h-7" />
                               </Button>
                             </PopoverTrigger>
-                            <PopoverContent className="w-64 bg-black/90 backdrop-blur-md border border-white/20 text-white">
+                            <PopoverContent className="w-64 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
                               <Input
                                 placeholder="Search market..."
                                 value={marketSearchQuery}
