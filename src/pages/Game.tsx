@@ -4,6 +4,7 @@ import { usePrivy } from '@privy-io/react-auth';
 import { useNavigate } from "react-router-dom";
 import { useStore } from "@/hooks/useStore";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -57,6 +58,11 @@ const Game = () => {
   // All Players filter states
   const [allPlayersSelectedRarity, setAllPlayersSelectedRarity] = useState("all");
   const [allPlayersSelectedCategory, setAllPlayersSelectedCategory] = useState("all");
+  // Search states
+  const [allPlayersSearchQuery, setAllPlayersSearchQuery] = useState("");
+  const [marketSearchQuery, setMarketSearchQuery] = useState("");
+  const [isAllPlayersSearchOpen, setIsAllPlayersSearchOpen] = useState(false);
+  const [isMarketSearchOpen, setIsMarketSearchOpen] = useState(false);
   const [settingsExpanded, setSettingsExpanded] = useState(false);
   const [objectivesView, setObjectivesView] = useState("weekly");
   const [isObjectivesGlowing, setIsObjectivesGlowing] = useState(false);
@@ -434,6 +440,14 @@ const Game = () => {
   // Filter function for all players
   const filterAllPlayers = (players: any[]) => {
     let filtered = players;
+    
+    // Filter by search query
+    if (allPlayersSearchQuery.trim() !== "") {
+      const query = allPlayersSearchQuery.toLowerCase().trim();
+      filtered = filtered.filter(player => 
+        player.name.toLowerCase().includes(query)
+      );
+    }
     
     if (allPlayersSelectedCategory !== "all") {
       filtered = filtered.filter(player => player.category === allPlayersSelectedCategory);
@@ -2155,9 +2169,21 @@ const Game = () => {
                     <CardTitle className="text-base flex items-center justify-between text-white">
                       <span>All Players</span>
                       <div className="flex items-center space-x-2">
-                        <Button variant="outline" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
-                          <Search className="w-3 h-3" />
-                        </Button>
+                        <Popover open={isAllPlayersSearchOpen} onOpenChange={setIsAllPlayersSearchOpen}>
+                          <PopoverTrigger asChild>
+                            <Button variant="outline" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
+                              <Search className="w-3 h-3" />
+                            </Button>
+                          </PopoverTrigger>
+                          <PopoverContent className="w-64 bg-black/90 backdrop-blur-md border border-white/20 text-white">
+                            <Input
+                              placeholder="Search players..."
+                              value={allPlayersSearchQuery}
+                              onChange={(e) => setAllPlayersSearchQuery(e.target.value)}
+                              className="bg-white/10 border-white/20 text-white placeholder:text-white/60"
+                            />
+                          </PopoverContent>
+                        </Popover>
                         
                         {/* All Players Category Filter */}
                         {isMobile ? (
@@ -4169,9 +4195,21 @@ const Game = () => {
                     <CardTitle className="text-lg flex items-center justify-between text-white">
                       <span>All Fighters - Most Expensive First</span>
                       <div className="flex items-center space-x-2">
-                        <Button variant="ghost" size="sm" className="text-white hover:bg-white/10 h-8 px-2">
-                          <Search className="w-3 h-3" />
-                        </Button>
+                        <Popover open={isMarketSearchOpen} onOpenChange={setIsMarketSearchOpen}>
+                          <PopoverTrigger asChild>
+                            <Button variant="ghost" size="sm" className="text-white hover:bg-white/10 h-8 px-2">
+                              <Search className="w-3 h-3" />
+                            </Button>
+                          </PopoverTrigger>
+                          <PopoverContent className="w-64 bg-black/90 backdrop-blur-md border border-white/20 text-white">
+                            <Input
+                              placeholder="Search market..."
+                              value={marketSearchQuery}
+                              onChange={(e) => setMarketSearchQuery(e.target.value)}
+                              className="bg-white/10 border-white/20 text-white placeholder:text-white/60"
+                            />
+                          </PopoverContent>
+                        </Popover>
                         {/* Market Category Filter */}
                         {isMobile ? (
                           <Drawer>
@@ -4466,6 +4504,11 @@ const Game = () => {
                     
                     {(() => {
                       const filteredPlayers = allPlayers.filter(player => {
+                        // Filter by search query
+                        if (marketSearchQuery.trim() !== "") {
+                          const query = marketSearchQuery.toLowerCase().trim();
+                          if (!player.name.toLowerCase().includes(query)) return false;
+                        }
                         if (marketSelectedCategory !== "all" && player.category !== marketSelectedCategory) return false;
                         if (marketSelectedRarity !== "all" && player.rarity !== marketSelectedRarity) return false;
                         return true;
