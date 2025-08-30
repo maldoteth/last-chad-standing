@@ -3060,7 +3060,7 @@ const Game = () => {
                     )}
                   </div>
                   
-                  <div className="flex items-center justify-center space-x-3 mb-4">
+                  <div className="flex items-center justify-center space-x-3 mb-4 lg:scale-110">
                     <div>
                       <h1 className="text-3xl font-bold">Store</h1>
                     </div>
