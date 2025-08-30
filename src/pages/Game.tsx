@@ -55,10 +55,18 @@ const Game = () => {
 
   // Initialize user balance and profile on login
   useEffect(() => {
-    if (authenticated && user?.id && !profile) {
-      createProfile().catch(console.error);
+    if (authenticated && user?.id && !profile && !loading) {
+      console.log('Attempting to create profile for user:', user.id);
+      createProfile().catch((error) => {
+        console.error('Failed to create profile in Game component:', error);
+        toast({
+          title: "Profile Error",
+          description: "Failed to load your profile. Please refresh the page.",
+          variant: "destructive",
+        });
+      });
     }
-  }, [authenticated, user?.id, profile]);
+  }, [authenticated, user?.id, profile, loading, createProfile]);
 
   // Handle purchase function
   const handlePurchase = async (itemId: string, itemName: string, price: number) => {
@@ -456,7 +464,7 @@ const Game = () => {
                     <AvatarImage src={profile?.avatar_url || "/placeholder.svg"} />
                     <AvatarFallback>
                       {profile?.username?.charAt(0).toUpperCase() || 
-                       user?.email?.address?.charAt(0).toUpperCase() || "U"}
+                       user?.email?.address?.charAt(0).toUpperCase() || "?"}
                     </AvatarFallback>
                   </Avatar>
                 </DropdownMenuTrigger>
@@ -479,7 +487,7 @@ const Game = () => {
                         </div>
                         <div className="flex flex-col space-y-1">
                           <p className="text-sm font-medium leading-none text-white">
-                            {profile?.username || 'Anonymous'}
+                            {loading ? "Loading profile..." : (profile?.username || 'Profile Error')}
                           </p>
                           <p className="text-xs leading-none text-gray-200">
                             {user?.email?.address}
