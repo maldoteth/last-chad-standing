@@ -2951,7 +2951,7 @@ const Game = () => {
                 <div className="p-6">
                   <div className="space-y-6 max-w-4xl">
                 {/* Store Header */}
-                <div className="text-center relative sticky top-0 z-50 bg-black/80 backdrop-blur-md py-1">
+                <div className="text-center relative sticky top-0 z-50 bg-black/80 backdrop-blur-md">
                   {/* Category Filter - positioned in top left */}
                   <div className="absolute top-0 left-0">
                     {isMobile ? (
