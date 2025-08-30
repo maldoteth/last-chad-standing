@@ -1122,7 +1122,7 @@ const Game = () => {
 
             {activeTab === "store" && <div className="p-4 space-y-6">
                 {/* Store Header */}
-                <div className="text-center relative sticky top-0 z-50 bg-black/80 backdrop-blur-md py-4">
+                <div className="text-center relative sticky top-0 z-50 bg-gradient-to-b from-black/90 via-black/70 to-black/40 backdrop-blur-md py-4">
                   {/* Category Filter - positioned in top left */}
                   <div className="absolute top-0 left-0">
                     {isMobile ? (
