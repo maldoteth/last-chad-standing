@@ -2164,8 +2164,7 @@ const Game = () => {
                           <Drawer>
                             <DrawerTrigger asChild>
                                <Button variant="outline" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
-                                 <Layers className="w-3 h-3 mr-1" />
-                                 Category
+                                 <Layers className="w-3 h-3" />
                                </Button>
                             </DrawerTrigger>
                             <DrawerContent className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
@@ -2215,8 +2214,7 @@ const Game = () => {
                           <DropdownMenu>
                             <DropdownMenuTrigger asChild>
                                <Button variant="outline" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
-                                 <Layers className="w-3 h-3 mr-1" />
-                                 Category
+                                 <Layers className="w-3 h-3" />
                                </Button>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
@@ -2259,8 +2257,7 @@ const Game = () => {
                           <Drawer>
                             <DrawerTrigger asChild>
                                <Button variant="outline" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
-                                 <Filter className="w-3 h-3 mr-1" />
-                                 Rarity
+                                 <Filter className="w-3 h-3" />
                                </Button>
                             </DrawerTrigger>
                             <DrawerContent className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
@@ -2323,8 +2320,7 @@ const Game = () => {
                           <DropdownMenu>
                             <DropdownMenuTrigger asChild>
                                <Button variant="outline" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
-                                 <Filter className="w-3 h-3 mr-1" />
-                                 Rarity
+                                 <Filter className="w-3 h-3" />
                                </Button>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
