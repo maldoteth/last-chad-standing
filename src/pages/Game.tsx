@@ -4395,8 +4395,12 @@ const Game = () => {
                 avatar: "👑"
               }].map((player) => (
                 <div key={player.rank} className="flex items-center space-x-3 p-3 rounded-lg bg-white/5 backdrop-blur-sm border border-white/10">
-                  <div className="flex items-center justify-center w-8 h-8 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-sm font-bold">
-                    {player.rank}
+                  <div className="flex-shrink-0 w-8 text-center">
+                    {player.rank <= 3 ? (
+                      <Medal className={`w-5 h-5 ${player.rank === 1 ? 'text-yellow-400' : player.rank === 2 ? 'text-gray-300' : 'text-amber-600'}`} />
+                    ) : (
+                      <span className="text-sm font-medium text-white/60">#{player.rank}</span>
+                    )}
                   </div>
                   
                   <Avatar className="w-8 h-8">
