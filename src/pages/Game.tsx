@@ -1125,51 +1125,110 @@ const Game = () => {
                 <div className="text-center relative sticky top-0 z-50 bg-black/80 backdrop-blur-md py-4">
                   {/* Category Filter - positioned in top left */}
                   <div className="absolute top-0 left-0">
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" size="sm" className="text-white hover:bg-white/10">
-                          <Layers className="w-4 h-4" />
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
-                        <DropdownMenuItem 
-                          onClick={() => setSelectedCategory("all")} 
-                          className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "all" ? "bg-white/20" : ""}`}
-                        >
-                          <span>All Categories</span>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem 
-                          onClick={() => setSelectedCategory("skins")} 
-                          className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "skins" ? "bg-white/20" : ""}`}
-                        >
-                          <span>Skins</span>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem 
-                          onClick={() => setSelectedCategory("accessories")} 
-                          className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "accessories" ? "bg-white/20" : ""}`}
-                        >
-                          <span>Accessories</span>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem 
-                          onClick={() => setSelectedCategory("mobility")} 
-                          className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "mobility" ? "bg-white/20" : ""}`}
-                        >
-                          <span>Mobility</span>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem 
-                          onClick={() => setSelectedCategory("emotes")} 
-                          className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "emotes" ? "bg-white/20" : ""}`}
-                        >
-                          <span>Emotes</span>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem 
-                          onClick={() => setSelectedCategory("packs")} 
-                          className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "packs" ? "bg-white/20" : ""}`}
-                        >
-                          <span>Packs</span>
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
+                    {isMobile ? (
+                      <Drawer>
+                        <DrawerTrigger asChild>
+                          <Button variant="ghost" size="sm" className="text-white hover:bg-white/10">
+                            <Layers className="w-4 h-4" />
+                          </Button>
+                        </DrawerTrigger>
+                        <DrawerContent className="bg-black/95 backdrop-blur-md border-white/20 text-white">
+                          <DrawerHeader>
+                            <DrawerTitle>Filter by Category</DrawerTitle>
+                          </DrawerHeader>
+                          <div className="px-4 pb-8 space-y-2">
+                            <Button 
+                              variant="ghost" 
+                              onClick={() => setSelectedCategory("all")} 
+                              className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "all" ? "bg-white/20" : ""}`}
+                            >
+                              All Categories
+                            </Button>
+                            <Button 
+                              variant="ghost" 
+                              onClick={() => setSelectedCategory("skins")} 
+                              className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "skins" ? "bg-white/20" : ""}`}
+                            >
+                              Skins
+                            </Button>
+                            <Button 
+                              variant="ghost" 
+                              onClick={() => setSelectedCategory("accessories")} 
+                              className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "accessories" ? "bg-white/20" : ""}`}
+                            >
+                              Accessories
+                            </Button>
+                            <Button 
+                              variant="ghost" 
+                              onClick={() => setSelectedCategory("mobility")} 
+                              className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "mobility" ? "bg-white/20" : ""}`}
+                            >
+                              Mobility
+                            </Button>
+                            <Button 
+                              variant="ghost" 
+                              onClick={() => setSelectedCategory("emotes")} 
+                              className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "emotes" ? "bg-white/20" : ""}`}
+                            >
+                              Emotes
+                            </Button>
+                            <Button 
+                              variant="ghost" 
+                              onClick={() => setSelectedCategory("packs")} 
+                              className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "packs" ? "bg-white/20" : ""}`}
+                            >
+                              Packs
+                            </Button>
+                          </div>
+                        </DrawerContent>
+                      </Drawer>
+                    ) : (
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button variant="ghost" size="sm" className="text-white hover:bg-white/10">
+                            <Layers className="w-4 h-4" />
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
+                          <DropdownMenuItem 
+                            onClick={() => setSelectedCategory("all")} 
+                            className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "all" ? "bg-white/20" : ""}`}
+                          >
+                            <span>All Categories</span>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem 
+                            onClick={() => setSelectedCategory("skins")} 
+                            className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "skins" ? "bg-white/20" : ""}`}
+                          >
+                            <span>Skins</span>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem 
+                            onClick={() => setSelectedCategory("accessories")} 
+                            className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "accessories" ? "bg-white/20" : ""}`}
+                          >
+                            <span>Accessories</span>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem 
+                            onClick={() => setSelectedCategory("mobility")} 
+                            className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "mobility" ? "bg-white/20" : ""}`}
+                          >
+                            <span>Mobility</span>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem 
+                            onClick={() => setSelectedCategory("emotes")} 
+                            className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "emotes" ? "bg-white/20" : ""}`}
+                          >
+                            <span>Emotes</span>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem 
+                            onClick={() => setSelectedCategory("packs")} 
+                            className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "packs" ? "bg-white/20" : ""}`}
+                          >
+                            <span>Packs</span>
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    )}
                   </div>
                   
                   <div className="flex items-center justify-center space-x-3 mb-4">
@@ -1181,57 +1240,122 @@ const Game = () => {
                   
                   {/* Filter Dropdown - positioned in top right */}
                   <div className="absolute top-0 right-0">
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" size="sm" className="text-white hover:bg-white/10">
-                          <Filter className="w-4 h-4" />
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
-                        <DropdownMenuItem 
-                          onClick={() => setSelectedRarity("all")} 
-                          className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "all" ? "bg-white/20" : ""}`}
-                        >
-                          <div className="w-3 h-3 rounded-full bg-black" />
-                          <span>All Rarities</span>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem 
-                          onClick={() => setSelectedRarity("green")} 
-                          className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "green" ? "bg-white/20" : ""}`}
-                        >
-                          <div className="w-3 h-3 rounded-full bg-green-500" />
-                          <span>Regular</span>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem 
-                          onClick={() => setSelectedRarity("blue")} 
-                          className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "blue" ? "bg-white/20" : ""}`}
-                        >
-                          <div className="w-3 h-3 rounded-full bg-blue-500" />
-                          <span>Rare</span>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem 
-                          onClick={() => setSelectedRarity("silver")} 
-                          className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "silver" ? "bg-white/20" : ""}`}
-                        >
-                          <div className="w-3 h-3 rounded-full bg-gray-300" />
-                          <span>Legendary</span>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem 
-                          onClick={() => setSelectedRarity("gold")} 
-                          className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "gold" ? "bg-white/20" : ""}`}
-                        >
-                          <div className="w-3 h-3 rounded-full bg-yellow-400" />
-                          <span>Mythical</span>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem 
-                          onClick={() => setSelectedRarity("special")} 
-                          className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "special" ? "bg-white/20" : ""}`}
-                        >
-                          <div className="w-3 h-3 rounded-full bg-gradient-to-r from-purple-400 via-pink-400 to-yellow-400" />
-                          <span>Special</span>
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
+                    {isMobile ? (
+                      <Drawer>
+                        <DrawerTrigger asChild>
+                          <Button variant="ghost" size="sm" className="text-white hover:bg-white/10">
+                            <Filter className="w-4 h-4" />
+                          </Button>
+                        </DrawerTrigger>
+                        <DrawerContent className="bg-black/95 backdrop-blur-md border-white/20 text-white">
+                          <DrawerHeader>
+                            <DrawerTitle>Filter by Rarity</DrawerTitle>
+                          </DrawerHeader>
+                          <div className="px-4 pb-8 space-y-2">
+                            <Button 
+                              variant="ghost" 
+                              onClick={() => setSelectedRarity("all")} 
+                              className={`w-full justify-start text-white hover:bg-white/10 ${selectedRarity === "all" ? "bg-white/20" : ""}`}
+                            >
+                              <div className="w-3 h-3 rounded-full bg-black mr-2" />
+                              All Rarities
+                            </Button>
+                            <Button 
+                              variant="ghost" 
+                              onClick={() => setSelectedRarity("green")} 
+                              className={`w-full justify-start text-white hover:bg-white/10 ${selectedRarity === "green" ? "bg-white/20" : ""}`}
+                            >
+                              <div className="w-3 h-3 rounded-full bg-green-500 mr-2" />
+                              Regular
+                            </Button>
+                            <Button 
+                              variant="ghost" 
+                              onClick={() => setSelectedRarity("blue")} 
+                              className={`w-full justify-start text-white hover:bg-white/10 ${selectedRarity === "blue" ? "bg-white/20" : ""}`}
+                            >
+                              <div className="w-3 h-3 rounded-full bg-blue-500 mr-2" />
+                              Rare
+                            </Button>
+                            <Button 
+                              variant="ghost" 
+                              onClick={() => setSelectedRarity("silver")} 
+                              className={`w-full justify-start text-white hover:bg-white/10 ${selectedRarity === "silver" ? "bg-white/20" : ""}`}
+                            >
+                              <div className="w-3 h-3 rounded-full bg-gray-300 mr-2" />
+                              Legendary
+                            </Button>
+                            <Button 
+                              variant="ghost" 
+                              onClick={() => setSelectedRarity("gold")} 
+                              className={`w-full justify-start text-white hover:bg-white/10 ${selectedRarity === "gold" ? "bg-white/20" : ""}`}
+                            >
+                              <div className="w-3 h-3 rounded-full bg-yellow-400 mr-2" />
+                              Mythical
+                            </Button>
+                            <Button 
+                              variant="ghost" 
+                              onClick={() => setSelectedRarity("special")} 
+                              className={`w-full justify-start text-white hover:bg-white/10 ${selectedRarity === "special" ? "bg-white/20" : ""}`}
+                            >
+                              <div className="w-3 h-3 rounded-full bg-gradient-to-r from-purple-400 via-pink-400 to-yellow-400 mr-2" />
+                              Special
+                            </Button>
+                          </div>
+                        </DrawerContent>
+                      </Drawer>
+                    ) : (
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button variant="ghost" size="sm" className="text-white hover:bg-white/10">
+                            <Filter className="w-4 h-4" />
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
+                          <DropdownMenuItem 
+                            onClick={() => setSelectedRarity("all")} 
+                            className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "all" ? "bg-white/20" : ""}`}
+                          >
+                            <div className="w-3 h-3 rounded-full bg-black" />
+                            <span>All Rarities</span>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem 
+                            onClick={() => setSelectedRarity("green")} 
+                            className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "green" ? "bg-white/20" : ""}`}
+                          >
+                            <div className="w-3 h-3 rounded-full bg-green-500" />
+                            <span>Regular</span>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem 
+                            onClick={() => setSelectedRarity("blue")} 
+                            className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "blue" ? "bg-white/20" : ""}`}
+                          >
+                            <div className="w-3 h-3 rounded-full bg-blue-500" />
+                            <span>Rare</span>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem 
+                            onClick={() => setSelectedRarity("silver")} 
+                            className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "silver" ? "bg-white/20" : ""}`}
+                          >
+                            <div className="w-3 h-3 rounded-full bg-gray-300" />
+                            <span>Legendary</span>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem 
+                            onClick={() => setSelectedRarity("gold")} 
+                            className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "gold" ? "bg-white/20" : ""}`}
+                          >
+                            <div className="w-3 h-3 rounded-full bg-yellow-400" />
+                            <span>Mythical</span>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem 
+                            onClick={() => setSelectedRarity("special")} 
+                            className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "special" ? "bg-white/20" : ""}`}
+                          >
+                            <div className="w-3 h-3 rounded-full bg-gradient-to-r from-purple-400 via-pink-400 to-yellow-400" />
+                            <span>Special</span>
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    )}
                   </div>
                 </div>
 
@@ -2805,51 +2929,110 @@ const Game = () => {
                 <div className="text-center relative sticky top-0 z-50 bg-black/80 backdrop-blur-md py-4">
                   {/* Category Filter - positioned in top left */}
                   <div className="absolute top-0 left-0">
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" size="sm" className="text-white hover:bg-white/10">
-                          <Layers className="w-4 h-4" />
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
-                        <DropdownMenuItem 
-                          onClick={() => setSelectedCategory("all")} 
-                          className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "all" ? "bg-white/20" : ""}`}
-                        >
-                          <span>All Categories</span>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem 
-                          onClick={() => setSelectedCategory("skins")} 
-                          className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "skins" ? "bg-white/20" : ""}`}
-                        >
-                          <span>Skins</span>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem 
-                          onClick={() => setSelectedCategory("accessories")} 
-                          className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "accessories" ? "bg-white/20" : ""}`}
-                        >
-                          <span>Accessories</span>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem 
-                          onClick={() => setSelectedCategory("mobility")} 
-                          className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "mobility" ? "bg-white/20" : ""}`}
-                        >
-                          <span>Mobility</span>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem 
-                          onClick={() => setSelectedCategory("emotes")} 
-                          className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "emotes" ? "bg-white/20" : ""}`}
-                        >
-                          <span>Emotes</span>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem 
-                          onClick={() => setSelectedCategory("packs")} 
-                          className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "packs" ? "bg-white/20" : ""}`}
-                        >
-                          <span>Packs</span>
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
+                    {isMobile ? (
+                      <Drawer>
+                        <DrawerTrigger asChild>
+                          <Button variant="ghost" size="sm" className="text-white hover:bg-white/10">
+                            <Layers className="w-4 h-4" />
+                          </Button>
+                        </DrawerTrigger>
+                        <DrawerContent className="bg-black/95 backdrop-blur-md border-white/20 text-white">
+                          <DrawerHeader>
+                            <DrawerTitle>Filter by Category</DrawerTitle>
+                          </DrawerHeader>
+                          <div className="px-4 pb-8 space-y-2">
+                            <Button 
+                              variant="ghost" 
+                              onClick={() => setSelectedCategory("all")} 
+                              className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "all" ? "bg-white/20" : ""}`}
+                            >
+                              All Categories
+                            </Button>
+                            <Button 
+                              variant="ghost" 
+                              onClick={() => setSelectedCategory("skins")} 
+                              className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "skins" ? "bg-white/20" : ""}`}
+                            >
+                              Skins
+                            </Button>
+                            <Button 
+                              variant="ghost" 
+                              onClick={() => setSelectedCategory("accessories")} 
+                              className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "accessories" ? "bg-white/20" : ""}`}
+                            >
+                              Accessories
+                            </Button>
+                            <Button 
+                              variant="ghost" 
+                              onClick={() => setSelectedCategory("mobility")} 
+                              className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "mobility" ? "bg-white/20" : ""}`}
+                            >
+                              Mobility
+                            </Button>
+                            <Button 
+                              variant="ghost" 
+                              onClick={() => setSelectedCategory("emotes")} 
+                              className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "emotes" ? "bg-white/20" : ""}`}
+                            >
+                              Emotes
+                            </Button>
+                            <Button 
+                              variant="ghost" 
+                              onClick={() => setSelectedCategory("packs")} 
+                              className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "packs" ? "bg-white/20" : ""}`}
+                            >
+                              Packs
+                            </Button>
+                          </div>
+                        </DrawerContent>
+                      </Drawer>
+                    ) : (
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button variant="ghost" size="sm" className="text-white hover:bg-white/10">
+                            <Layers className="w-4 h-4" />
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
+                          <DropdownMenuItem 
+                            onClick={() => setSelectedCategory("all")} 
+                            className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "all" ? "bg-white/20" : ""}`}
+                          >
+                            <span>All Categories</span>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem 
+                            onClick={() => setSelectedCategory("skins")} 
+                            className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "skins" ? "bg-white/20" : ""}`}
+                          >
+                            <span>Skins</span>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem 
+                            onClick={() => setSelectedCategory("accessories")} 
+                            className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "accessories" ? "bg-white/20" : ""}`}
+                          >
+                            <span>Accessories</span>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem 
+                            onClick={() => setSelectedCategory("mobility")} 
+                            className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "mobility" ? "bg-white/20" : ""}`}
+                          >
+                            <span>Mobility</span>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem 
+                            onClick={() => setSelectedCategory("emotes")} 
+                            className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "emotes" ? "bg-white/20" : ""}`}
+                          >
+                            <span>Emotes</span>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem 
+                            onClick={() => setSelectedCategory("packs")} 
+                            className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "packs" ? "bg-white/20" : ""}`}
+                          >
+                            <span>Packs</span>
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    )}
                   </div>
                   
                   <div className="flex items-center justify-center space-x-3 mb-4">
@@ -2861,57 +3044,122 @@ const Game = () => {
                   
                   {/* Filter Dropdown - positioned in top right */}
                   <div className="absolute top-0 right-0">
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" size="sm" className="text-white hover:bg-white/10">
-                          <Filter className="w-4 h-4" />
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
-                        <DropdownMenuItem 
-                          onClick={() => setSelectedRarity("all")} 
-                          className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "all" ? "bg-white/20" : ""}`}
-                        >
-                          <div className="w-3 h-3 rounded-full bg-black" />
-                          <span>All Rarities</span>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem 
-                          onClick={() => setSelectedRarity("green")} 
-                          className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "green" ? "bg-white/20" : ""}`}
-                        >
-                          <div className="w-3 h-3 rounded-full bg-green-500" />
-                          <span>Regular</span>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem 
-                          onClick={() => setSelectedRarity("blue")} 
-                          className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "blue" ? "bg-white/20" : ""}`}
-                        >
-                          <div className="w-3 h-3 rounded-full bg-blue-500" />
-                          <span>Rare</span>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem 
-                          onClick={() => setSelectedRarity("silver")} 
-                          className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "silver" ? "bg-white/20" : ""}`}
-                        >
-                          <div className="w-3 h-3 rounded-full bg-gray-300" />
-                          <span>Legendary</span>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem 
-                          onClick={() => setSelectedRarity("gold")} 
-                          className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "gold" ? "bg-white/20" : ""}`}
-                        >
-                          <div className="w-3 h-3 rounded-full bg-yellow-400" />
-                          <span>Mythical</span>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem 
-                          onClick={() => setSelectedRarity("special")} 
-                          className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "special" ? "bg-white/20" : ""}`}
-                        >
-                          <div className="w-3 h-3 rounded-full bg-gradient-to-r from-purple-400 via-pink-400 to-yellow-400" />
-                          <span>Special</span>
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
+                    {isMobile ? (
+                      <Drawer>
+                        <DrawerTrigger asChild>
+                          <Button variant="ghost" size="sm" className="text-white hover:bg-white/10">
+                            <Filter className="w-4 h-4" />
+                          </Button>
+                        </DrawerTrigger>
+                        <DrawerContent className="bg-black/95 backdrop-blur-md border-white/20 text-white">
+                          <DrawerHeader>
+                            <DrawerTitle>Filter by Rarity</DrawerTitle>
+                          </DrawerHeader>
+                          <div className="px-4 pb-8 space-y-2">
+                            <Button 
+                              variant="ghost" 
+                              onClick={() => setSelectedRarity("all")} 
+                              className={`w-full justify-start text-white hover:bg-white/10 ${selectedRarity === "all" ? "bg-white/20" : ""}`}
+                            >
+                              <div className="w-3 h-3 rounded-full bg-black mr-2" />
+                              All Rarities
+                            </Button>
+                            <Button 
+                              variant="ghost" 
+                              onClick={() => setSelectedRarity("green")} 
+                              className={`w-full justify-start text-white hover:bg-white/10 ${selectedRarity === "green" ? "bg-white/20" : ""}`}
+                            >
+                              <div className="w-3 h-3 rounded-full bg-green-500 mr-2" />
+                              Regular
+                            </Button>
+                            <Button 
+                              variant="ghost" 
+                              onClick={() => setSelectedRarity("blue")} 
+                              className={`w-full justify-start text-white hover:bg-white/10 ${selectedRarity === "blue" ? "bg-white/20" : ""}`}
+                            >
+                              <div className="w-3 h-3 rounded-full bg-blue-500 mr-2" />
+                              Rare
+                            </Button>
+                            <Button 
+                              variant="ghost" 
+                              onClick={() => setSelectedRarity("silver")} 
+                              className={`w-full justify-start text-white hover:bg-white/10 ${selectedRarity === "silver" ? "bg-white/20" : ""}`}
+                            >
+                              <div className="w-3 h-3 rounded-full bg-gray-300 mr-2" />
+                              Legendary
+                            </Button>
+                            <Button 
+                              variant="ghost" 
+                              onClick={() => setSelectedRarity("gold")} 
+                              className={`w-full justify-start text-white hover:bg-white/10 ${selectedRarity === "gold" ? "bg-white/20" : ""}`}
+                            >
+                              <div className="w-3 h-3 rounded-full bg-yellow-400 mr-2" />
+                              Mythical
+                            </Button>
+                            <Button 
+                              variant="ghost" 
+                              onClick={() => setSelectedRarity("special")} 
+                              className={`w-full justify-start text-white hover:bg-white/10 ${selectedRarity === "special" ? "bg-white/20" : ""}`}
+                            >
+                              <div className="w-3 h-3 rounded-full bg-gradient-to-r from-purple-400 via-pink-400 to-yellow-400 mr-2" />
+                              Special
+                            </Button>
+                          </div>
+                        </DrawerContent>
+                      </Drawer>
+                    ) : (
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button variant="ghost" size="sm" className="text-white hover:bg-white/10">
+                            <Filter className="w-4 h-4" />
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
+                          <DropdownMenuItem 
+                            onClick={() => setSelectedRarity("all")} 
+                            className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "all" ? "bg-white/20" : ""}`}
+                          >
+                            <div className="w-3 h-3 rounded-full bg-black" />
+                            <span>All Rarities</span>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem 
+                            onClick={() => setSelectedRarity("green")} 
+                            className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "green" ? "bg-white/20" : ""}`}
+                          >
+                            <div className="w-3 h-3 rounded-full bg-green-500" />
+                            <span>Regular</span>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem 
+                            onClick={() => setSelectedRarity("blue")} 
+                            className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "blue" ? "bg-white/20" : ""}`}
+                          >
+                            <div className="w-3 h-3 rounded-full bg-blue-500" />
+                            <span>Rare</span>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem 
+                            onClick={() => setSelectedRarity("silver")} 
+                            className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "silver" ? "bg-white/20" : ""}`}
+                          >
+                            <div className="w-3 h-3 rounded-full bg-gray-300" />
+                            <span>Legendary</span>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem 
+                            onClick={() => setSelectedRarity("gold")} 
+                            className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "gold" ? "bg-white/20" : ""}`}
+                          >
+                            <div className="w-3 h-3 rounded-full bg-yellow-400" />
+                            <span>Mythical</span>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem 
+                            onClick={() => setSelectedRarity("special")} 
+                            className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "special" ? "bg-white/20" : ""}`}
+                          >
+                            <div className="w-3 h-3 rounded-full bg-gradient-to-r from-purple-400 via-pink-400 to-yellow-400" />
+                            <span>Special</span>
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    )}
                   </div>
                 </div>
 
