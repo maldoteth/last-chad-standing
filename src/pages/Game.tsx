@@ -54,6 +54,8 @@ const Game = () => {
   const [settingsExpanded, setSettingsExpanded] = useState(false);
   const [objectivesView, setObjectivesView] = useState("weekly");
   const [isObjectivesGlowing, setIsObjectivesGlowing] = useState(false);
+  const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
+  const [isRankingsOpen, setIsRankingsOpen] = useState(false);
   const objectivesRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
   const {
@@ -469,6 +471,22 @@ const Game = () => {
           </div>
           
           <div className="flex items-center space-x-3">
+            {/* Mobile Notifications and Rankings Icons - Only show on mobile/tablet */}
+            <div className="flex items-center space-x-2 lg:hidden">
+              <button
+                onClick={() => setIsRankingsOpen(true)}
+                className="p-2 rounded-lg hover:bg-gray-800/50 transition-colors"
+              >
+                <Medal className="w-4 h-4 text-muted-foreground hover:text-foreground" />
+              </button>
+              <button
+                onClick={() => setIsNotificationsOpen(true)}
+                className="p-2 rounded-lg hover:bg-gray-800/50 transition-colors"
+              >
+                <Bell className="w-4 h-4 text-muted-foreground hover:text-foreground" />
+              </button>
+            </div>
+            
             <div className="flex items-center space-x-2">
               <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4" />
               <span className="font-semibold text-sm lg:text-base">{userCoins.toLocaleString()}</span>
@@ -4288,6 +4306,116 @@ const Game = () => {
           </aside>
         </div>
       </div>
+
+      {/* Mobile Notifications Drawer */}
+      <Drawer open={isNotificationsOpen} onOpenChange={setIsNotificationsOpen}>
+        <DrawerContent className="bg-black border-gray-700">
+          <DrawerHeader>
+            <DrawerTitle className="text-center text-white">Notifications</DrawerTitle>
+          </DrawerHeader>
+          <div className="px-4 pb-6">
+            <div className="text-center py-8">
+              <Bell className="w-12 h-12 mx-auto text-muted-foreground mb-4 opacity-50" />
+              <p className="text-sm text-muted-foreground">
+                You'll see game updates and important announcements here
+              </p>
+            </div>
+          </div>
+        </DrawerContent>
+      </Drawer>
+
+      {/* Mobile Rankings Drawer */}
+      <Drawer open={isRankingsOpen} onOpenChange={setIsRankingsOpen}>
+        <DrawerContent className="bg-black border-gray-700 max-h-[80vh]">
+          <DrawerHeader>
+            <DrawerTitle className="text-center text-white">Rankings</DrawerTitle>
+          </DrawerHeader>
+          <div className="px-4 pb-6 overflow-y-auto">
+            <p className="text-sm text-muted-foreground text-center pb-4">Weekly prize pool: $0</p>
+            <div className="space-y-2">
+              {[{
+                rank: 1,
+                name: "CryptoKing",
+                level: 15,
+                points: 15420,
+                avatar: "👑"
+              }, {
+                rank: 2,
+                name: "BlockMaster",
+                level: 14,
+                points: 14890,
+                avatar: "👑"
+              }, {
+                rank: 3,
+                name: "ChainWarrior",
+                level: 14,
+                points: 14320,
+                avatar: "👑"
+              }, {
+                rank: 4,
+                name: "TokenSlayer",
+                level: 13,
+                points: 13780,
+                avatar: "👑"
+              }, {
+                rank: 5,
+                name: "NFTChampion",
+                level: 13,
+                points: 13240,
+                avatar: "👑"
+              }, {
+                rank: 6,
+                name: "DeFiGamer",
+                level: 12,
+                points: 12890,
+                avatar: "👑"
+              }, {
+                rank: 7,
+                name: "MetaPlayer",
+                level: 12,
+                points: 12450,
+                avatar: "👑"
+              }, {
+                rank: 8,
+                name: "Web3Hero",
+                level: 12,
+                points: 12120,
+                avatar: "👑"
+              }, {
+                rank: 9,
+                name: "CoinMaster",
+                level: 11,
+                points: 11780,
+                avatar: "👑"
+              }, {
+                rank: 10,
+                name: "BlockHero",
+                level: 11,
+                points: 11340,
+                avatar: "👑"
+              }].map((player) => (
+                <div key={player.rank} className="flex items-center space-x-3 p-3 rounded-lg bg-gray-900/50 border border-gray-700/50">
+                  <div className="flex items-center justify-center w-6 h-6 rounded-full bg-primary/20 text-primary text-xs font-bold">
+                    {player.rank}
+                  </div>
+                  
+                  <Avatar className="w-8 h-8">
+                    <AvatarFallback className="text-sm">{player.avatar}</AvatarFallback>
+                  </Avatar>
+                  
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center justify-between">
+                      <p className="text-sm font-medium truncate text-white">{player.name}</p>
+                      <Badge variant="outline" className="text-xs">Lv.{player.level}</Badge>
+                    </div>
+                    <p className="text-xs text-muted-foreground">{player.points.toLocaleString()} XP</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </DrawerContent>
+      </Drawer>
 
       {/* Mobile Bottom Navigation */}
       <nav className="lg:hidden fixed bottom-0 left-0 right-0 bg-black border-t border-border px-4 py-2 z-50">
