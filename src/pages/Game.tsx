@@ -60,7 +60,7 @@ const Game = () => {
               <Button variant="outline" size="sm" onClick={() => navigate('/profile')}>
                 Profile
               </Button>
-              {user?.email === 'admin@example.com' && (
+              {user?.email?.address === 'admin@example.com' && (
                 <Button variant="secondary" size="sm" onClick={() => navigate('/admin')}>
                   Admin Panel
                 </Button>
