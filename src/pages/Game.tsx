@@ -1247,18 +1247,19 @@ const Game = () => {
                     )}
                   </div>
                   
-                  <div className="flex items-center justify-between mb-6">
-                     <div>
-                       <h1 className="text-2xl font-bold">Store</h1>
-                     </div>
-                     <div>
-                       {isMobile ? (
-                         <Drawer>
-                           <DrawerTrigger asChild>
-                              <Button variant="ghost" size="sm" className="text-white hover:bg-white/10">
-                                <Filter className="w-4 h-4" />
-                             </Button>
-                        </DrawerTrigger>
+                  <div className="text-center mb-4">
+                    <h1 className="text-2xl font-bold">Store</h1>
+                  </div>
+                  
+                  <div className="relative">
+                    <div className="absolute top-0 right-0 z-10">
+                      {isMobile ? (
+                        <Drawer>
+                          <DrawerTrigger asChild>
+                             <Button variant="ghost" size="sm" className="text-white hover:bg-white/10">
+                               <Filter className="w-4 h-4" />
+                            </Button>
+                       </DrawerTrigger>
                         <DrawerContent className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
                           <DrawerHeader>
                             <DrawerTitle>Filter by Rarity</DrawerTitle>
@@ -3058,11 +3059,12 @@ const Game = () => {
                     )}
                   </div>
                   
-                  <div className="flex items-center justify-between mb-6">
-                    <div>
-                      <h1 className="text-3xl font-bold">Store</h1>
-                    </div>
-                    <div>
+                  <div className="text-center mb-6">
+                    <h1 className="text-3xl font-bold">Store</h1>
+                  </div>
+                  
+                  <div className="relative">
+                    <div className="absolute top-0 right-0 z-10">
                       {isMobile ? (
                         <Drawer>
                           <DrawerTrigger asChild>
