@@ -19,7 +19,7 @@ import { getAllLevelsForDisplay, getCurrentLevel, getProgressToNextLevel } from 
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerTrigger, DrawerClose } from "@/components/ui/drawer";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogDescription } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Coins, ShoppingBag, Users, Package, CreditCard, Trophy, Star, Target, ChevronRight, Bell, Play, Home, TrendingUp, UserPlus, Medal, LogOut, Settings, Info, Gift, BarChart3, LineChart, ArrowUpRight, ArrowDownRight, Search, Filter, Gamepad, Instagram, Layers, BookOpen, Youtube, X, RotateCcw, MessageCircle } from "lucide-react";
+import { Coins, ShoppingBag, Users, Package, CreditCard, Trophy, Star, Target, ChevronRight, Bell, Play, Home, TrendingUp, UserPlus, Medal, LogOut, Settings, Info, Gift, BarChart3, LineChart, ArrowUpRight, ArrowDownRight, ArrowUpDown, Search, Filter, Gamepad, Instagram, Layers, BookOpen, Youtube, X, RotateCcw, MessageCircle } from "lucide-react";
 import { ResponsiveContainer, LineChart as RechartsLineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, PieChart, Pie, Cell, BarChart, Bar, Area, AreaChart } from 'recharts';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import cyberWarriorSkin from "@/assets/cyber-warrior-skin.png";
@@ -63,6 +63,9 @@ const Game = () => {
   const [marketSearchQuery, setMarketSearchQuery] = useState("");
   const [isAllPlayersSearchOpen, setIsAllPlayersSearchOpen] = useState(false);
   const [isMarketSearchOpen, setIsMarketSearchOpen] = useState(false);
+  // Sort states
+  const [marketSortOption, setMarketSortOption] = useState("expensive");
+  const [isMarketSortOpen, setIsMarketSortOpen] = useState(false);
   const [settingsExpanded, setSettingsExpanded] = useState(false);
   const [objectivesView, setObjectivesView] = useState("weekly");
   const [isObjectivesGlowing, setIsObjectivesGlowing] = useState(false);
@@ -4255,6 +4258,85 @@ const Game = () => {
                               />
                             </PopoverContent>
                           </Popover>
+                        )}
+                        {/* Market Sort Filter */}
+                        {isMobile ? (
+                          <Drawer open={isMarketSortOpen} onOpenChange={setIsMarketSortOpen}>
+                            <DrawerTrigger asChild>
+                              <Button variant="ghost" size="default" className="text-white hover:bg-white/10 w-18 h-18">
+                                <ArrowUpDown className="w-7 h-7" />
+                              </Button>
+                            </DrawerTrigger>
+                            <DrawerContent className="bg-black/10 backdrop-blur-xl border-t border-white/10 text-white">
+                              <DrawerHeader>
+                                <DrawerTitle>Sort Market</DrawerTitle>
+                              </DrawerHeader>
+                              <div className="px-4 pb-8 space-y-2">
+                                <Button 
+                                  variant="ghost" 
+                                  onClick={() => setMarketSortOption("expensive")} 
+                                  className={`w-full justify-start text-white hover:bg-white/10 ${marketSortOption === "expensive" ? "bg-white/20" : ""}`}
+                                >
+                                  Most Expensive
+                                </Button>
+                                <Button 
+                                  variant="ghost" 
+                                  onClick={() => setMarketSortOption("cheapest")} 
+                                  className={`w-full justify-start text-white hover:bg-white/10 ${marketSortOption === "cheapest" ? "bg-white/20" : ""}`}
+                                >
+                                  Cheapest
+                                </Button>
+                                <Button 
+                                  variant="ghost" 
+                                  onClick={() => setMarketSortOption("recent")} 
+                                  className={`w-full justify-start text-white hover:bg-white/10 ${marketSortOption === "recent" ? "bg-white/20" : ""}`}
+                                >
+                                  Most Recent
+                                </Button>
+                                <Button 
+                                  variant="ghost" 
+                                  onClick={() => setMarketSortOption("oldest")} 
+                                  className={`w-full justify-start text-white hover:bg-white/10 ${marketSortOption === "oldest" ? "bg-white/20" : ""}`}
+                                >
+                                  Oldest
+                                </Button>
+                              </div>
+                            </DrawerContent>
+                          </Drawer>
+                        ) : (
+                          <DropdownMenu open={isMarketSortOpen} onOpenChange={setIsMarketSortOpen}>
+                            <DropdownMenuTrigger asChild>
+                              <Button variant="ghost" size="default" className="text-white hover:bg-white/10 w-18 h-18">
+                                <ArrowUpDown className="w-7 h-7" />
+                              </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-xl border border-white/10 text-white z-50">
+                              <DropdownMenuItem 
+                                onClick={() => setMarketSortOption("expensive")} 
+                                className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketSortOption === "expensive" ? "bg-white/20" : ""}`}
+                              >
+                                <span>Most Expensive</span>
+                              </DropdownMenuItem>
+                              <DropdownMenuItem 
+                                onClick={() => setMarketSortOption("cheapest")} 
+                                className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketSortOption === "cheapest" ? "bg-white/20" : ""}`}
+                              >
+                                <span>Cheapest</span>
+                              </DropdownMenuItem>
+                              <DropdownMenuItem 
+                                onClick={() => setMarketSortOption("recent")} 
+                                className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketSortOption === "recent" ? "bg-white/20" : ""}`}
+                              >
+                                <span>Most Recent</span>
+                              </DropdownMenuItem>
+                              <DropdownMenuItem 
+                                onClick={() => setMarketSortOption("oldest")} 
+                                className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketSortOption === "oldest" ? "bg-white/20" : ""}`}
+                              >
+                                <span>Oldest</span>
+                              </DropdownMenuItem>
+                            </DropdownMenuContent>
+                          </DropdownMenu>
                         )}
                         {/* Market Category Filter */}
                         {isMobile ? (
