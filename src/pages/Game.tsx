@@ -2167,7 +2167,7 @@ const Game = () => {
             }} />
                   <CardHeader className="pb-3 relative z-10">
                     <CardTitle className="text-base flex items-center justify-between text-white">
-                      <span>All Players</span>
+                      <span>All Listings</span>
                       <div className="flex items-center space-x-2">
                         {isMobile ? (
                           <Drawer open={isAllPlayersSearchOpen} onOpenChange={setIsAllPlayersSearchOpen}>
