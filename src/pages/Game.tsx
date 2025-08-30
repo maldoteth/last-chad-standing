@@ -618,7 +618,7 @@ const Game = () => {
                             </CardContent>
                           </Card>
                         </DrawerTrigger>
-                        <DrawerContent className="bg-black/95 backdrop-blur-md border-white/20">
+                        <DrawerContent className="bg-black/20 backdrop-blur-xl border-white/10">
                           <DrawerHeader>
                             <DrawerTitle className="text-white">XP Progress Levels</DrawerTitle>
                           </DrawerHeader>
