@@ -54,6 +54,9 @@ const Game = () => {
   // Market-specific filter states
   const [marketSelectedRarity, setMarketSelectedRarity] = useState("all");
   const [marketSelectedCategory, setMarketSelectedCategory] = useState("all");
+  // All Players filter states
+  const [allPlayersSelectedRarity, setAllPlayersSelectedRarity] = useState("all");
+  const [allPlayersSelectedCategory, setAllPlayersSelectedCategory] = useState("all");
   const [settingsExpanded, setSettingsExpanded] = useState(false);
   const [objectivesView, setObjectivesView] = useState("weekly");
   const [isObjectivesGlowing, setIsObjectivesGlowing] = useState(false);
@@ -427,6 +430,32 @@ const Game = () => {
     if (selectedRarity === "all") return items;
     return items.filter(item => item.rarity === selectedRarity);
   };
+
+  // Filter function for all players
+  const filterAllPlayers = (players: any[]) => {
+    let filtered = players;
+    
+    if (allPlayersSelectedCategory !== "all") {
+      filtered = filtered.filter(player => player.category === allPlayersSelectedCategory);
+    }
+    
+    if (allPlayersSelectedRarity !== "all") {
+      // Map rarity display names to data values
+      const rarityMap = {
+        "green": "regular",
+        "blue": "rare", 
+        "silver": "legendary",
+        "gold": "mythical",
+        "special": "special"
+      };
+      const targetRarity = rarityMap[allPlayersSelectedRarity] || allPlayersSelectedRarity;
+      filtered = filtered.filter(player => player.rarity === targetRarity);
+    }
+    
+    return filtered;
+  };
+
+  const filteredAllPlayers = filterAllPlayers(allPlayers);
 
   // Debug logging for activeTab changes
   console.log('Current activeTab:', activeTab);
@@ -2130,16 +2159,227 @@ const Game = () => {
                           <Search className="w-3 h-3 mr-1" />
                           Search
                         </Button>
-                        <Button variant="outline" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
-                          <Filter className="w-3 h-3 mr-1" />
-                          Filter
-                        </Button>
+                        
+                        {/* All Players Category Filter */}
+                        {isMobile ? (
+                          <Drawer>
+                            <DrawerTrigger asChild>
+                               <Button variant="outline" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
+                                 <Layers className="w-3 h-3 mr-1" />
+                                 Category
+                               </Button>
+                            </DrawerTrigger>
+                            <DrawerContent className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
+                              <DrawerHeader>
+                                <DrawerTitle>Filter by Category</DrawerTitle>
+                              </DrawerHeader>
+                              <div className="px-4 pb-8 space-y-2">
+                                <Button 
+                                  variant="ghost" 
+                                  onClick={() => setAllPlayersSelectedCategory("all")} 
+                                  className={`w-full justify-start text-white hover:bg-white/10 ${allPlayersSelectedCategory === "all" ? "bg-white/20" : ""}`}
+                                >
+                                  All Categories
+                                </Button>
+                                <Button 
+                                  variant="ghost" 
+                                  onClick={() => setAllPlayersSelectedCategory("fighters")} 
+                                  className={`w-full justify-start text-white hover:bg-white/10 ${allPlayersSelectedCategory === "fighters" ? "bg-white/20" : ""}`}
+                                >
+                                  Fighters
+                                </Button>
+                                <Button 
+                                  variant="ghost" 
+                                  onClick={() => setAllPlayersSelectedCategory("accessories")} 
+                                  className={`w-full justify-start text-white hover:bg-white/10 ${allPlayersSelectedCategory === "accessories" ? "bg-white/20" : ""}`}
+                                >
+                                  Accessories
+                                </Button>
+                                <Button 
+                                  variant="ghost" 
+                                  onClick={() => setAllPlayersSelectedCategory("mobility")} 
+                                  className={`w-full justify-start text-white hover:bg-white/10 ${allPlayersSelectedCategory === "mobility" ? "bg-white/20" : ""}`}
+                                >
+                                  Mobility
+                                </Button>
+                                <Button 
+                                  variant="ghost" 
+                                  onClick={() => setAllPlayersSelectedCategory("emotes")} 
+                                  className={`w-full justify-start text-white hover:bg-white/10 ${allPlayersSelectedCategory === "emotes" ? "bg-white/20" : ""}`}
+                                >
+                                  Emotes
+                                </Button>
+                              </div>
+                            </DrawerContent>
+                          </Drawer>
+                        ) : (
+                          <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                               <Button variant="outline" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
+                                 <Layers className="w-3 h-3 mr-1" />
+                                 Category
+                               </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
+                              <DropdownMenuItem 
+                                onClick={() => setAllPlayersSelectedCategory("all")} 
+                                className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${allPlayersSelectedCategory === "all" ? "bg-white/20" : ""}`}
+                              >
+                                <span>All Categories</span>
+                              </DropdownMenuItem>
+                              <DropdownMenuItem 
+                                onClick={() => setAllPlayersSelectedCategory("fighters")} 
+                                className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${allPlayersSelectedCategory === "fighters" ? "bg-white/20" : ""}`}
+                              >
+                                <span>Fighters</span>
+                              </DropdownMenuItem>
+                              <DropdownMenuItem 
+                                onClick={() => setAllPlayersSelectedCategory("accessories")} 
+                                className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${allPlayersSelectedCategory === "accessories" ? "bg-white/20" : ""}`}
+                              >
+                                <span>Accessories</span>
+                              </DropdownMenuItem>
+                              <DropdownMenuItem 
+                                onClick={() => setAllPlayersSelectedCategory("mobility")} 
+                                className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${allPlayersSelectedCategory === "mobility" ? "bg-white/20" : ""}`}
+                              >
+                                <span>Mobility</span>
+                              </DropdownMenuItem>
+                              <DropdownMenuItem 
+                                onClick={() => setAllPlayersSelectedCategory("emotes")} 
+                                className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${allPlayersSelectedCategory === "emotes" ? "bg-white/20" : ""}`}
+                              >
+                                <span>Emotes</span>
+                              </DropdownMenuItem>
+                            </DropdownMenuContent>
+                          </DropdownMenu>
+                        )}
+                        
+                        {/* All Players Rarity Filter */}
+                        {isMobile ? (
+                          <Drawer>
+                            <DrawerTrigger asChild>
+                               <Button variant="outline" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
+                                 <Filter className="w-3 h-3 mr-1" />
+                                 Rarity
+                               </Button>
+                            </DrawerTrigger>
+                            <DrawerContent className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
+                              <DrawerHeader>
+                                <DrawerTitle>Filter by Rarity</DrawerTitle>
+                              </DrawerHeader>
+                              <div className="px-4 pb-8 space-y-2">
+                                <Button 
+                                  variant="ghost" 
+                                  onClick={() => setAllPlayersSelectedRarity("all")} 
+                                  className={`w-full justify-start text-white hover:bg-white/10 ${allPlayersSelectedRarity === "all" ? "bg-white/20" : ""}`}
+                                >
+                                  <div className="w-3 h-3 rounded-full bg-black mr-2" />
+                                  All Rarities
+                                </Button>
+                                <Button 
+                                  variant="ghost" 
+                                  onClick={() => setAllPlayersSelectedRarity("green")} 
+                                  className={`w-full justify-start text-white hover:bg-white/10 ${allPlayersSelectedRarity === "green" ? "bg-white/20" : ""}`}
+                                >
+                                  <div className="w-3 h-3 rounded-full bg-green-500 mr-2" />
+                                  Regular
+                                </Button>
+                                <Button 
+                                  variant="ghost" 
+                                  onClick={() => setAllPlayersSelectedRarity("blue")} 
+                                  className={`w-full justify-start text-white hover:bg-white/10 ${allPlayersSelectedRarity === "blue" ? "bg-white/20" : ""}`}
+                                >
+                                  <div className="w-3 h-3 rounded-full bg-blue-500 mr-2" />
+                                  Rare
+                                </Button>
+                                <Button 
+                                  variant="ghost" 
+                                  onClick={() => setAllPlayersSelectedRarity("silver")} 
+                                  className={`w-full justify-start text-white hover:bg-white/10 ${allPlayersSelectedRarity === "silver" ? "bg-white/20" : ""}`}
+                                >
+                                  <div className="w-3 h-3 rounded-full bg-gray-300 mr-2" />
+                                  Legendary
+                                </Button>
+                                <Button 
+                                  variant="ghost" 
+                                  onClick={() => setAllPlayersSelectedRarity("gold")} 
+                                  className={`w-full justify-start text-white hover:bg-white/10 ${allPlayersSelectedRarity === "gold" ? "bg-white/20" : ""}`}
+                                >
+                                  <div className="w-3 h-3 rounded-full bg-yellow-400 mr-2" />
+                                  Mythical
+                                </Button>
+                                <Button 
+                                  variant="ghost" 
+                                  onClick={() => setAllPlayersSelectedRarity("special")} 
+                                  className={`w-full justify-start text-white hover:bg-white/10 ${allPlayersSelectedRarity === "special" ? "bg-white/20" : ""}`}
+                                >
+                                  <div className="w-3 h-3 rounded-full bg-gradient-to-r from-purple-400 via-pink-400 to-yellow-400 mr-2" />
+                                  Special
+                                </Button>
+                              </div>
+                            </DrawerContent>
+                          </Drawer>
+                        ) : (
+                          <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                               <Button variant="outline" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
+                                 <Filter className="w-3 h-3 mr-1" />
+                                 Rarity
+                               </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
+                              <DropdownMenuItem 
+                                onClick={() => setAllPlayersSelectedRarity("all")} 
+                                className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${allPlayersSelectedRarity === "all" ? "bg-white/20" : ""}`}
+                              >
+                                <div className="w-3 h-3 rounded-full bg-black" />
+                                <span>All Rarities</span>
+                              </DropdownMenuItem>
+                              <DropdownMenuItem 
+                                onClick={() => setAllPlayersSelectedRarity("green")} 
+                                className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${allPlayersSelectedRarity === "green" ? "bg-white/20" : ""}`}
+                              >
+                                <div className="w-3 h-3 rounded-full bg-green-500" />
+                                <span>Regular</span>
+                              </DropdownMenuItem>
+                              <DropdownMenuItem 
+                                onClick={() => setAllPlayersSelectedRarity("blue")} 
+                                className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${allPlayersSelectedRarity === "blue" ? "bg-white/20" : ""}`}
+                              >
+                                <div className="w-3 h-3 rounded-full bg-blue-500" />
+                                <span>Rare</span>
+                              </DropdownMenuItem>
+                              <DropdownMenuItem 
+                                onClick={() => setAllPlayersSelectedRarity("silver")} 
+                                className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${allPlayersSelectedRarity === "silver" ? "bg-white/20" : ""}`}
+                              >
+                                <div className="w-3 h-3 rounded-full bg-gray-300" />
+                                <span>Legendary</span>
+                              </DropdownMenuItem>
+                              <DropdownMenuItem 
+                                onClick={() => setAllPlayersSelectedRarity("gold")} 
+                                className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${allPlayersSelectedRarity === "gold" ? "bg-white/20" : ""}`}
+                              >
+                                <div className="w-3 h-3 rounded-full bg-yellow-400" />
+                                <span>Mythical</span>
+                              </DropdownMenuItem>
+                              <DropdownMenuItem 
+                                onClick={() => setAllPlayersSelectedRarity("special")} 
+                                className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${allPlayersSelectedRarity === "special" ? "bg-white/20" : ""}`}
+                              >
+                                <div className="w-3 h-3 rounded-full bg-gradient-to-r from-purple-400 via-pink-400 to-yellow-400" />
+                                <span>Special</span>
+                              </DropdownMenuItem>
+                            </DropdownMenuContent>
+                          </DropdownMenu>
+                        )}
                       </div>
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="relative z-10">
                     <div className="space-y-2">
-                      {allPlayers.slice(0, visiblePlayers).map((player, idx) => <div key={idx} className="flex items-center space-x-3 p-3 bg-white/5 rounded-lg hover:bg-white/10 transition-colors">
+                      {filteredAllPlayers.slice(0, visiblePlayers).map((player, idx) => <div key={idx} className="flex items-center space-x-3 p-3 bg-white/5 rounded-lg hover:bg-white/10 transition-colors">
                           <div className="w-10 h-10 rounded-full overflow-hidden">
                             <img src={player.image} alt={player.name} className="w-full h-full object-cover" />
                           </div>
@@ -2173,8 +2413,8 @@ const Game = () => {
                         </div>)}
                     </div>
                     
-                    {visiblePlayers < allPlayers.length && <div className="mt-4 text-center">
-                        <Button variant="outline" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => setVisiblePlayers(prev => Math.min(prev + 10, allPlayers.length))}>
+                    {visiblePlayers < filteredAllPlayers.length && <div className="mt-4 text-center">
+                        <Button variant="outline" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => setVisiblePlayers(prev => Math.min(prev + 10, filteredAllPlayers.length))}>
                           Load More Players
                         </Button>
                       </div>}
