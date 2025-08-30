@@ -2156,8 +2156,7 @@ const Game = () => {
                       <span>All Players</span>
                       <div className="flex items-center space-x-2">
                         <Button variant="outline" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
-                          <Search className="w-3 h-3 mr-1" />
-                          Search
+                          <Search className="w-3 h-3" />
                         </Button>
                         
                         {/* All Players Category Filter */}
