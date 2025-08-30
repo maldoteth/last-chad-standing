@@ -84,7 +84,7 @@ export const useProfile = () => {
         .eq('user_id', user.id)
         .maybeSingle();
 
-      if (checkError && checkError.code !== 'PGRST116') {
+      if (checkError) {
         console.error('Error checking existing profile:', checkError);
         throw checkError;
       }
@@ -100,9 +100,29 @@ export const useProfile = () => {
         return profileWithIcon;
       }
 
-      // Create new profile - database will auto-generate username via trigger
-      console.log('Inserting new profile for user:', user.id);
-      const { data, error } = await supabase
+      // Create new profile and user balance in a transaction-like approach
+      console.log('Creating new profile and balance for user:', user.id);
+
+      // First, create user balance
+      const { data: balanceData, error: balanceError } = await supabase
+        .from('user_balances')
+        .insert({
+          user_id: user.id,
+          coins: 1000,
+          xp: 0
+        })
+        .select()
+        .single();
+
+      if (balanceError) {
+        console.error('Error creating user balance:', balanceError);
+        throw balanceError;
+      }
+
+      console.log('User balance created:', balanceData);
+
+      // Then create profile - trigger will auto-generate username
+      const { data: profileData, error: profileError } = await supabase
         .from('user_profiles')
         .insert({
           user_id: user.id,
@@ -110,43 +130,35 @@ export const useProfile = () => {
         .select()
         .single();
 
-      if (error) {
-        console.error('Error creating profile - Supabase error:', error);
-        console.error('Error details:', {
-          code: error.code,
-          message: error.message,
-          details: error.details,
-          hint: error.hint
-        });
-        
-        toast({
-          title: "Profile creation failed",
-          description: `Error: ${error.message}. Please try logging out and back in.`,
-          variant: "destructive",
-        });
-        
-        throw error;
+      if (profileError) {
+        console.error('Error creating profile:', profileError);
+        // If profile creation fails, we should cleanup the balance
+        await supabase
+          .from('user_balances')
+          .delete()
+          .eq('user_id', user.id);
+        throw profileError;
       }
 
-      if (!data) {
-        console.error('No data returned from profile creation');
-        throw new Error('No data returned from profile creation');
+      if (!profileData) {
+        console.error('No profile data returned from creation');
+        throw new Error('No profile data returned from creation');
       }
 
-      console.log('Profile created successfully:', data);
+      console.log('Profile created successfully:', profileData);
 
       // Add tier icon as avatar_url
-      const tierIcon = getTierIcon(userBalance?.xp || 0);
+      const tierIcon = getTierIcon(balanceData.xp);
       const profileWithIcon = {
-        ...data,
+        ...profileData,
         avatar_url: tierIcon
       };
       
       setProfile(profileWithIcon);
       
       toast({
-        title: "Profile created!",
-        description: `Welcome ${data.username}!`,
+        title: "Welcome!",
+        description: `Profile created: ${profileData.username}`,
       });
 
       return profileWithIcon;
@@ -154,8 +166,8 @@ export const useProfile = () => {
       console.error('Error in createProfile function:', error);
       
       toast({
-        title: "Profile creation error",
-        description: "Failed to create your profile. Please try again or contact support.",
+        title: "Profile creation failed",
+        description: "Unable to create your profile. Please try again.",
         variant: "destructive",
       });
       
