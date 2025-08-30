@@ -1247,8 +1247,7 @@ const Game = () => {
                     )}
                   </div>
                   
-                  <div className="flex items-center justify-center space-x-3 mb-4">
-                    <ShoppingBag className="w-8 h-8 text-primary" />
+                  <div className="flex items-center justify-center mb-4">
                      <div>
                        <h1 className="text-2xl font-bold">LCS Store</h1>
                      </div>
@@ -1880,8 +1879,7 @@ const Game = () => {
             {activeTab === "market" && <div className="p-4 space-y-6">
                 {/* Market Header */}
                 <div className="text-center">
-                  <div className="flex items-center justify-center space-x-3 mb-4">
-                    <CreditCard className="w-8 h-8 text-primary" />
+                  <div className="flex items-center justify-center mb-4">
                      <div>
                        <h1 className="text-2xl font-bold">Transfer Market</h1>
                      </div>
@@ -2164,8 +2162,7 @@ const Game = () => {
             {activeTab === "locker" && <div className="p-4 space-y-6">
                 {/* Mobile Locker Header */}
                 <div className="text-center">
-                  <div className="flex items-center justify-center space-x-3 mb-4">
-                    <Package className="w-8 h-8 text-primary" />
+                  <div className="flex items-center justify-center mb-4">
                     <div>
                       <h1 className="text-2xl font-bold">My Locker</h1>
                     </div>
@@ -3063,8 +3060,7 @@ const Game = () => {
                     )}
                   </div>
                   
-                  <div className="flex items-center justify-center space-x-3 mb-4">
-                    <ShoppingBag className="w-8 h-8 text-primary" />
+                  <div className="flex items-center justify-center mb-4">
                     <div>
                       <h1 className="text-3xl font-bold">LCS Store</h1>
                     </div>
@@ -3656,8 +3652,7 @@ const Game = () => {
                   <div className="space-y-6 max-w-6xl">
                 {/* Market Header */}
                 <div className="text-center">
-                  <div className="flex items-center justify-center space-x-3 mb-6">
-                    <CreditCard className="w-8 h-8 text-primary" />
+                  <div className="flex items-center justify-center mb-6">
                     <div>
                       <h1 className="text-3xl font-bold">Transfer Market</h1>
                     </div>
@@ -4006,8 +4001,7 @@ const Game = () => {
                   <div className="space-y-6 max-w-4xl">
                 {/* Desktop Locker Header */}
                 <div className="text-center">
-                  <div className="flex items-center justify-center space-x-3 mb-4">
-                    <Package className="w-8 h-8 text-primary" />
+                  <div className="flex items-center justify-center mb-4">
                     <div>
                       <h1 className="text-3xl font-bold">My Locker</h1>
                     </div>
