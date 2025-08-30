@@ -2142,7 +2142,19 @@ const Game = () => {
                             <CardHeader>
                               <CardTitle className="text-base flex items-center justify-between">
                                 <div className="flex items-center space-x-2">
-                                  <Star className="w-4 h-4" />
+                                  <div className="flex items-center space-x-1 text-xs">
+                                    <span title="Recruit (0 XP)">👤</span>
+                                    <span title="Trainee (1,000 XP)">🎯</span>
+                                    <span title="Sparrer (2,000 XP)">🤝</span>
+                                    <span title="Athlete (3,000 XP)">🏃</span>
+                                    <span title="Fighter (4,000 XP)">⚔️</span>
+                                    <span title="Pro (5,000 XP)">🥊</span>
+                                    <span title="Champ (6,000 XP)">🏆</span>
+                                    <span title="Superstar (7,000 XP)">⭐</span>
+                                    <span title="Chad (8,000 XP)">🔥</span>
+                                    <span title="Giga Chad (9,000 XP)">💪</span>
+                                    <span title="King Chad (10,000+ XP)">👑</span>
+                                  </div>
                                   <span>Progress</span>
                                 </div>
                                 <Info className="w-4 h-4 text-muted-foreground" />
