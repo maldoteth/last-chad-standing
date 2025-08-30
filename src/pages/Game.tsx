@@ -37,7 +37,7 @@ const getTierIcon = (xp: number): string => {
   if (xp >= 5000) return '🥊'; // Pro (Level 5)
   if (xp >= 4000) return '⚔️'; // Fighter (Level 4)
   if (xp >= 3000) return '🏃'; // Athlete (Level 3)
-  if (xp >= 2000) return '🤝'; // Sparrer (Level 2)
+  if (xp >= 2000) return '✊'; // Sparrer (Level 2)
   if (xp >= 1000) return '🎯'; // Trainee (Level 1)
   return '👤'; // Recruit (Level 0)
 };
