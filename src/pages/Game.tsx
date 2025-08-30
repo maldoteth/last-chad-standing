@@ -4309,14 +4309,14 @@ const Game = () => {
 
       {/* Mobile Notifications Drawer */}
       <Drawer open={isNotificationsOpen} onOpenChange={setIsNotificationsOpen}>
-        <DrawerContent className="bg-black border-gray-700">
+        <DrawerContent className="bg-black/20 backdrop-blur-md border-white/10">
           <DrawerHeader>
             <DrawerTitle className="text-center text-white">Notifications</DrawerTitle>
           </DrawerHeader>
           <div className="px-4 pb-6">
             <div className="text-center py-8">
-              <Bell className="w-12 h-12 mx-auto text-muted-foreground mb-4 opacity-50" />
-              <p className="text-sm text-muted-foreground">
+              <Bell className="w-12 h-12 mx-auto text-white/50 mb-4" />
+              <p className="text-sm text-white/70">
                 You'll see game updates and important announcements here
               </p>
             </div>
@@ -4326,12 +4326,12 @@ const Game = () => {
 
       {/* Mobile Rankings Drawer */}
       <Drawer open={isRankingsOpen} onOpenChange={setIsRankingsOpen}>
-        <DrawerContent className="bg-black border-gray-700 max-h-[80vh]">
+        <DrawerContent className="bg-black/20 backdrop-blur-md border-white/10 max-h-[80vh]">
           <DrawerHeader>
             <DrawerTitle className="text-center text-white">Rankings</DrawerTitle>
           </DrawerHeader>
           <div className="px-4 pb-6 overflow-y-auto">
-            <p className="text-sm text-muted-foreground text-center pb-4">Weekly prize pool: $0</p>
+            <p className="text-sm text-white/70 text-center pb-4">Weekly prize pool: $0</p>
             <div className="space-y-2">
               {[{
                 rank: 1,
@@ -4394,21 +4394,21 @@ const Game = () => {
                 points: 11340,
                 avatar: "👑"
               }].map((player) => (
-                <div key={player.rank} className="flex items-center space-x-3 p-3 rounded-lg bg-gray-900/50 border border-gray-700/50">
-                  <div className="flex items-center justify-center w-6 h-6 rounded-full bg-primary/20 text-primary text-xs font-bold">
+                <div key={player.rank} className="flex items-center space-x-3 p-3 rounded-lg bg-white/5 backdrop-blur-sm border border-white/10">
+                  <div className="flex items-center justify-center w-8 h-8 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-sm font-bold">
                     {player.rank}
                   </div>
                   
                   <Avatar className="w-8 h-8">
-                    <AvatarFallback className="text-sm">{player.avatar}</AvatarFallback>
+                    <AvatarFallback className="text-sm bg-white/10 text-white border border-white/20">{player.avatar}</AvatarFallback>
                   </Avatar>
                   
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between">
                       <p className="text-sm font-medium truncate text-white">{player.name}</p>
-                      <Badge variant="outline" className="text-xs">Lv.{player.level}</Badge>
+                      <Badge variant="outline" className="text-xs bg-white/10 text-white border-white/20">Lv.{player.level}</Badge>
                     </div>
-                    <p className="text-xs text-muted-foreground">{player.points.toLocaleString()} XP</p>
+                    <p className="text-xs text-white/60">{player.points.toLocaleString()} XP</p>
                   </div>
                 </div>
               ))}
