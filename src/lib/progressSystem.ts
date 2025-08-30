@@ -16,7 +16,7 @@ export const LEVEL_NAMES = [
   "Superstar",
   "Chad",
   "Giga Chad",
-  "God Mode"
+  "King Chad"
 ];
 
 export function getLevelFromXP(xp: number): number {
