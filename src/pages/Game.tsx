@@ -1247,19 +1247,22 @@ const Game = () => {
                     )}
                   </div>
                   
-                  <div className="text-center mb-4">
-                    <h1 className="text-2xl font-bold">Store</h1>
+                  <div className="flex items-center justify-center space-x-3 mb-4">
+                    <ShoppingBag className="w-8 h-8 text-primary" />
+                     <div>
+                       <h1 className="text-2xl font-bold">LCS Store</h1>
+                     </div>
                   </div>
                   
-                  <div className="relative">
-                    <div className="absolute top-0 right-0 z-10">
-                      {isMobile ? (
-                        <Drawer>
-                          <DrawerTrigger asChild>
-                             <Button variant="ghost" size="sm" className="text-white hover:bg-white/10">
-                               <Filter className="w-4 h-4" />
-                            </Button>
-                       </DrawerTrigger>
+                  {/* Filter Dropdown - positioned in top right */}
+                  <div className="absolute top-0 right-0">
+                    {isMobile ? (
+                      <Drawer>
+                        <DrawerTrigger asChild>
+                           <Button variant="ghost" size="lg" className="text-white hover:bg-white/10">
+                             <Filter className="w-7 h-7" />
+                          </Button>
+                        </DrawerTrigger>
                         <DrawerContent className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
                           <DrawerHeader>
                             <DrawerTitle>Filter by Rarity</DrawerTitle>
@@ -1317,12 +1320,12 @@ const Game = () => {
                         </DrawerContent>
                       </Drawer>
                     ) : (
-                       <DropdownMenu>
-                         <DropdownMenuTrigger asChild>
-                            <Button variant="ghost" size="sm" className="text-white hover:bg-white/10">
-                              <Filter className="w-4 h-4" />
-                           </Button>
-                         </DropdownMenuTrigger>
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                           <Button variant="ghost" size="lg" className="text-white hover:bg-white/10">
+                             <Filter className="w-7 h-7" />
+                          </Button>
+                        </DropdownMenuTrigger>
                         <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
                           <DropdownMenuItem 
                             onClick={() => setSelectedRarity("all")} 
@@ -1368,9 +1371,8 @@ const Game = () => {
                           </DropdownMenuItem>
                         </DropdownMenuContent>
                       </DropdownMenu>
-                     )}
-                   </div>
-                 </div>
+                    )}
+                  </div>
                 </div>
 
                 {/* Categories */}
@@ -1878,7 +1880,8 @@ const Game = () => {
             {activeTab === "market" && <div className="p-4 space-y-6">
                 {/* Market Header */}
                 <div className="text-center">
-                  <div className="flex items-center justify-center mb-4">
+                  <div className="flex items-center justify-center space-x-3 mb-4">
+                    <CreditCard className="w-8 h-8 text-primary" />
                      <div>
                        <h1 className="text-2xl font-bold">Transfer Market</h1>
                      </div>
@@ -2161,7 +2164,8 @@ const Game = () => {
             {activeTab === "locker" && <div className="p-4 space-y-6">
                 {/* Mobile Locker Header */}
                 <div className="text-center">
-                  <div className="flex items-center justify-center mb-4">
+                  <div className="flex items-center justify-center space-x-3 mb-4">
+                    <Package className="w-8 h-8 text-primary" />
                     <div>
                       <h1 className="text-2xl font-bold">My Locker</h1>
                     </div>
@@ -3059,18 +3063,21 @@ const Game = () => {
                     )}
                   </div>
                   
-                  <div className="text-center mb-6">
-                    <h1 className="text-3xl font-bold">Store</h1>
+                  <div className="flex items-center justify-center space-x-3 mb-4">
+                    <ShoppingBag className="w-8 h-8 text-primary" />
+                    <div>
+                      <h1 className="text-3xl font-bold">LCS Store</h1>
+                    </div>
                   </div>
                   
-                  <div className="relative">
-                    <div className="absolute top-0 right-0 z-10">
-                      {isMobile ? (
-                        <Drawer>
-                          <DrawerTrigger asChild>
-                             <Button variant="ghost" size="sm" className="text-white hover:bg-white/10">
-                               <Filter className="w-5 h-5" />
-                            </Button>
+                  {/* Filter Dropdown - positioned in top right */}
+                  <div className="absolute top-0 right-0">
+                    {isMobile ? (
+                      <Drawer>
+                        <DrawerTrigger asChild>
+                           <Button variant="ghost" size="lg" className="text-white hover:bg-white/10">
+                             <Filter className="w-7 h-7" />
+                          </Button>
                         </DrawerTrigger>
                         <DrawerContent className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
                           <DrawerHeader>
@@ -3129,12 +3136,12 @@ const Game = () => {
                         </DrawerContent>
                       </Drawer>
                     ) : (
-                       <DropdownMenu>
-                         <DropdownMenuTrigger asChild>
-                            <Button variant="ghost" size="sm" className="text-white hover:bg-white/10">
-                              <Filter className="w-5 h-5" />
-                           </Button>
-                         </DropdownMenuTrigger>
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                           <Button variant="ghost" size="lg" className="text-white hover:bg-white/10">
+                             <Filter className="w-7 h-7" />
+                          </Button>
+                        </DropdownMenuTrigger>
                         <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
                           <DropdownMenuItem 
                             onClick={() => setSelectedRarity("all")} 
@@ -3180,9 +3187,8 @@ const Game = () => {
                           </DropdownMenuItem>
                         </DropdownMenuContent>
                       </DropdownMenu>
-                     )}
-                   </div>
-                 </div>
+                    )}
+                  </div>
                 </div>
 
                 {/* Categories */}
@@ -3650,7 +3656,8 @@ const Game = () => {
                   <div className="space-y-6 max-w-6xl">
                 {/* Market Header */}
                 <div className="text-center">
-                  <div className="flex items-center justify-center mb-6">
+                  <div className="flex items-center justify-center space-x-3 mb-6">
+                    <CreditCard className="w-8 h-8 text-primary" />
                     <div>
                       <h1 className="text-3xl font-bold">Transfer Market</h1>
                     </div>
@@ -3999,7 +4006,8 @@ const Game = () => {
                   <div className="space-y-6 max-w-4xl">
                 {/* Desktop Locker Header */}
                 <div className="text-center">
-                  <div className="flex items-center justify-center mb-4">
+                  <div className="flex items-center justify-center space-x-3 mb-4">
+                    <Package className="w-8 h-8 text-primary" />
                     <div>
                       <h1 className="text-3xl font-bold">My Locker</h1>
                     </div>
