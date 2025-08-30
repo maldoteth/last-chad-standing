@@ -1128,7 +1128,7 @@ const Game = () => {
                     {isMobile ? (
                       <Drawer>
                         <DrawerTrigger asChild>
-                          <Button variant="ghost" size="sm" className="text-white hover:bg-white/10">
+                          <Button variant="ghost" size="default" className="text-white hover:bg-white/10 w-10 h-10">
                             <Layers className="w-4 h-4" />
                           </Button>
                         </DrawerTrigger>
@@ -1185,7 +1185,7 @@ const Game = () => {
                     ) : (
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
-                          <Button variant="ghost" size="sm" className="text-white hover:bg-white/10">
+                          <Button variant="ghost" size="default" className="text-white hover:bg-white/10 w-10 h-10">
                             <Layers className="w-4 h-4" />
                           </Button>
                         </DropdownMenuTrigger>
@@ -2932,7 +2932,7 @@ const Game = () => {
                     {isMobile ? (
                       <Drawer>
                         <DrawerTrigger asChild>
-                          <Button variant="ghost" size="sm" className="text-white hover:bg-white/10">
+                          <Button variant="ghost" size="default" className="text-white hover:bg-white/10 w-10 h-10">
                             <Layers className="w-4 h-4" />
                           </Button>
                         </DrawerTrigger>
@@ -2989,7 +2989,7 @@ const Game = () => {
                     ) : (
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
-                          <Button variant="ghost" size="sm" className="text-white hover:bg-white/10">
+                          <Button variant="ghost" size="default" className="text-white hover:bg-white/10 w-10 h-10">
                             <Layers className="w-4 h-4" />
                           </Button>
                         </DropdownMenuTrigger>
