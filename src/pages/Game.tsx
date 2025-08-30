@@ -1150,8 +1150,8 @@ const Game = () => {
                             <Button variant="ghost" onClick={() => setSelectedCategory("all")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "all" ? "bg-white/20" : ""}`}>
                               📋 All
                             </Button>
-                            <Button variant="ghost" onClick={() => setSelectedCategory("skins")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "skins" ? "bg-white/20" : ""}`}>
-                              🎨 Skins
+                            <Button variant="ghost" onClick={() => setSelectedCategory("fighters")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "fighters" ? "bg-white/20" : ""}`}>
+                              🎨 Fighters
                             </Button>
                             <Button variant="ghost" onClick={() => setSelectedCategory("accessories")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "accessories" ? "bg-white/20" : ""}`}>
                               💎 Accessories
@@ -1177,8 +1177,8 @@ const Game = () => {
                           <DropdownMenuItem onClick={() => setSelectedCategory("all")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "all" ? "bg-white/20" : ""}`}>
                             <span>📋 All</span>
                           </DropdownMenuItem>
-                          <DropdownMenuItem onClick={() => setSelectedCategory("skins")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "skins" ? "bg-white/20" : ""}`}>
-                            <span>🎨 Skins</span>
+                          <DropdownMenuItem onClick={() => setSelectedCategory("fighters")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "fighters" ? "bg-white/20" : ""}`}>
+                            <span>🎨 Fighters</span>
                           </DropdownMenuItem>
                           <DropdownMenuItem onClick={() => setSelectedCategory("accessories")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "accessories" ? "bg-white/20" : ""}`}>
                             <span>💎 Accessories</span>
