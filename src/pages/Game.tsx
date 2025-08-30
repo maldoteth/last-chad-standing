@@ -1248,7 +1248,6 @@ const Game = () => {
                   </div>
                   
                   <div className="flex items-center justify-center space-x-3 mb-4">
-                    <ShoppingBag className="w-8 h-8 text-primary" />
                      <div>
                        <h1 className="text-2xl font-bold">LCS Store</h1>
                      </div>
@@ -1881,7 +1880,6 @@ const Game = () => {
                 {/* Market Header */}
                 <div className="text-center">
                   <div className="flex items-center justify-center space-x-3 mb-4">
-                    <CreditCard className="w-8 h-8 text-primary" />
                      <div>
                        <h1 className="text-2xl font-bold">Transfer Market</h1>
                      </div>
@@ -2165,7 +2163,6 @@ const Game = () => {
                 {/* Mobile Locker Header */}
                 <div className="text-center">
                   <div className="flex items-center justify-center space-x-3 mb-4">
-                    <Package className="w-8 h-8 text-primary" />
                     <div>
                       <h1 className="text-2xl font-bold">My Locker</h1>
                     </div>
@@ -3064,7 +3061,6 @@ const Game = () => {
                   </div>
                   
                   <div className="flex items-center justify-center space-x-3 mb-4">
-                    <ShoppingBag className="w-8 h-8 text-primary" />
                     <div>
                       <h1 className="text-3xl font-bold">LCS Store</h1>
                     </div>
@@ -3657,7 +3653,6 @@ const Game = () => {
                 {/* Market Header */}
                 <div className="text-center">
                   <div className="flex items-center justify-center space-x-3 mb-6">
-                    <CreditCard className="w-8 h-8 text-primary" />
                     <div>
                       <h1 className="text-3xl font-bold">Transfer Market</h1>
                     </div>
@@ -4007,7 +4002,6 @@ const Game = () => {
                 {/* Desktop Locker Header */}
                 <div className="text-center">
                   <div className="flex items-center justify-center space-x-3 mb-4">
-                    <Package className="w-8 h-8 text-primary" />
                     <div>
                       <h1 className="text-3xl font-bold">My Locker</h1>
                     </div>
