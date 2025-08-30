@@ -25,7 +25,7 @@ export function getLevelFromXP(xp: number): number {
 
 export function getLevelName(level: number): string {
   if (level >= 10) {
-    return "God Mode";
+    return "King Chad";
   }
   return LEVEL_NAMES[level] || `Level ${level}`;
 }
@@ -49,7 +49,7 @@ export function getProgressToNextLevel(xp: number): { current: number; total: nu
 }
 
 export function getAllLevelsForDisplay(): Level[] {
-  // Generate levels for display (0-10, stop at God Mode)
+  // Generate levels for display (0-10, stop at King Chad)
   return Array.from({ length: 11 }, (_, index) => ({
     level: index,
     name: getLevelName(index),

@@ -16,7 +16,7 @@ interface UserProfile {
 
 // Function to get tier icon based on XP (aligned with 1k-per-level system)
 const getTierIcon = (xp: number): string => {
-  if (xp >= 10000) return '👑'; // God Mode (Level 10+)
+  if (xp >= 10000) return '👑'; // King Chad (Level 10+)
   if (xp >= 9000) return '💪'; // Giga Chad (Level 9)
   if (xp >= 8000) return '🔥'; // Chad (Level 8)
   if (xp >= 7000) return '⭐'; // Superstar (Level 7)
