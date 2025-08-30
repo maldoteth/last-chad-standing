@@ -2512,13 +2512,21 @@ const Game = () => {
                           <Info className="w-4 h-4 mr-2" />
                           How to play
                         </Button>
-                        <Button variant="secondary" size="default" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 transition-all duration-300" onClick={() => toast({
-                      title: "Coming Soon",
-                      description: "The game will be available soon!",
-                      duration: 4200
-                    })}>
+                        <Button 
+                          variant="secondary" 
+                          size="default" 
+                          className="bg-gray-600/20 backdrop-blur-md border border-gray-500/30 text-gray-300 hover:bg-gray-600/30 hover:border-gray-500/40 transition-all duration-300 relative overflow-hidden" 
+                          onClick={() => toast({
+                            title: "Coming Soon",
+                            description: "The game will be available soon!",
+                            duration: 4200
+                          })}
+                        >
                           <Play className="w-4 h-4 mr-2" />
                           Play now
+                          <span className="absolute -top-1 -right-1 bg-orange-500 text-white text-xs px-1.5 py-0.5 rounded-full font-semibold">
+                            SOON
+                          </span>
                         </Button>
                       </div>
                     </div>
