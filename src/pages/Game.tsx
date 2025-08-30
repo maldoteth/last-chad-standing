@@ -2178,11 +2178,11 @@ const Game = () => {
                             </DrawerTrigger>
                             <DrawerContent className="bg-black/10 backdrop-blur-xl border-t border-white/10 text-white">
                               <DrawerHeader>
-                                <DrawerTitle>search market</DrawerTitle>
+                                <DrawerTitle>Search Market</DrawerTitle>
                               </DrawerHeader>
                               <div className="px-4 pb-8">
                                 <Input
-                                  placeholder="type here"
+                                  placeholder="Type Here"
                                   value={allPlayersSearchQuery}
                                   onChange={(e) => setAllPlayersSearchQuery(e.target.value)}
                                   className="bg-white/10 border-white/20 text-white placeholder:text-white/60"
