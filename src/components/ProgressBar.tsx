@@ -17,14 +17,19 @@ export function ProgressBar({ xp, className }: ProgressBarProps) {
           Level {currentLevel.level} - {currentLevel.name}
         </span>
         <span className="text-xs text-muted-foreground">
-          {xp} XP
+          {currentLevel.level >= 10 ? "10,000+" : `${xp} XP`}
         </span>
       </div>
       
       <Progress value={progress.percentage} className="h-2" />
       
       <div className="flex justify-between items-center text-xs text-muted-foreground">
-        <span>{progress.current}/{progress.total} XP</span>
+        <span>
+          {currentLevel.level >= 10 
+            ? `${progress.current}/1,000 XP` 
+            : `${progress.current}/${progress.total} XP`
+          }
+        </span>
         <span>Next: Level {currentLevel.level + 1}</span>
       </div>
     </div>
