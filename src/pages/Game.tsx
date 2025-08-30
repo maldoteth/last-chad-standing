@@ -51,6 +51,9 @@ const Game = () => {
   const [visiblePlayers, setVisiblePlayers] = useState(10);
   const [selectedRarity, setSelectedRarity] = useState("all");
   const [selectedCategory, setSelectedCategory] = useState("all");
+  // Market-specific filter states
+  const [marketSelectedRarity, setMarketSelectedRarity] = useState("all");
+  const [marketSelectedCategory, setMarketSelectedCategory] = useState("all");
   const [settingsExpanded, setSettingsExpanded] = useState(false);
   const [objectivesView, setObjectivesView] = useState("weekly");
   const [isObjectivesGlowing, setIsObjectivesGlowing] = useState(false);
@@ -322,7 +325,9 @@ const Game = () => {
     price: 8500,
     lastSale: 7500,
     trend: "up",
-    image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
+    image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png",
+    category: "fighters",
+    rarity: "legendary"
   }, {
     name: "Fire Storm",
     team: "Flame Dragons",
@@ -330,7 +335,9 @@ const Game = () => {
     price: 8900,
     lastSale: 8100,
     trend: "up",
-    image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
+    image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png",
+    category: "fighters",
+    rarity: "mythical"
   }, {
     name: "Lightning Bolt",
     team: "Thunder Birds",
@@ -338,7 +345,9 @@ const Game = () => {
     price: 9100,
     lastSale: 7900,
     trend: "up",
-    image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png"
+    image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png",
+    category: "mobility",
+    rarity: "rare"
   }, {
     name: "Iron Fist",
     team: "Steel Wolves",
@@ -346,7 +355,9 @@ const Game = () => {
     price: 7200,
     lastSale: 7850,
     trend: "down",
-    image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
+    image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png",
+    category: "fighters",
+    rarity: "rare"
   }, {
     name: "Stone Wall",
     team: "Mountain Lions",
@@ -354,7 +365,9 @@ const Game = () => {
     price: 6800,
     lastSale: 7100,
     trend: "down",
-    image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png"
+    image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png",
+    category: "accessories",
+    rarity: "regular"
   }, {
     name: "Void Walker",
     team: "Dark Matter",
@@ -362,7 +375,9 @@ const Game = () => {
     price: 6100,
     lastSale: 5200,
     trend: "up",
-    image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
+    image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png",
+    category: "fighters",
+    rarity: "special"
   }, {
     name: "Solar Flare",
     team: "Sun Blazers",
@@ -370,7 +385,9 @@ const Game = () => {
     price: 5500,
     lastSale: 4750,
     trend: "up",
-    image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png"
+    image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png",
+    category: "emotes",
+    rarity: "legendary"
   }, {
     name: "Cyber Phantom",
     team: "Neon Guardians",
@@ -378,7 +395,9 @@ const Game = () => {
     price: 5200,
     lastSale: 4100,
     trend: "up",
-    image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
+    image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png",
+    category: "fighters",
+    rarity: "rare"
   }, {
     name: "Storm Breaker",
     team: "Wind Riders",
@@ -386,7 +405,9 @@ const Game = () => {
     price: 4900,
     lastSale: 4200,
     trend: "up",
-    image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png"
+    image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png",
+    category: "accessories",
+    rarity: "regular"
   }, {
     name: "Quantum Leap",
     team: "Future Force",
@@ -394,7 +415,9 @@ const Game = () => {
     price: 4800,
     lastSale: 4000,
     trend: "up",
-    image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
+    image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png",
+    category: "mobility",
+    rarity: "mythical"
   }].sort((a, b) => b.price - a.price);
   const currentMarketValue = marketValueData[marketValueData.length - 1]?.value || 0;
   const currentListings = Math.round(listingsData[listingsData.length - 1]?.listings || 0);
@@ -3915,16 +3938,129 @@ const Game = () => {
                           <Search className="w-3 h-3 mr-1" />
                           Search
                         </Button>
-                        <Button variant="outline" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-8 px-3">
-                          <Filter className="w-3 h-3 mr-1" />
-                          Filter
-                        </Button>
+                        {/* Market Filter Button */}
+                        {isMobile ? (
+                          <Drawer>
+                            <DrawerTrigger asChild>
+                              <Button variant="outline" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-8 px-3">
+                                <Filter className="w-3 h-3 mr-1" />
+                                Filter
+                              </Button>
+                            </DrawerTrigger>
+                            <DrawerContent className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border-gray-700/50">
+                              <DrawerHeader>
+                                <DrawerTitle className="text-white">Market Filters</DrawerTitle>
+                              </DrawerHeader>
+                              <div className="p-4 space-y-4">
+                                <div>
+                                  <label className="text-sm font-medium text-gray-300 mb-2 block">Category</label>
+                                  <div className="grid grid-cols-2 gap-2">
+                                    {["all", "fighters", "accessories", "mobility", "emotes"].map((category) => (
+                                      <Button
+                                        key={category}
+                                        variant={marketSelectedCategory === category ? "default" : "outline"}
+                                        size="sm"
+                                        className={`${
+                                          marketSelectedCategory === category 
+                                            ? "bg-primary text-primary-foreground" 
+                                            : "bg-white/10 border-white/20 text-white hover:bg-white/20"
+                                        }`}
+                                        onClick={() => setMarketSelectedCategory(category)}
+                                      >
+                                        {category === "all" ? "All Categories" : category.charAt(0).toUpperCase() + category.slice(1)}
+                                      </Button>
+                                    ))}
+                                  </div>
+                                </div>
+                                <div>
+                                  <label className="text-sm font-medium text-gray-300 mb-2 block">Rarity</label>
+                                  <div className="grid grid-cols-2 gap-2">
+                                    {["all", "regular", "rare", "legendary", "mythical", "special"].map((rarity) => (
+                                      <Button
+                                        key={rarity}
+                                        variant={marketSelectedRarity === rarity ? "default" : "outline"}
+                                        size="sm"
+                                        className={`${
+                                          marketSelectedRarity === rarity 
+                                            ? "bg-primary text-primary-foreground" 
+                                            : "bg-white/10 border-white/20 text-white hover:bg-white/20"
+                                        }`}
+                                        onClick={() => setMarketSelectedRarity(rarity)}
+                                      >
+                                        {rarity === "all" ? "All Rarities" : rarity.charAt(0).toUpperCase() + rarity.slice(1)}
+                                      </Button>
+                                    ))}
+                                  </div>
+                                </div>
+                              </div>
+                            </DrawerContent>
+                          </Drawer>
+                        ) : (
+                          <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                              <Button variant="outline" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-8 px-3">
+                                <Filter className="w-3 h-3 mr-1" />
+                                Filter
+                              </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent className="w-64 bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border-gray-700/50">
+                              <div className="p-3">
+                                <div className="mb-4">
+                                  <label className="text-sm font-medium text-gray-300 mb-2 block">Category</label>
+                                  <div className="grid grid-cols-2 gap-2">
+                                    {["all", "fighters", "accessories", "mobility", "emotes"].map((category) => (
+                                      <Button
+                                        key={category}
+                                        variant={marketSelectedCategory === category ? "default" : "outline"}
+                                        size="sm"
+                                        className={`${
+                                          marketSelectedCategory === category 
+                                            ? "bg-primary text-primary-foreground" 
+                                            : "bg-white/10 border-white/20 text-white hover:bg-white/20"
+                                        } text-xs`}
+                                        onClick={() => setMarketSelectedCategory(category)}
+                                      >
+                                        {category === "all" ? "All" : category.charAt(0).toUpperCase() + category.slice(1)}
+                                      </Button>
+                                    ))}
+                                  </div>
+                                </div>
+                                <div>
+                                  <label className="text-sm font-medium text-gray-300 mb-2 block">Rarity</label>
+                                  <div className="grid grid-cols-2 gap-2">
+                                    {["all", "regular", "rare", "legendary", "mythical", "special"].map((rarity) => (
+                                      <Button
+                                        key={rarity}
+                                        variant={marketSelectedRarity === rarity ? "default" : "outline"}
+                                        size="sm"
+                                        className={`${
+                                          marketSelectedRarity === rarity 
+                                            ? "bg-primary text-primary-foreground" 
+                                            : "bg-white/10 border-white/20 text-white hover:bg-white/20"
+                                        } text-xs`}
+                                        onClick={() => setMarketSelectedRarity(rarity)}
+                                      >
+                                        {rarity === "all" ? "All" : rarity.charAt(0).toUpperCase() + rarity.slice(1)}
+                                      </Button>
+                                    ))}
+                                  </div>
+                                </div>
+                              </div>
+                            </DropdownMenuContent>
+                          </DropdownMenu>
+                        )}
                       </div>
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="relative z-10">
                     <div className="space-y-3">
-                      {allPlayers.slice(0, visiblePlayers).map((player, idx) => <div key={idx} className="flex items-center space-x-4 p-4 bg-white/5 rounded-lg hover:bg-white/10 transition-colors">
+                      {allPlayers
+                        .filter(player => {
+                          if (marketSelectedCategory !== "all" && player.category !== marketSelectedCategory) return false;
+                          if (marketSelectedRarity !== "all" && player.rarity !== marketSelectedRarity) return false;
+                          return true;
+                        })
+                        .slice(0, visiblePlayers).map((player, idx) => <div key={idx} className="flex items-center space-x-4 p-4 bg-white/5 rounded-lg hover:bg-white/10 transition-colors">
                           <div className="w-16 h-16 rounded-full overflow-hidden">
                             <img src={player.image} alt={player.name} className="w-full h-full object-cover" />
                           </div>
@@ -3985,11 +4121,24 @@ const Game = () => {
                         </div>)}
                     </div>
                     
-                    {visiblePlayers < allPlayers.length && <div className="mt-6 text-center">
-                        <Button variant="outline" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => setVisiblePlayers(prev => Math.min(prev + 10, allPlayers.length))}>
-                          Load More Players ({allPlayers.length - visiblePlayers} remaining)
-                        </Button>
-                      </div>}
+                    {(() => {
+                      const filteredPlayers = allPlayers.filter(player => {
+                        if (marketSelectedCategory !== "all" && player.category !== marketSelectedCategory) return false;
+                        if (marketSelectedRarity !== "all" && player.rarity !== marketSelectedRarity) return false;
+                        return true;
+                      });
+                      return visiblePlayers < filteredPlayers.length && (
+                        <div className="mt-6 text-center">
+                          <Button 
+                            variant="outline" 
+                            className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" 
+                            onClick={() => setVisiblePlayers(prev => Math.min(prev + 10, filteredPlayers.length))}
+                          >
+                            Load More Players ({filteredPlayers.length - visiblePlayers} remaining)
+                          </Button>
+                        </div>
+                      );
+                    })()}
                   </CardContent>
                  </Card>
                </div>
