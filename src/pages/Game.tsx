@@ -2178,7 +2178,7 @@ const Game = () => {
                             </DrawerTrigger>
                             <DrawerContent className="bg-black/10 backdrop-blur-xl border-t border-white/10 text-white">
                               <DrawerHeader>
-                                <DrawerTitle>Search Players</DrawerTitle>
+                                <DrawerTitle>search market</DrawerTitle>
                               </DrawerHeader>
                               <div className="px-4 pb-8">
                                 <Input
