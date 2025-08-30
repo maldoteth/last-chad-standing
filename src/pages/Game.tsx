@@ -1247,20 +1247,17 @@ const Game = () => {
                     )}
                   </div>
                   
-                  <div className="flex items-center justify-center mb-6">
+                  <div className="flex items-center justify-between mb-6">
                      <div>
                        <h1 className="text-2xl font-bold">Store</h1>
                      </div>
-                  </div>
-                  
-                  {/* Filter Dropdown - positioned in top right */}
-                  <div className="absolute top-0 right-0">
-                    {isMobile ? (
-                      <Drawer>
-                        <DrawerTrigger asChild>
-                           <Button variant="ghost" size="lg" className="text-white hover:bg-white/10">
-                             <Filter className="w-7 h-7" />
-                          </Button>
+                     <div>
+                       {isMobile ? (
+                         <Drawer>
+                           <DrawerTrigger asChild>
+                              <Button variant="ghost" size="sm" className="text-white hover:bg-white/10">
+                                <Filter className="w-4 h-4" />
+                             </Button>
                         </DrawerTrigger>
                         <DrawerContent className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
                           <DrawerHeader>
@@ -1319,12 +1316,12 @@ const Game = () => {
                         </DrawerContent>
                       </Drawer>
                     ) : (
-                      <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                           <Button variant="ghost" size="lg" className="text-white hover:bg-white/10">
-                             <Filter className="w-7 h-7" />
-                          </Button>
-                        </DropdownMenuTrigger>
+                       <DropdownMenu>
+                         <DropdownMenuTrigger asChild>
+                            <Button variant="ghost" size="sm" className="text-white hover:bg-white/10">
+                              <Filter className="w-4 h-4" />
+                           </Button>
+                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
                           <DropdownMenuItem 
                             onClick={() => setSelectedRarity("all")} 
@@ -1370,8 +1367,9 @@ const Game = () => {
                           </DropdownMenuItem>
                         </DropdownMenuContent>
                       </DropdownMenu>
-                    )}
-                  </div>
+                     )}
+                   </div>
+                 </div>
                 </div>
 
                 {/* Categories */}
@@ -3060,20 +3058,17 @@ const Game = () => {
                     )}
                   </div>
                   
-                  <div className="flex items-center justify-center mb-6">
+                  <div className="flex items-center justify-between mb-6">
                     <div>
                       <h1 className="text-3xl font-bold">Store</h1>
                     </div>
-                  </div>
-                  
-                  {/* Filter Dropdown - positioned in top right */}
-                  <div className="absolute top-0 right-0">
-                    {isMobile ? (
-                      <Drawer>
-                        <DrawerTrigger asChild>
-                           <Button variant="ghost" size="lg" className="text-white hover:bg-white/10">
-                             <Filter className="w-7 h-7" />
-                          </Button>
+                    <div>
+                      {isMobile ? (
+                        <Drawer>
+                          <DrawerTrigger asChild>
+                             <Button variant="ghost" size="sm" className="text-white hover:bg-white/10">
+                               <Filter className="w-5 h-5" />
+                            </Button>
                         </DrawerTrigger>
                         <DrawerContent className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
                           <DrawerHeader>
@@ -3132,12 +3127,12 @@ const Game = () => {
                         </DrawerContent>
                       </Drawer>
                     ) : (
-                      <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                           <Button variant="ghost" size="lg" className="text-white hover:bg-white/10">
-                             <Filter className="w-7 h-7" />
-                          </Button>
-                        </DropdownMenuTrigger>
+                       <DropdownMenu>
+                         <DropdownMenuTrigger asChild>
+                            <Button variant="ghost" size="sm" className="text-white hover:bg-white/10">
+                              <Filter className="w-5 h-5" />
+                           </Button>
+                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
                           <DropdownMenuItem 
                             onClick={() => setSelectedRarity("all")} 
@@ -3183,8 +3178,9 @@ const Game = () => {
                           </DropdownMenuItem>
                         </DropdownMenuContent>
                       </DropdownMenu>
-                    )}
-                  </div>
+                     )}
+                   </div>
+                 </div>
                 </div>
 
                 {/* Categories */}
