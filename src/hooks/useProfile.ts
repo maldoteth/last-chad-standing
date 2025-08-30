@@ -18,7 +18,7 @@ interface UserProfile {
 const getTierIcon = (xp: number): string => {
   if (xp >= 10000) return '👑'; // King Chad (Level 10+)
   if (xp >= 9000) return '💪'; // Giga Chad (Level 9)
-  if (xp >= 8000) return '🔥'; // Chad (Level 8)
+  if (xp >= 8000) return '👊'; // Chad (Level 8)
   if (xp >= 7000) return '⭐'; // Superstar (Level 7)
   if (xp >= 6000) return '🏆'; // Champ (Level 6)
   if (xp >= 5000) return '🥊'; // Pro (Level 5)
