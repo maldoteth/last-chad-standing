@@ -449,9 +449,9 @@ const Game = () => {
       {/* Mobile/Tablet optimized layout */}
       
       {/* Header with coins and avatar - simplified for mobile */}
-      <header className="relative backdrop-blur-md bg-black/80 lg:border-b border-white/10 px-4 py-3 lg:px-6 lg:py-4 before:absolute before:inset-0 before:bg-gradient-to-r before:from-white/5 before:via-transparent before:to-white/5 before:pointer-events-none after:absolute after:inset-0 after:bg-gradient-to-br after:from-transparent after:via-white/3 after:to-transparent after:pointer-events-none">
-        <div className="relative z-10 flex items-center justify-between">
-          <img
+      <header className="bg-black lg:border-b border-border px-4 py-3 lg:px-6 lg:py-4">
+        <div className="flex items-center justify-between">
+          <img 
             src="/lovable-uploads/ef3aca91-a372-4313-aa94-3c2dcf946dd6.png" 
             alt="LCS Logo" 
             className="h-8 lg:h-10 cursor-pointer hover:opacity-80 transition-opacity" 
