@@ -26,6 +26,22 @@ const irishKingSkin = "/lovable-uploads/5c3f060f-4c5f-412b-8f27-eb1bebd3dd7d.png
 const staniEagleSkin = "/lovable-uploads/37f256dc-415c-4032-82ad-db63f676284d.png";
 const bonesSkin = "/lovable-uploads/660b5122-5ce8-4f6e-af72-2c607d47ef44.png";
 const latinLegendSkin = "/lovable-uploads/2c556456-ebeb-4eec-9842-f2d31e06c58a.png";
+
+// Function to get tier icon based on XP
+const getTierIcon = (xp: number): string => {
+  if (xp >= 10000) return '👑'; // King Chad (Level 10+)
+  if (xp >= 9000) return '💪'; // Giga Chad (Level 9)
+  if (xp >= 8000) return '🔥'; // Chad (Level 8)
+  if (xp >= 7000) return '⭐'; // Superstar (Level 7)
+  if (xp >= 6000) return '🏆'; // Champ (Level 6)
+  if (xp >= 5000) return '🥊'; // Pro (Level 5)
+  if (xp >= 4000) return '⚔️'; // Fighter (Level 4)
+  if (xp >= 3000) return '🏃'; // Athlete (Level 3)
+  if (xp >= 2000) return '🤝'; // Sparrer (Level 2)
+  if (xp >= 1000) return '🎯'; // Trainee (Level 1)
+  return '👤'; // Recruit (Level 0)
+};
+
 const Game = () => {
   const [activeTab, setActiveTab] = useState("home");
   const [gainersTimeFilter, setGainersTimeFilter] = useState("daily");
@@ -2189,9 +2205,9 @@ const Game = () => {
                                     }`}
                                   >
                                     <div className="flex items-center space-x-2">
-                                      <div className={`w-2 h-2 rounded-full ${
-                                        isCurrentLevel ? 'bg-primary' : isUnlocked ? 'bg-green-400' : 'bg-gray-500'
-                                      }`} />
+                                      <span className="text-base">
+                                        {getTierIcon(level.minXp)}
+                                      </span>
                                       <span className="text-sm font-medium">{level.name}</span>
                                     </div>
                                     <span className="text-xs text-gray-400">
