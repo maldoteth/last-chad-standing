@@ -11,6 +11,10 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       config={{
         appearance: {
           theme: 'dark',
+          accentColor: '#ffffff',
+          logo: undefined,
+          showWalletLoginFirst: false,
+          walletChainType: 'ethereum-only',
         },
         embeddedWallets: {
           createOnLogin: 'users-without-wallets',

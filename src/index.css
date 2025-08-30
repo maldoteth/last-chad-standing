@@ -104,3 +104,32 @@
   }
 }
 
+/* Privy Modal Styling - Make popup black */
+[data-privy-modal] {
+  background-color: #000000 !important;
+}
+
+[data-privy-modal] * {
+  --privy-color-background: #000000 !important;
+  --privy-color-foreground: #ffffff !important;
+}
+
+/* Override Privy modal content */
+iframe[src*="privy"] {
+  background-color: #000000 !important;
+}
+
+/* Target Privy modal overlay */
+div[style*="background-color"] {
+  background-color: rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Additional Privy theming */
+.privy-modal, 
+[class*="privy-modal"],
+[id*="privy-modal"],
+[data-testid*="privy-modal"] {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
