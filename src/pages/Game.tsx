@@ -1126,8 +1126,8 @@ const Game = () => {
                     {isMobile ? (
                       <Drawer>
                         <DrawerTrigger asChild>
-                          <Button variant="ghost" size="default" className="text-white hover:bg-white/10 w-10 h-10">
-                            <Layers className="w-4 h-4" />
+                           <Button variant="ghost" size="default" className="text-white hover:bg-white/10 w-18 h-18">
+                            <Layers className="w-7 h-7" />
                           </Button>
                         </DrawerTrigger>
                         <DrawerContent className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
@@ -1183,8 +1183,8 @@ const Game = () => {
                     ) : (
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
-                          <Button variant="ghost" size="default" className="text-white hover:bg-white/10 w-10 h-10">
-                            <Layers className="w-4 h-4" />
+                           <Button variant="ghost" size="default" className="text-white hover:bg-white/10 w-18 h-18">
+                             <Layers className="w-7 h-7" />
                           </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
@@ -1241,8 +1241,8 @@ const Game = () => {
                     {isMobile ? (
                       <Drawer>
                         <DrawerTrigger asChild>
-                          <Button variant="ghost" size="sm" className="text-white hover:bg-white/10">
-                            <Filter className="w-4 h-4" />
+                           <Button variant="ghost" size="lg" className="text-white hover:bg-white/10">
+                             <Filter className="w-7 h-7" />
                           </Button>
                         </DrawerTrigger>
                         <DrawerContent className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
@@ -1304,8 +1304,8 @@ const Game = () => {
                     ) : (
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
-                          <Button variant="ghost" size="sm" className="text-white hover:bg-white/10">
-                            <Filter className="w-4 h-4" />
+                           <Button variant="ghost" size="lg" className="text-white hover:bg-white/10">
+                             <Filter className="w-7 h-7" />
                           </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
@@ -2930,8 +2930,8 @@ const Game = () => {
                     {isMobile ? (
                       <Drawer>
                         <DrawerTrigger asChild>
-                          <Button variant="ghost" size="default" className="text-white hover:bg-white/10 w-10 h-10">
-                            <Layers className="w-4 h-4" />
+                           <Button variant="ghost" size="default" className="text-white hover:bg-white/10 w-18 h-18">
+                             <Layers className="w-7 h-7" />
                           </Button>
                         </DrawerTrigger>
                         <DrawerContent className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
@@ -2987,8 +2987,8 @@ const Game = () => {
                     ) : (
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
-                          <Button variant="ghost" size="default" className="text-white hover:bg-white/10 w-10 h-10">
-                            <Layers className="w-4 h-4" />
+                           <Button variant="ghost" size="default" className="text-white hover:bg-white/10 w-18 h-18">
+                             <Layers className="w-7 h-7" />
                           </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
@@ -3045,8 +3045,8 @@ const Game = () => {
                     {isMobile ? (
                       <Drawer>
                         <DrawerTrigger asChild>
-                          <Button variant="ghost" size="sm" className="text-white hover:bg-white/10">
-                            <Filter className="w-4 h-4" />
+                           <Button variant="ghost" size="lg" className="text-white hover:bg-white/10">
+                             <Filter className="w-7 h-7" />
                           </Button>
                         </DrawerTrigger>
                         <DrawerContent className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
@@ -3108,8 +3108,8 @@ const Game = () => {
                     ) : (
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
-                          <Button variant="ghost" size="sm" className="text-white hover:bg-white/10">
-                            <Filter className="w-4 h-4" />
+                           <Button variant="ghost" size="lg" className="text-white hover:bg-white/10">
+                             <Filter className="w-7 h-7" />
                           </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
