@@ -1580,7 +1580,7 @@ const Game = () => {
                       rarity: "gold",
                       image: "/lovable-uploads/291c5734-f144-47b0-9f49-915999e921b0.png"
                    }, {
-                      name: "EOS Pack",
+                       name: "EO Summer Pack",
                       price: 3500,
                       rarity: "special",
                       image: "/lovable-uploads/2149e9ad-919f-49ea-8be4-90f190387d39.png"
@@ -3227,7 +3227,7 @@ const Game = () => {
                         rarity: "gold",
                         image: "/lovable-uploads/291c5734-f144-47b0-9f49-915999e921b0.png"
                      }, {
-                        name: "EOS Pack",
+                        name: "EO Summer Pack",
                         price: 3500,
                         rarity: "special",
                         image: "/lovable-uploads/2149e9ad-919f-49ea-8be4-90f190387d39.png"
