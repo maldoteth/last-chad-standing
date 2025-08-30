@@ -3067,7 +3067,7 @@ const Game = () => {
                   </div>
                   
                   {/* Filter Dropdown - positioned in top right */}
-                  <div className="absolute top-0 right-0">
+                  <div className="absolute top-1 right-0">
                     {isMobile ? (
                       <Drawer>
                         <DrawerTrigger asChild>
