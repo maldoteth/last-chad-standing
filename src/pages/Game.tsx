@@ -41,7 +41,6 @@ const getTierIcon = (xp: number): string => {
   if (xp >= 1000) return '🎯'; // Trainee (Level 1)
   return '👤'; // Recruit (Level 0)
 };
-
 const Game = () => {
   const [activeTab, setActiveTab] = useState("home");
   const [gainersTimeFilter, setGainersTimeFilter] = useState("daily");
@@ -68,19 +67,27 @@ const Game = () => {
     user
   } = usePrivy();
   const navigate = useNavigate();
-  const { purchaseItem, userBalance } = useStore();
-  const { profile, loading, createProfile, fetchProfile } = useProfile();
+  const {
+    purchaseItem,
+    userBalance
+  } = useStore();
+  const {
+    profile,
+    loading,
+    createProfile,
+    fetchProfile
+  } = useProfile();
 
   // Initialize user balance and profile on login
   useEffect(() => {
     if (authenticated && user?.id && !profile && !loading) {
       console.log('Attempting to create profile for user:', user.id);
-      createProfile().catch((error) => {
+      createProfile().catch(error => {
         console.error('Failed to create profile in Game component:', error);
         toast({
           title: "Profile Error",
           description: "Failed to load your profile. Please refresh the page.",
-          variant: "destructive",
+          variant: "destructive"
         });
       });
     }
@@ -92,16 +99,15 @@ const Game = () => {
       toast({
         title: "Please log in",
         description: "You need to be logged in to make purchases.",
-        variant: "destructive",
+        variant: "destructive"
       });
       return;
     }
-
     const success = await purchaseItem(itemId, itemName, price);
     if (success) {
       toast({
         title: "Purchase successful!",
-        description: `You purchased ${itemName} for ${price} coins.`,
+        description: `You purchased ${itemName} for ${price} coins.`
       });
     }
   };
@@ -446,19 +452,13 @@ const Game = () => {
     label: "Coins",
     icon: Coins
   }];
-  return (
-    <div className="min-h-screen bg-black text-foreground dark">
+  return <div className="min-h-screen bg-black text-foreground dark">
       {/* Mobile/Tablet optimized layout */}
       
       {/* Header with coins and avatar - simplified for mobile */}
       <header className="bg-black lg:border-b border-border px-4 py-3 lg:px-6 lg:py-4">
         <div className="flex items-center justify-between">
-          <img 
-            src="/lovable-uploads/ef3aca91-a372-4313-aa94-3c2dcf946dd6.png" 
-            alt="LCS Logo" 
-            className="h-8 lg:h-10 cursor-pointer hover:opacity-80 transition-opacity" 
-            onClick={() => navigate("/")}
-          />
+          <img src="/lovable-uploads/ef3aca91-a372-4313-aa94-3c2dcf946dd6.png" alt="LCS Logo" className="h-8 lg:h-10 cursor-pointer hover:opacity-80 transition-opacity" onClick={() => navigate("/")} />
           
           {/* Desktop Navigation - hidden on mobile */}
           <div className="hidden lg:flex items-center justify-center flex-1">
@@ -473,16 +473,10 @@ const Game = () => {
           <div className="flex items-center space-x-3">
             {/* Mobile Notifications and Rankings Icons - Only show on mobile/tablet */}
             <div className="flex items-center space-x-2 lg:hidden">
-              <button
-                onClick={() => setIsRankingsOpen(true)}
-                className="p-2 rounded-lg hover:bg-gray-800/50 transition-colors"
-              >
+              <button onClick={() => setIsRankingsOpen(true)} className="p-2 rounded-lg hover:bg-gray-800/50 transition-colors">
                 <Medal className="w-4 h-4 text-muted-foreground hover:text-foreground" />
               </button>
-              <button
-                onClick={() => setIsNotificationsOpen(true)}
-                className="p-2 rounded-lg hover:bg-gray-800/50 transition-colors"
-              >
+              <button onClick={() => setIsNotificationsOpen(true)} className="p-2 rounded-lg hover:bg-gray-800/50 transition-colors">
                 <Bell className="w-4 h-4 text-muted-foreground hover:text-foreground" />
               </button>
             </div>
@@ -504,12 +498,12 @@ const Game = () => {
                   {/* Liquid glass metallic background effects */}
                   <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                   <div className="absolute inset-0" style={{
-                    backgroundImage: `
+                backgroundImage: `
                       linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
                       linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
                     `,
-                    backgroundSize: '4px 4px'
-                  }} />
+                backgroundSize: '4px 4px'
+              }} />
                   
                   <div className="relative z-10">
                     <div className="px-3 py-2">
@@ -519,7 +513,7 @@ const Game = () => {
                         </div>
                         <div className="flex flex-col space-y-1">
                           <p className="text-sm font-medium leading-none text-white">
-                            {loading ? "Loading profile..." : (profile?.username || 'Profile Error')}
+                            {loading ? "Loading profile..." : profile?.username || 'Profile Error'}
                           </p>
                           <p className="text-xs leading-none text-gray-200">
                             {user?.email?.address}
@@ -533,10 +527,7 @@ const Game = () => {
                     
                     <DropdownMenuSeparator className="bg-white/20" />
                     
-                    <DropdownMenuItem 
-                      onClick={logout}
-                      className="flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 hover:text-white transition-all duration-300"
-                    >
+                    <DropdownMenuItem onClick={logout} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 hover:text-white transition-all duration-300">
                       <LogOut className="w-4 h-4" />
                       <span>Sign Out</span>
                     </DropdownMenuItem>
@@ -588,8 +579,7 @@ const Game = () => {
                 <div className="px-4 pb-4">
                   <div className="relative">
                     {/* Mobile/Tablet: Drawer, Desktop: HoverCard */}
-                    {isMobile ? (
-                      <Drawer>
+                    {isMobile ? <Drawer>
                         <DrawerTrigger asChild>
                           <Card className="bg-black border-gray-700 cursor-pointer hover:border-gray-600 transition-colors">
                             <CardHeader className="pb-3">
@@ -625,20 +615,9 @@ const Game = () => {
                           <div className="px-4 pb-4">
                             <div className="space-y-2 max-h-60 overflow-y-auto">
                               {getAllLevelsForDisplay().map((level, index) => {
-                                const isCurrentLevel = getCurrentLevel(userBalance?.xp || 0).name === level.name;
-                                const isUnlocked = (userBalance?.xp || 0) >= level.minXp;
-                                
-                                return (
-                                  <div 
-                                    key={index}
-                                    className={`flex items-center justify-between p-2 rounded-md transition-colors ${
-                                      isCurrentLevel 
-                                        ? 'bg-primary/20 border border-primary/30' 
-                                        : isUnlocked 
-                                        ? 'bg-white/5 hover:bg-white/10' 
-                                        : 'bg-gray-800/50 opacity-60'
-                                    }`}
-                                  >
+                        const isCurrentLevel = getCurrentLevel(userBalance?.xp || 0).name === level.name;
+                        const isUnlocked = (userBalance?.xp || 0) >= level.minXp;
+                        return <div key={index} className={`flex items-center justify-between p-2 rounded-md transition-colors ${isCurrentLevel ? 'bg-primary/20 border border-primary/30' : isUnlocked ? 'bg-white/5 hover:bg-white/10' : 'bg-gray-800/50 opacity-60'}`}>
                                     <div className="flex items-center space-x-2">
                                       <span className="text-base">{getTierIcon(level.minXp)}</span>
                                       <span className="text-sm font-medium text-white">{level.name}</span>
@@ -646,15 +625,12 @@ const Game = () => {
                                     <span className="text-xs text-gray-400">
                                       {level.level >= 10 ? "10,000+ XP" : `${level.minXp.toLocaleString()}-${level.maxXp.toLocaleString()} XP`}
                                     </span>
-                                  </div>
-                                );
-                              })}
+                                  </div>;
+                      })}
                             </div>
                           </div>
                         </DrawerContent>
-                      </Drawer>
-                    ) : (
-                      <HoverCard>
+                      </Drawer> : <HoverCard>
                         <HoverCardTrigger asChild>
                           <Card className="bg-black border-gray-700 cursor-pointer hover:border-gray-600 transition-colors">
                             <CardHeader className="pb-3">
@@ -683,29 +659,14 @@ const Game = () => {
                             </CardContent>
                           </Card>
                         </HoverCardTrigger>
-                        <HoverCardContent 
-                          className="w-80 p-4 bg-black/90 backdrop-blur-md border border-white/20 text-white z-50"
-                          side="top"
-                          align="center"
-                        >
+                        <HoverCardContent className="w-80 p-4 bg-black/90 backdrop-blur-md border border-white/20 text-white z-50" side="top" align="center">
                           <div className="space-y-3">
                             <h4 className="font-semibold text-sm">XP Progress Levels</h4>
                             <div className="space-y-2 max-h-60 overflow-y-auto">
                               {getAllLevelsForDisplay().map((level, index) => {
-                                const isCurrentLevel = getCurrentLevel(userBalance?.xp || 0).name === level.name;
-                                const isUnlocked = (userBalance?.xp || 0) >= level.minXp;
-                                
-                                return (
-                                  <div 
-                                    key={index}
-                                    className={`flex items-center justify-between p-2 rounded-md transition-colors ${
-                                      isCurrentLevel 
-                                        ? 'bg-primary/20 border border-primary/30' 
-                                        : isUnlocked 
-                                        ? 'bg-white/5 hover:bg-white/10' 
-                                        : 'bg-gray-800/50 opacity-60'
-                                    }`}
-                                  >
+                        const isCurrentLevel = getCurrentLevel(userBalance?.xp || 0).name === level.name;
+                        const isUnlocked = (userBalance?.xp || 0) >= level.minXp;
+                        return <div key={index} className={`flex items-center justify-between p-2 rounded-md transition-colors ${isCurrentLevel ? 'bg-primary/20 border border-primary/30' : isUnlocked ? 'bg-white/5 hover:bg-white/10' : 'bg-gray-800/50 opacity-60'}`}>
                                     <div className="flex items-center space-x-2">
                                       <span className="text-base">{getTierIcon(level.minXp)}</span>
                                       <span className="text-sm font-medium">{level.name}</span>
@@ -713,14 +674,12 @@ const Game = () => {
                                     <span className="text-xs text-gray-400">
                                       {level.level >= 10 ? "10,000+ XP" : `${level.minXp.toLocaleString()}-${level.maxXp.toLocaleString()} XP`}
                                     </span>
-                                  </div>
-                                );
-                              })}
+                                  </div>;
+                      })}
                             </div>
                           </div>
                         </HoverCardContent>
-                      </HoverCard>
-                    )}
+                      </HoverCard>}
                   </div>
                 </div>
 
@@ -744,11 +703,14 @@ const Game = () => {
                         <h3 className="text-sm font-bold mb-1">Smash that XP</h3>
                         <p className="text-gray-300 text-xs mb-3 flex-1">by completing all quests</p>
                         <Button variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 text-xs h-7 relative z-10 transition-all duration-300" onClick={() => {
-                          setObjectivesView("quests");
-                          setTimeout(() => {
-                            objectivesRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                          }, 100);
-                        }}>
+                    setObjectivesView("quests");
+                    setTimeout(() => {
+                      objectivesRef.current?.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                      });
+                    }, 100);
+                  }}>
                           Show Quests
                         </Button>
                       </CardContent>
@@ -782,8 +744,7 @@ const Game = () => {
                             <span className="text-xs">x0</span>
                           </div>
                         </div>
-                        {isMobile ? (
-                          <Drawer>
+                        {isMobile ? <Drawer>
                             <DrawerTrigger asChild>
                               <Button variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 text-xs h-7 relative z-10 transition-all duration-300 w-full">
                                 Buy Now
@@ -794,25 +755,19 @@ const Game = () => {
                                 <DrawerTitle className="text-white text-center">Purchase Pack</DrawerTitle>
                               </DrawerHeader>
                               <div className="p-4 space-y-3">
-                                <Button 
-                                  className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20"
-                                   onClick={() => toast({
-                                     title: "Coming Soon",
-                                     description: "Coin purchases coming soon!",
-                                     duration: 3000
-                                   })}
-                                >
+                                <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => toast({
+                          title: "Coming Soon",
+                          description: "Coin purchases coming soon!",
+                          duration: 3000
+                        })}>
                                   <Coins className="mr-2 h-4 w-4" />
                                   Buy With Coins
                                 </Button>
-                                <Button 
-                                  className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20"
-                                   onClick={() => toast({
-                                     title: "Coming Soon",
-                                     description: "Card payments coming soon!",
-                                     duration: 3000
-                                   })}
-                                >
+                                <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => toast({
+                          title: "Coming Soon",
+                          description: "Card payments coming soon!",
+                          duration: 3000
+                        })}>
                                   <CreditCard className="mr-2 h-4 w-4" />
                                   Buy with Card
                                 </Button>
@@ -823,40 +778,31 @@ const Game = () => {
                                 </DrawerClose>
                               </div>
                             </DrawerContent>
-                          </Drawer>
-                        ) : (
-                          <DropdownMenu>
+                          </Drawer> : <DropdownMenu>
                             <DropdownMenuTrigger asChild>
                               <Button variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 text-xs h-7 relative z-10 transition-all duration-300 w-full">
                                 Buy Now
                               </Button>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent align="center" className="w-full bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
-                              <DropdownMenuItem 
-                               onClick={() => toast({
-                                   title: "Coming Soon",
-                                   description: "Coin purchases coming soon!",
-                                   duration: 3000
-                                 })}
-                                className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300"
-                              >
+                              <DropdownMenuItem onClick={() => toast({
+                        title: "Coming Soon",
+                        description: "Coin purchases coming soon!",
+                        duration: 3000
+                      })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
                                 <Coins className="w-4 h-4" />
                                 <span>Buy With Coins</span>
                               </DropdownMenuItem>
-                              <DropdownMenuItem 
-                               onClick={() => toast({
-                                   title: "Coming Soon", 
-                                   description: "Card payments coming soon!",
-                                   duration: 3000
-                                 })}
-                                className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300"
-                              >
+                              <DropdownMenuItem onClick={() => toast({
+                        title: "Coming Soon",
+                        description: "Card payments coming soon!",
+                        duration: 3000
+                      })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
                                 <CreditCard className="w-4 h-4" />
                                 <span>Buy with Card</span>
                               </DropdownMenuItem>
                             </DropdownMenuContent>
-                          </DropdownMenu>
-                        )}
+                          </DropdownMenu>}
                       </CardContent>
                     </Card>
                   </div>
@@ -922,27 +868,21 @@ const Game = () => {
                           <Target className="w-4 h-4" />
                            <span>{objectivesView === "weekly" ? "Weekly Objectives" : objectivesView === "daily" ? "Daily Objectives" : "Quests"}</span>
                         </div>
-                        <Button 
-                          variant="ghost" 
-                          size="sm" 
-                          className="h-6 w-6 p-0 hover:bg-white/10"
-                          onClick={() => {
-                            if (objectivesView === "weekly") {
-                              setObjectivesView("daily");
-                            } else if (objectivesView === "daily") {
-                              setObjectivesView("quests");
-                            } else {
-                              setObjectivesView("weekly");
-                            }
-                          }}
-                        >
+                        <Button variant="ghost" size="sm" className="h-6 w-6 p-0 hover:bg-white/10" onClick={() => {
+                    if (objectivesView === "weekly") {
+                      setObjectivesView("daily");
+                    } else if (objectivesView === "daily") {
+                      setObjectivesView("quests");
+                    } else {
+                      setObjectivesView("weekly");
+                    }
+                  }}>
                           <RotateCcw className="w-4 h-4" />
                         </Button>
                       </CardTitle>
                     </CardHeader>
                     <CardContent>
-                {objectivesView === "weekly" ? (
-                  <div className="space-y-3">
+                {objectivesView === "weekly" ? <div className="space-y-3">
                     <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
                       <div className="flex items-center space-x-3">
                         <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
@@ -1003,9 +943,7 @@ const Game = () => {
                       </div>
                       <ChevronRight className="w-4 h-4 text-muted-foreground" />
                     </div>
-                  </div>
-                ) : objectivesView === "daily" ? (
-                  <div className="space-y-3">
+                  </div> : objectivesView === "daily" ? <div className="space-y-3">
                     <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
                       <div className="flex items-center space-x-3">
                         <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
@@ -1066,9 +1004,7 @@ const Game = () => {
                       </div>
                       <ChevronRight className="w-4 h-4 text-muted-foreground" />
                     </div>
-                  </div>
-                ) : (
-                  <div className="space-y-3">
+                  </div> : <div className="space-y-3">
                     <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
                       <div className="flex items-center space-x-3">
                         <div className="w-8 h-8 bg-sky-500 rounded-full flex items-center justify-center">
@@ -1129,8 +1065,7 @@ const Game = () => {
                       </div>
                       <ChevronRight className="w-4 h-4 text-muted-foreground" />
                     </div>
-                  </div>
-                )}
+                  </div>}
                     </CardContent>
                   </Card>
                 </div>
@@ -1141,8 +1076,7 @@ const Game = () => {
                 <div className="text-center relative sticky top-0 z-50 bg-gradient-to-b from-black via-black/70 to-black/40 backdrop-blur-md py-1">
                   {/* Category Filter - positioned in top left */}
                   <div className="absolute top-0 left-0">
-                    {isMobile ? (
-                      <Drawer>
+                    {isMobile ? <Drawer>
                         <DrawerTrigger asChild>
                            <Button variant="ghost" size="default" className="text-white hover:bg-white/10 w-18 h-18">
                             <Layers className="w-7 h-7" />
@@ -1153,98 +1087,53 @@ const Game = () => {
                             <DrawerTitle>Filter by Category</DrawerTitle>
                           </DrawerHeader>
                           <div className="px-4 pb-8 space-y-2">
-                            <Button 
-                              variant="ghost" 
-                              onClick={() => setSelectedCategory("all")} 
-                              className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "all" ? "bg-white/20" : ""}`}
-                            >
+                            <Button variant="ghost" onClick={() => setSelectedCategory("all")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "all" ? "bg-white/20" : ""}`}>
                               All Categories
                             </Button>
-                            <Button 
-                              variant="ghost" 
-                              onClick={() => setSelectedCategory("skins")} 
-                              className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "skins" ? "bg-white/20" : ""}`}
-                            >
+                            <Button variant="ghost" onClick={() => setSelectedCategory("skins")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "skins" ? "bg-white/20" : ""}`}>
                               Skins
                             </Button>
-                            <Button 
-                              variant="ghost" 
-                              onClick={() => setSelectedCategory("accessories")} 
-                              className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "accessories" ? "bg-white/20" : ""}`}
-                            >
+                            <Button variant="ghost" onClick={() => setSelectedCategory("accessories")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "accessories" ? "bg-white/20" : ""}`}>
                               Accessories
                             </Button>
-                            <Button 
-                              variant="ghost" 
-                              onClick={() => setSelectedCategory("mobility")} 
-                              className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "mobility" ? "bg-white/20" : ""}`}
-                            >
+                            <Button variant="ghost" onClick={() => setSelectedCategory("mobility")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "mobility" ? "bg-white/20" : ""}`}>
                               Mobility
                             </Button>
-                            <Button 
-                              variant="ghost" 
-                              onClick={() => setSelectedCategory("emotes")} 
-                              className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "emotes" ? "bg-white/20" : ""}`}
-                            >
+                            <Button variant="ghost" onClick={() => setSelectedCategory("emotes")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "emotes" ? "bg-white/20" : ""}`}>
                               Emotes
                             </Button>
-                            <Button 
-                              variant="ghost" 
-                              onClick={() => setSelectedCategory("packs")} 
-                              className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "packs" ? "bg-white/20" : ""}`}
-                            >
+                            <Button variant="ghost" onClick={() => setSelectedCategory("packs")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "packs" ? "bg-white/20" : ""}`}>
                               Packs
                             </Button>
                           </div>
                         </DrawerContent>
-                      </Drawer>
-                    ) : (
-                      <DropdownMenu>
+                      </Drawer> : <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                            <Button variant="ghost" size="default" className="text-white hover:bg-white/10 w-18 h-18">
                              <Layers className="w-7 h-7" />
                           </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
-                          <DropdownMenuItem 
-                            onClick={() => setSelectedCategory("all")} 
-                            className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "all" ? "bg-white/20" : ""}`}
-                          >
+                          <DropdownMenuItem onClick={() => setSelectedCategory("all")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "all" ? "bg-white/20" : ""}`}>
                             <span>All Categories</span>
                           </DropdownMenuItem>
-                          <DropdownMenuItem 
-                            onClick={() => setSelectedCategory("skins")} 
-                            className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "skins" ? "bg-white/20" : ""}`}
-                          >
+                          <DropdownMenuItem onClick={() => setSelectedCategory("skins")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "skins" ? "bg-white/20" : ""}`}>
                             <span>Skins</span>
                           </DropdownMenuItem>
-                          <DropdownMenuItem 
-                            onClick={() => setSelectedCategory("accessories")} 
-                            className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "accessories" ? "bg-white/20" : ""}`}
-                          >
+                          <DropdownMenuItem onClick={() => setSelectedCategory("accessories")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "accessories" ? "bg-white/20" : ""}`}>
                             <span>Accessories</span>
                           </DropdownMenuItem>
-                          <DropdownMenuItem 
-                            onClick={() => setSelectedCategory("mobility")} 
-                            className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "mobility" ? "bg-white/20" : ""}`}
-                          >
+                          <DropdownMenuItem onClick={() => setSelectedCategory("mobility")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "mobility" ? "bg-white/20" : ""}`}>
                             <span>Mobility</span>
                           </DropdownMenuItem>
-                          <DropdownMenuItem 
-                            onClick={() => setSelectedCategory("emotes")} 
-                            className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "emotes" ? "bg-white/20" : ""}`}
-                          >
+                          <DropdownMenuItem onClick={() => setSelectedCategory("emotes")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "emotes" ? "bg-white/20" : ""}`}>
                             <span>Emotes</span>
                           </DropdownMenuItem>
-                          <DropdownMenuItem 
-                            onClick={() => setSelectedCategory("packs")} 
-                            className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "packs" ? "bg-white/20" : ""}`}
-                          >
+                          <DropdownMenuItem onClick={() => setSelectedCategory("packs")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "packs" ? "bg-white/20" : ""}`}>
                             <span>Packs</span>
                           </DropdownMenuItem>
                         </DropdownMenuContent>
-                      </DropdownMenu>
-                    )}
+                      </DropdownMenu>}
                   </div>
                   
                   <div className="flex items-center justify-center space-x-3 mb-4">
@@ -1255,8 +1144,7 @@ const Game = () => {
                   
                   {/* Filter Dropdown - positioned in top right */}
                   <div className="absolute top-0 right-0">
-                    {isMobile ? (
-                      <Drawer>
+                    {isMobile ? <Drawer>
                         <DrawerTrigger asChild>
                            <Button variant="ghost" size="default" className="w-18 h-18 text-white hover:bg-white/10">
                              <Filter className="w-7 h-7" />
@@ -1267,129 +1155,83 @@ const Game = () => {
                             <DrawerTitle>Filter by Rarity</DrawerTitle>
                           </DrawerHeader>
                           <div className="px-4 pb-8 space-y-2">
-                            <Button 
-                              variant="ghost" 
-                              onClick={() => setSelectedRarity("all")} 
-                              className={`w-full justify-start text-white hover:bg-white/10 ${selectedRarity === "all" ? "bg-white/20" : ""}`}
-                            >
+                            <Button variant="ghost" onClick={() => setSelectedRarity("all")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedRarity === "all" ? "bg-white/20" : ""}`}>
                               <div className="w-3 h-3 rounded-full bg-black mr-2" />
                               All Rarities
                             </Button>
-                            <Button 
-                              variant="ghost" 
-                              onClick={() => setSelectedRarity("green")} 
-                              className={`w-full justify-start text-white hover:bg-white/10 ${selectedRarity === "green" ? "bg-white/20" : ""}`}
-                            >
+                            <Button variant="ghost" onClick={() => setSelectedRarity("green")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedRarity === "green" ? "bg-white/20" : ""}`}>
                               <div className="w-3 h-3 rounded-full bg-green-500 mr-2" />
                               Regular
                             </Button>
-                            <Button 
-                              variant="ghost" 
-                              onClick={() => setSelectedRarity("blue")} 
-                              className={`w-full justify-start text-white hover:bg-white/10 ${selectedRarity === "blue" ? "bg-white/20" : ""}`}
-                            >
+                            <Button variant="ghost" onClick={() => setSelectedRarity("blue")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedRarity === "blue" ? "bg-white/20" : ""}`}>
                               <div className="w-3 h-3 rounded-full bg-blue-500 mr-2" />
                               Rare
                             </Button>
-                            <Button 
-                              variant="ghost" 
-                              onClick={() => setSelectedRarity("silver")} 
-                              className={`w-full justify-start text-white hover:bg-white/10 ${selectedRarity === "silver" ? "bg-white/20" : ""}`}
-                            >
+                            <Button variant="ghost" onClick={() => setSelectedRarity("silver")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedRarity === "silver" ? "bg-white/20" : ""}`}>
                               <div className="w-3 h-3 rounded-full bg-gray-300 mr-2" />
                               Legendary
                             </Button>
-                            <Button 
-                              variant="ghost" 
-                              onClick={() => setSelectedRarity("gold")} 
-                              className={`w-full justify-start text-white hover:bg-white/10 ${selectedRarity === "gold" ? "bg-white/20" : ""}`}
-                            >
+                            <Button variant="ghost" onClick={() => setSelectedRarity("gold")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedRarity === "gold" ? "bg-white/20" : ""}`}>
                               <div className="w-3 h-3 rounded-full bg-yellow-400 mr-2" />
                               Mythical
                             </Button>
-                            <Button 
-                              variant="ghost" 
-                              onClick={() => setSelectedRarity("special")} 
-                              className={`w-full justify-start text-white hover:bg-white/10 ${selectedRarity === "special" ? "bg-white/20" : ""}`}
-                            >
+                            <Button variant="ghost" onClick={() => setSelectedRarity("special")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedRarity === "special" ? "bg-white/20" : ""}`}>
                               <div className="w-3 h-3 rounded-full bg-gradient-to-r from-purple-400 via-pink-400 to-yellow-400 mr-2" />
                               Special
                             </Button>
                           </div>
                         </DrawerContent>
-                      </Drawer>
-                    ) : (
-                      <DropdownMenu>
+                      </Drawer> : <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                            <Button variant="ghost" size="default" className="w-18 h-18 text-white hover:bg-white/10">
                              <Filter className="w-7 h-7" />
                           </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
-                          <DropdownMenuItem 
-                            onClick={() => setSelectedRarity("all")} 
-                            className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "all" ? "bg-white/20" : ""}`}
-                          >
+                          <DropdownMenuItem onClick={() => setSelectedRarity("all")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "all" ? "bg-white/20" : ""}`}>
                             <div className="w-3 h-3 rounded-full bg-black" />
                             <span>All Rarities</span>
                           </DropdownMenuItem>
-                          <DropdownMenuItem 
-                            onClick={() => setSelectedRarity("green")} 
-                            className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "green" ? "bg-white/20" : ""}`}
-                          >
+                          <DropdownMenuItem onClick={() => setSelectedRarity("green")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "green" ? "bg-white/20" : ""}`}>
                             <div className="w-3 h-3 rounded-full bg-green-500" />
                             <span>Regular</span>
                           </DropdownMenuItem>
-                          <DropdownMenuItem 
-                            onClick={() => setSelectedRarity("blue")} 
-                            className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "blue" ? "bg-white/20" : ""}`}
-                          >
+                          <DropdownMenuItem onClick={() => setSelectedRarity("blue")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "blue" ? "bg-white/20" : ""}`}>
                             <div className="w-3 h-3 rounded-full bg-blue-500" />
                             <span>Rare</span>
                           </DropdownMenuItem>
-                          <DropdownMenuItem 
-                            onClick={() => setSelectedRarity("silver")} 
-                            className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "silver" ? "bg-white/20" : ""}`}
-                          >
+                          <DropdownMenuItem onClick={() => setSelectedRarity("silver")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "silver" ? "bg-white/20" : ""}`}>
                             <div className="w-3 h-3 rounded-full bg-gray-300" />
                             <span>Legendary</span>
                           </DropdownMenuItem>
-                          <DropdownMenuItem 
-                            onClick={() => setSelectedRarity("gold")} 
-                            className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "gold" ? "bg-white/20" : ""}`}
-                          >
+                          <DropdownMenuItem onClick={() => setSelectedRarity("gold")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "gold" ? "bg-white/20" : ""}`}>
                             <div className="w-3 h-3 rounded-full bg-yellow-400" />
                             <span>Mythical</span>
                           </DropdownMenuItem>
-                          <DropdownMenuItem 
-                            onClick={() => setSelectedRarity("special")} 
-                            className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "special" ? "bg-white/20" : ""}`}
-                          >
+                          <DropdownMenuItem onClick={() => setSelectedRarity("special")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "special" ? "bg-white/20" : ""}`}>
                             <div className="w-3 h-3 rounded-full bg-gradient-to-r from-purple-400 via-pink-400 to-yellow-400" />
                             <span>Special</span>
                           </DropdownMenuItem>
                         </DropdownMenuContent>
-                      </DropdownMenu>
-                    )}
+                      </DropdownMenu>}
                   </div>
                 </div>
 
                 {/* Categories */}
                 <div className="space-y-4">
                   {/* Skins Category */}
-                  {(selectedCategory === "all" || selectedCategory === "skins") && (
-                  <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                  {(selectedCategory === "all" || selectedCategory === "skins") && <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                     <div className="absolute inset-0" style={{
-                  backgroundImage: `
+                backgroundImage: `
                         linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
                         linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
                       `,
-                  backgroundSize: '4px 4px'
-                }} />
+                backgroundSize: '4px 4px'
+              }} />
                     <CardHeader className="relative z-10">
                       <CardTitle className="flex items-center justify-between text-white">
-                        <span>Skins</span>
+                        <span>Fighters</span>
                         <Badge variant="secondary">4 items</Badge>
                       </CardTitle>
                       
@@ -1397,26 +1239,26 @@ const Game = () => {
                     <CardContent>
                        <div className="grid grid-cols-2 gap-3">
                          {filterItemsByRarity([{
-                      name: "The Irish King",
-                      price: 2500,
-                      rarity: "gold",
-                      image: irishKingSkin
-                   }, {
-                      name: "Stani Eagle",
-                      price: 1800,
-                      rarity: "blue",
-                      image: staniEagleSkin
-                   }, {
-                       name: "Jonesy Bones",
-                      price: 2200,
-                      rarity: "silver",
-                      image: bonesSkin
-                   }, {
-                      name: "Latin Legend",
-                      price: 1500,
-                      rarity: "green",
-                      image: latinLegendSkin
-                    }]).map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden hover:scale-105 hover:shadow-3xl hover:border-gray-500/70 transition-all duration-300 cursor-pointer">
+                    name: "The Irish King",
+                    price: 2500,
+                    rarity: "gold",
+                    image: irishKingSkin
+                  }, {
+                    name: "Stani Eagle",
+                    price: 1800,
+                    rarity: "blue",
+                    image: staniEagleSkin
+                  }, {
+                    name: "Jonesy Bones",
+                    price: 2200,
+                    rarity: "silver",
+                    image: bonesSkin
+                  }, {
+                    name: "Latin Legend",
+                    price: 1500,
+                    rarity: "green",
+                    image: latinLegendSkin
+                  }]).map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden hover:scale-105 hover:shadow-3xl hover:border-gray-500/70 transition-all duration-300 cursor-pointer">
                              <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
                              <CardContent className="p-3 relative z-10">
                                <div className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden">
@@ -1440,25 +1282,19 @@ const Game = () => {
                                       <DrawerTitle className="text-white text-center">Purchase {item.name}</DrawerTitle>
                                     </DrawerHeader>
                                     <div className="p-4 space-y-3">
-                                      <Button 
-                                        className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20"
-                                         onClick={() => toast({
-                                           title: "Coming Soon",
-                                           description: "Coin purchases coming soon!",
-                                           duration: 3000
-                                         })}
-                                      >
+                                      <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => toast({
+                                title: "Coming Soon",
+                                description: "Coin purchases coming soon!",
+                                duration: 3000
+                              })}>
                                         <Coins className="mr-2 h-4 w-4" />
                                         Buy With Coins
                                       </Button>
-                                      <Button 
-                                        className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20"
-                                         onClick={() => toast({
-                                           title: "Coming Soon",
-                                           description: "Card payments coming soon!",
-                                           duration: 3000
-                                         })}
-                                      >
+                                      <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => toast({
+                                title: "Coming Soon",
+                                description: "Card payments coming soon!",
+                                duration: 3000
+                              })}>
                                         <CreditCard className="mr-2 h-4 w-4" />
                                         Buy with Card
                                       </Button>
@@ -1475,20 +1311,18 @@ const Game = () => {
                           </Card>)}
                       </div>
                      </CardContent>
-                   </Card>
-                   )}
+                   </Card>}
 
                    {/* Accessories Category */}
-                   {(selectedCategory === "all" || selectedCategory === "accessories") && (
-                   <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                   {(selectedCategory === "all" || selectedCategory === "accessories") && <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                     <div className="absolute inset-0" style={{
-                  backgroundImage: `
+                backgroundImage: `
                         linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
                         linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
                       `,
-                  backgroundSize: '4px 4px'
-                }} />
+                backgroundSize: '4px 4px'
+              }} />
                     <CardHeader className="relative z-10">
                       <CardTitle className="flex items-center justify-between text-white">
                         <span>Accessories</span>
@@ -1499,26 +1333,26 @@ const Game = () => {
                     <CardContent>
                        <div className="grid grid-cols-2 gap-3">
                          {filterItemsByRarity([{
-                      name: "Red Wing Suit",
-                     price: 600,
-                     rarity: "blue",
-                      image: "/lovable-uploads/2eec4a9a-97d3-4ba4-9508-2eeef0011139.png"
-                   }, {
-                      name: "Blue Wing Suit",
-                     price: 450,
-                     rarity: "green",
-                      image: "/lovable-uploads/1efc1553-007a-4b38-a982-79d9f5abbfa1.png"
-                   }, {
-                      name: "White Base Vest",
-                     price: 750,
-                     rarity: "special",
-                      image: "/lovable-uploads/508d1509-e761-46c6-9f3a-f70e256f5a52.png"
-                   }, {
-                       name: "Grey Base Vest",
-                      price: 550,
-                      rarity: "silver",
-                       image: "/lovable-uploads/91375d1a-e829-4716-b3b6-833b58355bd9.png"
-                    }]).map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden hover:scale-105 hover:shadow-3xl hover:border-gray-500/70 transition-all duration-300 cursor-pointer">
+                    name: "Red Wing Suit",
+                    price: 600,
+                    rarity: "blue",
+                    image: "/lovable-uploads/2eec4a9a-97d3-4ba4-9508-2eeef0011139.png"
+                  }, {
+                    name: "Blue Wing Suit",
+                    price: 450,
+                    rarity: "green",
+                    image: "/lovable-uploads/1efc1553-007a-4b38-a982-79d9f5abbfa1.png"
+                  }, {
+                    name: "White Base Vest",
+                    price: 750,
+                    rarity: "special",
+                    image: "/lovable-uploads/508d1509-e761-46c6-9f3a-f70e256f5a52.png"
+                  }, {
+                    name: "Grey Base Vest",
+                    price: 550,
+                    rarity: "silver",
+                    image: "/lovable-uploads/91375d1a-e829-4716-b3b6-833b58355bd9.png"
+                  }]).map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden hover:scale-105 hover:shadow-3xl hover:border-gray-500/70 transition-all duration-300 cursor-pointer">
                              <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
                              <CardContent className="p-3 relative z-10">
                                <div className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden">
@@ -1542,21 +1376,15 @@ const Game = () => {
                                       <DrawerTitle className="text-white text-center">Purchase {item.name}</DrawerTitle>
                                     </DrawerHeader>
                                     <div className="p-4 space-y-3">
-                                      <Button 
-                                        className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20"
-                                         onClick={() => toast({
-                                           title: "Coming Soon",
-                                           description: "Coin purchases coming soon!",
-                                           duration: 3000
-                                         })}
-                                      >
+                                      <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => toast({
+                                title: "Coming Soon",
+                                description: "Coin purchases coming soon!",
+                                duration: 3000
+                              })}>
                                         <Coins className="mr-2 h-4 w-4" />
                                         Buy With Coins
                                       </Button>
-                                      <Button 
-                                        className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20"
-                                        onClick={() => {/* TODO: Implement card payment */}}
-                                      >
+                                      <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => {/* TODO: Implement card payment */}}>
                                         <CreditCard className="mr-2 h-4 w-4" />
                                         Buy with Card
                                       </Button>
@@ -1573,20 +1401,18 @@ const Game = () => {
                           </Card>)}
                       </div>
                      </CardContent>
-                   </Card>
-                   )}
+                   </Card>}
 
                    {/* Mobility Category */}
-                   {(selectedCategory === "all" || selectedCategory === "mobility") && (
-                   <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                   {(selectedCategory === "all" || selectedCategory === "mobility") && <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                     <div className="absolute inset-0" style={{
-                  backgroundImage: `
+                backgroundImage: `
                         linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
                         linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
                       `,
-                  backgroundSize: '4px 4px'
-                }} />
+                backgroundSize: '4px 4px'
+              }} />
                     <CardHeader className="relative z-10">
                       <CardTitle className="flex items-center justify-between text-white">
                         <span>Mobility</span>
@@ -1597,26 +1423,26 @@ const Game = () => {
                     <CardContent>
                        <div className="grid grid-cols-2 gap-3">
                          {filterItemsByRarity([{
-                     name: "The Coupé Tank",
-                     price: 5000,
-                     rarity: "gold",
-                     image: "/lovable-uploads/1c6b707c-97a6-4381-bc54-de63a7cf8a31.png"
-                   }, {
-                     name: "Speed Buggy",
-                     price: 3200,
-                     rarity: "silver",
-                     image: "/lovable-uploads/b64d7801-1284-4763-b115-ca3cfa8ff315.png"
-                   }, {
-                      name: "Pit Bike",
-                      price: 4500,
-                      rarity: "blue",
-                      image: "/lovable-uploads/4e2aac54-cac6-4cf1-92ad-76bf7e788077.png"
-                   }, {
-                      name: "Pogo",
-                      price: 8000,
-                      rarity: "special",
-                      image: "/lovable-uploads/2877ff38-b9fd-4a5d-bca9-25b14f237997.png"
-                    }]).map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden hover:scale-105 hover:shadow-3xl hover:border-gray-500/70 transition-all duration-300 cursor-pointer">
+                    name: "The Coupé Tank",
+                    price: 5000,
+                    rarity: "gold",
+                    image: "/lovable-uploads/1c6b707c-97a6-4381-bc54-de63a7cf8a31.png"
+                  }, {
+                    name: "Speed Buggy",
+                    price: 3200,
+                    rarity: "silver",
+                    image: "/lovable-uploads/b64d7801-1284-4763-b115-ca3cfa8ff315.png"
+                  }, {
+                    name: "Pit Bike",
+                    price: 4500,
+                    rarity: "blue",
+                    image: "/lovable-uploads/4e2aac54-cac6-4cf1-92ad-76bf7e788077.png"
+                  }, {
+                    name: "Pogo",
+                    price: 8000,
+                    rarity: "special",
+                    image: "/lovable-uploads/2877ff38-b9fd-4a5d-bca9-25b14f237997.png"
+                  }]).map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden hover:scale-105 hover:shadow-3xl hover:border-gray-500/70 transition-all duration-300 cursor-pointer">
                              <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
                              <CardContent className="p-3 relative z-10">
                                <div className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden">
@@ -1640,21 +1466,15 @@ const Game = () => {
                                       <DrawerTitle className="text-white text-center">Purchase {item.name}</DrawerTitle>
                                     </DrawerHeader>
                                     <div className="p-4 space-y-3">
-                                      <Button 
-                                        className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20"
-                                         onClick={() => toast({
-                                           title: "Coming Soon",
-                                           description: "Coin purchases coming soon!",
-                                           duration: 3000
-                                         })}
-                                      >
+                                      <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => toast({
+                                title: "Coming Soon",
+                                description: "Coin purchases coming soon!",
+                                duration: 3000
+                              })}>
                                         <Coins className="mr-2 h-4 w-4" />
                                         Buy With Coins
                                       </Button>
-                                      <Button 
-                                        className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20"
-                                        onClick={() => {/* TODO: Implement card payment */}}
-                                      >
+                                      <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => {/* TODO: Implement card payment */}}>
                                         <CreditCard className="mr-2 h-4 w-4" />
                                         Buy with Card
                                       </Button>
@@ -1671,20 +1491,18 @@ const Game = () => {
                           </Card>)}
                       </div>
                      </CardContent>
-                   </Card>
-                   )}
+                   </Card>}
 
                    {/* Emotes Category */}
-                   {(selectedCategory === "all" || selectedCategory === "emotes") && (
-                   <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                   {(selectedCategory === "all" || selectedCategory === "emotes") && <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                     <div className="absolute inset-0" style={{
-                  backgroundImage: `
+                backgroundImage: `
                         linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
                         linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
                       `,
-                  backgroundSize: '4px 4px'
-                }} />
+                backgroundSize: '4px 4px'
+              }} />
                     <CardHeader className="relative z-10">
                       <CardTitle className="flex items-center justify-between text-white">
                         <span>Emotes</span>
@@ -1695,34 +1513,30 @@ const Game = () => {
                     <CardContent>
                        <div className="grid grid-cols-2 gap-3">
                          {filterItemsByRarity([{
-                     name: "Flex",
-                     price: 800,
-                     rarity: "blue",
-                     image: "/lovable-uploads/f52e83c2-28b7-417e-90ac-757255d1759f.png"
-                    }, {
-                      name: "Fists Up",
-                      price: 1800,
-                      rarity: "gold",
-                       image: "/lovable-uploads/370bd874-ad5c-467d-b844-55688b1a0f9a.png"
-                    }, {
-                      name: "Squeaky Dance",
-                      price: 2500,
-                      rarity: "special",
-                      image: "/lovable-uploads/5c8c027e-3baf-4550-96a9-ba0715d11506.png"
-                    }, {
-                      name: "u want sum?",
-                      price: 1500,
-                      rarity: "gold",
-                      image: "/lovable-uploads/30d419b4-79a9-459c-b37b-42099ffd6273.png"
-                     }]).map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden hover:scale-105 hover:shadow-3xl hover:border-gray-500/70 transition-all duration-300 cursor-pointer">
+                    name: "Flex",
+                    price: 800,
+                    rarity: "blue",
+                    image: "/lovable-uploads/f52e83c2-28b7-417e-90ac-757255d1759f.png"
+                  }, {
+                    name: "Fists Up",
+                    price: 1800,
+                    rarity: "gold",
+                    image: "/lovable-uploads/370bd874-ad5c-467d-b844-55688b1a0f9a.png"
+                  }, {
+                    name: "Squeaky Dance",
+                    price: 2500,
+                    rarity: "special",
+                    image: "/lovable-uploads/5c8c027e-3baf-4550-96a9-ba0715d11506.png"
+                  }, {
+                    name: "u want sum?",
+                    price: 1500,
+                    rarity: "gold",
+                    image: "/lovable-uploads/30d419b4-79a9-459c-b37b-42099ffd6273.png"
+                  }]).map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden hover:scale-105 hover:shadow-3xl hover:border-gray-500/70 transition-all duration-300 cursor-pointer">
                              <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
                              <CardContent className="p-3 relative z-10">
                                <div className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden flex items-center justify-center">
-                                  {item.image.startsWith('/') || item.image.startsWith('http') ? (
-                                    <img src={item.image} alt={item.name} className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" />
-                                  ) : (
-                                    <div className="text-4xl hover:scale-110 transition-transform duration-300">{item.image}</div>
-                                  )}
+                                  {item.image.startsWith('/') || item.image.startsWith('http') ? <img src={item.image} alt={item.name} className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" /> : <div className="text-4xl hover:scale-110 transition-transform duration-300">{item.image}</div>}
                                </div>
                               <h3 className="font-semibold text-xs text-white mb-1">{item.name}</h3>
                               <div className="flex items-center justify-between">
@@ -1742,21 +1556,15 @@ const Game = () => {
                                       <DrawerTitle className="text-white text-center">Purchase {item.name}</DrawerTitle>
                                     </DrawerHeader>
                                     <div className="p-4 space-y-3">
-                                      <Button 
-                                        className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20"
-                                         onClick={() => toast({
-                                           title: "Coming Soon",
-                                           description: "Coin purchases coming soon!",
-                                           duration: 3000
-                                         })}
-                                      >
+                                      <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => toast({
+                                title: "Coming Soon",
+                                description: "Coin purchases coming soon!",
+                                duration: 3000
+                              })}>
                                         <Coins className="mr-2 h-4 w-4" />
                                         Buy With Coins
                                       </Button>
-                                      <Button 
-                                        className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20"
-                                        onClick={() => {/* TODO: Implement card payment */}}
-                                      >
+                                      <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => {/* TODO: Implement card payment */}}>
                                         <CreditCard className="mr-2 h-4 w-4" />
                                         Buy with Card
                                       </Button>
@@ -1773,20 +1581,18 @@ const Game = () => {
                           </Card>)}
                       </div>
                      </CardContent>
-                   </Card>
-                   )}
+                   </Card>}
 
                    {/* Packs Category */}
-                   {(selectedCategory === "all" || selectedCategory === "packs") && (
-                   <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                   {(selectedCategory === "all" || selectedCategory === "packs") && <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                     <div className="absolute inset-0" style={{
-                  backgroundImage: `
+                backgroundImage: `
                         linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
                         linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
                       `,
-                  backgroundSize: '4px 4px'
-                }} />
+                backgroundSize: '4px 4px'
+              }} />
                     <CardHeader className="relative z-10">
                       <CardTitle className="flex items-center justify-between text-white">
                         <span>Packs</span>
@@ -1797,26 +1603,26 @@ const Game = () => {
                     <CardContent>
                        <div className="grid grid-cols-2 gap-3">
                           {filterItemsByRarity([{
-                      name: "Silver Pack",
-                      price: 1000,
-                      rarity: "silver",
-                      image: "/lovable-uploads/17c3a939-bcaa-4cdb-9b61-271b5774c7e2.png"
-                   }, {
-                      name: "Gold Pack",
-                      price: 2000,
-                      rarity: "gold",
-                      image: "/lovable-uploads/291c5734-f144-47b0-9f49-915999e921b0.png"
-                   }, {
-                       name: "EO Summer Pack",
-                      price: 3500,
-                      rarity: "special",
-                      image: "/lovable-uploads/2149e9ad-919f-49ea-8be4-90f190387d39.png"
-                   }, {
-                     name: "Wild West Pack",
-                     price: 5000,
-                     rarity: "special",
-                     image: "/lovable-uploads/5cf8ad93-f292-4e4c-b53c-eb0c4bc0f7be.png"
-                    }]).map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden hover:scale-105 hover:shadow-3xl hover:border-gray-500/70 transition-all duration-300 cursor-pointer">
+                    name: "Silver Pack",
+                    price: 1000,
+                    rarity: "silver",
+                    image: "/lovable-uploads/17c3a939-bcaa-4cdb-9b61-271b5774c7e2.png"
+                  }, {
+                    name: "Gold Pack",
+                    price: 2000,
+                    rarity: "gold",
+                    image: "/lovable-uploads/291c5734-f144-47b0-9f49-915999e921b0.png"
+                  }, {
+                    name: "EO Summer Pack",
+                    price: 3500,
+                    rarity: "special",
+                    image: "/lovable-uploads/2149e9ad-919f-49ea-8be4-90f190387d39.png"
+                  }, {
+                    name: "Wild West Pack",
+                    price: 5000,
+                    rarity: "special",
+                    image: "/lovable-uploads/5cf8ad93-f292-4e4c-b53c-eb0c4bc0f7be.png"
+                  }]).map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden hover:scale-105 hover:shadow-3xl hover:border-gray-500/70 transition-all duration-300 cursor-pointer">
                              <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
                              <CardContent className="p-3 relative z-10">
                                <div className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden">
@@ -1840,21 +1646,15 @@ const Game = () => {
                                       <DrawerTitle className="text-white text-center">Purchase {item.name}</DrawerTitle>
                                     </DrawerHeader>
                                     <div className="p-4 space-y-3">
-                                      <Button 
-                                        className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20"
-                                         onClick={() => toast({
-                                           title: "Coming Soon",
-                                           description: "Coin purchases coming soon!",
-                                           duration: 3000
-                                         })}
-                                      >
+                                      <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => toast({
+                                title: "Coming Soon",
+                                description: "Coin purchases coming soon!",
+                                duration: 3000
+                              })}>
                                         <Coins className="mr-2 h-4 w-4" />
                                         Buy With Coins
                                       </Button>
-                                      <Button 
-                                        className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20"
-                                        onClick={() => {/* TODO: Implement card payment */}}
-                                      >
+                                      <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => {/* TODO: Implement card payment */}}>
                                         <CreditCard className="mr-2 h-4 w-4" />
                                         Buy with Card
                                       </Button>
@@ -1871,8 +1671,7 @@ const Game = () => {
                           </Card>)}
                       </div>
                      </CardContent>
-                   </Card>
-                   )}
+                   </Card>}
                  </div>
                </div>}
 
@@ -1971,32 +1770,20 @@ const Game = () => {
                       </div>
                       <div className="flex space-x-1">
                         {[{
-                      key: "daily",
-                      label: "24H"
-                    }, {
-                      key: "weekly",
-                      label: "7D"
-                    }, {
-                      key: "monthly",
-                      label: "30D"
-                    }, {
-                      key: "all time",
-                      label: "All"
-                    }].map(filter => (
-                          <Button
-                            key={filter.key}
-                            variant={trendingTimeFilter === filter.key ? "secondary" : "ghost"}
-                            size="sm"
-                            className={`text-xs h-6 px-2 ${
-                              trendingTimeFilter === filter.key 
-                                ? "bg-white/20 text-white border-white/30" 
-                                : "bg-white/5 text-gray-300 hover:bg-white/10 hover:text-white"
-                            }`}
-                            onClick={() => setTrendingTimeFilter(filter.key)}
-                          >
+                    key: "daily",
+                    label: "24H"
+                  }, {
+                    key: "weekly",
+                    label: "7D"
+                  }, {
+                    key: "monthly",
+                    label: "30D"
+                  }, {
+                    key: "all time",
+                    label: "All"
+                  }].map(filter => <Button key={filter.key} variant={trendingTimeFilter === filter.key ? "secondary" : "ghost"} size="sm" className={`text-xs h-6 px-2 ${trendingTimeFilter === filter.key ? "bg-white/20 text-white border-white/30" : "bg-white/5 text-gray-300 hover:bg-white/10 hover:text-white"}`} onClick={() => setTrendingTimeFilter(filter.key)}>
                             {filter.label}
-                          </Button>
-                        ))}
+                          </Button>)}
                       </div>
                     </CardHeader>
                     <CardContent className="relative z-10">
@@ -2281,8 +2068,7 @@ const Game = () => {
           <aside className="w-80 bg-black border-r border-border p-6 space-y-6 overflow-y-auto h-screen">
             <div className="relative">
               {/* Desktop: Hover Card + Popover */}
-              {!isMobile ? (
-                <div className="relative">
+              {!isMobile ? <div className="relative">
                   <HoverCard>
                     <HoverCardTrigger asChild>
                       <Popover>
@@ -2314,29 +2100,14 @@ const Game = () => {
                             </CardContent>
                           </Card>
                         </PopoverTrigger>
-                        <PopoverContent 
-                          className="w-80 p-4 bg-black/90 backdrop-blur-md border border-white/20 text-white z-50"
-                          side="right"
-                          align="start"
-                        >
+                        <PopoverContent className="w-80 p-4 bg-black/90 backdrop-blur-md border border-white/20 text-white z-50" side="right" align="start">
                           <div className="space-y-3">
                             <h4 className="font-semibold text-sm">XP Progress Levels</h4>
                             <div className="space-y-2 max-h-60 overflow-y-auto">
                               {getAllLevelsForDisplay().map((level, index) => {
-                                const isCurrentLevel = getCurrentLevel(userBalance?.xp || 0).name === level.name;
-                                const isUnlocked = (userBalance?.xp || 0) >= level.minXp;
-                                
-                                return (
-                                  <div 
-                                    key={index}
-                                    className={`flex items-center justify-between p-2 rounded-md transition-colors ${
-                                      isCurrentLevel 
-                                        ? 'bg-primary/20 border border-primary/30' 
-                                        : isUnlocked 
-                                        ? 'bg-white/5 hover:bg-white/10' 
-                                        : 'bg-gray-800/50 opacity-60'
-                                    }`}
-                                  >
+                            const isCurrentLevel = getCurrentLevel(userBalance?.xp || 0).name === level.name;
+                            const isUnlocked = (userBalance?.xp || 0) >= level.minXp;
+                            return <div key={index} className={`flex items-center justify-between p-2 rounded-md transition-colors ${isCurrentLevel ? 'bg-primary/20 border border-primary/30' : isUnlocked ? 'bg-white/5 hover:bg-white/10' : 'bg-gray-800/50 opacity-60'}`}>
                                     <div className="flex items-center space-x-2">
                                       <span className="text-base">
                                         {getTierIcon(level.minXp)}
@@ -2346,37 +2117,21 @@ const Game = () => {
                                     <span className="text-xs text-gray-400">
                                       {level.maxXp === Infinity ? `${level.minXp.toLocaleString()}+ XP` : `${level.minXp.toLocaleString()}-${level.maxXp.toLocaleString()} XP`}
                                     </span>
-                                  </div>
-                                );
-                              })}
+                                  </div>;
+                          })}
                             </div>
                           </div>
                         </PopoverContent>
                       </Popover>
                     </HoverCardTrigger>
-                    <HoverCardContent 
-                      className="w-80 p-4 bg-black/90 backdrop-blur-md border border-white/20 text-white z-50"
-                      side="right"
-                      align="start"
-                    >
+                    <HoverCardContent className="w-80 p-4 bg-black/90 backdrop-blur-md border border-white/20 text-white z-50" side="right" align="start">
                       <div className="space-y-3">
                         <h4 className="font-semibold text-sm">XP Progress Levels</h4>
                         <div className="space-y-2 max-h-60 overflow-y-auto">
                           {getAllLevelsForDisplay().map((level, index) => {
-                            const isCurrentLevel = getCurrentLevel(userBalance?.xp || 0).name === level.name;
-                            const isUnlocked = (userBalance?.xp || 0) >= level.minXp;
-                            
-                            return (
-                              <div 
-                                key={index}
-                                className={`flex items-center justify-between p-2 rounded-md transition-colors ${
-                                  isCurrentLevel 
-                                    ? 'bg-primary/20 border border-primary/30' 
-                                    : isUnlocked 
-                                    ? 'bg-white/5 hover:bg-white/10' 
-                                    : 'bg-gray-800/50 opacity-60'
-                                }`}
-                              >
+                        const isCurrentLevel = getCurrentLevel(userBalance?.xp || 0).name === level.name;
+                        const isUnlocked = (userBalance?.xp || 0) >= level.minXp;
+                        return <div key={index} className={`flex items-center justify-between p-2 rounded-md transition-colors ${isCurrentLevel ? 'bg-primary/20 border border-primary/30' : isUnlocked ? 'bg-white/5 hover:bg-white/10' : 'bg-gray-800/50 opacity-60'}`}>
                                 <div className="flex items-center space-x-2">
                                   <span className="text-base">{getTierIcon(level.minXp)}</span>
                                   <span className="text-sm font-medium">{level.name}</span>
@@ -2384,17 +2139,14 @@ const Game = () => {
                                 <span className="text-xs text-gray-400">
                                   {level.maxXp === Infinity ? `${level.minXp.toLocaleString()}+ XP` : `${level.minXp.toLocaleString()}-${level.maxXp.toLocaleString()} XP`}
                                 </span>
-                              </div>
-                            );
-                          })}
+                              </div>;
+                      })}
                         </div>
                       </div>
                     </HoverCardContent>
                   </HoverCard>
-                </div>
-               ) : (
-                /* Mobile: Card with Info Button and Popover */
-                <Card className="bg-black border-gray-700">
+                </div> : (/* Mobile: Card with Info Button and Popover */
+            <Card className="bg-black border-gray-700">
                   <CardHeader>
                     <CardTitle className="text-base flex items-center justify-between">
                       <div className="flex items-center space-x-2">
@@ -2414,36 +2166,22 @@ const Game = () => {
                           <div className="p-4 pb-8">
                             <div className="space-y-2 max-h-80 overflow-y-auto">
                               {getAllLevelsForDisplay().map((level, index) => {
-                                const isCurrentLevel = getCurrentLevel(userBalance?.xp || 0).name === level.name;
-                                const isUnlocked = (userBalance?.xp || 0) >= level.minXp;
-                                
-                                return (
-                                  <div 
-                                    key={index}
-                                    className={`flex items-center justify-between p-3 rounded-md transition-colors ${
-                                      isCurrentLevel 
-                                        ? 'bg-primary/20 border border-primary/30' 
-                                        : isUnlocked 
-                                        ? 'bg-white/5 hover:bg-white/10' 
-                                        : 'bg-gray-800/50 opacity-60'
-                                    }`}
-                                  >
+                            const isCurrentLevel = getCurrentLevel(userBalance?.xp || 0).name === level.name;
+                            const isUnlocked = (userBalance?.xp || 0) >= level.minXp;
+                            return <div key={index} className={`flex items-center justify-between p-3 rounded-md transition-colors ${isCurrentLevel ? 'bg-primary/20 border border-primary/30' : isUnlocked ? 'bg-white/5 hover:bg-white/10' : 'bg-gray-800/50 opacity-60'}`}>
                                      <div className="flex items-center space-x-2">
                                        <span className="text-base">
                                          {getTierIcon(level.minXp)}
                                        </span>
-                                       <span className={`text-sm font-medium ${
-                                         isCurrentLevel ? 'text-primary' : 'text-white'
-                                       }`}>
+                                       <span className={`text-sm font-medium ${isCurrentLevel ? 'text-primary' : 'text-white'}`}>
                                          {level.name}
                                        </span>
                                      </div>
                                     <span className="text-xs text-gray-400">
                                       {level.level >= 10 ? "10,000+ XP" : `${level.minXp.toLocaleString()}-${level.maxXp.toLocaleString()} XP`}
                                     </span>
-                                  </div>
-                                );
-                              })}
+                                  </div>;
+                          })}
                             </div>
                           </div>
                         </DrawerContent>
@@ -2465,51 +2203,41 @@ const Game = () => {
                       </div>
                     </div>
                   </CardContent>
-                </Card>
-              )}
+                </Card>)}
             </div>
 
-            <Card 
-              className={`bg-black border-gray-700 transition-all duration-500 ease-in-out cursor-pointer hover:bg-black/80 ${isObjectivesGlowing ? 'ring-1 ring-primary/30 shadow-lg shadow-primary/20' : ''}`}
-              onClick={() => {
-                if (objectivesView === "weekly") {
-                  setObjectivesView("daily");
-                } else if (objectivesView === "daily") {
-                  setObjectivesView("quests");
-                } else {
-                  setObjectivesView("weekly");
-                }
-              }}
-            >
+            <Card className={`bg-black border-gray-700 transition-all duration-500 ease-in-out cursor-pointer hover:bg-black/80 ${isObjectivesGlowing ? 'ring-1 ring-primary/30 shadow-lg shadow-primary/20' : ''}`} onClick={() => {
+            if (objectivesView === "weekly") {
+              setObjectivesView("daily");
+            } else if (objectivesView === "daily") {
+              setObjectivesView("quests");
+            } else {
+              setObjectivesView("weekly");
+            }
+          }}>
               <CardHeader>
                 <CardTitle className="text-base flex items-center justify-between">
                   <div className="flex items-center space-x-2">
                     <Target className="w-4 h-4" />
                     <span>{objectivesView === "weekly" ? "Weekly Objectives" : objectivesView === "daily" ? "Daily Objectives" : "Quests"}</span>
                   </div>
-                  <Button 
-                    variant="ghost" 
-                    size="sm" 
-                    className="h-6 w-6 p-0 hover:bg-white/10"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      if (objectivesView === "weekly") {
-                        setObjectivesView("daily");
-                      } else if (objectivesView === "daily") {
-                        setObjectivesView("quests");
-                      } else {
-                        setObjectivesView("weekly");
-                      }
-                    }}
-                  >
+                  <Button variant="ghost" size="sm" className="h-6 w-6 p-0 hover:bg-white/10" onClick={e => {
+                  e.stopPropagation();
+                  if (objectivesView === "weekly") {
+                    setObjectivesView("daily");
+                  } else if (objectivesView === "daily") {
+                    setObjectivesView("quests");
+                  } else {
+                    setObjectivesView("weekly");
+                  }
+                }}>
                     <RotateCcw className="w-4 h-4" />
                   </Button>
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                {objectivesView === "weekly" ? (
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer" onClick={(e) => e.stopPropagation()}>
+                {objectivesView === "weekly" ? <div className="space-y-3">
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer" onClick={e => e.stopPropagation()}>
                       <div className="flex items-center space-x-3">
                         <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
                           <Package className="w-4 h-4 text-primary-foreground" />
@@ -2521,7 +2249,7 @@ const Game = () => {
                       </div>
                       <ChevronRight className="w-4 h-4 text-muted-foreground" />
                     </div>
-                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer" onClick={(e) => e.stopPropagation()}>
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer" onClick={e => e.stopPropagation()}>
                       <div className="flex items-center space-x-3">
                         <div className="w-8 h-8 bg-secondary rounded-full flex items-center justify-center">
                           <ShoppingBag className="w-4 h-4 text-secondary-foreground" />
@@ -2533,7 +2261,7 @@ const Game = () => {
                       </div>
                       <ChevronRight className="w-4 h-4 text-muted-foreground" />
                     </div>
-                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer" onClick={(e) => e.stopPropagation()}>
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer" onClick={e => e.stopPropagation()}>
                       <div className="flex items-center space-x-3">
                         <div className="w-8 h-8 bg-destructive rounded-full flex items-center justify-center">
                           <CreditCard className="w-4 h-4 text-destructive-foreground" />
@@ -2545,7 +2273,7 @@ const Game = () => {
                       </div>
                       <ChevronRight className="w-4 h-4 text-muted-foreground" />
                     </div>
-                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer" onClick={(e) => e.stopPropagation()}>
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer" onClick={e => e.stopPropagation()}>
                       <div className="flex items-center space-x-3">
                         <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center">
                           <TrendingUp className="w-4 h-4 text-white" />
@@ -2557,7 +2285,7 @@ const Game = () => {
                       </div>
                       <ChevronRight className="w-4 h-4 text-muted-foreground" />
                     </div>
-                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer" onClick={(e) => e.stopPropagation()}>
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer" onClick={e => e.stopPropagation()}>
                       <div className="flex items-center space-x-3">
                         <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
                           <UserPlus className="w-4 h-4 text-white" />
@@ -2569,10 +2297,8 @@ const Game = () => {
                       </div>
                       <ChevronRight className="w-4 h-4 text-muted-foreground" />
                     </div>
-                  </div>
-                ) : objectivesView === "daily" ? (
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer" onClick={(e) => e.stopPropagation()}>
+                  </div> : objectivesView === "daily" ? <div className="space-y-3">
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer" onClick={e => e.stopPropagation()}>
                       <div className="flex items-center space-x-3">
                         <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
                           <Play className="w-4 h-4 text-primary-foreground" />
@@ -2584,7 +2310,7 @@ const Game = () => {
                       </div>
                       <ChevronRight className="w-4 h-4 text-muted-foreground" />
                     </div>
-                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer" onClick={(e) => e.stopPropagation()}>
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer" onClick={e => e.stopPropagation()}>
                       <div className="flex items-center space-x-3">
                         <div className="w-8 h-8 bg-secondary rounded-full flex items-center justify-center">
                           <Gamepad className="w-4 h-4 text-secondary-foreground" />
@@ -2596,7 +2322,7 @@ const Game = () => {
                       </div>
                       <ChevronRight className="w-4 h-4 text-muted-foreground" />
                     </div>
-                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer" onClick={(e) => e.stopPropagation()}>
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer" onClick={e => e.stopPropagation()}>
                       <div className="flex items-center space-x-3">
                         <div className="w-8 h-8 bg-destructive rounded-full flex items-center justify-center">
                           <Play className="w-4 h-4 text-destructive-foreground" />
@@ -2608,7 +2334,7 @@ const Game = () => {
                       </div>
                       <ChevronRight className="w-4 h-4 text-muted-foreground" />
                     </div>
-                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer" onClick={(e) => e.stopPropagation()}>
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer" onClick={e => e.stopPropagation()}>
                       <div className="flex items-center space-x-3">
                         <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
                           <Trophy className="w-4 h-4 text-white" />
@@ -2620,7 +2346,7 @@ const Game = () => {
                       </div>
                       <ChevronRight className="w-4 h-4 text-muted-foreground" />
                     </div>
-                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer" onClick={(e) => e.stopPropagation()}>
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer" onClick={e => e.stopPropagation()}>
                       <div className="flex items-center space-x-3">
                         <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
                           <Users className="w-4 h-4 text-white" />
@@ -2632,10 +2358,8 @@ const Game = () => {
                       </div>
                       <ChevronRight className="w-4 h-4 text-muted-foreground" />
                     </div>
-                  </div>
-                ) : (
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer" onClick={(e) => e.stopPropagation()}>
+                  </div> : <div className="space-y-3">
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer" onClick={e => e.stopPropagation()}>
                       <div className="flex items-center space-x-3">
                         <div className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center">
                           <img src="/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png" alt="X" className="w-4 h-4" />
@@ -2647,7 +2371,7 @@ const Game = () => {
                       </div>
                       <ChevronRight className="w-4 h-4 text-muted-foreground" />
                     </div>
-                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer" onClick={(e) => e.stopPropagation()}>
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer" onClick={e => e.stopPropagation()}>
                       <div className="flex items-center space-x-3">
                         <div className="w-8 h-8 bg-pink-500 rounded-full flex items-center justify-center">
                           <img src="/lovable-uploads/896892f1-7ebc-4852-acea-80dcdbf7c545.png" alt="Instagram" className="w-4 h-4" />
@@ -2659,7 +2383,7 @@ const Game = () => {
                       </div>
                       <ChevronRight className="w-4 h-4 text-muted-foreground" />
                     </div>
-                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer" onClick={(e) => e.stopPropagation()}>
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer" onClick={e => e.stopPropagation()}>
                       <div className="flex items-center space-x-3">
                         <div className="w-8 h-8 bg-blue-400 rounded-full flex items-center justify-center">
                           <img src="/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png" alt="X" className="w-4 h-4" />
@@ -2671,7 +2395,7 @@ const Game = () => {
                       </div>
                       <ChevronRight className="w-4 h-4 text-muted-foreground" />
                     </div>
-                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer" onClick={(e) => e.stopPropagation()}>
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer" onClick={e => e.stopPropagation()}>
                       <div className="flex items-center space-x-3">
                         <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
                           <img src="/lovable-uploads/896892f1-7ebc-4852-acea-80dcdbf7c545.png" alt="Instagram" className="w-4 h-4" />
@@ -2683,7 +2407,7 @@ const Game = () => {
                       </div>
                       <ChevronRight className="w-4 h-4 text-muted-foreground" />
                     </div>
-                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer" onClick={(e) => e.stopPropagation()}>
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer" onClick={e => e.stopPropagation()}>
                       <div className="flex items-center space-x-3">
                         <div className="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center">
                           <MessageCircle className="w-4 h-4 text-white" />
@@ -2695,8 +2419,7 @@ const Game = () => {
                       </div>
                       <ChevronRight className="w-4 h-4 text-muted-foreground" />
                     </div>
-                  </div>
-                )}
+                  </div>}
               </CardContent>
             </Card>
             
@@ -2737,8 +2460,8 @@ const Game = () => {
                 {/* Large Welcome Card */}
                 <Card className="col-span-8 row-span-2 bg-gradient-to-br from-blue-600/80 to-purple-700/80 text-white border-0 relative overflow-hidden">
                   <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
-                backgroundImage: 'url(/lovable-uploads/8090c672-9fc6-4634-ad28-0629a1a7f181.png)'
-              }} />
+                    backgroundImage: 'url(/lovable-uploads/8090c672-9fc6-4634-ad28-0629a1a7f181.png)'
+                  }} />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
                   <CardContent className="p-8 h-full flex flex-col justify-end relative z-10">
                     <div>
@@ -2749,10 +2472,10 @@ const Game = () => {
                           How to play
                         </Button>
                         <Button variant="secondary" size="default" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 transition-all duration-300" onClick={() => toast({
-                      title: "Coming Soon",
-                      description: "The game will be available soon!",
-                      duration: 4200
-                    })}>
+                          title: "Coming Soon",
+                          description: "The game will be available soon!",
+                          duration: 4200
+                        })}>
                           <Play className="w-4 h-4 mr-2" />
                           Play now
                         </Button>
@@ -2765,12 +2488,12 @@ const Game = () => {
                 <Card className="col-span-4 bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                   <div className="absolute inset-0" style={{
-                backgroundImage: `
+                    backgroundImage: `
                       linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
                       linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
                     `,
-                backgroundSize: '4px 4px'
-              }} />
+                    backgroundSize: '4px 4px'
+                  }} />
                   <CardContent className="p-6">
                     <div className="flex items-center space-x-2 mb-4">
                       <Trophy className="w-5 h-5 text-white" />
@@ -2794,12 +2517,12 @@ const Game = () => {
                 <Card className="col-span-4 bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                   <div className="absolute inset-0" style={{
-                backgroundImage: `
+                    backgroundImage: `
                       linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
                       linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
                     `,
-                backgroundSize: '4px 4px'
-              }} />
+                    backgroundSize: '4px 4px'
+                  }} />
                   <CardContent className="p-6">
                     <div className="flex items-center space-x-2 mb-4">
                       <Gift className="w-5 h-5" />
@@ -2819,8 +2542,7 @@ const Game = () => {
                         <span className="text-sm">x0</span>
                       </div>
                     </div>
-                    {isMobile ? (
-                      <Drawer>
+                    {isMobile ? <Drawer>
                         <DrawerTrigger asChild>
                           <Button variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 w-full relative z-10 transition-all duration-300">
                             Buy Now
@@ -2831,25 +2553,19 @@ const Game = () => {
                             <DrawerTitle className="text-white text-center">Purchase Pack</DrawerTitle>
                           </DrawerHeader>
                           <div className="p-4 space-y-3">
-                            <Button 
-                              className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20"
-                               onClick={() => toast({
-                                 title: "Coming Soon",
-                                 description: "Coin purchases coming soon!",
-                                 duration: 3000
-                               })}
-                            >
+                            <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => toast({
+                            title: "Coming Soon",
+                            description: "Coin purchases coming soon!",
+                            duration: 3000
+                          })}>
                               <Coins className="mr-2 h-4 w-4" />
                               Buy With Coins
                             </Button>
-                            <Button 
-                              className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20"
-                               onClick={() => toast({
-                                 title: "Coming Soon",
-                                 description: "Card payments coming soon!",
-                                 duration: 3000
-                               })}
-                            >
+                            <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => toast({
+                            title: "Coming Soon",
+                            description: "Card payments coming soon!",
+                            duration: 3000
+                          })}>
                               <CreditCard className="mr-2 h-4 w-4" />
                               Buy with Card
                             </Button>
@@ -2860,40 +2576,31 @@ const Game = () => {
                             </DrawerClose>
                           </div>
                         </DrawerContent>
-                      </Drawer>
-                    ) : (
-                      <DropdownMenu>
+                      </Drawer> : <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                           <Button variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 w-full relative z-10 transition-all duration-300">
                             Buy Now
                           </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="center" className="w-full bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
-                          <DropdownMenuItem 
-                             onClick={() => toast({
-                               title: "Coming Soon",
-                               description: "Coin purchases coming soon!",
-                               duration: 3000
-                             })}
-                            className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300"
-                          >
+                          <DropdownMenuItem onClick={() => toast({
+                          title: "Coming Soon",
+                          description: "Coin purchases coming soon!",
+                          duration: 3000
+                        })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
                             <Coins className="w-4 h-4" />
                             <span>Buy With Coins</span>
                           </DropdownMenuItem>
-                          <DropdownMenuItem 
-                             onClick={() => toast({
-                               title: "Coming Soon",
-                               description: "Card payments coming soon!",
-                               duration: 3000
-                             })}
-                            className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300"
-                          >
+                          <DropdownMenuItem onClick={() => toast({
+                          title: "Coming Soon",
+                          description: "Card payments coming soon!",
+                          duration: 3000
+                        })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
                             <CreditCard className="w-4 h-4" />
                             <span>Buy with Card</span>
                           </DropdownMenuItem>
                         </DropdownMenuContent>
-                      </DropdownMenu>
-                    )}
+                      </DropdownMenu>}
                   </CardContent>
                 </Card>
 
@@ -2954,8 +2661,7 @@ const Game = () => {
                 <div className="text-center relative sticky top-0 z-50 bg-black/80 backdrop-blur-md">
                   {/* Category Filter - positioned in top left */}
                   <div className="absolute top-0 left-0">
-                    {isMobile ? (
-                      <Drawer>
+                    {isMobile ? <Drawer>
                         <DrawerTrigger asChild>
                            <Button variant="ghost" size="default" className="text-white hover:bg-white/10 w-18 h-18">
                              <Layers className="w-7 h-7" />
@@ -2966,98 +2672,53 @@ const Game = () => {
                             <DrawerTitle>Filter by Category</DrawerTitle>
                           </DrawerHeader>
                           <div className="px-4 pb-8 space-y-2">
-                            <Button 
-                              variant="ghost" 
-                              onClick={() => setSelectedCategory("all")} 
-                              className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "all" ? "bg-white/20" : ""}`}
-                            >
+                            <Button variant="ghost" onClick={() => setSelectedCategory("all")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "all" ? "bg-white/20" : ""}`}>
                               All Categories
                             </Button>
-                            <Button 
-                              variant="ghost" 
-                              onClick={() => setSelectedCategory("skins")} 
-                              className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "skins" ? "bg-white/20" : ""}`}
-                            >
+                            <Button variant="ghost" onClick={() => setSelectedCategory("skins")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "skins" ? "bg-white/20" : ""}`}>
                               Skins
                             </Button>
-                            <Button 
-                              variant="ghost" 
-                              onClick={() => setSelectedCategory("accessories")} 
-                              className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "accessories" ? "bg-white/20" : ""}`}
-                            >
+                            <Button variant="ghost" onClick={() => setSelectedCategory("accessories")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "accessories" ? "bg-white/20" : ""}`}>
                               Accessories
                             </Button>
-                            <Button 
-                              variant="ghost" 
-                              onClick={() => setSelectedCategory("mobility")} 
-                              className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "mobility" ? "bg-white/20" : ""}`}
-                            >
+                            <Button variant="ghost" onClick={() => setSelectedCategory("mobility")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "mobility" ? "bg-white/20" : ""}`}>
                               Mobility
                             </Button>
-                            <Button 
-                              variant="ghost" 
-                              onClick={() => setSelectedCategory("emotes")} 
-                              className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "emotes" ? "bg-white/20" : ""}`}
-                            >
+                            <Button variant="ghost" onClick={() => setSelectedCategory("emotes")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "emotes" ? "bg-white/20" : ""}`}>
                               Emotes
                             </Button>
-                            <Button 
-                              variant="ghost" 
-                              onClick={() => setSelectedCategory("packs")} 
-                              className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "packs" ? "bg-white/20" : ""}`}
-                            >
+                            <Button variant="ghost" onClick={() => setSelectedCategory("packs")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "packs" ? "bg-white/20" : ""}`}>
                               Packs
                             </Button>
                           </div>
                         </DrawerContent>
-                      </Drawer>
-                    ) : (
-                      <DropdownMenu>
+                      </Drawer> : <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                            <Button variant="ghost" size="default" className="text-white hover:bg-white/10 w-18 h-18">
                              <Layers className="w-7 h-7" />
                           </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
-                          <DropdownMenuItem 
-                            onClick={() => setSelectedCategory("all")} 
-                            className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "all" ? "bg-white/20" : ""}`}
-                          >
+                          <DropdownMenuItem onClick={() => setSelectedCategory("all")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "all" ? "bg-white/20" : ""}`}>
                             <span>All Categories</span>
                           </DropdownMenuItem>
-                          <DropdownMenuItem 
-                            onClick={() => setSelectedCategory("skins")} 
-                            className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "skins" ? "bg-white/20" : ""}`}
-                          >
+                          <DropdownMenuItem onClick={() => setSelectedCategory("skins")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "skins" ? "bg-white/20" : ""}`}>
                             <span>Skins</span>
                           </DropdownMenuItem>
-                          <DropdownMenuItem 
-                            onClick={() => setSelectedCategory("accessories")} 
-                            className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "accessories" ? "bg-white/20" : ""}`}
-                          >
+                          <DropdownMenuItem onClick={() => setSelectedCategory("accessories")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "accessories" ? "bg-white/20" : ""}`}>
                             <span>Accessories</span>
                           </DropdownMenuItem>
-                          <DropdownMenuItem 
-                            onClick={() => setSelectedCategory("mobility")} 
-                            className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "mobility" ? "bg-white/20" : ""}`}
-                          >
+                          <DropdownMenuItem onClick={() => setSelectedCategory("mobility")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "mobility" ? "bg-white/20" : ""}`}>
                             <span>Mobility</span>
                           </DropdownMenuItem>
-                          <DropdownMenuItem 
-                            onClick={() => setSelectedCategory("emotes")} 
-                            className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "emotes" ? "bg-white/20" : ""}`}
-                          >
+                          <DropdownMenuItem onClick={() => setSelectedCategory("emotes")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "emotes" ? "bg-white/20" : ""}`}>
                             <span>Emotes</span>
                           </DropdownMenuItem>
-                          <DropdownMenuItem 
-                            onClick={() => setSelectedCategory("packs")} 
-                            className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "packs" ? "bg-white/20" : ""}`}
-                          >
+                          <DropdownMenuItem onClick={() => setSelectedCategory("packs")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "packs" ? "bg-white/20" : ""}`}>
                             <span>Packs</span>
                           </DropdownMenuItem>
                         </DropdownMenuContent>
-                      </DropdownMenu>
-                    )}
+                      </DropdownMenu>}
                   </div>
                   
                   <div className="flex items-center justify-center space-x-3 mb-4">
@@ -3068,8 +2729,7 @@ const Game = () => {
                   
                   {/* Filter Dropdown - positioned in top right */}
                   <div className="absolute top-1 right-0">
-                    {isMobile ? (
-                      <Drawer>
+                    {isMobile ? <Drawer>
                         <DrawerTrigger asChild>
                            <Button variant="ghost" size="default" className="w-18 h-18 text-white hover:bg-white/10">
                              <Filter className="w-7 h-7" />
@@ -3080,126 +2740,80 @@ const Game = () => {
                             <DrawerTitle>Filter by Rarity</DrawerTitle>
                           </DrawerHeader>
                           <div className="px-4 pb-8 space-y-2">
-                            <Button 
-                              variant="ghost" 
-                              onClick={() => setSelectedRarity("all")} 
-                              className={`w-full justify-start text-white hover:bg-white/10 ${selectedRarity === "all" ? "bg-white/20" : ""}`}
-                            >
+                            <Button variant="ghost" onClick={() => setSelectedRarity("all")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedRarity === "all" ? "bg-white/20" : ""}`}>
                               <div className="w-3 h-3 rounded-full bg-black mr-2" />
                               All Rarities
                             </Button>
-                            <Button 
-                              variant="ghost" 
-                              onClick={() => setSelectedRarity("green")} 
-                              className={`w-full justify-start text-white hover:bg-white/10 ${selectedRarity === "green" ? "bg-white/20" : ""}`}
-                            >
+                            <Button variant="ghost" onClick={() => setSelectedRarity("green")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedRarity === "green" ? "bg-white/20" : ""}`}>
                               <div className="w-3 h-3 rounded-full bg-green-500 mr-2" />
                               Regular
                             </Button>
-                            <Button 
-                              variant="ghost" 
-                              onClick={() => setSelectedRarity("blue")} 
-                              className={`w-full justify-start text-white hover:bg-white/10 ${selectedRarity === "blue" ? "bg-white/20" : ""}`}
-                            >
+                            <Button variant="ghost" onClick={() => setSelectedRarity("blue")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedRarity === "blue" ? "bg-white/20" : ""}`}>
                               <div className="w-3 h-3 rounded-full bg-blue-500 mr-2" />
                               Rare
                             </Button>
-                            <Button 
-                              variant="ghost" 
-                              onClick={() => setSelectedRarity("silver")} 
-                              className={`w-full justify-start text-white hover:bg-white/10 ${selectedRarity === "silver" ? "bg-white/20" : ""}`}
-                            >
+                            <Button variant="ghost" onClick={() => setSelectedRarity("silver")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedRarity === "silver" ? "bg-white/20" : ""}`}>
                               <div className="w-3 h-3 rounded-full bg-gray-300 mr-2" />
                               Legendary
                             </Button>
-                            <Button 
-                              variant="ghost" 
-                              onClick={() => setSelectedRarity("gold")} 
-                              className={`w-full justify-start text-white hover:bg-white/10 ${selectedRarity === "gold" ? "bg-white/20" : ""}`}
-                            >
+                            <Button variant="ghost" onClick={() => setSelectedRarity("gold")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedRarity === "gold" ? "bg-white/20" : ""}`}>
                               <div className="w-3 h-3 rounded-full bg-yellow-400 mr-2" />
                               Mythical
                             </Button>
-                            <Button 
-                              variant="ghost" 
-                              onClick={() => setSelectedRarity("special")} 
-                              className={`w-full justify-start text-white hover:bg-white/10 ${selectedRarity === "special" ? "bg-white/20" : ""}`}
-                            >
+                            <Button variant="ghost" onClick={() => setSelectedRarity("special")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedRarity === "special" ? "bg-white/20" : ""}`}>
                               <div className="w-3 h-3 rounded-full bg-gradient-to-r from-purple-400 via-pink-400 to-yellow-400 mr-2" />
                               Special
                             </Button>
                           </div>
                         </DrawerContent>
-                      </Drawer>
-                    ) : (
-                      <DropdownMenu>
+                      </Drawer> : <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                            <Button variant="ghost" size="default" className="w-18 h-18 text-white hover:bg-white/10">
                              <Filter className="w-7 h-7" />
                           </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
-                          <DropdownMenuItem 
-                            onClick={() => setSelectedRarity("all")} 
-                            className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "all" ? "bg-white/20" : ""}`}
-                          >
+                          <DropdownMenuItem onClick={() => setSelectedRarity("all")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "all" ? "bg-white/20" : ""}`}>
                             <div className="w-3 h-3 rounded-full bg-black" />
                             <span>All Rarities</span>
                           </DropdownMenuItem>
-                          <DropdownMenuItem 
-                            onClick={() => setSelectedRarity("green")} 
-                            className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "green" ? "bg-white/20" : ""}`}
-                          >
+                          <DropdownMenuItem onClick={() => setSelectedRarity("green")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "green" ? "bg-white/20" : ""}`}>
                             <div className="w-3 h-3 rounded-full bg-green-500" />
                             <span>Regular</span>
                           </DropdownMenuItem>
-                          <DropdownMenuItem 
-                            onClick={() => setSelectedRarity("blue")} 
-                            className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "blue" ? "bg-white/20" : ""}`}
-                          >
+                          <DropdownMenuItem onClick={() => setSelectedRarity("blue")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "blue" ? "bg-white/20" : ""}`}>
                             <div className="w-3 h-3 rounded-full bg-blue-500" />
                             <span>Rare</span>
                           </DropdownMenuItem>
-                          <DropdownMenuItem 
-                            onClick={() => setSelectedRarity("silver")} 
-                            className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "silver" ? "bg-white/20" : ""}`}
-                          >
+                          <DropdownMenuItem onClick={() => setSelectedRarity("silver")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "silver" ? "bg-white/20" : ""}`}>
                             <div className="w-3 h-3 rounded-full bg-gray-300" />
                             <span>Legendary</span>
                           </DropdownMenuItem>
-                          <DropdownMenuItem 
-                            onClick={() => setSelectedRarity("gold")} 
-                            className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "gold" ? "bg-white/20" : ""}`}
-                          >
+                          <DropdownMenuItem onClick={() => setSelectedRarity("gold")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "gold" ? "bg-white/20" : ""}`}>
                             <div className="w-3 h-3 rounded-full bg-yellow-400" />
                             <span>Mythical</span>
                           </DropdownMenuItem>
-                          <DropdownMenuItem 
-                            onClick={() => setSelectedRarity("special")} 
-                            className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "special" ? "bg-white/20" : ""}`}
-                          >
+                          <DropdownMenuItem onClick={() => setSelectedRarity("special")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "special" ? "bg-white/20" : ""}`}>
                             <div className="w-3 h-3 rounded-full bg-gradient-to-r from-purple-400 via-pink-400 to-yellow-400" />
                             <span>Special</span>
                           </DropdownMenuItem>
                         </DropdownMenuContent>
-                      </DropdownMenu>
-                    )}
+                      </DropdownMenu>}
                   </div>
                 </div>
 
                 {/* Categories */}
                 <div className="space-y-6">
                   {/* Skins Category */}
-                  {(selectedCategory === "all" || selectedCategory === "skins") && (
-                  <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                  {(selectedCategory === "all" || selectedCategory === "skins") && <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                     <div className="absolute inset-0" style={{
-                  backgroundImage: `
+                      backgroundImage: `
                         linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
                         linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
                       `,
-                  backgroundSize: '4px 4px'
-                }} />
+                      backgroundSize: '4px 4px'
+                    }} />
                     <CardHeader className="relative z-10">
                       <CardTitle className="flex items-center justify-between text-white">
                          <span>Fighters</span>
@@ -3209,26 +2823,26 @@ const Game = () => {
                      <CardContent>
                        <div className="grid grid-cols-4 gap-4">
                          {filterItemsByRarity([{
-                        name: "The Irish King",
-                        price: 2500,
-                        rarity: "gold",
-                        image: irishKingSkin
-                     }, {
-                        name: "Stani Eagle",
-                        price: 1800,
-                        rarity: "blue",
-                        image: staniEagleSkin
-                     }, {
-                        name: "Jonesy Bones",
-                        price: 2200,
-                        rarity: "silver",
-                        image: bonesSkin
-                     }, {
-                        name: "Latin Legend",
-                        price: 1500,
-                        rarity: "green",
-                        image: latinLegendSkin
-                     }]).map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
+                          name: "The Irish King",
+                          price: 2500,
+                          rarity: "gold",
+                          image: irishKingSkin
+                        }, {
+                          name: "Stani Eagle",
+                          price: 1800,
+                          rarity: "blue",
+                          image: staniEagleSkin
+                        }, {
+                          name: "Jonesy Bones",
+                          price: 2200,
+                          rarity: "silver",
+                          image: bonesSkin
+                        }, {
+                          name: "Latin Legend",
+                          price: 1500,
+                          rarity: "green",
+                          image: latinLegendSkin
+                        }]).map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
                             <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
                             <CardContent className="p-4 relative z-10">
                               <div className="aspect-square bg-gray-800/50 rounded-lg mb-3 overflow-hidden">
@@ -3247,25 +2861,19 @@ const Game = () => {
                                     </Button>
                                   </DropdownMenuTrigger>
                                   <DropdownMenuContent align="start" className="w-full lg:w-full bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
-                                    <DropdownMenuItem 
-                                       onClick={() => toast({
-                                         title: "Coming Soon",
-                                         description: "Coin purchases coming soon!",
-                                         duration: 3000
-                                       })}
-                                      className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300"
-                                    >
+                                    <DropdownMenuItem onClick={() => toast({
+                                    title: "Coming Soon",
+                                    description: "Coin purchases coming soon!",
+                                    duration: 3000
+                                  })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
                                       <Coins className="w-4 h-4" />
                                       <span>Buy With Coins</span>
                                     </DropdownMenuItem>
-                                    <DropdownMenuItem 
-                                       onClick={() => toast({
-                                         title: "Coming Soon",
-                                         description: "Card payments coming soon!",
-                                         duration: 3000
-                                       })}
-                                      className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300"
-                                    >
+                                    <DropdownMenuItem onClick={() => toast({
+                                    title: "Coming Soon",
+                                    description: "Card payments coming soon!",
+                                    duration: 3000
+                                  })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
                                       <CreditCard className="w-4 h-4" />
                                       <span>Buy with Card</span>
                                     </DropdownMenuItem>
@@ -3276,20 +2884,18 @@ const Game = () => {
                           </Card>)}
                       </div>
                      </CardContent>
-                   </Card>
-                   )}
+                   </Card>}
 
                    {/* Accessories Category */}
-                   {(selectedCategory === "all" || selectedCategory === "accessories") && (
-                   <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                   {(selectedCategory === "all" || selectedCategory === "accessories") && <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                     <div className="absolute inset-0" style={{
-                  backgroundImage: `
+                      backgroundImage: `
                         linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
                         linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
                       `,
-                  backgroundSize: '4px 4px'
-                }} />
+                      backgroundSize: '4px 4px'
+                    }} />
                     <CardHeader className="relative z-10">
                       <CardTitle className="flex items-center justify-between text-white">
                         <span>Accessories</span>
@@ -3299,26 +2905,26 @@ const Game = () => {
                      <CardContent>
                        <div className="grid grid-cols-4 gap-4">
                          {filterItemsByRarity([{
-                       name: "Red Wing Suit",
-                       price: 600,
-                       rarity: "blue",
-                        image: "/lovable-uploads/2eec4a9a-97d3-4ba4-9508-2eeef0011139.png"
-                     }, {
-                       name: "Blue Wing Suit",
-                       price: 450,
-                       rarity: "green",
-                        image: "/lovable-uploads/1efc1553-007a-4b38-a982-79d9f5abbfa1.png"
-                     }, {
-                        name: "White Base Vest",
-                       price: 750,
-                       rarity: "special",
-                       image: "/lovable-uploads/508d1509-e761-46c6-9f3a-f70e256f5a52.png"
-                     }, {
-                        name: "Grey Base Vest",
-                        price: 550,
-                        rarity: "silver",
-                        image: "/lovable-uploads/91375d1a-e829-4716-b3b6-833b58355bd9.png"
-                     }]).map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
+                          name: "Red Wing Suit",
+                          price: 600,
+                          rarity: "blue",
+                          image: "/lovable-uploads/2eec4a9a-97d3-4ba4-9508-2eeef0011139.png"
+                        }, {
+                          name: "Blue Wing Suit",
+                          price: 450,
+                          rarity: "green",
+                          image: "/lovable-uploads/1efc1553-007a-4b38-a982-79d9f5abbfa1.png"
+                        }, {
+                          name: "White Base Vest",
+                          price: 750,
+                          rarity: "special",
+                          image: "/lovable-uploads/508d1509-e761-46c6-9f3a-f70e256f5a52.png"
+                        }, {
+                          name: "Grey Base Vest",
+                          price: 550,
+                          rarity: "silver",
+                          image: "/lovable-uploads/91375d1a-e829-4716-b3b6-833b58355bd9.png"
+                        }]).map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
                             <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
                             <CardContent className="p-4 relative z-10">
                               <div className="aspect-square bg-gray-800/50 rounded-lg mb-3 overflow-hidden">
@@ -3337,25 +2943,19 @@ const Game = () => {
                                     </Button>
                                   </DropdownMenuTrigger>
                                   <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
-                                    <DropdownMenuItem 
-                                       onClick={() => toast({
-                                         title: "Coming Soon",
-                                         description: "Coin purchases coming soon!",
-                                         duration: 3000
-                                       })}
-                                      className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300"
-                                    >
+                                    <DropdownMenuItem onClick={() => toast({
+                                    title: "Coming Soon",
+                                    description: "Coin purchases coming soon!",
+                                    duration: 3000
+                                  })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
                                       <Coins className="w-4 h-4" />
                                       <span>Buy With Coins</span>
                                     </DropdownMenuItem>
-                                    <DropdownMenuItem 
-                                       onClick={() => toast({
-                                         title: "Coming Soon",
-                                         description: "Card payments coming soon!",
-                                         duration: 3000
-                                       })}
-                                      className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300"
-                                    >
+                                    <DropdownMenuItem onClick={() => toast({
+                                    title: "Coming Soon",
+                                    description: "Card payments coming soon!",
+                                    duration: 3000
+                                  })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
                                       <CreditCard className="w-4 h-4" />
                                       <span>Buy with Card</span>
                                     </DropdownMenuItem>
@@ -3366,20 +2966,18 @@ const Game = () => {
                           </Card>)}
                       </div>
                      </CardContent>
-                   </Card>
-                   )}
+                   </Card>}
 
                    {/* Mobility Category */}
-                   {(selectedCategory === "all" || selectedCategory === "mobility") && (
-                   <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                   {(selectedCategory === "all" || selectedCategory === "mobility") && <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                     <div className="absolute inset-0" style={{
-                  backgroundImage: `
+                      backgroundImage: `
                         linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
                         linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
                       `,
-                  backgroundSize: '4px 4px'
-                }} />
+                      backgroundSize: '4px 4px'
+                    }} />
                     <CardHeader className="relative z-10">
                       <CardTitle className="flex items-center justify-between text-white">
                         <span>Mobility</span>
@@ -3389,26 +2987,26 @@ const Game = () => {
                      <CardContent>
                        <div className="grid grid-cols-4 gap-4">
                          {filterItemsByRarity([{
-                        name: "The Coupé Tank",
-                       price: 5000,
-                       rarity: "gold",
-                        image: "/lovable-uploads/1c6b707c-97a6-4381-bc54-de63a7cf8a31.png"
-                      }, {
-                        name: "Speed Buggy",
-                        price: 3200,
-                        rarity: "silver",
-                        image: "/lovable-uploads/b64d7801-1284-4763-b115-ca3cfa8ff315.png"
-                     }, {
-                        name: "Pit Bike",
-                        price: 4500,
-                        rarity: "blue",
-                        image: "/lovable-uploads/4e2aac54-cac6-4cf1-92ad-76bf7e788077.png"
-                     }, {
-                        name: "Pogo",
-                        price: 8000,
-                        rarity: "special",
-                        image: "/lovable-uploads/2877ff38-b9fd-4a5d-bca9-25b14f237997.png"
-                     }]).map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
+                          name: "The Coupé Tank",
+                          price: 5000,
+                          rarity: "gold",
+                          image: "/lovable-uploads/1c6b707c-97a6-4381-bc54-de63a7cf8a31.png"
+                        }, {
+                          name: "Speed Buggy",
+                          price: 3200,
+                          rarity: "silver",
+                          image: "/lovable-uploads/b64d7801-1284-4763-b115-ca3cfa8ff315.png"
+                        }, {
+                          name: "Pit Bike",
+                          price: 4500,
+                          rarity: "blue",
+                          image: "/lovable-uploads/4e2aac54-cac6-4cf1-92ad-76bf7e788077.png"
+                        }, {
+                          name: "Pogo",
+                          price: 8000,
+                          rarity: "special",
+                          image: "/lovable-uploads/2877ff38-b9fd-4a5d-bca9-25b14f237997.png"
+                        }]).map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
                             <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
                             <CardContent className="p-4 relative z-10">
                               <div className="aspect-square bg-gray-800/50 rounded-lg mb-3 overflow-hidden">
@@ -3427,25 +3025,19 @@ const Game = () => {
                                     </Button>
                                   </DropdownMenuTrigger>
                                   <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
-                                    <DropdownMenuItem 
-                                       onClick={() => toast({
-                                         title: "Coming Soon",
-                                         description: "Coin purchases coming soon!",
-                                         duration: 3000
-                                       })}
-                                      className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300"
-                                    >
+                                    <DropdownMenuItem onClick={() => toast({
+                                    title: "Coming Soon",
+                                    description: "Coin purchases coming soon!",
+                                    duration: 3000
+                                  })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
                                       <Coins className="w-4 h-4" />
                                       <span>Buy With Coins</span>
                                     </DropdownMenuItem>
-                                    <DropdownMenuItem 
-                                       onClick={() => toast({
-                                         title: "Coming Soon",
-                                         description: "Card payments coming soon!",
-                                         duration: 3000
-                                       })}
-                                      className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300"
-                                    >
+                                    <DropdownMenuItem onClick={() => toast({
+                                    title: "Coming Soon",
+                                    description: "Card payments coming soon!",
+                                    duration: 3000
+                                  })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
                                       <CreditCard className="w-4 h-4" />
                                       <span>Buy with Card</span>
                                     </DropdownMenuItem>
@@ -3456,20 +3048,18 @@ const Game = () => {
                           </Card>)}
                       </div>
                      </CardContent>
-                   </Card>
-                   )}
+                   </Card>}
 
                    {/* Emotes Category */}
-                   {(selectedCategory === "all" || selectedCategory === "emotes") && (
-                   <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                   {(selectedCategory === "all" || selectedCategory === "emotes") && <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                     <div className="absolute inset-0" style={{
-                  backgroundImage: `
+                      backgroundImage: `
                         linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
                         linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
                       `,
-                  backgroundSize: '4px 4px'
-                }} />
+                      backgroundSize: '4px 4px'
+                    }} />
                     <CardHeader className="relative z-10">
                       <CardTitle className="flex items-center justify-between text-white">
                         <span>Emotes</span>
@@ -3479,34 +3069,30 @@ const Game = () => {
                      <CardContent>
                        <div className="grid grid-cols-4 gap-4">
                          {filterItemsByRarity([{
-                        name: "Flex",
-                        price: 800,
-                        rarity: "blue",
-                        image: "/lovable-uploads/f52e83c2-28b7-417e-90ac-757255d1759f.png"
-                       }, {
-                        name: "Fists Up",
-                        price: 1800,
-                        rarity: "gold",
-                        image: "/lovable-uploads/370bd874-ad5c-467d-b844-55688b1a0f9a.png"
-                      }, {
-                        name: "Squeaky Dance",
-                        price: 2500,
-                        rarity: "special",
-                        image: "/lovable-uploads/5c8c027e-3baf-4550-96a9-ba0715d11506.png"
-                      }, {
-                        name: "u want sum?",
-                        price: 1500,
-                        rarity: "gold",
-                        image: "/lovable-uploads/30d419b4-79a9-459c-b37b-42099ffd6273.png"
-                      }]).map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
+                          name: "Flex",
+                          price: 800,
+                          rarity: "blue",
+                          image: "/lovable-uploads/f52e83c2-28b7-417e-90ac-757255d1759f.png"
+                        }, {
+                          name: "Fists Up",
+                          price: 1800,
+                          rarity: "gold",
+                          image: "/lovable-uploads/370bd874-ad5c-467d-b844-55688b1a0f9a.png"
+                        }, {
+                          name: "Squeaky Dance",
+                          price: 2500,
+                          rarity: "special",
+                          image: "/lovable-uploads/5c8c027e-3baf-4550-96a9-ba0715d11506.png"
+                        }, {
+                          name: "u want sum?",
+                          price: 1500,
+                          rarity: "gold",
+                          image: "/lovable-uploads/30d419b4-79a9-459c-b37b-42099ffd6273.png"
+                        }]).map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
                             <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
                             <CardContent className="p-4 relative z-10">
                               <div className="aspect-square bg-gray-800/50 rounded-lg mb-3 overflow-hidden flex items-center justify-center">
-                                 {item.image.startsWith('/') || item.image.startsWith('http') ? (
-                                   <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
-                                 ) : (
-                                   <div className="text-6xl">{item.image}</div>
-                                 )}
+                                 {item.image.startsWith('/') || item.image.startsWith('http') ? <img src={item.image} alt={item.name} className="w-full h-full object-cover" /> : <div className="text-6xl">{item.image}</div>}
                               </div>
                               <h3 className="font-semibold text-sm text-white mb-2">{item.name}</h3>
                               <div className="flex items-center justify-between">
@@ -3521,25 +3107,19 @@ const Game = () => {
                                     </Button>
                                   </DropdownMenuTrigger>
                                   <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
-                                    <DropdownMenuItem 
-                                       onClick={() => toast({
-                                         title: "Coming Soon",
-                                         description: "Coin purchases coming soon!",
-                                         duration: 3000
-                                       })}
-                                      className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300"
-                                    >
+                                    <DropdownMenuItem onClick={() => toast({
+                                    title: "Coming Soon",
+                                    description: "Coin purchases coming soon!",
+                                    duration: 3000
+                                  })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
                                       <Coins className="w-4 h-4" />
                                       <span>Buy With Coins</span>
                                     </DropdownMenuItem>
-                                    <DropdownMenuItem 
-                                       onClick={() => toast({
-                                         title: "Coming Soon",
-                                         description: "Card payments coming soon!",
-                                         duration: 3000
-                                       })}
-                                      className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300"
-                                    >
+                                    <DropdownMenuItem onClick={() => toast({
+                                    title: "Coming Soon",
+                                    description: "Card payments coming soon!",
+                                    duration: 3000
+                                  })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
                                       <CreditCard className="w-4 h-4" />
                                       <span>Buy with Card</span>
                                     </DropdownMenuItem>
@@ -3550,20 +3130,18 @@ const Game = () => {
                           </Card>)}
                       </div>
                      </CardContent>
-                   </Card>
-                   )}
+                   </Card>}
 
                    {/* Packs Category */}
-                   {(selectedCategory === "all" || selectedCategory === "packs") && (
-                   <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                   {(selectedCategory === "all" || selectedCategory === "packs") && <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                     <div className="absolute inset-0" style={{
-                  backgroundImage: `
+                      backgroundImage: `
                         linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
                         linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
                       `,
-                  backgroundSize: '4px 4px'
-                }} />
+                      backgroundSize: '4px 4px'
+                    }} />
                     <CardHeader className="relative z-10">
                       <CardTitle className="flex items-center justify-between text-white">
                         <span>Packs</span>
@@ -3573,26 +3151,26 @@ const Game = () => {
                      <CardContent>
                        <div className="grid grid-cols-4 gap-4">
                          {filterItemsByRarity([{
-                        name: "Silver Pack",
-                        price: 1000,
-                        rarity: "silver",
-                        image: "/lovable-uploads/17c3a939-bcaa-4cdb-9b61-271b5774c7e2.png"
-                     }, {
-                        name: "Gold Pack",
-                        price: 2000,
-                        rarity: "gold",
-                        image: "/lovable-uploads/291c5734-f144-47b0-9f49-915999e921b0.png"
-                     }, {
-                        name: "EO Summer Pack",
-                        price: 3500,
-                        rarity: "special",
-                        image: "/lovable-uploads/2149e9ad-919f-49ea-8be4-90f190387d39.png"
-                     }, {
-                        name: "Wild West Pack",
-                       price: 5000,
-                       rarity: "special",
-                       image: "/lovable-uploads/5cf8ad93-f292-4e4c-b53c-eb0c4bc0f7be.png"
-                     }]).map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
+                          name: "Silver Pack",
+                          price: 1000,
+                          rarity: "silver",
+                          image: "/lovable-uploads/17c3a939-bcaa-4cdb-9b61-271b5774c7e2.png"
+                        }, {
+                          name: "Gold Pack",
+                          price: 2000,
+                          rarity: "gold",
+                          image: "/lovable-uploads/291c5734-f144-47b0-9f49-915999e921b0.png"
+                        }, {
+                          name: "EO Summer Pack",
+                          price: 3500,
+                          rarity: "special",
+                          image: "/lovable-uploads/2149e9ad-919f-49ea-8be4-90f190387d39.png"
+                        }, {
+                          name: "Wild West Pack",
+                          price: 5000,
+                          rarity: "special",
+                          image: "/lovable-uploads/5cf8ad93-f292-4e4c-b53c-eb0c4bc0f7be.png"
+                        }]).map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
                             <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
                             <CardContent className="p-4 relative z-10">
                               <div className="aspect-square bg-gray-800/50 rounded-lg mb-3 overflow-hidden">
@@ -3611,25 +3189,19 @@ const Game = () => {
                                     </Button>
                                   </DropdownMenuTrigger>
                                   <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
-                                    <DropdownMenuItem 
-                                       onClick={() => toast({
-                                         title: "Coming Soon",
-                                         description: "Coin purchases coming soon!",
-                                         duration: 3000
-                                       })}
-                                      className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300"
-                                    >
+                                    <DropdownMenuItem onClick={() => toast({
+                                    title: "Coming Soon",
+                                    description: "Coin purchases coming soon!",
+                                    duration: 3000
+                                  })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
                                       <Coins className="w-4 h-4" />
                                       <span>Buy With Coins</span>
                                     </DropdownMenuItem>
-                                    <DropdownMenuItem 
-                                       onClick={() => toast({
-                                         title: "Coming Soon",
-                                         description: "Card payments coming soon!",
-                                         duration: 3000
-                                       })}
-                                      className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300"
-                                    >
+                                    <DropdownMenuItem onClick={() => toast({
+                                    title: "Coming Soon",
+                                    description: "Card payments coming soon!",
+                                    duration: 3000
+                                  })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
                                       <CreditCard className="w-4 h-4" />
                                       <span>Buy with Card</span>
                                     </DropdownMenuItem>
@@ -3640,8 +3212,7 @@ const Game = () => {
                           </Card>)}
                       </div>
                      </CardContent>
-                   </Card>
-                   )}
+                   </Card>}
                   </div>
                 </div>
                  </div>
@@ -3665,12 +3236,12 @@ const Game = () => {
                   <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                     <div className="absolute inset-0" style={{
-                  backgroundImage: `
+                      backgroundImage: `
                         linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
                         linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
                       `,
-                  backgroundSize: '4px 4px'
-                }} />
+                      backgroundSize: '4px 4px'
+                    }} />
                     <CardHeader className="relative z-10">
                       <CardTitle className="text-lg flex items-center space-x-2 text-white">
                         <BarChart3 className="w-5 h-5" />
@@ -3680,8 +3251,8 @@ const Game = () => {
                         <div className="flex items-center space-x-2">
                           <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4" />
                           <span className="text-xl font-bold text-white">{currentMarketValue.toLocaleString('en-US', {
-                          maximumFractionDigits: 0
-                        })}</span>
+                              maximumFractionDigits: 0
+                            })}</span>
                         </div>
                       </CardDescription>
                     </CardHeader>
@@ -3691,24 +3262,23 @@ const Game = () => {
                           <AreaChart data={marketValueData}>
                             <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
                             <XAxis dataKey="date" tick={{
-                          fontSize: 12,
-                          fill: 'rgba(255,255,255,0.7)'
-                        }} />
+                              fontSize: 12,
+                              fill: 'rgba(255,255,255,0.7)'
+                            }} />
                             <YAxis tick={{
-                          fontSize: 12,
-                          fill: 'rgba(255,255,255,0.7)'
-                        }} />
-                            <Tooltip 
-                              labelStyle={{
-                                color: '#000'
-                              }} 
-                              contentStyle={{
-                                backgroundColor: 'rgba(0,0,0,0.8)',
-                                border: '1px solid rgba(255,255,255,0.2)',
-                                borderRadius: '8px'
-                              }}
-                              formatter={(value) => [Number(value).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }), 'Market Value']}
-                            />
+                              fontSize: 12,
+                              fill: 'rgba(255,255,255,0.7)'
+                            }} />
+                            <Tooltip labelStyle={{
+                              color: '#000'
+                            }} contentStyle={{
+                              backgroundColor: 'rgba(0,0,0,0.8)',
+                              border: '1px solid rgba(255,255,255,0.2)',
+                              borderRadius: '8px'
+                            }} formatter={value => [Number(value).toLocaleString('en-US', {
+                              minimumFractionDigits: 2,
+                              maximumFractionDigits: 2
+                            }), 'Market Value']} />
                             <Area type="monotone" dataKey="value" stroke="hsl(var(--primary))" fill="hsl(var(--primary))" fillOpacity={0.3} strokeWidth={2} />
                           </AreaChart>
                         </ResponsiveContainer>
@@ -3720,12 +3290,12 @@ const Game = () => {
                   <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                     <div className="absolute inset-0" style={{
-                  backgroundImage: `
+                      backgroundImage: `
                         linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
                         linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
                       `,
-                  backgroundSize: '4px 4px'
-                }} />
+                      backgroundSize: '4px 4px'
+                    }} />
                     <CardHeader className="relative z-10">
                       <CardTitle className="text-lg flex items-center space-x-2 text-white">
                         <LineChart className="w-5 h-5" />
@@ -3741,27 +3311,20 @@ const Game = () => {
                           <AreaChart data={listingsData}>
                             <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
                             <XAxis dataKey="date" tick={{
-                          fontSize: 12,
-                          fill: 'rgba(255,255,255,0.7)'
-                        }} />
-                            <YAxis 
-                              tick={{
-                                fontSize: 12,
-                                fill: 'rgba(255,255,255,0.7)'
-                              }}
-                              tickFormatter={(value) => Math.round(value).toString()}
-                            />
-                            <Tooltip 
-                              labelStyle={{
-                                color: '#000'
-                              }} 
-                              contentStyle={{
-                                backgroundColor: 'rgba(0,0,0,0.8)',
-                                border: '1px solid rgba(255,255,255,0.2)',
-                                borderRadius: '8px'
-                              }}
-                              formatter={(value) => [Math.round(Number(value)), 'Listings']}
-                            />
+                              fontSize: 12,
+                              fill: 'rgba(255,255,255,0.7)'
+                            }} />
+                            <YAxis tick={{
+                              fontSize: 12,
+                              fill: 'rgba(255,255,255,0.7)'
+                            }} tickFormatter={value => Math.round(value).toString()} />
+                            <Tooltip labelStyle={{
+                              color: '#000'
+                            }} contentStyle={{
+                              backgroundColor: 'rgba(0,0,0,0.8)',
+                              border: '1px solid rgba(255,255,255,0.2)',
+                              borderRadius: '8px'
+                            }} formatter={value => [Math.round(Number(value)), 'Listings']} />
                             <Area type="monotone" dataKey="listings" stroke="hsl(var(--primary))" fill="hsl(var(--primary))" fillOpacity={0.3} strokeWidth={2} />
                           </AreaChart>
                         </ResponsiveContainer>
@@ -3776,12 +3339,12 @@ const Game = () => {
                   <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                     <div className="absolute inset-0" style={{
-                  backgroundImage: `
+                      backgroundImage: `
                         linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
                         linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
                       `,
-                  backgroundSize: '4px 4px'
-                }} />
+                      backgroundSize: '4px 4px'
+                    }} />
                     <CardHeader className="relative z-10">
                       <div className="flex items-center justify-between mb-3">
                         <CardTitle className="text-lg flex items-center space-x-2 text-white">
@@ -3790,21 +3353,9 @@ const Game = () => {
                         </CardTitle>
                       </div>
                       <div className="flex flex-wrap gap-2">
-                        {['daily', 'weekly', 'monthly', 'all time'].map((period) => (
-                          <Button
-                            key={period}
-                            variant={trendingTimeFilter === period ? "secondary" : "ghost"}
-                            size="sm"
-                            onClick={() => setTrendingTimeFilter(period)}
-                            className={`text-xs px-3 py-1 h-7 ${
-                              trendingTimeFilter === period 
-                                ? "bg-white/20 text-white border-white/30" 
-                                : "bg-white/5 text-gray-300 hover:bg-white/10 hover:text-white"
-                            }`}
-                          >
+                        {['daily', 'weekly', 'monthly', 'all time'].map(period => <Button key={period} variant={trendingTimeFilter === period ? "secondary" : "ghost"} size="sm" onClick={() => setTrendingTimeFilter(period)} className={`text-xs px-3 py-1 h-7 ${trendingTimeFilter === period ? "bg-white/20 text-white border-white/30" : "bg-white/5 text-gray-300 hover:bg-white/10 hover:text-white"}`}>
                             {period.charAt(0).toUpperCase() + period.slice(1)}
-                          </Button>
-                        ))}
+                          </Button>)}
                       </div>
                     </CardHeader>
                     <CardContent className="relative z-10">
@@ -3838,12 +3389,12 @@ const Game = () => {
                   <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                     <div className="absolute inset-0" style={{
-                  backgroundImage: `
+                      backgroundImage: `
                         linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
                         linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
                       `,
-                  backgroundSize: '4px 4px'
-                }} />
+                      backgroundSize: '4px 4px'
+                    }} />
                     <CardHeader className="relative z-10">
                       <div className="flex items-center justify-between mb-3">
                         <CardTitle className="text-lg flex items-center space-x-2 text-white">
@@ -3853,18 +3404,18 @@ const Game = () => {
                       </div>
                       <div className="flex space-x-2">
                         {[{
-                      key: "daily",
-                      label: "Daily"
-                    }, {
-                      key: "weekly",
-                      label: "Weekly"
-                    }, {
-                      key: "monthly",
-                      label: "Monthly"
-                    }, {
-                      key: "alltime",
-                      label: "All Time"
-                    }].map(filter => <Button key={filter.key} variant={gainersTimeFilter === filter.key ? "secondary" : "ghost"} size="sm" className={`text-xs ${gainersTimeFilter === filter.key ? "bg-white/20 text-white border-white/30" : "bg-white/5 text-gray-300 hover:bg-white/10 hover:text-white"}`} onClick={() => setGainersTimeFilter(filter.key)}>
+                          key: "daily",
+                          label: "Daily"
+                        }, {
+                          key: "weekly",
+                          label: "Weekly"
+                        }, {
+                          key: "monthly",
+                          label: "Monthly"
+                        }, {
+                          key: "alltime",
+                          label: "All Time"
+                        }].map(filter => <Button key={filter.key} variant={gainersTimeFilter === filter.key ? "secondary" : "ghost"} size="sm" className={`text-xs ${gainersTimeFilter === filter.key ? "bg-white/20 text-white border-white/30" : "bg-white/5 text-gray-300 hover:bg-white/10 hover:text-white"}`} onClick={() => setGainersTimeFilter(filter.key)}>
                             {filter.label}
                           </Button>)}
                       </div>
@@ -3901,12 +3452,12 @@ const Game = () => {
                 <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                   <div className="absolute inset-0" style={{
-                backgroundImage: `
+                    backgroundImage: `
                       linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
                       linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
                     `,
-                backgroundSize: '4px 4px'
-              }} />
+                    backgroundSize: '4px 4px'
+                  }} />
                   <CardHeader className="relative z-10">
                     <CardTitle className="text-lg flex items-center justify-between text-white">
                       <span>All Fighters - Most Expensive First</span>
@@ -3955,25 +3506,19 @@ const Game = () => {
                                     </Button>
                                   </DropdownMenuTrigger>
                                   <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
-                                    <DropdownMenuItem 
-                         onClick={() => toast({
-                           title: "Coming Soon",
-                           description: "Coin purchases coming soon!",
-                           duration: 3000
-                         })}
-                                      className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300"
-                                    >
+                                    <DropdownMenuItem onClick={() => toast({
+                                    title: "Coming Soon",
+                                    description: "Coin purchases coming soon!",
+                                    duration: 3000
+                                  })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
                                       <Coins className="w-4 h-4" />
                                       <span>Buy With Coins</span>
                                     </DropdownMenuItem>
-                                    <DropdownMenuItem 
-                                       onClick={() => toast({
-                                         title: "Coming Soon",
-                                         description: "Card payments coming soon!",
-                                         duration: 3000
-                                       })}
-                                      className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300"
-                                    >
+                                    <DropdownMenuItem onClick={() => toast({
+                                    title: "Coming Soon",
+                                    description: "Card payments coming soon!",
+                                    duration: 3000
+                                  })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
                                       <CreditCard className="w-4 h-4" />
                                       <span>Buy with Card</span>
                                     </DropdownMenuItem>
@@ -4011,12 +3556,12 @@ const Game = () => {
                 {!authenticated ? <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                     <div className="absolute inset-0" style={{
-              backgroundImage: `
+                    backgroundImage: `
                         linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
                         linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
                       `,
-              backgroundSize: '4px 4px'
-            }} />
+                    backgroundSize: '4px 4px'
+                  }} />
                     <CardContent className="p-6 text-center relative z-10">
                        <Package className="w-16 h-16 mx-auto text-gray-400 mb-4" />
                        <h3 className="text-lg font-semibold mb-2 text-white">Login to View Your Locker</h3>
@@ -4030,12 +3575,12 @@ const Game = () => {
                     <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
                       <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                       <div className="absolute inset-0" style={{
-                        backgroundImage: `
+                      backgroundImage: `
                           linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
                           linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
                         `,
-                        backgroundSize: '4px 4px'
-                      }} />
+                      backgroundSize: '4px 4px'
+                    }} />
                       <CardHeader className="relative z-10">
                         <CardTitle className="flex items-center justify-between text-white">
                           <span>Skins</span>
@@ -4058,12 +3603,12 @@ const Game = () => {
                     <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
                       <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                       <div className="absolute inset-0" style={{
-                        backgroundImage: `
+                      backgroundImage: `
                           linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
                           linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
                         `,
-                        backgroundSize: '4px 4px'
-                      }} />
+                      backgroundSize: '4px 4px'
+                    }} />
                       <CardHeader className="relative z-10">
                         <CardTitle className="flex items-center justify-between text-white">
                           <span>Accessories</span>
@@ -4086,12 +3631,12 @@ const Game = () => {
                     <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
                       <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                       <div className="absolute inset-0" style={{
-                        backgroundImage: `
+                      backgroundImage: `
                           linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
                           linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
                         `,
-                        backgroundSize: '4px 4px'
-                      }} />
+                      backgroundSize: '4px 4px'
+                    }} />
                       <CardHeader className="relative z-10">
                         <CardTitle className="flex items-center justify-between text-white">
                           <span>Mobility</span>
@@ -4141,205 +3686,6 @@ const Game = () => {
               <TabsContent value="rankings" className="flex-1 overflow-y-auto space-y-2 -mt-2 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] bg-black">
                 <p className="text-sm text-muted-foreground text-center pb-2 pt-6">Weekly prize pool: $0</p>
                 {[{
-                rank: 1,
-                name: "CryptoKing",
-                level: 15,
-                points: 15420,
-                avatar: "👑"
-              }, {
-                rank: 2,
-                 name: "BlockMaster",
-                 level: 14,
-                 points: 14890,
-                 avatar: "👑"
-              }, {
-                rank: 3,
-                 name: "ChainWarrior",
-                 level: 14,
-                 points: 14320,
-                 avatar: "👑"
-              }, {
-                rank: 4,
-                 name: "TokenSlayer",
-                 level: 13,
-                 points: 13780,
-                 avatar: "👑"
-              }, {
-                rank: 5,
-                 name: "NFTChampion",
-                 level: 13,
-                 points: 13240,
-                 avatar: "👑"
-              }, {
-                rank: 6,
-                 name: "DeFiGamer",
-                 level: 12,
-                 points: 12890,
-                 avatar: "👑"
-              }, {
-                rank: 7,
-                 name: "MetaPlayer",
-                 level: 12,
-                 points: 12450,
-                 avatar: "👑"
-              }, {
-                rank: 8,
-                 name: "Web3Hero",
-                 level: 12,
-                 points: 12120,
-                 avatar: "👑"
-              }, {
-                rank: 9,
-                 name: "CoinMaster",
-                 level: 11,
-                 points: 11780,
-                 avatar: "👑"
-              }, {
-                rank: 10,
-                 name: "BlockHero",
-                 level: 11,
-                 points: 11340,
-                 avatar: "👑"
-              }, {
-                rank: 11,
-                 name: "SmartTrader",
-                 level: 10,
-                 points: 10920,
-                 avatar: "👑"
-              }, {
-                rank: 12,
-                 name: "CyberNinja",
-                 level: 10,
-                 points: 10540,
-                 avatar: "👑"
-              }, {
-                rank: 13,
-                 name: "QuantumGamer",
-                 level: 10,
-                 points: 10180,
-                 avatar: "👑"
-              }, {
-                rank: 14,
-                 name: "PixelMaster",
-                 level: 9,
-                 points: 9840,
-                 avatar: "💪"
-              }, {
-                rank: 15,
-                 name: "CodeWarrior",
-                 level: 9,
-                 points: 9520,
-                 avatar: "💪"
-              }, {
-                rank: 16,
-                 name: "AlgoTrader",
-                 level: 9,
-                 points: 9210,
-                 avatar: "💪"
-              }, {
-                rank: 17,
-                 name: "BitCrusher",
-                 level: 8,
-                 points: 8920,
-                 avatar: "🔥"
-              }, {
-                rank: 18,
-                 name: "EtherLord",
-                 level: 8,
-                 points: 8650,
-                 avatar: "🔥"
-              }, {
-                rank: 19,
-                 name: "GameChanger",
-                 level: 8,
-                 points: 8390,
-                 avatar: "🔥"
-              }, {
-                rank: 20,
-                 name: "TechSavvy",
-                 level: 8,
-                 points: 8140,
-                 avatar: "🔥"
-              }, {
-                rank: 21,
-                 name: "DigitalNomad",
-                 level: 7,
-                 points: 7910,
-                 avatar: "⭐"
-              }, {
-                rank: 22,
-                 name: "CryptoSage",
-                 level: 7,
-                 points: 7690,
-                 avatar: "⭐"
-              }, {
-                rank: 23,
-                 name: "BlockBuilder",
-                 level: 7,
-                 points: 7480,
-                 avatar: "⭐"
-              }, {
-                rank: 24,
-                 name: "TokenHunter",
-                 level: 7,
-                 points: 7280,
-                 avatar: "⭐"
-              }, {
-                rank: 25,
-                 name: "ChainLink",
-                 level: 7,
-                 points: 7090,
-                 avatar: "⭐"
-              }].map(player => <div key={player.rank} className="flex items-center space-x-3 p-3 rounded-lg hover:bg-muted/50 transition-colors">
-                    <div className="flex-shrink-0 w-8 text-center">
-                      {player.rank <= 3 ? <Medal className={`w-5 h-5 ${player.rank === 1 ? 'text-yellow-400' : player.rank === 2 ? 'text-gray-300' : 'text-amber-600'}`} /> : <span className="text-sm font-medium text-muted-foreground">#{player.rank}</span>}
-                    </div>
-                    
-                    <Avatar className="w-8 h-8">
-                      <AvatarFallback className="text-sm">{player.avatar}</AvatarFallback>
-                    </Avatar>
-                    
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center justify-between">
-                        <p className="text-sm font-medium truncate">{player.name}</p>
-                        <Badge variant="outline" className="text-xs">Lv.{player.level}</Badge>
-                      </div>
-                      <p className="text-xs text-muted-foreground">{player.points.toLocaleString()} XP</p>
-                    </div>
-                  </div>)}
-              </TabsContent>
-            </Tabs>
-          </aside>
-        </div>
-      </div>
-
-      {/* Mobile Notifications Drawer */}
-      <Drawer open={isNotificationsOpen} onOpenChange={setIsNotificationsOpen}>
-        <DrawerContent className="bg-black/20 backdrop-blur-md border-white/10">
-          <DrawerHeader>
-            <DrawerTitle className="text-center text-white">Notifications</DrawerTitle>
-          </DrawerHeader>
-          <div className="px-4 pb-6">
-            <div className="text-center py-8">
-              <Bell className="w-12 h-12 mx-auto text-white/50 mb-4" />
-              <p className="text-sm text-white/70">
-                You'll see game updates and important announcements here
-              </p>
-            </div>
-          </div>
-        </DrawerContent>
-      </Drawer>
-
-      {/* Mobile Rankings Drawer */}
-      <Drawer open={isRankingsOpen} onOpenChange={setIsRankingsOpen}>
-        <DrawerContent className="bg-black/20 backdrop-blur-md border-white/10 max-h-[80vh]">
-          <DrawerHeader>
-            <DrawerTitle className="text-center text-white">Rankings</DrawerTitle>
-          </DrawerHeader>
-          <div className="px-4 pb-6 overflow-y-auto">
-            <p className="text-sm text-white/70 text-center pb-4">Weekly prize pool: $0</p>
-            <div className="space-y-2">
-              {[{
                 rank: 1,
                 name: "CryptoKing",
                 level: 15,
@@ -4399,14 +3745,208 @@ const Game = () => {
                 level: 11,
                 points: 11340,
                 avatar: "👑"
-              }].map((player) => (
-                <div key={player.rank} className="flex items-center space-x-3 p-3 rounded-lg bg-white/5 backdrop-blur-sm border border-white/10">
+              }, {
+                rank: 11,
+                name: "SmartTrader",
+                level: 10,
+                points: 10920,
+                avatar: "👑"
+              }, {
+                rank: 12,
+                name: "CyberNinja",
+                level: 10,
+                points: 10540,
+                avatar: "👑"
+              }, {
+                rank: 13,
+                name: "QuantumGamer",
+                level: 10,
+                points: 10180,
+                avatar: "👑"
+              }, {
+                rank: 14,
+                name: "PixelMaster",
+                level: 9,
+                points: 9840,
+                avatar: "💪"
+              }, {
+                rank: 15,
+                name: "CodeWarrior",
+                level: 9,
+                points: 9520,
+                avatar: "💪"
+              }, {
+                rank: 16,
+                name: "AlgoTrader",
+                level: 9,
+                points: 9210,
+                avatar: "💪"
+              }, {
+                rank: 17,
+                name: "BitCrusher",
+                level: 8,
+                points: 8920,
+                avatar: "🔥"
+              }, {
+                rank: 18,
+                name: "EtherLord",
+                level: 8,
+                points: 8650,
+                avatar: "🔥"
+              }, {
+                rank: 19,
+                name: "GameChanger",
+                level: 8,
+                points: 8390,
+                avatar: "🔥"
+              }, {
+                rank: 20,
+                name: "TechSavvy",
+                level: 8,
+                points: 8140,
+                avatar: "🔥"
+              }, {
+                rank: 21,
+                name: "DigitalNomad",
+                level: 7,
+                points: 7910,
+                avatar: "⭐"
+              }, {
+                rank: 22,
+                name: "CryptoSage",
+                level: 7,
+                points: 7690,
+                avatar: "⭐"
+              }, {
+                rank: 23,
+                name: "BlockBuilder",
+                level: 7,
+                points: 7480,
+                avatar: "⭐"
+              }, {
+                rank: 24,
+                name: "TokenHunter",
+                level: 7,
+                points: 7280,
+                avatar: "⭐"
+              }, {
+                rank: 25,
+                name: "ChainLink",
+                level: 7,
+                points: 7090,
+                avatar: "⭐"
+              }].map(player => <div key={player.rank} className="flex items-center space-x-3 p-3 rounded-lg hover:bg-muted/50 transition-colors">
+                    <div className="flex-shrink-0 w-8 text-center">
+                      {player.rank <= 3 ? <Medal className={`w-5 h-5 ${player.rank === 1 ? 'text-yellow-400' : player.rank === 2 ? 'text-gray-300' : 'text-amber-600'}`} /> : <span className="text-sm font-medium text-muted-foreground">#{player.rank}</span>}
+                    </div>
+                    
+                    <Avatar className="w-8 h-8">
+                      <AvatarFallback className="text-sm">{player.avatar}</AvatarFallback>
+                    </Avatar>
+                    
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center justify-between">
+                        <p className="text-sm font-medium truncate">{player.name}</p>
+                        <Badge variant="outline" className="text-xs">Lv.{player.level}</Badge>
+                      </div>
+                      <p className="text-xs text-muted-foreground">{player.points.toLocaleString()} XP</p>
+                    </div>
+                  </div>)}
+              </TabsContent>
+            </Tabs>
+          </aside>
+        </div>
+      </div>
+
+      {/* Mobile Notifications Drawer */}
+      <Drawer open={isNotificationsOpen} onOpenChange={setIsNotificationsOpen}>
+        <DrawerContent className="bg-black/20 backdrop-blur-md border-white/10">
+          <DrawerHeader>
+            <DrawerTitle className="text-center text-white">Notifications</DrawerTitle>
+          </DrawerHeader>
+          <div className="px-4 pb-6">
+            <div className="text-center py-8">
+              <Bell className="w-12 h-12 mx-auto text-white/50 mb-4" />
+              <p className="text-sm text-white/70">
+                You'll see game updates and important announcements here
+              </p>
+            </div>
+          </div>
+        </DrawerContent>
+      </Drawer>
+
+      {/* Mobile Rankings Drawer */}
+      <Drawer open={isRankingsOpen} onOpenChange={setIsRankingsOpen}>
+        <DrawerContent className="bg-black/20 backdrop-blur-md border-white/10 max-h-[80vh]">
+          <DrawerHeader>
+            <DrawerTitle className="text-center text-white">Rankings</DrawerTitle>
+          </DrawerHeader>
+          <div className="px-4 pb-6 overflow-y-auto">
+            <p className="text-sm text-white/70 text-center pb-4">Weekly prize pool: $0</p>
+            <div className="space-y-2">
+              {[{
+              rank: 1,
+              name: "CryptoKing",
+              level: 15,
+              points: 15420,
+              avatar: "👑"
+            }, {
+              rank: 2,
+              name: "BlockMaster",
+              level: 14,
+              points: 14890,
+              avatar: "👑"
+            }, {
+              rank: 3,
+              name: "ChainWarrior",
+              level: 14,
+              points: 14320,
+              avatar: "👑"
+            }, {
+              rank: 4,
+              name: "TokenSlayer",
+              level: 13,
+              points: 13780,
+              avatar: "👑"
+            }, {
+              rank: 5,
+              name: "NFTChampion",
+              level: 13,
+              points: 13240,
+              avatar: "👑"
+            }, {
+              rank: 6,
+              name: "DeFiGamer",
+              level: 12,
+              points: 12890,
+              avatar: "👑"
+            }, {
+              rank: 7,
+              name: "MetaPlayer",
+              level: 12,
+              points: 12450,
+              avatar: "👑"
+            }, {
+              rank: 8,
+              name: "Web3Hero",
+              level: 12,
+              points: 12120,
+              avatar: "👑"
+            }, {
+              rank: 9,
+              name: "CoinMaster",
+              level: 11,
+              points: 11780,
+              avatar: "👑"
+            }, {
+              rank: 10,
+              name: "BlockHero",
+              level: 11,
+              points: 11340,
+              avatar: "👑"
+            }].map(player => <div key={player.rank} className="flex items-center space-x-3 p-3 rounded-lg bg-white/5 backdrop-blur-sm border border-white/10">
                   <div className="flex-shrink-0 w-8 text-center">
-                    {player.rank <= 3 ? (
-                      <Medal className={`w-5 h-5 ${player.rank === 1 ? 'text-yellow-400' : player.rank === 2 ? 'text-gray-300' : 'text-amber-600'}`} />
-                    ) : (
-                      <span className="text-sm font-medium text-white/60">#{player.rank}</span>
-                    )}
+                    {player.rank <= 3 ? <Medal className={`w-5 h-5 ${player.rank === 1 ? 'text-yellow-400' : player.rank === 2 ? 'text-gray-300' : 'text-amber-600'}`} /> : <span className="text-sm font-medium text-white/60">#{player.rank}</span>}
                   </div>
                   
                   <Avatar className="w-8 h-8">
@@ -4420,8 +3960,7 @@ const Game = () => {
                     </div>
                     <p className="text-xs text-white/60">{player.points.toLocaleString()} XP</p>
                   </div>
-                </div>
-              ))}
+                </div>)}
             </div>
           </div>
         </DrawerContent>
@@ -4436,7 +3975,6 @@ const Game = () => {
             </button>)}
         </div>
       </nav>
-    </div>
-  );
+    </div>;
 };
 export default Game;
