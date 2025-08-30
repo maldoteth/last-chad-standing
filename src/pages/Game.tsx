@@ -2472,7 +2472,18 @@ const Game = () => {
               )}
             </div>
 
-            <Card className={`bg-black border-gray-700 transition-all duration-500 ease-in-out ${isObjectivesGlowing ? 'ring-1 ring-primary/30 shadow-lg shadow-primary/20' : ''}`}>
+            <Card 
+              className={`bg-black border-gray-700 transition-all duration-500 ease-in-out cursor-pointer hover:bg-black/80 ${isObjectivesGlowing ? 'ring-1 ring-primary/30 shadow-lg shadow-primary/20' : ''}`}
+              onClick={() => {
+                if (objectivesView === "weekly") {
+                  setObjectivesView("daily");
+                } else if (objectivesView === "daily") {
+                  setObjectivesView("quests");
+                } else {
+                  setObjectivesView("weekly");
+                }
+              }}
+            >
               <CardHeader>
                 <CardTitle className="text-base flex items-center justify-between">
                   <div className="flex items-center space-x-2">
@@ -2483,7 +2494,8 @@ const Game = () => {
                     variant="ghost" 
                     size="sm" 
                     className="h-6 w-6 p-0 hover:bg-white/10"
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.stopPropagation();
                       if (objectivesView === "weekly") {
                         setObjectivesView("daily");
                       } else if (objectivesView === "daily") {
@@ -2500,7 +2512,7 @@ const Game = () => {
               <CardContent>
                 {objectivesView === "weekly" ? (
                   <div className="space-y-3">
-                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer" onClick={(e) => e.stopPropagation()}>
                       <div className="flex items-center space-x-3">
                         <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
                           <Package className="w-4 h-4 text-primary-foreground" />
@@ -2512,7 +2524,7 @@ const Game = () => {
                       </div>
                       <ChevronRight className="w-4 h-4 text-muted-foreground" />
                     </div>
-                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer" onClick={(e) => e.stopPropagation()}>
                       <div className="flex items-center space-x-3">
                         <div className="w-8 h-8 bg-secondary rounded-full flex items-center justify-center">
                           <ShoppingBag className="w-4 h-4 text-secondary-foreground" />
@@ -2524,7 +2536,7 @@ const Game = () => {
                       </div>
                       <ChevronRight className="w-4 h-4 text-muted-foreground" />
                     </div>
-                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer" onClick={(e) => e.stopPropagation()}>
                       <div className="flex items-center space-x-3">
                         <div className="w-8 h-8 bg-destructive rounded-full flex items-center justify-center">
                           <CreditCard className="w-4 h-4 text-destructive-foreground" />
@@ -2536,7 +2548,7 @@ const Game = () => {
                       </div>
                       <ChevronRight className="w-4 h-4 text-muted-foreground" />
                     </div>
-                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer" onClick={(e) => e.stopPropagation()}>
                       <div className="flex items-center space-x-3">
                         <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center">
                           <TrendingUp className="w-4 h-4 text-white" />
@@ -2548,7 +2560,7 @@ const Game = () => {
                       </div>
                       <ChevronRight className="w-4 h-4 text-muted-foreground" />
                     </div>
-                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer" onClick={(e) => e.stopPropagation()}>
                       <div className="flex items-center space-x-3">
                         <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
                           <UserPlus className="w-4 h-4 text-white" />
@@ -2563,7 +2575,7 @@ const Game = () => {
                   </div>
                 ) : objectivesView === "daily" ? (
                   <div className="space-y-3">
-                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer" onClick={(e) => e.stopPropagation()}>
                       <div className="flex items-center space-x-3">
                         <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
                           <Play className="w-4 h-4 text-primary-foreground" />
@@ -2575,7 +2587,7 @@ const Game = () => {
                       </div>
                       <ChevronRight className="w-4 h-4 text-muted-foreground" />
                     </div>
-                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer" onClick={(e) => e.stopPropagation()}>
                       <div className="flex items-center space-x-3">
                         <div className="w-8 h-8 bg-secondary rounded-full flex items-center justify-center">
                           <Gamepad className="w-4 h-4 text-secondary-foreground" />
@@ -2587,7 +2599,7 @@ const Game = () => {
                       </div>
                       <ChevronRight className="w-4 h-4 text-muted-foreground" />
                     </div>
-                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer" onClick={(e) => e.stopPropagation()}>
                       <div className="flex items-center space-x-3">
                         <div className="w-8 h-8 bg-destructive rounded-full flex items-center justify-center">
                           <Play className="w-4 h-4 text-destructive-foreground" />
@@ -2599,7 +2611,7 @@ const Game = () => {
                       </div>
                       <ChevronRight className="w-4 h-4 text-muted-foreground" />
                     </div>
-                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer" onClick={(e) => e.stopPropagation()}>
                       <div className="flex items-center space-x-3">
                         <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
                           <Trophy className="w-4 h-4 text-white" />
@@ -2611,7 +2623,7 @@ const Game = () => {
                       </div>
                       <ChevronRight className="w-4 h-4 text-muted-foreground" />
                     </div>
-                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer" onClick={(e) => e.stopPropagation()}>
                       <div className="flex items-center space-x-3">
                         <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
                           <Users className="w-4 h-4 text-white" />
@@ -2626,7 +2638,7 @@ const Game = () => {
                   </div>
                 ) : (
                   <div className="space-y-3">
-                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer" onClick={(e) => e.stopPropagation()}>
                       <div className="flex items-center space-x-3">
                         <div className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center">
                           <img src="/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png" alt="X" className="w-4 h-4" />
@@ -2638,7 +2650,7 @@ const Game = () => {
                       </div>
                       <ChevronRight className="w-4 h-4 text-muted-foreground" />
                     </div>
-                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer" onClick={(e) => e.stopPropagation()}>
                       <div className="flex items-center space-x-3">
                         <div className="w-8 h-8 bg-pink-500 rounded-full flex items-center justify-center">
                           <img src="/lovable-uploads/896892f1-7ebc-4852-acea-80dcdbf7c545.png" alt="Instagram" className="w-4 h-4" />
@@ -2650,7 +2662,7 @@ const Game = () => {
                       </div>
                       <ChevronRight className="w-4 h-4 text-muted-foreground" />
                     </div>
-                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer" onClick={(e) => e.stopPropagation()}>
                       <div className="flex items-center space-x-3">
                         <div className="w-8 h-8 bg-blue-400 rounded-full flex items-center justify-center">
                           <img src="/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png" alt="X" className="w-4 h-4" />
@@ -2662,7 +2674,7 @@ const Game = () => {
                       </div>
                       <ChevronRight className="w-4 h-4 text-muted-foreground" />
                     </div>
-                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer" onClick={(e) => e.stopPropagation()}>
                       <div className="flex items-center space-x-3">
                         <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
                           <img src="/lovable-uploads/896892f1-7ebc-4852-acea-80dcdbf7c545.png" alt="Instagram" className="w-4 h-4" />
@@ -2674,7 +2686,7 @@ const Game = () => {
                       </div>
                       <ChevronRight className="w-4 h-4 text-muted-foreground" />
                     </div>
-                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer">
+                    <div className="flex items-center justify-between p-3 bg-accent/30 rounded-lg hover:bg-accent/50 transition-colors cursor-pointer" onClick={(e) => e.stopPropagation()}>
                       <div className="flex items-center space-x-3">
                         <div className="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center">
                           <MessageCircle className="w-4 h-4 text-white" />
