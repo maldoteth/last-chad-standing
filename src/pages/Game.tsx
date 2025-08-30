@@ -2169,21 +2169,44 @@ const Game = () => {
                     <CardTitle className="text-base flex items-center justify-between text-white">
                       <span>All Players</span>
                       <div className="flex items-center space-x-2">
-                        <Popover open={isAllPlayersSearchOpen} onOpenChange={setIsAllPlayersSearchOpen}>
-                          <PopoverTrigger asChild>
-                            <Button variant="outline" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
-                              <Search className="w-3 h-3" />
-                            </Button>
-                          </PopoverTrigger>
-                          <PopoverContent className="w-64 bg-black/90 backdrop-blur-md border border-white/20 text-white">
-                            <Input
-                              placeholder="Search players..."
-                              value={allPlayersSearchQuery}
-                              onChange={(e) => setAllPlayersSearchQuery(e.target.value)}
-                              className="bg-white/10 border-white/20 text-white placeholder:text-white/60"
-                            />
-                          </PopoverContent>
-                        </Popover>
+                        {isMobile ? (
+                          <Drawer open={isAllPlayersSearchOpen} onOpenChange={setIsAllPlayersSearchOpen}>
+                            <DrawerTrigger asChild>
+                              <Button variant="outline" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
+                                <Search className="w-3 h-3" />
+                              </Button>
+                            </DrawerTrigger>
+                            <DrawerContent className="bg-black/90 backdrop-blur-md border border-white/20 text-white">
+                              <DrawerHeader>
+                                <DrawerTitle>Search Players</DrawerTitle>
+                              </DrawerHeader>
+                              <div className="px-4 pb-8">
+                                <Input
+                                  placeholder="Search players..."
+                                  value={allPlayersSearchQuery}
+                                  onChange={(e) => setAllPlayersSearchQuery(e.target.value)}
+                                  className="bg-white/10 border-white/20 text-white placeholder:text-white/60"
+                                />
+                              </div>
+                            </DrawerContent>
+                          </Drawer>
+                        ) : (
+                          <Popover open={isAllPlayersSearchOpen} onOpenChange={setIsAllPlayersSearchOpen}>
+                            <PopoverTrigger asChild>
+                              <Button variant="outline" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
+                                <Search className="w-3 h-3" />
+                              </Button>
+                            </PopoverTrigger>
+                            <PopoverContent className="w-64 bg-black/90 backdrop-blur-md border border-white/20 text-white">
+                              <Input
+                                placeholder="Search players..."
+                                value={allPlayersSearchQuery}
+                                onChange={(e) => setAllPlayersSearchQuery(e.target.value)}
+                                className="bg-white/10 border-white/20 text-white placeholder:text-white/60"
+                              />
+                            </PopoverContent>
+                          </Popover>
+                        )}
                         
                         {/* All Players Category Filter */}
                         {isMobile ? (
@@ -4195,21 +4218,44 @@ const Game = () => {
                     <CardTitle className="text-lg flex items-center justify-between text-white">
                       <span>All Fighters - Most Expensive First</span>
                       <div className="flex items-center space-x-2">
-                        <Popover open={isMarketSearchOpen} onOpenChange={setIsMarketSearchOpen}>
-                          <PopoverTrigger asChild>
-                            <Button variant="ghost" size="sm" className="text-white hover:bg-white/10 h-8 px-2">
-                              <Search className="w-3 h-3" />
-                            </Button>
-                          </PopoverTrigger>
-                          <PopoverContent className="w-64 bg-black/90 backdrop-blur-md border border-white/20 text-white">
-                            <Input
-                              placeholder="Search market..."
-                              value={marketSearchQuery}
-                              onChange={(e) => setMarketSearchQuery(e.target.value)}
-                              className="bg-white/10 border-white/20 text-white placeholder:text-white/60"
-                            />
-                          </PopoverContent>
-                        </Popover>
+                        {isMobile ? (
+                          <Drawer open={isMarketSearchOpen} onOpenChange={setIsMarketSearchOpen}>
+                            <DrawerTrigger asChild>
+                              <Button variant="ghost" size="sm" className="text-white hover:bg-white/10 h-8 px-2">
+                                <Search className="w-3 h-3" />
+                              </Button>
+                            </DrawerTrigger>
+                            <DrawerContent className="bg-black/90 backdrop-blur-md border border-white/20 text-white">
+                              <DrawerHeader>
+                                <DrawerTitle>Search Market</DrawerTitle>
+                              </DrawerHeader>
+                              <div className="px-4 pb-8">
+                                <Input
+                                  placeholder="Search market..."
+                                  value={marketSearchQuery}
+                                  onChange={(e) => setMarketSearchQuery(e.target.value)}
+                                  className="bg-white/10 border-white/20 text-white placeholder:text-white/60"
+                                />
+                              </div>
+                            </DrawerContent>
+                          </Drawer>
+                        ) : (
+                          <Popover open={isMarketSearchOpen} onOpenChange={setIsMarketSearchOpen}>
+                            <PopoverTrigger asChild>
+                              <Button variant="ghost" size="sm" className="text-white hover:bg-white/10 h-8 px-2">
+                                <Search className="w-3 h-3" />
+                              </Button>
+                            </PopoverTrigger>
+                            <PopoverContent className="w-64 bg-black/90 backdrop-blur-md border border-white/20 text-white">
+                              <Input
+                                placeholder="Search market..."
+                                value={marketSearchQuery}
+                                onChange={(e) => setMarketSearchQuery(e.target.value)}
+                                className="bg-white/10 border-white/20 text-white placeholder:text-white/60"
+                              />
+                            </PopoverContent>
+                          </Popover>
+                        )}
                         {/* Market Category Filter */}
                         {isMobile ? (
                           <Drawer>
