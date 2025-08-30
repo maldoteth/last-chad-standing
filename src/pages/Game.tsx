@@ -1875,9 +1875,11 @@ const Game = () => {
                    </Card>
                    )}
                  </div>
-                </div>
+                  </div>
+                )
 
-            {activeTab === "market" && <div className="p-4 space-y-6">
+            {activeTab === "market" && (
+              <div className="p-4 space-y-6">
                 {/* Market Header */}
                 <div className="text-center">
                   <div className="flex items-center justify-center space-x-3 mb-4">
@@ -2159,9 +2161,11 @@ const Game = () => {
                       </div>}
                   </CardContent>
                 </Card>
-              </div>}
+                </div>
+              )}
 
-            {activeTab === "locker" && <div className="p-4 space-y-6">
+            {activeTab === "locker" && (
+              <div className="p-4 space-y-6">
                 {/* Mobile Locker Header */}
                 <div className="text-center">
                   <div className="flex items-center justify-center space-x-3 mb-4">
@@ -2276,9 +2280,11 @@ const Game = () => {
                   </div>
                 )}
               </div>
-            )}
-          
+            )
+
         </div>
+
+        {/* Desktop Layout - Hidden on mobile */}
         <div className="hidden lg:flex lg:min-h-screen w-full">
           {/* Left Sidebar - Desktop only */}
           <aside className="w-80 bg-black border-r border-border p-6 space-y-6 overflow-y-auto h-screen">
@@ -2946,11 +2952,13 @@ const Game = () => {
                     </Button>
                   </CardContent>
                 </Card>
-              </div>
-                </div>
-              </ScrollArea>}
+               </div>
+                 </div>
+              </ScrollArea>
+            )
 
-            {activeTab === "store" && <ScrollArea className="h-full">
+            {activeTab === "store" && (
+              <ScrollArea className="h-full">
                 <div className="p-6">
                   <div className="space-y-6 max-w-4xl">
                 {/* Store Header */}
@@ -3646,11 +3654,13 @@ const Game = () => {
                    </Card>
                    )}
                   </div>
-                </div>
                  </div>
-               </ScrollArea>}
+                  </div>
+               </ScrollArea>
+            )}
 
-            {activeTab === "market" && <ScrollArea className="h-full">
+            {activeTab === "market" && (
+              <ScrollArea className="h-full">
                 <div className="p-6">
                   <div className="space-y-6 max-w-6xl">
                 {/* Market Header */}
