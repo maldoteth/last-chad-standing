@@ -2267,7 +2267,7 @@ const Game = () => {
                   <CardHeader>
                     <CardTitle className="text-base flex items-center justify-between">
                       <div className="flex items-center space-x-2">
-                        <Star className="w-4 h-4" />
+                        <span className="text-base">{profile?.avatar_url || '👤'}</span>
                         <span>Progress</span>
                       </div>
                       <Drawer>
@@ -2297,16 +2297,16 @@ const Game = () => {
                                         : 'bg-gray-800/50 opacity-60'
                                     }`}
                                   >
-                                    <div className="flex items-center space-x-2">
-                                      <div className={`w-2 h-2 rounded-full ${
-                                        isCurrentLevel ? 'bg-primary' : isUnlocked ? 'bg-green-400' : 'bg-gray-500'
-                                      }`} />
-                                      <span className={`text-sm font-medium ${
-                                        isCurrentLevel ? 'text-primary' : 'text-white'
-                                      }`}>
-                                        {level.name}
-                                      </span>
-                                    </div>
+                                     <div className="flex items-center space-x-2">
+                                       <span className="text-base">
+                                         {getTierIcon(level.minXp)}
+                                       </span>
+                                       <span className={`text-sm font-medium ${
+                                         isCurrentLevel ? 'text-primary' : 'text-white'
+                                       }`}>
+                                         {level.name}
+                                       </span>
+                                     </div>
                                     <span className="text-xs text-gray-400">
                                       {level.level >= 10 ? "10,000+ XP" : `${level.minXp.toLocaleString()}-${level.maxXp.toLocaleString()} XP`}
                                     </span>
