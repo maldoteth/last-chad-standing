@@ -24,6 +24,9 @@ export function getLevelFromXP(xp: number): number {
 }
 
 export function getLevelName(level: number): string {
+  if (level >= 10) {
+    return "God Mode";
+  }
   return LEVEL_NAMES[level] || `Level ${level}`;
 }
 
