@@ -2176,7 +2176,7 @@ const Game = () => {
                                 <Search className="w-3 h-3" />
                               </Button>
                             </DrawerTrigger>
-                            <DrawerContent className="bg-black/90 backdrop-blur-md border border-white/20 text-white">
+                            <DrawerContent className="bg-black/10 backdrop-blur-xl border-t border-white/10 text-white">
                               <DrawerHeader>
                                 <DrawerTitle>Search Players</DrawerTitle>
                               </DrawerHeader>
