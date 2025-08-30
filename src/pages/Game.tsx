@@ -2178,20 +2178,18 @@ const Game = () => {
                         <Star className="w-4 h-4" />
                         <span>Progress</span>
                       </div>
-                      <Popover>
-                        <PopoverTrigger asChild>
+                      <Drawer>
+                        <DrawerTrigger asChild>
                           <Button variant="ghost" size="sm" className="h-6 w-6 p-0 hover:bg-white/10">
                             <Info className="w-4 h-4" />
                           </Button>
-                        </PopoverTrigger>
-                        <PopoverContent 
-                          className="w-80 p-4 bg-black/90 backdrop-blur-md border border-white/20 text-white z-50"
-                          side="top"
-                          align="end"
-                        >
-                          <div className="space-y-3">
-                            <h4 className="font-semibold text-sm">XP Progress Levels</h4>
-                            <div className="space-y-2 max-h-60 overflow-y-auto">
+                        </DrawerTrigger>
+                        <DrawerContent className="bg-black/95 backdrop-blur-md border-gray-700">
+                          <DrawerHeader>
+                            <DrawerTitle className="text-white">XP Progress Levels</DrawerTitle>
+                          </DrawerHeader>
+                          <div className="p-4 pb-8">
+                            <div className="space-y-2 max-h-80 overflow-y-auto">
                               {getAllLevelsForDisplay().map((level, index) => {
                                 const isCurrentLevel = getCurrentLevel(userBalance?.xp || 0).name === level.name;
                                 const isUnlocked = (userBalance?.xp || 0) >= level.minXp;
@@ -2199,7 +2197,7 @@ const Game = () => {
                                 return (
                                   <div 
                                     key={index}
-                                    className={`flex items-center justify-between p-2 rounded-md transition-colors ${
+                                    className={`flex items-center justify-between p-3 rounded-md transition-colors ${
                                       isCurrentLevel 
                                         ? 'bg-primary/20 border border-primary/30' 
                                         : isUnlocked 
@@ -2217,16 +2215,16 @@ const Game = () => {
                                         {level.name}
                                       </span>
                                     </div>
-                                    <span className="text-xs text-gray-300">
-                                      {level.minXp === 0 ? '0' : level.minXp.toLocaleString()}-{level.maxXp === Infinity ? '∞' : level.maxXp.toLocaleString()} XP
+                                    <span className="text-xs text-gray-400">
+                                      {level.level >= 10 ? "10,000+ XP" : `${level.minXp.toLocaleString()}-${level.maxXp.toLocaleString()} XP`}
                                     </span>
                                   </div>
                                 );
                               })}
                             </div>
                           </div>
-                        </PopoverContent>
-                      </Popover>
+                        </DrawerContent>
+                      </Drawer>
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
