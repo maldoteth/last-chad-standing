@@ -65,11 +65,11 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
       <div className="flex items-center space-x-2">
         <div className="flex items-center space-x-1">
           <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className={coin} />
-          <span className={`${text} font-bold text-red-400`}>{formatNumberWithAbbreviation(mockSellPrice)}</span>
+          <span className={`${text} font-bold text-red-400`}>{formatNumberWithAbbreviation(mockBuyPrice)}</span>
         </div>
         <div className="flex items-center space-x-1">
           <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className={coin} />
-          <span className={`${text} font-bold text-green-400`}>{formatNumberWithAbbreviation(mockBuyPrice)}</span>
+          <span className={`${text} font-bold text-green-400`}>{formatNumberWithAbbreviation(mockSellPrice)}</span>
         </div>
       </div>
     );
@@ -77,16 +77,16 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
 
   return (
     <div className="flex items-center space-x-2">
-      {prices.bestSellPrice && (
-        <div className="flex items-center space-x-1">
-          <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className={coin} />
-          <span className={`${text} font-bold text-red-400`}>{formatNumberWithAbbreviation(prices.bestSellPrice)}</span>
-        </div>
-      )}
       {prices.bestBuyPrice && (
         <div className="flex items-center space-x-1">
           <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className={coin} />
-          <span className={`${text} font-bold text-green-400`}>{formatNumberWithAbbreviation(prices.bestBuyPrice)}</span>
+          <span className={`${text} font-bold text-red-400`}>{formatNumberWithAbbreviation(prices.bestBuyPrice)}</span>
+        </div>
+      )}
+      {prices.bestSellPrice && (
+        <div className="flex items-center space-x-1">
+          <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className={coin} />
+          <span className={`${text} font-bold text-green-400`}>{formatNumberWithAbbreviation(prices.bestSellPrice)}</span>
         </div>
       )}
     </div>
