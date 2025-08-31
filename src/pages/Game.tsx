@@ -4293,15 +4293,15 @@ const Game = () => {
 
       {/* Buy Dialog */}
       <Dialog open={buyDialogOpen} onOpenChange={setBuyDialogOpen}>
-        <DialogContent className="sm:max-w-md">
+        <DialogContent className="sm:max-w-md bg-black/90 backdrop-blur-sm border border-white/20 text-white">
           <DialogHeader>
-            <DialogTitle>Buy {selectedPlayer?.name}</DialogTitle>
-            <DialogDescription>
+            <DialogTitle className="text-white">Buy {selectedPlayer?.name}</DialogTitle>
+            <DialogDescription className="text-white/80">
               Choose your payment method to purchase this player.
             </DialogDescription>
           </DialogHeader>
           <div className="flex flex-col space-y-3 pt-4">
-            <Button className="w-full" onClick={() => {
+            <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 transition-all duration-300" onClick={() => {
               toast({
                 title: "Card Payment",
                 description: "Card payment functionality coming soon!"
@@ -4311,7 +4311,7 @@ const Game = () => {
               <CreditCard className="w-4 h-4 mr-2" />
               Buy with Card
             </Button>
-            <Button variant="outline" className="w-full" onClick={() => {
+            <Button variant="outline" className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 transition-all duration-300" onClick={() => {
               toast({
                 title: "Coin Payment",
                 description: "Coin payment functionality coming soon!"
@@ -4321,7 +4321,7 @@ const Game = () => {
               <Coins className="w-4 h-4 mr-2" />
               Buy with Coins
             </Button>
-            <Button variant="ghost" onClick={() => setBuyDialogOpen(false)}>
+            <Button variant="ghost" className="text-white hover:bg-white/10 transition-all duration-300" onClick={() => setBuyDialogOpen(false)}>
               Cancel
             </Button>
           </div>
