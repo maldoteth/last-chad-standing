@@ -3508,16 +3508,25 @@ const Game = () => {
                      <CardTitle className="text-lg flex items-center justify-between text-white">
                         <span>Marketplace</span>
                           <div className="flex items-center gap-1">
-                            {/* Search Input */}
-                            <div className="relative">
-                              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-3 h-3 text-gray-400" />
-                              <Input
-                                placeholder="search"
-                                value={searchTerm}
-                                onChange={(e) => setSearchTerm(e.target.value)}
-                                className="pl-6 pr-3 h-8 text-xs bg-black/10 backdrop-blur-md border-white/20 text-white placeholder:text-gray-400 w-48"
-                              />
-                            </div>
+                            {/* Search Dropdown */}
+                            <DropdownMenu>
+                              <DropdownMenuTrigger asChild>
+                                <Button variant="outline" size="sm" className="bg-black/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-8 w-8">
+                                  <Search className="w-3 h-3" />
+                                </Button>
+                              </DropdownMenuTrigger>
+                              <DropdownMenuContent align="center" className="w-64 bg-black/90 backdrop-blur-md border border-white/20 text-white z-[9999] p-3">
+                                <div className="relative">
+                                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-3 h-3 text-gray-400" />
+                                  <Input
+                                    placeholder="search"
+                                    value={searchTerm}
+                                    onChange={(e) => setSearchTerm(e.target.value)}
+                                    className="pl-8 pr-3 h-8 text-xs bg-black/10 backdrop-blur-md border-white/20 text-white placeholder:text-gray-400 w-full"
+                                  />
+                                </div>
+                              </DropdownMenuContent>
+                            </DropdownMenu>
                             
                             {/* Category Filter */}
                             <DropdownMenu>
