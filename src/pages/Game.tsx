@@ -1575,6 +1575,7 @@ const Game = () => {
                     />
                   }
                 </div>
+              </div>}
 
             {activeTab === "market" && <div className="p-4 space-y-6">
                 {/* Market Header */}
@@ -1985,13 +1986,9 @@ const Game = () => {
                       </CardContent>
                     </Card>
 
-                </div>
-              </div>
-            }
-          
-        </div>
+         </div>
 
-        {/* Desktop Layout - Hidden on mobile */}
+         {/* Desktop Layout - Hidden on mobile */}
         <div className="hidden lg:flex lg:min-h-screen w-full">
           {/* Left Sidebar - Desktop only */}
           <aside className="w-80 bg-black border-r border-border p-6 space-y-6 overflow-y-auto h-screen">
