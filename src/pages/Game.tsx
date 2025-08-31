@@ -46,7 +46,7 @@ const getTierIcon = (xp: number): string => {
 };
 
 // Function to render marketplace prices (bid/ask)
-const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: string, itemType: string) => any, size: 'small' | 'medium' | 'large' = 'medium') => {
+const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: string, itemType: string) => any, size: 'small' | 'medium' | 'large' = 'medium', onSellClick?: () => void, onBuyClick?: () => void) => {
   const prices = getMarketplacePrices(player.name, 'player');
   
   const sizeClasses = {
@@ -66,10 +66,20 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
       <div className="flex items-center space-x-2">
         <div className="flex items-center space-x-1">
           <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className={coin} />
-          <span className={`${text} font-bold text-red-400`}>{formatNumberWithAbbreviation(mockBuyPrice)}</span>
+          <span 
+            className={`${text} font-bold text-red-400 cursor-pointer hover:text-red-300 transition-colors`}
+            onClick={() => onSellClick?.()}
+          >
+            {formatNumberWithAbbreviation(mockBuyPrice)}
+          </span>
         </div>
         <span className={`${text} text-white/60`}>|</span>
-        <span className={`${text} font-bold text-green-400`}>{formatNumberWithAbbreviation(mockSellPrice)}</span>
+        <span 
+          className={`${text} font-bold text-green-400 cursor-pointer hover:text-green-300 transition-colors`}
+          onClick={() => onBuyClick?.()}
+        >
+          {formatNumberWithAbbreviation(mockSellPrice)}
+        </span>
       </div>
     );
   }
@@ -79,14 +89,24 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
       {prices.bestBuyPrice && (
         <div className="flex items-center space-x-1">
           <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className={coin} />
-          <span className={`${text} font-bold text-red-400`}>{formatNumberWithAbbreviation(prices.bestBuyPrice)}</span>
+          <span 
+            className={`${text} font-bold text-red-400 cursor-pointer hover:text-red-300 transition-colors`}
+            onClick={() => onSellClick?.()}
+          >
+            {formatNumberWithAbbreviation(prices.bestBuyPrice)}
+          </span>
         </div>
       )}
       {prices.bestBuyPrice && prices.bestSellPrice && (
         <span className={`${text} text-white/60`}>|</span>
       )}
       {prices.bestSellPrice && (
-        <span className={`${text} font-bold text-green-400`}>{formatNumberWithAbbreviation(prices.bestSellPrice)}</span>
+        <span 
+          className={`${text} font-bold text-green-400 cursor-pointer hover:text-green-300 transition-colors`}
+          onClick={() => onBuyClick?.()}
+        >
+          {formatNumberWithAbbreviation(prices.bestSellPrice)}
+        </span>
       )}
     </div>
   );
@@ -109,6 +129,9 @@ const Game = () => {
   const [isObjectivesGlowing, setIsObjectivesGlowing] = useState(false);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
   const [isRankingsOpen, setIsRankingsOpen] = useState(false);
+  const [sellDialogOpen, setSellDialogOpen] = useState(false);
+  const [buyDialogOpen, setBuyDialogOpen] = useState(false);
+  const [selectedPlayer, setSelectedPlayer] = useState<any>(null);
   const objectivesRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
   const {
@@ -165,6 +188,18 @@ const Game = () => {
         description: `You purchased ${itemName} for ${price} coins.`
       });
     }
+  };
+
+  // Handle sell click
+  const handleSellClick = (player: any) => {
+    setSelectedPlayer(player);
+    setSellDialogOpen(true);
+  };
+
+  // Handle buy click
+  const handleBuyClick = (player: any) => {
+    setSelectedPlayer(player);
+    setBuyDialogOpen(true);
   };
 
   // Mock data for market analytics
@@ -1902,7 +1937,7 @@ const Game = () => {
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center justify-between">
                                 <p className="text-xs font-semibold text-white truncate">{player.name}</p>
-                                {renderMarketplacePrices(player, getMarketplacePrices, 'small')}
+                                {renderMarketplacePrices(player, getMarketplacePrices, 'small', () => handleSellClick(player), () => handleBuyClick(player))}
                               </div>
                                <div className="flex items-center justify-between">
                                  <div className={`flex items-center space-x-1 ${player.trend === 'up' ? 'text-green-400' : 'text-red-400'}`}>
@@ -1960,7 +1995,7 @@ const Game = () => {
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center justify-between">
                                 <p className="text-xs font-semibold text-white truncate">{player.name}</p>
-                                {renderMarketplacePrices(player, getMarketplacePrices, 'small')}
+                                {renderMarketplacePrices(player, getMarketplacePrices, 'small', () => handleSellClick(player), () => handleBuyClick(player))}
                               </div>
                                <div className="flex items-center justify-between">
                                  <div className="flex items-center space-x-1 text-green-400">
@@ -2091,7 +2126,7 @@ const Game = () => {
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center justify-between">
                               <p className="text-sm font-semibold text-white truncate">{player.name}</p>
-                              {renderMarketplacePrices(player, getMarketplacePrices, 'medium')}
+                              {renderMarketplacePrices(player, getMarketplacePrices, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
                             </div>
                           </div>
                         </div>)}
@@ -3663,7 +3698,7 @@ const Game = () => {
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center justify-between">
                               <p className="text-lg font-semibold text-white truncate">{player.name}</p>
-                              {renderMarketplacePrices(player, getMarketplacePrices, 'large')}
+                              {renderMarketplacePrices(player, getMarketplacePrices, 'large', () => handleSellClick(player), () => handleBuyClick(player))}
                             </div>
                           </div>
                         </div>)}
@@ -3711,7 +3746,7 @@ const Game = () => {
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center justify-between mb-1">
                                 <p className="text-sm font-semibold text-white truncate">{player.name}</p>
-                                {renderMarketplacePrices(player, getMarketplacePrices, 'medium')}
+                                {renderMarketplacePrices(player, getMarketplacePrices, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
                               </div>
                                <div className="flex items-center justify-between">
                                  <div className={`flex items-center space-x-1 ${player.trend === 'up' ? 'text-green-400' : 'text-red-400'}`}>
@@ -3769,7 +3804,7 @@ const Game = () => {
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center justify-between mb-1">
                                 <p className="text-sm font-semibold text-white truncate">{player.name}</p>
-                                {renderMarketplacePrices(player, getMarketplacePrices, 'medium')}
+                                {renderMarketplacePrices(player, getMarketplacePrices, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
                               </div>
                                <div className="flex items-center justify-between">
                                  <div className="flex items-center space-x-1 text-green-400">
@@ -4221,6 +4256,60 @@ const Game = () => {
             </button>)}
         </div>
       </nav>
+
+      {/* Sell Dialog */}
+      <Dialog open={sellDialogOpen} onOpenChange={setSellDialogOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Sell {selectedPlayer?.name}</DialogTitle>
+            <DialogDescription>
+              Selling functionality is coming soon! Stay tuned for updates.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="flex justify-end space-x-2 pt-4">
+            <Button variant="outline" onClick={() => setSellDialogOpen(false)}>
+              Close
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Buy Dialog */}
+      <Dialog open={buyDialogOpen} onOpenChange={setBuyDialogOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Buy {selectedPlayer?.name}</DialogTitle>
+            <DialogDescription>
+              Choose your payment method to purchase this player.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="flex flex-col space-y-3 pt-4">
+            <Button className="w-full" onClick={() => {
+              toast({
+                title: "Card Payment",
+                description: "Card payment functionality coming soon!"
+              });
+              setBuyDialogOpen(false);
+            }}>
+              <CreditCard className="w-4 h-4 mr-2" />
+              Buy with Card
+            </Button>
+            <Button variant="outline" className="w-full" onClick={() => {
+              toast({
+                title: "Coin Payment",
+                description: "Coin payment functionality coming soon!"
+              });
+              setBuyDialogOpen(false);
+            }}>
+              <Coins className="w-4 h-4 mr-2" />
+              Buy with Coins
+            </Button>
+            <Button variant="ghost" onClick={() => setBuyDialogOpen(false)}>
+              Cancel
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>;
 };
 export default Game;
