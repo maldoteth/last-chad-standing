@@ -484,9 +484,22 @@ const Game = () => {
     return players;
   };
 
-  const filteredMarketplacePlayers = filterMarketplaceByRarity(
-    filterMarketplaceByCategory(allPlayers, marketplaceCategory),
-    marketplaceRarity
+  const filterMarketplaceBySearch = (players: any[], search: string) => {
+    if (!search.trim()) return players;
+    const searchLower = search.toLowerCase();
+    return players.filter(player => 
+      player.name.toLowerCase().includes(searchLower) ||
+      player.team.toLowerCase().includes(searchLower) ||
+      player.position.toLowerCase().includes(searchLower)
+    );
+  };
+
+  const filteredMarketplacePlayers = filterMarketplaceBySearch(
+    filterMarketplaceByRarity(
+      filterMarketplaceByCategory(allPlayers, marketplaceCategory),
+      marketplaceRarity
+    ),
+    searchTerm
   );
 
   // Debug logging for activeTab changes
@@ -1976,28 +1989,61 @@ const Game = () => {
                   <CardHeader className="pb-3 relative z-10">
                     <CardTitle className="text-base flex items-center justify-between text-white">
                       <span>Marketplace</span>
-                       <div className="flex items-center space-x-2">
-                        <Drawer>
-                          <DrawerTrigger asChild>
-                            <Button variant="outline" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
-                              <Search className="w-3 h-3 mr-1" />
-                              Search
-                            </Button>
-                          </DrawerTrigger>
-                          <DrawerContent className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
-                            <DrawerHeader>
-                              <DrawerTitle>Search Players</DrawerTitle>
-                            </DrawerHeader>
-                            <div className="px-4 pb-8">
-                              <Input
-                                placeholder="Search players..."
-                                value={searchTerm}
-                                onChange={(e) => setSearchTerm(e.target.value)}
-                                className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
-                              />
-                            </div>
-                          </DrawerContent>
-                        </Drawer>
+                        <div className="flex items-center space-x-2">
+                         <Drawer>
+                           <DrawerTrigger asChild>
+                             <Button variant="outline" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
+                               <Layers className="w-3 h-3 mr-1" />
+                               Category
+                             </Button>
+                           </DrawerTrigger>
+                           <DrawerContent className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
+                             <DrawerHeader>
+                               <DrawerTitle>Filter by Category</DrawerTitle>
+                             </DrawerHeader>
+                             <div className="px-4 pb-8 space-y-2">
+                               <Button variant="ghost" onClick={() => setMarketplaceCategory("all")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceCategory === "all" ? "bg-white/20" : ""}`}>
+                                 All Categories
+                               </Button>
+                               <Button variant="ghost" onClick={() => setMarketplaceCategory("striker")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceCategory === "striker" ? "bg-white/20" : ""}`}>
+                                 Striker
+                               </Button>
+                               <Button variant="ghost" onClick={() => setMarketplaceCategory("tank")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceCategory === "tank" ? "bg-white/20" : ""}`}>
+                                 Tank
+                               </Button>
+                               <Button variant="ghost" onClick={() => setMarketplaceCategory("speed")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceCategory === "speed" ? "bg-white/20" : ""}`}>
+                                 Speed
+                               </Button>
+                               <Button variant="ghost" onClick={() => setMarketplaceCategory("defense")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceCategory === "defense" ? "bg-white/20" : ""}`}>
+                                 Defense
+                               </Button>
+                               <Button variant="ghost" onClick={() => setMarketplaceCategory("assault")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceCategory === "assault" ? "bg-white/20" : ""}`}>
+                                 Assault
+                               </Button>
+                             </div>
+                           </DrawerContent>
+                         </Drawer>
+                         <Drawer>
+                           <DrawerTrigger asChild>
+                             <Button variant="outline" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
+                               <Search className="w-3 h-3 mr-1" />
+                               Search
+                             </Button>
+                           </DrawerTrigger>
+                           <DrawerContent className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
+                             <DrawerHeader>
+                               <DrawerTitle>Search Players</DrawerTitle>
+                             </DrawerHeader>
+                             <div className="px-4 pb-8">
+                               <Input
+                                 placeholder="Search players..."
+                                 value={searchTerm}
+                                 onChange={(e) => setSearchTerm(e.target.value)}
+                                 className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
+                               />
+                             </div>
+                           </DrawerContent>
+                         </Drawer>
                         <Drawer>
                           <DrawerTrigger asChild>
                             <Button variant="outline" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
@@ -3464,74 +3510,50 @@ const Game = () => {
                    <CardHeader className="relative z-10">
                      <CardTitle className="text-lg flex items-center justify-between text-white">
                        <span>Marketplace</span>
-                        <div className="flex items-center space-x-2">
-                          {/* Category Filter */}
-                          <div>
-                            {isMobile ? (
-                              <Drawer>
-                                <DrawerTrigger asChild>
-                                  <Button variant="outline" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-8 px-3">
-                                    <Layers className="w-3 h-3 mr-1" />
-                                    Category
-                                  </Button>
-                                </DrawerTrigger>
-                                <DrawerContent className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
-                                  <DrawerHeader>
-                                    <DrawerTitle>Filter by Category</DrawerTitle>
-                                  </DrawerHeader>
-                                  <div className="px-4 pb-8 space-y-2">
-                                    <Button variant="ghost" onClick={() => setMarketplaceCategory("all")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceCategory === "all" ? "bg-white/20" : ""}`}>
-                                      All Categories
-                                    </Button>
-                                    <Button variant="ghost" onClick={() => setMarketplaceCategory("skins")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceCategory === "skins" ? "bg-white/20" : ""}`}>
-                                      Skins
-                                    </Button>
-                                    <Button variant="ghost" onClick={() => setMarketplaceCategory("accessories")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceCategory === "accessories" ? "bg-white/20" : ""}`}>
-                                      Accessories
-                                    </Button>
-                                    <Button variant="ghost" onClick={() => setMarketplaceCategory("mobility")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceCategory === "mobility" ? "bg-white/20" : ""}`}>
-                                      Mobility
-                                    </Button>
-                                    <Button variant="ghost" onClick={() => setMarketplaceCategory("emotes")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceCategory === "emotes" ? "bg-white/20" : ""}`}>
-                                      Emotes
-                                    </Button>
-                                    <Button variant="ghost" onClick={() => setMarketplaceCategory("packs")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceCategory === "packs" ? "bg-white/20" : ""}`}>
-                                      Packs
-                                    </Button>
-                                  </div>
-                                </DrawerContent>
-                              </Drawer>
-                            ) : (
-                              <DropdownMenu>
-                                <DropdownMenuTrigger asChild>
-                                  <Button variant="outline" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-8 px-3">
-                                    <Layers className="w-3 h-3 mr-1" />
-                                    Category
-                                  </Button>
-                                </DropdownMenuTrigger>
-                                <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-[9999]">
-                                  <DropdownMenuItem onClick={() => setMarketplaceCategory("all")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceCategory === "all" ? "bg-white/20" : ""}`}>
-                                    <span>All Categories</span>
-                                  </DropdownMenuItem>
-                                  <DropdownMenuItem onClick={() => setMarketplaceCategory("skins")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceCategory === "skins" ? "bg-white/20" : ""}`}>
-                                    <span>Skins</span>
-                                  </DropdownMenuItem>
-                                  <DropdownMenuItem onClick={() => setMarketplaceCategory("accessories")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceCategory === "accessories" ? "bg-white/20" : ""}`}>
-                                    <span>Accessories</span>
-                                  </DropdownMenuItem>
-                                  <DropdownMenuItem onClick={() => setMarketplaceCategory("mobility")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceCategory === "mobility" ? "bg-white/20" : ""}`}>
-                                    <span>Mobility</span>
-                                  </DropdownMenuItem>
-                                  <DropdownMenuItem onClick={() => setMarketplaceCategory("emotes")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceCategory === "emotes" ? "bg-white/20" : ""}`}>
-                                    <span>Emotes</span>
-                                  </DropdownMenuItem>
-                                  <DropdownMenuItem onClick={() => setMarketplaceCategory("packs")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceCategory === "packs" ? "bg-white/20" : ""}`}>
-                                    <span>Packs</span>
-                                  </DropdownMenuItem>
-                                </DropdownMenuContent>
-                              </DropdownMenu>
-                            )}
-                          </div>
+                         <div className="flex items-center space-x-2">
+                           {/* Search Input */}
+                           <div className="relative">
+                             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-3 h-3 text-gray-400" />
+                             <Input
+                               placeholder="Search players..."
+                               value={searchTerm}
+                               onChange={(e) => setSearchTerm(e.target.value)}
+                               className="pl-8 pr-3 h-8 text-xs bg-white/10 border-white/20 text-white placeholder:text-gray-400 w-48"
+                             />
+                           </div>
+                           
+                           {/* Category Filter */}
+                           <div>
+                             <DropdownMenu>
+                               <DropdownMenuTrigger asChild>
+                                 <Button variant="outline" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-8 px-3">
+                                   <Layers className="w-3 h-3 mr-1" />
+                                   Category
+                                 </Button>
+                               </DropdownMenuTrigger>
+                               <DropdownMenuContent align="center" className="w-40 bg-black/90 backdrop-blur-md border border-white/20 text-white z-[9999]">
+                                 <DropdownMenuItem onClick={() => setMarketplaceCategory("all")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceCategory === "all" ? "bg-white/20" : ""}`}>
+                                   <span>All Categories</span>
+                                 </DropdownMenuItem>
+                                 <DropdownMenuItem onClick={() => setMarketplaceCategory("striker")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceCategory === "striker" ? "bg-white/20" : ""}`}>
+                                   <span>Striker</span>
+                                 </DropdownMenuItem>
+                                 <DropdownMenuItem onClick={() => setMarketplaceCategory("tank")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceCategory === "tank" ? "bg-white/20" : ""}`}>
+                                   <span>Tank</span>
+                                 </DropdownMenuItem>
+                                 <DropdownMenuItem onClick={() => setMarketplaceCategory("speed")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceCategory === "speed" ? "bg-white/20" : ""}`}>
+                                   <span>Speed</span>
+                                 </DropdownMenuItem>
+                                 <DropdownMenuItem onClick={() => setMarketplaceCategory("defense")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceCategory === "defense" ? "bg-white/20" : ""}`}>
+                                   <span>Defense</span>
+                                 </DropdownMenuItem>
+                                 <DropdownMenuItem onClick={() => setMarketplaceCategory("assault")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceCategory === "assault" ? "bg-white/20" : ""}`}>
+                                   <span>Assault</span>
+                                 </DropdownMenuItem>
+                                 </DropdownMenuContent>
+                               </DropdownMenu>
+                             </div>
+                           </div>
 
                          {/* Filter Dropdown - Price/Trend Filter */}
                          <div>
@@ -3611,10 +3633,9 @@ const Game = () => {
                                 </DropdownMenuContent>
                              </DropdownMenu>
                            )}
-                         </div>
-                       </div>
-                     </CardTitle>
-                   </CardHeader>
+                          </div>
+                      </CardTitle>
+                    </CardHeader>
                    <CardContent className="relative z-10">
                      <div className="space-y-3">
                        {filteredMarketplacePlayers.slice(0, visiblePlayers).map((player, idx) => <div key={idx} className="flex items-center space-x-4 p-4 bg-white/5 rounded-lg hover:bg-white/10 transition-colors mb-3 last:mb-0">
@@ -3745,8 +3766,8 @@ const Game = () => {
                   </Card>
                 </div>
                 </div>
-                 </div>  
-               </ScrollArea>}
+              </div>
+            </ScrollArea>}
 
             {activeTab === "locker" && <ScrollArea className="h-full">
                 <div className="p-6">
