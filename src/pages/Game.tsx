@@ -45,8 +45,8 @@ const getTierIcon = (xp: number): string => {
 };
 
 // Function to render marketplace prices (bid/ask)
-const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: string, itemType: string) => any, size: 'small' | 'medium' | 'large' = 'medium') => {
-  const prices = getMarketplacePrices(player.name, 'player');
+const renderMarketplacePrices = (item: any, getMarketplacePrices: (itemId: string, itemType: string) => any, size: 'small' | 'medium' | 'large' = 'medium') => {
+  const prices = getMarketplacePrices(item.id, item.category);
   
   const sizeClasses = {
     small: { coin: 'w-3 h-3', text: 'text-xs' },
@@ -58,8 +58,8 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
 
   if (!prices.hasListings || (!prices.bestSellPrice && !prices.bestBuyPrice)) {
     // Generate mock bid/ask prices when no real listings exist
-    const mockSellPrice = Math.round(player.price * 1.15);
-    const mockBuyPrice = Math.round(player.price * 0.85);
+    const mockSellPrice = Math.round(item.price * 1.15);
+    const mockBuyPrice = Math.round(item.price * 0.85);
     
     return (
       <div className="flex items-center space-x-2">
@@ -122,7 +122,8 @@ const Game = () => {
   const navigate = useNavigate();
   const {
     purchaseItem,
-    userBalance
+    userBalance,
+    storeItems
   } = useStore();
   const {
     profile,
@@ -187,275 +188,51 @@ const Game = () => {
       day: 'numeric'
     })
   }));
-  const trendingPlayers = [{
-    name: "Shadow Strike",
-    team: "Crimson Hawks",
-    position: "Striker",
-    price: 8500,
-    change: 12.5,
-    trend: "up",
-    image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
-  }, {
-    name: "Iron Fist",
-    team: "Steel Wolves",
-    position: "Tank",
-    price: 7200,
-    change: -8.3,
-    trend: "down",
-    image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png"
-  }, {
-    name: "Lightning Bolt",
-    team: "Thunder Birds",
-    position: "Speed",
-    price: 9100,
-    change: 15.7,
-    trend: "up",
-    image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
-  }, {
-    name: "Stone Wall",
-    team: "Mountain Lions",
-    position: "Defense",
-    price: 6800,
-    change: -4.2,
-    trend: "down",
-    image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png"
-  }, {
-    name: "Fire Storm",
-    team: "Flame Dragons",
-    position: "Assault",
-    price: 8900,
-    change: 9.6,
-    trend: "up",
-    image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
-  }];
+  // Get unique categories from store items
+  const uniqueCategories = [...new Set(storeItems.map(item => item.category))];
+
+  // Create trending items from store data with mock market data
+  const trendingPlayers = storeItems.slice(0, 5).map((item, index) => ({
+    id: item.id,
+    name: item.name,
+    category: item.category,
+    rarity: item.rarity,
+    price: item.price,
+    change: [12.5, -8.3, 15.7, -4.2, 9.6][index] || (Math.random() * 30 - 15),
+    trend: [12.5, -8.3, 15.7, -4.2, 9.6][index] > 0 ? "up" : "down",
+    image: item.image_url || "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
+  }));
+  // Create gainers data from store items with mock market data
+  const createGainersFromStore = (changeMultiplier: number) => {
+    return storeItems.slice(0, 5).map((item, index) => ({
+      id: item.id,
+      name: item.name,
+      category: item.category,
+      rarity: item.rarity,
+      price: item.price,
+      change: (24.8 - index * 5) * changeMultiplier,
+      image: item.image_url || "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
+    }));
+  };
+
   const topGainersData = {
-    daily: [{
-      name: "Cyber Phantom",
-      team: "Neon Guardians",
-      position: "Stealth",
-      price: 5200,
-      change: 24.8,
-      image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
-    }, {
-      name: "Quantum Leap",
-      team: "Future Force",
-      position: "Mobility",
-      price: 4800,
-      change: 19.3,
-      image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png"
-    }, {
-      name: "Void Walker",
-      team: "Dark Matter",
-      position: "Phantom",
-      price: 6100,
-      change: 17.5,
-      image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
-    }, {
-      name: "Solar Flare",
-      team: "Sun Blazers",
-      position: "Energy",
-      price: 5500,
-      change: 16.2,
-      image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png"
-    }, {
-      name: "Storm Breaker",
-      team: "Wind Riders",
-      position: "Force",
-      price: 4900,
-      change: 15.9,
-      image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
-    }],
-    weekly: [{
-      name: "Lightning Strike",
-      team: "Thunder Hawks",
-      position: "Speed",
-      price: 7300,
-      change: 45.2,
-      image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
-    }, {
-      name: "Iron Forge",
-      team: "Steel Warriors",
-      position: "Tank",
-      price: 6800,
-      change: 38.7,
-      image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png"
-    }, {
-      name: "Phoenix Wing",
-      team: "Fire Eagles",
-      position: "Assault",
-      price: 5900,
-      change: 33.1,
-      image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
-    }, {
-      name: "Frost Bite",
-      team: "Ice Wolves",
-      position: "Control",
-      price: 6400,
-      change: 29.8,
-      image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png"
-    }, {
-      name: "Earth Shaker",
-      team: "Ground Force",
-      position: "Heavy",
-      price: 7100,
-      change: 27.3,
-      image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
-    }],
-    monthly: [{
-      name: "Titan Crusher",
-      team: "Mega Corps",
-      position: "Destroyer",
-      price: 9200,
-      change: 89.4,
-      image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
-    }, {
-      name: "Shadow Master",
-      team: "Dark Legion",
-      position: "Assassin",
-      price: 8500,
-      change: 76.8,
-      image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png"
-    }, {
-      name: "Plasma Cannon",
-      team: "Energy Corps",
-      position: "Artillery",
-      price: 8900,
-      change: 69.5,
-      image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
-    }, {
-      name: "Void Reaper",
-      team: "Space Raiders",
-      position: "Elite",
-      price: 9800,
-      change: 62.1,
-      image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png"
-    }, {
-      name: "Storm Lord",
-      team: "Weather Gods",
-      position: "Legendary",
-      price: 10500,
-      change: 58.7,
-      image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
-    }],
-    alltime: [{
-      name: "Apex Legend",
-      team: "Ultimate Force",
-      position: "Champion",
-      price: 15000,
-      change: 234.7,
-      image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
-    }, {
-      name: "God Slayer",
-      team: "Divine Army",
-      position: "Mythic",
-      price: 13500,
-      change: 189.3,
-      image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png"
-    }, {
-      name: "Universe Destroyer",
-      team: "Cosmic Force",
-      position: "Godlike",
-      price: 14200,
-      change: 156.8,
-      image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
-    }, {
-      name: "Reality Bender",
-      team: "Quantum Lords",
-      position: "Transcendent",
-      price: 12800,
-      change: 142.5,
-      image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png"
-    }, {
-      name: "Infinite Power",
-      team: "Eternal Guardians",
-      position: "Supreme",
-      price: 16000,
-      change: 198.9,
-      image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
-    }]
+    daily: createGainersFromStore(1),
+    weekly: createGainersFromStore(1.8),
+    monthly: createGainersFromStore(3.5),
+    alltime: createGainersFromStore(8)
   };
   const topGainers = topGainersData[gainersTimeFilter];
-  const allPlayers = [{
-    name: "Shadow Strike",
-    team: "Crimson Hawks",
-    position: "Striker",
-    price: 8500,
-    lastSale: 7500,
-    trend: "up",
-    image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
-  }, {
-    name: "Fire Storm",
-    team: "Flame Dragons",
-    position: "Assault",
-    price: 8900,
-    lastSale: 8100,
-    trend: "up",
-    image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
-  }, {
-    name: "Lightning Bolt",
-    team: "Thunder Birds",
-    position: "Speed",
-    price: 9100,
-    lastSale: 7900,
-    trend: "up",
-    image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png"
-  }, {
-    name: "Iron Fist",
-    team: "Steel Wolves",
-    position: "Tank",
-    price: 7200,
-    lastSale: 7850,
-    trend: "down",
-    image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
-  }, {
-    name: "Stone Wall",
-    team: "Mountain Lions",
-    position: "Defense",
-    price: 6800,
-    lastSale: 7100,
-    trend: "down",
-    image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png"
-  }, {
-    name: "Void Walker",
-    team: "Dark Matter",
-    position: "Phantom",
-    price: 6100,
-    lastSale: 5200,
-    trend: "up",
-    image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
-  }, {
-    name: "Solar Flare",
-    team: "Sun Blazers",
-    position: "Energy",
-    price: 5500,
-    lastSale: 4750,
-    trend: "up",
-    image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png"
-  }, {
-    name: "Cyber Phantom",
-    team: "Neon Guardians",
-    position: "Stealth",
-    price: 5200,
-    lastSale: 4100,
-    trend: "up",
-    image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
-  }, {
-    name: "Storm Breaker",
-    team: "Wind Riders",
-    position: "Force",
-    price: 4900,
-    lastSale: 4200,
-    trend: "up",
-    image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png"
-  }, {
-    name: "Quantum Leap",
-    team: "Future Force",
-    position: "Mobility",
-    price: 4800,
-    lastSale: 4000,
-    trend: "up",
-    image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
-  }].sort((a, b) => b.price - a.price);
+  // Create all players data from store items with mock market data
+  const allPlayers = storeItems.map((item, index) => ({
+    id: item.id,
+    name: item.name,
+    category: item.category,
+    rarity: item.rarity,
+    price: item.price,
+    lastSale: Math.round(item.price * (0.85 + Math.random() * 0.3)),
+    trend: Math.random() > 0.5 ? "up" : "down",
+    image: item.image_url || "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
+  })).sort((a, b) => b.price - a.price);
   const currentMarketValue = marketValueData[marketValueData.length - 1]?.value || 0;
   const currentListings = Math.round(listingsData[listingsData.length - 1]?.listings || 0);
 
@@ -465,23 +242,23 @@ const Game = () => {
     return items.filter(item => item.rarity === selectedRarity);
   };
 
-  // Filter marketplace players
-  const filterMarketplaceByCategory = (players: any[], category: string) => {
-    if (category === "all") return players;
-    return players.filter(player => player.position.toLowerCase() === category.toLowerCase());
+  // Filter marketplace items
+  const filterMarketplaceByCategory = (items: any[], category: string) => {
+    if (category === "all") return items;
+    return items.filter(item => item.category.toLowerCase() === category.toLowerCase());
   };
 
-  const filterMarketplaceByFilter = (players: any[], filter: string) => {
-    if (filter === "all") return players;
-    if (filter === "pricelow") return players.filter(player => player.price <= 5000);
-    if (filter === "pricemedium") return players.filter(player => player.price > 5000 && player.price <= 15000);
-    if (filter === "pricehigh") return players.filter(player => player.price > 15000);
-    if (filter === "trendup") return players.filter(player => player.trend === "up");
-    if (filter === "trenddown") return players.filter(player => player.trend === "down");
-    return players;
+  const filterMarketplaceByFilter = (items: any[], filter: string) => {
+    if (filter === "all") return items;
+    if (filter === "pricelow") return items.filter(item => item.price <= 5000);
+    if (filter === "pricemedium") return items.filter(item => item.price > 5000 && item.price <= 15000);
+    if (filter === "pricehigh") return items.filter(item => item.price > 15000);
+    if (filter === "trendup") return items.filter(item => item.trend === "up");
+    if (filter === "trenddown") return items.filter(item => item.trend === "down");
+    return items;
   };
 
-  const filteredMarketplacePlayers = filterMarketplaceByFilter(
+  const filteredMarketplaceItems = filterMarketplaceByFilter(
     filterMarketplaceByCategory(allPlayers, marketplaceCategory),
     marketplaceFilter
   );
@@ -1886,10 +1663,15 @@ const Game = () => {
                               <img src={player.image} alt={player.name} className="w-full h-full object-cover" />
                             </div>
                             <div className="flex-1 min-w-0">
-                              <div className="flex items-center justify-between">
-                                <p className="text-xs font-semibold text-white truncate">{player.name}</p>
-                                {renderMarketplacePrices(player, getMarketplacePrices, 'small')}
-                              </div>
+                               <div className="flex items-center justify-between">
+                                 <div>
+                                   <p className="text-xs font-semibold text-white truncate">{player.name}</p>
+                                   <Badge variant="outline" className="text-xs bg-white/10 text-white border-white/20 mt-1">
+                                     {player.category}
+                                   </Badge>
+                                 </div>
+                                 {renderMarketplacePrices(player, getMarketplacePrices, 'small')}
+                               </div>
                                <div className="flex items-center justify-between">
                                  <div className={`flex items-center space-x-1 ${player.trend === 'up' ? 'text-green-400' : 'text-red-400'}`}>
                                    {player.trend === 'up' ? <ArrowUpRight className="w-3 h-3" /> : <ArrowDownRight className="w-3 h-3" />}
@@ -3518,63 +3300,49 @@ const Game = () => {
                      <CardTitle className="text-lg flex items-center justify-between text-white">
                        <span>Marketplace</span>
                        <div className="flex items-center space-x-2">
-                         {/* Category Filter - Position Filter */}
+                         {/* Category Filter - Category Filter */}
                          <div>
                            {isMobile ? (
                              <Drawer>
                                <DrawerTrigger asChild>
-                                 <Button variant="outline" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-8 px-3">
-                                   <Layers className="w-3 h-3 mr-1" />
-                                   Position
-                                 </Button>
-                               </DrawerTrigger>
-                               <DrawerContent className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
-                                 <DrawerHeader>
-                                   <DrawerTitle>Filter by Position</DrawerTitle>
-                                 </DrawerHeader>
-                                 <div className="px-4 pb-8 space-y-2">
-                                   <Button variant="ghost" onClick={() => setMarketplaceCategory("all")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceCategory === "all" ? "bg-white/20" : ""}`}>
-                                     All Positions
-                                   </Button>
-                                   <Button variant="ghost" onClick={() => setMarketplaceCategory("striker")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceCategory === "striker" ? "bg-white/20" : ""}`}>
-                                     Striker
-                                   </Button>
-                                   <Button variant="ghost" onClick={() => setMarketplaceCategory("defender")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceCategory === "defender" ? "bg-white/20" : ""}`}>
-                                     Defender
-                                   </Button>
-                                   <Button variant="ghost" onClick={() => setMarketplaceCategory("midfielder")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceCategory === "midfielder" ? "bg-white/20" : ""}`}>
-                                     Midfielder
-                                   </Button>
-                                   <Button variant="ghost" onClick={() => setMarketplaceCategory("supreme")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceCategory === "supreme" ? "bg-white/20" : ""}`}>
-                                     Supreme
-                                   </Button>
+                                  <Button variant="outline" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-8 px-3">
+                                    <Layers className="w-3 h-3 mr-1" />
+                                    Category
+                                  </Button>
+                                </DrawerTrigger>
+                                <DrawerContent className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
+                                  <DrawerHeader>
+                                    <DrawerTitle>Filter by Category</DrawerTitle>
+                                  </DrawerHeader>
+                                  <div className="px-4 pb-8 space-y-2">
+                                    <Button variant="ghost" onClick={() => setMarketplaceCategory("all")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceCategory === "all" ? "bg-white/20" : ""}`}>
+                                      All Categories
+                                    </Button>
+                                    {uniqueCategories.map(category => (
+                                      <Button key={category} variant="ghost" onClick={() => setMarketplaceCategory(category)} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceCategory === category ? "bg-white/20" : ""}`}>
+                                        {category}
+                                      </Button>
+                                    ))}
                                  </div>
                                </DrawerContent>
                              </Drawer>
                            ) : (
                              <DropdownMenu>
                                <DropdownMenuTrigger asChild>
-                                 <Button variant="outline" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-8 px-3">
-                                   <Layers className="w-3 h-3 mr-1" />
-                                   Position
-                                 </Button>
-                               </DropdownMenuTrigger>
-                               <DropdownMenuContent align="center" className="w-32 bg-black/90 backdrop-blur-md border border-white/20 text-white z-[9999]">
-                                 <DropdownMenuItem onClick={() => setMarketplaceCategory("all")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceCategory === "all" ? "bg-white/20" : ""}`}>
-                                   <span>All Positions</span>
-                                 </DropdownMenuItem>
-                                 <DropdownMenuItem onClick={() => setMarketplaceCategory("striker")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceCategory === "striker" ? "bg-white/20" : ""}`}>
-                                   <span>Striker</span>
-                                 </DropdownMenuItem>
-                                 <DropdownMenuItem onClick={() => setMarketplaceCategory("defender")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceCategory === "defender" ? "bg-white/20" : ""}`}>
-                                   <span>Defender</span>
-                                 </DropdownMenuItem>
-                                 <DropdownMenuItem onClick={() => setMarketplaceCategory("midfielder")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceCategory === "midfielder" ? "bg-white/20" : ""}`}>
-                                   <span>Midfielder</span>
-                                 </DropdownMenuItem>
-                                 <DropdownMenuItem onClick={() => setMarketplaceCategory("supreme")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceCategory === "supreme" ? "bg-white/20" : ""}`}>
-                                   <span>Supreme</span>
-                                 </DropdownMenuItem>
+                                  <Button variant="outline" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-8 px-3">
+                                    <Layers className="w-3 h-3 mr-1" />
+                                    Category
+                                  </Button>
+                                </DropdownMenuTrigger>
+                                <DropdownMenuContent align="center" className="w-32 bg-black/90 backdrop-blur-md border border-white/20 text-white z-[9999]">
+                                  <DropdownMenuItem onClick={() => setMarketplaceCategory("all")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceCategory === "all" ? "bg-white/20" : ""}`}>
+                                    <span>All Categories</span>
+                                  </DropdownMenuItem>
+                                  {uniqueCategories.map(category => (
+                                    <DropdownMenuItem key={category} onClick={() => setMarketplaceCategory(category)} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceCategory === category ? "bg-white/20" : ""}`}>
+                                      <span>{category}</span>
+                                    </DropdownMenuItem>
+                                  ))}
                                </DropdownMenuContent>
                              </DropdownMenu>
                            )}
@@ -3652,22 +3420,32 @@ const Game = () => {
                    </CardHeader>
                    <CardContent className="relative z-10">
                      <div className="space-y-3">
-                       {filteredMarketplacePlayers.slice(0, visiblePlayers).map((player, idx) => <div key={idx} className="flex items-center space-x-4 p-4 bg-white/5 rounded-lg hover:bg-white/10 transition-colors mb-3 last:mb-0">
+                       {filteredMarketplaceItems.slice(0, visiblePlayers).map((player, idx) => <div key={idx} className="flex items-center space-x-4 p-4 bg-white/5 rounded-lg hover:bg-white/10 transition-colors mb-3 last:mb-0">
                           <div className="w-16 h-16 rounded-full overflow-hidden">
                             <img src={player.image} alt={player.name} className="w-full h-full object-cover" />
                           </div>
-                          <div className="flex-1 min-w-0">
-                            <div className="flex items-center justify-between">
-                              <p className="text-lg font-semibold text-white truncate">{player.name}</p>
-                              {renderMarketplacePrices(player, getMarketplacePrices, 'large')}
-                            </div>
-                          </div>
+                           <div className="flex-1 min-w-0">
+                             <div className="flex items-center justify-between">
+                               <div>
+                                 <p className="text-lg font-semibold text-white truncate">{player.name}</p>
+                                 <div className="flex items-center space-x-2 mt-1">
+                                   <Badge variant="outline" className="text-xs bg-white/10 text-white border-white/20">
+                                     {player.category}
+                                   </Badge>
+                                   <Badge variant="outline" className="text-xs bg-white/10 text-white border-white/20">
+                                     {player.rarity}
+                                   </Badge>
+                                 </div>
+                               </div>
+                               {renderMarketplacePrices(player, getMarketplacePrices, 'large')}
+                             </div>
+                           </div>
                         </div>)}
                     </div>
                     
-                     {visiblePlayers < filteredMarketplacePlayers.length && <div className="mt-6 text-center">
-                         <Button variant="outline" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => setVisiblePlayers(prev => Math.min(prev + 10, filteredMarketplacePlayers.length))}>
-                           Load More Players ({filteredMarketplacePlayers.length - visiblePlayers} remaining)
+                      {visiblePlayers < filteredMarketplaceItems.length && <div className="mt-6 text-center">
+                          <Button variant="outline" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => setVisiblePlayers(prev => Math.min(prev + 10, filteredMarketplaceItems.length))}>
+                            Load More Items ({filteredMarketplaceItems.length - visiblePlayers} remaining)
                          </Button>
                        </div>}
                   </CardContent>
