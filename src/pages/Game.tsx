@@ -3095,7 +3095,7 @@ const Game = () => {
                                <div className="aspect-square bg-gray-800/50 rounded-lg mb-3 overflow-hidden">
                                  <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
                                </div>
-                               <h3 className="font-semibold text-sm text-white mb-2">{item.name}</h3>
+                               <h3 className="font-semibold text-sm text-white mb-2 truncate">{item.name}</h3>
                                <div className="flex items-center justify-between">
                                  <div className="flex items-center space-x-1">
                                    <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4" />
