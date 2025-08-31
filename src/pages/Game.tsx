@@ -140,7 +140,7 @@ const Game = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchExpanded, setSearchExpanded] = useState(false);
   const [settingsExpanded, setSettingsExpanded] = useState(false);
-  const [objectivesView, setObjectivesView] = useState("daily");
+  const [objectivesView, setObjectivesView] = useState("weekly");
   const [isObjectivesGlowing, setIsObjectivesGlowing] = useState(false);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
   const [isRankingsOpen, setIsRankingsOpen] = useState(false);
@@ -328,12 +328,12 @@ const Game = () => {
       image: "/lovable-uploads/4e2aac54-cac6-4cf1-92ad-76bf7e788077.png"
     }],
     weekly: [{
-      name: "Silverborg",
+      name: "Lightning Strike",
       team: "Thunder Hawks",
       position: "Speed",
       price: 7300,
       change: 45.2,
-      image: "/lovable-uploads/fdd396d6-16bd-493f-ba2e-0c27e846ea03.png"
+      image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
     }, {
       name: "Iron Forge",
       team: "Steel Warriors",
@@ -618,7 +618,7 @@ const Game = () => {
           
           {/* Desktop Navigation - hidden on mobile */}
           <div className="hidden lg:flex items-center justify-center flex-1">
-            <nav className="flex items-center justify-center space-x-6 ml-24">
+            <nav className="flex items-center justify-center space-x-6 ml-20">
              {tabItems.filter(tab => tab.id !== "coins").map(tab => <button key={tab.id} onClick={() => handleTabClick(tab.id)} className={`relative flex items-center justify-center px-3 py-2 text-sm font-medium transition-all duration-300 ${activeTab === tab.id ? "text-foreground after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-primary after:scale-x-100 after:transition-transform after:duration-300" : "text-muted-foreground hover:text-foreground after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-primary after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100"}`}>
                 <tab.icon className="w-8 h-8" />
               </button>)}
@@ -710,7 +710,7 @@ const Game = () => {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
                     <CardContent className="p-6 h-full flex flex-col justify-end relative z-10">
                       <div>
-                        <h2 className="text-2xl font-bold mb-2">Welcome to LCS</h2>
+                        <h2 className="text-2xl font-bold mb-2">Get Ready To Fight </h2>
                         <div className="flex space-x-3">
                           <Button variant="secondary" size="default" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 transition-all duration-300" onClick={() => navigate('/docs')}>
                             <Info className="w-4 h-4 mr-2" />
@@ -1406,27 +1406,7 @@ const Game = () => {
                       
                     </CardHeader>
                     <CardContent>
-                        <StoreCarousel ref={fightersCarouselRef} items={filterItemsByRarity([{
-                  name: "Dale Sunny",
-                  price: 1200,
-                  rarity: "special",
-                  image: "/lovable-uploads/93281d21-be75-4f68-86b0-b80b1e03ac56.png"
-                }, {
-                  name: "Ray Del Mar",
-                  price: 2800,
-                  rarity: "blue",
-                  image: "/lovable-uploads/e8b33b1a-410f-4448-9b83-126b8d27f0a9.png"
-                }, {
-                  name: "John Strictland",
-                  price: 1000,
-                  rarity: "special",
-                  image: "/lovable-uploads/98664a07-8365-4512-8f3e-a0c79bd4617c.png"
-                }, {
-                  name: "Tarragon Southslice",
-                  price: 2800,
-                  rarity: "gold",
-                  image: "/lovable-uploads/cf5abf4c-cf7f-49b7-a830-49343c8d1222.png"
-                }, {
+                       <StoreCarousel ref={fightersCarouselRef} items={filterItemsByRarity([{
                   name: "The Irish King",
                   price: 2500,
                   rarity: "gold",
@@ -1446,6 +1426,26 @@ const Game = () => {
                   price: 1500,
                   rarity: "green",
                   image: latinLegendSkin
+                }, {
+                  name: "Tarragon Southcut",
+                  price: 2800,
+                  rarity: "gold",
+                  image: "/lovable-uploads/dc6922ce-3718-474e-acac-697502a010b2.png"
+                }, {
+                  name: "Cyber Warrior",
+                  price: 3200,
+                  rarity: "special",
+                  image: cyberWarriorSkin
+                }, {
+                  name: "Thunder Punch",
+                  price: 1900,
+                  rarity: "blue",
+                  image: "/lovable-uploads/77a6c004-93ed-49ee-a5d0-6056ee852612.png"
+                }, {
+                  name: "Ice Breaker",
+                  price: 2400,
+                  rarity: "silver",
+                  image: "/lovable-uploads/8c2f941a-58db-43db-9b99-afb13cd3c36b.png"
                 }])} renderItem={(item, idx) => <GlowCard key={idx} className="cursor-pointer">
                               <div className="p-3">
                                <div className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden">
@@ -3049,27 +3049,7 @@ const Game = () => {
                        </CardTitle>
                      </CardHeader>
                       <CardContent>
-                         <StoreCarousel ref={desktopFightersCarouselRef} desktopMode={true} items={filterItemsByRarity([{
-                        name: "Dale Sunny",
-                        price: 1200,
-                        rarity: "gold",
-                        image: "/lovable-uploads/93281d21-be75-4f68-86b0-b80b1e03ac56.png"
-                      }, {
-                        name: "Ray Del Mar",
-                        price: 2800,
-                        rarity: "blue",
-                        image: "/lovable-uploads/e8b33b1a-410f-4448-9b83-126b8d27f0a9.png"
-                      }, {
-                        name: "John Strictland",
-                        price: 1000,
-                        rarity: "special",
-                        image: "/lovable-uploads/98664a07-8365-4512-8f3e-a0c79bd4617c.png"
-                      }, {
-                        name: "Tarragon Southslice",
-                        price: 2800,
-                        rarity: "gold",
-                        image: "/lovable-uploads/cf5abf4c-cf7f-49b7-a830-49343c8d1222.png"
-                      }, {
+                        <StoreCarousel ref={desktopFightersCarouselRef} desktopMode={true} items={filterItemsByRarity([{
                         name: "The Irish King",
                         price: 2500,
                         rarity: "gold",
@@ -3089,13 +3069,33 @@ const Game = () => {
                         price: 1500,
                         rarity: "green",
                         image: latinLegendSkin
+                      }, {
+                        name: "Cyber Warrior",
+                        price: 3000,
+                        rarity: "gold",
+                        image: cyberWarriorSkin
+                      }, {
+                        name: "Shadow Hunter",
+                        price: 2800,
+                        rarity: "blue",
+                        image: "/lovable-uploads/4c80b2cf-0ea7-49a2-96b8-58ecbfa7623a.png"
+                      }, {
+                        name: "Fire Master",
+                        price: 3500,
+                        rarity: "special",
+                        image: "/lovable-uploads/13b1e254-7a27-4fc3-8040-9882d7705c70.png"
+                      }, {
+                        name: "Ice Warrior",
+                        price: 2700,
+                        rarity: "silver",
+                        image: "/lovable-uploads/7d4ea94f-0c4d-459f-bded-b68a2bd272d6.png"
                       }])} renderItem={(item, idx) => <GlowCard key={idx} className="text-white shadow-2xl cursor-pointer">
                               <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
                               <CardContent className="p-4 relative z-10">
                                <div className="aspect-square bg-gray-800/50 rounded-lg mb-3 overflow-hidden">
                                  <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
                                </div>
-                               <h3 className="font-semibold text-sm text-white mb-2 truncate">{item.name}</h3>
+                               <h3 className="font-semibold text-sm text-white mb-2">{item.name}</h3>
                                <div className="flex items-center justify-between">
                                  <div className="flex items-center space-x-1">
                                    <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4" />
