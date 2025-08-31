@@ -2037,7 +2037,7 @@ const Game = () => {
                   <CardContent className="relative z-10">
                     <div className="space-y-2">
                       {allPlayers.slice(0, visiblePlayers).map((player, idx) => <div key={idx} className="flex items-center space-x-3 p-3 bg-white/5 rounded-lg hover:bg-white/10 transition-colors">
-                          <div className="w-10 h-10 rounded-full overflow-hidden">
+                          <div className="w-12 h-12 rounded-full overflow-hidden">
                             <img src={player.image} alt={player.name} className="w-full h-full object-cover" />
                           </div>
                           <div className="flex-1 min-w-0">
