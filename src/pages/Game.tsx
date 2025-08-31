@@ -4311,42 +4311,77 @@ const Game = () => {
         </DialogContent>
       </Dialog>
 
-      {/* Buy Dialog */}
-      <Dialog open={buyDialogOpen} onOpenChange={setBuyDialogOpen}>
-        <DialogContent className="sm:max-w-md bg-black/10 backdrop-blur-md border border-white/20 text-white">
-          <DialogHeader>
-            <DialogTitle className="text-white">Buy {selectedPlayer?.name}</DialogTitle>
-            <DialogDescription className="text-white/80">
-              Choose your payment method to purchase this player.
-            </DialogDescription>
-          </DialogHeader>
-          <div className="flex flex-col space-y-3 pt-4">
-            <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 hover:text-white transition-all duration-300" onClick={() => {
-              toast({
-                title: "Card Payment",
-                description: "Card payment functionality coming soon!"
-              });
-              setBuyDialogOpen(false);
-            }}>
-              <CreditCard className="w-4 h-4 mr-2" />
-              Buy with Card
-            </Button>
-            <Button variant="outline" className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 hover:text-white transition-all duration-300" onClick={() => {
-              toast({
-                title: "Coin Payment",
-                description: "Coin payment functionality coming soon!"
-              });
-              setBuyDialogOpen(false);
-            }}>
-              <Coins className="w-4 h-4 mr-2" />
-              Buy with Coins
-            </Button>
-            <Button variant="ghost" className="text-white hover:bg-white/10 hover:text-white transition-all duration-300" onClick={() => setBuyDialogOpen(false)}>
-              Cancel
-            </Button>
-          </div>
-        </DialogContent>
-      </Dialog>
+      {/* Buy Dialog - Mobile: Drawer, Desktop: Dialog */}
+      {isMobile ? (
+        <Drawer open={buyDialogOpen} onOpenChange={setBuyDialogOpen}>
+          <DrawerContent className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
+            <DrawerHeader>
+              <DrawerTitle className="text-white">Buy {selectedPlayer?.name}</DrawerTitle>
+            </DrawerHeader>
+            <div className="flex flex-col space-y-3 p-4">
+              <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 hover:text-white transition-all duration-300" onClick={() => {
+                toast({
+                  title: "Card Payment",
+                  description: "Card payment functionality coming soon!"
+                });
+                setBuyDialogOpen(false);
+              }}>
+                <CreditCard className="w-4 h-4 mr-2" />
+                Buy with Card
+              </Button>
+              <Button variant="outline" className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 hover:text-white transition-all duration-300" onClick={() => {
+                toast({
+                  title: "Coin Payment",
+                  description: "Coin payment functionality coming soon!"
+                });
+                setBuyDialogOpen(false);
+              }}>
+                <Coins className="w-4 h-4 mr-2" />
+                Buy with Coins
+              </Button>
+              <Button variant="ghost" className="text-white hover:bg-white/10 hover:text-white transition-all duration-300" onClick={() => setBuyDialogOpen(false)}>
+                Cancel
+              </Button>
+            </div>
+          </DrawerContent>
+        </Drawer>
+      ) : (
+        <Dialog open={buyDialogOpen} onOpenChange={setBuyDialogOpen}>
+          <DialogContent className="sm:max-w-md bg-black/10 backdrop-blur-md border border-white/20 text-white">
+            <DialogHeader>
+              <DialogTitle className="text-white">Buy {selectedPlayer?.name}</DialogTitle>
+              <DialogDescription className="text-white/80">
+                Choose your payment method to purchase this player.
+              </DialogDescription>
+            </DialogHeader>
+            <div className="flex flex-col space-y-3 pt-4">
+              <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 hover:text-white transition-all duration-300" onClick={() => {
+                toast({
+                  title: "Card Payment",
+                  description: "Card payment functionality coming soon!"
+                });
+                setBuyDialogOpen(false);
+              }}>
+                <CreditCard className="w-4 h-4 mr-2" />
+                Buy with Card
+              </Button>
+              <Button variant="outline" className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 hover:text-white transition-all duration-300" onClick={() => {
+                toast({
+                  title: "Coin Payment",
+                  description: "Coin payment functionality coming soon!"
+                });
+                setBuyDialogOpen(false);
+              }}>
+                <Coins className="w-4 h-4 mr-2" />
+                Buy with Coins
+              </Button>
+              <Button variant="ghost" className="text-white hover:bg-white/10 hover:text-white transition-all duration-300" onClick={() => setBuyDialogOpen(false)}>
+                Cancel
+              </Button>
+            </div>
+          </DialogContent>
+        </Dialog>
+      )}
     </div>;
 };
 export default Game;
