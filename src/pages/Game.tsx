@@ -3535,7 +3535,7 @@ const Game = () => {
                                    <Layers className="w-3 h-3" />
                                  </Button>
                               </DropdownMenuTrigger>
-                              <DropdownMenuContent align="center" className="w-40 bg-black/90 backdrop-blur-md border border-white/20 text-white z-[9999]">
+                              <DropdownMenuContent align="center" className="w-40 bg-black/10 backdrop-blur-md border border-white/20 text-white z-[9999]">
                                 <DropdownMenuItem onClick={() => setMarketplaceCategory("all")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceCategory === "all" ? "bg-white/20" : ""}`}>
                                   <span>All Categories</span>
                                 </DropdownMenuItem>
