@@ -2992,76 +2992,119 @@ const Game = () => {
                       `,
                       backgroundSize: '4px 4px'
                     }} />
-                    <CardHeader className="relative z-10">
-                      <CardTitle className="flex items-center justify-between text-white">
-                         <span>Fighters</span>
-                        <Badge variant="secondary">4 items</Badge>
-                      </CardTitle>
-                    </CardHeader>
-                     <CardContent>
-                       <div className="grid grid-cols-4 gap-4">
-                         {filterItemsByRarity([{
-                          name: "The Irish King",
-                          price: 2500,
-                          rarity: "gold",
-                          image: irishKingSkin
-                        }, {
-                          name: "Stani Eagle",
-                          price: 1800,
-                          rarity: "blue",
-                          image: staniEagleSkin
-                        }, {
-                          name: "Jonesy Bones",
-                          price: 2200,
-                          rarity: "silver",
-                          image: bonesSkin
-                        }, {
-                          name: "Latin Legend",
-                          price: 1500,
-                          rarity: "green",
-                          image: latinLegendSkin
-                        }]).map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden hover:scale-105 hover:shadow-3xl hover:border-gray-500/70 transition-all duration-300 cursor-pointer">
-                            <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
-                            <CardContent className="p-4 relative z-10">
-                              <div className="aspect-square bg-gray-800/50 rounded-lg mb-3 overflow-hidden">
-                                <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
-                              </div>
-                              <h3 className="font-semibold text-sm text-white mb-2">{item.name}</h3>
-                              <div className="flex items-center justify-between">
-                                <div className="flex items-center space-x-1">
-                                  <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4" />
-                                  <span className="text-sm font-bold text-white">{item.price.toLocaleString()}</span>
-                                </div>
-                                <DropdownMenu>
-                                  <DropdownMenuTrigger asChild>
-                                    <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-7 px-3">
-                                      Buy
-                                    </Button>
-                                  </DropdownMenuTrigger>
-                                  <DropdownMenuContent align="start" className="w-full lg:w-full bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
-                                    <DropdownMenuItem onClick={() => toast({
-                                    title: "Coming Soon",
-                                    description: "Coin purchases coming soon!",
-                                    duration: 3000
-                                  })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
-                                      <Coins className="w-4 h-4" />
-                                      <span>Buy With Coins</span>
-                                    </DropdownMenuItem>
-                                    <DropdownMenuItem onClick={() => toast({
-                                    title: "Coming Soon",
-                                    description: "Card payments coming soon!",
-                                    duration: 3000
-                                  })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
-                                      <CreditCard className="w-4 h-4" />
-                                      <span>Buy with Card</span>
-                                    </DropdownMenuItem>
-                                  </DropdownMenuContent>
-                                </DropdownMenu>
-                              </div>
-                            </CardContent>
-                          </Card>)}
-                      </div>
-                     </CardContent>
+                     <CardHeader className="relative z-10">
+                       <CardTitle className="flex items-center justify-between text-white">
+                          <div className="flex items-center space-x-2">
+                            <span>Fighters</span>
+                            <div className="flex space-x-1">
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                onClick={() => desktopFightersCarouselRef.current?.scrollToPrevious()}
+                                className="h-6 w-6 p-0 text-white hover:bg-white/20"
+                              >
+                                <ChevronLeft className="h-4 w-4" />
+                              </Button>
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                onClick={() => desktopFightersCarouselRef.current?.scrollToNext()}
+                                className="h-6 w-6 p-0 text-white hover:bg-white/20"
+                              >
+                                <ChevronRight className="h-4 w-4" />
+                              </Button>
+                            </div>
+                          </div>
+                         <Badge variant="secondary">8 items</Badge>
+                       </CardTitle>
+                     </CardHeader>
+                      <CardContent>
+                        <StoreCarousel
+                          ref={desktopFightersCarouselRef}
+                          desktopMode={true}
+                          items={filterItemsByRarity([{
+                           name: "The Irish King",
+                           price: 2500,
+                           rarity: "gold",
+                           image: irishKingSkin
+                         }, {
+                           name: "Stani Eagle",
+                           price: 1800,
+                           rarity: "blue",
+                           image: staniEagleSkin
+                         }, {
+                           name: "Jonesy Bones",
+                           price: 2200,
+                           rarity: "silver",
+                           image: bonesSkin
+                         }, {
+                           name: "Latin Legend",
+                           price: 1500,
+                           rarity: "green",
+                           image: latinLegendSkin
+                         }, {
+                           name: "Cyber Warrior",
+                           price: 3000,
+                           rarity: "gold",
+                           image: cyberWarriorSkin
+                         }, {
+                           name: "Shadow Hunter",
+                           price: 2800,
+                           rarity: "blue",
+                           image: "/lovable-uploads/4c80b2cf-0ea7-49a2-96b8-58ecbfa7623a.png"
+                         }, {
+                           name: "Fire Master",
+                           price: 3500,
+                           rarity: "special",
+                           image: "/lovable-uploads/13b1e254-7a27-4fc3-8040-9882d7705c70.png"
+                         }, {
+                           name: "Ice Warrior",
+                           price: 2700,
+                           rarity: "silver",
+                           image: "/lovable-uploads/7d4ea94f-0c4d-459f-bded-b68a2bd272d6.png"
+                         }])}
+                          renderItem={(item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden hover:scale-105 hover:shadow-3xl hover:border-gray-500/70 transition-all duration-300 cursor-pointer">
+                             <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
+                             <CardContent className="p-4 relative z-10">
+                               <div className="aspect-square bg-gray-800/50 rounded-lg mb-3 overflow-hidden">
+                                 <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+                               </div>
+                               <h3 className="font-semibold text-sm text-white mb-2">{item.name}</h3>
+                               <div className="flex items-center justify-between">
+                                 <div className="flex items-center space-x-1">
+                                   <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4" />
+                                   <span className="text-sm font-bold text-white">{item.price.toLocaleString()}</span>
+                                 </div>
+                                 <DropdownMenu>
+                                   <DropdownMenuTrigger asChild>
+                                     <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-7 px-3">
+                                       Buy
+                                     </Button>
+                                   </DropdownMenuTrigger>
+                                   <DropdownMenuContent align="start" className="w-full lg:w-full bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
+                                     <DropdownMenuItem onClick={() => toast({
+                                     title: "Coming Soon",
+                                     description: "Coin purchases coming soon!",
+                                     duration: 3000
+                                   })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
+                                       <Coins className="w-4 h-4" />
+                                       <span>Buy With Coins</span>
+                                     </DropdownMenuItem>
+                                     <DropdownMenuItem onClick={() => toast({
+                                     title: "Coming Soon",
+                                     description: "Card payments coming soon!",
+                                     duration: 3000
+                                   })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
+                                       <CreditCard className="w-4 h-4" />
+                                       <span>Buy with Card</span>
+                                     </DropdownMenuItem>
+                                   </DropdownMenuContent>
+                                 </DropdownMenu>
+                               </div>
+                             </CardContent>
+                           </Card>}
+                        />
+                       </CardContent>
                    </Card>}
 
                    {/* Accessories Category */}
