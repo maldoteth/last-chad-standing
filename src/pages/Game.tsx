@@ -641,7 +641,7 @@ const Game = () => {
           
           {/* Desktop Navigation - hidden on mobile */}
           <div className="hidden lg:flex items-center justify-center flex-1">
-            <nav className="flex items-center justify-center space-x-6">
+            <nav className="flex items-center justify-center space-x-6 ml-20">
              {tabItems.filter(tab => tab.id !== "coins").map(tab => <button key={tab.id} onClick={() => handleTabClick(tab.id)} className={`relative flex items-center justify-center px-3 py-2 text-sm font-medium transition-all duration-300 ${activeTab === tab.id ? "text-foreground after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-primary after:scale-x-100 after:transition-transform after:duration-300" : "text-muted-foreground hover:text-foreground after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-primary after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100"}`}>
                 <tab.icon className="w-8 h-8" />
               </button>)}
