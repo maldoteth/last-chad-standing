@@ -4007,7 +4007,7 @@ const Game = () => {
                           </div>
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center justify-between">
-                              <p className="text-lg font-semibold text-white truncate">{player.name}</p>
+                              <p className="text-lg md:text-xl font-semibold text-white truncate">{player.name}</p>
                               {renderMarketplacePrices(player, getMarketplacePrices, 'large', () => handleSellClick(player), () => handleBuyClick(player))}
                             </div>
                           </div>
