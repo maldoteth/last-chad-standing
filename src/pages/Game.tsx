@@ -424,13 +424,13 @@ const Game = () => {
     trend: "up",
     image: "/lovable-uploads/2877ff38-b9fd-4a5d-bca9-25b14f237997.png"
   }, {
-    name: "Solar Flare",
+    name: "Blue Wing Suit",
     team: "Sun Blazers",
     position: "Energy",
     price: 5500,
     lastSale: 4750,
     trend: "up",
-    image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png"
+    image: "/lovable-uploads/1efc1553-007a-4b38-a982-79d9f5abbfa1.png"
   }, {
     name: "Cyber Phantom",
     team: "Neon Guardians",
