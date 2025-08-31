@@ -3092,10 +3092,10 @@ const Game = () => {
                       }])} renderItem={(item, idx) => <GlowCard key={idx} className="text-white shadow-2xl cursor-pointer">
                               <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
                               <CardContent className="p-4 relative z-10">
-                               <div className="aspect-square bg-gray-800/50 rounded-lg mb-3 overflow-hidden">
-                                 <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
-                               </div>
-                               <h3 className="font-semibold text-sm text-white mb-2 truncate">{item.name}</h3>
+                                <div className="aspect-square bg-gray-800/50 rounded-lg mb-3 overflow-hidden">
+                                  <img src="/lovable-uploads/b73477e0-aee4-4590-8dfb-b570e11f6185.png" alt="Rey Del Mar" className="w-full h-full object-cover" />
+                                </div>
+                                <h3 className="font-semibold text-sm text-white mb-2 truncate">Rey Del Mar</h3>
                                <div className="flex items-center justify-between">
                                  <div className="flex items-center space-x-1">
                                    <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4" />
