@@ -349,7 +349,7 @@ const Game = () => {
       change: 33.1,
       image: "/lovable-uploads/55728a6c-0c6b-4217-82d8-a21b16e912d6.png"
     }, {
-      name: "Frost Bite",
+      name: "Big Dawg",
       team: "Ice Wolves",
       position: "Control",
       price: 6400,
