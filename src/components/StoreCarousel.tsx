@@ -33,18 +33,30 @@ const StoreCarousel: React.FC<StoreCarouselProps> = ({ items, renderItem }) => {
   }
 
   return (
-    <Carousel className="w-full">
-      <CarouselContent>
-        {itemGroups.map((group, groupIdx) => (
-          <CarouselItem key={groupIdx}>
-            <div className="grid grid-cols-2 gap-3">
-              {group.map((item, idx) => renderItem(item, groupIdx * 4 + idx))}
-            </div>
-          </CarouselItem>
-        ))}
-      </CarouselContent>
+    <div className="relative">
+      <Carousel className="w-full">
+        <CarouselContent>
+          {itemGroups.map((group, groupIdx) => (
+            <CarouselItem key={groupIdx}>
+              <div className="grid grid-cols-2 gap-3">
+                {group.map((item, idx) => renderItem(item, groupIdx * 4 + idx))}
+              </div>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        
+        {/* Desktop Navigation - Top positioned arrows */}
+        {itemGroups.length > 1 && (
+          <>
+            <CarouselPrevious className="hidden md:flex absolute -top-2 left-2 z-10 bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 h-8 w-8" />
+            <CarouselNext className="hidden md:flex absolute -top-2 right-2 z-10 bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 h-8 w-8" />
+          </>
+        )}
+      </Carousel>
+      
+      {/* Mobile Navigation - Bottom positioned */}
       {itemGroups.length > 1 && (
-        <div className="flex justify-center items-center mt-4 space-x-2">
+        <div className="flex md:hidden justify-center items-center mt-4 space-x-2">
           <CarouselPrevious className="static translate-y-0 bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 h-8 w-8" />
           <div className="flex space-x-1">
             {itemGroups.map((_, idx) => (
@@ -54,7 +66,7 @@ const StoreCarousel: React.FC<StoreCarouselProps> = ({ items, renderItem }) => {
           <CarouselNext className="static translate-y-0 bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 h-8 w-8" />
         </div>
       )}
-    </Carousel>
+    </div>
   );
 };
 
