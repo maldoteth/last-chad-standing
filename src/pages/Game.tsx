@@ -25,7 +25,7 @@ import { Coins, ShoppingBag, Users, Package, CreditCard, Handshake, Trophy, Star
 import { ResponsiveContainer, LineChart as RechartsLineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, PieChart, Pie, Cell, BarChart, Bar, Area, AreaChart } from 'recharts';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import cyberWarriorSkin from "@/assets/cyber-warrior-skin.png";
-import StoreCarousel from "@/components/StoreCarousel";
+import StoreCarousel, { StoreCarouselRef } from "@/components/StoreCarousel";
 const irishKingSkin = "/lovable-uploads/5c3f060f-4c5f-412b-8f27-eb1bebd3dd7d.png";
 const staniEagleSkin = "/lovable-uploads/37f256dc-415c-4032-82ad-db63f676284d.png";
 const bonesSkin = "/lovable-uploads/660b5122-5ce8-4f6e-af72-2c607d47ef44.png";
@@ -170,6 +170,9 @@ const Game = () => {
   const [buyDialogOpen, setBuyDialogOpen] = useState(false);
   const [selectedPlayer, setSelectedPlayer] = useState<any>(null);
   const objectivesRef = useRef<HTMLDivElement>(null);
+  const fightersCarouselRef = useRef<StoreCarouselRef>(null);
+  const accessoriesCarouselRef = useRef<StoreCarouselRef>(null);
+  const emotesCarouselRef = useRef<StoreCarouselRef>(null);
   const isMobile = useIsMobile();
   const {
     toast
@@ -1415,20 +1418,12 @@ const Game = () => {
                           {/* Navigation arrows for carousel - only show when more than 4 items */}
                           <div className="flex items-center space-x-1">
                             <Button variant="ghost" size="sm" className="h-6 w-6 p-0 text-white/70 hover:text-white hover:bg-white/10" onClick={() => {
-                              const carousel = document.querySelector('[data-orientation="horizontal"]');
-                              if (carousel) {
-                                const prevBtn = carousel.querySelector('[data-orientation="horizontal"] button[aria-label="Previous slide"]') as HTMLButtonElement;
-                                if (prevBtn) prevBtn.click();
-                              }
+                              fightersCarouselRef.current?.scrollToPrevious();
                             }}>
                               <ChevronLeft className="h-4 w-4" />
                             </Button>
                             <Button variant="ghost" size="sm" className="h-6 w-6 p-0 text-white/70 hover:text-white hover:bg-white/10" onClick={() => {
-                              const carousel = document.querySelector('[data-orientation="horizontal"]');
-                              if (carousel) {
-                                const nextBtn = carousel.querySelector('[data-orientation="horizontal"] button[aria-label="Next slide"]') as HTMLButtonElement;
-                                if (nextBtn) nextBtn.click();
-                              }
+                              fightersCarouselRef.current?.scrollToNext();
                             }}>
                               <ChevronRight className="h-4 w-4" />
                             </Button>
@@ -1440,6 +1435,7 @@ const Game = () => {
                     </CardHeader>
                     <CardContent>
                        <StoreCarousel 
+                         ref={fightersCarouselRef}
                          items={filterItemsByRarity([{
                     name: "The Irish King",
                     price: 2500,
@@ -1555,20 +1551,12 @@ const Game = () => {
                           {/* Navigation arrows for carousel - only show when more than 4 items */}
                           <div className="flex items-center space-x-1">
                             <Button variant="ghost" size="sm" className="h-6 w-6 p-0 text-white/70 hover:text-white hover:bg-white/10" onClick={() => {
-                              const carousels = document.querySelectorAll('[data-orientation="horizontal"]');
-                              if (carousels[1]) {
-                                const prevBtn = carousels[1].querySelector('button[aria-label="Previous slide"]') as HTMLButtonElement;
-                                if (prevBtn) prevBtn.click();
-                              }
+                              accessoriesCarouselRef.current?.scrollToPrevious();
                             }}>
                               <ChevronLeft className="h-4 w-4" />
                             </Button>
                             <Button variant="ghost" size="sm" className="h-6 w-6 p-0 text-white/70 hover:text-white hover:bg-white/10" onClick={() => {
-                              const carousels = document.querySelectorAll('[data-orientation="horizontal"]');
-                              if (carousels[1]) {
-                                const nextBtn = carousels[1].querySelector('button[aria-label="Next slide"]') as HTMLButtonElement;
-                                if (nextBtn) nextBtn.click();
-                              }
+                              accessoriesCarouselRef.current?.scrollToNext();
                             }}>
                               <ChevronRight className="h-4 w-4" />
                             </Button>
@@ -1580,6 +1568,7 @@ const Game = () => {
                     </CardHeader>
                     <CardContent>
                        <StoreCarousel 
+                         ref={accessoriesCarouselRef}
                          items={filterItemsByRarity([{
                     name: "Red Wing Suit",
                     price: 600,
@@ -1691,20 +1680,12 @@ const Game = () => {
                           {/* Navigation arrows for carousel - only show when more than 4 items */}
                           <div className="flex items-center space-x-1">
                             <Button variant="ghost" size="sm" className="h-6 w-6 p-0 text-white/70 hover:text-white hover:bg-white/10" onClick={() => {
-                              const carousels = document.querySelectorAll('[data-orientation="horizontal"]');
-                              if (carousels[2]) {
-                                const prevBtn = carousels[2].querySelector('button[aria-label="Previous slide"]') as HTMLButtonElement;
-                                if (prevBtn) prevBtn.click();
-                              }
+                              emotesCarouselRef.current?.scrollToPrevious();
                             }}>
                               <ChevronLeft className="h-4 w-4" />
                             </Button>
                             <Button variant="ghost" size="sm" className="h-6 w-6 p-0 text-white/70 hover:text-white hover:bg-white/10" onClick={() => {
-                              const carousels = document.querySelectorAll('[data-orientation="horizontal"]');
-                              if (carousels[2]) {
-                                const nextBtn = carousels[2].querySelector('button[aria-label="Next slide"]') as HTMLButtonElement;
-                                if (nextBtn) nextBtn.click();
-                              }
+                              emotesCarouselRef.current?.scrollToNext();
                             }}>
                               <ChevronRight className="h-4 w-4" />
                             </Button>
@@ -1716,6 +1697,7 @@ const Game = () => {
                     </CardHeader>
                     <CardContent>
                        <StoreCarousel 
+                         ref={emotesCarouselRef}
                          items={filterItemsByRarity([{
                     name: "Flex",
                     price: 800,
