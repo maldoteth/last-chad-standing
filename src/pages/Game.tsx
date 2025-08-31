@@ -448,6 +448,24 @@ const Game = () => {
     } else {
       setActiveTab(tabId);
       console.log('Setting activeTab to:', tabId);
+      
+      // Reset scroll position to top when switching tabs
+      setTimeout(() => {
+        // Reset main window scroll
+        window.scrollTo(0, 0);
+        
+        // Reset mobile/tablet scroll containers
+        const mobileScrollContainers = document.querySelectorAll('.overflow-y-auto');
+        mobileScrollContainers.forEach(container => {
+          container.scrollTop = 0;
+        });
+        
+        // Reset desktop ScrollArea containers
+        const scrollAreas = document.querySelectorAll('[data-radix-scroll-area-viewport]');
+        scrollAreas.forEach(viewport => {
+          viewport.scrollTop = 0;
+        });
+      }, 50);
     }
   };
   const tabItems = [{
