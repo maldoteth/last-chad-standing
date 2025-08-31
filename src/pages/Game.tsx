@@ -1408,7 +1408,7 @@ const Game = () => {
                     <CardContent>
                         <StoreCarousel ref={fightersCarouselRef} items={filterItemsByRarity([{
                   name: "Dale Sunny",
-                  price: 3200,
+                  price: 1000,
                   rarity: "special",
                   image: "/lovable-uploads/93281d21-be75-4f68-86b0-b80b1e03ac56.png"
                 }, {
@@ -3051,7 +3051,7 @@ const Game = () => {
                       <CardContent>
                          <StoreCarousel ref={desktopFightersCarouselRef} desktopMode={true} items={filterItemsByRarity([{
                         name: "Dale Sunny",
-                        price: 3000,
+                        price: 1000,
                         rarity: "gold",
                         image: "/lovable-uploads/93281d21-be75-4f68-86b0-b80b1e03ac56.png"
                       }, {
