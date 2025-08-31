@@ -3522,7 +3522,7 @@ const Game = () => {
                                     placeholder="search"
                                     value={searchTerm}
                                     onChange={(e) => setSearchTerm(e.target.value)}
-                                    className="pl-8 pr-3 h-8 text-xs bg-black/10 backdrop-blur-md border-white/20 text-white placeholder:text-gray-400 w-full"
+                                    className="pl-8 pr-3 h-8 text-xs bg-black/20 backdrop-blur-md border-white/30 text-white placeholder:text-gray-400 w-full focus:bg-black/30 focus:border-white/40"
                                   />
                                 </div>
                               </DropdownMenuContent>
