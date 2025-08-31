@@ -3508,126 +3508,122 @@ const Game = () => {
                      <CardTitle className="text-lg flex items-center justify-between text-white">
                         <span>Marketplace</span>
                           <div className="flex items-center gap-1">
-                           {/* Search Input */}
-                           <div className="relative">
-                             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-3 h-3 text-gray-400" />
-                             <Input
-                               placeholder="Search players..."
-                               value={searchTerm}
-                               onChange={(e) => setSearchTerm(e.target.value)}
-                               className="pl-8 pr-3 h-8 text-xs bg-black/10 backdrop-blur-md border-white/20 text-white placeholder:text-gray-400 w-48"
-                             />
-                           </div>
-                           
-                           {/* Category Filter */}
-                           <div>
-                             <DropdownMenu>
-                               <DropdownMenuTrigger asChild>
-                                   <Button variant="outline" size="sm" className="bg-black/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-8 w-8">
-                                    <Layers className="w-3 h-3" />
-                                  </Button>
-                               </DropdownMenuTrigger>
-                               <DropdownMenuContent align="center" className="w-40 bg-black/90 backdrop-blur-md border border-white/20 text-white z-[9999]">
-                                 <DropdownMenuItem onClick={() => setMarketplaceCategory("all")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceCategory === "all" ? "bg-white/20" : ""}`}>
-                                   <span>All Categories</span>
-                                 </DropdownMenuItem>
-                                 <DropdownMenuItem onClick={() => setMarketplaceCategory("striker")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceCategory === "striker" ? "bg-white/20" : ""}`}>
-                                   <span>Striker</span>
-                                 </DropdownMenuItem>
-                                 <DropdownMenuItem onClick={() => setMarketplaceCategory("tank")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceCategory === "tank" ? "bg-white/20" : ""}`}>
-                                   <span>Tank</span>
-                                 </DropdownMenuItem>
-                                 <DropdownMenuItem onClick={() => setMarketplaceCategory("speed")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceCategory === "speed" ? "bg-white/20" : ""}`}>
-                                   <span>Speed</span>
-                                 </DropdownMenuItem>
-                                 <DropdownMenuItem onClick={() => setMarketplaceCategory("defense")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceCategory === "defense" ? "bg-white/20" : ""}`}>
-                                   <span>Defense</span>
-                                 </DropdownMenuItem>
-                                 <DropdownMenuItem onClick={() => setMarketplaceCategory("assault")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceCategory === "assault" ? "bg-white/20" : ""}`}>
-                                   <span>Assault</span>
-                                 </DropdownMenuItem>
-                                 </DropdownMenuContent>
-                               </DropdownMenu>
-                             </div>
-                           </div>
-
-                         {/* Filter Dropdown - Price/Trend Filter */}
-                         <div>
-                           {isMobile ? (
-                             <Drawer>
-                               <DrawerTrigger asChild>
-                                 <Button variant="outline" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-8 px-3">
-                                   <Filter className="w-3 h-3 mr-1" />
-                                   Filter
-                                 </Button>
-                               </DrawerTrigger>
-                               <DrawerContent className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
-                                  <DrawerHeader>
-                                    <DrawerTitle>Filter by Rarity</DrawerTitle>
-                                  </DrawerHeader>
-                                  <div className="px-4 pb-8 space-y-2">
-                                    <Button variant="ghost" onClick={() => setMarketplaceRarity("all")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceRarity === "all" ? "bg-white/20" : ""}`}>
-                                      <div className="w-3 h-3 rounded-full bg-black mr-2" />
-                                      All Rarities
-                                    </Button>
-                                    <Button variant="ghost" onClick={() => setMarketplaceRarity("green")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceRarity === "green" ? "bg-white/20" : ""}`}>
-                                      <div className="w-3 h-3 rounded-full bg-green-500 mr-2" />
-                                      Regular
-                                    </Button>
-                                    <Button variant="ghost" onClick={() => setMarketplaceRarity("blue")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceRarity === "blue" ? "bg-white/20" : ""}`}>
-                                      <div className="w-3 h-3 rounded-full bg-blue-500 mr-2" />
-                                      Rare
-                                    </Button>
-                                    <Button variant="ghost" onClick={() => setMarketplaceRarity("silver")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceRarity === "silver" ? "bg-white/20" : ""}`}>
-                                      <div className="w-3 h-3 rounded-full bg-gray-300 mr-2" />
-                                      Legendary
-                                    </Button>
-                                    <Button variant="ghost" onClick={() => setMarketplaceRarity("gold")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceRarity === "gold" ? "bg-white/20" : ""}`}>
-                                      <div className="w-3 h-3 rounded-full bg-yellow-400 mr-2" />
-                                      Mythical
-                                    </Button>
-                                    <Button variant="ghost" onClick={() => setMarketplaceRarity("special")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceRarity === "special" ? "bg-white/20" : ""}`}>
-                                      <div className="w-3 h-3 rounded-full bg-gradient-to-r from-purple-400 via-pink-400 to-yellow-400 mr-2" />
-                                      Special
-                                    </Button>
-                                  </div>
-                               </DrawerContent>
-                             </Drawer>
-                           ) : (
-                             <DropdownMenu>
-                               <DropdownMenuTrigger asChild>
+                            {/* Search Input */}
+                            <div className="relative">
+                              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-3 h-3 text-gray-400" />
+                              <Input
+                                placeholder="Search players..."
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                                className="pl-8 pr-3 h-8 text-xs bg-black/10 backdrop-blur-md border-white/20 text-white placeholder:text-gray-400 w-48"
+                              />
+                            </div>
+                            
+                            {/* Category Filter */}
+                            <DropdownMenu>
+                              <DropdownMenuTrigger asChild>
                                   <Button variant="outline" size="sm" className="bg-black/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-8 w-8">
-                                    <Filter className="w-3 h-3" />
-                                  </Button>
-                               </DropdownMenuTrigger>
-                                <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-[9999]">
-                                  <DropdownMenuItem onClick={() => setMarketplaceRarity("all")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceRarity === "all" ? "bg-white/20" : ""}`}>
-                                    <div className="w-3 h-3 rounded-full bg-black" />
-                                    <span>All Rarities</span>
-                                  </DropdownMenuItem>
-                                  <DropdownMenuItem onClick={() => setMarketplaceRarity("green")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceRarity === "green" ? "bg-white/20" : ""}`}>
-                                    <div className="w-3 h-3 rounded-full bg-green-500" />
-                                    <span>Regular</span>
-                                  </DropdownMenuItem>
-                                  <DropdownMenuItem onClick={() => setMarketplaceRarity("blue")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceRarity === "blue" ? "bg-white/20" : ""}`}>
-                                    <div className="w-3 h-3 rounded-full bg-blue-500" />
-                                    <span>Rare</span>
-                                  </DropdownMenuItem>
-                                  <DropdownMenuItem onClick={() => setMarketplaceRarity("silver")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceRarity === "silver" ? "bg-white/20" : ""}`}>
-                                    <div className="w-3 h-3 rounded-full bg-gray-300" />
-                                    <span>Legendary</span>
-                                  </DropdownMenuItem>
-                                  <DropdownMenuItem onClick={() => setMarketplaceRarity("gold")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceRarity === "gold" ? "bg-white/20" : ""}`}>
-                                    <div className="w-3 h-3 rounded-full bg-yellow-400" />
-                                    <span>Mythical</span>
-                                  </DropdownMenuItem>
-                                  <DropdownMenuItem onClick={() => setMarketplaceRarity("special")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceRarity === "special" ? "bg-white/20" : ""}`}>
-                                    <div className="w-3 h-3 rounded-full bg-gradient-to-r from-purple-400 via-pink-400 to-yellow-400" />
-                                    <span>Special</span>
-                                  </DropdownMenuItem>
+                                   <Layers className="w-3 h-3" />
+                                 </Button>
+                              </DropdownMenuTrigger>
+                              <DropdownMenuContent align="center" className="w-40 bg-black/90 backdrop-blur-md border border-white/20 text-white z-[9999]">
+                                <DropdownMenuItem onClick={() => setMarketplaceCategory("all")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceCategory === "all" ? "bg-white/20" : ""}`}>
+                                  <span>All Categories</span>
+                                </DropdownMenuItem>
+                                <DropdownMenuItem onClick={() => setMarketplaceCategory("striker")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceCategory === "striker" ? "bg-white/20" : ""}`}>
+                                  <span>Striker</span>
+                                </DropdownMenuItem>
+                                <DropdownMenuItem onClick={() => setMarketplaceCategory("tank")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceCategory === "tank" ? "bg-white/20" : ""}`}>
+                                  <span>Tank</span>
+                                </DropdownMenuItem>
+                                <DropdownMenuItem onClick={() => setMarketplaceCategory("speed")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceCategory === "speed" ? "bg-white/20" : ""}`}>
+                                  <span>Speed</span>
+                                </DropdownMenuItem>
+                                <DropdownMenuItem onClick={() => setMarketplaceCategory("defense")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceCategory === "defense" ? "bg-white/20" : ""}`}>
+                                  <span>Defense</span>
+                                </DropdownMenuItem>
+                                <DropdownMenuItem onClick={() => setMarketplaceCategory("assault")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceCategory === "assault" ? "bg-white/20" : ""}`}>
+                                  <span>Assault</span>
+                                </DropdownMenuItem>
                                 </DropdownMenuContent>
-                             </DropdownMenu>
-                           )}
+                              </DropdownMenu>
+
+                            {/* Filter Dropdown - Price/Trend Filter */}
+                            {isMobile ? (
+                              <Drawer>
+                                <DrawerTrigger asChild>
+                                  <Button variant="outline" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-8 px-3">
+                                    <Filter className="w-3 h-3 mr-1" />
+                                    Filter
+                                  </Button>
+                                </DrawerTrigger>
+                                <DrawerContent className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
+                                   <DrawerHeader>
+                                     <DrawerTitle>Filter by Rarity</DrawerTitle>
+                                   </DrawerHeader>
+                                   <div className="px-4 pb-8 space-y-2">
+                                     <Button variant="ghost" onClick={() => setMarketplaceRarity("all")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceRarity === "all" ? "bg-white/20" : ""}`}>
+                                       <div className="w-3 h-3 rounded-full bg-black mr-2" />
+                                       All Rarities
+                                     </Button>
+                                     <Button variant="ghost" onClick={() => setMarketplaceRarity("green")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceRarity === "green" ? "bg-white/20" : ""}`}>
+                                       <div className="w-3 h-3 rounded-full bg-green-500 mr-2" />
+                                       Regular
+                                     </Button>
+                                     <Button variant="ghost" onClick={() => setMarketplaceRarity("blue")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceRarity === "blue" ? "bg-white/20" : ""}`}>
+                                       <div className="w-3 h-3 rounded-full bg-blue-500 mr-2" />
+                                       Rare
+                                     </Button>
+                                     <Button variant="ghost" onClick={() => setMarketplaceRarity("silver")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceRarity === "silver" ? "bg-white/20" : ""}`}>
+                                       <div className="w-3 h-3 rounded-full bg-gray-300 mr-2" />
+                                       Legendary
+                                     </Button>
+                                     <Button variant="ghost" onClick={() => setMarketplaceRarity("gold")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceRarity === "gold" ? "bg-white/20" : ""}`}>
+                                       <div className="w-3 h-3 rounded-full bg-yellow-400 mr-2" />
+                                       Mythical
+                                     </Button>
+                                     <Button variant="ghost" onClick={() => setMarketplaceRarity("special")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceRarity === "special" ? "bg-white/20" : ""}`}>
+                                       <div className="w-3 h-3 rounded-full bg-gradient-to-r from-purple-400 via-pink-400 to-yellow-400 mr-2" />
+                                       Special
+                                     </Button>
+                                   </div>
+                                </DrawerContent>
+                              </Drawer>
+                            ) : (
+                              <DropdownMenu>
+                                <DropdownMenuTrigger asChild>
+                                   <Button variant="outline" size="sm" className="bg-black/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-8 w-8">
+                                     <Filter className="w-3 h-3" />
+                                   </Button>
+                                </DropdownMenuTrigger>
+                                 <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-[9999]">
+                                   <DropdownMenuItem onClick={() => setMarketplaceRarity("all")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceRarity === "all" ? "bg-white/20" : ""}`}>
+                                     <div className="w-3 h-3 rounded-full bg-black" />
+                                     <span>All Rarities</span>
+                                   </DropdownMenuItem>
+                                   <DropdownMenuItem onClick={() => setMarketplaceRarity("green")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceRarity === "green" ? "bg-white/20" : ""}`}>
+                                     <div className="w-3 h-3 rounded-full bg-green-500" />
+                                     <span>Regular</span>
+                                   </DropdownMenuItem>
+                                   <DropdownMenuItem onClick={() => setMarketplaceRarity("blue")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceRarity === "blue" ? "bg-white/20" : ""}`}>
+                                     <div className="w-3 h-3 rounded-full bg-blue-500" />
+                                     <span>Rare</span>
+                                   </DropdownMenuItem>
+                                   <DropdownMenuItem onClick={() => setMarketplaceRarity("silver")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceRarity === "silver" ? "bg-white/20" : ""}`}>
+                                     <div className="w-3 h-3 rounded-full bg-gray-300" />
+                                     <span>Legendary</span>
+                                   </DropdownMenuItem>
+                                   <DropdownMenuItem onClick={() => setMarketplaceRarity("gold")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceRarity === "gold" ? "bg-white/20" : ""}`}>
+                                     <div className="w-3 h-3 rounded-full bg-yellow-400" />
+                                     <span>Mythical</span>
+                                   </DropdownMenuItem>
+                                   <DropdownMenuItem onClick={() => setMarketplaceRarity("special")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceRarity === "special" ? "bg-white/20" : ""}`}>
+                                     <div className="w-3 h-3 rounded-full bg-gradient-to-r from-purple-400 via-pink-400 to-yellow-400" />
+                                     <span>Special</span>
+                                   </DropdownMenuItem>
+                                 </DropdownMenuContent>
+                              </DropdownMenu>
+                            )}
                           </div>
                       </CardTitle>
                     </CardHeader>
