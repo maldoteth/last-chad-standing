@@ -2994,8 +2994,9 @@ const Game = () => {
                     }} />
                      <CardHeader className="relative z-10">
                        <CardTitle className="flex items-center justify-between text-white">
+                          <span>Fighters</span>
                           <div className="flex items-center space-x-2">
-                            <span>Fighters</span>
+                            <Badge variant="secondary">8 items</Badge>
                             <div className="flex space-x-1">
                               <Button
                                 variant="ghost"
@@ -3015,7 +3016,6 @@ const Game = () => {
                               </Button>
                             </div>
                           </div>
-                         <Badge variant="secondary">8 items</Badge>
                        </CardTitle>
                      </CardHeader>
                       <CardContent>
@@ -3119,8 +3119,9 @@ const Game = () => {
                     }} />
                      <CardHeader className="relative z-10">
                        <CardTitle className="flex items-center justify-between text-white">
+                         <span>Accessories</span>
                          <div className="flex items-center space-x-2">
-                           <span>Accessories</span>
+                           <Badge variant="secondary">8 items</Badge>
                            <div className="flex space-x-1">
                              <Button
                                variant="ghost"
@@ -3140,7 +3141,6 @@ const Game = () => {
                              </Button>
                            </div>
                          </div>
-                         <Badge variant="secondary">8 items</Badge>
                        </CardTitle>
                      </CardHeader>
                       <CardContent>
@@ -3244,8 +3244,9 @@ const Game = () => {
                     }} />
                      <CardHeader className="relative z-10">
                        <CardTitle className="flex items-center justify-between text-white">
+                         <span>Mobility</span>
                          <div className="flex items-center space-x-2">
-                           <span>Mobility</span>
+                           <Badge variant="secondary">8 items</Badge>
                            <div className="flex space-x-1">
                              <Button
                                variant="ghost"
@@ -3265,7 +3266,6 @@ const Game = () => {
                              </Button>
                            </div>
                          </div>
-                         <Badge variant="secondary">8 items</Badge>
                        </CardTitle>
                      </CardHeader>
                       <CardContent>
@@ -3369,8 +3369,9 @@ const Game = () => {
                     }} />
                      <CardHeader className="relative z-10">
                        <CardTitle className="flex items-center justify-between text-white">
+                         <span>Emotes</span>
                          <div className="flex items-center space-x-2">
-                           <span>Emotes</span>
+                           <Badge variant="secondary">8 items</Badge>
                            <div className="flex space-x-1">
                              <Button
                                variant="ghost"
@@ -3390,7 +3391,6 @@ const Game = () => {
                              </Button>
                            </div>
                          </div>
-                         <Badge variant="secondary">8 items</Badge>
                        </CardTitle>
                      </CardHeader>
                       <CardContent>
@@ -3492,77 +3492,122 @@ const Game = () => {
                       `,
                       backgroundSize: '4px 4px'
                     }} />
-                    <CardHeader className="relative z-10">
-                      <CardTitle className="flex items-center justify-between text-white">
-                        <span>Packs</span>
-                        <Badge variant="secondary">4 items</Badge>
-                      </CardTitle>
-                    </CardHeader>
-                     <CardContent>
-                       <div className="grid grid-cols-4 gap-4">
-                         {filterItemsByRarity([{
-                          name: "Silver Pack",
-                          price: 1000,
-                          rarity: "silver",
-                          image: "/lovable-uploads/17c3a939-bcaa-4cdb-9b61-271b5774c7e2.png"
-                        }, {
-                          name: "Gold Pack",
-                          price: 2000,
-                          rarity: "gold",
-                          image: "/lovable-uploads/291c5734-f144-47b0-9f49-915999e921b0.png"
-                        }, {
-                          name: "EO Summer Pack",
-                          price: 3500,
-                          rarity: "special",
-                          image: "/lovable-uploads/2149e9ad-919f-49ea-8be4-90f190387d39.png"
-                        }, {
-                          name: "Wild West Pack",
-                          price: 5000,
-                          rarity: "special",
-                          image: "/lovable-uploads/5cf8ad93-f292-4e4c-b53c-eb0c4bc0f7be.png"
-                        }]).map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden hover:scale-105 hover:shadow-3xl hover:border-gray-500/70 transition-all duration-300 cursor-pointer">
-                            <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
-                            <CardContent className="p-4 relative z-10">
-                              <div className="aspect-square bg-gray-800/50 rounded-lg mb-3 overflow-hidden">
-                                <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
-                              </div>
-                              <h3 className="font-semibold text-sm text-white mb-2">{item.name}</h3>
-                              <div className="flex items-center justify-between">
-                                <div className="flex items-center space-x-1">
-                                  <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4" />
-                                  <span className="text-sm font-bold text-white">{item.price.toLocaleString()}</span>
+                     <CardHeader className="relative z-10">
+                       <CardTitle className="flex items-center justify-between text-white">
+                         <span>Packs</span>
+                         <div className="flex items-center space-x-2">
+                           <Badge variant="secondary">8 items</Badge>
+                           <div className="flex space-x-1">
+                             <Button
+                               variant="ghost"
+                               size="sm"
+                               onClick={() => desktopPacksCarouselRef.current?.scrollToPrevious()}
+                               className="h-6 w-6 p-0 text-white hover:bg-white/20"
+                             >
+                               <ChevronLeft className="h-4 w-4" />
+                             </Button>
+                             <Button
+                               variant="ghost"
+                               size="sm"
+                               onClick={() => desktopPacksCarouselRef.current?.scrollToNext()}
+                               className="h-6 w-6 p-0 text-white hover:bg-white/20"
+                             >
+                               <ChevronRight className="h-4 w-4" />
+                             </Button>
+                           </div>
+                         </div>
+                       </CardTitle>
+                     </CardHeader>
+                      <CardContent>
+                        <StoreCarousel
+                          ref={desktopPacksCarouselRef}
+                          desktopMode={true}
+                          items={filterItemsByRarity([{
+                           name: "Silver Pack",
+                           price: 1000,
+                           rarity: "silver",
+                           image: "/lovable-uploads/17c3a939-bcaa-4cdb-9b61-271b5774c7e2.png"
+                         }, {
+                           name: "Gold Pack",
+                           price: 2000,
+                           rarity: "gold",
+                           image: "/lovable-uploads/291c5734-f144-47b0-9f49-915999e921b0.png"
+                         }, {
+                           name: "EO Summer Pack",
+                           price: 3500,
+                           rarity: "special",
+                           image: "/lovable-uploads/2149e9ad-919f-49ea-8be4-90f190387d39.png"
+                         }, {
+                           name: "Wild West Pack",
+                           price: 5000,
+                           rarity: "special",
+                           image: "/lovable-uploads/5cf8ad93-f292-4e4c-b53c-eb0c4bc0f7be.png"
+                         }, {
+                           name: "Platinum Pack",
+                           price: 4500,
+                           rarity: "special",
+                           image: "/lovable-uploads/ef3aca91-a372-4313-aa94-3c2dcf946dd6.png"
+                         }, {
+                           name: "Diamond Pack",
+                           price: 5000,
+                           rarity: "special",
+                           image: "/lovable-uploads/ba9c646a-45e6-4ab3-9b25-1f069d27960b.png"
+                         }, {
+                           name: "Premium Pack",
+                           price: 2800,
+                           rarity: "gold",
+                           image: "/lovable-uploads/1615e7da-29d5-454e-a2fe-57f5abf91d56.png"
+                         }, {
+                           name: "Starter Pack",
+                           price: 500,
+                           rarity: "green",
+                           image: "/lovable-uploads/ac3e1f52-ba21-4588-9051-87eef47caf5c.png"
+                         }])}
+                           renderItem={(item, idx) => (
+                             <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden hover:scale-105 hover:shadow-3xl hover:border-gray-500/70 transition-all duration-300 cursor-pointer">
+                              <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
+                              <CardContent className="p-4 relative z-10">
+                                <div className="aspect-square bg-gray-800/50 rounded-lg mb-3 overflow-hidden flex items-center justify-center">
+                                   <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
                                 </div>
-                                <DropdownMenu>
-                                  <DropdownMenuTrigger asChild>
-                                    <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-7 px-3">
-                                      Buy
-                                    </Button>
-                                  </DropdownMenuTrigger>
-                                  <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
-                                    <DropdownMenuItem onClick={() => toast({
-                                    title: "Coming Soon",
-                                    description: "Coin purchases coming soon!",
-                                    duration: 3000
-                                  })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
-                                      <Coins className="w-4 h-4" />
-                                      <span>Buy With Coins</span>
-                                    </DropdownMenuItem>
-                                    <DropdownMenuItem onClick={() => toast({
-                                    title: "Coming Soon",
-                                    description: "Card payments coming soon!",
-                                    duration: 3000
-                                  })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
-                                      <CreditCard className="w-4 h-4" />
-                                      <span>Buy with Card</span>
-                                    </DropdownMenuItem>
-                                  </DropdownMenuContent>
-                                </DropdownMenu>
-                              </div>
-                            </CardContent>
-                          </Card>)}
-                      </div>
-                     </CardContent>
-                   </Card>}
+                                <h3 className="font-semibold text-sm text-white mb-2">{item.name}</h3>
+                                <div className="flex items-center justify-between">
+                                  <div className="flex items-center space-x-1">
+                                    <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4" />
+                                    <span className="text-sm font-bold text-white">{item.price.toLocaleString()}</span>
+                                  </div>
+                                  <DropdownMenu>
+                                    <DropdownMenuTrigger asChild>
+                                      <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-7 px-3">
+                                        Buy
+                                      </Button>
+                                    </DropdownMenuTrigger>
+                                    <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
+                                      <DropdownMenuItem onClick={() => toast({
+                                      title: "Coming Soon",
+                                      description: "Coin purchases coming soon!",
+                                      duration: 3000
+                                    })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
+                                        <Coins className="w-4 h-4" />
+                                        <span>Buy With Coins</span>
+                                      </DropdownMenuItem>
+                                      <DropdownMenuItem onClick={() => toast({
+                                      title: "Coming Soon",
+                                      description: "Card payments coming soon!",
+                                      duration: 3000
+                                    })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
+                                        <CreditCard className="w-4 h-4" />
+                                        <span>Buy with Card</span>
+                                      </DropdownMenuItem>
+                                    </DropdownMenuContent>
+                                  </DropdownMenu>
+                                </div>
+                              </CardContent>
+                            </Card>
+                           )}
+                        />
+                        </CardContent>
+                    </Card>}
                   </div>
                 </div>
                  </div>
