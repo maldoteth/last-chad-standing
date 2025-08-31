@@ -1410,7 +1410,7 @@ const Game = () => {
                   name: "Dale Sunny",
                   price: 3200,
                   rarity: "special",
-                  image: "/lovable-uploads/155dbfd4-968c-45cf-b58f-f53281c10270.png"
+                  image: "/lovable-uploads/93281d21-be75-4f68-86b0-b80b1e03ac56.png"
                 }, {
                   name: "Ray Del Mar",
                   price: 2800,
@@ -3053,7 +3053,7 @@ const Game = () => {
                         name: "Dale Sunny",
                         price: 3000,
                         rarity: "gold",
-                        image: "/lovable-uploads/155dbfd4-968c-45cf-b58f-f53281c10270.png"
+                        image: "/lovable-uploads/93281d21-be75-4f68-86b0-b80b1e03ac56.png"
                       }, {
                         name: "Ray Del Mar",
                         price: 2800,
