@@ -4276,15 +4276,15 @@ const Game = () => {
 
       {/* Sell Dialog */}
       <Dialog open={sellDialogOpen} onOpenChange={setSellDialogOpen}>
-        <DialogContent className="sm:max-w-md">
+        <DialogContent className="sm:max-w-md bg-black/10 backdrop-blur-md border border-white/20 text-white">
           <DialogHeader>
-            <DialogTitle>Sell {selectedPlayer?.name}</DialogTitle>
-            <DialogDescription>
+            <DialogTitle className="text-white">Sell {selectedPlayer?.name}</DialogTitle>
+            <DialogDescription className="text-white/80">
               Selling functionality is coming soon! Stay tuned for updates.
             </DialogDescription>
           </DialogHeader>
           <div className="flex justify-end space-x-2 pt-4">
-            <Button variant="outline" onClick={() => setSellDialogOpen(false)}>
+            <Button variant="outline" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 hover:text-white transition-all duration-300" onClick={() => setSellDialogOpen(false)}>
               Close
             </Button>
           </div>
