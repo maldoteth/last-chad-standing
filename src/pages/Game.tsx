@@ -212,13 +212,13 @@ const Game = () => {
     trend: "up",
     image: "/lovable-uploads/37f256dc-415c-4032-82ad-db63f676284d.png"
   }, {
-    name: "Stone Wall",
+    name: "Latin Legend",
     team: "Mountain Lions",
     position: "Defense",
     price: 6800,
     change: -4.2,
     trend: "down",
-    image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png"
+    image: "/lovable-uploads/2c556456-ebeb-4eec-9842-f2d31e06c58a.png"
   }, {
     name: "Fire Storm",
     team: "Flame Dragons",
@@ -408,13 +408,13 @@ const Game = () => {
     trend: "down",
     image: "/lovable-uploads/660b5122-5ce8-4f6e-af72-2c607d47ef44.png"
   }, {
-    name: "Stone Wall",
+    name: "Latin Legend",
     team: "Mountain Lions",
     position: "Defense",
     price: 6800,
     lastSale: 7100,
     trend: "down",
-    image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png"
+    image: "/lovable-uploads/2c556456-ebeb-4eec-9842-f2d31e06c58a.png"
   }, {
     name: "Void Walker",
     team: "Dark Matter",
