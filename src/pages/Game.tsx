@@ -8,7 +8,6 @@ import { useMarketplace } from "@/hooks/useMarketplace";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { StoreCategory } from "@/components/StoreCategory";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Progress } from "@/components/ui/progress";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from "@/components/ui/dropdown-menu";
@@ -30,138 +29,6 @@ const irishKingSkin = "/lovable-uploads/5c3f060f-4c5f-412b-8f27-eb1bebd3dd7d.png
 const staniEagleSkin = "/lovable-uploads/37f256dc-415c-4032-82ad-db63f676284d.png";
 const bonesSkin = "/lovable-uploads/660b5122-5ce8-4f6e-af72-2c607d47ef44.png";
 const latinLegendSkin = "/lovable-uploads/2c556456-ebeb-4eec-9842-f2d31e06c58a.png";
-const luchadorSkin = "/lovable-uploads/57b3ab6b-2e56-4a30-98f6-1980bbe99c9a.png";
-const tarragonSkin = "/lovable-uploads/dc6922ce-3718-474e-acac-697502a010b2.png";
-
-// Store items data
-const fighterItems = [
-  {
-    name: "The Irish King",
-    price: 2500,
-    rarity: "gold",
-    image: irishKingSkin
-  },
-  {
-    name: "Stani Eagle", 
-    price: 1800,
-    rarity: "blue",
-    image: staniEagleSkin
-  },
-  {
-    name: "Jonesy Bones",
-    price: 2200,
-    rarity: "silver", 
-    image: bonesSkin
-  },
-  {
-    name: "Latin Legend",
-    price: 1500,
-    rarity: "green",
-    image: latinLegendSkin
-  },
-  {
-    name: "Luchador",
-    price: 2000,
-    rarity: "silver",
-    image: luchadorSkin
-  },
-  {
-    name: "Tarragon Southcut",
-    price: 2800,
-    rarity: "gold",
-    image: tarragonSkin
-  }
-];
-
-const accessoryItems = [
-  {
-    name: "Victory Crown",
-    price: 800,
-    rarity: "gold",
-    image: "/lovable-uploads/1373b087-4cb8-43e3-ae69-f3ff5c05a5d1.png"
-  },
-  {
-    name: "Champion Belt",
-    price: 600,
-    rarity: "silver",
-    image: "/lovable-uploads/89896bcd-7068-4438-ba8d-95f8e577cb75.png"
-  },
-  {
-    name: "Power Gloves",
-    price: 400,
-    rarity: "blue",
-    image: "/lovable-uploads/8c2f941a-58db-43db-9b99-afb13cd3c36b.png"
-  },
-  {
-    name: "Combat Boots",
-    price: 300,
-    rarity: "green",
-    image: "/lovable-uploads/896892f1-7ebc-4852-acea-80dcdbf7c545.png"
-  }
-];
-
-const mobilityItems = [
-  {
-    name: "Speed Buggy",
-    price: 4500,
-    rarity: "special",
-    image: "/lovable-uploads/b64d7801-1284-4763-b115-ca3cfa8ff315.png"
-  },
-  {
-    name: "Hover Bike",
-    price: 3800,
-    rarity: "gold", 
-    image: "/lovable-uploads/69c61fed-9ccd-43d2-bab5-17c6c0db05b4.png"
-  },
-  {
-    name: "Pit Bike",
-    price: 2800,
-    rarity: "silver",
-    image: "/lovable-uploads/4e2aac54-cac6-4cf1-92ad-76bf7e788077.png"
-  },
-  {
-    name: "Power Wheels",
-    price: 1900,
-    rarity: "blue",
-    image: "/lovable-uploads/f8acb5fa-02b0-488e-90fd-9e4a19b89924.png"
-  }
-];
-
-const emoteItems = [
-  {
-    name: "Victory Dance",
-    price: 500,
-    rarity: "blue",
-    image: "/lovable-uploads/d7985914-9867-479d-9ae7-6028fb346c32.png"
-  },
-  {
-    name: "Flex Pose",
-    price: 350,
-    rarity: "green",
-    image: "/lovable-uploads/508d1509-e761-46c6-9f3a-f70e256f5a52.png"
-  },
-  {
-    name: "Taunt",
-    price: 250,
-    rarity: "green", 
-    image: "/lovable-uploads/c4d89b50-9bf5-44a2-a51f-88febb52c38d.png"
-  },
-  {
-    name: "Celebration",
-    price: 400,
-    rarity: "blue",
-    image: "/lovable-uploads/7311683b-ea99-4dd9-9b1f-89d96742eff0.png"
-  }
-];
-
-const packItems = [
-  {
-    name: "Summer Pack",
-    price: 5000,
-    rarity: "special",
-    image: "/lovable-uploads/5cf8ad93-f292-4e4c-b53c-eb0c4bc0f7be.png"
-  }
-];
 
 // Function to get tier icon based on XP
 const getTierIcon = (xp: number): string => {
@@ -341,7 +208,7 @@ const Game = () => {
   }, [authenticated, user?.id, profile, loading, createProfile]);
 
   // Handle purchase function
-  const handlePurchase = async (item: any) => {
+  const handlePurchase = async (itemId: string, itemName: string, price: number) => {
     if (!authenticated) {
       toast({
         title: "Please log in",
@@ -350,13 +217,13 @@ const Game = () => {
       });
       return;
     }
-    
-    // For now, just show a toast - can be connected to actual purchase logic later
-    toast({
-      title: "Coming Soon",
-      description: "Coin purchases coming soon!",
-      duration: 3000
-    });
+    const success = await purchaseItem(itemId, itemName, price);
+    if (success) {
+      toast({
+        title: "Purchase successful!",
+        description: `You purchased ${itemName} for ${price} coins.`
+      });
+    }
   };
 
   // Handle sell click
@@ -1530,52 +1397,461 @@ const Game = () => {
 
                 {/* Categories */}
                 <div className="space-y-4">
-                  {/* Fighters Category */}
-                  {(selectedCategory === "all" || selectedCategory === "skins") && 
-                    <StoreCategory 
-                      title="Fighters" 
-                      items={filterItemsByRarity(fighterItems)}
-                      onPurchase={handlePurchase}
-                    />
-                  }
+                  {/* Skins Category */}
+                  {(selectedCategory === "all" || selectedCategory === "skins") && <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
+                    <div className="absolute inset-0" style={{
+                backgroundImage: `
+                        linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
+                        linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
+                      `,
+                backgroundSize: '4px 4px'
+              }} />
+                    <CardHeader className="relative z-10">
+                      <CardTitle className="flex items-center justify-between text-white">
+                        <span>Fighters</span>
+                        <Badge variant="secondary">4 items</Badge>
+                      </CardTitle>
+                      
+                    </CardHeader>
+                    <CardContent>
+                       <div className="grid grid-cols-2 gap-3">
+                         {filterItemsByRarity([{
+                    name: "The Irish King",
+                    price: 2500,
+                    rarity: "gold",
+                    image: irishKingSkin
+                  }, {
+                    name: "Stani Eagle",
+                    price: 1800,
+                    rarity: "blue",
+                    image: staniEagleSkin
+                  }, {
+                    name: "Jonesy Bones",
+                    price: 2200,
+                    rarity: "silver",
+                    image: bonesSkin
+                  }, {
+                    name: "Latin Legend",
+                    price: 1500,
+                    rarity: "green",
+                    image: latinLegendSkin
+                  }]).map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden hover:scale-105 hover:shadow-3xl hover:border-gray-500/70 transition-all duration-300 cursor-pointer">
+                             <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
+                             <CardContent className="p-3 relative z-10">
+                               <div className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden">
+                                 <img src={item.image} alt={item.name} className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" />
+                               </div>
+                              <h3 className="font-semibold text-xs text-white mb-1">{item.name}</h3>
+                              <div className="flex items-center justify-between">
+                                <div className="flex items-center space-x-1">
+                                  <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
+                                  <span className="text-xs font-bold text-white">{item.price.toLocaleString()}</span>
+                                </div>
+                                <Drawer>
+                                  <DrawerTrigger asChild>
+                                     <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
+                                       <ShoppingBag className={`${isMobile ? 'h-3 w-3' : 'mr-1 h-2 w-2'}`} />
+                                       {!isMobile && "Buy"}
+                                     </Button>
+                                  </DrawerTrigger>
+                                   <DrawerContent className="bg-black/10 backdrop-blur-md border-t border-white/20 text-white transition-all duration-300">
+                                    <DrawerHeader>
+                                      <DrawerTitle className="text-white text-center">Purchase {item.name}</DrawerTitle>
+                                    </DrawerHeader>
+                                    <div className="p-4 space-y-3">
+                                      <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => toast({
+                                title: "Coming Soon",
+                                description: "Coin purchases coming soon!",
+                                duration: 3000
+                              })}>
+                                        <Coins className="mr-2 h-4 w-4" />
+                                        Buy With Coins
+                                      </Button>
+                                      <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => toast({
+                                title: "Coming Soon",
+                                description: "Card payments coming soon!",
+                                duration: 3000
+                              })}>
+                                        <CreditCard className="mr-2 h-4 w-4" />
+                                        Buy with Card
+                                      </Button>
+                                      <DrawerClose asChild>
+                                         <Button variant="outline" className="w-full border-white/20 text-white hover:bg-white/10 hover:text-white">
+                                          Cancel
+                                        </Button>
+                                      </DrawerClose>
+                                    </div>
+                                  </DrawerContent>
+                                </Drawer>
+                              </div>
+                            </CardContent>
+                          </Card>)}
+                      </div>
+                     </CardContent>
+                   </Card>}
 
-                  {/* Accessories Category */}
-                  {(selectedCategory === "all" || selectedCategory === "accessories") && 
-                    <StoreCategory 
-                      title="Accessories" 
-                      items={filterItemsByRarity(accessoryItems)}
-                      onPurchase={handlePurchase}
-                    />
-                  }
+                   {/* Accessories Category */}
+                   {(selectedCategory === "all" || selectedCategory === "accessories") && <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
+                    <div className="absolute inset-0" style={{
+                backgroundImage: `
+                        linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
+                        linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
+                      `,
+                backgroundSize: '4px 4px'
+              }} />
+                    <CardHeader className="relative z-10">
+                      <CardTitle className="flex items-center justify-between text-white">
+                        <span>Accessories</span>
+                        <Badge variant="secondary">4 items</Badge>
+                      </CardTitle>
+                      
+                    </CardHeader>
+                    <CardContent>
+                       <div className="grid grid-cols-2 gap-3">
+                         {filterItemsByRarity([{
+                    name: "Red Wing Suit",
+                    price: 600,
+                    rarity: "blue",
+                    image: "/lovable-uploads/2eec4a9a-97d3-4ba4-9508-2eeef0011139.png"
+                  }, {
+                    name: "Blue Wing Suit",
+                    price: 450,
+                    rarity: "green",
+                    image: "/lovable-uploads/1efc1553-007a-4b38-a982-79d9f5abbfa1.png"
+                  }, {
+                    name: "White Base Vest",
+                    price: 750,
+                    rarity: "special",
+                    image: "/lovable-uploads/508d1509-e761-46c6-9f3a-f70e256f5a52.png"
+                  }, {
+                    name: "Grey Base Vest",
+                    price: 550,
+                    rarity: "silver",
+                    image: "/lovable-uploads/91375d1a-e829-4716-b3b6-833b58355bd9.png"
+                  }]).map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden hover:scale-105 hover:shadow-3xl hover:border-gray-500/70 transition-all duration-300 cursor-pointer">
+                             <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
+                             <CardContent className="p-3 relative z-10">
+                               <div className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden">
+                                 <img src={item.image} alt={item.name} className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" />
+                               </div>
+                              <h3 className="font-semibold text-xs text-white mb-1">{item.name}</h3>
+                              <div className="flex items-center justify-between">
+                                <div className="flex items-center space-x-1">
+                                  <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
+                                  <span className="text-xs font-bold text-white">{item.price.toLocaleString()}</span>
+                                </div>
+                                <Drawer>
+                                  <DrawerTrigger asChild>
+                                     <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
+                                       <ShoppingBag className={`${isMobile ? 'h-3 w-3' : 'mr-1 h-2 w-2'}`} />
+                                       {!isMobile && "Buy"}
+                                     </Button>
+                                  </DrawerTrigger>
+                                   <DrawerContent className="bg-black/10 backdrop-blur-md border-t border-white/20 text-white transition-all duration-300">
+                                    <DrawerHeader>
+                                      <DrawerTitle className="text-white text-center">Purchase {item.name}</DrawerTitle>
+                                    </DrawerHeader>
+                                    <div className="p-4 space-y-3">
+                                      <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => toast({
+                                title: "Coming Soon",
+                                description: "Coin purchases coming soon!",
+                                duration: 3000
+                              })}>
+                                        <Coins className="mr-2 h-4 w-4" />
+                                        Buy With Coins
+                                      </Button>
+                                      <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => {/* TODO: Implement card payment */}}>
+                                        <CreditCard className="mr-2 h-4 w-4" />
+                                        Buy with Card
+                                      </Button>
+                                      <DrawerClose asChild>
+                                         <Button variant="outline" className="w-full border-white/20 text-white hover:bg-white/10 hover:text-white">
+                                          Cancel
+                                        </Button>
+                                      </DrawerClose>
+                                    </div>
+                                  </DrawerContent>
+                                </Drawer>
+                              </div>
+                            </CardContent>
+                          </Card>)}
+                      </div>
+                     </CardContent>
+                   </Card>}
 
-                  {/* Mobility Category */}
-                  {(selectedCategory === "all" || selectedCategory === "mobility") && 
-                    <StoreCategory 
-                      title="Mobility" 
-                      items={filterItemsByRarity(mobilityItems)}
-                      onPurchase={handlePurchase}
-                    />
-                  }
+                   {/* Mobility Category */}
+                   {(selectedCategory === "all" || selectedCategory === "mobility") && <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
+                    <div className="absolute inset-0" style={{
+                backgroundImage: `
+                        linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
+                        linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
+                      `,
+                backgroundSize: '4px 4px'
+              }} />
+                    <CardHeader className="relative z-10">
+                      <CardTitle className="flex items-center justify-between text-white">
+                        <span>Mobility</span>
+                        <Badge variant="secondary">4 items</Badge>
+                      </CardTitle>
+                      
+                    </CardHeader>
+                    <CardContent>
+                       <div className="grid grid-cols-2 gap-3">
+                         {filterItemsByRarity([{
+                    name: "The Coupé Tank",
+                    price: 5000,
+                    rarity: "gold",
+                    image: "/lovable-uploads/1c6b707c-97a6-4381-bc54-de63a7cf8a31.png"
+                  }, {
+                    name: "Speed Buggy",
+                    price: 3200,
+                    rarity: "silver",
+                    image: "/lovable-uploads/b64d7801-1284-4763-b115-ca3cfa8ff315.png"
+                  }, {
+                    name: "Pit Bike",
+                    price: 4500,
+                    rarity: "blue",
+                    image: "/lovable-uploads/4e2aac54-cac6-4cf1-92ad-76bf7e788077.png"
+                  }, {
+                    name: "Pogo",
+                    price: 8000,
+                    rarity: "special",
+                    image: "/lovable-uploads/2877ff38-b9fd-4a5d-bca9-25b14f237997.png"
+                  }]).map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden hover:scale-105 hover:shadow-3xl hover:border-gray-500/70 transition-all duration-300 cursor-pointer">
+                             <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
+                             <CardContent className="p-3 relative z-10">
+                               <div className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden">
+                                 <img src={item.image} alt={item.name} className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" />
+                               </div>
+                              <h3 className="font-semibold text-xs text-white mb-1">{item.name}</h3>
+                              <div className="flex items-center justify-between">
+                                <div className="flex items-center space-x-1">
+                                  <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
+                                  <span className="text-xs font-bold text-white">{item.price.toLocaleString()}</span>
+                                </div>
+                                <Drawer>
+                                  <DrawerTrigger asChild>
+                                     <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
+                                       <ShoppingBag className={`${isMobile ? 'h-3 w-3' : 'mr-1 h-2 w-2'}`} />
+                                       {!isMobile && "Buy"}
+                                     </Button>
+                                  </DrawerTrigger>
+                                   <DrawerContent className="bg-black/10 backdrop-blur-md border-t border-white/20 text-white transition-all duration-300">
+                                    <DrawerHeader>
+                                      <DrawerTitle className="text-white text-center">Purchase {item.name}</DrawerTitle>
+                                    </DrawerHeader>
+                                    <div className="p-4 space-y-3">
+                                      <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => toast({
+                                title: "Coming Soon",
+                                description: "Coin purchases coming soon!",
+                                duration: 3000
+                              })}>
+                                        <Coins className="mr-2 h-4 w-4" />
+                                        Buy With Coins
+                                      </Button>
+                                      <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => {/* TODO: Implement card payment */}}>
+                                        <CreditCard className="mr-2 h-4 w-4" />
+                                        Buy with Card
+                                      </Button>
+                                      <DrawerClose asChild>
+                                         <Button variant="outline" className="w-full border-white/20 text-white hover:bg-white/10 hover:text-white">
+                                          Cancel
+                                        </Button>
+                                      </DrawerClose>
+                                    </div>
+                                  </DrawerContent>
+                                </Drawer>
+                              </div>
+                            </CardContent>
+                          </Card>)}
+                      </div>
+                     </CardContent>
+                   </Card>}
 
-                  {/* Emotes Category */}
-                  {(selectedCategory === "all" || selectedCategory === "emotes") && 
-                    <StoreCategory 
-                      title="Emotes" 
-                      items={filterItemsByRarity(emoteItems)}
-                      onPurchase={handlePurchase}
-                    />
-                  }
+                   {/* Emotes Category */}
+                   {(selectedCategory === "all" || selectedCategory === "emotes") && <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
+                    <div className="absolute inset-0" style={{
+                backgroundImage: `
+                        linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
+                        linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
+                      `,
+                backgroundSize: '4px 4px'
+              }} />
+                    <CardHeader className="relative z-10">
+                      <CardTitle className="flex items-center justify-between text-white">
+                        <span>Emotes</span>
+                         <Badge variant="secondary">4 items</Badge>
+                      </CardTitle>
+                      
+                    </CardHeader>
+                    <CardContent>
+                       <div className="grid grid-cols-2 gap-3">
+                         {filterItemsByRarity([{
+                    name: "Flex",
+                    price: 800,
+                    rarity: "blue",
+                    image: "/lovable-uploads/f52e83c2-28b7-417e-90ac-757255d1759f.png"
+                  }, {
+                    name: "Fists Up",
+                    price: 1800,
+                    rarity: "gold",
+                    image: "/lovable-uploads/370bd874-ad5c-467d-b844-55688b1a0f9a.png"
+                  }, {
+                    name: "Squeaky Dance",
+                    price: 2500,
+                    rarity: "special",
+                    image: "/lovable-uploads/5c8c027e-3baf-4550-96a9-ba0715d11506.png"
+                  }, {
+                    name: "u want sum?",
+                    price: 1500,
+                    rarity: "gold",
+                    image: "/lovable-uploads/30d419b4-79a9-459c-b37b-42099ffd6273.png"
+                  }]).map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden hover:scale-105 hover:shadow-3xl hover:border-gray-500/70 transition-all duration-300 cursor-pointer">
+                             <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
+                             <CardContent className="p-3 relative z-10">
+                               <div className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden flex items-center justify-center">
+                                  {item.image.startsWith('/') || item.image.startsWith('http') ? <img src={item.image} alt={item.name} className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" /> : <div className="text-4xl hover:scale-110 transition-transform duration-300">{item.image}</div>}
+                               </div>
+                              <h3 className="font-semibold text-xs text-white mb-1">{item.name}</h3>
+                              <div className="flex items-center justify-between">
+                                <div className="flex items-center space-x-1">
+                                  <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
+                                  <span className="text-xs font-bold text-white">{item.price.toLocaleString()}</span>
+                                </div>
+                                <Drawer>
+                                  <DrawerTrigger asChild>
+                                     <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
+                                       <ShoppingBag className={`${isMobile ? 'h-3 w-3' : 'mr-1 h-2 w-2'}`} />
+                                       {!isMobile && "Buy"}
+                                     </Button>
+                                  </DrawerTrigger>
+                                   <DrawerContent className="bg-black/10 backdrop-blur-md border-t border-white/20 text-white transition-all duration-300">
+                                    <DrawerHeader>
+                                      <DrawerTitle className="text-white text-center">Purchase {item.name}</DrawerTitle>
+                                    </DrawerHeader>
+                                    <div className="p-4 space-y-3">
+                                      <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => toast({
+                                title: "Coming Soon",
+                                description: "Coin purchases coming soon!",
+                                duration: 3000
+                              })}>
+                                        <Coins className="mr-2 h-4 w-4" />
+                                        Buy With Coins
+                                      </Button>
+                                      <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => {/* TODO: Implement card payment */}}>
+                                        <CreditCard className="mr-2 h-4 w-4" />
+                                        Buy with Card
+                                      </Button>
+                                      <DrawerClose asChild>
+                                         <Button variant="outline" className="w-full border-white/20 text-white hover:bg-white/10 hover:text-white">
+                                          Cancel
+                                        </Button>
+                                      </DrawerClose>
+                                    </div>
+                                  </DrawerContent>
+                                </Drawer>
+                              </div>
+                            </CardContent>
+                          </Card>)}
+                      </div>
+                     </CardContent>
+                   </Card>}
 
-                  {/* Packs Category */}
-                  {(selectedCategory === "all" || selectedCategory === "packs") && 
-                    <StoreCategory 
-                      title="Packs" 
-                      items={filterItemsByRarity(packItems)}
-                      onPurchase={handlePurchase}
-                    />
-                  }
-                </div>
-              </div>}
+                   {/* Packs Category */}
+                   {(selectedCategory === "all" || selectedCategory === "packs") && <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
+                    <div className="absolute inset-0" style={{
+                backgroundImage: `
+                        linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
+                        linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
+                      `,
+                backgroundSize: '4px 4px'
+              }} />
+                    <CardHeader className="relative z-10">
+                      <CardTitle className="flex items-center justify-between text-white">
+                        <span>Packs</span>
+                        <Badge variant="secondary">4 items</Badge>
+                      </CardTitle>
+                      
+                    </CardHeader>
+                    <CardContent>
+                       <div className="grid grid-cols-2 gap-3">
+                          {filterItemsByRarity([{
+                    name: "Silver Pack",
+                    price: 1000,
+                    rarity: "silver",
+                    image: "/lovable-uploads/17c3a939-bcaa-4cdb-9b61-271b5774c7e2.png"
+                  }, {
+                    name: "Gold Pack",
+                    price: 2000,
+                    rarity: "gold",
+                    image: "/lovable-uploads/291c5734-f144-47b0-9f49-915999e921b0.png"
+                  }, {
+                    name: "EO Summer Pack",
+                    price: 3500,
+                    rarity: "special",
+                    image: "/lovable-uploads/2149e9ad-919f-49ea-8be4-90f190387d39.png"
+                  }, {
+                    name: "Wild West Pack",
+                    price: 5000,
+                    rarity: "special",
+                    image: "/lovable-uploads/5cf8ad93-f292-4e4c-b53c-eb0c4bc0f7be.png"
+                  }]).map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden hover:scale-105 hover:shadow-3xl hover:border-gray-500/70 transition-all duration-300 cursor-pointer">
+                             <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
+                             <CardContent className="p-3 relative z-10">
+                               <div className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden">
+                                 <img src={item.image} alt={item.name} className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" />
+                               </div>
+                              <h3 className="font-semibold text-xs text-white mb-1">{item.name}</h3>
+                              <div className="flex items-center justify-between">
+                                <div className="flex items-center space-x-1">
+                                  <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
+                                  <span className="text-xs font-bold text-white">{item.price.toLocaleString()}</span>
+                                </div>
+                                <Drawer>
+                                  <DrawerTrigger asChild>
+                                     <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
+                                       <ShoppingBag className={`${isMobile ? 'h-3 w-3' : 'mr-1 h-2 w-2'}`} />
+                                       {!isMobile && "Buy"}
+                                     </Button>
+                                  </DrawerTrigger>
+                                  <DrawerContent className="bg-black/10 backdrop-blur-md border-t border-white/20 text-white transition-all duration-300">
+                                    <DrawerHeader>
+                                      <DrawerTitle className="text-white text-center">Purchase {item.name}</DrawerTitle>
+                                    </DrawerHeader>
+                                    <div className="p-4 space-y-3">
+                                      <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => toast({
+                                title: "Coming Soon",
+                                description: "Coin purchases coming soon!",
+                                duration: 3000
+                              })}>
+                                        <Coins className="mr-2 h-4 w-4" />
+                                        Buy With Coins
+                                      </Button>
+                                      <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => {/* TODO: Implement card payment */}}>
+                                        <CreditCard className="mr-2 h-4 w-4" />
+                                        Buy with Card
+                                      </Button>
+                                      <DrawerClose asChild>
+                                        <Button variant="outline" className="w-full border-white/20 text-white hover:bg-white/10 hover:text-white">
+                                          Cancel
+                                        </Button>
+                                      </DrawerClose>
+                                    </div>
+                                  </DrawerContent>
+                                </Drawer>
+                              </div>
+                            </CardContent>
+                          </Card>)}
+                      </div>
+                     </CardContent>
+                   </Card>}
+                 </div>
+               </div>}
 
             {activeTab === "market" && <div className="p-4 space-y-6">
                 {/* Market Header */}
@@ -1986,9 +2262,39 @@ const Game = () => {
                       </CardContent>
                     </Card>
 
-         </div>
+                    {/* Mobile Mobility Category */}
+                    <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
+                      <div className="absolute inset-0" style={{
+                backgroundImage: `
+                          linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
+                          linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
+                        `,
+                backgroundSize: '4px 4px'
+              }} />
+                      <CardHeader className="relative z-10 pb-3">
+                        <CardTitle className="flex items-center justify-between text-white text-lg">
+                          <span>Mobility</span>
+                          <Badge variant="secondary" className="bg-white/10 text-white border-white/20">0 owned</Badge>
+                        </CardTitle>
+                        
+                      </CardHeader>
+                      <CardContent className="relative z-10">
+                        <div className="text-center py-8">
+                          <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <Package className="w-6 h-6 text-gray-400" />
+                          </div>
+                          <p className="text-gray-300 text-sm">No vehicles owned yet</p>
+                          <p className="text-xs text-gray-400 mt-1">Visit the store to purchase bikes, cars, and hovercrafts</p>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </div>}
+              </div>}
+          
+        </div>
 
-         {/* Desktop Layout - Hidden on mobile */}
+        {/* Desktop Layout - Hidden on mobile */}
         <div className="hidden lg:flex lg:min-h-screen w-full">
           {/* Left Sidebar - Desktop only */}
           <aside className="w-80 bg-black border-r border-border p-6 space-y-6 overflow-y-auto h-screen">
@@ -4096,8 +4402,6 @@ const Game = () => {
           </DialogContent>
         </Dialog>
       )}
-    </div>
-  );
+    </div>;
 };
-
 export default Game;
