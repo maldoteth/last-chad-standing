@@ -356,7 +356,7 @@ const Game = () => {
       change: 29.8,
       image: "/lovable-uploads/2532e628-0d4b-465e-b350-e49def10eb26.png"
     }, {
-      name: "Earth Shaker",
+      name: "Zombie Chan",
       team: "Ground Force",
       position: "Heavy",
       price: 7100,
