@@ -16,6 +16,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { ProgressBar } from "@/components/ProgressBar";
 import { useProfile } from "@/hooks/useProfile";
 import { getAllLevelsForDisplay, getCurrentLevel, getProgressToNextLevel } from "@/lib/progressSystem";
+import { formatNumberWithAbbreviation } from "@/lib/utils";
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerTrigger, DrawerClose } from "@/components/ui/drawer";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogDescription } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -60,7 +61,7 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
     return (
       <div className="flex items-center space-x-1">
         <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className={coin} />
-        <span className={`${text} font-bold text-white`}>{player.price.toLocaleString()}</span>
+        <span className={`${text} font-bold text-white`}>{formatNumberWithAbbreviation(player.price)}</span>
       </div>
     );
   }
@@ -71,14 +72,14 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
         <div className="flex items-center space-x-1">
           <span className={`${text} font-medium text-red-400`}>Sell:</span>
           <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className={coin} />
-          <span className={`${text} font-bold text-red-400`}>{prices.bestSellPrice.toLocaleString()}</span>
+          <span className={`${text} font-bold text-red-400`}>{formatNumberWithAbbreviation(prices.bestSellPrice)}</span>
         </div>
       )}
       {prices.bestBuyPrice && (
         <div className="flex items-center space-x-1">
           <span className={`${text} font-medium text-green-400`}>Buy:</span>
           <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className={coin} />
-          <span className={`${text} font-bold text-green-400`}>{prices.bestBuyPrice.toLocaleString()}</span>
+          <span className={`${text} font-bold text-green-400`}>{formatNumberWithAbbreviation(prices.bestBuyPrice)}</span>
         </div>
       )}
     </div>
