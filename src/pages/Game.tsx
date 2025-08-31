@@ -75,7 +75,12 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
             </span>
           </div>
           <div className="flex justify-center ml-6">
-            <span className={`${label} text-red-400 font-medium`}>sell</span>
+            <span 
+              className={`${label} text-red-400 font-medium cursor-pointer hover:text-red-300 transition-colors`}
+              onClick={() => onSellClick?.()}
+            >
+              sell
+            </span>
           </div>
         </div>
         <span className={`${text} text-white/60`}>|</span>
@@ -86,7 +91,12 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
           >
             {formatNumberWithAbbreviation(mockSellPrice)}
           </span>
-          <span className={`${label} text-green-400 font-medium`}>buy</span>
+          <span 
+            className={`${label} text-green-400 font-medium cursor-pointer hover:text-green-300 transition-colors`}
+            onClick={() => onBuyClick?.()}
+          >
+            buy
+          </span>
         </div>
       </div>
     );
@@ -106,7 +116,12 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
             </span>
           </div>
           <div className="flex justify-center ml-6">
-            <span className={`${label} text-red-400 font-medium`}>sell</span>
+            <span 
+              className={`${label} text-red-400 font-medium cursor-pointer hover:text-red-300 transition-colors`}
+              onClick={() => onSellClick?.()}
+            >
+              sell
+            </span>
           </div>
         </div>
       )}
@@ -121,7 +136,12 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
           >
             {formatNumberWithAbbreviation(prices.bestSellPrice)}
           </span>
-          <span className={`${label} text-green-400 font-medium`}>buy</span>
+          <span 
+            className={`${label} text-green-400 font-medium cursor-pointer hover:text-green-300 transition-colors`}
+            onClick={() => onBuyClick?.()}
+          >
+            buy
+          </span>
         </div>
       )}
     </div>
