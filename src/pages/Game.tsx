@@ -1823,13 +1823,12 @@ const Game = () => {
                                   <span className="text-xs font-bold text-white">{player.price.toLocaleString()}</span>
                                 </div>
                               </div>
-                              <div className="flex items-center justify-between">
-                                <p className="text-xs text-gray-400">{player.team}</p>
-                                <div className={`flex items-center space-x-1 ${player.trend === 'up' ? 'text-green-400' : 'text-red-400'}`}>
-                                  {player.trend === 'up' ? <ArrowUpRight className="w-3 h-3" /> : <ArrowDownRight className="w-3 h-3" />}
-                                  <span className="text-xs font-medium">{Math.abs(player.change)}%</span>
-                                </div>
-                              </div>
+                               <div className="flex items-center justify-between">
+                                 <div className={`flex items-center space-x-1 ${player.trend === 'up' ? 'text-green-400' : 'text-red-400'}`}>
+                                   {player.trend === 'up' ? <ArrowUpRight className="w-3 h-3" /> : <ArrowDownRight className="w-3 h-3" />}
+                                   <span className="text-xs font-medium">{Math.abs(player.change)}%</span>
+                                 </div>
+                               </div>
                             </div>
                           </div>)}
                       </div>
@@ -1885,13 +1884,12 @@ const Game = () => {
                                   <span className="text-xs font-bold text-white">{player.price.toLocaleString()}</span>
                                 </div>
                               </div>
-                              <div className="flex items-center justify-between">
-                                <p className="text-xs text-gray-400">{player.team}</p>
-                                <div className="flex items-center space-x-1 text-green-400">
-                                  <ArrowUpRight className="w-3 h-3" />
-                                  <span className="text-xs font-medium">+{player.change}%</span>
-                                </div>
-                              </div>
+                               <div className="flex items-center justify-between">
+                                 <div className="flex items-center space-x-1 text-green-400">
+                                   <ArrowUpRight className="w-3 h-3" />
+                                   <span className="text-xs font-medium">+{player.change}%</span>
+                                 </div>
+                               </div>
                             </div>
                           </div>)}
                       </div>
@@ -1938,12 +1936,11 @@ const Game = () => {
                                 <span className="text-sm font-bold text-white">{player.price.toLocaleString()}</span>
                               </div>
                             </div>
-                            <div className="flex items-center justify-between">
-                              <div>
-                                <p className="text-xs text-gray-400">{player.team} • {player.position}</p>
-                                <p className="text-xs text-gray-500">Last: {player.lastSale.toLocaleString()}</p>
-                              </div>
-                              <div className="flex items-center space-x-2">
+                             <div className="flex items-center justify-between">
+                               <div>
+                                 <p className="text-xs text-gray-500">Last: {player.lastSale.toLocaleString()}</p>
+                               </div>
+                               <div className="flex items-center space-x-2">
                                 <div className={`flex items-center space-x-1 ${player.trend === 'up' ? 'text-green-400' : 'text-red-400'}`}>
                                   {player.trend === 'up' ? <ArrowUpRight className="w-3 h-3" /> : <ArrowDownRight className="w-3 h-3" />}
                                 </div>
