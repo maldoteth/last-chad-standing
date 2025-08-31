@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { forwardRef, useImperativeHandle } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
+import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext, useCarousel } from '@/components/ui/carousel';
 
 interface StoreItem {
   name: string;
@@ -16,7 +16,12 @@ interface StoreCarouselProps {
   renderItem: (item: StoreItem, idx: number) => React.ReactNode;
 }
 
-const StoreCarousel: React.FC<StoreCarouselProps> = ({ items, renderItem }) => {
+export interface StoreCarouselRef {
+  scrollToPrevious: () => void;
+  scrollToNext: () => void;
+}
+
+const StoreCarousel = forwardRef<StoreCarouselRef, StoreCarouselProps>(({ items, renderItem }, ref) => {
   // Group items into sets of 4 for 2x2 grid display
   const itemGroups = [];
   for (let i = 0; i < items.length; i += 4) {
@@ -32,8 +37,20 @@ const StoreCarousel: React.FC<StoreCarouselProps> = ({ items, renderItem }) => {
     );
   }
 
+  const CarouselWithRef = () => {
+    const { scrollPrev, scrollNext } = useCarousel();
+    
+    useImperativeHandle(ref, () => ({
+      scrollToPrevious: scrollPrev,
+      scrollToNext: scrollNext,
+    }));
+
+    return null;
+  };
+
   return (
     <Carousel className="w-full">
+      <CarouselWithRef />
       <CarouselContent>
         {itemGroups.map((group, groupIdx) => (
           <CarouselItem key={groupIdx}>
@@ -43,8 +60,11 @@ const StoreCarousel: React.FC<StoreCarouselProps> = ({ items, renderItem }) => {
           </CarouselItem>
         ))}
       </CarouselContent>
+      {/* Hidden navigation buttons for DOM queries */}
+      <CarouselPrevious className="hidden" />
+      <CarouselNext className="hidden" />
     </Carousel>
   );
-};
+});
 
 export default StoreCarousel;
