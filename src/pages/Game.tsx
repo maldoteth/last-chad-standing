@@ -50,9 +50,9 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
   const prices = getMarketplacePrices(player.name, 'player');
   
   const sizeClasses = {
-    small: { coin: 'w-3 h-3 md:w-3.5 md:h-3.5 md:-ml-1', text: 'text-xs', label: 'text-[10px]' },
-    medium: { coin: 'w-4 h-4 md:w-5 md:h-5 md:-ml-1', text: 'text-sm', label: 'text-xs' },
-    large: { coin: 'w-5 h-5 md:w-6 md:h-6 md:-ml-1', text: 'text-lg', label: 'text-sm' }
+    small: { coin: 'w-3 h-3 md:w-4.5 md:h-4.5 md:-ml-1', text: 'text-xs md:text-base', label: 'text-[10px] md:text-sm' },
+    medium: { coin: 'w-4 h-4 md:w-6 md:h-6 md:-ml-1', text: 'text-sm md:text-xl', label: 'text-xs md:text-base' },
+    large: { coin: 'w-5 h-5 md:w-7.5 md:h-7.5 md:-ml-1', text: 'text-lg md:text-2xl', label: 'text-sm md:text-lg' }
   };
 
   const { coin, text, label } = sizeClasses[size];
@@ -2071,7 +2071,7 @@ const Game = () => {
               }} />
                     <CardHeader className="pb-3 relative z-10">
                       <div className="flex items-center justify-between mb-2">
-                        <CardTitle className="text-base flex items-center space-x-2 text-white">
+                        <CardTitle className="text-base md:text-xl flex items-center space-x-2 text-white">
                           <TrendingUp className="w-4 h-4" />
                           <span>Trending</span>
                         </CardTitle>
@@ -2129,7 +2129,7 @@ const Game = () => {
               }} />
                     <CardHeader className="pb-3 relative z-10">
                       <div className="flex items-center justify-between mb-2">
-                        <CardTitle className="text-base flex items-center space-x-2 text-white">
+                        <CardTitle className="text-base md:text-xl flex items-center space-x-2 text-white">
                           <ArrowUpRight className="w-4 h-4 text-green-400" />
                           <span>Top Gainers</span>
                         </CardTitle>
@@ -3763,7 +3763,7 @@ const Game = () => {
                     }} />
                     <CardHeader className="relative z-10">
                       <div className="flex items-center justify-between mb-3">
-                        <CardTitle className="text-lg flex items-center space-x-2 text-white">
+                        <CardTitle className="text-lg md:text-2xl flex items-center space-x-2 text-white">
                           <TrendingUp className="w-5 h-5" />
                           <span>Trending</span>
                         </CardTitle>
@@ -3809,7 +3809,7 @@ const Game = () => {
                     }} />
                     <CardHeader className="relative z-10">
                       <div className="flex items-center justify-between mb-3">
-                        <CardTitle className="text-lg flex items-center space-x-2 text-white">
+                        <CardTitle className="text-lg md:text-2xl flex items-center space-x-2 text-white">
                           <ArrowUpRight className="w-5 h-5 text-green-400" />
                           <span>Top Gainers</span>
                         </CardTitle>
