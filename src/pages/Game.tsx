@@ -2107,12 +2107,7 @@ const Game = () => {
                                 <p className="text-sm md:text-xl font-semibold text-white truncate">{player.name}</p>
                                 {renderMarketplacePrices(player, getMarketplacePrices, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
                               </div>
-                               <div className="flex items-center justify-between">
-                                 <div className={`flex items-center space-x-1 ${player.trend === 'up' ? 'text-green-400' : 'text-red-400'}`}>
-                                   {player.trend === 'up' ? <ArrowUpRight className="w-3 h-3" /> : <ArrowDownRight className="w-3 h-3" />}
-                                   <span className="text-xs font-medium">{Math.abs(player.change)}%</span>
-                                 </div>
-                               </div>
+                               
                             </div>
                           </div>)}
                       </div>
@@ -2165,12 +2160,7 @@ const Game = () => {
                                 <p className="text-sm md:text-xl font-semibold text-white truncate">{player.name}</p>
                                 {renderMarketplacePrices(player, getMarketplacePrices, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
                               </div>
-                               <div className="flex items-center justify-between">
-                                 <div className="flex items-center space-x-1 text-green-400">
-                                   <ArrowUpRight className="w-3 h-3" />
-                                   <span className="text-xs font-medium">+{player.change}%</span>
-                                 </div>
-                               </div>
+                               
                             </div>
                           </div>)}
                       </div>
