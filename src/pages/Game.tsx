@@ -1246,7 +1246,7 @@ const Game = () => {
                               All Categories
                             </Button>
                             <Button variant="ghost" onClick={() => setSelectedCategory("skins")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "skins" ? "bg-white/20" : ""}`}>
-                              Skins
+                              Fighters
                             </Button>
                             <Button variant="ghost" onClick={() => setSelectedCategory("accessories")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "accessories" ? "bg-white/20" : ""}`}>
                               Accessories
@@ -1273,7 +1273,7 @@ const Game = () => {
                             <span>All Categories</span>
                           </DropdownMenuItem>
                           <DropdownMenuItem onClick={() => setSelectedCategory("skins")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "skins" ? "bg-white/20" : ""}`}>
-                            <span>Skins</span>
+                            <span>Fighters</span>
                           </DropdownMenuItem>
                           <DropdownMenuItem onClick={() => setSelectedCategory("accessories")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "accessories" ? "bg-white/20" : ""}`}>
                             <span>Accessories</span>
@@ -1374,7 +1374,7 @@ const Game = () => {
 
                 {/* Categories */}
                 <div className="space-y-4">
-                  {/* Skins Category */}
+                  {/* Fighters Category */}
                   {(selectedCategory === "all" || selectedCategory === "skins") && <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                     <div className="absolute inset-0" style={{
@@ -2198,7 +2198,7 @@ const Game = () => {
                       </Button>
                     </CardContent>
                   </Card> : <div className="space-y-4">
-                    {/* Mobile Skins Category */}
+                    {/* Mobile Fighters Category */}
                     <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
                       <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                       <div className="absolute inset-0" style={{
@@ -2897,7 +2897,7 @@ const Game = () => {
                               All Categories
                             </Button>
                             <Button variant="ghost" onClick={() => setSelectedCategory("skins")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "skins" ? "bg-white/20" : ""}`}>
-                              Skins
+                              Fighters
                             </Button>
                             <Button variant="ghost" onClick={() => setSelectedCategory("accessories")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "accessories" ? "bg-white/20" : ""}`}>
                               Accessories
@@ -2924,7 +2924,7 @@ const Game = () => {
                             <span>All Categories</span>
                           </DropdownMenuItem>
                           <DropdownMenuItem onClick={() => setSelectedCategory("skins")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "skins" ? "bg-white/20" : ""}`}>
-                            <span>Skins</span>
+                            <span>Fighters</span>
                           </DropdownMenuItem>
                           <DropdownMenuItem onClick={() => setSelectedCategory("accessories")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "accessories" ? "bg-white/20" : ""}`}>
                             <span>Accessories</span>
@@ -3025,7 +3025,7 @@ const Game = () => {
 
                 {/* Categories */}
                 <div className="space-y-6">
-                  {/* Skins Category */}
+                  {/* Fighters Category */}
                   {(selectedCategory === "all" || selectedCategory === "skins") && <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                     <div className="absolute inset-0" style={{
@@ -3967,7 +3967,7 @@ const Game = () => {
                        </Button>
                     </CardContent>
                   </Card> : <div className="space-y-6">
-                    {/* Desktop Skins Category */}
+                    {/* Desktop Fighters Category */}
                     <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
                       <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                       <div className="absolute inset-0" style={{
