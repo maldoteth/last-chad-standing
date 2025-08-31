@@ -361,7 +361,7 @@ const Game = () => {
       position: "Heavy",
       price: 7100,
       change: 27.3,
-      image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
+      image: "/lovable-uploads/82fe8aed-6cfa-45b6-945c-c447349b7fe2.png"
     }],
     monthly: [{
       name: "Titan Crusher",
