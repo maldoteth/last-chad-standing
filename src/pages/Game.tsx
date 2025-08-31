@@ -2097,7 +2097,7 @@ const Game = () => {
                     <CardContent className="relative z-10">
                       <div className="space-y-2">
                         {trendingPlayers.map((player, idx) => <div key={idx} className="flex items-center space-x-3 p-2 bg-white/5 rounded-lg">
-                            <div className="w-8 h-8 rounded-full overflow-hidden">
+                            <div className="w-12 h-12 rounded-full overflow-hidden">
                               <img src={player.image} alt={player.name} className="w-full h-full object-cover" />
                             </div>
                             <div className="flex-1 min-w-0">
@@ -2155,7 +2155,7 @@ const Game = () => {
                     <CardContent className="relative z-10">
                       <div className="space-y-2">
                         {topGainers.map((player, idx) => <div key={idx} className="flex items-center space-x-3 p-2 bg-white/5 rounded-lg">
-                            <div className="w-8 h-8 rounded-full overflow-hidden">
+                            <div className="w-12 h-12 rounded-full overflow-hidden">
                               <img src={player.image} alt={player.name} className="w-full h-full object-cover" />
                             </div>
                             <div className="flex-1 min-w-0">
