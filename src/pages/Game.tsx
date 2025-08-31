@@ -335,7 +335,7 @@ const Game = () => {
       change: 45.2,
       image: "/lovable-uploads/fdd396d6-16bd-493f-ba2e-0c27e846ea03.png"
     }, {
-      name: "Iron Forge",
+      name: "Based Chad",
       team: "Steel Warriors",
       position: "Tank",
       price: 6800,
