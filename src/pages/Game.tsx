@@ -3523,10 +3523,9 @@ const Game = () => {
                            <div>
                              <DropdownMenu>
                                <DropdownMenuTrigger asChild>
-                                 <Button variant="outline" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-8 px-3">
-                                   <Layers className="w-3 h-3 mr-1" />
-                                   Category
-                                 </Button>
+                                  <Button variant="outline" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-8 w-8">
+                                    <Layers className="w-3 h-3" />
+                                  </Button>
                                </DropdownMenuTrigger>
                                <DropdownMenuContent align="center" className="w-40 bg-black/90 backdrop-blur-md border border-white/20 text-white z-[9999]">
                                  <DropdownMenuItem onClick={() => setMarketplaceCategory("all")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceCategory === "all" ? "bg-white/20" : ""}`}>
@@ -3597,10 +3596,9 @@ const Game = () => {
                            ) : (
                              <DropdownMenu>
                                <DropdownMenuTrigger asChild>
-                                 <Button variant="outline" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-8 px-3">
-                                   <Filter className="w-3 h-3 mr-1" />
-                                   Filter
-                                 </Button>
+                                  <Button variant="outline" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-8 w-8">
+                                    <Filter className="w-3 h-3" />
+                                  </Button>
                                </DropdownMenuTrigger>
                                 <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-[9999]">
                                   <DropdownMenuItem onClick={() => setMarketplaceRarity("all")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceRarity === "all" ? "bg-white/20" : ""}`}>
