@@ -1952,8 +1952,8 @@ const Game = () => {
               }} />
                     <CardContent className="p-4 relative z-10">
                       <div className="flex items-center space-x-2 mb-2">
-                        <BarChart3 className="w-4 h-4 text-white" />
-                        <span className="text-xs font-medium text-white">Total Market Value</span>
+                        <BarChart3 className="w-4 h-4 md:w-5 md:h-5 text-white" />
+                        <span className="text-xs md:text-sm font-medium text-white">Total Market Value</span>
                       </div>
                       <div className="space-y-1">
                         <div className="flex items-center space-x-1">
@@ -1985,8 +1985,8 @@ const Game = () => {
               }} />
                     <CardContent className="p-4 relative z-10">
                       <div className="flex items-center space-x-2 mb-2">
-                        <LineChart className="w-4 h-4 text-white" />
-                        <span className="text-xs font-medium text-white">Live Listings</span>
+                        <LineChart className="w-4 h-4 md:w-5 md:h-5 text-white" />
+                        <span className="text-xs md:text-sm font-medium text-white">Live Listings</span>
                       </div>
                       <div className="space-y-1">
                         <span className="text-sm font-bold text-white">{currentListings}</span>
