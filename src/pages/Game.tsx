@@ -3283,15 +3283,11 @@ const Game = () => {
                </ScrollArea>}
 
             {activeTab === "market" && <ScrollArea className="h-full">
-                <div className="p-6">
-                  <div className="space-y-6 max-w-6xl">
+                <div className="px-6 py-6">
+                  <div className="space-y-6 max-w-6xl mx-auto">
                 {/* Market Header */}
-                <div className="text-center">
-                  <div className="flex items-center justify-center space-x-3 mb-6">
-                    <div>
-                      <h1 className="text-3xl font-bold">Market</h1>
-                    </div>
-                  </div>
+                <div className="flex items-center justify-center">
+                  <h1 className="text-3xl font-bold mb-6">Market</h1>
                 </div>
 
                 {/* Market Analytics Dashboard */}
