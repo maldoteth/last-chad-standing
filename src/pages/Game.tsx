@@ -3395,13 +3395,12 @@ const Game = () => {
                                   <span className="text-sm font-bold text-white">{player.price.toLocaleString()}</span>
                                 </div>
                               </div>
-                              <div className="flex items-center justify-between">
-                                <p className="text-xs text-gray-400">{player.team} • {player.position}</p>
-                                <div className={`flex items-center space-x-1 ${player.trend === 'up' ? 'text-green-400' : 'text-red-400'}`}>
-                                  {player.trend === 'up' ? <ArrowUpRight className="w-3 h-3" /> : <ArrowDownRight className="w-3 h-3" />}
-                                  <span className="text-xs font-medium">{player.trend === 'up' ? '+' : ''}{player.change}%</span>
-                                </div>
-                              </div>
+                               <div className="flex items-center justify-between">
+                                 <div className={`flex items-center space-x-1 ${player.trend === 'up' ? 'text-green-400' : 'text-red-400'}`}>
+                                   {player.trend === 'up' ? <ArrowUpRight className="w-3 h-3" /> : <ArrowDownRight className="w-3 h-3" />}
+                                   <span className="text-xs font-medium">{player.trend === 'up' ? '+' : ''}{player.change}%</span>
+                                 </div>
+                               </div>
                             </div>
                           </div>)}
                       </div>
@@ -3631,12 +3630,11 @@ const Game = () => {
                                 <span className="text-lg font-bold text-white">{player.price.toLocaleString()}</span>
                               </div>
                             </div>
-                            <div className="flex items-center justify-between">
-                              <div>
-                                <p className="text-sm text-gray-400">{player.team} • {player.position}</p>
-                                <p className="text-xs text-gray-500">Last sale: {player.lastSale.toLocaleString()}</p>
-                              </div>
-                              <div className="flex items-center space-x-3">
+                             <div className="flex items-center justify-between">
+                               <div>
+                                 <p className="text-xs text-gray-500">Last sale: {player.lastSale.toLocaleString()}</p>
+                               </div>
+                               <div className="flex items-center space-x-3">
                                 <div className={`flex items-center space-x-1 ${player.trend === 'up' ? 'text-green-400' : 'text-red-400'}`}>
                                   {player.trend === 'up' ? <ArrowUpRight className="w-4 h-4" /> : <ArrowDownRight className="w-4 h-4" />}
                                   <span className="text-sm font-medium">
