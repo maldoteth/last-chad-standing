@@ -1962,21 +1962,21 @@ const Game = () => {
                                <Button variant="ghost" onClick={() => setMarketplaceCategory("all")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceCategory === "all" ? "bg-white/20" : ""}`}>
                                  All Categories
                                </Button>
-                               <Button variant="ghost" onClick={() => setMarketplaceCategory("striker")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceCategory === "striker" ? "bg-white/20" : ""}`}>
-                                 Striker
-                               </Button>
-                               <Button variant="ghost" onClick={() => setMarketplaceCategory("tank")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceCategory === "tank" ? "bg-white/20" : ""}`}>
-                                 Tank
-                               </Button>
-                               <Button variant="ghost" onClick={() => setMarketplaceCategory("speed")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceCategory === "speed" ? "bg-white/20" : ""}`}>
-                                 Speed
-                               </Button>
-                               <Button variant="ghost" onClick={() => setMarketplaceCategory("defense")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceCategory === "defense" ? "bg-white/20" : ""}`}>
-                                 Defense
-                               </Button>
-                               <Button variant="ghost" onClick={() => setMarketplaceCategory("assault")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceCategory === "assault" ? "bg-white/20" : ""}`}>
-                                 Assault
-                               </Button>
+                                <Button variant="ghost" onClick={() => setMarketplaceCategory("fighters")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceCategory === "fighters" ? "bg-white/20" : ""}`}>
+                                  Fighters
+                                </Button>
+                                <Button variant="ghost" onClick={() => setMarketplaceCategory("mobility")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceCategory === "mobility" ? "bg-white/20" : ""}`}>
+                                  Mobility
+                                </Button>
+                                <Button variant="ghost" onClick={() => setMarketplaceCategory("accessories")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceCategory === "accessories" ? "bg-white/20" : ""}`}>
+                                  Accessories
+                                </Button>
+                                <Button variant="ghost" onClick={() => setMarketplaceCategory("emotes")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceCategory === "emotes" ? "bg-white/20" : ""}`}>
+                                  Emotes
+                                </Button>
+                                <Button variant="ghost" onClick={() => setMarketplaceCategory("packs")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceCategory === "packs" ? "bg-white/20" : ""}`}>
+                                  Packs
+                                </Button>
                              </div>
                            </DrawerContent>
                          </Drawer>
@@ -3721,20 +3721,20 @@ const Game = () => {
                                 <DropdownMenuItem onClick={() => setMarketplaceCategory("all")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceCategory === "all" ? "bg-white/20" : ""}`}>
                                   <span>All Categories</span>
                                 </DropdownMenuItem>
-                                <DropdownMenuItem onClick={() => setMarketplaceCategory("striker")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceCategory === "striker" ? "bg-white/20" : ""}`}>
-                                  <span>Striker</span>
+                                <DropdownMenuItem onClick={() => setMarketplaceCategory("fighters")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceCategory === "fighters" ? "bg-white/20" : ""}`}>
+                                  <span>Fighters</span>
                                 </DropdownMenuItem>
-                                <DropdownMenuItem onClick={() => setMarketplaceCategory("tank")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceCategory === "tank" ? "bg-white/20" : ""}`}>
-                                  <span>Tank</span>
+                                <DropdownMenuItem onClick={() => setMarketplaceCategory("mobility")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceCategory === "mobility" ? "bg-white/20" : ""}`}>
+                                  <span>Mobility</span>
                                 </DropdownMenuItem>
-                                <DropdownMenuItem onClick={() => setMarketplaceCategory("speed")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceCategory === "speed" ? "bg-white/20" : ""}`}>
-                                  <span>Speed</span>
+                                <DropdownMenuItem onClick={() => setMarketplaceCategory("accessories")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceCategory === "accessories" ? "bg-white/20" : ""}`}>
+                                  <span>Accessories</span>
                                 </DropdownMenuItem>
-                                <DropdownMenuItem onClick={() => setMarketplaceCategory("defense")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceCategory === "defense" ? "bg-white/20" : ""}`}>
-                                  <span>Defense</span>
+                                <DropdownMenuItem onClick={() => setMarketplaceCategory("emotes")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceCategory === "emotes" ? "bg-white/20" : ""}`}>
+                                  <span>Emotes</span>
                                 </DropdownMenuItem>
-                                <DropdownMenuItem onClick={() => setMarketplaceCategory("assault")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceCategory === "assault" ? "bg-white/20" : ""}`}>
-                                  <span>Assault</span>
+                                <DropdownMenuItem onClick={() => setMarketplaceCategory("packs")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceCategory === "packs" ? "bg-white/20" : ""}`}>
+                                  <span>Packs</span>
                                 </DropdownMenuItem>
                                 </DropdownMenuContent>
                               </DropdownMenu>
