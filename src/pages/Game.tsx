@@ -50,9 +50,9 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
   const prices = getMarketplacePrices(player.name, 'player');
   
   const sizeClasses = {
-    small: { coin: 'w-3 h-3', text: 'text-xs', label: 'text-[10px]' },
-    medium: { coin: 'w-4 h-4', text: 'text-sm', label: 'text-xs' },
-    large: { coin: 'w-5 h-5', text: 'text-lg', label: 'text-sm' }
+    small: { coin: 'w-3 h-3 md:w-3.5 md:h-3.5 md:-ml-1', text: 'text-xs', label: 'text-[10px]' },
+    medium: { coin: 'w-4 h-4 md:w-5 md:h-5 md:-ml-1', text: 'text-sm', label: 'text-xs' },
+    large: { coin: 'w-5 h-5 md:w-6 md:h-6 md:-ml-1', text: 'text-lg', label: 'text-sm' }
   };
 
   const { coin, text, label } = sizeClasses[size];
