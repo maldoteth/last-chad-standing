@@ -174,6 +174,7 @@ const Game = () => {
   const fightersCarouselRef = useRef<StoreCarouselRef>(null);
   const accessoriesCarouselRef = useRef<StoreCarouselRef>(null);
   const emotesCarouselRef = useRef<StoreCarouselRef>(null);
+  const packsCarouselRef = useRef<StoreCarouselRef>(null);
   const desktopFightersCarouselRef = useRef<StoreCarouselRef>(null);
   const desktopAccessoriesCarouselRef = useRef<StoreCarouselRef>(null);
   const desktopMobilityCarouselRef = useRef<StoreCarouselRef>(null);
@@ -1789,10 +1790,143 @@ const Game = () => {
                            </GlowCard>
                          )}
                        />
-                     </CardContent>
-                   </Card>}
-                 </div>
-               </div>}
+                      </CardContent>
+                    </Card>}
+
+                    {/* Packs Category */}
+                    {(selectedCategory === "all" || selectedCategory === "packs") && <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                     <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
+                     <div className="absolute inset-0" style={{
+                       backgroundImage: `
+                         linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
+                         linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
+                       `,
+                       backgroundSize: '4px 4px'
+                     }} />
+                      <CardHeader className="relative z-10">
+                        <CardTitle className="flex items-center justify-between text-white">
+                          <span>Packs</span>
+                          <div className="flex space-x-1">
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => packsCarouselRef.current?.scrollToPrevious()}
+                              className="h-6 w-6 p-0 text-white hover:bg-white/20"
+                            >
+                              <ChevronLeft className="h-4 w-4" />
+                            </Button>
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => packsCarouselRef.current?.scrollToNext()}
+                              className="h-6 w-6 p-0 text-white hover:bg-white/20"
+                            >
+                              <ChevronRight className="h-4 w-4" />
+                            </Button>
+                          </div>
+                        </CardTitle>
+                      </CardHeader>
+                       <CardContent>
+                         <StoreCarousel
+                           ref={packsCarouselRef}
+                           items={filterItemsByRarity([{
+                            name: "Silver Pack",
+                            price: 1000,
+                            rarity: "silver",
+                            image: "/lovable-uploads/17c3a939-bcaa-4cdb-9b61-271b5774c7e2.png"
+                          }, {
+                            name: "Gold Pack",
+                            price: 2000,
+                            rarity: "gold",
+                            image: "/lovable-uploads/291c5734-f144-47b0-9f49-915999e921b0.png"
+                          }, {
+                            name: "EO Summer Pack",
+                            price: 3500,
+                            rarity: "special",
+                            image: "/lovable-uploads/2149e9ad-919f-49ea-8be4-90f190387d39.png"
+                          }, {
+                            name: "Wild West Pack",
+                            price: 5000,
+                            rarity: "special",
+                            image: "/lovable-uploads/5cf8ad93-f292-4e4c-b53c-eb0c4bc0f7be.png"
+                          }, {
+                            name: "Platinum Pack",
+                            price: 4500,
+                            rarity: "special",
+                            image: "/lovable-uploads/ef3aca91-a372-4313-aa94-3c2dcf946dd6.png"
+                          }, {
+                            name: "Diamond Pack",
+                            price: 5000,
+                            rarity: "special",
+                            image: "/lovable-uploads/ba9c646a-45e6-4ab3-9b25-1f069d27960b.png"
+                          }, {
+                            name: "Premium Pack",
+                            price: 2800,
+                            rarity: "gold",
+                            image: "/lovable-uploads/1615e7da-29d5-454e-a2fe-57f5abf91d56.png"
+                          }, {
+                            name: "Starter Pack",
+                            price: 500,
+                            rarity: "green",
+                            image: "/lovable-uploads/ac3e1f52-ba21-4588-9051-87eef47caf5c.png"
+                          }])}
+                            renderItem={(item, idx) => (
+                              <GlowCard key={idx} className="cursor-pointer">
+                               <div className="p-3">
+                                 <div className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden flex items-center justify-center">
+                                    <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+                                 </div>
+                                 <h3 className="font-semibold text-xs text-white mb-1">{item.name}</h3>
+                                 <div className="flex items-center justify-between">
+                                   <div className="flex items-center space-x-1">
+                                     <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
+                                     <span className="text-xs font-bold text-white">{item.price.toLocaleString()}</span>
+                                   </div>
+                                   <Drawer>
+                                     <DrawerTrigger asChild>
+                                       <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
+                                        <ShoppingBag className={`${isMobile ? 'h-3 w-3' : 'mr-1 h-2 w-2'}`} />
+                                        {!isMobile && "Buy"}
+                                       </Button>
+                                     </DrawerTrigger>
+                                     <DrawerContent className="bg-black/10 backdrop-blur-md border-t border-white/20 text-white transition-all duration-300">
+                                       <DrawerHeader>
+                                         <DrawerTitle className="text-white text-center">Purchase {item.name}</DrawerTitle>
+                                       </DrawerHeader>
+                                       <div className="p-4 space-y-3">
+                                         <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => toast({
+                                         title: "Coming Soon",
+                                         description: "Coin purchases coming soon!",
+                                         duration: 3000
+                                       })}>
+                                           <Coins className="mr-2 h-4 w-4" />
+                                           Buy With Coins
+                                         </Button>
+                                         <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => toast({
+                                         title: "Coming Soon",
+                                         description: "Card payments coming soon!",
+                                         duration: 3000
+                                       })}>
+                                           <CreditCard className="mr-2 h-4 w-4" />
+                                           Buy with Card
+                                         </Button>
+                                         <DrawerClose asChild>
+                                           <Button variant="outline" className="w-full border-white/20 text-white hover:bg-white/10 hover:text-white">
+                                             Cancel
+                                           </Button>
+                                         </DrawerClose>
+                                       </div>
+                                     </DrawerContent>
+                                   </Drawer>
+                                 </div>
+                               </div>
+                             </GlowCard>
+                            )}
+                         />
+                         </CardContent>
+                     </Card>}
+                  </div>
+                </div>}
 
             {activeTab === "market" && <div className="p-4 space-y-6">
                 {/* Market Header */}
