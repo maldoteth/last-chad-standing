@@ -3626,44 +3626,6 @@ const Game = () => {
                                 <span className="text-lg font-bold text-white">{player.price.toLocaleString()}</span>
                               </div>
                             </div>
-                             <div className="flex items-center justify-between">
-                               <div>
-                                 <p className="text-xs text-gray-500">Last sale: {player.lastSale.toLocaleString()}</p>
-                               </div>
-                               <div className="flex items-center space-x-3">
-                                <div className={`flex items-center space-x-1 ${player.trend === 'up' ? 'text-green-400' : 'text-red-400'}`}>
-                                  {player.trend === 'up' ? <ArrowUpRight className="w-4 h-4" /> : <ArrowDownRight className="w-4 h-4" />}
-                                  <span className="text-sm font-medium">
-                                    {((player.price - player.lastSale) / player.lastSale * 100).toFixed(1)}%
-                                  </span>
-                                </div>
-                                <DropdownMenu>
-                                  <DropdownMenuTrigger asChild>
-                                    <Button variant="outline" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20">
-                                      Buy Now
-                                    </Button>
-                                  </DropdownMenuTrigger>
-                                  <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
-                                    <DropdownMenuItem onClick={() => toast({
-                                    title: "Coming Soon",
-                                    description: "Coin purchases coming soon!",
-                                    duration: 3000
-                                  })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
-                                      <Coins className="w-4 h-4" />
-                                      <span>Buy With Coins</span>
-                                    </DropdownMenuItem>
-                                    <DropdownMenuItem onClick={() => toast({
-                                    title: "Coming Soon",
-                                    description: "Card payments coming soon!",
-                                    duration: 3000
-                                  })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
-                                      <CreditCard className="w-4 h-4" />
-                                      <span>Buy with Card</span>
-                                    </DropdownMenuItem>
-                                  </DropdownMenuContent>
-                                </DropdownMenu>
-                              </div>
-                            </div>
                           </div>
                         </div>)}
                     </div>
