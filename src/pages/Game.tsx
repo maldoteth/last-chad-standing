@@ -699,7 +699,7 @@ const Game = () => {
       <div className="lg:flex lg:min-h-[calc(100vh-80px)]">
         
         {/* Mobile: Stack everything vertically */}
-        <div className="lg:hidden overflow-y-auto max-h-[calc(100vh-140px)] pb-6">
+        <div className="lg:hidden overflow-y-auto max-h-[calc(100vh-140px)] pb-2">
             {activeTab === "home" && <>
                 {/* Hero Card - Portrait oriented for mobile */}
                 <div className="p-4">
