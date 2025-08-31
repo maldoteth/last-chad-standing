@@ -1953,7 +1953,7 @@ const Game = () => {
                     <CardContent className="p-4 relative z-10">
                       <div className="flex items-center space-x-2 mb-2">
                         <BarChart3 className="w-4 h-4 text-white" />
-                        <span className="text-xs font-medium text-white">Market Cap</span>
+                        <span className="text-xs font-medium text-white">Total Market Value</span>
                       </div>
                       <div className="space-y-1">
                         <div className="flex items-center space-x-1">
