@@ -50,104 +50,81 @@ const getTierIcon = (xp: number): string => {
 // Function to render marketplace prices (bid/ask)
 const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: string, itemType: string) => any, size: 'small' | 'medium' | 'large' = 'medium', onSellClick?: () => void, onBuyClick?: () => void) => {
   const prices = getMarketplacePrices(player.name, 'player');
-  
   const sizeClasses = {
-    small: { coin: 'w-3 h-3 md:w-4.5 md:h-4.5 md:-ml-1', text: 'text-xs md:text-base', label: 'text-[10px] md:text-sm' },
-    medium: { coin: 'w-4 h-4 md:w-5 md:h-5 md:-ml-1', text: 'text-sm md:text-sm', label: 'text-xs md:text-xs' },
-    large: { coin: 'w-5 h-5 md:w-7.5 md:h-7.5 md:-ml-1', text: 'text-lg md:text-xl', label: 'text-sm md:text-lg' }
+    small: {
+      coin: 'w-3 h-3 md:w-4.5 md:h-4.5 md:-ml-1',
+      text: 'text-xs md:text-base',
+      label: 'text-[10px] md:text-sm'
+    },
+    medium: {
+      coin: 'w-4 h-4 md:w-5 md:h-5 md:-ml-1',
+      text: 'text-sm md:text-sm',
+      label: 'text-xs md:text-xs'
+    },
+    large: {
+      coin: 'w-5 h-5 md:w-7.5 md:h-7.5 md:-ml-1',
+      text: 'text-lg md:text-xl',
+      label: 'text-sm md:text-lg'
+    }
   };
-
-  const { coin, text, label } = sizeClasses[size];
-
-  if (!prices.hasListings || (!prices.bestSellPrice && !prices.bestBuyPrice)) {
+  const {
+    coin,
+    text,
+    label
+  } = sizeClasses[size];
+  if (!prices.hasListings || !prices.bestSellPrice && !prices.bestBuyPrice) {
     // Generate mock bid/ask prices when no real listings exist
     const mockSellPrice = Math.round(player.price * 1.15);
     const mockBuyPrice = Math.round(player.price * 0.85);
-    
-    return (
-      <div className="flex items-start space-x-2">
+    return <div className="flex items-start space-x-2">
          <div className="flex flex-col">
           <div className="flex items-center space-x-1">
             <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className={coin} />
-            <span 
-              className={`${text} font-bold text-red-400 cursor-pointer hover:text-red-300 transition-colors`}
-              onClick={() => onSellClick?.()}
-            >
+            <span className={`${text} font-bold text-red-400 cursor-pointer hover:text-red-300 transition-colors`} onClick={() => onSellClick?.()}>
               {formatNumberWithAbbreviation(mockBuyPrice)}
             </span>
           </div>
           <div className="flex justify-center ml-6">
-            <span 
-              className={`${label} text-red-400 font-medium cursor-pointer hover:text-red-300 transition-colors`}
-              onClick={() => onSellClick?.()}
-            >
+            <span className={`${label} text-red-400 font-medium cursor-pointer hover:text-red-300 transition-colors`} onClick={() => onSellClick?.()}>
               sell
             </span>
           </div>
         </div>
         <span className={`${text} text-white/60`}>|</span>
         <div className="flex flex-col items-center">
-          <span 
-            className={`${text} font-bold text-green-400 cursor-pointer hover:text-green-300 transition-colors`}
-            onClick={() => onBuyClick?.()}
-          >
+          <span className={`${text} font-bold text-green-400 cursor-pointer hover:text-green-300 transition-colors`} onClick={() => onBuyClick?.()}>
             {formatNumberWithAbbreviation(mockSellPrice)}
           </span>
-          <span 
-            className={`${label} text-green-400 font-medium cursor-pointer hover:text-green-300 transition-colors`}
-            onClick={() => onBuyClick?.()}
-          >
+          <span className={`${label} text-green-400 font-medium cursor-pointer hover:text-green-300 transition-colors`} onClick={() => onBuyClick?.()}>
             buy
           </span>
         </div>
-      </div>
-    );
+      </div>;
   }
-
-  return (
-    <div className="flex items-start space-x-2">
-      {prices.bestBuyPrice && (
-         <div className="flex flex-col">
+  return <div className="flex items-start space-x-2">
+      {prices.bestBuyPrice && <div className="flex flex-col">
           <div className="flex items-center space-x-1">
             <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className={coin} />
-            <span 
-              className={`${text} font-bold text-red-400 cursor-pointer hover:text-red-300 transition-colors`}
-              onClick={() => onSellClick?.()}
-            >
+            <span className={`${text} font-bold text-red-400 cursor-pointer hover:text-red-300 transition-colors`} onClick={() => onSellClick?.()}>
               {formatNumberWithAbbreviation(prices.bestBuyPrice)}
             </span>
           </div>
           <div className="flex justify-center ml-6">
-            <span 
-              className={`${label} text-red-400 font-medium cursor-pointer hover:text-red-300 transition-colors`}
-              onClick={() => onSellClick?.()}
-            >
+            <span className={`${label} text-red-400 font-medium cursor-pointer hover:text-red-300 transition-colors`} onClick={() => onSellClick?.()}>
               sell
             </span>
           </div>
-        </div>
-      )}
-      {prices.bestBuyPrice && prices.bestSellPrice && (
-        <span className={`${text} text-white/60`}>|</span>
-      )}
-      {prices.bestSellPrice && (
-        <div className="flex flex-col items-center">
-          <span 
-            className={`${text} font-bold text-green-400 cursor-pointer hover:text-green-300 transition-colors`}
-            onClick={() => onBuyClick?.()}
-          >
+        </div>}
+      {prices.bestBuyPrice && prices.bestSellPrice && <span className={`${text} text-white/60`}>|</span>}
+      {prices.bestSellPrice && <div className="flex flex-col items-center">
+          <span className={`${text} font-bold text-green-400 cursor-pointer hover:text-green-300 transition-colors`} onClick={() => onBuyClick?.()}>
             {formatNumberWithAbbreviation(prices.bestSellPrice)}
           </span>
-          <span 
-            className={`${label} text-green-400 font-medium cursor-pointer hover:text-green-300 transition-colors`}
-            onClick={() => onBuyClick?.()}
-          >
+          <span className={`${label} text-green-400 font-medium cursor-pointer hover:text-green-300 transition-colors`} onClick={() => onBuyClick?.()}>
             buy
           </span>
-        </div>
-      )}
-    </div>
-  );
+        </div>}
+    </div>;
 };
 const Game = () => {
   const [activeTab, setActiveTab] = useState("home");
@@ -201,7 +178,9 @@ const Game = () => {
     createProfile,
     fetchProfile
   } = useProfile();
-  const { getMarketplacePrices } = useMarketplace();
+  const {
+    getMarketplacePrices
+  } = useMarketplace();
 
   // Initialize user balance and profile on login
   useEffect(() => {
@@ -553,7 +532,6 @@ const Game = () => {
     if (category === "all") return players;
     return players.filter(player => player.position.toLowerCase() === category.toLowerCase());
   };
-
   const filterMarketplaceByRarity = (players: any[], rarity: string) => {
     if (rarity === "all") return players;
     // Since we don't have rarity data for players, we'll mock it based on price ranges for now
@@ -564,24 +542,12 @@ const Game = () => {
     if (rarity === "special") return players.filter(player => player.price > 12000);
     return players;
   };
-
   const filterMarketplaceBySearch = (players: any[], search: string) => {
     if (!search.trim()) return players;
     const searchLower = search.toLowerCase();
-    return players.filter(player => 
-      player.name.toLowerCase().includes(searchLower) ||
-      player.team.toLowerCase().includes(searchLower) ||
-      player.position.toLowerCase().includes(searchLower)
-    );
+    return players.filter(player => player.name.toLowerCase().includes(searchLower) || player.team.toLowerCase().includes(searchLower) || player.position.toLowerCase().includes(searchLower));
   };
-
-  const filteredMarketplacePlayers = filterMarketplaceBySearch(
-    filterMarketplaceByRarity(
-      filterMarketplaceByCategory(allPlayers, marketplaceCategory),
-      marketplaceRarity
-    ),
-    searchTerm
-  );
+  const filteredMarketplacePlayers = filterMarketplaceBySearch(filterMarketplaceByRarity(filterMarketplaceByCategory(allPlayers, marketplaceCategory), marketplaceRarity), searchTerm);
 
   // Debug logging for activeTab changes
   console.log('Current activeTab:', activeTab);
@@ -597,18 +563,18 @@ const Game = () => {
     } else {
       setActiveTab(tabId);
       console.log('Setting activeTab to:', tabId);
-      
+
       // Reset scroll position to top when switching tabs
       setTimeout(() => {
         // Reset main window scroll
         window.scrollTo(0, 0);
-        
+
         // Reset mobile/tablet scroll containers
         const mobileScrollContainers = document.querySelectorAll('.overflow-y-auto');
         mobileScrollContainers.forEach(container => {
           container.scrollTop = 0;
         });
-        
+
         // Reset desktop ScrollArea containers
         const scrollAreas = document.querySelectorAll('[data-radix-scroll-area-viewport]');
         scrollAreas.forEach(viewport => {
@@ -1425,13 +1391,13 @@ const Game = () => {
                           {/* Navigation arrows for carousel - only show when more than 4 items */}
                           <div className="flex items-center space-x-1">
                             <Button variant="ghost" size="sm" className="h-6 w-6 p-0 text-white/70 hover:text-white hover:bg-white/10" onClick={() => {
-                              fightersCarouselRef.current?.scrollToPrevious();
-                            }}>
+                        fightersCarouselRef.current?.scrollToPrevious();
+                      }}>
                               <ChevronLeft className="h-4 w-4" />
                             </Button>
                             <Button variant="ghost" size="sm" className="h-6 w-6 p-0 text-white/70 hover:text-white hover:bg-white/10" onClick={() => {
-                              fightersCarouselRef.current?.scrollToNext();
-                            }}>
+                        fightersCarouselRef.current?.scrollToNext();
+                      }}>
                               <ChevronRight className="h-4 w-4" />
                             </Button>
                          </div>
@@ -1440,51 +1406,47 @@ const Game = () => {
                       
                     </CardHeader>
                     <CardContent>
-                       <StoreCarousel 
-                         ref={fightersCarouselRef}
-                         items={filterItemsByRarity([{
-                    name: "The Irish King",
-                    price: 2500,
-                    rarity: "gold",
-                    image: irishKingSkin
-                  }, {
-                    name: "Stani Eagle",
-                    price: 1800,
-                    rarity: "blue",
-                    image: staniEagleSkin
-                  }, {
-                    name: "Jonesy Bones",
-                    price: 2200,
-                    rarity: "silver",
-                    image: bonesSkin
-                  }, {
-                    name: "Latin Legend",
-                    price: 1500,
-                    rarity: "green",
-                    image: latinLegendSkin
-                  }, {
-                    name: "Tarragon Southcut",
-                    price: 2800,
-                    rarity: "gold",
-                    image: "/lovable-uploads/dc6922ce-3718-474e-acac-697502a010b2.png"
-                  }, {
-                    name: "Cyber Warrior",
-                    price: 3200,
-                    rarity: "special",
-                    image: cyberWarriorSkin
-                  }, {
-                    name: "Thunder Punch",
-                    price: 1900,
-                    rarity: "blue",
-                    image: "/lovable-uploads/77a6c004-93ed-49ee-a5d0-6056ee852612.png"
-                  }, {
-                    name: "Ice Breaker",
-                    price: 2400,
-                    rarity: "silver",
-                    image: "/lovable-uploads/8c2f941a-58db-43db-9b99-afb13cd3c36b.png"
-                  }])}
-                          renderItem={(item, idx) => (
-                            <GlowCard key={idx} className="cursor-pointer">
+                       <StoreCarousel ref={fightersCarouselRef} items={filterItemsByRarity([{
+                  name: "The Irish King",
+                  price: 2500,
+                  rarity: "gold",
+                  image: irishKingSkin
+                }, {
+                  name: "Stani Eagle",
+                  price: 1800,
+                  rarity: "blue",
+                  image: staniEagleSkin
+                }, {
+                  name: "Jonesy Bones",
+                  price: 2200,
+                  rarity: "silver",
+                  image: bonesSkin
+                }, {
+                  name: "Latin Legend",
+                  price: 1500,
+                  rarity: "green",
+                  image: latinLegendSkin
+                }, {
+                  name: "Tarragon Southcut",
+                  price: 2800,
+                  rarity: "gold",
+                  image: "/lovable-uploads/dc6922ce-3718-474e-acac-697502a010b2.png"
+                }, {
+                  name: "Cyber Warrior",
+                  price: 3200,
+                  rarity: "special",
+                  image: cyberWarriorSkin
+                }, {
+                  name: "Thunder Punch",
+                  price: 1900,
+                  rarity: "blue",
+                  image: "/lovable-uploads/77a6c004-93ed-49ee-a5d0-6056ee852612.png"
+                }, {
+                  name: "Ice Breaker",
+                  price: 2400,
+                  rarity: "silver",
+                  image: "/lovable-uploads/8c2f941a-58db-43db-9b99-afb13cd3c36b.png"
+                }])} renderItem={(item, idx) => <GlowCard key={idx} className="cursor-pointer">
                               <div className="p-3">
                                <div className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden">
                                  <img src={item.image} alt={item.name} className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" />
@@ -1508,18 +1470,18 @@ const Game = () => {
                                     </DrawerHeader>
                                     <div className="p-4 space-y-3">
                                       <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => toast({
-                                title: "Coming Soon",
-                                description: "Coin purchases coming soon!",
-                                duration: 3000
-                              })}>
+                              title: "Coming Soon",
+                              description: "Coin purchases coming soon!",
+                              duration: 3000
+                            })}>
                                         <Coins className="mr-2 h-4 w-4" />
                                         Buy With Coins
                                       </Button>
                                       <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => toast({
-                                title: "Coming Soon",
-                                description: "Card payments coming soon!",
-                                duration: 3000
-                              })}>
+                              title: "Coming Soon",
+                              description: "Card payments coming soon!",
+                              duration: 3000
+                            })}>
                                         <CreditCard className="mr-2 h-4 w-4" />
                                         Buy with Card
                                       </Button>
@@ -1533,9 +1495,7 @@ const Game = () => {
                                 </Drawer>
                                </div>
                              </div>
-                           </GlowCard>
-                         )}
-                       />
+                           </GlowCard>} />
                      </CardContent>
                    </Card>}
 
@@ -1556,13 +1516,13 @@ const Game = () => {
                           {/* Navigation arrows for carousel - only show when more than 4 items */}
                           <div className="flex items-center space-x-1">
                             <Button variant="ghost" size="sm" className="h-6 w-6 p-0 text-white/70 hover:text-white hover:bg-white/10" onClick={() => {
-                              accessoriesCarouselRef.current?.scrollToPrevious();
-                            }}>
+                        accessoriesCarouselRef.current?.scrollToPrevious();
+                      }}>
                               <ChevronLeft className="h-4 w-4" />
                             </Button>
                             <Button variant="ghost" size="sm" className="h-6 w-6 p-0 text-white/70 hover:text-white hover:bg-white/10" onClick={() => {
-                              accessoriesCarouselRef.current?.scrollToNext();
-                            }}>
+                        accessoriesCarouselRef.current?.scrollToNext();
+                      }}>
                               <ChevronRight className="h-4 w-4" />
                             </Button>
                          </div>
@@ -1571,51 +1531,47 @@ const Game = () => {
                       
                     </CardHeader>
                     <CardContent>
-                       <StoreCarousel 
-                         ref={accessoriesCarouselRef}
-                         items={filterItemsByRarity([{
-                    name: "Red Wing Suit",
-                    price: 600,
-                    rarity: "blue",
-                    image: "/lovable-uploads/2eec4a9a-97d3-4ba4-9508-2eeef0011139.png"
-                  }, {
-                    name: "Blue Wing Suit",
-                    price: 450,
-                    rarity: "green",
-                    image: "/lovable-uploads/1efc1553-007a-4b38-a982-79d9f5abbfa1.png"
-                  }, {
-                    name: "White Base Vest",
-                    price: 750,
-                    rarity: "special",
-                    image: "/lovable-uploads/508d1509-e761-46c6-9f3a-f70e256f5a52.png"
-                  }, {
-                    name: "Grey Base Vest",
-                    price: 550,
-                    rarity: "silver",
-                    image: "/lovable-uploads/91375d1a-e829-4716-b3b6-833b58355bd9.png"
-                  }, {
-                    name: "Combat Helmet",
-                    price: 800,
-                    rarity: "gold",
-                    image: "/lovable-uploads/896892f1-7ebc-4852-acea-80dcdbf7c545.png"
-                  }, {
-                    name: "Tactical Gloves",
-                    price: 350,
-                    rarity: "green",
-                    image: "/lovable-uploads/4c80b2cf-0ea7-49a2-96b8-58ecbfa7623a.png"
-                  }, {
-                    name: "Elite Armor",
-                    price: 1200,
-                    rarity: "special",
-                    image: "/lovable-uploads/c4290bdc-f68b-45db-bf53-f9551d2cb16f.png"
-                  }, {
-                    name: "Battle Boots",
-                    price: 650,
-                    rarity: "blue",
-                    image: "/lovable-uploads/7d84dfb4-4db3-4adb-87f0-36f33c0f8daa.png"
-                  }])}
-                          renderItem={(item, idx) => (
-                            <GlowCard key={idx} className="cursor-pointer">
+                       <StoreCarousel ref={accessoriesCarouselRef} items={filterItemsByRarity([{
+                  name: "Red Wing Suit",
+                  price: 600,
+                  rarity: "blue",
+                  image: "/lovable-uploads/2eec4a9a-97d3-4ba4-9508-2eeef0011139.png"
+                }, {
+                  name: "Blue Wing Suit",
+                  price: 450,
+                  rarity: "green",
+                  image: "/lovable-uploads/1efc1553-007a-4b38-a982-79d9f5abbfa1.png"
+                }, {
+                  name: "White Base Vest",
+                  price: 750,
+                  rarity: "special",
+                  image: "/lovable-uploads/508d1509-e761-46c6-9f3a-f70e256f5a52.png"
+                }, {
+                  name: "Grey Base Vest",
+                  price: 550,
+                  rarity: "silver",
+                  image: "/lovable-uploads/91375d1a-e829-4716-b3b6-833b58355bd9.png"
+                }, {
+                  name: "Combat Helmet",
+                  price: 800,
+                  rarity: "gold",
+                  image: "/lovable-uploads/896892f1-7ebc-4852-acea-80dcdbf7c545.png"
+                }, {
+                  name: "Tactical Gloves",
+                  price: 350,
+                  rarity: "green",
+                  image: "/lovable-uploads/4c80b2cf-0ea7-49a2-96b8-58ecbfa7623a.png"
+                }, {
+                  name: "Elite Armor",
+                  price: 1200,
+                  rarity: "special",
+                  image: "/lovable-uploads/c4290bdc-f68b-45db-bf53-f9551d2cb16f.png"
+                }, {
+                  name: "Battle Boots",
+                  price: 650,
+                  rarity: "blue",
+                  image: "/lovable-uploads/7d84dfb4-4db3-4adb-87f0-36f33c0f8daa.png"
+                }])} renderItem={(item, idx) => <GlowCard key={idx} className="cursor-pointer">
                               <div className="p-3">
                                <div className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden">
                                  <img src={item.image} alt={item.name} className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" />
@@ -1639,10 +1595,10 @@ const Game = () => {
                                     </DrawerHeader>
                                     <div className="p-4 space-y-3">
                                       <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => toast({
-                                title: "Coming Soon",
-                                description: "Coin purchases coming soon!",
-                                duration: 3000
-                              })}>
+                              title: "Coming Soon",
+                              description: "Coin purchases coming soon!",
+                              duration: 3000
+                            })}>
                                         <Coins className="mr-2 h-4 w-4" />
                                         Buy With Coins
                                       </Button>
@@ -1660,9 +1616,7 @@ const Game = () => {
                                 </Drawer>
                                </div>
                              </div>
-                           </GlowCard>
-                         )}
-                       />
+                           </GlowCard>} />
                      </CardContent>
                    </Card>}
 
@@ -1683,13 +1637,13 @@ const Game = () => {
                           {/* Navigation arrows for carousel - only show when more than 4 items */}
                           <div className="flex items-center space-x-1">
                             <Button variant="ghost" size="sm" className="h-6 w-6 p-0 text-white/70 hover:text-white hover:bg-white/10" onClick={() => {
-                              emotesCarouselRef.current?.scrollToPrevious();
-                            }}>
+                        emotesCarouselRef.current?.scrollToPrevious();
+                      }}>
                               <ChevronLeft className="h-4 w-4" />
                             </Button>
                             <Button variant="ghost" size="sm" className="h-6 w-6 p-0 text-white/70 hover:text-white hover:bg-white/10" onClick={() => {
-                              emotesCarouselRef.current?.scrollToNext();
-                            }}>
+                        emotesCarouselRef.current?.scrollToNext();
+                      }}>
                               <ChevronRight className="h-4 w-4" />
                             </Button>
                          </div>
@@ -1698,51 +1652,47 @@ const Game = () => {
                       
                     </CardHeader>
                     <CardContent>
-                       <StoreCarousel 
-                         ref={emotesCarouselRef}
-                         items={filterItemsByRarity([{
-                    name: "Flex",
-                    price: 800,
-                    rarity: "blue",
-                    image: "/lovable-uploads/f52e83c2-28b7-417e-90ac-757255d1759f.png"
-                  }, {
-                    name: "Fists Up",
-                    price: 1800,
-                    rarity: "gold",
-                    image: "/lovable-uploads/370bd874-ad5c-467d-b844-55688b1a0f9a.png"
-                  }, {
-                    name: "Squeaky Dance",
-                    price: 2500,
-                    rarity: "special",
-                    image: "/lovable-uploads/5c8c027e-3baf-4550-96a9-ba0715d11506.png"
-                  }, {
-                    name: "u want sum?",
-                    price: 1500,
-                    rarity: "gold",
-                    image: "/lovable-uploads/30d419b4-79a9-459c-b37b-42099ffd6273.png"
-                  }, {
-                    name: "Victory Dance",
-                    price: 1200,
-                    rarity: "silver",
-                    image: "/lovable-uploads/8090c672-9fc6-4634-ad28-0629a1a7f181.png"
-                  }, {
-                    name: "Taunt",
-                    price: 950,
-                    rarity: "blue",
-                    image: "/lovable-uploads/13bff6a8-5c37-4ca1-928f-3b3c98952224.png"
-                  }, {
-                    name: "Power Pose",
-                    price: 1600,
-                    rarity: "gold",
-                    image: "/lovable-uploads/c076819c-8944-483c-9fd4-336da5ebba11.png"
-                  }, {
-                    name: "Ultimate Flex",
-                    price: 3000,
-                    rarity: "special",
-                    image: "/lovable-uploads/dd15acda-3123-4e95-916c-ba6ef8db31fd.png"
-                  }])}
-                          renderItem={(item, idx) => (
-                            <GlowCard key={idx} className="cursor-pointer">
+                       <StoreCarousel ref={emotesCarouselRef} items={filterItemsByRarity([{
+                  name: "Flex",
+                  price: 800,
+                  rarity: "blue",
+                  image: "/lovable-uploads/f52e83c2-28b7-417e-90ac-757255d1759f.png"
+                }, {
+                  name: "Fists Up",
+                  price: 1800,
+                  rarity: "gold",
+                  image: "/lovable-uploads/370bd874-ad5c-467d-b844-55688b1a0f9a.png"
+                }, {
+                  name: "Squeaky Dance",
+                  price: 2500,
+                  rarity: "special",
+                  image: "/lovable-uploads/5c8c027e-3baf-4550-96a9-ba0715d11506.png"
+                }, {
+                  name: "u want sum?",
+                  price: 1500,
+                  rarity: "gold",
+                  image: "/lovable-uploads/30d419b4-79a9-459c-b37b-42099ffd6273.png"
+                }, {
+                  name: "Victory Dance",
+                  price: 1200,
+                  rarity: "silver",
+                  image: "/lovable-uploads/8090c672-9fc6-4634-ad28-0629a1a7f181.png"
+                }, {
+                  name: "Taunt",
+                  price: 950,
+                  rarity: "blue",
+                  image: "/lovable-uploads/13bff6a8-5c37-4ca1-928f-3b3c98952224.png"
+                }, {
+                  name: "Power Pose",
+                  price: 1600,
+                  rarity: "gold",
+                  image: "/lovable-uploads/c076819c-8944-483c-9fd4-336da5ebba11.png"
+                }, {
+                  name: "Ultimate Flex",
+                  price: 3000,
+                  rarity: "special",
+                  image: "/lovable-uploads/dd15acda-3123-4e95-916c-ba6ef8db31fd.png"
+                }])} renderItem={(item, idx) => <GlowCard key={idx} className="cursor-pointer">
                               <div className="p-3">
                                <div className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden flex items-center justify-center">
                                   {item.image.startsWith('/') || item.image.startsWith('http') ? <img src={item.image} alt={item.name} className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" /> : <div className="text-4xl hover:scale-110 transition-transform duration-300">{item.image}</div>}
@@ -1766,10 +1716,10 @@ const Game = () => {
                                     </DrawerHeader>
                                     <div className="p-4 space-y-3">
                                       <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => toast({
-                                title: "Coming Soon",
-                                description: "Coin purchases coming soon!",
-                                duration: 3000
-                              })}>
+                              title: "Coming Soon",
+                              description: "Coin purchases coming soon!",
+                              duration: 3000
+                            })}>
                                         <Coins className="mr-2 h-4 w-4" />
                                         Buy With Coins
                                       </Button>
@@ -1787,9 +1737,7 @@ const Game = () => {
                                 </Drawer>
                                </div>
                              </div>
-                           </GlowCard>
-                         )}
-                       />
+                           </GlowCard>} />
                       </CardContent>
                     </Card>}
 
@@ -1797,81 +1745,67 @@ const Game = () => {
                     {(selectedCategory === "all" || selectedCategory === "packs") && <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
                      <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                      <div className="absolute inset-0" style={{
-                       backgroundImage: `
+                backgroundImage: `
                          linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
                          linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
                        `,
-                       backgroundSize: '4px 4px'
-                     }} />
+                backgroundSize: '4px 4px'
+              }} />
                       <CardHeader className="relative z-10">
                         <CardTitle className="flex items-center justify-between text-white">
                           <span>Packs</span>
                           <div className="flex space-x-1">
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              onClick={() => packsCarouselRef.current?.scrollToPrevious()}
-                              className="h-6 w-6 p-0 text-white hover:bg-white/20"
-                            >
+                            <Button variant="ghost" size="sm" onClick={() => packsCarouselRef.current?.scrollToPrevious()} className="h-6 w-6 p-0 text-white hover:bg-white/20">
                               <ChevronLeft className="h-4 w-4" />
                             </Button>
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              onClick={() => packsCarouselRef.current?.scrollToNext()}
-                              className="h-6 w-6 p-0 text-white hover:bg-white/20"
-                            >
+                            <Button variant="ghost" size="sm" onClick={() => packsCarouselRef.current?.scrollToNext()} className="h-6 w-6 p-0 text-white hover:bg-white/20">
                               <ChevronRight className="h-4 w-4" />
                             </Button>
                           </div>
                         </CardTitle>
                       </CardHeader>
                        <CardContent>
-                         <StoreCarousel
-                           ref={packsCarouselRef}
-                           items={filterItemsByRarity([{
-                            name: "Silver Pack",
-                            price: 1000,
-                            rarity: "silver",
-                            image: "/lovable-uploads/17c3a939-bcaa-4cdb-9b61-271b5774c7e2.png"
-                          }, {
-                            name: "Gold Pack",
-                            price: 2000,
-                            rarity: "gold",
-                            image: "/lovable-uploads/291c5734-f144-47b0-9f49-915999e921b0.png"
-                          }, {
-                            name: "EO Summer Pack",
-                            price: 3500,
-                            rarity: "special",
-                            image: "/lovable-uploads/2149e9ad-919f-49ea-8be4-90f190387d39.png"
-                          }, {
-                            name: "Wild West Pack",
-                            price: 5000,
-                            rarity: "special",
-                            image: "/lovable-uploads/5cf8ad93-f292-4e4c-b53c-eb0c4bc0f7be.png"
-                          }, {
-                            name: "Platinum Pack",
-                            price: 4500,
-                            rarity: "special",
-                            image: "/lovable-uploads/ef3aca91-a372-4313-aa94-3c2dcf946dd6.png"
-                          }, {
-                            name: "Diamond Pack",
-                            price: 5000,
-                            rarity: "special",
-                            image: "/lovable-uploads/ba9c646a-45e6-4ab3-9b25-1f069d27960b.png"
-                          }, {
-                            name: "Premium Pack",
-                            price: 2800,
-                            rarity: "gold",
-                            image: "/lovable-uploads/1615e7da-29d5-454e-a2fe-57f5abf91d56.png"
-                          }, {
-                            name: "Starter Pack",
-                            price: 500,
-                            rarity: "green",
-                            image: "/lovable-uploads/ac3e1f52-ba21-4588-9051-87eef47caf5c.png"
-                          }])}
-                            renderItem={(item, idx) => (
-                              <GlowCard key={idx} className="cursor-pointer">
+                         <StoreCarousel ref={packsCarouselRef} items={filterItemsByRarity([{
+                  name: "Silver Pack",
+                  price: 1000,
+                  rarity: "silver",
+                  image: "/lovable-uploads/17c3a939-bcaa-4cdb-9b61-271b5774c7e2.png"
+                }, {
+                  name: "Gold Pack",
+                  price: 2000,
+                  rarity: "gold",
+                  image: "/lovable-uploads/291c5734-f144-47b0-9f49-915999e921b0.png"
+                }, {
+                  name: "EO Summer Pack",
+                  price: 3500,
+                  rarity: "special",
+                  image: "/lovable-uploads/2149e9ad-919f-49ea-8be4-90f190387d39.png"
+                }, {
+                  name: "Wild West Pack",
+                  price: 5000,
+                  rarity: "special",
+                  image: "/lovable-uploads/5cf8ad93-f292-4e4c-b53c-eb0c4bc0f7be.png"
+                }, {
+                  name: "Platinum Pack",
+                  price: 4500,
+                  rarity: "special",
+                  image: "/lovable-uploads/ef3aca91-a372-4313-aa94-3c2dcf946dd6.png"
+                }, {
+                  name: "Diamond Pack",
+                  price: 5000,
+                  rarity: "special",
+                  image: "/lovable-uploads/ba9c646a-45e6-4ab3-9b25-1f069d27960b.png"
+                }, {
+                  name: "Premium Pack",
+                  price: 2800,
+                  rarity: "gold",
+                  image: "/lovable-uploads/1615e7da-29d5-454e-a2fe-57f5abf91d56.png"
+                }, {
+                  name: "Starter Pack",
+                  price: 500,
+                  rarity: "green",
+                  image: "/lovable-uploads/ac3e1f52-ba21-4588-9051-87eef47caf5c.png"
+                }])} renderItem={(item, idx) => <GlowCard key={idx} className="cursor-pointer">
                                <div className="p-3">
                                  <div className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden flex items-center justify-center">
                                     <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
@@ -1895,18 +1829,18 @@ const Game = () => {
                                        </DrawerHeader>
                                        <div className="p-4 space-y-3">
                                          <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => toast({
-                                         title: "Coming Soon",
-                                         description: "Coin purchases coming soon!",
-                                         duration: 3000
-                                       })}>
+                              title: "Coming Soon",
+                              description: "Coin purchases coming soon!",
+                              duration: 3000
+                            })}>
                                            <Coins className="mr-2 h-4 w-4" />
                                            Buy With Coins
                                          </Button>
                                          <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => toast({
-                                         title: "Coming Soon",
-                                         description: "Card payments coming soon!",
-                                         duration: 3000
-                                       })}>
+                              title: "Coming Soon",
+                              description: "Card payments coming soon!",
+                              duration: 3000
+                            })}>
                                            <CreditCard className="mr-2 h-4 w-4" />
                                            Buy with Card
                                          </Button>
@@ -1920,9 +1854,7 @@ const Game = () => {
                                    </Drawer>
                                  </div>
                                </div>
-                             </GlowCard>
-                            )}
-                         />
+                             </GlowCard>} />
                          </CardContent>
                      </Card>}
                   </div>
@@ -2059,12 +1991,7 @@ const Game = () => {
                                <DrawerTitle className="text-center">Search Players</DrawerTitle>
                              </DrawerHeader>
                              <div className="px-4 pb-8">
-                               <Input
-                                 placeholder="Search players..."
-                                 value={searchTerm}
-                                 onChange={(e) => setSearchTerm(e.target.value)}
-                                 className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
-                               />
+                               <Input placeholder="Search players..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="bg-white/10 border-white/20 text-white placeholder:text-gray-400" />
                              </div>
                            </DrawerContent>
                          </Drawer>
@@ -3122,71 +3049,57 @@ const Game = () => {
                        <CardTitle className="flex items-center justify-between text-white">
                           <span>Fighters</span>
                           <div className="flex space-x-1">
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              onClick={() => desktopFightersCarouselRef.current?.scrollToPrevious()}
-                              className="h-6 w-6 p-0 text-white hover:bg-white/20"
-                            >
+                            <Button variant="ghost" size="sm" onClick={() => desktopFightersCarouselRef.current?.scrollToPrevious()} className="h-6 w-6 p-0 text-white hover:bg-white/20">
                               <ChevronLeft className="h-4 w-4" />
                             </Button>
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              onClick={() => desktopFightersCarouselRef.current?.scrollToNext()}
-                              className="h-6 w-6 p-0 text-white hover:bg-white/20"
-                            >
+                            <Button variant="ghost" size="sm" onClick={() => desktopFightersCarouselRef.current?.scrollToNext()} className="h-6 w-6 p-0 text-white hover:bg-white/20">
                               <ChevronRight className="h-4 w-4" />
                             </Button>
                           </div>
                        </CardTitle>
                      </CardHeader>
                       <CardContent>
-                        <StoreCarousel
-                          ref={desktopFightersCarouselRef}
-                          desktopMode={true}
-                          items={filterItemsByRarity([{
-                           name: "The Irish King",
-                           price: 2500,
-                           rarity: "gold",
-                           image: irishKingSkin
-                         }, {
-                           name: "Stani Eagle",
-                           price: 1800,
-                           rarity: "blue",
-                           image: staniEagleSkin
-                         }, {
-                           name: "Jonesy Bones",
-                           price: 2200,
-                           rarity: "silver",
-                           image: bonesSkin
-                         }, {
-                           name: "Latin Legend",
-                           price: 1500,
-                           rarity: "green",
-                           image: latinLegendSkin
-                         }, {
-                           name: "Cyber Warrior",
-                           price: 3000,
-                           rarity: "gold",
-                           image: cyberWarriorSkin
-                         }, {
-                           name: "Shadow Hunter",
-                           price: 2800,
-                           rarity: "blue",
-                           image: "/lovable-uploads/4c80b2cf-0ea7-49a2-96b8-58ecbfa7623a.png"
-                         }, {
-                           name: "Fire Master",
-                           price: 3500,
-                           rarity: "special",
-                           image: "/lovable-uploads/13b1e254-7a27-4fc3-8040-9882d7705c70.png"
-                         }, {
-                           name: "Ice Warrior",
-                           price: 2700,
-                           rarity: "silver",
-                           image: "/lovable-uploads/7d4ea94f-0c4d-459f-bded-b68a2bd272d6.png"
-                         }])}
-                           renderItem={(item, idx) => <GlowCard key={idx} className="text-white shadow-2xl cursor-pointer">
+                        <StoreCarousel ref={desktopFightersCarouselRef} desktopMode={true} items={filterItemsByRarity([{
+                        name: "The Irish King",
+                        price: 2500,
+                        rarity: "gold",
+                        image: irishKingSkin
+                      }, {
+                        name: "Stani Eagle",
+                        price: 1800,
+                        rarity: "blue",
+                        image: staniEagleSkin
+                      }, {
+                        name: "Jonesy Bones",
+                        price: 2200,
+                        rarity: "silver",
+                        image: bonesSkin
+                      }, {
+                        name: "Latin Legend",
+                        price: 1500,
+                        rarity: "green",
+                        image: latinLegendSkin
+                      }, {
+                        name: "Cyber Warrior",
+                        price: 3000,
+                        rarity: "gold",
+                        image: cyberWarriorSkin
+                      }, {
+                        name: "Shadow Hunter",
+                        price: 2800,
+                        rarity: "blue",
+                        image: "/lovable-uploads/4c80b2cf-0ea7-49a2-96b8-58ecbfa7623a.png"
+                      }, {
+                        name: "Fire Master",
+                        price: 3500,
+                        rarity: "special",
+                        image: "/lovable-uploads/13b1e254-7a27-4fc3-8040-9882d7705c70.png"
+                      }, {
+                        name: "Ice Warrior",
+                        price: 2700,
+                        rarity: "silver",
+                        image: "/lovable-uploads/7d4ea94f-0c4d-459f-bded-b68a2bd272d6.png"
+                      }])} renderItem={(item, idx) => <GlowCard key={idx} className="text-white shadow-2xl cursor-pointer">
                               <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
                               <CardContent className="p-4 relative z-10">
                                <div className="aspect-square bg-gray-800/50 rounded-lg mb-3 overflow-hidden">
@@ -3206,18 +3119,18 @@ const Game = () => {
                                    </DropdownMenuTrigger>
                                    <DropdownMenuContent align="start" className="w-full lg:w-full bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
                                      <DropdownMenuItem onClick={() => toast({
-                                     title: "Coming Soon",
-                                     description: "Coin purchases coming soon!",
-                                     duration: 3000
-                                   })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
+                                  title: "Coming Soon",
+                                  description: "Coin purchases coming soon!",
+                                  duration: 3000
+                                })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
                                        <Coins className="w-4 h-4" />
                                        <span>Buy With Coins</span>
                                      </DropdownMenuItem>
                                      <DropdownMenuItem onClick={() => toast({
-                                     title: "Coming Soon",
-                                     description: "Card payments coming soon!",
-                                     duration: 3000
-                                   })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
+                                  title: "Coming Soon",
+                                  description: "Card payments coming soon!",
+                                  duration: 3000
+                                })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
                                        <CreditCard className="w-4 h-4" />
                                        <span>Buy with Card</span>
                                      </DropdownMenuItem>
@@ -3225,8 +3138,7 @@ const Game = () => {
                                  </DropdownMenu>
                                </div>
                              </CardContent>
-                            </GlowCard>}
-                        />
+                            </GlowCard>} />
                        </CardContent>
                    </Card>}
 
@@ -3244,71 +3156,57 @@ const Game = () => {
                        <CardTitle className="flex items-center justify-between text-white">
                          <span>Accessories</span>
                          <div className="flex space-x-1">
-                           <Button
-                             variant="ghost"
-                             size="sm"
-                             onClick={() => desktopAccessoriesCarouselRef.current?.scrollToPrevious()}
-                             className="h-6 w-6 p-0 text-white hover:bg-white/20"
-                           >
+                           <Button variant="ghost" size="sm" onClick={() => desktopAccessoriesCarouselRef.current?.scrollToPrevious()} className="h-6 w-6 p-0 text-white hover:bg-white/20">
                              <ChevronLeft className="h-4 w-4" />
                            </Button>
-                           <Button
-                             variant="ghost"
-                             size="sm"
-                             onClick={() => desktopAccessoriesCarouselRef.current?.scrollToNext()}
-                             className="h-6 w-6 p-0 text-white hover:bg-white/20"
-                           >
+                           <Button variant="ghost" size="sm" onClick={() => desktopAccessoriesCarouselRef.current?.scrollToNext()} className="h-6 w-6 p-0 text-white hover:bg-white/20">
                              <ChevronRight className="h-4 w-4" />
                            </Button>
                          </div>
                        </CardTitle>
                      </CardHeader>
                       <CardContent>
-                        <StoreCarousel
-                          ref={desktopAccessoriesCarouselRef}
-                          desktopMode={true}
-                          items={filterItemsByRarity([{
-                           name: "Red Wing Suit",
-                           price: 600,
-                           rarity: "blue",
-                           image: "/lovable-uploads/2eec4a9a-97d3-4ba4-9508-2eeef0011139.png"
-                         }, {
-                           name: "Blue Wing Suit",
-                           price: 450,
-                           rarity: "green",
-                           image: "/lovable-uploads/1efc1553-007a-4b38-a982-79d9f5abbfa1.png"
-                         }, {
-                           name: "White Base Vest",
-                           price: 750,
-                           rarity: "special",
-                           image: "/lovable-uploads/508d1509-e761-46c6-9f3a-f70e256f5a52.png"
-                         }, {
-                           name: "Grey Base Vest",
-                           price: 550,
-                           rarity: "silver",
-                           image: "/lovable-uploads/91375d1a-e829-4716-b3b6-833b58355bd9.png"
-                         }, {
-                           name: "Black Combat Vest",
-                           price: 880,
-                           rarity: "gold",
-                           image: "/lovable-uploads/745baeae-f05a-4a2a-828f-45aed6d05972.png"
-                         }, {
-                           name: "Tactical Backpack",
-                           price: 990,
-                           rarity: "blue",
-                           image: "/lovable-uploads/8c2f941a-58db-43db-9b99-afb13cd3c36b.png"
-                         }, {
-                           name: "Stealth Boots",
-                           price: 1200,
-                           rarity: "special",
-                           image: "/lovable-uploads/77a6c004-93ed-49ee-a5d0-6056ee852612.png"
-                         }, {
-                           name: "Power Gloves",
-                           price: 800,
-                           rarity: "silver",
-                           image: "/lovable-uploads/79162f7a-0435-4ead-b016-c20194bd1b0e.png"
-                         }])}
-                           renderItem={(item, idx) => <GlowCard key={idx} className="text-white shadow-2xl cursor-pointer">
+                        <StoreCarousel ref={desktopAccessoriesCarouselRef} desktopMode={true} items={filterItemsByRarity([{
+                        name: "Red Wing Suit",
+                        price: 600,
+                        rarity: "blue",
+                        image: "/lovable-uploads/2eec4a9a-97d3-4ba4-9508-2eeef0011139.png"
+                      }, {
+                        name: "Blue Wing Suit",
+                        price: 450,
+                        rarity: "green",
+                        image: "/lovable-uploads/1efc1553-007a-4b38-a982-79d9f5abbfa1.png"
+                      }, {
+                        name: "White Base Vest",
+                        price: 750,
+                        rarity: "special",
+                        image: "/lovable-uploads/508d1509-e761-46c6-9f3a-f70e256f5a52.png"
+                      }, {
+                        name: "Grey Base Vest",
+                        price: 550,
+                        rarity: "silver",
+                        image: "/lovable-uploads/91375d1a-e829-4716-b3b6-833b58355bd9.png"
+                      }, {
+                        name: "Black Combat Vest",
+                        price: 880,
+                        rarity: "gold",
+                        image: "/lovable-uploads/745baeae-f05a-4a2a-828f-45aed6d05972.png"
+                      }, {
+                        name: "Tactical Backpack",
+                        price: 990,
+                        rarity: "blue",
+                        image: "/lovable-uploads/8c2f941a-58db-43db-9b99-afb13cd3c36b.png"
+                      }, {
+                        name: "Stealth Boots",
+                        price: 1200,
+                        rarity: "special",
+                        image: "/lovable-uploads/77a6c004-93ed-49ee-a5d0-6056ee852612.png"
+                      }, {
+                        name: "Power Gloves",
+                        price: 800,
+                        rarity: "silver",
+                        image: "/lovable-uploads/79162f7a-0435-4ead-b016-c20194bd1b0e.png"
+                      }])} renderItem={(item, idx) => <GlowCard key={idx} className="text-white shadow-2xl cursor-pointer">
                               <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
                               <CardContent className="p-4 relative z-10">
                                <div className="aspect-square bg-gray-800/50 rounded-lg mb-3 overflow-hidden">
@@ -3328,18 +3226,18 @@ const Game = () => {
                                    </DropdownMenuTrigger>
                                    <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
                                      <DropdownMenuItem onClick={() => toast({
-                                     title: "Coming Soon",
-                                     description: "Coin purchases coming soon!",
-                                     duration: 3000
-                                   })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
+                                  title: "Coming Soon",
+                                  description: "Coin purchases coming soon!",
+                                  duration: 3000
+                                })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
                                        <Coins className="w-4 h-4" />
                                        <span>Buy With Coins</span>
                                      </DropdownMenuItem>
                                      <DropdownMenuItem onClick={() => toast({
-                                     title: "Coming Soon",
-                                     description: "Card payments coming soon!",
-                                     duration: 3000
-                                   })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
+                                  title: "Coming Soon",
+                                  description: "Card payments coming soon!",
+                                  duration: 3000
+                                })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
                                        <CreditCard className="w-4 h-4" />
                                        <span>Buy with Card</span>
                                      </DropdownMenuItem>
@@ -3347,8 +3245,7 @@ const Game = () => {
                                  </DropdownMenu>
                                </div>
                              </CardContent>
-                            </GlowCard>}
-                        />
+                            </GlowCard>} />
                        </CardContent>
                    </Card>}
 
@@ -3366,71 +3263,57 @@ const Game = () => {
                        <CardTitle className="flex items-center justify-between text-white">
                          <span>Mobility</span>
                          <div className="flex space-x-1">
-                           <Button
-                             variant="ghost"
-                             size="sm"
-                             onClick={() => desktopMobilityCarouselRef.current?.scrollToPrevious()}
-                             className="h-6 w-6 p-0 text-white hover:bg-white/20"
-                           >
+                           <Button variant="ghost" size="sm" onClick={() => desktopMobilityCarouselRef.current?.scrollToPrevious()} className="h-6 w-6 p-0 text-white hover:bg-white/20">
                              <ChevronLeft className="h-4 w-4" />
                            </Button>
-                           <Button
-                             variant="ghost"
-                             size="sm"
-                             onClick={() => desktopMobilityCarouselRef.current?.scrollToNext()}
-                             className="h-6 w-6 p-0 text-white hover:bg-white/20"
-                           >
+                           <Button variant="ghost" size="sm" onClick={() => desktopMobilityCarouselRef.current?.scrollToNext()} className="h-6 w-6 p-0 text-white hover:bg-white/20">
                              <ChevronRight className="h-4 w-4" />
                            </Button>
                          </div>
                        </CardTitle>
                      </CardHeader>
                       <CardContent>
-                        <StoreCarousel
-                          ref={desktopMobilityCarouselRef}
-                          desktopMode={true}
-                          items={filterItemsByRarity([{
-                           name: "The Coupé Tank",
-                           price: 5000,
-                           rarity: "gold",
-                           image: "/lovable-uploads/1c6b707c-97a6-4381-bc54-de63a7cf8a31.png"
-                         }, {
-                           name: "Speed Buggy",
-                           price: 3200,
-                           rarity: "silver",
-                           image: "/lovable-uploads/b64d7801-1284-4763-b115-ca3cfa8ff315.png"
-                         }, {
-                           name: "Pit Bike",
-                           price: 4500,
-                           rarity: "blue",
-                           image: "/lovable-uploads/4e2aac54-cac6-4cf1-92ad-76bf7e788077.png"
-                         }, {
-                           name: "Pogo",
-                           price: 8000,
-                           rarity: "special",
-                           image: "/lovable-uploads/2877ff38-b9fd-4a5d-bca9-25b14f237997.png"
-                         }, {
-                           name: "Hover Bike",
-                           price: 6500,
-                           rarity: "gold",
-                           image: "/lovable-uploads/10a67a27-b0a7-4fbe-b4f2-7fc2474b98bb.png"
-                         }, {
-                           name: "Racing Car",
-                           price: 7200,
-                           rarity: "special",
-                           image: "/lovable-uploads/896892f1-7ebc-4852-acea-80dcdbf7c545.png"
-                         }, {
-                           name: "Jet Pack",
-                           price: 9000,
-                           rarity: "special",
-                           image: "/lovable-uploads/8090c672-9fc6-4634-ad28-0629a1a7f181.png"
-                         }, {
-                           name: "Skateboard",
-                           price: 2800,
-                           rarity: "green",
-                           image: "/lovable-uploads/7be743c8-5f8f-4016-a88a-c5e7edf73e2e.png"
-                         }])}
-                           renderItem={(item, idx) => <GlowCard key={idx} className="text-white shadow-2xl cursor-pointer">
+                        <StoreCarousel ref={desktopMobilityCarouselRef} desktopMode={true} items={filterItemsByRarity([{
+                        name: "The Coupé Tank",
+                        price: 5000,
+                        rarity: "gold",
+                        image: "/lovable-uploads/1c6b707c-97a6-4381-bc54-de63a7cf8a31.png"
+                      }, {
+                        name: "Speed Buggy",
+                        price: 3200,
+                        rarity: "silver",
+                        image: "/lovable-uploads/b64d7801-1284-4763-b115-ca3cfa8ff315.png"
+                      }, {
+                        name: "Pit Bike",
+                        price: 4500,
+                        rarity: "blue",
+                        image: "/lovable-uploads/4e2aac54-cac6-4cf1-92ad-76bf7e788077.png"
+                      }, {
+                        name: "Pogo",
+                        price: 8000,
+                        rarity: "special",
+                        image: "/lovable-uploads/2877ff38-b9fd-4a5d-bca9-25b14f237997.png"
+                      }, {
+                        name: "Hover Bike",
+                        price: 6500,
+                        rarity: "gold",
+                        image: "/lovable-uploads/10a67a27-b0a7-4fbe-b4f2-7fc2474b98bb.png"
+                      }, {
+                        name: "Racing Car",
+                        price: 7200,
+                        rarity: "special",
+                        image: "/lovable-uploads/896892f1-7ebc-4852-acea-80dcdbf7c545.png"
+                      }, {
+                        name: "Jet Pack",
+                        price: 9000,
+                        rarity: "special",
+                        image: "/lovable-uploads/8090c672-9fc6-4634-ad28-0629a1a7f181.png"
+                      }, {
+                        name: "Skateboard",
+                        price: 2800,
+                        rarity: "green",
+                        image: "/lovable-uploads/7be743c8-5f8f-4016-a88a-c5e7edf73e2e.png"
+                      }])} renderItem={(item, idx) => <GlowCard key={idx} className="text-white shadow-2xl cursor-pointer">
                               <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
                               <CardContent className="p-4 relative z-10">
                                <div className="aspect-square bg-gray-800/50 rounded-lg mb-3 overflow-hidden">
@@ -3450,18 +3333,18 @@ const Game = () => {
                                    </DropdownMenuTrigger>
                                    <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
                                      <DropdownMenuItem onClick={() => toast({
-                                     title: "Coming Soon",
-                                     description: "Coin purchases coming soon!",
-                                     duration: 3000
-                                   })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
+                                  title: "Coming Soon",
+                                  description: "Coin purchases coming soon!",
+                                  duration: 3000
+                                })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
                                        <Coins className="w-4 h-4" />
                                        <span>Buy With Coins</span>
                                      </DropdownMenuItem>
                                      <DropdownMenuItem onClick={() => toast({
-                                     title: "Coming Soon",
-                                     description: "Card payments coming soon!",
-                                     duration: 3000
-                                   })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
+                                  title: "Coming Soon",
+                                  description: "Card payments coming soon!",
+                                  duration: 3000
+                                })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
                                        <CreditCard className="w-4 h-4" />
                                        <span>Buy with Card</span>
                                      </DropdownMenuItem>
@@ -3469,8 +3352,7 @@ const Game = () => {
                                  </DropdownMenu>
                                </div>
                              </CardContent>
-                            </GlowCard>}
-                        />
+                            </GlowCard>} />
                        </CardContent>
                    </Card>}
 
@@ -3488,71 +3370,57 @@ const Game = () => {
                        <CardTitle className="flex items-center justify-between text-white">
                          <span>Emotes</span>
                          <div className="flex space-x-1">
-                           <Button
-                             variant="ghost"
-                             size="sm"
-                             onClick={() => desktopEmotesCarouselRef.current?.scrollToPrevious()}
-                             className="h-6 w-6 p-0 text-white hover:bg-white/20"
-                           >
+                           <Button variant="ghost" size="sm" onClick={() => desktopEmotesCarouselRef.current?.scrollToPrevious()} className="h-6 w-6 p-0 text-white hover:bg-white/20">
                              <ChevronLeft className="h-4 w-4" />
                            </Button>
-                           <Button
-                             variant="ghost"
-                             size="sm"
-                             onClick={() => desktopEmotesCarouselRef.current?.scrollToNext()}
-                             className="h-6 w-6 p-0 text-white hover:bg-white/20"
-                           >
+                           <Button variant="ghost" size="sm" onClick={() => desktopEmotesCarouselRef.current?.scrollToNext()} className="h-6 w-6 p-0 text-white hover:bg-white/20">
                              <ChevronRight className="h-4 w-4" />
                            </Button>
                          </div>
                        </CardTitle>
                      </CardHeader>
                       <CardContent>
-                        <StoreCarousel
-                          ref={desktopEmotesCarouselRef}
-                          desktopMode={true}
-                          items={filterItemsByRarity([{
-                           name: "Flex",
-                           price: 800,
-                           rarity: "blue",
-                           image: "/lovable-uploads/f52e83c2-28b7-417e-90ac-757255d1759f.png"
-                         }, {
-                           name: "Fists Up",
-                           price: 1800,
-                           rarity: "gold",
-                           image: "/lovable-uploads/370bd874-ad5c-467d-b844-55688b1a0f9a.png"
-                         }, {
-                           name: "Squeaky Dance",
-                           price: 2500,
-                           rarity: "special",
-                           image: "/lovable-uploads/5c8c027e-3baf-4550-96a9-ba0715d11506.png"
-                         }, {
-                           name: "u want sum?",
-                           price: 1500,
-                           rarity: "gold",
-                           image: "/lovable-uploads/30d419b4-79a9-459c-b37b-42099ffd6273.png"
-                         }, {
-                           name: "Victory Dance",
-                           price: 2200,
-                           rarity: "special",
-                           image: "/lovable-uploads/c4290bdc-f68b-45db-bf53-f9551d2cb16f.png"
-                         }, {
-                           name: "Champion Pose",
-                           price: 1900,
-                           rarity: "silver",
-                           image: "/lovable-uploads/ea386eae-1f4f-44c0-ad78-7f038df224d3.png"
-                         }, {
-                           name: "Power Move",
-                           price: 1700,
-                           rarity: "blue",
-                           image: "/lovable-uploads/12c90a89-5880-412c-85dc-6f52abc127b8.png"
-                         }, {
-                           name: "Cool Gesture",
-                           price: 1200,
-                           rarity: "green",
-                           image: "/lovable-uploads/8c0bf943-2c5d-40b7-863f-93ba04863642.png"
-                         }])}
-                           renderItem={(item, idx) => <GlowCard key={idx} className="text-white shadow-2xl cursor-pointer">
+                        <StoreCarousel ref={desktopEmotesCarouselRef} desktopMode={true} items={filterItemsByRarity([{
+                        name: "Flex",
+                        price: 800,
+                        rarity: "blue",
+                        image: "/lovable-uploads/f52e83c2-28b7-417e-90ac-757255d1759f.png"
+                      }, {
+                        name: "Fists Up",
+                        price: 1800,
+                        rarity: "gold",
+                        image: "/lovable-uploads/370bd874-ad5c-467d-b844-55688b1a0f9a.png"
+                      }, {
+                        name: "Squeaky Dance",
+                        price: 2500,
+                        rarity: "special",
+                        image: "/lovable-uploads/5c8c027e-3baf-4550-96a9-ba0715d11506.png"
+                      }, {
+                        name: "u want sum?",
+                        price: 1500,
+                        rarity: "gold",
+                        image: "/lovable-uploads/30d419b4-79a9-459c-b37b-42099ffd6273.png"
+                      }, {
+                        name: "Victory Dance",
+                        price: 2200,
+                        rarity: "special",
+                        image: "/lovable-uploads/c4290bdc-f68b-45db-bf53-f9551d2cb16f.png"
+                      }, {
+                        name: "Champion Pose",
+                        price: 1900,
+                        rarity: "silver",
+                        image: "/lovable-uploads/ea386eae-1f4f-44c0-ad78-7f038df224d3.png"
+                      }, {
+                        name: "Power Move",
+                        price: 1700,
+                        rarity: "blue",
+                        image: "/lovable-uploads/12c90a89-5880-412c-85dc-6f52abc127b8.png"
+                      }, {
+                        name: "Cool Gesture",
+                        price: 1200,
+                        rarity: "green",
+                        image: "/lovable-uploads/8c0bf943-2c5d-40b7-863f-93ba04863642.png"
+                      }])} renderItem={(item, idx) => <GlowCard key={idx} className="text-white shadow-2xl cursor-pointer">
                               <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
                               <CardContent className="p-4 relative z-10">
                                <div className="aspect-square bg-gray-800/50 rounded-lg mb-3 overflow-hidden flex items-center justify-center">
@@ -3572,18 +3440,18 @@ const Game = () => {
                                    </DropdownMenuTrigger>
                                    <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
                                      <DropdownMenuItem onClick={() => toast({
-                                     title: "Coming Soon",
-                                     description: "Coin purchases coming soon!",
-                                     duration: 3000
-                                   })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
+                                  title: "Coming Soon",
+                                  description: "Coin purchases coming soon!",
+                                  duration: 3000
+                                })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
                                        <Coins className="w-4 h-4" />
                                        <span>Buy With Coins</span>
                                      </DropdownMenuItem>
                                      <DropdownMenuItem onClick={() => toast({
-                                     title: "Coming Soon",
-                                     description: "Card payments coming soon!",
-                                     duration: 3000
-                                   })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
+                                  title: "Coming Soon",
+                                  description: "Card payments coming soon!",
+                                  duration: 3000
+                                })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
                                        <CreditCard className="w-4 h-4" />
                                        <span>Buy with Card</span>
                                      </DropdownMenuItem>
@@ -3591,8 +3459,7 @@ const Game = () => {
                                  </DropdownMenu>
                                </div>
                              </CardContent>
-                            </GlowCard>}
-                        />
+                            </GlowCard>} />
                        </CardContent>
                    </Card>}
 
@@ -3610,72 +3477,57 @@ const Game = () => {
                        <CardTitle className="flex items-center justify-between text-white">
                          <span>Packs</span>
                          <div className="flex space-x-1">
-                           <Button
-                             variant="ghost"
-                             size="sm"
-                             onClick={() => desktopPacksCarouselRef.current?.scrollToPrevious()}
-                             className="h-6 w-6 p-0 text-white hover:bg-white/20"
-                           >
+                           <Button variant="ghost" size="sm" onClick={() => desktopPacksCarouselRef.current?.scrollToPrevious()} className="h-6 w-6 p-0 text-white hover:bg-white/20">
                              <ChevronLeft className="h-4 w-4" />
                            </Button>
-                           <Button
-                             variant="ghost"
-                             size="sm"
-                             onClick={() => desktopPacksCarouselRef.current?.scrollToNext()}
-                             className="h-6 w-6 p-0 text-white hover:bg-white/20"
-                           >
+                           <Button variant="ghost" size="sm" onClick={() => desktopPacksCarouselRef.current?.scrollToNext()} className="h-6 w-6 p-0 text-white hover:bg-white/20">
                              <ChevronRight className="h-4 w-4" />
                            </Button>
                          </div>
                        </CardTitle>
                      </CardHeader>
                       <CardContent>
-                        <StoreCarousel
-                          ref={desktopPacksCarouselRef}
-                          desktopMode={true}
-                          items={filterItemsByRarity([{
-                           name: "Silver Pack",
-                           price: 1000,
-                           rarity: "silver",
-                           image: "/lovable-uploads/17c3a939-bcaa-4cdb-9b61-271b5774c7e2.png"
-                         }, {
-                           name: "Gold Pack",
-                           price: 2000,
-                           rarity: "gold",
-                           image: "/lovable-uploads/291c5734-f144-47b0-9f49-915999e921b0.png"
-                         }, {
-                           name: "EO Summer Pack",
-                           price: 3500,
-                           rarity: "special",
-                           image: "/lovable-uploads/2149e9ad-919f-49ea-8be4-90f190387d39.png"
-                         }, {
-                           name: "Wild West Pack",
-                           price: 5000,
-                           rarity: "special",
-                           image: "/lovable-uploads/5cf8ad93-f292-4e4c-b53c-eb0c4bc0f7be.png"
-                         }, {
-                           name: "Platinum Pack",
-                           price: 4500,
-                           rarity: "special",
-                           image: "/lovable-uploads/ef3aca91-a372-4313-aa94-3c2dcf946dd6.png"
-                         }, {
-                           name: "Diamond Pack",
-                           price: 5000,
-                           rarity: "special",
-                           image: "/lovable-uploads/ba9c646a-45e6-4ab3-9b25-1f069d27960b.png"
-                         }, {
-                           name: "Premium Pack",
-                           price: 2800,
-                           rarity: "gold",
-                           image: "/lovable-uploads/1615e7da-29d5-454e-a2fe-57f5abf91d56.png"
-                         }, {
-                           name: "Starter Pack",
-                           price: 500,
-                           rarity: "green",
-                           image: "/lovable-uploads/ac3e1f52-ba21-4588-9051-87eef47caf5c.png"
-                         }])}
-                            renderItem={(item, idx) => (
-                              <GlowCard key={idx} className="cursor-pointer">
+                        <StoreCarousel ref={desktopPacksCarouselRef} desktopMode={true} items={filterItemsByRarity([{
+                        name: "Silver Pack",
+                        price: 1000,
+                        rarity: "silver",
+                        image: "/lovable-uploads/17c3a939-bcaa-4cdb-9b61-271b5774c7e2.png"
+                      }, {
+                        name: "Gold Pack",
+                        price: 2000,
+                        rarity: "gold",
+                        image: "/lovable-uploads/291c5734-f144-47b0-9f49-915999e921b0.png"
+                      }, {
+                        name: "EO Summer Pack",
+                        price: 3500,
+                        rarity: "special",
+                        image: "/lovable-uploads/2149e9ad-919f-49ea-8be4-90f190387d39.png"
+                      }, {
+                        name: "Wild West Pack",
+                        price: 5000,
+                        rarity: "special",
+                        image: "/lovable-uploads/5cf8ad93-f292-4e4c-b53c-eb0c4bc0f7be.png"
+                      }, {
+                        name: "Platinum Pack",
+                        price: 4500,
+                        rarity: "special",
+                        image: "/lovable-uploads/ef3aca91-a372-4313-aa94-3c2dcf946dd6.png"
+                      }, {
+                        name: "Diamond Pack",
+                        price: 5000,
+                        rarity: "special",
+                        image: "/lovable-uploads/ba9c646a-45e6-4ab3-9b25-1f069d27960b.png"
+                      }, {
+                        name: "Premium Pack",
+                        price: 2800,
+                        rarity: "gold",
+                        image: "/lovable-uploads/1615e7da-29d5-454e-a2fe-57f5abf91d56.png"
+                      }, {
+                        name: "Starter Pack",
+                        price: 500,
+                        rarity: "green",
+                        image: "/lovable-uploads/ac3e1f52-ba21-4588-9051-87eef47caf5c.png"
+                      }])} renderItem={(item, idx) => <GlowCard key={idx} className="cursor-pointer">
                                <div className="p-4">
                                 <div className="aspect-square bg-gray-800/50 rounded-lg mb-3 overflow-hidden flex items-center justify-center">
                                    <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
@@ -3694,18 +3546,18 @@ const Game = () => {
                                     </DropdownMenuTrigger>
                                     <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
                                       <DropdownMenuItem onClick={() => toast({
-                                      title: "Coming Soon",
-                                      description: "Coin purchases coming soon!",
-                                      duration: 3000
-                                    })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
+                                  title: "Coming Soon",
+                                  description: "Coin purchases coming soon!",
+                                  duration: 3000
+                                })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
                                         <Coins className="w-4 h-4" />
                                         <span>Buy With Coins</span>
                                       </DropdownMenuItem>
                                       <DropdownMenuItem onClick={() => toast({
-                                      title: "Coming Soon",
-                                      description: "Card payments coming soon!",
-                                      duration: 3000
-                                    })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
+                                  title: "Coming Soon",
+                                  description: "Card payments coming soon!",
+                                  duration: 3000
+                                })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
                                         <CreditCard className="w-4 h-4" />
                                         <span>Buy with Card</span>
                                       </DropdownMenuItem>
@@ -3713,9 +3565,7 @@ const Game = () => {
                                   </DropdownMenu>
                                  </div>
                                </div>
-                             </GlowCard>
-                           )}
-                        />
+                             </GlowCard>} />
                         </CardContent>
                     </Card>}
                   </div>
@@ -3854,41 +3704,20 @@ const Game = () => {
                           <div className="flex items-center gap-1">
                             {/* Expandable Search */}
                             <div className="flex items-center">
-                              {!searchExpanded ? (
-                                <Button 
-                                  variant="outline" 
-                                  size="sm" 
-                                  className="bg-black/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-8 w-8"
-                                  onClick={() => setSearchExpanded(true)}
-                                >
+                              {!searchExpanded ? <Button variant="outline" size="sm" className="bg-black/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-8 w-8" onClick={() => setSearchExpanded(true)}>
                                   <Search className="w-3 h-3" />
-                                </Button>
-                              ) : (
-                                <div className="flex items-center animate-fade-in">
+                                </Button> : <div className="flex items-center animate-fade-in">
                                   <div className="relative">
                                     <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-3 h-3 text-white" />
-                                    <Input
-                                      placeholder="search"
-                                      value={searchTerm}
-                                      onChange={(e) => setSearchTerm(e.target.value)}
-                                      onBlur={() => !searchTerm && setSearchExpanded(false)}
-                                      className="pl-8 pr-3 h-8 text-xs bg-black/20 backdrop-blur-md border-white/30 text-white placeholder:text-gray-400 w-48 focus:bg-black/30 focus:border-white/40"
-                                      autoFocus
-                                    />
+                                    <Input placeholder="search" value={searchTerm} onChange={e => setSearchTerm(e.target.value)} onBlur={() => !searchTerm && setSearchExpanded(false)} className="pl-8 pr-3 h-8 text-xs bg-black/20 backdrop-blur-md border-white/30 text-white placeholder:text-gray-400 w-48 focus:bg-black/30 focus:border-white/40" autoFocus />
                                   </div>
-                                  <Button 
-                                    variant="ghost" 
-                                    size="sm" 
-                                    className="ml-1 h-8 w-8 text-white hover:bg-white/20"
-                                    onClick={() => {
-                                      setSearchTerm("");
-                                      setSearchExpanded(false);
-                                    }}
-                                  >
+                                  <Button variant="ghost" size="sm" className="ml-1 h-8 w-8 text-white hover:bg-white/20" onClick={() => {
+                              setSearchTerm("");
+                              setSearchExpanded(false);
+                            }}>
                                     <X className="w-3 h-3" />
                                   </Button>
-                                </div>
-                              )}
+                                </div>}
                             </div>
                             
                             {/* Category Filter */}
@@ -3921,8 +3750,7 @@ const Game = () => {
                               </DropdownMenu>
 
                             {/* Filter Dropdown - Price/Trend Filter */}
-                            {isMobile ? (
-                              <Drawer>
+                            {isMobile ? <Drawer>
                                 <DrawerTrigger asChild>
                                   <Button variant="outline" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-8 px-3">
                                     <Filter className="w-3 h-3 mr-1" />
@@ -3960,9 +3788,7 @@ const Game = () => {
                                      </Button>
                                    </div>
                                 </DrawerContent>
-                              </Drawer>
-                            ) : (
-                              <DropdownMenu>
+                              </Drawer> : <DropdownMenu>
                                 <DropdownMenuTrigger asChild>
                                    <Button variant="outline" size="sm" className="bg-black/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-8 w-8">
                                      <Filter className="w-3 h-3" />
@@ -3994,8 +3820,7 @@ const Game = () => {
                                      <span>Special</span>
                                    </DropdownMenuItem>
                                  </DropdownMenuContent>
-                              </DropdownMenu>
-                            )}
+                              </DropdownMenu>}
                           </div>
                       </CardTitle>
                     </CardHeader>
@@ -4058,12 +3883,7 @@ const Game = () => {
                                 <p className="text-sm font-semibold text-white truncate">{player.name}</p>
                                 {renderMarketplacePrices(player, getMarketplacePrices, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
                               </div>
-                               <div className="flex items-center justify-between">
-                                 <div className={`flex items-center space-x-1 ${player.trend === 'up' ? 'text-green-400' : 'text-red-400'}`}>
-                                   {player.trend === 'up' ? <ArrowUpRight className="w-3 h-3" /> : <ArrowDownRight className="w-3 h-3" />}
-                                   <span className="text-xs font-medium">{player.trend === 'up' ? '+' : ''}{player.change}%</span>
-                                 </div>
-                               </div>
+                               
                             </div>
                           </div>)}
                       </div>
@@ -4116,12 +3936,7 @@ const Game = () => {
                                 <p className="text-sm font-semibold text-white truncate">{player.name}</p>
                                 {renderMarketplacePrices(player, getMarketplacePrices, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
                               </div>
-                               <div className="flex items-center justify-between">
-                                 <div className="flex items-center space-x-1 text-green-400">
-                                   <ArrowUpRight className="w-3 h-3" />
-                                   <span className="text-xs font-medium">+{player.change}%</span>
-                                 </div>
-                               </div>
+                               
                             </div>
                           </div>)}
                       </div>
@@ -4565,8 +4380,7 @@ const Game = () => {
       </nav>
 
       {/* Sell Dialog - Mobile: Drawer, Desktop: Dialog */}
-      {isMobile ? (
-        <Drawer open={sellDialogOpen} onOpenChange={setSellDialogOpen}>
+      {isMobile ? <Drawer open={sellDialogOpen} onOpenChange={setSellDialogOpen}>
           <DrawerContent className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
             <DrawerHeader>
               <DrawerTitle className="text-white text-center">Sell {selectedPlayer?.name}</DrawerTitle>
@@ -4582,9 +4396,7 @@ const Game = () => {
               </div>
             </div>
           </DrawerContent>
-        </Drawer>
-      ) : (
-        <Dialog open={sellDialogOpen} onOpenChange={setSellDialogOpen}>
+        </Drawer> : <Dialog open={sellDialogOpen} onOpenChange={setSellDialogOpen}>
           <DialogContent className="sm:max-w-md bg-black/10 backdrop-blur-md border border-white/20 text-white">
             <DialogHeader>
               <DialogTitle className="text-white">Sell {selectedPlayer?.name}</DialogTitle>
@@ -4598,34 +4410,32 @@ const Game = () => {
               </Button>
             </div>
           </DialogContent>
-        </Dialog>
-      )}
+        </Dialog>}
 
       {/* Buy Dialog - Mobile: Drawer, Desktop: Dialog */}
-      {isMobile ? (
-        <Drawer open={buyDialogOpen} onOpenChange={setBuyDialogOpen}>
+      {isMobile ? <Drawer open={buyDialogOpen} onOpenChange={setBuyDialogOpen}>
           <DrawerContent className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
             <DrawerHeader>
               <DrawerTitle className="text-white text-center">Buy {selectedPlayer?.name}</DrawerTitle>
             </DrawerHeader>
             <div className="flex flex-col space-y-3 p-4">
               <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 hover:text-white transition-all duration-300" onClick={() => {
-                toast({
-                  title: "Card Payment",
-                  description: "Card payment functionality coming soon!"
-                });
-                setBuyDialogOpen(false);
-              }}>
+            toast({
+              title: "Card Payment",
+              description: "Card payment functionality coming soon!"
+            });
+            setBuyDialogOpen(false);
+          }}>
                 <CreditCard className="w-4 h-4 mr-2" />
                 Buy with Card
               </Button>
               <Button variant="outline" className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 hover:text-white transition-all duration-300" onClick={() => {
-                toast({
-                  title: "Coin Payment",
-                  description: "Coin payment functionality coming soon!"
-                });
-                setBuyDialogOpen(false);
-              }}>
+            toast({
+              title: "Coin Payment",
+              description: "Coin payment functionality coming soon!"
+            });
+            setBuyDialogOpen(false);
+          }}>
                 <Coins className="w-4 h-4 mr-2" />
                 Buy with Coins
               </Button>
@@ -4634,9 +4444,7 @@ const Game = () => {
               </Button>
             </div>
           </DrawerContent>
-        </Drawer>
-      ) : (
-        <Dialog open={buyDialogOpen} onOpenChange={setBuyDialogOpen}>
+        </Drawer> : <Dialog open={buyDialogOpen} onOpenChange={setBuyDialogOpen}>
           <DialogContent className="sm:max-w-md bg-black/10 backdrop-blur-md border border-white/20 text-white">
             <DialogHeader>
               <DialogTitle className="text-white">Buy {selectedPlayer?.name}</DialogTitle>
@@ -4646,22 +4454,22 @@ const Game = () => {
             </DialogHeader>
             <div className="flex flex-col space-y-3 pt-4">
               <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 hover:text-white transition-all duration-300" onClick={() => {
-                toast({
-                  title: "Card Payment",
-                  description: "Card payment functionality coming soon!"
-                });
-                setBuyDialogOpen(false);
-              }}>
+            toast({
+              title: "Card Payment",
+              description: "Card payment functionality coming soon!"
+            });
+            setBuyDialogOpen(false);
+          }}>
                 <CreditCard className="w-4 h-4 mr-2" />
                 Buy with Card
               </Button>
               <Button variant="outline" className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 hover:text-white transition-all duration-300" onClick={() => {
-                toast({
-                  title: "Coin Payment",
-                  description: "Coin payment functionality coming soon!"
-                });
-                setBuyDialogOpen(false);
-              }}>
+            toast({
+              title: "Coin Payment",
+              description: "Coin payment functionality coming soon!"
+            });
+            setBuyDialogOpen(false);
+          }}>
                 <Coins className="w-4 h-4 mr-2" />
                 Buy with Coins
               </Button>
@@ -4670,8 +4478,7 @@ const Game = () => {
               </Button>
             </div>
           </DialogContent>
-        </Dialog>
-      )}
+        </Dialog>}
     </div>;
 };
 export default Game;
