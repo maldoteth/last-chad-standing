@@ -1432,7 +1432,7 @@ const Game = () => {
                   rarity: "gold",
                   image: "/lovable-uploads/cf5abf4c-cf7f-49b7-a830-49343c8d1222.png"
                 }, {
-                  name: "Cyber Warrior",
+                  name: "Dale Sunny",
                   price: 3200,
                   rarity: "special",
                   image: cyberWarriorSkin
@@ -3070,7 +3070,7 @@ const Game = () => {
                         rarity: "green",
                         image: latinLegendSkin
                       }, {
-                        name: "Cyber Warrior",
+                        name: "Dale Sunny",
                         price: 3000,
                         rarity: "gold",
                         image: cyberWarriorSkin
