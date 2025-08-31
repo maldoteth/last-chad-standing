@@ -788,7 +788,7 @@ const Game = () => {
                         </DrawerTrigger>
                         <DrawerContent className="bg-black/20 backdrop-blur-xl border-white/10">
                           <DrawerHeader>
-                            <DrawerTitle className="text-white">XP Progress Levels</DrawerTitle>
+                             <DrawerTitle className="text-white text-center">XP Progress Levels</DrawerTitle>
                           </DrawerHeader>
                           <div className="px-4 pb-4">
                             <div className="space-y-2 max-h-60 overflow-y-auto">
@@ -1262,7 +1262,7 @@ const Game = () => {
                         </DrawerTrigger>
                         <DrawerContent className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
                           <DrawerHeader>
-                            <DrawerTitle>Filter by Category</DrawerTitle>
+                             <DrawerTitle className="text-center">Filter by Category</DrawerTitle>
                           </DrawerHeader>
                           <div className="px-4 pb-8 space-y-2">
                             <Button variant="ghost" onClick={() => setSelectedCategory("all")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "all" ? "bg-white/20" : ""}`}>
@@ -1330,7 +1330,7 @@ const Game = () => {
                         </DrawerTrigger>
                         <DrawerContent className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
                           <DrawerHeader>
-                            <DrawerTitle>Filter by Rarity</DrawerTitle>
+                             <DrawerTitle className="text-center">Filter by Rarity</DrawerTitle>
                           </DrawerHeader>
                           <div className="px-4 pb-8 space-y-2">
                             <Button variant="ghost" onClick={() => setSelectedRarity("all")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedRarity === "all" ? "bg-white/20" : ""}`}>
@@ -1949,7 +1949,7 @@ const Game = () => {
                            </DrawerTrigger>
                            <DrawerContent className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
                              <DrawerHeader>
-                               <DrawerTitle>Filter by Category</DrawerTitle>
+                                <DrawerTitle className="text-center">Filter by Category</DrawerTitle>
                              </DrawerHeader>
                              <div className="px-4 pb-8 space-y-2">
                                <Button variant="ghost" onClick={() => setMarketplaceCategory("all")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceCategory === "all" ? "bg-white/20" : ""}`}>
@@ -1981,7 +1981,7 @@ const Game = () => {
                            </DrawerTrigger>
                            <DrawerContent className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
                              <DrawerHeader>
-                               <DrawerTitle>Search Players</DrawerTitle>
+                               <DrawerTitle className="text-center">Search Players</DrawerTitle>
                              </DrawerHeader>
                              <div className="px-4 pb-8">
                                <Input
@@ -2001,7 +2001,7 @@ const Game = () => {
                           </DrawerTrigger>
                           <DrawerContent className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
                             <DrawerHeader>
-                              <DrawerTitle>Filter by Rarity</DrawerTitle>
+                               <DrawerTitle className="text-center">Filter by Rarity</DrawerTitle>
                             </DrawerHeader>
                             <div className="px-4 pb-8 space-y-2">
                               <Button variant="ghost" onClick={() => setMarketplaceRarity("all")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceRarity === "all" ? "bg-white/20" : ""}`}>
@@ -2393,7 +2393,7 @@ const Game = () => {
                         </DrawerTrigger>
                         <DrawerContent className="bg-black/95 backdrop-blur-md border-gray-700">
                           <DrawerHeader>
-                            <DrawerTitle className="text-white">XP Progress Levels</DrawerTitle>
+                            <DrawerTitle className="text-white text-center">XP Progress Levels</DrawerTitle>
                           </DrawerHeader>
                           <div className="p-4 pb-8">
                             <div className="space-y-2 max-h-80 overflow-y-auto">
@@ -2901,7 +2901,7 @@ const Game = () => {
                         </DrawerTrigger>
                         <DrawerContent className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
                           <DrawerHeader>
-                            <DrawerTitle>Filter by Category</DrawerTitle>
+                            <DrawerTitle className="text-center">Filter by Category</DrawerTitle>
                           </DrawerHeader>
                           <div className="px-4 pb-8 space-y-2">
                             <Button variant="ghost" onClick={() => setSelectedCategory("all")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "all" ? "bg-white/20" : ""}`}>
@@ -2969,7 +2969,7 @@ const Game = () => {
                         </DrawerTrigger>
                         <DrawerContent className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
                           <DrawerHeader>
-                            <DrawerTitle>Filter by Rarity</DrawerTitle>
+                             <DrawerTitle className="text-center">Filter by Rarity</DrawerTitle>
                           </DrawerHeader>
                           <div className="px-4 pb-8 space-y-2">
                             <Button variant="ghost" onClick={() => setSelectedRarity("all")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedRarity === "all" ? "bg-white/20" : ""}`}>
@@ -3658,7 +3658,7 @@ const Game = () => {
                                 </DrawerTrigger>
                                 <DrawerContent className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
                                    <DrawerHeader>
-                                     <DrawerTitle>Filter by Rarity</DrawerTitle>
+                                     <DrawerTitle className="text-center">Filter by Rarity</DrawerTitle>
                                    </DrawerHeader>
                                    <div className="px-4 pb-8 space-y-2">
                                      <Button variant="ghost" onClick={() => setMarketplaceRarity("all")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceRarity === "all" ? "bg-white/20" : ""}`}>
@@ -4299,7 +4299,7 @@ const Game = () => {
         <Drawer open={sellDialogOpen} onOpenChange={setSellDialogOpen}>
           <DrawerContent className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
             <DrawerHeader>
-              <DrawerTitle className="text-white">Sell {selectedPlayer?.name}</DrawerTitle>
+              <DrawerTitle className="text-white text-center">Sell {selectedPlayer?.name}</DrawerTitle>
             </DrawerHeader>
             <div className="p-4">
               <p className="text-white/80 mb-4">
@@ -4336,7 +4336,7 @@ const Game = () => {
         <Drawer open={buyDialogOpen} onOpenChange={setBuyDialogOpen}>
           <DrawerContent className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
             <DrawerHeader>
-              <DrawerTitle className="text-white">Buy {selectedPlayer?.name}</DrawerTitle>
+              <DrawerTitle className="text-white text-center">Buy {selectedPlayer?.name}</DrawerTitle>
             </DrawerHeader>
             <div className="flex flex-col space-y-3 p-4">
               <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 hover:text-white transition-all duration-300" onClick={() => {
