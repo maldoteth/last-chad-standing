@@ -65,7 +65,7 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
     const mockBuyPrice = Math.round(player.price * 0.85);
     
     return (
-      <div className="flex items-start space-x-2">
+      <div className="flex items-center space-x-2">
          <div className="flex flex-col">
           <div className="flex items-center space-x-1">
             <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className={coin} />
@@ -105,7 +105,7 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
   }
 
   return (
-    <div className="flex items-start space-x-2">
+    <div className="flex items-center space-x-2">
       {prices.bestBuyPrice && (
          <div className="flex flex-col">
           <div className="flex items-center space-x-1">
