@@ -440,13 +440,13 @@ const Game = () => {
     trend: "up",
     image: "/lovable-uploads/4e2aac54-cac6-4cf1-92ad-76bf7e788077.png"
   }, {
-    name: "Storm Breaker",
+    name: "Flex",
     team: "Wind Riders",
     position: "Force",
     price: 4900,
     lastSale: 4200,
     trend: "up",
-    image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png"
+    image: "/lovable-uploads/f52e83c2-28b7-417e-90ac-757255d1759f.png"
   }, {
     name: "Quantum Leap",
     team: "Future Force",
