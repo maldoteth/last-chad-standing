@@ -638,7 +638,7 @@ const Game = () => {
             
             <div className="flex items-center space-x-2">
               <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-8 h-8" />
-              <span className="font-semibold text-sm lg:text-base">{userCoins.toLocaleString()}</span>
+              <span className="font-semibold text-lg lg:text-xl">{userCoins.toLocaleString()}</span>
             </div>
             
             {authenticated ? <DropdownMenu>
