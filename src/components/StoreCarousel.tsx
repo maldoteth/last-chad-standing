@@ -33,28 +33,41 @@ const StoreCarousel: React.FC<StoreCarouselProps> = ({ items, renderItem }) => {
   }
 
   return (
-    <Carousel className="w-full">
-      <CarouselContent>
-        {itemGroups.map((group, groupIdx) => (
-          <CarouselItem key={groupIdx}>
-            <div className="grid grid-cols-2 gap-3">
-              {group.map((item, idx) => renderItem(item, groupIdx * 4 + idx))}
+    <div className="relative">
+      <Carousel className="w-full">
+        {itemGroups.length > 1 && (
+          <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 z-10 hidden md:flex items-center space-x-2">
+            <CarouselPrevious className="static translate-y-0 bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 h-6 w-6" />
+            <div className="flex space-x-1">
+              {itemGroups.map((_, idx) => (
+                <div key={idx} className="w-1.5 h-1.5 rounded-full bg-white/30" />
+              ))}
             </div>
-          </CarouselItem>
-        ))}
-      </CarouselContent>
-      {itemGroups.length > 1 && (
-        <div className="flex justify-center items-center mt-4 space-x-2">
-          <CarouselPrevious className="static translate-y-0 bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 h-8 w-8" />
-          <div className="flex space-x-1">
-            {itemGroups.map((_, idx) => (
-              <div key={idx} className="w-2 h-2 rounded-full bg-white/30" />
-            ))}
+            <CarouselNext className="static translate-y-0 bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 h-6 w-6" />
           </div>
-          <CarouselNext className="static translate-y-0 bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 h-8 w-8" />
-        </div>
-      )}
-    </Carousel>
+        )}
+        <CarouselContent>
+          {itemGroups.map((group, groupIdx) => (
+            <CarouselItem key={groupIdx}>
+              <div className="grid grid-cols-2 gap-3">
+                {group.map((item, idx) => renderItem(item, groupIdx * 4 + idx))}
+              </div>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        {itemGroups.length > 1 && (
+          <div className="flex justify-center items-center mt-4 space-x-2 md:hidden">
+            <CarouselPrevious className="static translate-y-0 bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 h-8 w-8" />
+            <div className="flex space-x-1">
+              {itemGroups.map((_, idx) => (
+                <div key={idx} className="w-2 h-2 rounded-full bg-white/30" />
+              ))}
+            </div>
+            <CarouselNext className="static translate-y-0 bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 h-8 w-8" />
+          </div>
+        )}
+      </Carousel>
+    </div>
   );
 };
 
