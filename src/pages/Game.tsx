@@ -3075,7 +3075,7 @@ const Game = () => {
                         rarity: "gold",
                         image: cyberWarriorSkin
                       }, {
-                        name: "Shadow Hunter",
+                        name: "Ray Del Mar",
                         price: 2800,
                         rarity: "blue",
                         image: "/lovable-uploads/e8b33b1a-410f-4448-9b83-126b8d27f0a9.png"
