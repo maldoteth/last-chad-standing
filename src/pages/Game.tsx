@@ -105,6 +105,7 @@ const Game = () => {
   const [marketplaceCategory, setMarketplaceCategory] = useState("all");
   const [marketplaceRarity, setMarketplaceRarity] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
+  const [searchExpanded, setSearchExpanded] = useState(false);
   const [settingsExpanded, setSettingsExpanded] = useState(false);
   const [objectivesView, setObjectivesView] = useState("weekly");
   const [isObjectivesGlowing, setIsObjectivesGlowing] = useState(false);
@@ -3508,25 +3509,44 @@ const Game = () => {
                      <CardTitle className="text-lg flex items-center justify-between text-white">
                         <span>Marketplace</span>
                           <div className="flex items-center gap-1">
-                            {/* Search Dropdown */}
-                            <DropdownMenu>
-                              <DropdownMenuTrigger asChild>
-                                <Button variant="outline" size="sm" className="bg-black/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-8 w-8">
+                            {/* Expandable Search */}
+                            <div className="flex items-center">
+                              {!searchExpanded ? (
+                                <Button 
+                                  variant="outline" 
+                                  size="sm" 
+                                  className="bg-black/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-8 w-8"
+                                  onClick={() => setSearchExpanded(true)}
+                                >
                                   <Search className="w-3 h-3" />
                                 </Button>
-                              </DropdownMenuTrigger>
-                              <DropdownMenuContent align="center" className="w-64 bg-black/90 backdrop-blur-md border border-white/20 text-white z-[9999] p-3">
-                                <div className="relative">
-                                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-3 h-3 text-gray-400" />
-                                  <Input
-                                    placeholder="search"
-                                    value={searchTerm}
-                                    onChange={(e) => setSearchTerm(e.target.value)}
-                                    className="pl-8 pr-3 h-8 text-xs bg-black/20 backdrop-blur-md border-white/30 text-white placeholder:text-gray-400 w-full focus:bg-black/30 focus:border-white/40"
-                                  />
+                              ) : (
+                                <div className="flex items-center animate-fade-in">
+                                  <div className="relative">
+                                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-3 h-3 text-gray-400" />
+                                    <Input
+                                      placeholder="search"
+                                      value={searchTerm}
+                                      onChange={(e) => setSearchTerm(e.target.value)}
+                                      onBlur={() => !searchTerm && setSearchExpanded(false)}
+                                      className="pl-8 pr-3 h-8 text-xs bg-black/20 backdrop-blur-md border-white/30 text-white placeholder:text-gray-400 w-48 focus:bg-black/30 focus:border-white/40"
+                                      autoFocus
+                                    />
+                                  </div>
+                                  <Button 
+                                    variant="ghost" 
+                                    size="sm" 
+                                    className="ml-1 h-8 w-8 text-white hover:bg-white/20"
+                                    onClick={() => {
+                                      setSearchTerm("");
+                                      setSearchExpanded(false);
+                                    }}
+                                  >
+                                    <X className="w-3 h-3" />
+                                  </Button>
                                 </div>
-                              </DropdownMenuContent>
-                            </DropdownMenu>
+                              )}
+                            </div>
                             
                             {/* Category Filter */}
                             <DropdownMenu>
