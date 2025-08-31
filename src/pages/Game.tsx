@@ -1929,7 +1929,7 @@ const Game = () => {
                             <img src={player.image} alt={player.name} className="w-full h-full object-cover" />
                           </div>
                           <div className="flex-1 min-w-0">
-                            <div className="flex items-center justify-between mb-1">
+                            <div className="flex items-center justify-between">
                               <p className="text-sm font-semibold text-white truncate">{player.name}</p>
                               <div className="flex items-center space-x-1">
                                 <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4" />
