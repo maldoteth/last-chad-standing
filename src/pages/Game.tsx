@@ -3728,7 +3728,7 @@ const Game = () => {
                     </CardHeader>
                    <CardContent className="relative z-10">
                      <div className="space-y-3">
-                       {filteredMarketplacePlayers.slice(0, visiblePlayers).map((player, idx) => <div key={idx} className="flex items-center space-x-4 p-4 bg-white/5 rounded-lg hover:bg-white/10 transition-colors mb-3 last:mb-0">
+                       {filteredMarketplacePlayers.slice(0, visiblePlayers).map((player, idx) => <div key={idx} className="flex items-center space-x-4 p-4 bg-white/5 rounded-lg hover:bg-white/15 md:hover:bg-white/20 transition-all duration-300 mb-3 last:mb-0 cursor-pointer">
                           <div className="w-16 h-16 rounded-full overflow-hidden">
                             <img src={player.image} alt={player.name} className="w-full h-full object-cover" />
                           </div>
@@ -3776,7 +3776,7 @@ const Game = () => {
                     </CardHeader>
                     <CardContent className="relative z-10">
                       <div className="space-y-3">
-                        {trendingPlayers.map((player, idx) => <div key={idx} className="flex items-center space-x-3 p-3 bg-white/5 rounded-lg hover:bg-white/10 transition-colors">
+                        {trendingPlayers.map((player, idx) => <div key={idx} className="flex items-center space-x-3 p-3 bg-white/5 rounded-lg hover:bg-white/15 md:hover:bg-white/20 transition-all duration-300 cursor-pointer">
                             <div className="w-12 h-12 rounded-full overflow-hidden">
                               <img src={player.image} alt={player.name} className="w-full h-full object-cover" />
                             </div>
@@ -3834,7 +3834,7 @@ const Game = () => {
                     </CardHeader>
                     <CardContent className="relative z-10">
                       <div className="space-y-3">
-                        {topGainers.map((player, idx) => <div key={idx} className="flex items-center space-x-3 p-3 bg-white/5 rounded-lg hover:bg-white/10 transition-colors">
+                        {topGainers.map((player, idx) => <div key={idx} className="flex items-center space-x-3 p-3 bg-white/5 rounded-lg hover:bg-white/15 md:hover:bg-white/20 transition-all duration-300 cursor-pointer">
                             <div className="w-12 h-12 rounded-full overflow-hidden">
                               <img src={player.image} alt={player.name} className="w-full h-full object-cover" />
                             </div>
