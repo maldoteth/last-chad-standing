@@ -4,6 +4,7 @@ import { usePrivy } from '@privy-io/react-auth';
 import { useNavigate } from "react-router-dom";
 import { useStore } from "@/hooks/useStore";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useMarketplace } from "@/hooks/useMarketplace";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -40,6 +41,48 @@ const getTierIcon = (xp: number): string => {
   if (xp >= 2000) return '✊'; // Sparrer (Level 2)
   if (xp >= 1000) return '🎯'; // Trainee (Level 1)
   return '👤'; // Recruit (Level 0)
+};
+
+// Function to render marketplace prices (bid/ask)
+const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: string, itemType: string) => any, size: 'small' | 'medium' | 'large' = 'medium') => {
+  const prices = getMarketplacePrices(player.name, 'player');
+  
+  const sizeClasses = {
+    small: { coin: 'w-3 h-3', text: 'text-xs' },
+    medium: { coin: 'w-4 h-4', text: 'text-sm' },
+    large: { coin: 'w-5 h-5', text: 'text-lg' }
+  };
+
+  const { coin, text } = sizeClasses[size];
+
+  if (!prices.hasListings || (!prices.bestSellPrice && !prices.bestBuyPrice)) {
+    // Fallback to old single price display
+    return (
+      <div className="flex items-center space-x-1">
+        <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className={coin} />
+        <span className={`${text} font-bold text-white`}>{player.price.toLocaleString()}</span>
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex flex-col space-y-1">
+      {prices.bestSellPrice && (
+        <div className="flex items-center space-x-1">
+          <span className={`${text} font-medium text-red-400`}>Sell:</span>
+          <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className={coin} />
+          <span className={`${text} font-bold text-red-400`}>{prices.bestSellPrice.toLocaleString()}</span>
+        </div>
+      )}
+      {prices.bestBuyPrice && (
+        <div className="flex items-center space-x-1">
+          <span className={`${text} font-medium text-green-400`}>Buy:</span>
+          <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className={coin} />
+          <span className={`${text} font-bold text-green-400`}>{prices.bestBuyPrice.toLocaleString()}</span>
+        </div>
+      )}
+    </div>
+  );
 };
 const Game = () => {
   const [activeTab, setActiveTab] = useState("home");
@@ -79,6 +122,7 @@ const Game = () => {
     createProfile,
     fetchProfile
   } = useProfile();
+  const { getMarketplacePrices } = useMarketplace();
 
   // Initialize user balance and profile on login
   useEffect(() => {
@@ -1836,10 +1880,7 @@ const Game = () => {
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center justify-between">
                                 <p className="text-xs font-semibold text-white truncate">{player.name}</p>
-                                <div className="flex items-center space-x-1">
-                                  <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
-                                  <span className="text-xs font-bold text-white">{player.price.toLocaleString()}</span>
-                                </div>
+                                {renderMarketplacePrices(player, getMarketplacePrices, 'small')}
                               </div>
                                <div className="flex items-center justify-between">
                                  <div className={`flex items-center space-x-1 ${player.trend === 'up' ? 'text-green-400' : 'text-red-400'}`}>
@@ -1897,10 +1938,7 @@ const Game = () => {
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center justify-between">
                                 <p className="text-xs font-semibold text-white truncate">{player.name}</p>
-                                <div className="flex items-center space-x-1">
-                                  <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
-                                  <span className="text-xs font-bold text-white">{player.price.toLocaleString()}</span>
-                                </div>
+                                {renderMarketplacePrices(player, getMarketplacePrices, 'small')}
                               </div>
                                <div className="flex items-center justify-between">
                                  <div className="flex items-center space-x-1 text-green-400">
@@ -1949,10 +1987,7 @@ const Game = () => {
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center justify-between">
                               <p className="text-sm font-semibold text-white truncate">{player.name}</p>
-                              <div className="flex items-center space-x-1">
-                                <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4" />
-                                <span className="text-sm font-bold text-white">{player.price.toLocaleString()}</span>
-                              </div>
+                              {renderMarketplacePrices(player, getMarketplacePrices, 'medium')}
                             </div>
                           </div>
                         </div>)}
@@ -3388,10 +3423,7 @@ const Game = () => {
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center justify-between mb-1">
                                 <p className="text-sm font-semibold text-white truncate">{player.name}</p>
-                                <div className="flex items-center space-x-1">
-                                  <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4" />
-                                  <span className="text-sm font-bold text-white">{player.price.toLocaleString()}</span>
-                                </div>
+                                {renderMarketplacePrices(player, getMarketplacePrices, 'medium')}
                               </div>
                                <div className="flex items-center justify-between">
                                  <div className={`flex items-center space-x-1 ${player.trend === 'up' ? 'text-green-400' : 'text-red-400'}`}>
@@ -3449,10 +3481,7 @@ const Game = () => {
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center justify-between mb-1">
                                 <p className="text-sm font-semibold text-white truncate">{player.name}</p>
-                                <div className="flex items-center space-x-1">
-                                  <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4" />
-                                  <span className="text-sm font-bold text-white">{player.price.toLocaleString()}</span>
-                                </div>
+                                {renderMarketplacePrices(player, getMarketplacePrices, 'medium')}
                               </div>
                                <div className="flex items-center justify-between">
                                  <div className="flex items-center space-x-1 text-green-400">
@@ -3622,10 +3651,7 @@ const Game = () => {
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center justify-between">
                               <p className="text-lg font-semibold text-white truncate">{player.name}</p>
-                              <div className="flex items-center space-x-2">
-                                <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-5 h-5" />
-                                <span className="text-lg font-bold text-white">{player.price.toLocaleString()}</span>
-                              </div>
+                              {renderMarketplacePrices(player, getMarketplacePrices, 'large')}
                             </div>
                           </div>
                         </div>)}
