@@ -376,7 +376,7 @@ const Game = () => {
       position: "Assassin",
       price: 8500,
       change: 76.8,
-      image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png"
+      image: "/lovable-uploads/fa6496ee-f2e7-4af5-8205-7445121d8a6a.png"
     }, {
       name: "Plasma Cannon",
       team: "Energy Corps",
