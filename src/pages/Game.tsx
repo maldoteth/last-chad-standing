@@ -2013,7 +2013,7 @@ const Game = () => {
               backgroundSize: '4px 4px'
             }} />
                   <CardHeader className="pb-3 relative z-10">
-                    <CardTitle className="text-base flex items-center justify-between text-white">
+                    <CardTitle className="text-2xl md:text-3xl flex items-center justify-between text-white">
                       <span>Marketplace</span>
                         <div className="flex items-center space-x-2">
                          <Drawer>
