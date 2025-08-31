@@ -51,7 +51,7 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
   
   const sizeClasses = {
     small: { coin: 'w-3 h-3 md:w-4.5 md:h-4.5 md:-ml-1', text: 'text-xs md:text-base', label: 'text-[10px] md:text-sm' },
-    medium: { coin: 'w-4 h-4 md:w-6 md:h-6 md:-ml-1', text: 'text-sm md:text-lg', label: 'text-xs md:text-sm' },
+    medium: { coin: 'w-4 h-4 md:w-5 md:h-5 md:-ml-1', text: 'text-sm md:text-base', label: 'text-xs md:text-xs' },
     large: { coin: 'w-5 h-5 md:w-7.5 md:h-7.5 md:-ml-1', text: 'text-lg md:text-2xl', label: 'text-sm md:text-lg' }
   };
 
