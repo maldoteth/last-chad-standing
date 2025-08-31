@@ -3781,10 +3781,8 @@ const Game = () => {
                               <img src={player.image} alt={player.name} className="w-full h-full object-cover" />
                             </div>
                             <div className="flex-1 min-w-0">
-                              <div className="mb-1">
+                              <div className="flex items-center justify-between mb-1">
                                 <p className="text-sm font-semibold text-white truncate">{player.name}</p>
-                              </div>
-                              <div className="flex justify-end mb-1">
                                 {renderMarketplacePrices(player, getMarketplacePrices, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
                               </div>
                                <div className="flex items-center justify-between">
@@ -3841,10 +3839,8 @@ const Game = () => {
                               <img src={player.image} alt={player.name} className="w-full h-full object-cover" />
                             </div>
                             <div className="flex-1 min-w-0">
-                              <div className="mb-1">
+                              <div className="flex items-center justify-between mb-1">
                                 <p className="text-sm font-semibold text-white truncate">{player.name}</p>
-                              </div>
-                              <div className="flex justify-end mb-1">
                                 {renderMarketplacePrices(player, getMarketplacePrices, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
                               </div>
                                <div className="flex items-center justify-between">
