@@ -108,6 +108,7 @@ const Game = () => {
   const [isObjectivesGlowing, setIsObjectivesGlowing] = useState(false);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
   const [isRankingsOpen, setIsRankingsOpen] = useState(false);
+  const [marketTimeFilter, setMarketTimeFilter] = useState("1W");
   const objectivesRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
   const {
@@ -166,27 +167,51 @@ const Game = () => {
     }
   };
 
-  // Mock data for market analytics
-  const marketValueData = Array.from({
-    length: 30
-  }, (_, i) => ({
-    day: i + 1,
-    value: 125000 + Math.sin(i * 0.3) * 15000 + Math.random() * 10000,
-    date: new Date(Date.now() - (29 - i) * 24 * 60 * 60 * 1000).toLocaleDateString('en-US', {
-      month: 'short',
-      day: 'numeric'
-    })
-  }));
-  const listingsData = Array.from({
-    length: 30
-  }, (_, i) => ({
-    day: i + 1,
-    listings: Math.round(450 + Math.cos(i * 0.4) * 50 + Math.random() * 30),
-    date: new Date(Date.now() - (29 - i) * 24 * 60 * 60 * 1000).toLocaleDateString('en-US', {
-      month: 'short',
-      day: 'numeric'
-    })
-  }));
+  // Mock data generators for market analytics
+  const generateMarketValueData = (timeFilter: string) => {
+    const periods = {
+      "1W": 7,
+      "1M": 30, 
+      "1Y": 365,
+      "ALL": 730 // 2 years for all-time
+    };
+    
+    const days = periods[timeFilter] || 30;
+    
+    return Array.from({ length: days }, (_, i) => ({
+      day: i + 1,
+      value: 125000 + Math.sin(i * 0.3) * 15000 + Math.random() * 10000,
+      date: new Date(Date.now() - (days - 1 - i) * 24 * 60 * 60 * 1000).toLocaleDateString('en-US', {
+        month: timeFilter === "1Y" || timeFilter === "ALL" ? 'short' : 'short',
+        day: 'numeric',
+        ...(timeFilter === "1Y" || timeFilter === "ALL" ? { year: '2-digit' } : {})
+      })
+    }));
+  };
+
+  const generateListingsData = (timeFilter: string) => {
+    const periods = {
+      "1W": 7,
+      "1M": 30,
+      "1Y": 365, 
+      "ALL": 730 // 2 years for all-time
+    };
+    
+    const days = periods[timeFilter] || 30;
+    
+    return Array.from({ length: days }, (_, i) => ({
+      day: i + 1,
+      listings: Math.round(450 + Math.cos(i * 0.4) * 50 + Math.random() * 30),
+      date: new Date(Date.now() - (days - 1 - i) * 24 * 60 * 60 * 1000).toLocaleDateString('en-US', {
+        month: timeFilter === "1Y" || timeFilter === "ALL" ? 'short' : 'short',
+        day: 'numeric',
+        ...(timeFilter === "1Y" || timeFilter === "ALL" ? { year: '2-digit' } : {})
+      })
+    }));
+  };
+
+  const marketValueData = generateMarketValueData(marketTimeFilter);
+  const listingsData = generateListingsData(marketTimeFilter);
   const trendingPlayers = [{
     name: "The Irish King",
     team: "Crimson Hawks",
@@ -3290,6 +3315,27 @@ const Game = () => {
                   <div className="flex items-center justify-center space-x-3 mb-6">
                     <div>
                       <h1 className="text-3xl font-bold">Market</h1>
+                    </div>
+                  </div>
+                  
+                  {/* Market Time Filter */}
+                  <div className="flex items-center justify-center mb-6">
+                    <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-lg p-1 inline-flex">
+                      {["1W", "1M", "1Y", "ALL"].map((period) => (
+                        <Button
+                          key={period}
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => setMarketTimeFilter(period)}
+                          className={`px-4 py-2 text-sm font-medium rounded-md transition-all duration-200 ${
+                            marketTimeFilter === period
+                              ? "bg-white text-black shadow-sm"
+                              : "text-white/70 hover:text-white hover:bg-white/10"
+                          }`}
+                        >
+                          {period}
+                        </Button>
+                      ))}
                     </div>
                   </div>
                 </div>
