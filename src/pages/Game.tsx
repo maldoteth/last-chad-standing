@@ -340,7 +340,7 @@ const Game = () => {
       position: "Tank",
       price: 6800,
       change: 38.7,
-      image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png"
+      image: "/lovable-uploads/335b4baf-29e6-4895-a2d4-54e4cee9fae5.png"
     }, {
       name: "Phoenix Wing",
       team: "Fire Eagles",
