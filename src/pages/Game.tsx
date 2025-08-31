@@ -2102,7 +2102,7 @@ const Game = () => {
                             </div>
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center justify-between">
-                                <p className="text-xs font-semibold text-white truncate">{player.name}</p>
+                                <p className="text-sm md:text-xl font-semibold text-white truncate">{player.name}</p>
                                 {renderMarketplacePrices(player, getMarketplacePrices, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
                               </div>
                                <div className="flex items-center justify-between">
