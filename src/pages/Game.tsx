@@ -140,7 +140,7 @@ const Game = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchExpanded, setSearchExpanded] = useState(false);
   const [settingsExpanded, setSettingsExpanded] = useState(false);
-  const [objectivesView, setObjectivesView] = useState("weekly");
+  const [objectivesView, setObjectivesView] = useState("daily");
   const [isObjectivesGlowing, setIsObjectivesGlowing] = useState(false);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
   const [isRankingsOpen, setIsRankingsOpen] = useState(false);
