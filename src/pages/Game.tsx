@@ -17,6 +17,7 @@ import { ProgressBar } from "@/components/ProgressBar";
 import { useProfile } from "@/hooks/useProfile";
 import { getAllLevelsForDisplay, getCurrentLevel, getProgressToNextLevel } from "@/lib/progressSystem";
 import { formatNumberWithAbbreviation } from "@/lib/utils";
+import { Input } from "@/components/ui/input";
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerTrigger, DrawerClose } from "@/components/ui/drawer";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogDescription } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -103,6 +104,7 @@ const Game = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [marketplaceCategory, setMarketplaceCategory] = useState("all");
   const [marketplaceRarity, setMarketplaceRarity] = useState("all");
+  const [searchTerm, setSearchTerm] = useState("");
   const [settingsExpanded, setSettingsExpanded] = useState(false);
   const [objectivesView, setObjectivesView] = useState("weekly");
   const [isObjectivesGlowing, setIsObjectivesGlowing] = useState(false);
@@ -1974,15 +1976,67 @@ const Game = () => {
                   <CardHeader className="pb-3 relative z-10">
                     <CardTitle className="text-base flex items-center justify-between text-white">
                       <span>Marketplace</span>
-                      <div className="flex items-center space-x-2">
-                        <Button variant="outline" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
-                          <Search className="w-3 h-3 mr-1" />
-                          Search
-                        </Button>
-                        <Button variant="outline" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
-                          <Filter className="w-3 h-3 mr-1" />
-                          Filter
-                        </Button>
+                       <div className="flex items-center space-x-2">
+                        <Drawer>
+                          <DrawerTrigger asChild>
+                            <Button variant="outline" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
+                              <Search className="w-3 h-3 mr-1" />
+                              Search
+                            </Button>
+                          </DrawerTrigger>
+                          <DrawerContent className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
+                            <DrawerHeader>
+                              <DrawerTitle>Search Players</DrawerTitle>
+                            </DrawerHeader>
+                            <div className="px-4 pb-8">
+                              <Input
+                                placeholder="Search players..."
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                                className="bg-white/10 border-white/20 text-white placeholder:text-gray-400"
+                              />
+                            </div>
+                          </DrawerContent>
+                        </Drawer>
+                        <Drawer>
+                          <DrawerTrigger asChild>
+                            <Button variant="outline" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
+                              <Filter className="w-3 h-3 mr-1" />
+                              Filter
+                            </Button>
+                          </DrawerTrigger>
+                          <DrawerContent className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
+                            <DrawerHeader>
+                              <DrawerTitle>Filter by Rarity</DrawerTitle>
+                            </DrawerHeader>
+                            <div className="px-4 pb-8 space-y-2">
+                              <Button variant="ghost" onClick={() => setMarketplaceRarity("all")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceRarity === "all" ? "bg-white/20" : ""}`}>
+                                <div className="w-3 h-3 rounded-full bg-black mr-2" />
+                                All Rarities
+                              </Button>
+                              <Button variant="ghost" onClick={() => setMarketplaceRarity("green")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceRarity === "green" ? "bg-white/20" : ""}`}>
+                                <div className="w-3 h-3 rounded-full bg-green-500 mr-2" />
+                                Regular
+                              </Button>
+                              <Button variant="ghost" onClick={() => setMarketplaceRarity("blue")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceRarity === "blue" ? "bg-white/20" : ""}`}>
+                                <div className="w-3 h-3 rounded-full bg-blue-500 mr-2" />
+                                Rare
+                              </Button>
+                              <Button variant="ghost" onClick={() => setMarketplaceRarity("silver")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceRarity === "silver" ? "bg-white/20" : ""}`}>
+                                <div className="w-3 h-3 rounded-full bg-gray-300 mr-2" />
+                                Legendary
+                              </Button>
+                              <Button variant="ghost" onClick={() => setMarketplaceRarity("gold")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceRarity === "gold" ? "bg-white/20" : ""}`}>
+                                <div className="w-3 h-3 rounded-full bg-yellow-400 mr-2" />
+                                Mythical
+                              </Button>
+                              <Button variant="ghost" onClick={() => setMarketplaceRarity("special")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceRarity === "special" ? "bg-white/20" : ""}`}>
+                                <div className="w-3 h-3 rounded-full bg-gradient-to-r from-purple-400 via-pink-400 to-yellow-400 mr-2" />
+                                Special
+                              </Button>
+                            </div>
+                          </DrawerContent>
+                        </Drawer>
                       </div>
                     </CardTitle>
                   </CardHeader>
