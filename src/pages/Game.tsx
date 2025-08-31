@@ -204,13 +204,13 @@ const Game = () => {
     trend: "down",
     image: "/lovable-uploads/660b5122-5ce8-4f6e-af72-2c607d47ef44.png"
   }, {
-    name: "Lightning Bolt",
+    name: "Stani Eagle",
     team: "Thunder Birds",
     position: "Speed",
     price: 9100,
     change: 15.7,
     trend: "up",
-    image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
+    image: "/lovable-uploads/37f256dc-415c-4032-82ad-db63f676284d.png"
   }, {
     name: "Stone Wall",
     team: "Mountain Lions",
@@ -392,13 +392,13 @@ const Game = () => {
     trend: "up",
     image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
   }, {
-    name: "Lightning Bolt",
+    name: "Stani Eagle",
     team: "Thunder Birds",
     position: "Speed",
     price: 9100,
     lastSale: 7900,
     trend: "up",
-    image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png"
+    image: "/lovable-uploads/37f256dc-415c-4032-82ad-db63f676284d.png"
   }, {
     name: "Jonesy Bones",
     team: "Steel Wolves",
