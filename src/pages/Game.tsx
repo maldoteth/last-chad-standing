@@ -3849,7 +3849,7 @@ const Game = () => {
                     backgroundSize: '4px 4px'
                   }} />
                    <CardHeader className="relative z-10">
-                     <CardTitle className="text-3xl md:text-4xl flex items-center justify-between text-white">
+                     <CardTitle className="text-2xl md:text-3xl flex items-center justify-between text-white">
                         <span>Marketplace</span>
                           <div className="flex items-center gap-1">
                             {/* Expandable Search */}
