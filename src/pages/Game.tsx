@@ -3085,10 +3085,10 @@ const Game = () => {
                         rarity: "special",
                         image: "/lovable-uploads/13b1e254-7a27-4fc3-8040-9882d7705c70.png"
                       }, {
-                        name: "Ice Warrior",
-                        price: 2700,
-                        rarity: "silver",
-                        image: "/lovable-uploads/7d4ea94f-0c4d-459f-bded-b68a2bd272d6.png"
+                        name: "Tarragon Southslice",
+                        price: 2800,
+                        rarity: "gold",
+                        image: "/lovable-uploads/cf5abf4c-cf7f-49b7-a830-49343c8d1222.png"
                       }])} renderItem={(item, idx) => <GlowCard key={idx} className="text-white shadow-2xl cursor-pointer">
                               <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
                               <CardContent className="p-4 relative z-10">
