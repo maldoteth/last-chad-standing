@@ -4294,22 +4294,42 @@ const Game = () => {
         </div>
       </nav>
 
-      {/* Sell Dialog */}
-      <Dialog open={sellDialogOpen} onOpenChange={setSellDialogOpen}>
-        <DialogContent className="sm:max-w-md bg-black/10 backdrop-blur-md border border-white/20 text-white">
-          <DialogHeader>
-            <DialogTitle className="text-white">Sell {selectedPlayer?.name}</DialogTitle>
-            <DialogDescription className="text-white/80">
-              Selling functionality is coming soon! Stay tuned for updates.
-            </DialogDescription>
-          </DialogHeader>
-          <div className="flex justify-end space-x-2 pt-4">
-            <Button variant="outline" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 hover:text-white transition-all duration-300" onClick={() => setSellDialogOpen(false)}>
-              Close
-            </Button>
-          </div>
-        </DialogContent>
-      </Dialog>
+      {/* Sell Dialog - Mobile: Drawer, Desktop: Dialog */}
+      {isMobile ? (
+        <Drawer open={sellDialogOpen} onOpenChange={setSellDialogOpen}>
+          <DrawerContent className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
+            <DrawerHeader>
+              <DrawerTitle className="text-white">Sell {selectedPlayer?.name}</DrawerTitle>
+            </DrawerHeader>
+            <div className="p-4">
+              <p className="text-white/80 mb-4">
+                Selling functionality is coming soon! Stay tuned for updates.
+              </p>
+              <div className="flex justify-end">
+                <Button variant="outline" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 hover:text-white transition-all duration-300" onClick={() => setSellDialogOpen(false)}>
+                  Close
+                </Button>
+              </div>
+            </div>
+          </DrawerContent>
+        </Drawer>
+      ) : (
+        <Dialog open={sellDialogOpen} onOpenChange={setSellDialogOpen}>
+          <DialogContent className="sm:max-w-md bg-black/10 backdrop-blur-md border border-white/20 text-white">
+            <DialogHeader>
+              <DialogTitle className="text-white">Sell {selectedPlayer?.name}</DialogTitle>
+              <DialogDescription className="text-white/80">
+                Selling functionality is coming soon! Stay tuned for updates.
+              </DialogDescription>
+            </DialogHeader>
+            <div className="flex justify-end space-x-2 pt-4">
+              <Button variant="outline" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 hover:text-white transition-all duration-300" onClick={() => setSellDialogOpen(false)}>
+                Close
+              </Button>
+            </div>
+          </DialogContent>
+        </Dialog>
+      )}
 
       {/* Buy Dialog - Mobile: Drawer, Desktop: Dialog */}
       {isMobile ? (
