@@ -3512,7 +3512,7 @@ const Game = () => {
                             <div className="relative">
                               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-3 h-3 text-gray-400" />
                               <Input
-                                placeholder="Search players..."
+                                placeholder="search"
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
                                 className="pl-8 pr-3 h-8 text-xs bg-black/10 backdrop-blur-md border-white/20 text-white placeholder:text-gray-400 w-48"
