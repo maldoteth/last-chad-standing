@@ -82,8 +82,12 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
             {formatNumberWithAbbreviation(mockSellPrice)}
           </span>
         </div>
-        <div className="flex items-center justify-between">
-          <span className={`${label} text-red-400 font-medium`}>sell</span>
+        <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-1">
+            <div className={coin}></div>
+            <span className={`${label} text-red-400 font-medium`}>sell</span>
+          </div>
+          <span className={`${text} text-white/60 opacity-0`}>|</span>
           <span className={`${label} text-green-400 font-medium`}>buy</span>
         </div>
       </div>
@@ -116,9 +120,15 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
           </span>
         )}
       </div>
-      <div className="flex items-center justify-between">
+      <div className="flex items-center space-x-2">
         {prices.bestBuyPrice && (
-          <span className={`${label} text-red-400 font-medium`}>sell</span>
+          <div className="flex items-center space-x-1">
+            <div className={coin}></div>
+            <span className={`${label} text-red-400 font-medium`}>sell</span>
+          </div>
+        )}
+        {prices.bestBuyPrice && prices.bestSellPrice && (
+          <span className={`${text} text-white/60 opacity-0`}>|</span>
         )}
         {prices.bestSellPrice && (
           <span className={`${label} text-green-400 font-medium`}>buy</span>
