@@ -448,13 +448,13 @@ const Game = () => {
     trend: "up",
     image: "/lovable-uploads/f52e83c2-28b7-417e-90ac-757255d1759f.png"
   }, {
-    name: "Quantum Leap",
+    name: "White Base Vest",
     team: "Future Force",
     position: "Mobility",
     price: 4800,
     lastSale: 4000,
     trend: "up",
-    image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
+    image: "/lovable-uploads/508d1509-e761-46c6-9f3a-f70e256f5a52.png"
   }].sort((a, b) => b.price - a.price);
   const currentMarketValue = marketValueData[marketValueData.length - 1]?.value || 0;
   const currentListings = Math.round(listingsData[listingsData.length - 1]?.listings || 0);
