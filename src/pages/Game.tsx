@@ -3781,7 +3781,7 @@ const Game = () => {
                               <img src={player.image} alt={player.name} className="w-full h-full object-cover" />
                             </div>
                             <div className="flex-1 min-w-0">
-                              <div>
+                              <div className="flex items-center justify-between mb-1">
                                 <p className="text-sm font-semibold text-white truncate">{player.name}</p>
                                 {renderMarketplacePrices(player, getMarketplacePrices, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
                               </div>
@@ -3839,7 +3839,7 @@ const Game = () => {
                               <img src={player.image} alt={player.name} className="w-full h-full object-cover" />
                             </div>
                             <div className="flex-1 min-w-0">
-                              <div>
+                              <div className="flex items-center justify-between mb-1">
                                 <p className="text-sm font-semibold text-white truncate">{player.name}</p>
                                 {renderMarketplacePrices(player, getMarketplacePrices, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
                               </div>
