@@ -230,12 +230,12 @@ const Game = () => {
   }];
   const topGainersData = {
     daily: [{
-      name: "Cyber Phantom",
+      name: "The Coupé Tank",
       team: "Neon Guardians",
       position: "Stealth",
       price: 5200,
       change: 24.8,
-      image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
+      image: "/lovable-uploads/1c6b707c-97a6-4381-bc54-de63a7cf8a31.png"
     }, {
       name: "Quantum Leap",
       team: "Future Force",
