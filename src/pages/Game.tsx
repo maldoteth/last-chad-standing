@@ -432,13 +432,13 @@ const Game = () => {
     trend: "up",
     image: "/lovable-uploads/1efc1553-007a-4b38-a982-79d9f5abbfa1.png"
   }, {
-    name: "Cyber Phantom",
+    name: "Pit Bike",
     team: "Neon Guardians",
     position: "Stealth",
     price: 5200,
     lastSale: 4100,
     trend: "up",
-    image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
+    image: "/lovable-uploads/4e2aac54-cac6-4cf1-92ad-76bf7e788077.png"
   }, {
     name: "Storm Breaker",
     team: "Wind Riders",
