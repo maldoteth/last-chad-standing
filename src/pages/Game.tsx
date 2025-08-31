@@ -3612,9 +3612,9 @@ const Game = () => {
                        </div>
                      </CardTitle>
                    </CardHeader>
-                  <CardContent className="relative z-10">
-                    <div className="space-y-3">
-                      {filteredMarketplacePlayers.slice(0, visiblePlayers).map((player, idx) => <div key={idx} className="flex items-center space-x-4 p-4 bg-white/5 rounded-lg hover:bg-white/10 transition-colors">
+                   <CardContent className="relative z-10">
+                     <div className="space-y-3">
+                       {filteredMarketplacePlayers.slice(0, visiblePlayers).map((player, idx) => <div key={idx} className="flex items-center space-x-4 p-4 bg-white/5 rounded-lg hover:bg-white/10 transition-colors mb-3 last:mb-0">
                           <div className="w-16 h-16 rounded-full overflow-hidden">
                             <img src={player.image} alt={player.name} className="w-full h-full object-cover" />
                           </div>
