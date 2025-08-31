@@ -4293,7 +4293,7 @@ const Game = () => {
 
       {/* Buy Dialog */}
       <Dialog open={buyDialogOpen} onOpenChange={setBuyDialogOpen}>
-        <DialogContent className="sm:max-w-md bg-black/20 backdrop-blur-xl border border-white/20 text-white">
+        <DialogContent className="sm:max-w-md bg-black/10 backdrop-blur-md border border-white/20 text-white">
           <DialogHeader>
             <DialogTitle className="text-white">Buy {selectedPlayer?.name}</DialogTitle>
             <DialogDescription className="text-white/80">
