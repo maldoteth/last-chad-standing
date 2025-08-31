@@ -342,7 +342,7 @@ const Game = () => {
       change: 38.7,
       image: "/lovable-uploads/335b4baf-29e6-4895-a2d4-54e4cee9fae5.png"
     }, {
-      name: "Phoenix Wing",
+      name: "Leroy Girthy",
       team: "Fire Eagles",
       position: "Assault",
       price: 5900,
