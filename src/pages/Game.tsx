@@ -333,7 +333,7 @@ const Game = () => {
       position: "Speed",
       price: 7300,
       change: 45.2,
-      image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
+      image: "/lovable-uploads/fdd396d6-16bd-493f-ba2e-0c27e846ea03.png"
     }, {
       name: "Iron Forge",
       team: "Steel Warriors",
