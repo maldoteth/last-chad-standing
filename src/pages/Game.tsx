@@ -1435,7 +1435,7 @@ const Game = () => {
                   name: "Dale Sunny",
                   price: 3200,
                   rarity: "special",
-                  image: cyberWarriorSkin
+                  image: "/lovable-uploads/155dbfd4-968c-45cf-b58f-f53281c10270.png"
                 }, {
                   name: "Thunder Punch",
                   price: 1900,
@@ -3073,7 +3073,7 @@ const Game = () => {
                         name: "Dale Sunny",
                         price: 3000,
                         rarity: "gold",
-                        image: cyberWarriorSkin
+                        image: "/lovable-uploads/155dbfd4-968c-45cf-b58f-f53281c10270.png"
                       }, {
                         name: "Ray Del Mar",
                         price: 2800,
