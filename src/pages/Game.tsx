@@ -25,6 +25,7 @@ import { Coins, ShoppingBag, Users, Package, CreditCard, Handshake, Trophy, Star
 import { ResponsiveContainer, LineChart as RechartsLineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, PieChart, Pie, Cell, BarChart, Bar, Area, AreaChart } from 'recharts';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import cyberWarriorSkin from "@/assets/cyber-warrior-skin.png";
+import StoreCarousel from "@/components/StoreCarousel";
 const irishKingSkin = "/lovable-uploads/5c3f060f-4c5f-412b-8f27-eb1bebd3dd7d.png";
 const staniEagleSkin = "/lovable-uploads/37f256dc-415c-4032-82ad-db63f676284d.png";
 const bonesSkin = "/lovable-uploads/660b5122-5ce8-4f6e-af72-2c607d47ef44.png";
@@ -1410,13 +1411,13 @@ const Game = () => {
                     <CardHeader className="relative z-10">
                       <CardTitle className="flex items-center justify-between text-white">
                         <span>Fighters</span>
-                        <Badge variant="secondary">4 items</Badge>
+                        <Badge variant="secondary">8 items</Badge>
                       </CardTitle>
                       
                     </CardHeader>
                     <CardContent>
-                       <div className="grid grid-cols-2 gap-3">
-                         {filterItemsByRarity([{
+                       <StoreCarousel 
+                         items={filterItemsByRarity([{
                     name: "The Irish King",
                     price: 2500,
                     rarity: "gold",
@@ -1436,7 +1437,29 @@ const Game = () => {
                     price: 1500,
                     rarity: "green",
                     image: latinLegendSkin
-                  }]).map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden hover:scale-105 hover:shadow-3xl hover:border-gray-500/70 transition-all duration-300 cursor-pointer">
+                  }, {
+                    name: "Tarragon Southcut",
+                    price: 2800,
+                    rarity: "gold",
+                    image: "/lovable-uploads/dc6922ce-3718-474e-acac-697502a010b2.png"
+                  }, {
+                    name: "Cyber Warrior",
+                    price: 3200,
+                    rarity: "special",
+                    image: cyberWarriorSkin
+                  }, {
+                    name: "Thunder Punch",
+                    price: 1900,
+                    rarity: "blue",
+                    image: "/lovable-uploads/77a6c004-93ed-49ee-a5d0-6056ee852612.png"
+                  }, {
+                    name: "Ice Breaker",
+                    price: 2400,
+                    rarity: "silver",
+                    image: "/lovable-uploads/8c2f941a-58db-43db-9b99-afb13cd3c36b.png"
+                  }])}
+                         renderItem={(item, idx) => (
+                           <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden hover:scale-105 hover:shadow-3xl hover:border-gray-500/70 transition-all duration-300 cursor-pointer">
                              <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
                              <CardContent className="p-3 relative z-10">
                                <div className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden">
@@ -1486,8 +1509,9 @@ const Game = () => {
                                 </Drawer>
                               </div>
                             </CardContent>
-                          </Card>)}
-                      </div>
+                          </Card>
+                         )}
+                       />
                      </CardContent>
                    </Card>}
 
@@ -1504,13 +1528,13 @@ const Game = () => {
                     <CardHeader className="relative z-10">
                       <CardTitle className="flex items-center justify-between text-white">
                         <span>Accessories</span>
-                        <Badge variant="secondary">4 items</Badge>
+                        <Badge variant="secondary">8 items</Badge>
                       </CardTitle>
                       
                     </CardHeader>
                     <CardContent>
-                       <div className="grid grid-cols-2 gap-3">
-                         {filterItemsByRarity([{
+                       <StoreCarousel 
+                         items={filterItemsByRarity([{
                     name: "Red Wing Suit",
                     price: 600,
                     rarity: "blue",
@@ -1530,97 +1554,29 @@ const Game = () => {
                     price: 550,
                     rarity: "silver",
                     image: "/lovable-uploads/91375d1a-e829-4716-b3b6-833b58355bd9.png"
-                  }]).map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden hover:scale-105 hover:shadow-3xl hover:border-gray-500/70 transition-all duration-300 cursor-pointer">
-                             <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
-                             <CardContent className="p-3 relative z-10">
-                               <div className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden">
-                                 <img src={item.image} alt={item.name} className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" />
-                               </div>
-                              <h3 className="font-semibold text-xs text-white mb-1">{item.name}</h3>
-                              <div className="flex items-center justify-between">
-                                <div className="flex items-center space-x-1">
-                                  <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
-                                  <span className="text-xs font-bold text-white">{item.price.toLocaleString()}</span>
-                                </div>
-                                <Drawer>
-                                  <DrawerTrigger asChild>
-                                     <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
-                                       <ShoppingBag className={`${isMobile ? 'h-3 w-3' : 'mr-1 h-2 w-2'}`} />
-                                       {!isMobile && "Buy"}
-                                     </Button>
-                                  </DrawerTrigger>
-                                   <DrawerContent className="bg-black/10 backdrop-blur-md border-t border-white/20 text-white transition-all duration-300">
-                                    <DrawerHeader>
-                                      <DrawerTitle className="text-white text-center">Purchase {item.name}</DrawerTitle>
-                                    </DrawerHeader>
-                                    <div className="p-4 space-y-3">
-                                      <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => toast({
-                                title: "Coming Soon",
-                                description: "Coin purchases coming soon!",
-                                duration: 3000
-                              })}>
-                                        <Coins className="mr-2 h-4 w-4" />
-                                        Buy With Coins
-                                      </Button>
-                                      <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => {/* TODO: Implement card payment */}}>
-                                        <CreditCard className="mr-2 h-4 w-4" />
-                                        Buy with Card
-                                      </Button>
-                                      <DrawerClose asChild>
-                                         <Button variant="outline" className="w-full border-white/20 text-white hover:bg-white/10 hover:text-white">
-                                          Cancel
-                                        </Button>
-                                      </DrawerClose>
-                                    </div>
-                                  </DrawerContent>
-                                </Drawer>
-                              </div>
-                            </CardContent>
-                          </Card>)}
-                      </div>
-                     </CardContent>
-                   </Card>}
-
-                   {/* Mobility Category */}
-                   {(selectedCategory === "all" || selectedCategory === "mobility") && <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
-                    <div className="absolute inset-0" style={{
-                backgroundImage: `
-                        linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
-                        linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
-                      `,
-                backgroundSize: '4px 4px'
-              }} />
-                    <CardHeader className="relative z-10">
-                      <CardTitle className="flex items-center justify-between text-white">
-                        <span>Mobility</span>
-                        <Badge variant="secondary">4 items</Badge>
-                      </CardTitle>
-                      
-                    </CardHeader>
-                    <CardContent>
-                       <div className="grid grid-cols-2 gap-3">
-                         {filterItemsByRarity([{
-                    name: "The Coupé Tank",
-                    price: 5000,
+                  }, {
+                    name: "Combat Helmet",
+                    price: 800,
                     rarity: "gold",
-                    image: "/lovable-uploads/1c6b707c-97a6-4381-bc54-de63a7cf8a31.png"
+                    image: "/lovable-uploads/896892f1-7ebc-4852-acea-80dcdbf7c545.png"
                   }, {
-                    name: "Speed Buggy",
-                    price: 3200,
-                    rarity: "silver",
-                    image: "/lovable-uploads/b64d7801-1284-4763-b115-ca3cfa8ff315.png"
+                    name: "Tactical Gloves",
+                    price: 350,
+                    rarity: "green",
+                    image: "/lovable-uploads/4c80b2cf-0ea7-49a2-96b8-58ecbfa7623a.png"
                   }, {
-                    name: "Pit Bike",
-                    price: 4500,
-                    rarity: "blue",
-                    image: "/lovable-uploads/4e2aac54-cac6-4cf1-92ad-76bf7e788077.png"
-                  }, {
-                    name: "Pogo",
-                    price: 8000,
+                    name: "Elite Armor",
+                    price: 1200,
                     rarity: "special",
-                    image: "/lovable-uploads/2877ff38-b9fd-4a5d-bca9-25b14f237997.png"
-                  }]).map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden hover:scale-105 hover:shadow-3xl hover:border-gray-500/70 transition-all duration-300 cursor-pointer">
+                    image: "/lovable-uploads/c4290bdc-f68b-45db-bf53-f9551d2cb16f.png"
+                  }, {
+                    name: "Battle Boots",
+                    price: 650,
+                    rarity: "blue",
+                    image: "/lovable-uploads/7d84dfb4-4db3-4adb-87f0-36f33c0f8daa.png"
+                  }])}
+                         renderItem={(item, idx) => (
+                           <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden hover:scale-105 hover:shadow-3xl hover:border-gray-500/70 transition-all duration-300 cursor-pointer">
                              <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
                              <CardContent className="p-3 relative z-10">
                                <div className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden">
@@ -1666,8 +1622,9 @@ const Game = () => {
                                 </Drawer>
                               </div>
                             </CardContent>
-                          </Card>)}
-                      </div>
+                          </Card>
+                         )}
+                       />
                      </CardContent>
                    </Card>}
 
@@ -1684,13 +1641,13 @@ const Game = () => {
                     <CardHeader className="relative z-10">
                       <CardTitle className="flex items-center justify-between text-white">
                         <span>Emotes</span>
-                         <Badge variant="secondary">4 items</Badge>
+                         <Badge variant="secondary">8 items</Badge>
                       </CardTitle>
                       
                     </CardHeader>
                     <CardContent>
-                       <div className="grid grid-cols-2 gap-3">
-                         {filterItemsByRarity([{
+                       <StoreCarousel 
+                         items={filterItemsByRarity([{
                     name: "Flex",
                     price: 800,
                     rarity: "blue",
@@ -1710,7 +1667,29 @@ const Game = () => {
                     price: 1500,
                     rarity: "gold",
                     image: "/lovable-uploads/30d419b4-79a9-459c-b37b-42099ffd6273.png"
-                  }]).map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden hover:scale-105 hover:shadow-3xl hover:border-gray-500/70 transition-all duration-300 cursor-pointer">
+                  }, {
+                    name: "Victory Dance",
+                    price: 1200,
+                    rarity: "silver",
+                    image: "/lovable-uploads/8090c672-9fc6-4634-ad28-0629a1a7f181.png"
+                  }, {
+                    name: "Taunt",
+                    price: 950,
+                    rarity: "blue",
+                    image: "/lovable-uploads/13bff6a8-5c37-4ca1-928f-3b3c98952224.png"
+                  }, {
+                    name: "Power Pose",
+                    price: 1600,
+                    rarity: "gold",
+                    image: "/lovable-uploads/c076819c-8944-483c-9fd4-336da5ebba11.png"
+                  }, {
+                    name: "Ultimate Flex",
+                    price: 3000,
+                    rarity: "special",
+                    image: "/lovable-uploads/dd15acda-3123-4e95-916c-ba6ef8db31fd.png"
+                  }])}
+                         renderItem={(item, idx) => (
+                           <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden hover:scale-105 hover:shadow-3xl hover:border-gray-500/70 transition-all duration-300 cursor-pointer">
                              <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
                              <CardContent className="p-3 relative z-10">
                                <div className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden flex items-center justify-center">
@@ -1756,98 +1735,9 @@ const Game = () => {
                                 </Drawer>
                               </div>
                             </CardContent>
-                          </Card>)}
-                      </div>
-                     </CardContent>
-                   </Card>}
-
-                   {/* Packs Category */}
-                   {(selectedCategory === "all" || selectedCategory === "packs") && <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
-                    <div className="absolute inset-0" style={{
-                backgroundImage: `
-                        linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
-                        linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
-                      `,
-                backgroundSize: '4px 4px'
-              }} />
-                    <CardHeader className="relative z-10">
-                      <CardTitle className="flex items-center justify-between text-white">
-                        <span>Packs</span>
-                        <Badge variant="secondary">4 items</Badge>
-                      </CardTitle>
-                      
-                    </CardHeader>
-                    <CardContent>
-                       <div className="grid grid-cols-2 gap-3">
-                          {filterItemsByRarity([{
-                    name: "Silver Pack",
-                    price: 1000,
-                    rarity: "silver",
-                    image: "/lovable-uploads/17c3a939-bcaa-4cdb-9b61-271b5774c7e2.png"
-                  }, {
-                    name: "Gold Pack",
-                    price: 2000,
-                    rarity: "gold",
-                    image: "/lovable-uploads/291c5734-f144-47b0-9f49-915999e921b0.png"
-                  }, {
-                    name: "EO Summer Pack",
-                    price: 3500,
-                    rarity: "special",
-                    image: "/lovable-uploads/2149e9ad-919f-49ea-8be4-90f190387d39.png"
-                  }, {
-                    name: "Wild West Pack",
-                    price: 5000,
-                    rarity: "special",
-                    image: "/lovable-uploads/5cf8ad93-f292-4e4c-b53c-eb0c4bc0f7be.png"
-                  }]).map((item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden hover:scale-105 hover:shadow-3xl hover:border-gray-500/70 transition-all duration-300 cursor-pointer">
-                             <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
-                             <CardContent className="p-3 relative z-10">
-                               <div className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden">
-                                 <img src={item.image} alt={item.name} className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" />
-                               </div>
-                              <h3 className="font-semibold text-xs text-white mb-1">{item.name}</h3>
-                              <div className="flex items-center justify-between">
-                                <div className="flex items-center space-x-1">
-                                  <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
-                                  <span className="text-xs font-bold text-white">{item.price.toLocaleString()}</span>
-                                </div>
-                                <Drawer>
-                                  <DrawerTrigger asChild>
-                                     <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
-                                       <ShoppingBag className={`${isMobile ? 'h-3 w-3' : 'mr-1 h-2 w-2'}`} />
-                                       {!isMobile && "Buy"}
-                                     </Button>
-                                  </DrawerTrigger>
-                                  <DrawerContent className="bg-black/10 backdrop-blur-md border-t border-white/20 text-white transition-all duration-300">
-                                    <DrawerHeader>
-                                      <DrawerTitle className="text-white text-center">Purchase {item.name}</DrawerTitle>
-                                    </DrawerHeader>
-                                    <div className="p-4 space-y-3">
-                                      <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => toast({
-                                title: "Coming Soon",
-                                description: "Coin purchases coming soon!",
-                                duration: 3000
-                              })}>
-                                        <Coins className="mr-2 h-4 w-4" />
-                                        Buy With Coins
-                                      </Button>
-                                      <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => {/* TODO: Implement card payment */}}>
-                                        <CreditCard className="mr-2 h-4 w-4" />
-                                        Buy with Card
-                                      </Button>
-                                      <DrawerClose asChild>
-                                        <Button variant="outline" className="w-full border-white/20 text-white hover:bg-white/10 hover:text-white">
-                                          Cancel
-                                        </Button>
-                                      </DrawerClose>
-                                    </div>
-                                  </DrawerContent>
-                                </Drawer>
-                              </div>
-                            </CardContent>
-                          </Card>)}
-                      </div>
+                          </Card>
+                         )}
+                       />
                      </CardContent>
                    </Card>}
                  </div>
