@@ -3083,7 +3083,7 @@ const Game = () => {
                         name: "Fire Master",
                         price: 3500,
                         rarity: "special",
-                        image: "/lovable-uploads/13b1e254-7a27-4fc3-8040-9882d7705c70.png"
+                        image: "/lovable-uploads/98664a07-8365-4512-8f3e-a0c79bd4617c.png"
                       }, {
                         name: "Tarragon Southslice",
                         price: 2800,
