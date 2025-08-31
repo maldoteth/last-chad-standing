@@ -31,6 +31,7 @@ const staniEagleSkin = "/lovable-uploads/37f256dc-415c-4032-82ad-db63f676284d.pn
 const bonesSkin = "/lovable-uploads/660b5122-5ce8-4f6e-af72-2c607d47ef44.png";
 const latinLegendSkin = "/lovable-uploads/2c556456-ebeb-4eec-9842-f2d31e06c58a.png";
 const luchadorSkin = "/lovable-uploads/57b3ab6b-2e56-4a30-98f6-1980bbe99c9a.png";
+const tarragonSkin = "/lovable-uploads/dc6922ce-3718-474e-acac-697502a010b2.png";
 
 // Store items data
 const fighterItems = [
@@ -63,6 +64,12 @@ const fighterItems = [
     price: 2000,
     rarity: "silver",
     image: luchadorSkin
+  },
+  {
+    name: "Tarragon Southcut",
+    price: 2800,
+    rarity: "gold",
+    image: tarragonSkin
   }
 ];
 
