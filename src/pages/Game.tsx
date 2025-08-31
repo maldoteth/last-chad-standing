@@ -188,13 +188,13 @@ const Game = () => {
     })
   }));
   const trendingPlayers = [{
-    name: "Shadow Strike",
+    name: "The Irish King",
     team: "Crimson Hawks",
     position: "Striker",
     price: 8500,
     change: 12.5,
     trend: "up",
-    image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
+    image: "/src/assets/irish-king-skin.png"
   }, {
     name: "Iron Fist",
     team: "Steel Wolves",
@@ -376,13 +376,13 @@ const Game = () => {
   };
   const topGainers = topGainersData[gainersTimeFilter];
   const allPlayers = [{
-    name: "Shadow Strike",
+    name: "The Irish King",
     team: "Crimson Hawks",
     position: "Striker",
     price: 8500,
     lastSale: 7500,
     trend: "up",
-    image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
+    image: "/src/assets/irish-king-skin.png"
   }, {
     name: "Fire Storm",
     team: "Flame Dragons",
