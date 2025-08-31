@@ -67,15 +67,15 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
         <div className="flex flex-col">
           <div className="flex items-center space-x-1">
             <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className={coin} />
-            <span 
-              className={`${text} font-bold text-red-400 cursor-pointer hover:text-red-300 transition-colors`}
-              onClick={() => onSellClick?.()}
-            >
-              {formatNumberWithAbbreviation(mockBuyPrice)}
-            </span>
-          </div>
-          <div className="flex justify-center">
-            <span className={`${label} text-red-400 font-medium`}>sell</span>
+            <div className="flex flex-col items-center">
+              <span 
+                className={`${text} font-bold text-red-400 cursor-pointer hover:text-red-300 transition-colors`}
+                onClick={() => onSellClick?.()}
+              >
+                {formatNumberWithAbbreviation(mockBuyPrice)}
+              </span>
+              <span className={`${label} text-red-400 font-medium`}>sell</span>
+            </div>
           </div>
         </div>
         <span className={`${text} text-white/60`}>|</span>
@@ -98,15 +98,15 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
         <div className="flex flex-col">
           <div className="flex items-center space-x-1">
             <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className={coin} />
-            <span 
-              className={`${text} font-bold text-red-400 cursor-pointer hover:text-red-300 transition-colors`}
-              onClick={() => onSellClick?.()}
-            >
-              {formatNumberWithAbbreviation(prices.bestBuyPrice)}
-            </span>
-          </div>
-          <div className="flex justify-center">
-            <span className={`${label} text-red-400 font-medium`}>sell</span>
+            <div className="flex flex-col items-center">
+              <span 
+                className={`${text} font-bold text-red-400 cursor-pointer hover:text-red-300 transition-colors`}
+                onClick={() => onSellClick?.()}
+              >
+                {formatNumberWithAbbreviation(prices.bestBuyPrice)}
+              </span>
+              <span className={`${label} text-red-400 font-medium`}>sell</span>
+            </div>
           </div>
         </div>
       )}
