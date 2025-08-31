@@ -2103,7 +2103,7 @@ const Game = () => {
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center justify-between">
                                 <p className="text-xs font-semibold text-white truncate">{player.name}</p>
-                                {renderMarketplacePrices(player, getMarketplacePrices, 'small', () => handleSellClick(player), () => handleBuyClick(player))}
+                                {renderMarketplacePrices(player, getMarketplacePrices, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
                               </div>
                                <div className="flex items-center justify-between">
                                  <div className={`flex items-center space-x-1 ${player.trend === 'up' ? 'text-green-400' : 'text-red-400'}`}>
@@ -2161,7 +2161,7 @@ const Game = () => {
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center justify-between">
                                 <p className="text-xs font-semibold text-white truncate">{player.name}</p>
-                                {renderMarketplacePrices(player, getMarketplacePrices, 'small', () => handleSellClick(player), () => handleBuyClick(player))}
+                                {renderMarketplacePrices(player, getMarketplacePrices, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
                               </div>
                                <div className="flex items-center justify-between">
                                  <div className="flex items-center space-x-1 text-green-400">
