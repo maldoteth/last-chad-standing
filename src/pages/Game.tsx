@@ -258,12 +258,12 @@ const Game = () => {
       change: 16.2,
       image: "/lovable-uploads/1efc1553-007a-4b38-a982-79d9f5abbfa1.png"
     }, {
-      name: "Storm Breaker",
+      name: "Pit Bike",
       team: "Wind Riders",
       position: "Force",
       price: 4900,
       change: 15.9,
-      image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
+      image: "/lovable-uploads/4e2aac54-cac6-4cf1-92ad-76bf7e788077.png"
     }],
     weekly: [{
       name: "Lightning Strike",
