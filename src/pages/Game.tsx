@@ -1482,10 +1482,9 @@ const Game = () => {
                     rarity: "silver",
                     image: "/lovable-uploads/8c2f941a-58db-43db-9b99-afb13cd3c36b.png"
                   }])}
-                         renderItem={(item, idx) => (
-                           <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden hover:scale-105 hover:shadow-3xl hover:border-gray-500/70 transition-all duration-300 cursor-pointer">
-                             <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
-                             <CardContent className="p-3 relative z-10">
+                          renderItem={(item, idx) => (
+                            <GlowCard key={idx} className="cursor-pointer">
+                              <div className="p-3">
                                <div className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden">
                                  <img src={item.image} alt={item.name} className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" />
                                </div>
@@ -1531,9 +1530,9 @@ const Game = () => {
                                     </div>
                                   </DrawerContent>
                                 </Drawer>
-                              </div>
-                            </CardContent>
-                          </Card>
+                               </div>
+                             </div>
+                           </GlowCard>
                          )}
                        />
                      </CardContent>
@@ -1614,10 +1613,9 @@ const Game = () => {
                     rarity: "blue",
                     image: "/lovable-uploads/7d84dfb4-4db3-4adb-87f0-36f33c0f8daa.png"
                   }])}
-                         renderItem={(item, idx) => (
-                           <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden hover:scale-105 hover:shadow-3xl hover:border-gray-500/70 transition-all duration-300 cursor-pointer">
-                             <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
-                             <CardContent className="p-3 relative z-10">
+                          renderItem={(item, idx) => (
+                            <GlowCard key={idx} className="cursor-pointer">
+                              <div className="p-3">
                                <div className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden">
                                  <img src={item.image} alt={item.name} className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" />
                                </div>
@@ -1659,9 +1657,9 @@ const Game = () => {
                                     </div>
                                   </DrawerContent>
                                 </Drawer>
-                              </div>
-                            </CardContent>
-                          </Card>
+                               </div>
+                             </div>
+                           </GlowCard>
                          )}
                        />
                      </CardContent>
@@ -1742,10 +1740,9 @@ const Game = () => {
                     rarity: "special",
                     image: "/lovable-uploads/dd15acda-3123-4e95-916c-ba6ef8db31fd.png"
                   }])}
-                         renderItem={(item, idx) => (
-                           <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden hover:scale-105 hover:shadow-3xl hover:border-gray-500/70 transition-all duration-300 cursor-pointer">
-                             <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
-                             <CardContent className="p-3 relative z-10">
+                          renderItem={(item, idx) => (
+                            <GlowCard key={idx} className="cursor-pointer">
+                              <div className="p-3">
                                <div className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden flex items-center justify-center">
                                   {item.image.startsWith('/') || item.image.startsWith('http') ? <img src={item.image} alt={item.name} className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" /> : <div className="text-4xl hover:scale-110 transition-transform duration-300">{item.image}</div>}
                                </div>
@@ -1787,9 +1784,9 @@ const Game = () => {
                                     </div>
                                   </DrawerContent>
                                 </Drawer>
-                              </div>
-                            </CardContent>
-                          </Card>
+                               </div>
+                             </div>
+                           </GlowCard>
                          )}
                        />
                      </CardContent>
