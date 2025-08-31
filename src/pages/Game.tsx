@@ -194,7 +194,7 @@ const Game = () => {
     price: 8500,
     change: 12.5,
     trend: "up",
-    image: "/src/assets/irish-king-skin.png"
+    image: "/lovable-uploads/5c3f060f-4c5f-412b-8f27-eb1bebd3dd7d.png"
   }, {
     name: "Iron Fist",
     team: "Steel Wolves",
@@ -382,7 +382,7 @@ const Game = () => {
     price: 8500,
     lastSale: 7500,
     trend: "up",
-    image: "/src/assets/irish-king-skin.png"
+    image: "/lovable-uploads/5c3f060f-4c5f-412b-8f27-eb1bebd3dd7d.png"
   }, {
     name: "Fire Storm",
     team: "Flame Dragons",
