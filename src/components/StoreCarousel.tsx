@@ -3,6 +3,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext, useCarousel } from '@/components/ui/carousel';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface StoreItem {
   name: string;
@@ -14,6 +15,7 @@ interface StoreItem {
 interface StoreCarouselProps {
   items: StoreItem[];
   renderItem: (item: StoreItem, idx: number) => React.ReactNode;
+  desktopMode?: boolean;
 }
 
 export interface StoreCarouselRef {
@@ -21,17 +23,21 @@ export interface StoreCarouselRef {
   scrollToNext: () => void;
 }
 
-const StoreCarousel = forwardRef<StoreCarouselRef, StoreCarouselProps>(({ items, renderItem }, ref) => {
-  // Group items into sets of 4 for 2x2 grid display
+const StoreCarousel = forwardRef<StoreCarouselRef, StoreCarouselProps>(({ items, renderItem, desktopMode = false }, ref) => {
+  const isMobile = useIsMobile();
+  const isDesktopLayout = !isMobile || desktopMode;
+  const itemsPerSlide = isDesktopLayout ? 4 : 4;
+  
+  // Group items into sets for display
   const itemGroups = [];
-  for (let i = 0; i < items.length; i += 4) {
-    itemGroups.push(items.slice(i, i + 4));
+  for (let i = 0; i < items.length; i += itemsPerSlide) {
+    itemGroups.push(items.slice(i, i + itemsPerSlide));
   }
 
   if (itemGroups.length <= 1) {
-    // If 4 or fewer items, show in regular grid without carousel
+    // If only one group, show in regular grid without carousel
     return (
-      <div className="grid grid-cols-2 gap-3">
+      <div className={isDesktopLayout ? "grid grid-cols-4 gap-4" : "grid grid-cols-2 gap-3"}>
         {items.map((item, idx) => renderItem(item, idx))}
       </div>
     );
@@ -54,8 +60,8 @@ const StoreCarousel = forwardRef<StoreCarouselRef, StoreCarouselProps>(({ items,
       <CarouselContent>
         {itemGroups.map((group, groupIdx) => (
           <CarouselItem key={groupIdx}>
-            <div className="grid grid-cols-2 gap-3">
-              {group.map((item, idx) => renderItem(item, groupIdx * 4 + idx))}
+            <div className={isDesktopLayout ? "grid grid-cols-4 gap-4" : "grid grid-cols-2 gap-3"}>
+              {group.map((item, idx) => renderItem(item, groupIdx * itemsPerSlide + idx))}
             </div>
           </CarouselItem>
         ))}
