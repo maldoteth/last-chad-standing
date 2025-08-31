@@ -1410,7 +1410,7 @@ const Game = () => {
                   name: "Shane Sonny",
                   price: 1200,
                   rarity: "special",
-                  image: "/lovable-uploads/21f7a69d-601b-495d-9eef-0897556d9bfd.png"
+                  image: "/lovable-uploads/d940ed73-e383-4051-b953-e0f43f86955e.png"
                 }, {
                   name: "Ray Del Mar",
                   price: 2800,
@@ -3053,7 +3053,7 @@ const Game = () => {
                         name: "Shane Sonny",
                         price: 1200,
                         rarity: "gold",
-                        image: "/lovable-uploads/21f7a69d-601b-495d-9eef-0897556d9bfd.png"
+                        image: "/lovable-uploads/d940ed73-e383-4051-b953-e0f43f86955e.png"
                       }, {
                         name: "Ray Del Mar",
                         price: 2800,
