@@ -416,13 +416,13 @@ const Game = () => {
     trend: "down",
     image: "/lovable-uploads/2c556456-ebeb-4eec-9842-f2d31e06c58a.png"
   }, {
-    name: "Void Walker",
+    name: "Pogo",
     team: "Dark Matter",
     position: "Phantom",
     price: 6100,
     lastSale: 5200,
     trend: "up",
-    image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
+    image: "/lovable-uploads/2877ff38-b9fd-4a5d-bca9-25b14f237997.png"
   }, {
     name: "Solar Flare",
     team: "Sun Blazers",
