@@ -1936,23 +1936,6 @@ const Game = () => {
                                 <span className="text-sm font-bold text-white">{player.price.toLocaleString()}</span>
                               </div>
                             </div>
-                             <div className="flex items-center justify-between">
-                               <div>
-                                 <p className="text-xs text-gray-500">Last: {player.lastSale.toLocaleString()}</p>
-                               </div>
-                               <div className="flex items-center space-x-2">
-                                <div className={`flex items-center space-x-1 ${player.trend === 'up' ? 'text-green-400' : 'text-red-400'}`}>
-                                  {player.trend === 'up' ? <ArrowUpRight className="w-3 h-3" /> : <ArrowDownRight className="w-3 h-3" />}
-                                </div>
-                                <Button variant="outline" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2" onClick={() => toast({
-                          title: "Purchase Initiated",
-                          description: `Attempting to buy ${player.name} for ${player.price.toLocaleString()} coins`,
-                          duration: 3000
-                        })}>
-                                  Buy
-                                </Button>
-                              </div>
-                            </div>
                           </div>
                         </div>)}
                     </div>
