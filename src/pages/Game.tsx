@@ -3506,8 +3506,8 @@ const Game = () => {
                   }} />
                    <CardHeader className="relative z-10">
                      <CardTitle className="text-lg flex items-center justify-between text-white">
-                       <span>Marketplace</span>
-                         <div className="flex items-center space-x-2">
+                        <span>Marketplace</span>
+                          <div className="flex items-center space-x-1 justify-start">
                            {/* Search Input */}
                            <div className="relative">
                              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-3 h-3 text-gray-400" />
@@ -3515,7 +3515,7 @@ const Game = () => {
                                placeholder="Search players..."
                                value={searchTerm}
                                onChange={(e) => setSearchTerm(e.target.value)}
-                               className="pl-8 pr-3 h-8 text-xs bg-white/10 border-white/20 text-white placeholder:text-gray-400 w-48"
+                               className="pl-8 pr-3 h-8 text-xs bg-black/10 backdrop-blur-md border-white/20 text-white placeholder:text-gray-400 w-48"
                              />
                            </div>
                            
@@ -3523,7 +3523,7 @@ const Game = () => {
                            <div>
                              <DropdownMenu>
                                <DropdownMenuTrigger asChild>
-                                  <Button variant="outline" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-8 w-8">
+                                   <Button variant="outline" size="sm" className="bg-black/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-8 w-8">
                                     <Layers className="w-3 h-3" />
                                   </Button>
                                </DropdownMenuTrigger>
@@ -3596,7 +3596,7 @@ const Game = () => {
                            ) : (
                              <DropdownMenu>
                                <DropdownMenuTrigger asChild>
-                                  <Button variant="outline" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-8 w-8">
+                                  <Button variant="outline" size="sm" className="bg-black/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-8 w-8">
                                     <Filter className="w-3 h-3" />
                                   </Button>
                                </DropdownMenuTrigger>
