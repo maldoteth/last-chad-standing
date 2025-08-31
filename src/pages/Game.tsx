@@ -237,12 +237,12 @@ const Game = () => {
       change: 24.8,
       image: "/lovable-uploads/1c6b707c-97a6-4381-bc54-de63a7cf8a31.png"
     }, {
-      name: "Quantum Leap",
+      name: "Flex",
       team: "Future Force",
       position: "Mobility",
       price: 4800,
       change: 19.3,
-      image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png"
+      image: "/lovable-uploads/f52e83c2-28b7-417e-90ac-757255d1759f.png"
     }, {
       name: "Void Walker",
       team: "Dark Matter",
