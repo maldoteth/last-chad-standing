@@ -1406,7 +1406,27 @@ const Game = () => {
                       
                     </CardHeader>
                     <CardContent>
-                       <StoreCarousel ref={fightersCarouselRef} items={filterItemsByRarity([{
+                        <StoreCarousel ref={fightersCarouselRef} items={filterItemsByRarity([{
+                  name: "Dale Sunny",
+                  price: 3200,
+                  rarity: "special",
+                  image: "/lovable-uploads/155dbfd4-968c-45cf-b58f-f53281c10270.png"
+                }, {
+                  name: "Ray Del Mar",
+                  price: 2800,
+                  rarity: "blue",
+                  image: "/lovable-uploads/e8b33b1a-410f-4448-9b83-126b8d27f0a9.png"
+                }, {
+                  name: "John Strictland",
+                  price: 3500,
+                  rarity: "special",
+                  image: "/lovable-uploads/98664a07-8365-4512-8f3e-a0c79bd4617c.png"
+                }, {
+                  name: "Tarragon Southslice",
+                  price: 2800,
+                  rarity: "gold",
+                  image: "/lovable-uploads/cf5abf4c-cf7f-49b7-a830-49343c8d1222.png"
+                }, {
                   name: "The Irish King",
                   price: 2500,
                   rarity: "gold",
@@ -1426,26 +1446,6 @@ const Game = () => {
                   price: 1500,
                   rarity: "green",
                   image: latinLegendSkin
-                }, {
-                  name: "Tarragon Southslice",
-                  price: 2800,
-                  rarity: "gold",
-                  image: "/lovable-uploads/cf5abf4c-cf7f-49b7-a830-49343c8d1222.png"
-                }, {
-                  name: "Dale Sunny",
-                  price: 3200,
-                  rarity: "special",
-                  image: "/lovable-uploads/155dbfd4-968c-45cf-b58f-f53281c10270.png"
-                }, {
-                  name: "Thunder Punch",
-                  price: 1900,
-                  rarity: "blue",
-                  image: "/lovable-uploads/77a6c004-93ed-49ee-a5d0-6056ee852612.png"
-                }, {
-                  name: "Ice Breaker",
-                  price: 2400,
-                  rarity: "silver",
-                  image: "/lovable-uploads/8c2f941a-58db-43db-9b99-afb13cd3c36b.png"
                 }])} renderItem={(item, idx) => <GlowCard key={idx} className="cursor-pointer">
                               <div className="p-3">
                                <div className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden">
@@ -3049,27 +3049,7 @@ const Game = () => {
                        </CardTitle>
                      </CardHeader>
                       <CardContent>
-                        <StoreCarousel ref={desktopFightersCarouselRef} desktopMode={true} items={filterItemsByRarity([{
-                        name: "The Irish King",
-                        price: 2500,
-                        rarity: "gold",
-                        image: irishKingSkin
-                      }, {
-                        name: "Stani Eagle",
-                        price: 1800,
-                        rarity: "blue",
-                        image: staniEagleSkin
-                      }, {
-                        name: "Jonesy Bones",
-                        price: 2200,
-                        rarity: "silver",
-                        image: bonesSkin
-                      }, {
-                        name: "Latin Legend",
-                        price: 1500,
-                        rarity: "green",
-                        image: latinLegendSkin
-                      }, {
+                         <StoreCarousel ref={desktopFightersCarouselRef} desktopMode={true} items={filterItemsByRarity([{
                         name: "Dale Sunny",
                         price: 3000,
                         rarity: "gold",
@@ -3089,6 +3069,26 @@ const Game = () => {
                         price: 2800,
                         rarity: "gold",
                         image: "/lovable-uploads/cf5abf4c-cf7f-49b7-a830-49343c8d1222.png"
+                      }, {
+                        name: "The Irish King",
+                        price: 2500,
+                        rarity: "gold",
+                        image: irishKingSkin
+                      }, {
+                        name: "Stani Eagle",
+                        price: 1800,
+                        rarity: "blue",
+                        image: staniEagleSkin
+                      }, {
+                        name: "Jonesy Bones",
+                        price: 2200,
+                        rarity: "silver",
+                        image: bonesSkin
+                      }, {
+                        name: "Latin Legend",
+                        price: 1500,
+                        rarity: "green",
+                        image: latinLegendSkin
                       }])} renderItem={(item, idx) => <GlowCard key={idx} className="text-white shadow-2xl cursor-pointer">
                               <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
                               <CardContent className="p-4 relative z-10">
