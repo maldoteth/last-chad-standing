@@ -1903,126 +1903,7 @@ const Game = () => {
                   </Card>
                 </div>
 
-                {/* Trending & Gainers */}
-                <div className="space-y-4">
-                  {/* Trending */}
-                  <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
-                    <div className="absolute inset-0" style={{
-                backgroundImage: `
-                        linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
-                        linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
-                      `,
-                backgroundSize: '4px 4px'
-              }} />
-                    <CardHeader className="pb-3 relative z-10">
-                      <div className="flex items-center justify-between mb-2">
-                        <CardTitle className="text-base flex items-center space-x-2 text-white">
-                          <TrendingUp className="w-4 h-4" />
-                          <span>Trending</span>
-                        </CardTitle>
-                      </div>
-                      <div className="flex space-x-1">
-                        {[{
-                    key: "daily",
-                    label: "24H"
-                  }, {
-                    key: "weekly",
-                    label: "7D"
-                  }, {
-                    key: "monthly",
-                    label: "30D"
-                  }, {
-                    key: "all time",
-                    label: "All"
-                  }].map(filter => <Button key={filter.key} variant={trendingTimeFilter === filter.key ? "secondary" : "ghost"} size="sm" className={`text-xs h-6 px-2 ${trendingTimeFilter === filter.key ? "bg-white/20 text-white border-white/30" : "bg-white/5 text-gray-300 hover:bg-white/10 hover:text-white"}`} onClick={() => setTrendingTimeFilter(filter.key)}>
-                            {filter.label}
-                          </Button>)}
-                      </div>
-                    </CardHeader>
-                    <CardContent className="relative z-10">
-                      <div className="space-y-2">
-                        {trendingPlayers.map((player, idx) => <div key={idx} className="flex items-center space-x-3 p-2 bg-white/5 rounded-lg">
-                            <div className="w-8 h-8 rounded-full overflow-hidden">
-                              <img src={player.image} alt={player.name} className="w-full h-full object-cover" />
-                            </div>
-                            <div className="flex-1 min-w-0">
-                              <div className="flex items-center justify-between">
-                                <p className="text-xs font-semibold text-white truncate">{player.name}</p>
-                                {renderMarketplacePrices(player, getMarketplacePrices, 'small', () => handleSellClick(player), () => handleBuyClick(player))}
-                              </div>
-                               <div className="flex items-center justify-between">
-                                 <div className={`flex items-center space-x-1 ${player.trend === 'up' ? 'text-green-400' : 'text-red-400'}`}>
-                                   {player.trend === 'up' ? <ArrowUpRight className="w-3 h-3" /> : <ArrowDownRight className="w-3 h-3" />}
-                                   <span className="text-xs font-medium">{Math.abs(player.change)}%</span>
-                                 </div>
-                               </div>
-                            </div>
-                          </div>)}
-                      </div>
-                    </CardContent>
-                  </Card>
-
-                  {/* Top Gainers */}
-                  <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
-                    <div className="absolute inset-0" style={{
-                backgroundImage: `
-                        linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
-                        linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
-                      `,
-                backgroundSize: '4px 4px'
-              }} />
-                    <CardHeader className="pb-3 relative z-10">
-                      <div className="flex items-center justify-between mb-2">
-                        <CardTitle className="text-base flex items-center space-x-2 text-white">
-                          <ArrowUpRight className="w-4 h-4 text-green-400" />
-                          <span>Top Gainers</span>
-                        </CardTitle>
-                      </div>
-                      <div className="flex space-x-1">
-                        {[{
-                    key: "daily",
-                    label: "24H"
-                  }, {
-                    key: "weekly",
-                    label: "7D"
-                  }, {
-                    key: "monthly",
-                    label: "30D"
-                  }, {
-                    key: "alltime",
-                    label: "All"
-                  }].map(filter => <Button key={filter.key} variant={gainersTimeFilter === filter.key ? "secondary" : "ghost"} size="sm" className={`text-xs h-6 px-2 ${gainersTimeFilter === filter.key ? "bg-white/20 text-white border-white/30" : "bg-white/5 text-gray-300 hover:bg-white/10 hover:text-white"}`} onClick={() => setGainersTimeFilter(filter.key)}>
-                            {filter.label}
-                          </Button>)}
-                      </div>
-                    </CardHeader>
-                    <CardContent className="relative z-10">
-                      <div className="space-y-2">
-                        {topGainers.map((player, idx) => <div key={idx} className="flex items-center space-x-3 p-2 bg-white/5 rounded-lg">
-                            <div className="w-8 h-8 rounded-full overflow-hidden">
-                              <img src={player.image} alt={player.name} className="w-full h-full object-cover" />
-                            </div>
-                            <div className="flex-1 min-w-0">
-                              <div className="flex items-center justify-between">
-                                <p className="text-xs font-semibold text-white truncate">{player.name}</p>
-                                {renderMarketplacePrices(player, getMarketplacePrices, 'small', () => handleSellClick(player), () => handleBuyClick(player))}
-                              </div>
-                               <div className="flex items-center justify-between">
-                                 <div className="flex items-center space-x-1 text-green-400">
-                                   <ArrowUpRight className="w-3 h-3" />
-                                   <span className="text-xs font-medium">+{player.change}%</span>
-                                 </div>
-                               </div>
-                            </div>
-                          </div>)}
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
-
-                {/* All Players List */}
+                {/* All Players List (Marketplace) - Moved above for mobile/tablet */}
                 <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                   <div className="absolute inset-0" style={{
@@ -2151,6 +2032,126 @@ const Game = () => {
                       </div>}
                   </CardContent>
                 </Card>
+
+                {/* Trending & Gainers */}
+                <div className="space-y-4">
+                  {/* Trending */}
+                  <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
+                    <div className="absolute inset-0" style={{
+                backgroundImage: `
+                        linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
+                        linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
+                      `,
+                backgroundSize: '4px 4px'
+              }} />
+                    <CardHeader className="pb-3 relative z-10">
+                      <div className="flex items-center justify-between mb-2">
+                        <CardTitle className="text-base flex items-center space-x-2 text-white">
+                          <TrendingUp className="w-4 h-4" />
+                          <span>Trending</span>
+                        </CardTitle>
+                      </div>
+                      <div className="flex space-x-1">
+                        {[{
+                    key: "daily",
+                    label: "24H"
+                  }, {
+                    key: "weekly",
+                    label: "7D"
+                  }, {
+                    key: "monthly",
+                    label: "30D"
+                  }, {
+                    key: "all time",
+                    label: "All"
+                  }].map(filter => <Button key={filter.key} variant={trendingTimeFilter === filter.key ? "secondary" : "ghost"} size="sm" className={`text-xs h-6 px-2 ${trendingTimeFilter === filter.key ? "bg-white/20 text-white border-white/30" : "bg-white/5 text-gray-300 hover:bg-white/10 hover:text-white"}`} onClick={() => setTrendingTimeFilter(filter.key)}>
+                            {filter.label}
+                          </Button>)}
+                      </div>
+                    </CardHeader>
+                    <CardContent className="relative z-10">
+                      <div className="space-y-2">
+                        {trendingPlayers.map((player, idx) => <div key={idx} className="flex items-center space-x-3 p-2 bg-white/5 rounded-lg">
+                            <div className="w-8 h-8 rounded-full overflow-hidden">
+                              <img src={player.image} alt={player.name} className="w-full h-full object-cover" />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center justify-between">
+                                <p className="text-xs font-semibold text-white truncate">{player.name}</p>
+                                {renderMarketplacePrices(player, getMarketplacePrices, 'small', () => handleSellClick(player), () => handleBuyClick(player))}
+                              </div>
+                               <div className="flex items-center justify-between">
+                                 <div className={`flex items-center space-x-1 ${player.trend === 'up' ? 'text-green-400' : 'text-red-400'}`}>
+                                   {player.trend === 'up' ? <ArrowUpRight className="w-3 h-3" /> : <ArrowDownRight className="w-3 h-3" />}
+                                   <span className="text-xs font-medium">{Math.abs(player.change)}%</span>
+                                 </div>
+                               </div>
+                            </div>
+                          </div>)}
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  {/* Top Gainers */}
+                  <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
+                    <div className="absolute inset-0" style={{
+                backgroundImage: `
+                        linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
+                        linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
+                      `,
+                backgroundSize: '4px 4px'
+              }} />
+                    <CardHeader className="pb-3 relative z-10">
+                      <div className="flex items-center justify-between mb-2">
+                        <CardTitle className="text-base flex items-center space-x-2 text-white">
+                          <ArrowUpRight className="w-4 h-4 text-green-400" />
+                          <span>Top Gainers</span>
+                        </CardTitle>
+                      </div>
+                      <div className="flex space-x-1">
+                        {[{
+                    key: "daily",
+                    label: "24H"
+                  }, {
+                    key: "weekly",
+                    label: "7D"
+                  }, {
+                    key: "monthly",
+                    label: "30D"
+                  }, {
+                    key: "alltime",
+                    label: "All"
+                  }].map(filter => <Button key={filter.key} variant={gainersTimeFilter === filter.key ? "secondary" : "ghost"} size="sm" className={`text-xs h-6 px-2 ${gainersTimeFilter === filter.key ? "bg-white/20 text-white border-white/30" : "bg-white/5 text-gray-300 hover:bg-white/10 hover:text-white"}`} onClick={() => setGainersTimeFilter(filter.key)}>
+                            {filter.label}
+                          </Button>)}
+                      </div>
+                    </CardHeader>
+                    <CardContent className="relative z-10">
+                      <div className="space-y-2">
+                        {topGainers.map((player, idx) => <div key={idx} className="flex items-center space-x-3 p-2 bg-white/5 rounded-lg">
+                            <div className="w-8 h-8 rounded-full overflow-hidden">
+                              <img src={player.image} alt={player.name} className="w-full h-full object-cover" />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center justify-between">
+                                <p className="text-xs font-semibold text-white truncate">{player.name}</p>
+                                {renderMarketplacePrices(player, getMarketplacePrices, 'small', () => handleSellClick(player), () => handleBuyClick(player))}
+                              </div>
+                               <div className="flex items-center justify-between">
+                                 <div className="flex items-center space-x-1 text-green-400">
+                                   <ArrowUpRight className="w-3 h-3" />
+                                   <span className="text-xs font-medium">+{player.change}%</span>
+                                 </div>
+                               </div>
+                            </div>
+                          </div>)}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+
               </div>}
 
             {activeTab === "locker" && <div className="p-4 space-y-6">
