@@ -1432,8 +1432,7 @@ const Game = () => {
                             }}>
                               <ChevronRight className="h-4 w-4" />
                             </Button>
-                          </div>
-                          <Badge variant="secondary">8 items</Badge>
+                         </div>
                         </div>
                       </CardTitle>
                       
@@ -1565,8 +1564,7 @@ const Game = () => {
                             }}>
                               <ChevronRight className="h-4 w-4" />
                             </Button>
-                          </div>
-                          <Badge variant="secondary">8 items</Badge>
+                         </div>
                         </div>
                       </CardTitle>
                       
@@ -1694,8 +1692,7 @@ const Game = () => {
                             }}>
                               <ChevronRight className="h-4 w-4" />
                             </Button>
-                          </div>
-                          <Badge variant="secondary">8 items</Badge>
+                         </div>
                         </div>
                       </CardTitle>
                       
@@ -2163,10 +2160,9 @@ const Game = () => {
                 backgroundSize: '4px 4px'
               }} />
                       <CardHeader className="relative z-10 pb-3">
-                        <CardTitle className="flex items-center justify-between text-white text-lg">
-                          <span>Skins</span>
-                          <Badge variant="secondary" className="bg-white/10 text-white border-white/20">0 owned</Badge>
-                        </CardTitle>
+                         <CardTitle className="flex items-center text-white text-lg">
+                           <span>Skins</span>
+                         </CardTitle>
                         
                       </CardHeader>
                       <CardContent className="relative z-10">
@@ -2191,10 +2187,9 @@ const Game = () => {
                 backgroundSize: '4px 4px'
               }} />
                       <CardHeader className="relative z-10 pb-3">
-                        <CardTitle className="flex items-center justify-between text-white text-lg">
-                          <span>Accessories</span>
-                          <Badge variant="secondary" className="bg-white/10 text-white border-white/20">0 owned</Badge>
-                        </CardTitle>
+                         <CardTitle className="flex items-center text-white text-lg">
+                           <span>Accessories</span>
+                         </CardTitle>
                         
                       </CardHeader>
                       <CardContent className="relative z-10">
@@ -2219,10 +2214,9 @@ const Game = () => {
                 backgroundSize: '4px 4px'
               }} />
                       <CardHeader className="relative z-10 pb-3">
-                        <CardTitle className="flex items-center justify-between text-white text-lg">
-                          <span>Mobility</span>
-                          <Badge variant="secondary" className="bg-white/10 text-white border-white/20">0 owned</Badge>
-                        </CardTitle>
+                         <CardTitle className="flex items-center text-white text-lg">
+                           <span>Mobility</span>
+                         </CardTitle>
                         
                       </CardHeader>
                       <CardContent className="relative z-10">
@@ -2995,26 +2989,23 @@ const Game = () => {
                      <CardHeader className="relative z-10">
                        <CardTitle className="flex items-center justify-between text-white">
                           <span>Fighters</span>
-                          <div className="flex items-center space-x-2">
-                            <Badge variant="secondary">8 items</Badge>
-                            <div className="flex space-x-1">
-                              <Button
-                                variant="ghost"
-                                size="sm"
-                                onClick={() => desktopFightersCarouselRef.current?.scrollToPrevious()}
-                                className="h-6 w-6 p-0 text-white hover:bg-white/20"
-                              >
-                                <ChevronLeft className="h-4 w-4" />
-                              </Button>
-                              <Button
-                                variant="ghost"
-                                size="sm"
-                                onClick={() => desktopFightersCarouselRef.current?.scrollToNext()}
-                                className="h-6 w-6 p-0 text-white hover:bg-white/20"
-                              >
-                                <ChevronRight className="h-4 w-4" />
-                              </Button>
-                            </div>
+                          <div className="flex space-x-1">
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => desktopFightersCarouselRef.current?.scrollToPrevious()}
+                              className="h-6 w-6 p-0 text-white hover:bg-white/20"
+                            >
+                              <ChevronLeft className="h-4 w-4" />
+                            </Button>
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => desktopFightersCarouselRef.current?.scrollToNext()}
+                              className="h-6 w-6 p-0 text-white hover:bg-white/20"
+                            >
+                              <ChevronRight className="h-4 w-4" />
+                            </Button>
                           </div>
                        </CardTitle>
                      </CardHeader>
@@ -3120,26 +3111,23 @@ const Game = () => {
                      <CardHeader className="relative z-10">
                        <CardTitle className="flex items-center justify-between text-white">
                          <span>Accessories</span>
-                         <div className="flex items-center space-x-2">
-                           <Badge variant="secondary">8 items</Badge>
-                           <div className="flex space-x-1">
-                             <Button
-                               variant="ghost"
-                               size="sm"
-                               onClick={() => desktopAccessoriesCarouselRef.current?.scrollToPrevious()}
-                               className="h-6 w-6 p-0 text-white hover:bg-white/20"
-                             >
-                               <ChevronLeft className="h-4 w-4" />
-                             </Button>
-                             <Button
-                               variant="ghost"
-                               size="sm"
-                               onClick={() => desktopAccessoriesCarouselRef.current?.scrollToNext()}
-                               className="h-6 w-6 p-0 text-white hover:bg-white/20"
-                             >
-                               <ChevronRight className="h-4 w-4" />
-                             </Button>
-                           </div>
+                         <div className="flex space-x-1">
+                           <Button
+                             variant="ghost"
+                             size="sm"
+                             onClick={() => desktopAccessoriesCarouselRef.current?.scrollToPrevious()}
+                             className="h-6 w-6 p-0 text-white hover:bg-white/20"
+                           >
+                             <ChevronLeft className="h-4 w-4" />
+                           </Button>
+                           <Button
+                             variant="ghost"
+                             size="sm"
+                             onClick={() => desktopAccessoriesCarouselRef.current?.scrollToNext()}
+                             className="h-6 w-6 p-0 text-white hover:bg-white/20"
+                           >
+                             <ChevronRight className="h-4 w-4" />
+                           </Button>
                          </div>
                        </CardTitle>
                      </CardHeader>
@@ -3245,26 +3233,23 @@ const Game = () => {
                      <CardHeader className="relative z-10">
                        <CardTitle className="flex items-center justify-between text-white">
                          <span>Mobility</span>
-                         <div className="flex items-center space-x-2">
-                           <Badge variant="secondary">8 items</Badge>
-                           <div className="flex space-x-1">
-                             <Button
-                               variant="ghost"
-                               size="sm"
-                               onClick={() => desktopMobilityCarouselRef.current?.scrollToPrevious()}
-                               className="h-6 w-6 p-0 text-white hover:bg-white/20"
-                             >
-                               <ChevronLeft className="h-4 w-4" />
-                             </Button>
-                             <Button
-                               variant="ghost"
-                               size="sm"
-                               onClick={() => desktopMobilityCarouselRef.current?.scrollToNext()}
-                               className="h-6 w-6 p-0 text-white hover:bg-white/20"
-                             >
-                               <ChevronRight className="h-4 w-4" />
-                             </Button>
-                           </div>
+                         <div className="flex space-x-1">
+                           <Button
+                             variant="ghost"
+                             size="sm"
+                             onClick={() => desktopMobilityCarouselRef.current?.scrollToPrevious()}
+                             className="h-6 w-6 p-0 text-white hover:bg-white/20"
+                           >
+                             <ChevronLeft className="h-4 w-4" />
+                           </Button>
+                           <Button
+                             variant="ghost"
+                             size="sm"
+                             onClick={() => desktopMobilityCarouselRef.current?.scrollToNext()}
+                             className="h-6 w-6 p-0 text-white hover:bg-white/20"
+                           >
+                             <ChevronRight className="h-4 w-4" />
+                           </Button>
                          </div>
                        </CardTitle>
                      </CardHeader>
@@ -3370,26 +3355,23 @@ const Game = () => {
                      <CardHeader className="relative z-10">
                        <CardTitle className="flex items-center justify-between text-white">
                          <span>Emotes</span>
-                         <div className="flex items-center space-x-2">
-                           <Badge variant="secondary">8 items</Badge>
-                           <div className="flex space-x-1">
-                             <Button
-                               variant="ghost"
-                               size="sm"
-                               onClick={() => desktopEmotesCarouselRef.current?.scrollToPrevious()}
-                               className="h-6 w-6 p-0 text-white hover:bg-white/20"
-                             >
-                               <ChevronLeft className="h-4 w-4" />
-                             </Button>
-                             <Button
-                               variant="ghost"
-                               size="sm"
-                               onClick={() => desktopEmotesCarouselRef.current?.scrollToNext()}
-                               className="h-6 w-6 p-0 text-white hover:bg-white/20"
-                             >
-                               <ChevronRight className="h-4 w-4" />
-                             </Button>
-                           </div>
+                         <div className="flex space-x-1">
+                           <Button
+                             variant="ghost"
+                             size="sm"
+                             onClick={() => desktopEmotesCarouselRef.current?.scrollToPrevious()}
+                             className="h-6 w-6 p-0 text-white hover:bg-white/20"
+                           >
+                             <ChevronLeft className="h-4 w-4" />
+                           </Button>
+                           <Button
+                             variant="ghost"
+                             size="sm"
+                             onClick={() => desktopEmotesCarouselRef.current?.scrollToNext()}
+                             className="h-6 w-6 p-0 text-white hover:bg-white/20"
+                           >
+                             <ChevronRight className="h-4 w-4" />
+                           </Button>
                          </div>
                        </CardTitle>
                      </CardHeader>
@@ -3495,26 +3477,23 @@ const Game = () => {
                      <CardHeader className="relative z-10">
                        <CardTitle className="flex items-center justify-between text-white">
                          <span>Packs</span>
-                         <div className="flex items-center space-x-2">
-                           <Badge variant="secondary">8 items</Badge>
-                           <div className="flex space-x-1">
-                             <Button
-                               variant="ghost"
-                               size="sm"
-                               onClick={() => desktopPacksCarouselRef.current?.scrollToPrevious()}
-                               className="h-6 w-6 p-0 text-white hover:bg-white/20"
-                             >
-                               <ChevronLeft className="h-4 w-4" />
-                             </Button>
-                             <Button
-                               variant="ghost"
-                               size="sm"
-                               onClick={() => desktopPacksCarouselRef.current?.scrollToNext()}
-                               className="h-6 w-6 p-0 text-white hover:bg-white/20"
-                             >
-                               <ChevronRight className="h-4 w-4" />
-                             </Button>
-                           </div>
+                         <div className="flex space-x-1">
+                           <Button
+                             variant="ghost"
+                             size="sm"
+                             onClick={() => desktopPacksCarouselRef.current?.scrollToPrevious()}
+                             className="h-6 w-6 p-0 text-white hover:bg-white/20"
+                           >
+                             <ChevronLeft className="h-4 w-4" />
+                           </Button>
+                           <Button
+                             variant="ghost"
+                             size="sm"
+                             onClick={() => desktopPacksCarouselRef.current?.scrollToNext()}
+                             className="h-6 w-6 p-0 text-white hover:bg-white/20"
+                           >
+                             <ChevronRight className="h-4 w-4" />
+                           </Button>
                          </div>
                        </CardTitle>
                      </CardHeader>
@@ -4063,10 +4042,9 @@ const Game = () => {
                       backgroundSize: '4px 4px'
                     }} />
                       <CardHeader className="relative z-10">
-                        <CardTitle className="flex items-center justify-between text-white">
-                          <span>Skins</span>
-                          <Badge variant="secondary">0 owned</Badge>
-                        </CardTitle>
+                         <CardTitle className="text-white">
+                           <span>Skins</span>
+                         </CardTitle>
                         <CardDescription className="text-gray-300">Your character skins</CardDescription>
                       </CardHeader>
                       <CardContent className="relative z-10">
@@ -4091,10 +4069,9 @@ const Game = () => {
                       backgroundSize: '4px 4px'
                     }} />
                       <CardHeader className="relative z-10">
-                        <CardTitle className="flex items-center justify-between text-white">
-                          <span>Accessories</span>
-                          <Badge variant="secondary">0 owned</Badge>
-                        </CardTitle>
+                         <CardTitle className="text-white">
+                           <span>Accessories</span>
+                         </CardTitle>
                         <CardDescription className="text-gray-300">Your accessories collection</CardDescription>
                       </CardHeader>
                       <CardContent className="relative z-10">
@@ -4119,10 +4096,9 @@ const Game = () => {
                       backgroundSize: '4px 4px'
                     }} />
                       <CardHeader className="relative z-10">
-                        <CardTitle className="flex items-center justify-between text-white">
-                          <span>Mobility</span>
-                          <Badge variant="secondary">0 owned</Badge>
-                        </CardTitle>
+                         <CardTitle className="text-white">
+                           <span>Mobility</span>
+                         </CardTitle>
                         <CardDescription className="text-gray-300">Your vehicles collection</CardDescription>
                       </CardHeader>
                       <CardContent className="relative z-10">
