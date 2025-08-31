@@ -1459,7 +1459,7 @@ const Game = () => {
                                 </div>
                                 <Drawer>
                                   <DrawerTrigger asChild>
-                                     <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
+                                     <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-blue-600/40 text-xs h-6 px-2">
                                        <ShoppingBag className={`${isMobile ? 'h-3 w-3' : 'mr-1 h-2 w-2'}`} />
                                        {!isMobile && "Buy"}
                                      </Button>
