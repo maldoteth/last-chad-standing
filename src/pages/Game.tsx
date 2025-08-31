@@ -354,7 +354,7 @@ const Game = () => {
       position: "Control",
       price: 6400,
       change: 29.8,
-      image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png"
+      image: "/lovable-uploads/2532e628-0d4b-465e-b350-e49def10eb26.png"
     }, {
       name: "Earth Shaker",
       team: "Ground Force",
