@@ -3080,7 +3080,7 @@ const Game = () => {
                         rarity: "blue",
                         image: "/lovable-uploads/e8b33b1a-410f-4448-9b83-126b8d27f0a9.png"
                       }, {
-                        name: "Fire Master",
+                        name: "John Strictland",
                         price: 3500,
                         rarity: "special",
                         image: "/lovable-uploads/98664a07-8365-4512-8f3e-a0c79bd4617c.png"
