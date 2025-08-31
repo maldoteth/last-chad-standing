@@ -648,7 +648,7 @@ const Game = () => {
       {/* Header with coins and avatar - simplified for mobile */}
       <header className="bg-black lg:border-b border-border px-4 py-3 lg:px-6 lg:py-4">
         <div className="flex items-center justify-between">
-          <img src="/lovable-uploads/ef3aca91-a372-4313-aa94-3c2dcf946dd6.png" alt="LCS Logo" className="h-10 lg:h-12 cursor-pointer hover:opacity-80 transition-opacity" onClick={() => navigate("/")} />
+          <img src="/lovable-uploads/fa645b0b-fcbe-46f6-9054-45d5ab0929d6.png" alt="LCS Fist Logo" className="h-10 lg:h-12 cursor-pointer hover:opacity-80 transition-opacity" onClick={() => navigate("/")} />
           
           {/* Desktop Navigation - hidden on mobile */}
           <div className="hidden lg:flex items-center justify-center flex-1">
