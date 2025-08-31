@@ -364,7 +364,7 @@ const Game = () => {
       image: "/lovable-uploads/82fe8aed-6cfa-45b6-945c-c447349b7fe2.png"
     }],
     monthly: [{
-      name: "Titan Crusher",
+      name: "Demetrious Johnson",
       team: "Mega Corps",
       position: "Destroyer",
       price: 9200,
