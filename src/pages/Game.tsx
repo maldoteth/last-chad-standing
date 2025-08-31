@@ -3078,7 +3078,7 @@ const Game = () => {
                         name: "Shadow Hunter",
                         price: 2800,
                         rarity: "blue",
-                        image: "/lovable-uploads/4c80b2cf-0ea7-49a2-96b8-58ecbfa7623a.png"
+                        image: "/lovable-uploads/e8b33b1a-410f-4448-9b83-126b8d27f0a9.png"
                       }, {
                         name: "Fire Master",
                         price: 3500,
