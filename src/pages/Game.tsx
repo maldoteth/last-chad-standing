@@ -220,13 +220,13 @@ const Game = () => {
     trend: "down",
     image: "/lovable-uploads/2c556456-ebeb-4eec-9842-f2d31e06c58a.png"
   }, {
-    name: "Fire Storm",
+    name: "Speed Buggy",
     team: "Flame Dragons",
     position: "Assault",
     price: 8900,
     change: 9.6,
     trend: "up",
-    image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
+    image: "/lovable-uploads/b64d7801-1284-4763-b115-ca3cfa8ff315.png"
   }];
   const topGainersData = {
     daily: [{
@@ -384,13 +384,13 @@ const Game = () => {
     trend: "up",
     image: "/lovable-uploads/5c3f060f-4c5f-412b-8f27-eb1bebd3dd7d.png"
   }, {
-    name: "Fire Storm",
+    name: "Speed Buggy",
     team: "Flame Dragons",
     position: "Assault",
     price: 8900,
     lastSale: 8100,
     trend: "up",
-    image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
+    image: "/lovable-uploads/b64d7801-1284-4763-b115-ca3cfa8ff315.png"
   }, {
     name: "Stani Eagle",
     team: "Thunder Birds",
