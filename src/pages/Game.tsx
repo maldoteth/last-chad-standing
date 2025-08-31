@@ -128,7 +128,7 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
 };
 const Game = () => {
   const [activeTab, setActiveTab] = useState("home");
-  const [gainersTimeFilter, setGainersTimeFilter] = useState("weekly");
+  const [gainersTimeFilter, setGainersTimeFilter] = useState("daily");
   const [trendingTimeFilter, setTrendingTimeFilter] = useState("daily");
   const [rightSidebarTab, setRightSidebarTab] = useState("rankings");
   const [userCoins] = useState(0);
