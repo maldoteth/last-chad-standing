@@ -1427,7 +1427,7 @@ const Game = () => {
                   rarity: "green",
                   image: latinLegendSkin
                 }, {
-                  name: "Tarragon Southcut",
+                  name: "Tarragon Southslice",
                   price: 2800,
                   rarity: "gold",
                   image: "/lovable-uploads/cf5abf4c-cf7f-49b7-a830-49343c8d1222.png"
