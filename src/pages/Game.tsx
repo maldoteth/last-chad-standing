@@ -369,7 +369,7 @@ const Game = () => {
       position: "Destroyer",
       price: 9200,
       change: 89.4,
-      image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
+      image: "/lovable-uploads/1e5737a2-94f3-4556-9114-0b0f53307327.png"
     }, {
       name: "Shadow Master",
       team: "Dark Legion",
