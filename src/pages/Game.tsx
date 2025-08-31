@@ -200,7 +200,7 @@ const Game = () => {
     price: item.price,
     change: [12.5, -8.3, 15.7, -4.2, 9.6][index] || (Math.random() * 30 - 15),
     trend: [12.5, -8.3, 15.7, -4.2, 9.6][index] > 0 ? "up" : "down",
-    image: item.image_url || "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
+    image: item.image_url
   }));
   // Create gainers data from store items with mock market data
   const createGainersFromStore = (changeMultiplier: number) => {
@@ -211,7 +211,7 @@ const Game = () => {
       rarity: item.rarity,
       price: item.price,
       change: (24.8 - index * 5) * changeMultiplier,
-      image: item.image_url || "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
+      image: item.image_url
     }));
   };
 
@@ -231,7 +231,7 @@ const Game = () => {
     price: item.price,
     lastSale: Math.round(item.price * (0.85 + Math.random() * 0.3)),
     trend: Math.random() > 0.5 ? "up" : "down",
-    image: item.image_url || "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
+    image: item.image_url
   })).sort((a, b) => b.price - a.price);
   const currentMarketValue = marketValueData[marketValueData.length - 1]?.value || 0;
   const currentListings = Math.round(listingsData[listingsData.length - 1]?.listings || 0);
