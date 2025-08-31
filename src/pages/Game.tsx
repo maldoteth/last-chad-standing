@@ -3054,7 +3054,7 @@ const Game = () => {
                            rarity: "silver",
                            image: "/lovable-uploads/7d4ea94f-0c4d-459f-bded-b68a2bd272d6.png"
                          }])}
-                          renderItem={(item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden hover:scale-105 hover:shadow-3xl hover:border-gray-500/70 transition-all duration-300 cursor-pointer">
+                          renderItem={(item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden transition-all duration-300 cursor-pointer">
                              <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
                              <CardContent className="p-4 relative z-10">
                                <div className="aspect-square bg-gray-800/50 rounded-lg mb-3 overflow-hidden">
@@ -3176,7 +3176,7 @@ const Game = () => {
                            rarity: "silver",
                            image: "/lovable-uploads/79162f7a-0435-4ead-b016-c20194bd1b0e.png"
                          }])}
-                          renderItem={(item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden hover:scale-105 hover:shadow-3xl hover:border-gray-500/70 transition-all duration-300 cursor-pointer">
+                          renderItem={(item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden transition-all duration-300 cursor-pointer">
                              <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
                              <CardContent className="p-4 relative z-10">
                                <div className="aspect-square bg-gray-800/50 rounded-lg mb-3 overflow-hidden">
@@ -3298,7 +3298,7 @@ const Game = () => {
                            rarity: "green",
                            image: "/lovable-uploads/7be743c8-5f8f-4016-a88a-c5e7edf73e2e.png"
                          }])}
-                          renderItem={(item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden hover:scale-105 hover:shadow-3xl hover:border-gray-500/70 transition-all duration-300 cursor-pointer">
+                          renderItem={(item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden transition-all duration-300 cursor-pointer">
                              <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
                              <CardContent className="p-4 relative z-10">
                                <div className="aspect-square bg-gray-800/50 rounded-lg mb-3 overflow-hidden">
@@ -3420,7 +3420,7 @@ const Game = () => {
                            rarity: "green",
                            image: "/lovable-uploads/8c0bf943-2c5d-40b7-863f-93ba04863642.png"
                          }])}
-                          renderItem={(item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden hover:scale-105 hover:shadow-3xl hover:border-gray-500/70 transition-all duration-300 cursor-pointer">
+                          renderItem={(item, idx) => <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden transition-all duration-300 cursor-pointer">
                              <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
                              <CardContent className="p-4 relative z-10">
                                <div className="aspect-square bg-gray-800/50 rounded-lg mb-3 overflow-hidden flex items-center justify-center">
