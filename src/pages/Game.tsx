@@ -3520,9 +3520,9 @@ const Game = () => {
                    <CardHeader className="relative z-10">
                      <CardTitle className="text-lg flex items-center justify-between text-white">
                        <span>Marketplace</span>
-                       <div className="text-center relative sticky top-0 z-50 bg-gradient-to-b from-black via-black/70 to-black/40 backdrop-blur-md py-1">
-                         {/* Category Filter - positioned in top left */}
-                         <div className="absolute top-0 left-0">
+                        <div className="text-center relative sticky top-0 z-50 bg-gradient-to-b from-black via-black/70 to-black/40 backdrop-blur-md py-1">
+                          {/* Category Filter - positioned in top left */}
+                          <div className="absolute top-2 left-2">
                            {isMobile ? <Drawer>
                                <DrawerTrigger asChild>
                                   <Button variant="ghost" size="default" className="text-white hover:bg-white/10 w-18 h-18">
@@ -3571,8 +3571,8 @@ const Game = () => {
                              </DropdownMenu>}
                          </div>
                          
-                         {/* Filter Dropdown - positioned in top right */}
-                         <div className="absolute top-0 right-0">
+                          {/* Filter Dropdown - positioned in top right */}
+                          <div className="absolute top-2 right-2">
                            {isMobile ? <Drawer>
                                <DrawerTrigger asChild>
                                   <Button variant="ghost" size="default" className="w-18 h-18 text-white hover:bg-white/10">
