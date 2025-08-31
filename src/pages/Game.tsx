@@ -244,12 +244,12 @@ const Game = () => {
       change: 19.3,
       image: "/lovable-uploads/f52e83c2-28b7-417e-90ac-757255d1759f.png"
     }, {
-      name: "Void Walker",
+      name: "Pogo",
       team: "Dark Matter",
       position: "Phantom",
       price: 6100,
       change: 17.5,
-      image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
+      image: "/lovable-uploads/2877ff38-b9fd-4a5d-bca9-25b14f237997.png"
     }, {
       name: "Solar Flare",
       team: "Sun Blazers",
