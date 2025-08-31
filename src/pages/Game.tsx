@@ -328,7 +328,7 @@ const Game = () => {
       image: "/lovable-uploads/4e2aac54-cac6-4cf1-92ad-76bf7e788077.png"
     }],
     weekly: [{
-      name: "Lightning Strike",
+      name: "Silverborg",
       team: "Thunder Hawks",
       position: "Speed",
       price: 7300,
