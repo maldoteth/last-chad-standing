@@ -64,12 +64,10 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
     return (
       <div className="flex flex-col space-y-1">
         <div className="flex items-center space-x-1">
-          <span className={`${text} font-medium text-red-400`}>Sell:</span>
           <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className={coin} />
           <span className={`${text} font-bold text-red-400`}>{formatNumberWithAbbreviation(mockSellPrice)}</span>
         </div>
         <div className="flex items-center space-x-1">
-          <span className={`${text} font-medium text-green-400`}>Buy:</span>
           <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className={coin} />
           <span className={`${text} font-bold text-green-400`}>{formatNumberWithAbbreviation(mockBuyPrice)}</span>
         </div>
@@ -81,14 +79,12 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
     <div className="flex flex-col space-y-1">
       {prices.bestSellPrice && (
         <div className="flex items-center space-x-1">
-          <span className={`${text} font-medium text-red-400`}>Sell:</span>
           <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className={coin} />
           <span className={`${text} font-bold text-red-400`}>{formatNumberWithAbbreviation(prices.bestSellPrice)}</span>
         </div>
       )}
       {prices.bestBuyPrice && (
         <div className="flex items-center space-x-1">
-          <span className={`${text} font-medium text-green-400`}>Buy:</span>
           <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className={coin} />
           <span className={`${text} font-bold text-green-400`}>{formatNumberWithAbbreviation(prices.bestBuyPrice)}</span>
         </div>
