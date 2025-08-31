@@ -582,15 +582,15 @@ const Game = () => {
             {/* Mobile Notifications and Rankings Icons - Only show on mobile/tablet */}
             <div className="flex items-center space-x-2 lg:hidden">
               <button onClick={() => setIsRankingsOpen(true)} className="p-2 rounded-lg hover:bg-gray-800/50 transition-colors">
-                <Medal className="w-4 h-4 text-muted-foreground hover:text-foreground" />
+                <Medal className="w-6 h-6 text-muted-foreground hover:text-foreground" />
               </button>
               <button onClick={() => setIsNotificationsOpen(true)} className="p-2 rounded-lg hover:bg-gray-800/50 transition-colors">
-                <Bell className="w-4 h-4 text-muted-foreground hover:text-foreground" />
+                <Bell className="w-6 h-6 text-muted-foreground hover:text-foreground" />
               </button>
             </div>
             
             <div className="flex items-center space-x-2">
-              <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4" />
+              <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-6 h-6" />
               <span className="font-semibold text-sm lg:text-base">{userCoins.toLocaleString()}</span>
             </div>
             
