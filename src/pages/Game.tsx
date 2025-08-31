@@ -3543,10 +3543,9 @@ const Game = () => {
                            rarity: "green",
                            image: "/lovable-uploads/ac3e1f52-ba21-4588-9051-87eef47caf5c.png"
                          }])}
-                           renderItem={(item, idx) => (
-                             <Card key={idx} className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden hover:scale-105 hover:shadow-3xl hover:border-gray-500/70 transition-all duration-300 cursor-pointer">
-                              <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
-                              <CardContent className="p-4 relative z-10">
+                            renderItem={(item, idx) => (
+                              <GlowCard key={idx} className="cursor-pointer">
+                               <div className="p-4">
                                 <div className="aspect-square bg-gray-800/50 rounded-lg mb-3 overflow-hidden flex items-center justify-center">
                                    <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
                                 </div>
@@ -3581,9 +3580,9 @@ const Game = () => {
                                       </DropdownMenuItem>
                                     </DropdownMenuContent>
                                   </DropdownMenu>
-                                </div>
-                              </CardContent>
-                            </Card>
+                                 </div>
+                               </div>
+                             </GlowCard>
                            )}
                         />
                         </CardContent>
