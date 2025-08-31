@@ -1407,7 +1407,7 @@ const Game = () => {
                     </CardHeader>
                     <CardContent>
                         <StoreCarousel ref={fightersCarouselRef} items={filterItemsByRarity([{
-                  name: "Dale Sunny",
+                  name: "Shane Sonny",
                   price: 1200,
                   rarity: "special",
                   image: "/lovable-uploads/93281d21-be75-4f68-86b0-b80b1e03ac56.png"
@@ -3050,7 +3050,7 @@ const Game = () => {
                      </CardHeader>
                       <CardContent>
                          <StoreCarousel ref={desktopFightersCarouselRef} desktopMode={true} items={filterItemsByRarity([{
-                        name: "Dale Sunny",
+                        name: "Shane Sonny",
                         price: 1200,
                         rarity: "gold",
                         image: "/lovable-uploads/93281d21-be75-4f68-86b0-b80b1e03ac56.png"
