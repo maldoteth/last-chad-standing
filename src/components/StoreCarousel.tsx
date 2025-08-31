@@ -2,7 +2,7 @@ import React from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from '@/components/ui/carousel';
+import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
 
 interface StoreItem {
   name: string;
@@ -34,17 +34,6 @@ const StoreCarousel: React.FC<StoreCarouselProps> = ({ items, renderItem }) => {
 
   return (
     <Carousel className="w-full">
-      {itemGroups.length > 1 && (
-        <div className="flex justify-center items-center mb-4 space-x-2">
-          <CarouselPrevious className="static translate-y-0 bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 h-8 w-8" />
-          <div className="flex space-x-1">
-            {itemGroups.map((_, idx) => (
-              <div key={idx} className="w-2 h-2 rounded-full bg-white/30" />
-            ))}
-          </div>
-          <CarouselNext className="static translate-y-0 bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 h-8 w-8" />
-        </div>
-      )}
       <CarouselContent>
         {itemGroups.map((group, groupIdx) => (
           <CarouselItem key={groupIdx}>

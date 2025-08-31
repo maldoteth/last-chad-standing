@@ -21,7 +21,7 @@ import { Input } from "@/components/ui/input";
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerTrigger, DrawerClose } from "@/components/ui/drawer";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogDescription } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Coins, ShoppingBag, Users, Package, CreditCard, Handshake, Trophy, Star, Target, ChevronRight, Bell, Play, Home, TrendingUp, UserPlus, Medal, LogOut, Settings, Info, Gift, BarChart3, LineChart, ArrowUpRight, ArrowDownRight, Search, Filter, Gamepad, Instagram, Layers, BookOpen, Youtube, X, RotateCcw, MessageCircle } from "lucide-react";
+import { Coins, ShoppingBag, Users, Package, CreditCard, Handshake, Trophy, Star, Target, ChevronRight, ChevronLeft, Bell, Play, Home, TrendingUp, UserPlus, Medal, LogOut, Settings, Info, Gift, BarChart3, LineChart, ArrowUpRight, ArrowDownRight, Search, Filter, Gamepad, Instagram, Layers, BookOpen, Youtube, X, RotateCcw, MessageCircle } from "lucide-react";
 import { ResponsiveContainer, LineChart as RechartsLineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, PieChart, Pie, Cell, BarChart, Bar, Area, AreaChart } from 'recharts';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import cyberWarriorSkin from "@/assets/cyber-warrior-skin.png";
@@ -1411,7 +1411,30 @@ const Game = () => {
                     <CardHeader className="relative z-10">
                       <CardTitle className="flex items-center justify-between text-white">
                         <span>Fighters</span>
-                        <Badge variant="secondary">8 items</Badge>
+                        <div className="flex items-center space-x-3">
+                          {/* Navigation arrows for carousel - only show when more than 4 items */}
+                          <div className="flex items-center space-x-1">
+                            <Button variant="ghost" size="sm" className="h-6 w-6 p-0 text-white/70 hover:text-white hover:bg-white/10" onClick={() => {
+                              const carousel = document.querySelector('[data-orientation="horizontal"]');
+                              if (carousel) {
+                                const prevBtn = carousel.querySelector('[data-orientation="horizontal"] button[aria-label="Previous slide"]') as HTMLButtonElement;
+                                if (prevBtn) prevBtn.click();
+                              }
+                            }}>
+                              <ChevronLeft className="h-4 w-4" />
+                            </Button>
+                            <Button variant="ghost" size="sm" className="h-6 w-6 p-0 text-white/70 hover:text-white hover:bg-white/10" onClick={() => {
+                              const carousel = document.querySelector('[data-orientation="horizontal"]');
+                              if (carousel) {
+                                const nextBtn = carousel.querySelector('[data-orientation="horizontal"] button[aria-label="Next slide"]') as HTMLButtonElement;
+                                if (nextBtn) nextBtn.click();
+                              }
+                            }}>
+                              <ChevronRight className="h-4 w-4" />
+                            </Button>
+                          </div>
+                          <Badge variant="secondary">8 items</Badge>
+                        </div>
                       </CardTitle>
                       
                     </CardHeader>
@@ -1528,7 +1551,30 @@ const Game = () => {
                     <CardHeader className="relative z-10">
                       <CardTitle className="flex items-center justify-between text-white">
                         <span>Accessories</span>
-                        <Badge variant="secondary">8 items</Badge>
+                        <div className="flex items-center space-x-3">
+                          {/* Navigation arrows for carousel - only show when more than 4 items */}
+                          <div className="flex items-center space-x-1">
+                            <Button variant="ghost" size="sm" className="h-6 w-6 p-0 text-white/70 hover:text-white hover:bg-white/10" onClick={() => {
+                              const carousels = document.querySelectorAll('[data-orientation="horizontal"]');
+                              if (carousels[1]) {
+                                const prevBtn = carousels[1].querySelector('button[aria-label="Previous slide"]') as HTMLButtonElement;
+                                if (prevBtn) prevBtn.click();
+                              }
+                            }}>
+                              <ChevronLeft className="h-4 w-4" />
+                            </Button>
+                            <Button variant="ghost" size="sm" className="h-6 w-6 p-0 text-white/70 hover:text-white hover:bg-white/10" onClick={() => {
+                              const carousels = document.querySelectorAll('[data-orientation="horizontal"]');
+                              if (carousels[1]) {
+                                const nextBtn = carousels[1].querySelector('button[aria-label="Next slide"]') as HTMLButtonElement;
+                                if (nextBtn) nextBtn.click();
+                              }
+                            }}>
+                              <ChevronRight className="h-4 w-4" />
+                            </Button>
+                          </div>
+                          <Badge variant="secondary">8 items</Badge>
+                        </div>
                       </CardTitle>
                       
                     </CardHeader>
@@ -1641,7 +1687,30 @@ const Game = () => {
                     <CardHeader className="relative z-10">
                       <CardTitle className="flex items-center justify-between text-white">
                         <span>Emotes</span>
-                         <Badge variant="secondary">8 items</Badge>
+                        <div className="flex items-center space-x-3">
+                          {/* Navigation arrows for carousel - only show when more than 4 items */}
+                          <div className="flex items-center space-x-1">
+                            <Button variant="ghost" size="sm" className="h-6 w-6 p-0 text-white/70 hover:text-white hover:bg-white/10" onClick={() => {
+                              const carousels = document.querySelectorAll('[data-orientation="horizontal"]');
+                              if (carousels[2]) {
+                                const prevBtn = carousels[2].querySelector('button[aria-label="Previous slide"]') as HTMLButtonElement;
+                                if (prevBtn) prevBtn.click();
+                              }
+                            }}>
+                              <ChevronLeft className="h-4 w-4" />
+                            </Button>
+                            <Button variant="ghost" size="sm" className="h-6 w-6 p-0 text-white/70 hover:text-white hover:bg-white/10" onClick={() => {
+                              const carousels = document.querySelectorAll('[data-orientation="horizontal"]');
+                              if (carousels[2]) {
+                                const nextBtn = carousels[2].querySelector('button[aria-label="Next slide"]') as HTMLButtonElement;
+                                if (nextBtn) nextBtn.click();
+                              }
+                            }}>
+                              <ChevronRight className="h-4 w-4" />
+                            </Button>
+                          </div>
+                          <Badge variant="secondary">8 items</Badge>
+                        </div>
                       </CardTitle>
                       
                     </CardHeader>
