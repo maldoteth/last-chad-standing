@@ -3866,7 +3866,7 @@ const Game = () => {
                               ) : (
                                 <div className="flex items-center animate-fade-in">
                                   <div className="relative">
-                                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-3 h-3 text-gray-400" />
+                                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-3 h-3 text-white" />
                                     <Input
                                       placeholder="search"
                                       value={searchTerm}
