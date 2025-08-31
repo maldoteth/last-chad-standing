@@ -88,7 +88,10 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
             <span className={`${label} text-red-400 font-medium`}>sell</span>
           </div>
           <span className={`${text} text-white/60 opacity-0`}>|</span>
-          <span className={`${label} text-green-400 font-medium`}>buy</span>
+          <div className="flex items-center space-x-1">
+            <div className={`${coin} opacity-0`}></div>
+            <span className={`${label} text-green-400 font-medium`}>buy</span>
+          </div>
         </div>
       </div>
     );
