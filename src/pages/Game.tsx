@@ -1992,10 +1992,9 @@ const Game = () => {
                         <div className="flex items-center space-x-2">
                          <Drawer>
                            <DrawerTrigger asChild>
-                             <Button variant="outline" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
-                               <Layers className="w-3 h-3 mr-1" />
-                               Category
-                             </Button>
+                              <Button variant="outline" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 w-6">
+                                <Layers className="w-3 h-3" />
+                              </Button>
                            </DrawerTrigger>
                            <DrawerContent className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
                              <DrawerHeader>
@@ -2025,10 +2024,9 @@ const Game = () => {
                          </Drawer>
                          <Drawer>
                            <DrawerTrigger asChild>
-                             <Button variant="outline" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
-                               <Search className="w-3 h-3 mr-1" />
-                               Search
-                             </Button>
+                              <Button variant="outline" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 w-6">
+                                <Search className="w-3 h-3" />
+                              </Button>
                            </DrawerTrigger>
                            <DrawerContent className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
                              <DrawerHeader>
@@ -2046,10 +2044,9 @@ const Game = () => {
                          </Drawer>
                         <Drawer>
                           <DrawerTrigger asChild>
-                            <Button variant="outline" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
-                              <Filter className="w-3 h-3 mr-1" />
-                              Filter
-                            </Button>
+                             <Button variant="outline" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 w-6">
+                               <Filter className="w-3 h-3" />
+                             </Button>
                           </DrawerTrigger>
                           <DrawerContent className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
                             <DrawerHeader>
