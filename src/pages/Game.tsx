@@ -347,7 +347,7 @@ const Game = () => {
       position: "Assault",
       price: 5900,
       change: 33.1,
-      image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
+      image: "/lovable-uploads/55728a6c-0c6b-4217-82d8-a21b16e912d6.png"
     }, {
       name: "Frost Bite",
       team: "Ice Wolves",
