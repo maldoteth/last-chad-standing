@@ -100,52 +100,53 @@ export const useProfile = () => {
         return profileWithIcon;
       }
 
-      // Create new profile and user balance in a transaction-like approach
+      // Use upsert logic to handle potential duplicate keys
       console.log('Creating new profile and balance for user:', user.id);
 
-      // First, create user balance
+      // First, upsert user balance (handle duplicates gracefully)
       const { data: balanceData, error: balanceError } = await supabase
         .from('user_balances')
-        .insert({
+        .upsert({
           user_id: user.id,
           coins: 1000,
           xp: 0
+        }, {
+          onConflict: 'user_id',
+          ignoreDuplicates: false
         })
         .select()
         .single();
 
       if (balanceError) {
-        console.error('Error creating user balance:', balanceError);
+        console.error('Error upserting user balance:', balanceError);
         throw balanceError;
       }
 
-      console.log('User balance created:', balanceData);
+      console.log('User balance upserted:', balanceData);
 
       // Then create profile - trigger will auto-generate username
       const { data: profileData, error: profileError } = await supabase
         .from('user_profiles')
-        .insert({
+        .upsert({
           user_id: user.id,
+        }, {
+          onConflict: 'user_id',
+          ignoreDuplicates: false
         })
         .select()
         .single();
 
       if (profileError) {
-        console.error('Error creating profile:', profileError);
-        // If profile creation fails, we should cleanup the balance
-        await supabase
-          .from('user_balances')
-          .delete()
-          .eq('user_id', user.id);
+        console.error('Error upserting profile:', profileError);
         throw profileError;
       }
 
       if (!profileData) {
-        console.error('No profile data returned from creation');
-        throw new Error('No profile data returned from creation');
+        console.error('No profile data returned from upsert');
+        throw new Error('No profile data returned from upsert');
       }
 
-      console.log('Profile created successfully:', profileData);
+      console.log('Profile upserted successfully:', profileData);
 
       // Add tier icon as avatar_url
       const tierIcon = getTierIcon(balanceData.xp);
@@ -158,16 +159,21 @@ export const useProfile = () => {
       
       toast({
         title: "Welcome!",
-        description: `Profile created: ${profileData.username}`,
+        description: `Profile ready: ${profileData.username}`,
       });
 
       return profileWithIcon;
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error in createProfile function:', error);
+      
+      // Handle specific database constraint errors
+      const errorMessage = error?.code === '23505' 
+        ? "Profile already exists. Please try logging in again."
+        : "Unable to create your profile. Please try again.";
       
       toast({
         title: "Profile creation failed",
-        description: "Unable to create your profile. Please try again.",
+        description: errorMessage,
         variant: "destructive",
       });
       
