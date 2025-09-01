@@ -81,7 +81,7 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
     const mockChange = (Math.random() * 30 - 15);
     const isPositive = mockChange > 0;
     
-    return <div className="flex items-center justify-between bg-card rounded-lg p-3 min-w-[140px]">
+    return <div className="flex items-center justify-between rounded-lg p-3 min-w-[140px]">
       <div className="flex flex-col">
         <div className="flex items-center gap-1 mb-1">
           <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className={coin} />
