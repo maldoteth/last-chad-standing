@@ -104,7 +104,15 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
             <ArrowRightLeft className="w-3 h-3 md:w-4 md:h-4" />
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-32 p-2" align="end">
+        <PopoverContent 
+          className="w-32 p-2 md:w-32 md:p-2 md:bg-popover md:border md:shadow-md
+                     sm:w-full sm:max-w-sm sm:p-4 sm:rounded-t-3xl sm:rounded-b-none 
+                     sm:bg-black/80 sm:backdrop-blur-xl sm:border-t sm:border-white/20 
+                     sm:shadow-2xl sm:fixed sm:bottom-0 sm:left-1/2 sm:transform sm:-translate-x-1/2
+                     sm:animate-slide-in-right"
+          align="end"
+          side="bottom"
+        >
           <div className="flex flex-col gap-1">
             <Button 
               size="sm" 
