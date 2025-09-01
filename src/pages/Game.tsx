@@ -392,12 +392,12 @@ const Game = () => {
       change: 62.1,
       image: "/lovable-uploads/e8b33b1a-410f-4448-9b83-126b8d27f0a9.png"
     }, {
-      name: "Storm Lord",
+      name: "John Strictland",
       team: "Weather Gods",
       position: "Legendary",
       price: 10500,
       change: 58.7,
-      image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
+      image: "/lovable-uploads/98664a07-8365-4512-8f3e-a0c79bd4617c.png"
     }],
     alltime: [{
       name: "Apex Legend",
