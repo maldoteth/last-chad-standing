@@ -3725,7 +3725,32 @@ const Game = () => {
                               </DropdownMenu>
 
                             {/* Sort Dropdown */}
-                            <DropdownMenu>
+                            {isMobile ? <Drawer>
+                                <DrawerTrigger asChild>
+                                  <Button variant="outline" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-8 w-8">
+                                    <ArrowUpDown className="w-3 h-3" />
+                                  </Button>
+                                </DrawerTrigger>
+                                <DrawerContent className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
+                                   <DrawerHeader>
+                                     <DrawerTitle className="text-center">Sort By</DrawerTitle>
+                                   </DrawerHeader>
+                                   <div className="px-4 pb-8 space-y-2">
+                                     <Button variant="ghost" onClick={() => setMarketplaceSortBy("highest-price")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceSortBy === "highest-price" ? "bg-white/20" : ""}`}>
+                                       Highest Price
+                                     </Button>
+                                     <Button variant="ghost" onClick={() => setMarketplaceSortBy("lowest-price")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceSortBy === "lowest-price" ? "bg-white/20" : ""}`}>
+                                       Lowest Price
+                                     </Button>
+                                     <Button variant="ghost" onClick={() => setMarketplaceSortBy("highest-gain")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceSortBy === "highest-gain" ? "bg-white/20" : ""}`}>
+                                       Highest % Gain
+                                     </Button>
+                                     <Button variant="ghost" onClick={() => setMarketplaceSortBy("highest-loss")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceSortBy === "highest-loss" ? "bg-white/20" : ""}`}>
+                                       Highest % Loss
+                                     </Button>
+                                   </div>
+                                 </DrawerContent>
+                               </Drawer> : <DropdownMenu>
                               <DropdownMenuTrigger asChild>
                                   <Button variant="outline" size="sm" className="bg-black/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-8 w-8">
                                    <ArrowUpDown className="w-3 h-3" />
@@ -3745,7 +3770,7 @@ const Game = () => {
                                   <span>Highest % Loss</span>
                                 </DropdownMenuItem>
                                 </DropdownMenuContent>
-                              </DropdownMenu>
+                              </DropdownMenu>}
 
                             {/* Filter Dropdown - Price/Trend Filter */}
                             {isMobile ? <Drawer>
