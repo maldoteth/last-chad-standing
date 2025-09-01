@@ -87,15 +87,17 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
           </div>
         </div>
         
-        <div className="flex flex-col items-center">
-          <span className={`${text} font-bold text-green-400 cursor-pointer hover:text-green-300 transition-colors flex items-center gap-1`} onClick={() => onBuyClick?.()}>
+        <Button 
+          onClick={() => onBuyClick?.()} 
+          variant="outline" 
+          className="flex flex-col items-center justify-center p-2 h-auto border-green-400/30 bg-green-400/10 hover:bg-green-400/20 text-green-400 hover:text-green-300 transition-colors"
+        >
+          <div className="flex items-center gap-1 mb-1">
             <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className={coin} />
-            {formatNumberWithAbbreviation(mockSellPrice)}
-          </span>
-          <span className={`${label} text-green-400 font-medium cursor-pointer hover:text-green-300 transition-colors text-center`} onClick={() => onBuyClick?.()}>
-            BUY
-          </span>
-        </div>
+            <span className={`${text} font-bold`}>{formatNumberWithAbbreviation(mockSellPrice)}</span>
+          </div>
+          <span className={`${label} font-medium`}>BUY</span>
+        </Button>
       </div>;
   }
   return <div className="flex items-start space-x-2">
