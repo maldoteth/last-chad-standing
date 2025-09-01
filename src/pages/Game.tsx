@@ -419,7 +419,7 @@ const Game = () => {
       position: "Godlike",
       price: 14200,
       change: 156.8,
-      image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
+      image: "/lovable-uploads/76adb888-cbfd-4b1c-ba39-36303e53c2c0.png"
     }, {
       name: "Reality Bender",
       team: "Quantum Lords",
