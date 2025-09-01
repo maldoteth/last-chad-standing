@@ -913,7 +913,7 @@ const Game = () => {
                           description: "Coin purchases coming soon!",
                           duration: 3000
                         })}>
-                                  <Coins className="mr-2 h-4 w-4" />
+                                   <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="mr-2 h-4 w-4" />
                                   Buy With Coins
                                 </Button>
                                 <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => toast({
@@ -943,7 +943,7 @@ const Game = () => {
                         description: "Coin purchases coming soon!",
                         duration: 3000
                       })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
-                                <Coins className="w-4 h-4" />
+                                 <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4" />
                                 <span>Buy With Coins</span>
                               </DropdownMenuItem>
                               <DropdownMenuItem onClick={() => toast({
@@ -1460,7 +1460,7 @@ const Game = () => {
                               description: "Coin purchases coming soon!",
                               duration: 3000
                             })}>
-                                        <Coins className="mr-2 h-4 w-4" />
+                                         <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="mr-2 h-4 w-4" />
                                         Buy With Coins
                                       </Button>
                                       <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => toast({
@@ -1585,7 +1585,7 @@ const Game = () => {
                               description: "Coin purchases coming soon!",
                               duration: 3000
                             })}>
-                                        <Coins className="mr-2 h-4 w-4" />
+                                         <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="mr-2 h-4 w-4" />
                                         Buy With Coins
                                       </Button>
                                       <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => {/* TODO: Implement card payment */}}>
@@ -1706,7 +1706,7 @@ const Game = () => {
                               description: "Coin purchases coming soon!",
                               duration: 3000
                             })}>
-                                        <Coins className="mr-2 h-4 w-4" />
+                                         <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="mr-2 h-4 w-4" />
                                         Buy With Coins
                                       </Button>
                                       <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => {/* TODO: Implement card payment */}}>
@@ -1820,7 +1820,7 @@ const Game = () => {
                               description: "Coin purchases coming soon!",
                               duration: 3000
                             })}>
-                                           <Coins className="mr-2 h-4 w-4" />
+                                            <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="mr-2 h-4 w-4" />
                                            Buy With Coins
                                          </Button>
                                          <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => toast({
@@ -2756,7 +2756,7 @@ const Game = () => {
                             description: "Coin purchases coming soon!",
                             duration: 3000
                           })}>
-                              <Coins className="mr-2 h-4 w-4" />
+                              <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="mr-2 h-4 w-4" />
                               Buy With Coins
                             </Button>
                             <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => toast({
@@ -2786,7 +2786,7 @@ const Game = () => {
                           description: "Coin purchases coming soon!",
                           duration: 3000
                         })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
-                            <Coins className="w-4 h-4" />
+                             <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4" />
                             <span>Buy With Coins</span>
                           </DropdownMenuItem>
                           <DropdownMenuItem onClick={() => toast({
@@ -3078,7 +3078,7 @@ const Game = () => {
                                   description: "Coin purchases coming soon!",
                                   duration: 3000
                                 })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
-                                       <Coins className="w-4 h-4" />
+                                        <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4" />
                                        <span>Buy With Coins</span>
                                      </DropdownMenuItem>
                                      <DropdownMenuItem onClick={() => toast({
@@ -3185,7 +3185,7 @@ const Game = () => {
                                   description: "Coin purchases coming soon!",
                                   duration: 3000
                                 })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
-                                       <Coins className="w-4 h-4" />
+                                        <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4" />
                                        <span>Buy With Coins</span>
                                      </DropdownMenuItem>
                                      <DropdownMenuItem onClick={() => toast({
@@ -3272,7 +3272,7 @@ const Game = () => {
                                   description: "Coin purchases coming soon!",
                                   duration: 3000
                                 })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
-                                        <Coins className="w-4 h-4" />
+                                         <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4" />
                                         <span>Buy With Coins</span>
                                       </DropdownMenuItem>
                                       <DropdownMenuItem onClick={() => toast({
@@ -3379,7 +3379,7 @@ const Game = () => {
                                   description: "Coin purchases coming soon!",
                                   duration: 3000
                                 })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
-                                       <Coins className="w-4 h-4" />
+                                        <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4" />
                                        <span>Buy With Coins</span>
                                      </DropdownMenuItem>
                                      <DropdownMenuItem onClick={() => toast({
@@ -3466,7 +3466,7 @@ const Game = () => {
                                  description: "Coin purchases coming soon!",
                                  duration: 3000
                                })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
-                                       <Coins className="w-4 h-4" />
+                                       <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4" />
                                        <span>Buy With Coins</span>
                                      </DropdownMenuItem>
                                      <DropdownMenuItem onClick={() => toast({
@@ -4391,7 +4391,7 @@ const Game = () => {
             });
             setBuyDialogOpen(false);
           }}>
-                <Coins className="w-4 h-4 mr-2" />
+                <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4 mr-2" />
                 Buy with Coins
               </Button>
               <Button variant="ghost" className="text-white hover:bg-white/10 hover:text-white transition-all duration-300" onClick={() => setBuyDialogOpen(false)}>
