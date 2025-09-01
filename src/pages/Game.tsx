@@ -80,9 +80,7 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
          <div className="flex flex-col">
           <div className="flex items-center space-x-1">
             <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className={coin} />
-            <span className={`${text} font-bold text-red-400 cursor-pointer hover:text-red-300 transition-colors`} onClick={() => onSellClick?.()}>
-              {formatNumberWithAbbreviation(mockBuyPrice)}
-            </span>
+            
           </div>
           <div className="flex justify-center ml-6">
             <span className={`${label} text-red-400 font-medium cursor-pointer hover:text-red-300 transition-colors`} onClick={() => onSellClick?.()}>
@@ -90,7 +88,7 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
             </span>
           </div>
         </div>
-        <span className={`${text} text-white/60`}>|</span>
+        
         <div className="flex flex-col items-center">
           <span className={`${text} font-bold text-green-400 cursor-pointer hover:text-green-300 transition-colors`} onClick={() => onBuyClick?.()}>
             {formatNumberWithAbbreviation(mockSellPrice)}
@@ -2181,12 +2179,12 @@ const Game = () => {
                      <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
                        <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                        <div className="absolute inset-0" style={{
-                 backgroundImage: `
+                backgroundImage: `
                            linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
                            linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
                          `,
-                 backgroundSize: '4px 4px'
-               }} />
+                backgroundSize: '4px 4px'
+              }} />
                        <CardHeader className="relative z-10 pb-3">
                           <CardTitle className="flex items-center text-white text-lg">
                             <span>Fighters</span>
@@ -2200,12 +2198,7 @@ const Game = () => {
                            </div>
                            <p className="text-gray-300 text-sm">No fighters owned yet</p>
                            <p className="text-xs text-gray-400 mt-1">Visit the store to purchase fighters</p>
-                           <Button 
-                             onClick={() => setActiveTab("store")} 
-                             variant="secondary" 
-                             size="sm" 
-                             className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 mt-3"
-                           >
+                           <Button onClick={() => setActiveTab("store")} variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 mt-3">
                              Browse Store
                            </Button>
                          </div>
@@ -2235,12 +2228,7 @@ const Game = () => {
                            </div>
                            <p className="text-gray-300 text-sm">No accessories owned yet</p>
                            <p className="text-xs text-gray-400 mt-1">Visit the store to purchase shoes, backpacks, and hats</p>
-                           <Button 
-                             onClick={() => setActiveTab("store")} 
-                             variant="secondary" 
-                             size="sm" 
-                             className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 mt-3"
-                           >
+                           <Button onClick={() => setActiveTab("store")} variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 mt-3">
                              Browse Store
                            </Button>
                          </div>
@@ -2251,12 +2239,12 @@ const Game = () => {
                      <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
                        <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                        <div className="absolute inset-0" style={{
-                 backgroundImage: `
+                backgroundImage: `
                            linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
                            linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
                          `,
-                 backgroundSize: '4px 4px'
-               }} />
+                backgroundSize: '4px 4px'
+              }} />
                        <CardHeader className="relative z-10 pb-3">
                           <CardTitle className="flex items-center text-white text-lg">
                             <span>Mobility</span>
@@ -2270,12 +2258,7 @@ const Game = () => {
                            </div>
                            <p className="text-gray-300 text-sm">No vehicles owned yet</p>
                            <p className="text-xs text-gray-400 mt-1">Visit the store to purchase bikes, cars, and hovercrafts</p>
-                           <Button 
-                             onClick={() => setActiveTab("store")} 
-                             variant="secondary" 
-                             size="sm" 
-                             className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 mt-3"
-                           >
+                           <Button onClick={() => setActiveTab("store")} variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 mt-3">
                              Browse Store
                            </Button>
                          </div>
@@ -2286,12 +2269,12 @@ const Game = () => {
                      <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
                        <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                        <div className="absolute inset-0" style={{
-                 backgroundImage: `
+                backgroundImage: `
                            linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
                            linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
                          `,
-                 backgroundSize: '4px 4px'
-               }} />
+                backgroundSize: '4px 4px'
+              }} />
                        <CardHeader className="relative z-10 pb-3">
                           <CardTitle className="flex items-center text-white text-lg">
                             <span>Packs</span>
@@ -2305,12 +2288,7 @@ const Game = () => {
                            </div>
                            <p className="text-gray-300 text-sm">No packs owned yet</p>
                            <p className="text-xs text-gray-400 mt-1">Visit the store to purchase item packs</p>
-                           <Button 
-                             onClick={() => setActiveTab("store")} 
-                             variant="secondary" 
-                             size="sm" 
-                             className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 mt-3"
-                           >
+                           <Button onClick={() => setActiveTab("store")} variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 mt-3">
                              Browse Store
                            </Button>
                          </div>
@@ -3948,12 +3926,12 @@ const Game = () => {
                      <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
                        <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                        <div className="absolute inset-0" style={{
-                       backgroundImage: `
+                      backgroundImage: `
                            linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
                            linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
                          `,
-                       backgroundSize: '4px 4px'
-                     }} />
+                      backgroundSize: '4px 4px'
+                    }} />
                        <CardHeader className="relative z-10">
                           <CardTitle className="text-white">
                             <span>Fighters</span>
@@ -3967,12 +3945,7 @@ const Game = () => {
                            </div>
                            <p className="text-gray-300">No fighters owned yet</p>
                            <p className="text-sm text-gray-400 mt-1">Visit the store to purchase fighters</p>
-                           <Button 
-                             onClick={() => setActiveTab("store")} 
-                             variant="secondary" 
-                             size="sm" 
-                             className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 mt-4"
-                           >
+                           <Button onClick={() => setActiveTab("store")} variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 mt-4">
                              Browse Store
                            </Button>
                          </div>
@@ -4002,12 +3975,7 @@ const Game = () => {
                            </div>
                            <p className="text-gray-300">No accessories owned yet</p>
                            <p className="text-sm text-gray-400 mt-1">Visit the store to purchase shoes, backpacks, and hats</p>
-                           <Button 
-                             onClick={() => setActiveTab("store")} 
-                             variant="secondary" 
-                             size="sm" 
-                             className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 mt-4"
-                           >
+                           <Button onClick={() => setActiveTab("store")} variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 mt-4">
                              Browse Store
                            </Button>
                          </div>
@@ -4018,12 +3986,12 @@ const Game = () => {
                      <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
                        <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                        <div className="absolute inset-0" style={{
-                       backgroundImage: `
+                      backgroundImage: `
                            linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
                            linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
                          `,
-                       backgroundSize: '4px 4px'
-                     }} />
+                      backgroundSize: '4px 4px'
+                    }} />
                        <CardHeader className="relative z-10">
                           <CardTitle className="text-white">
                             <span>Mobility</span>
@@ -4037,12 +4005,7 @@ const Game = () => {
                            </div>
                            <p className="text-gray-300">No vehicles owned yet</p>
                            <p className="text-sm text-gray-400 mt-1">Visit the store to purchase cars, golf buggies, and more</p>
-                           <Button 
-                             onClick={() => setActiveTab("store")} 
-                             variant="secondary" 
-                             size="sm" 
-                             className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 mt-4"
-                           >
+                           <Button onClick={() => setActiveTab("store")} variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 mt-4">
                              Browse Store
                            </Button>
                          </div>
@@ -4053,12 +4016,12 @@ const Game = () => {
                      <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
                        <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                        <div className="absolute inset-0" style={{
-                       backgroundImage: `
+                      backgroundImage: `
                            linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
                            linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
                          `,
-                       backgroundSize: '4px 4px'
-                     }} />
+                      backgroundSize: '4px 4px'
+                    }} />
                        <CardHeader className="relative z-10">
                           <CardTitle className="text-white">
                             <span>Packs</span>
@@ -4072,12 +4035,7 @@ const Game = () => {
                            </div>
                            <p className="text-gray-300">No packs owned yet</p>
                            <p className="text-sm text-gray-400 mt-1">Visit the store to purchase item packs</p>
-                           <Button 
-                             onClick={() => setActiveTab("store")} 
-                             variant="secondary" 
-                             size="sm" 
-                             className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 mt-4"
-                           >
+                           <Button onClick={() => setActiveTab("store")} variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 mt-4">
                              Browse Store
                            </Button>
                          </div>
