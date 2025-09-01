@@ -272,7 +272,7 @@ const Documents = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between h-16">
               <div className="flex items-center gap-4">
-                <Button variant="outline" size="sm" asChild className="flex items-center gap-2">
+                <Button variant="outline" size="sm" asChild className="flex items-center gap-2 text-gray-700 border-gray-300 hover:text-gray-900 hover:border-gray-400">
                   <Link to="/" className="text-gray-600 hover:text-gray-900 transition-colors">
                     <ArrowLeft size={20} />
                     <span className="hidden sm:inline">Back</span>
@@ -287,7 +287,7 @@ const Documents = () => {
                 <img src="/lovable-uploads/896892f1-7ebc-4852-acea-80dcdbf7c545.png" alt="Last Chad Standing Logo" className="h-14 w-auto opacity-90" />
               </div>
               
-              <Button variant="outline" size="sm" onClick={handleSearchClick} className="flex items-center gap-2">
+              <Button variant="outline" size="sm" onClick={handleSearchClick} className="flex items-center gap-2 text-gray-700 border-gray-300 hover:text-gray-900 hover:border-gray-400">
                 <Search size={16} />
                 <span className="hidden sm:inline">Search</span>
                 <kbd className="hidden sm:inline-flex pointer-events-none h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground">
