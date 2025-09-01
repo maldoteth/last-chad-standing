@@ -3153,7 +3153,7 @@ const Game = () => {
                         name: "Rapz Gloves",
                         price: 800,
                         rarity: "silver",
-                        image: "/lovable-uploads/79162f7a-0435-4ead-b016-c20194bd1b0e.png"
+                        image: "/lovable-uploads/9320a71d-c3b8-4922-938c-5e759907fcf6.png"
                       }])} renderItem={(item, idx) => <GlowCard key={idx} className="text-white shadow-2xl cursor-pointer">
                               <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
                               <CardContent className="p-4 relative z-10">
