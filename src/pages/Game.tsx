@@ -276,47 +276,172 @@ const Game = () => {
       day: 'numeric'
     })
   }));
-  const trendingPlayers = [{
-    name: "The Irish King",
-    team: "Crimson Hawks",
-    position: "Striker",
-    price: 8500,
-    change: 12.5,
-    trend: "up",
-    image: "/lovable-uploads/5c3f060f-4c5f-412b-8f27-eb1bebd3dd7d.png"
-  }, {
-    name: "Jonesy Bones",
-    team: "Steel Wolves",
-    position: "Tank",
-    price: 7200,
-    change: -8.3,
-    trend: "down",
-    image: "/lovable-uploads/660b5122-5ce8-4f6e-af72-2c607d47ef44.png"
-  }, {
-    name: "Stani Eagle",
-    team: "Thunder Birds",
-    position: "Speed",
-    price: 9100,
-    change: 15.7,
-    trend: "up",
-    image: "/lovable-uploads/37f256dc-415c-4032-82ad-db63f676284d.png"
-  }, {
-    name: "Latin Legend",
-    team: "Mountain Lions",
-    position: "Defense",
-    price: 6800,
-    change: -4.2,
-    trend: "down",
-    image: "/lovable-uploads/2c556456-ebeb-4eec-9842-f2d31e06c58a.png"
-  }, {
-    name: "Speed Buggy",
-    team: "Flame Dragons",
-    position: "Assault",
-    price: 8900,
-    change: 9.6,
-    trend: "up",
-    image: "/lovable-uploads/b64d7801-1284-4763-b115-ca3cfa8ff315.png"
-  }];
+  const trendingPlayersData = {
+    daily: [{
+      name: "The Irish King",
+      team: "Crimson Hawks",
+      position: "Striker",
+      price: 8500,
+      change: 12.5,
+      trend: "up",
+      image: "/lovable-uploads/5c3f060f-4c5f-412b-8f27-eb1bebd3dd7d.png"
+    }, {
+      name: "Jonesy Bones",
+      team: "Steel Wolves",
+      position: "Tank",
+      price: 7200,
+      change: -8.3,
+      trend: "down",
+      image: "/lovable-uploads/660b5122-5ce8-4f6e-af72-2c607d47ef44.png"
+    }, {
+      name: "Stani Eagle",
+      team: "Thunder Birds",
+      position: "Speed",
+      price: 9100,
+      change: 15.7,
+      trend: "up",
+      image: "/lovable-uploads/37f256dc-415c-4032-82ad-db63f676284d.png"
+    }, {
+      name: "Latin Legend",
+      team: "Mountain Lions",
+      position: "Defense",
+      price: 6800,
+      change: -4.2,
+      trend: "down",
+      image: "/lovable-uploads/2c556456-ebeb-4eec-9842-f2d31e06c58a.png"
+    }, {
+      name: "Speed Buggy",
+      team: "Flame Dragons",
+      position: "Assault",
+      price: 8900,
+      change: 9.6,
+      trend: "up",
+      image: "/lovable-uploads/b64d7801-1284-4763-b115-ca3cfa8ff315.png"
+    }],
+    weekly: [{
+      name: "Silverborg",
+      team: "Thunder Hawks",
+      position: "Speed",
+      price: 7300,
+      change: 45.2,
+      trend: "up",
+      image: "/lovable-uploads/fdd396d6-16bd-493f-ba2e-0c27e846ea03.png"
+    }, {
+      name: "Based Chad",
+      team: "Steel Warriors",
+      position: "Tank",
+      price: 6800,
+      change: 38.7,
+      trend: "up",
+      image: "/lovable-uploads/335b4baf-29e6-4895-a2d4-54e4cee9fae5.png"
+    }, {
+      name: "Leroy Girthy",
+      team: "Fire Eagles",
+      position: "Assault",
+      price: 5900,
+      change: 33.1,
+      trend: "up",
+      image: "/lovable-uploads/55728a6c-0c6b-4217-82d8-a21b16e912d6.png"
+    }, {
+      name: "Big Dawg",
+      team: "Ice Wolves",
+      position: "Control",
+      price: 6400,
+      change: 29.8,
+      trend: "up",
+      image: "/lovable-uploads/2532e628-0d4b-465e-b350-e49def10eb26.png"
+    }, {
+      name: "Zombie Chan",
+      team: "Ground Force",
+      position: "Heavy",
+      price: 7100,
+      change: 27.3,
+      trend: "up",
+      image: "/lovable-uploads/82fe8aed-6cfa-45b6-945c-c447349b7fe2.png"
+    }],
+    monthly: [{
+      name: "DJ Mouse",
+      team: "Mega Corps",
+      position: "Destroyer",
+      price: 9200,
+      change: 89.4,
+      trend: "up",
+      image: "/lovable-uploads/b86689f4-6c8c-4f7f-91f0-c36052c824e6.png"
+    }, {
+      name: "Alex Toosick",
+      team: "Dark Legion",
+      position: "Assassin",
+      price: 8500,
+      change: 76.8,
+      trend: "up",
+      image: "/lovable-uploads/fa6496ee-f2e7-4af5-8205-7445121d8a6a.png"
+    }, {
+      name: "Tarragon Southslice",
+      team: "Energy Corps",
+      position: "Artillery",
+      price: 8900,
+      change: 69.5,
+      trend: "up",
+      image: "/lovable-uploads/cf5abf4c-cf7f-49b7-a830-49343c8d1222.png"
+    }, {
+      name: "Ray Del Maestro",
+      team: "Space Raiders",
+      position: "Elite",
+      price: 9800,
+      change: 62.1,
+      trend: "up",
+      image: "/lovable-uploads/e8b33b1a-410f-4448-9b83-126b8d27f0a9.png"
+    }, {
+      name: "John Strictland",
+      team: "Weather Gods",
+      position: "Legendary",
+      price: 10500,
+      change: 58.7,
+      trend: "up",
+      image: "/lovable-uploads/98664a07-8365-4512-8f3e-a0c79bd4617c.png"
+    }],
+    "all time": [{
+      name: "Shane Sonny",
+      team: "Ultimate Force",
+      position: "Champion",
+      price: 15000,
+      change: 234.7,
+      trend: "up",
+      image: "/lovable-uploads/a76e21f1-ffca-4130-bd9a-08d09167dca0.png"
+    }, {
+      name: "Lean Chad",
+      team: "Divine Army",
+      position: "Mythic",
+      price: 13500,
+      change: 189.3,
+      trend: "up",
+      image: "/lovable-uploads/a266b13a-b169-41bf-92db-c75cf3d91c9e.png"
+    }, {
+      name: "Indi",
+      team: "Cosmic Force",
+      position: "Godlike",
+      price: 14200,
+      change: 156.8,
+      trend: "up",
+      image: "/lovable-uploads/76adb888-cbfd-4b1c-ba39-36303e53c2c0.png"
+    }, {
+      name: "Kayne Famooser",
+      team: "Quantum Lords",
+      position: "Transcendent",
+      price: 12800,
+      change: 142.5,
+      trend: "up",
+      image: "/lovable-uploads/89c54fc5-22f2-44fd-bbf1-d90a653fdb22.png"
+    }, {
+      name: "White Base Vest",
+      team: "Eternal Guardians",
+      position: "Supreme",
+      price: 16000,
+      change: 198.9,
+      trend: "up",
+      image: "/lovable-uploads/508d1509-e761-46c6-9f3a-f70e256f5a52.png"
+    }]
+  };
   const topGainersData = {
     daily: [{
       name: "The Coupé Tank",
@@ -464,6 +589,7 @@ const Game = () => {
     }]
   };
   const topGainers = topGainersData[gainersTimeFilter];
+  const trendingPlayers = trendingPlayersData[trendingTimeFilter];
   const allPlayers = [{
     name: "The Irish King",
     team: "Crimson Hawks",
