@@ -16,11 +16,8 @@ import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/h
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { ProgressBar } from "@/components/ProgressBar";
 import { useProfile } from "@/hooks/useProfile";
-import { useImagePreloader } from "@/hooks/useImagePreloader";
 import { getAllLevelsForDisplay, getCurrentLevel, getProgressToNextLevel } from "@/lib/progressSystem";
 import { formatNumberWithAbbreviation } from "@/lib/utils";
-import { PlayerCard } from "@/components/PlayerCard";
-import { OptimizedPlayerImage } from "@/components/OptimizedPlayerImage";
 import { Input } from "@/components/ui/input";
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerTrigger, DrawerClose } from "@/components/ui/drawer";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogDescription } from "@/components/ui/dialog";
@@ -399,7 +396,7 @@ const Game = () => {
       position: "Destroyer",
       price: 9200,
       change: 89.4,
-      image: "/lovable-uploads/1e5737a2-94f3-4556-9114-0b0f53307327.png"
+      image: "/lovable-uploads/b86689f4-6c8c-4f7f-91f0-c36052c824e6.png"
     }, {
       name: "Alex Toosick",
       team: "Dark Legion",
@@ -467,25 +464,6 @@ const Game = () => {
     }]
   };
   const topGainers = topGainersData[gainersTimeFilter];
-
-  // Extract all unique image URLs for preloading
-  const allImageSources = React.useMemo(() => {
-    const images = new Set<string>();
-    
-    // Add trending players images
-    trendingPlayers.forEach(player => images.add(player.image));
-    
-    // Add all top gainers images from all time periods
-    Object.values(topGainersData).forEach(gainers => {
-      gainers.forEach(player => images.add(player.image));
-    });
-    
-    return Array.from(images);
-  }, []);
-
-  // Preload all player images
-  const { preloadedImages, isPreloading, preloadProgress } = useImagePreloader(allImageSources);
-
   const allPlayers = [{
     name: "The Irish King",
     team: "Crimson Hawks",
@@ -2121,15 +2099,31 @@ const Game = () => {
                     <CardContent className="relative z-10">
                       <div className="space-y-2">
                         {trendingPlayers.map((player, idx) => (
-                          <PlayerCard
-                            key={`trending-${idx}`}
-                            player={player}
-                            getMarketplacePrices={getMarketplacePrices}
-                            renderMarketplacePrices={renderMarketplacePrices}
-                            onSellClick={handleSellClick}
-                            onBuyClick={handleBuyClick}
-                            priority={idx < 3} // Prioritize first 3 images
-                          />
+                          <div key={`trending-${idx}`} className="flex items-center space-x-3 p-2 bg-white/5 rounded-lg">
+                            <div className="w-12 h-12 rounded-full overflow-hidden">
+                              <img 
+                                src={player.image} 
+                                alt={player.name} 
+                                className="w-full h-full object-cover"
+                                loading={idx < 3 ? 'eager' : 'lazy'}
+                              />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center justify-between">
+                                <div className="flex-1 min-w-0">
+                                  <p className="text-sm md:text-xl font-semibold text-white">{player.name}</p>
+                                  <p className={`text-xs ${player.change >= 0 ? 'text-green-400' : 'text-red-400'}`}>
+                                    {player.change >= 0 ? '+' : ''}{formatNumberWithAbbreviation(player.change)}%{' '}
+                                    {getMarketplacePrices(player.name, 'fighter').bestSellPrice ? 
+                                      `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestSellPrice)} sell` : ''}{' '}
+                                    {getMarketplacePrices(player.name, 'fighter').bestBuyPrice ? 
+                                      `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestBuyPrice)} buy` : ''}
+                                  </p>
+                                </div>
+                                {renderMarketplacePrices(player, getMarketplacePrices, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
+                              </div>
+                            </div>
+                          </div>
                         ))}
                       </div>
                     </CardContent>
@@ -2173,15 +2167,31 @@ const Game = () => {
                     <CardContent className="relative z-10">
                       <div className="space-y-2">
                         {topGainers.map((player, idx) => (
-                          <PlayerCard
-                            key={`gainers-${gainersTimeFilter}-${idx}`}
-                            player={player}
-                            getMarketplacePrices={getMarketplacePrices}
-                            renderMarketplacePrices={renderMarketplacePrices}
-                            onSellClick={handleSellClick}
-                            onBuyClick={handleBuyClick}
-                            priority={idx < 3} // Prioritize first 3 images
-                          />
+                          <div key={`gainers-${gainersTimeFilter}-${idx}`} className="flex items-center space-x-3 p-2 bg-white/5 rounded-lg">
+                            <div className="w-12 h-12 rounded-full overflow-hidden">
+                              <img 
+                                src={player.image} 
+                                alt={player.name} 
+                                className="w-full h-full object-cover"
+                                loading={idx < 3 ? 'eager' : 'lazy'}
+                              />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center justify-between">
+                                <div className="flex-1 min-w-0">
+                                  <p className="text-sm md:text-xl font-semibold text-white">{player.name}</p>
+                                  <p className={`text-xs ${player.change >= 0 ? 'text-green-400' : 'text-red-400'}`}>
+                                    {player.change >= 0 ? '+' : ''}{formatNumberWithAbbreviation(player.change)}%{' '}
+                                    {getMarketplacePrices(player.name, 'fighter').bestSellPrice ? 
+                                      `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestSellPrice)} sell` : ''}{' '}
+                                    {getMarketplacePrices(player.name, 'fighter').bestBuyPrice ? 
+                                      `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestBuyPrice)} buy` : ''}
+                                  </p>
+                                </div>
+                                {renderMarketplacePrices(player, getMarketplacePrices, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
+                              </div>
+                            </div>
+                          </div>
                         ))}
                       </div>
                     </CardContent>
@@ -3904,17 +3914,31 @@ const Game = () => {
                     <CardContent className="relative z-10">
                       <div className="space-y-3">
                         {trendingPlayers.map((player, idx) => (
-                          <PlayerCard
-                            key={`desktop-trending-${idx}`}
-                            player={player}
-                            getMarketplacePrices={getMarketplacePrices}
-                            renderMarketplacePrices={renderMarketplacePrices}
-                            onSellClick={handleSellClick}
-                            onBuyClick={handleBuyClick}
-                            priority={idx < 3} // Prioritize first 3 images
-                            variant="desktop"
-                            className="flex items-center space-x-3 p-3 bg-white/5 rounded-lg hover:bg-white/15 md:hover:bg-white/20 transition-all duration-300 cursor-pointer"
-                          />
+                          <div key={`desktop-trending-${idx}`} className="flex items-center space-x-3 p-3 bg-white/5 rounded-lg hover:bg-white/15 md:hover:bg-white/20 transition-all duration-300 cursor-pointer">
+                            <div className="w-12 h-12 rounded-full overflow-hidden">
+                              <img 
+                                src={player.image} 
+                                alt={player.name} 
+                                className="w-full h-full object-cover"
+                                loading={idx < 3 ? 'eager' : 'lazy'}
+                              />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center justify-between mb-1">
+                                <div className="flex-1 min-w-0">
+                                  <p className="text-sm font-semibold text-white">{player.name}</p>
+                                  <p className={`text-xs ${player.change >= 0 ? 'text-green-400' : 'text-red-400'}`}>
+                                    {player.change >= 0 ? '+' : ''}{formatNumberWithAbbreviation(player.change)}%{' '}
+                                    {getMarketplacePrices(player.name, 'fighter').bestSellPrice ? 
+                                      `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestSellPrice)} sell` : ''}{' '}
+                                    {getMarketplacePrices(player.name, 'fighter').bestBuyPrice ? 
+                                      `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestBuyPrice)} buy` : ''}
+                                  </p>
+                                </div>
+                                {renderMarketplacePrices(player, getMarketplacePrices, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
+                              </div>
+                            </div>
+                          </div>
                         ))}
                       </div>
                     </CardContent>
@@ -3958,17 +3982,31 @@ const Game = () => {
                     <CardContent className="relative z-10">
                       <div className="space-y-3">
                         {topGainers.map((player, idx) => (
-                          <PlayerCard
-                            key={`desktop-gainers-${gainersTimeFilter}-${idx}`}
-                            player={player}
-                            getMarketplacePrices={getMarketplacePrices}
-                            renderMarketplacePrices={renderMarketplacePrices}
-                            onSellClick={handleSellClick}
-                            onBuyClick={handleBuyClick}
-                            priority={idx < 3} // Prioritize first 3 images
-                            variant="desktop"
-                            className="flex items-center space-x-3 p-3 bg-white/5 rounded-lg hover:bg-white/15 md:hover:bg-white/20 transition-all duration-300 cursor-pointer"
-                          />
+                          <div key={`desktop-gainers-${gainersTimeFilter}-${idx}`} className="flex items-center space-x-3 p-3 bg-white/5 rounded-lg hover:bg-white/15 md:hover:bg-white/20 transition-all duration-300 cursor-pointer">
+                            <div className="w-12 h-12 rounded-full overflow-hidden">
+                              <img 
+                                src={player.image} 
+                                alt={player.name} 
+                                className="w-full h-full object-cover"
+                                loading={idx < 3 ? 'eager' : 'lazy'}
+                              />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center justify-between mb-1">
+                                <div className="flex-1 min-w-0">
+                                  <p className="text-sm font-semibold text-white">{player.name}</p>
+                                  <p className={`text-xs ${player.change >= 0 ? 'text-green-400' : 'text-red-400'}`}>
+                                    {player.change >= 0 ? '+' : ''}{formatNumberWithAbbreviation(player.change)}%{' '}
+                                    {getMarketplacePrices(player.name, 'fighter').bestSellPrice ? 
+                                      `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestSellPrice)} sell` : ''}{' '}
+                                    {getMarketplacePrices(player.name, 'fighter').bestBuyPrice ? 
+                                      `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestBuyPrice)} buy` : ''}
+                                  </p>
+                                </div>
+                                {renderMarketplacePrices(player, getMarketplacePrices, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
+                              </div>
+                            </div>
+                          </div>
                         ))}
                       </div>
                     </CardContent>
