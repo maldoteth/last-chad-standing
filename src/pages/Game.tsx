@@ -50,6 +50,7 @@ const getTierIcon = (xp: number): string => {
 // Function to render marketplace prices (bid/ask)
 const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: string, itemType: string) => any, size: 'small' | 'medium' | 'large' = 'medium', onSellClick?: () => void, onBuyClick?: () => void) => {
   const prices = getMarketplacePrices(player.name, 'player');
+  const isMobile = useIsMobile(); // Use hook directly in function
   const sizeClasses = {
     small: {
       coin: 'w-3 h-3 md:w-4.5 md:h-4.5 md:-ml-1',
@@ -94,45 +95,74 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
         </div>
       </div>
       
-      <Popover>
-        <PopoverTrigger asChild>
-          <Button 
-            size="icon"
-            variant="ghost" 
-            className="h-6 w-6 md:h-8 md:w-8 bg-transparent hover:bg-transparent -mt-1 md:mt-0"
-          >
-            <ArrowRightLeft className="w-3 h-3 md:w-4 md:h-4" />
-          </Button>
-        </PopoverTrigger>
-        <PopoverContent 
-          className="w-32 p-2 md:w-32 md:p-2 md:bg-popover md:border md:shadow-md
-                     sm:w-full sm:max-w-sm sm:p-4 sm:rounded-t-3xl sm:rounded-b-none 
-                     sm:bg-black/80 sm:backdrop-blur-xl sm:border-t sm:border-white/20 
-                     sm:shadow-2xl sm:fixed sm:bottom-0 sm:left-1/2 sm:transform sm:-translate-x-1/2
-                     sm:animate-slide-in-right"
-          align="end"
-          side="bottom"
-        >
-          <div className="flex flex-col gap-1">
+      {isMobile ? (
+        <Drawer>
+          <DrawerTrigger asChild>
             <Button 
-              size="sm" 
-              variant="outline" 
-              className="text-green-400 border-green-400/30 hover:bg-green-400/10"
-              onClick={() => onBuyClick?.()}
+              size="icon"
+              variant="ghost" 
+              className="h-6 w-6 bg-transparent hover:bg-transparent -mt-1"
             >
-              Buy
+              <ArrowRightLeft className="w-3 h-3" />
             </Button>
+          </DrawerTrigger>
+          <DrawerContent className="bg-black/80 backdrop-blur-xl border-t border-white/20 rounded-t-3xl">
+            <DrawerHeader>
+              <DrawerTitle className="text-white">Trade Options</DrawerTitle>
+            </DrawerHeader>
+            <div className="flex flex-col gap-3 p-4 pb-6">
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="text-green-400 border-green-400/30 hover:bg-green-400/10 bg-transparent"
+                onClick={() => onBuyClick?.()}
+              >
+                Buy
+              </Button>
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="text-red-400 border-red-400/30 hover:bg-red-400/10 bg-transparent"
+                onClick={() => onSellClick?.()}
+              >
+                Sell
+              </Button>
+            </div>
+          </DrawerContent>
+        </Drawer>
+      ) : (
+        <Popover>
+          <PopoverTrigger asChild>
             <Button 
-              size="sm" 
-              variant="outline" 
-              className="text-red-400 border-red-400/30 hover:bg-red-400/10"
-              onClick={() => onSellClick?.()}
+              size="icon"
+              variant="ghost" 
+              className="h-8 w-8 bg-transparent hover:bg-transparent"
             >
-              Sell
+              <ArrowRightLeft className="w-4 h-4" />
             </Button>
-          </div>
-        </PopoverContent>
-      </Popover>
+          </PopoverTrigger>
+          <PopoverContent className="w-32 p-2" align="end">
+            <div className="flex flex-col gap-1">
+              <Button 
+                size="sm" 
+                variant="outline" 
+                className="text-green-400 border-green-400/30 hover:bg-green-400/10"
+                onClick={() => onBuyClick?.()}
+              >
+                Buy
+              </Button>
+              <Button 
+                size="sm" 
+                variant="outline" 
+                className="text-red-400 border-red-400/30 hover:bg-red-400/10"
+                onClick={() => onSellClick?.()}
+              >
+                Sell
+              </Button>
+            </div>
+          </PopoverContent>
+        </Popover>
+      )}
     </div>;
   }
   return <div className="flex items-start space-x-2">
