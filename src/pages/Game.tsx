@@ -3143,7 +3143,7 @@ const Game = () => {
                         name: "DHB x LCS shorts",
                         price: 990,
                         rarity: "blue",
-                        image: "/lovable-uploads/8c2f941a-58db-43db-9b99-afb13cd3c36b.png"
+                        image: "/lovable-uploads/e21fe8d7-5519-4b7b-bd90-6b96e74635d4.png"
                       }, {
                         name: "Stealth Boots",
                         price: 1200,
