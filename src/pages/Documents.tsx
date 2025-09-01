@@ -273,7 +273,7 @@ const Documents = () => {
             <div className="flex items-center justify-between h-16">
               <div className="flex items-center gap-4">
                 <Button variant="outline" size="sm" asChild className="flex items-center gap-2 text-gray-700 border-gray-300 hover:text-gray-900 hover:border-gray-400">
-                  <Link to="/" className="text-gray-600 hover:text-gray-900 transition-colors">
+                  <Link to="/" className="text-white hover:text-white transition-colors">
                     <ArrowLeft size={20} />
                     <span className="hidden sm:inline">Back</span>
                   </Link>
