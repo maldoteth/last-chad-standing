@@ -414,7 +414,7 @@ const Game = () => {
       change: 189.3,
       image: "/lovable-uploads/a266b13a-b169-41bf-92db-c75cf3d91c9e.png"
     }, {
-      name: "Universe Destroyer",
+      name: "Indi",
       team: "Cosmic Force",
       position: "Godlike",
       price: 14200,
