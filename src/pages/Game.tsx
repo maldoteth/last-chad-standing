@@ -200,24 +200,6 @@ const Game = () => {
     getMarketplacePrices
   } = useMarketplace();
 
-  // Extract all unique image URLs for preloading
-  const allImageSources = React.useMemo(() => {
-    const images = new Set<string>();
-    
-    // Add trending players images
-    trendingPlayers.forEach(player => images.add(player.image));
-    
-    // Add all top gainers images from all time periods
-    Object.values(topGainersData).forEach(gainers => {
-      gainers.forEach(player => images.add(player.image));
-    });
-    
-    return Array.from(images);
-  }, []);
-
-  // Preload all player images
-  const { preloadedImages, isPreloading, preloadProgress } = useImagePreloader(allImageSources);
-
   // Handle mobility shake animation
   const handleMobilityNextClick = () => {
     setMobilityShaking(true);
@@ -485,6 +467,25 @@ const Game = () => {
     }]
   };
   const topGainers = topGainersData[gainersTimeFilter];
+
+  // Extract all unique image URLs for preloading
+  const allImageSources = React.useMemo(() => {
+    const images = new Set<string>();
+    
+    // Add trending players images
+    trendingPlayers.forEach(player => images.add(player.image));
+    
+    // Add all top gainers images from all time periods
+    Object.values(topGainersData).forEach(gainers => {
+      gainers.forEach(player => images.add(player.image));
+    });
+    
+    return Array.from(images);
+  }, []);
+
+  // Preload all player images
+  const { preloadedImages, isPreloading, preloadProgress } = useImagePreloader(allImageSources);
+
   const allPlayers = [{
     name: "The Irish King",
     team: "Crimson Hawks",
