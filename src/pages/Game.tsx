@@ -140,6 +140,7 @@ const Game = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchExpanded, setSearchExpanded] = useState(false);
   const [mobilityShaking, setMobilityShaking] = useState(false);
+  const [accessoriesShaking, setAccessoriesShaking] = useState(false);
   const [settingsExpanded, setSettingsExpanded] = useState(false);
   const [objectivesView, setObjectivesView] = useState("daily");
   const [isObjectivesGlowing, setIsObjectivesGlowing] = useState(false);
@@ -187,6 +188,12 @@ const Game = () => {
   const handleMobilityNextClick = () => {
     setMobilityShaking(true);
     setTimeout(() => setMobilityShaking(false), 500);
+  };
+
+  // Handle accessories shake animation
+  const handleAccessoriesNextClick = () => {
+    setAccessoriesShaking(true);
+    setTimeout(() => setAccessoriesShaking(false), 500);
   };
 
   // Initialize user balance and profile on login
@@ -3091,109 +3098,89 @@ const Game = () => {
                    </Card>}
 
                    {/* Accessories Category */}
-                   {(selectedCategory === "all" || selectedCategory === "accessories") && <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
-                    <div className="absolute inset-0" style={{
-                      backgroundImage: `
-                        linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
-                        linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
-                      `,
-                      backgroundSize: '4px 4px'
-                    }} />
-                     <CardHeader className="relative z-10">
-                       <CardTitle className="flex items-center justify-between text-white">
-                         <span>Accessories</span>
-                         <div className="flex space-x-1">
-                           <Button variant="ghost" size="sm" onClick={() => desktopAccessoriesCarouselRef.current?.scrollToPrevious()} className="h-6 w-6 p-0 text-white hover:bg-white/20">
-                             <ChevronLeft className="h-4 w-4" />
-                           </Button>
-                           <Button variant="ghost" size="sm" onClick={() => desktopAccessoriesCarouselRef.current?.scrollToNext()} className="h-6 w-6 p-0 text-white hover:bg-white/20">
-                             <ChevronRight className="h-4 w-4" />
-                           </Button>
-                         </div>
-                       </CardTitle>
-                     </CardHeader>
-                      <CardContent>
-                        <StoreCarousel ref={desktopAccessoriesCarouselRef} desktopMode={true} items={filterItemsByRarity([{
-                        name: "Red Wing Suit",
-                        price: 600,
-                        rarity: "blue",
-                        image: "/lovable-uploads/2eec4a9a-97d3-4ba4-9508-2eeef0011139.png"
-                      }, {
-                        name: "Blue Wing Suit",
-                        price: 450,
-                        rarity: "green",
-                        image: "/lovable-uploads/1efc1553-007a-4b38-a982-79d9f5abbfa1.png"
-                      }, {
-                        name: "White Base Vest",
-                        price: 750,
-                        rarity: "special",
-                        image: "/lovable-uploads/508d1509-e761-46c6-9f3a-f70e256f5a52.png"
-                      }, {
-                        name: "Grey Base Vest",
-                        price: 550,
-                        rarity: "silver",
-                        image: "/lovable-uploads/91375d1a-e829-4716-b3b6-833b58355bd9.png"
-                      }, {
-                        name: "Combat Vest",
-                        price: 880,
-                        rarity: "gold",
-                        image: "/lovable-uploads/8c7fd9f1-1128-4d45-b089-e8879cb0fa98.png"
-                      }, {
-                        name: "DHB x LCS shorts",
-                        price: 990,
-                        rarity: "blue",
-                        image: "/lovable-uploads/e21fe8d7-5519-4b7b-bd90-6b96e74635d4.png"
-                      }, {
-                        name: "BMF Shorts",
-                        price: 1200,
-                        rarity: "special",
-                        image: "/lovable-uploads/6ffd60e7-d39b-442f-a71c-9ae2f491846f.png"
-                      }, {
-                        name: "Rapz Gloves",
-                        price: 800,
-                        rarity: "silver",
-                        image: "/lovable-uploads/9320a71d-c3b8-4922-938c-5e759907fcf6.png"
-                      }])} renderItem={(item, idx) => <GlowCard key={idx} className="text-white shadow-2xl cursor-pointer">
-                              <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
-                              <CardContent className="p-4 relative z-10">
-                               <div className="aspect-square bg-gray-800/50 rounded-lg mb-3 overflow-hidden">
-                                 <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
-                               </div>
-                               <h3 className="font-semibold text-sm text-white mb-2">{item.name}</h3>
-                               <div className="flex items-center justify-between">
-                                 <div className="flex items-center space-x-1">
-                                   <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4" />
-                                   <span className="text-sm font-bold text-white">{item.price.toLocaleString()}</span>
-                                 </div>
-                                 <DropdownMenu>
-                                   <DropdownMenuTrigger asChild>
-                                     <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-7 px-3">
-                                       Buy
-                                     </Button>
-                                   </DropdownMenuTrigger>
-                                   <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
-                                     <DropdownMenuItem onClick={() => toast({
+                   {(selectedCategory === "all" || selectedCategory === "accessories") && <Card className={`bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden transition-transform duration-300 ${accessoriesShaking ? 'animate-[shake_0.5s_ease-in-out]' : ''}`}>
+                     <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
+                     <div className="absolute inset-0" style={{
+                       backgroundImage: `
+                         linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
+                         linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
+                       `,
+                       backgroundSize: '4px 4px'
+                     }} />
+                      <CardHeader className="relative z-10">
+                        <CardTitle className="flex items-center justify-between text-white">
+                          <span>Accessories</span>
+                          <div className="flex space-x-1">
+                            <Button variant="ghost" size="sm" onClick={() => desktopAccessoriesCarouselRef.current?.scrollToPrevious()} className="h-6 w-6 p-0 text-white hover:bg-white/20">
+                              <ChevronLeft className="h-4 w-4" />
+                            </Button>
+                            <Button variant="ghost" size="sm" onClick={handleAccessoriesNextClick} className="h-6 w-6 p-0 text-white hover:bg-white/20">
+                              <ChevronRight className="h-4 w-4" />
+                            </Button>
+                          </div>
+                        </CardTitle>
+                      </CardHeader>
+                       <CardContent className="relative z-10">
+                         <StoreCarousel ref={desktopAccessoriesCarouselRef} desktopMode={true} items={filterItemsByRarity([{
+                         name: "White Base Vest",
+                         price: 750,
+                         rarity: "special",
+                         image: "/lovable-uploads/508d1509-e761-46c6-9f3a-f70e256f5a52.png"
+                       }, {
+                         name: "Grey Base Vest",
+                         price: 550,
+                         rarity: "silver",
+                         image: "/lovable-uploads/91375d1a-e829-4716-b3b6-833b58355bd9.png"
+                       }, {
+                         name: "Combat Vest",
+                         price: 880,
+                         rarity: "gold",
+                         image: "/lovable-uploads/8c7fd9f1-1128-4d45-b089-e8879cb0fa98.png"
+                       }, {
+                         name: "DHB x LCS shorts",
+                         price: 990,
+                         rarity: "blue",
+                         image: "/lovable-uploads/e21fe8d7-5519-4b7b-bd90-6b96e74635d4.png"
+                       }])} renderItem={(item, idx) => <GlowCard key={idx} className="text-white shadow-2xl cursor-pointer">
+                               <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
+                               <CardContent className="p-4 relative z-10">
+                                <div className="aspect-square bg-gray-800/50 rounded-lg mb-3 overflow-hidden">
+                                  <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+                                </div>
+                                <h3 className="font-semibold text-sm text-white mb-2">{item.name}</h3>
+                                <div className="flex items-center justify-between">
+                                  <div className="flex items-center space-x-1">
+                                    <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4" />
+                                    <span className="text-sm font-bold text-white">{item.price.toLocaleString()}</span>
+                                  </div>
+                                  <DropdownMenu>
+                                    <DropdownMenuTrigger asChild>
+                                      <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-7 px-3">
+                                        Buy
+                                      </Button>
+                                    </DropdownMenuTrigger>
+                                    <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
+                                      <DropdownMenuItem onClick={() => toast({
                                   title: "Coming Soon",
                                   description: "Coin purchases coming soon!",
                                   duration: 3000
                                 })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
-                                       <Coins className="w-4 h-4" />
-                                       <span>Buy With Coins</span>
-                                     </DropdownMenuItem>
-                                     <DropdownMenuItem onClick={() => toast({
+                                        <Coins className="w-4 h-4" />
+                                        <span>Buy With Coins</span>
+                                      </DropdownMenuItem>
+                                      <DropdownMenuItem onClick={() => toast({
                                   title: "Coming Soon",
                                   description: "Card payments coming soon!",
                                   duration: 3000
                                 })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
-                                       <CreditCard className="w-4 h-4" />
-                                       <span>Buy with Card</span>
-                                     </DropdownMenuItem>
-                                   </DropdownMenuContent>
-                                 </DropdownMenu>
-                               </div>
-                             </CardContent>
-                            </GlowCard>} />
+                                        <CreditCard className="w-4 h-4" />
+                                        <span>Buy with Card</span>
+                                      </DropdownMenuItem>
+                                    </DropdownMenuContent>
+                                  </DropdownMenu>
+                                 </div>
+                               </CardContent>
+                             </GlowCard>} />
                        </CardContent>
                    </Card>}
 
