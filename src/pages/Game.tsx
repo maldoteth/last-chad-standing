@@ -400,12 +400,12 @@ const Game = () => {
       image: "/lovable-uploads/98664a07-8365-4512-8f3e-a0c79bd4617c.png"
     }],
     alltime: [{
-      name: "Apex Legend",
+      name: "Shane Sonny",
       team: "Ultimate Force",
       position: "Champion",
       price: 15000,
       change: 234.7,
-      image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
+      image: "/lovable-uploads/a76e21f1-ffca-4130-bd9a-08d09167dca0.png"
     }, {
       name: "God Slayer",
       team: "Divine Army",
