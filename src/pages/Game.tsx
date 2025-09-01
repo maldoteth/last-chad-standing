@@ -3347,7 +3347,7 @@ const Game = () => {
                         name: "Dumbbell Singer",
                         price: 1200,
                         rarity: "green",
-                        image: "/lovable-uploads/8c0bf943-2c5d-40b7-863f-93ba04863642.png"
+                        image: "/lovable-uploads/2c2096de-f308-4a16-865b-31c36a14a080.png"
                       }])} renderItem={(item, idx) => <GlowCard key={idx} className="text-white shadow-2xl cursor-pointer">
                               <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
                               <CardContent className="p-4 relative z-10">
