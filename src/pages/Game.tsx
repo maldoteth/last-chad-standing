@@ -428,12 +428,12 @@ const Game = () => {
       change: 142.5,
       image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png"
     }, {
-      name: "Infinite Power",
+      name: "White Base Vest",
       team: "Eternal Guardians",
       position: "Supreme",
       price: 16000,
       change: 198.9,
-      image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
+      image: "/lovable-uploads/508d1509-e761-46c6-9f3a-f70e256f5a52.png"
     }]
   };
   const topGainers = topGainersData[gainersTimeFilter];
