@@ -79,13 +79,11 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
     return <div className="flex items-start space-x-2">
          <div className="flex flex-col">
           <div className="flex items-center space-x-1">
-            <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className={coin} />
+            
             
           </div>
           <div className="flex justify-center ml-6">
-            <span className={`${label} text-red-400 font-medium cursor-pointer hover:text-red-300 transition-colors`} onClick={() => onSellClick?.()}>
-              sell
-            </span>
+            
           </div>
         </div>
         
