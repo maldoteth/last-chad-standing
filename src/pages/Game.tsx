@@ -841,15 +841,7 @@ const Game = () => {
                 {/* Action Cards Grid - 2 columns on mobile */}
                 <div className="px-4 pb-4">
                   <div className="grid grid-cols-2 gap-3">
-                    <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
-                      <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
-                      <div className="absolute inset-0" style={{
-                  backgroundImage: `
-                          linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
-                          linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
-                        `,
-                  backgroundSize: '4px 4px'
-                }} />
+                    <GlowCard className="cursor-pointer">
                       <CardContent className="p-4 flex flex-col h-full">
                         <div className="flex items-center space-x-1 mb-2">
                           <Trophy className="w-4 h-4 text-white" />
@@ -869,17 +861,9 @@ const Game = () => {
                           Show Quests
                         </Button>
                       </CardContent>
-                    </Card>
+                    </GlowCard>
 
-                    <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
-                      <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
-                      <div className="absolute inset-0" style={{
-                  backgroundImage: `
-                          linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
-                          linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
-                        `,
-                  backgroundSize: '4px 4px'
-                }} />
+                    <GlowCard className="cursor-pointer">
                       <CardContent className="p-4">
                         <div className="flex items-center space-x-1 mb-2">
                           <Gift className="w-4 h-4" />
@@ -959,7 +943,7 @@ const Game = () => {
                             </DropdownMenuContent>
                           </DropdownMenu>}
                       </CardContent>
-                    </Card>
+                    </GlowCard>
                   </div>
                 </div>
 
@@ -1730,16 +1714,8 @@ const Game = () => {
                     </Card>}
 
                     {/* Packs Category */}
-                    {(selectedCategory === "all" || selectedCategory === "packs") && <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
-                     <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
-                     <div className="absolute inset-0" style={{
-                backgroundImage: `
-                         linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
-                         linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
-                       `,
-                backgroundSize: '4px 4px'
-              }} />
-                      <CardHeader className="relative z-10">
+                    {(selectedCategory === "all" || selectedCategory === "packs") && <GlowCard className="cursor-pointer">
+                     <CardHeader>
                         <CardTitle className="flex items-center justify-between text-white">
                           <span>Packs</span>
                           <div className="flex space-x-1">
@@ -1844,7 +1820,7 @@ const Game = () => {
                                </div>
                              </GlowCard>} />
                          </CardContent>
-                     </Card>}
+                      </GlowCard>}
                   </div>
                 </div>}
 
@@ -2700,15 +2676,7 @@ const Game = () => {
                 </Card>
 
                 {/* Tournament Complete Card */}
-                <Card className="col-span-4 bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
-                  <div className="absolute inset-0" style={{
-                    backgroundImage: `
-                      linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
-                      linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
-                    `,
-                    backgroundSize: '4px 4px'
-                  }} />
+                <GlowCard className="col-span-4 cursor-pointer">
                   <CardContent className="p-6">
                     <div className="flex items-center space-x-2 mb-4">
                       <Trophy className="w-5 h-5 text-white" />
@@ -2726,18 +2694,10 @@ const Game = () => {
                       Show Quests
                     </Button>
                   </CardContent>
-                </Card>
+                </GlowCard>
 
                 {/* Open Packs Card */}
-                <Card className="col-span-4 bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
-                  <div className="absolute inset-0" style={{
-                    backgroundImage: `
-                      linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
-                      linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
-                    `,
-                    backgroundSize: '4px 4px'
-                  }} />
+                <GlowCard className="col-span-4 cursor-pointer">
                   <CardContent className="p-6">
                     <div className="flex items-center space-x-2 mb-4">
                       <Gift className="w-5 h-5" />
@@ -2817,7 +2777,7 @@ const Game = () => {
                         </DropdownMenuContent>
                       </DropdownMenu>}
                   </CardContent>
-                </Card>
+                </GlowCard>
 
                 {/* Additional Cards */}
                 <GlowCard className="col-span-6 cursor-pointer h-full">
@@ -3436,16 +3396,8 @@ const Game = () => {
                    </Card>}
 
                    {/* Packs Category */}
-                   {(selectedCategory === "all" || selectedCategory === "packs") && <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
-                    <div className="absolute inset-0" style={{
-                      backgroundImage: `
-                        linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
-                        linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
-                      `,
-                      backgroundSize: '4px 4px'
-                    }} />
-                     <CardHeader className="relative z-10">
+                   {(selectedCategory === "all" || selectedCategory === "packs") && <GlowCard className="cursor-pointer">
+                    <CardHeader>
                        <CardTitle className="flex items-center justify-between text-white">
                          <span>Packs</span>
                          <div className="flex space-x-1">
@@ -3539,7 +3491,7 @@ const Game = () => {
                                </div>
                              </GlowCard>} />
                         </CardContent>
-                    </Card>}
+                    </GlowCard>}
                   </div>
                 </div>
                  </div>
