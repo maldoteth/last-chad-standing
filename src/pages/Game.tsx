@@ -105,8 +105,8 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
         <PopoverTrigger asChild>
           <Button 
             size="icon"
-            variant="outline" 
-            className="h-8 w-8 rounded-full border-muted hover:bg-accent"
+            variant="ghost" 
+            className="h-8 w-8 bg-transparent hover:bg-transparent"
           >
             <ArrowRightLeft className="w-4 h-4" />
           </Button>
