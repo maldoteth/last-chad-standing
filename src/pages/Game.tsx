@@ -57,7 +57,7 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
       label: 'text-[10px] md:text-sm'
     },
     medium: {
-      coin: 'w-3 h-3 md:w-5 md:h-5 md:-ml-1',
+      coin: 'w-4 h-4 md:w-5 md:h-5 md:-ml-1',
       text: 'text-sm md:text-sm',
       label: 'text-xs md:text-xs'
     },
@@ -85,7 +85,7 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
       <div className="flex flex-col items-end md:flex-row md:items-center md:gap-4">
         <div className="flex items-center gap-1 mb-1 md:mb-0 justify-start">
           <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className={`${coin} flex-shrink-0`} />
-          <span className={`${text} font-bold text-foreground leading-none`}>
+          <span className={`${text} font-bold text-foreground`}>
             {formatNumberWithAbbreviation(mockSellPrice)}
           </span>
         </div>
@@ -99,9 +99,9 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
           <Button 
             size="icon"
             variant="ghost" 
-            className="h-6 w-6 md:h-8 md:w-8 bg-transparent hover:bg-transparent -mt-1 md:mt-0"
+            className="h-8 w-8 bg-transparent hover:bg-transparent"
           >
-            <ArrowRightLeft className="w-3 h-3 md:w-4 md:h-4" />
+            <ArrowRightLeft className="w-4 h-4" />
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-32 p-2" align="end">
@@ -2042,9 +2042,9 @@ const Game = () => {
                           <div className="w-12 h-12 rounded-full overflow-hidden">
                             <img src={player.image} alt={player.name} className="w-full h-full object-cover" />
                           </div>
-                          <div className="flex-1">
+                          <div className="flex-1 min-w-0">
                             <div className="flex items-center justify-between">
-                               <p className="text-sm md:text-xl font-semibold text-white whitespace-nowrap">{player.name}</p>
+                               <p className="text-sm md:text-xl font-semibold text-white">{player.name}</p>
                               {renderMarketplacePrices(player, getMarketplacePrices, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
                             </div>
                           </div>
@@ -2104,8 +2104,8 @@ const Game = () => {
                             </div>
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center justify-between">
-                                <div className="flex-1">
-                                   <p className="text-sm md:text-xl font-semibold text-white whitespace-nowrap">{player.name}</p>
+                                <div className="flex-1 min-w-0">
+                                   <p className="text-sm md:text-xl font-semibold text-white">{player.name}</p>
                                   <p className={`text-xs ${player.change >= 0 ? 'text-green-400' : 'text-red-400'}`}>{player.change >= 0 ? '+' : ''}{formatNumberWithAbbreviation(player.change)}% {getMarketplacePrices(player.name, 'fighter').bestSellPrice ? `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestSellPrice)} sell` : ''} {getMarketplacePrices(player.name, 'fighter').bestBuyPrice ? `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestBuyPrice)} buy` : ''}</p>
                                 </div>
                                 {renderMarketplacePrices(player, getMarketplacePrices, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
@@ -2160,8 +2160,8 @@ const Game = () => {
                             </div>
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center justify-between">
-                                <div className="flex-1">
-                                  <p className="text-sm md:text-xl font-semibold text-white whitespace-nowrap">{player.name}</p>
+                                <div className="flex-1 min-w-0">
+                                  <p className="text-sm md:text-xl font-semibold text-white">{player.name}</p>
                                   <p className={`text-xs ${player.change >= 0 ? 'text-green-400' : 'text-red-400'}`}>{player.change >= 0 ? '+' : ''}{formatNumberWithAbbreviation(player.change)}% {getMarketplacePrices(player.name, 'fighter').bestSellPrice ? `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestSellPrice)} sell` : ''} {getMarketplacePrices(player.name, 'fighter').bestBuyPrice ? `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestBuyPrice)} buy` : ''}</p>
                                 </div>
                                 {renderMarketplacePrices(player, getMarketplacePrices, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
@@ -3895,8 +3895,8 @@ const Game = () => {
                             </div>
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center justify-between mb-1">
-                                <div className="flex-1">
-                                   <p className="text-sm font-semibold text-white whitespace-nowrap">{player.name}</p>
+                                <div className="flex-1 min-w-0">
+                                   <p className="text-sm font-semibold text-white">{player.name}</p>
                                   <p className={`text-xs ${player.change >= 0 ? 'text-green-400' : 'text-red-400'}`}>{player.change >= 0 ? '+' : ''}{formatNumberWithAbbreviation(player.change)}% {getMarketplacePrices(player.name, 'fighter').bestSellPrice ? `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestSellPrice)} sell` : ''} {getMarketplacePrices(player.name, 'fighter').bestBuyPrice ? `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestBuyPrice)} buy` : ''}</p>
                                 </div>
                                 {renderMarketplacePrices(player, getMarketplacePrices, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
@@ -3951,8 +3951,8 @@ const Game = () => {
                             </div>
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center justify-between mb-1">
-                                <div className="flex-1">
-                                  <p className="text-sm font-semibold text-white whitespace-nowrap">{player.name}</p>
+                                <div className="flex-1 min-w-0">
+                                  <p className="text-sm font-semibold text-white">{player.name}</p>
                                   <p className={`text-xs ${player.change >= 0 ? 'text-green-400' : 'text-red-400'}`}>{player.change >= 0 ? '+' : ''}{formatNumberWithAbbreviation(player.change)}% {getMarketplacePrices(player.name, 'fighter').bestSellPrice ? `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestSellPrice)} sell` : ''} {getMarketplacePrices(player.name, 'fighter').bestBuyPrice ? `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestBuyPrice)} buy` : ''}</p>
                                 </div>
                                 {renderMarketplacePrices(player, getMarketplacePrices, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
