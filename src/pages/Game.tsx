@@ -2832,14 +2832,15 @@ const Game = () => {
                 </Card>
 
                 {/* Additional Cards */}
-                <Card className="col-span-6 bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
-                  {/* Metallic base layer */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
-                  
-                  {/* Metallic shine overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-400/10 to-transparent transform -skew-x-12" />
-                  
-                  <CardContent className="p-6 relative z-10">
+                <GlowCard className="col-span-6 cursor-pointer">
+                  <Card className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden h-full">
+                    {/* Metallic base layer */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
+                    
+                    {/* Metallic shine overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-400/10 to-transparent transform -skew-x-12" />
+                    
+                    <CardContent className="p-6 relative z-10">
                     <div className="flex flex-col items-center text-center space-y-3 mb-4">
                       <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
                         <Users className="w-5 h-5 text-white" />
@@ -2849,20 +2850,22 @@ const Game = () => {
                         <p className="text-sm text-gray-300">Pick your prizefighters</p>
                       </div>
                     </div>
-                    <Button variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 w-full transition-all duration-300" onClick={() => setActiveTab("store")}>
-                      Start Building
-                    </Button>
-                  </CardContent>
-                </Card>
+                      <Button variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 w-full transition-all duration-300" onClick={() => setActiveTab("store")}>
+                        Start Building
+                      </Button>
+                    </CardContent>
+                  </Card>
+                </GlowCard>
 
-                <Card className="col-span-6 bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden">
-                  {/* Metallic base layer */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
-                  
-                  {/* Metallic shine overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-400/10 to-transparent transform -skew-x-12" />
-                  
-                  <CardContent className="p-6 relative z-10">
+                <GlowCard className="col-span-6 cursor-pointer">
+                  <Card className="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white border border-gray-600/50 shadow-2xl relative overflow-hidden h-full">
+                    {/* Metallic base layer */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
+                    
+                    {/* Metallic shine overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-400/10 to-transparent transform -skew-x-12" />
+                    
+                    <CardContent className="p-6 relative z-10">
                     <div className="flex flex-col items-center text-center space-y-3 mb-4">
                       <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
                         <CreditCard className="w-5 h-5 text-white" />
@@ -2872,11 +2875,12 @@ const Game = () => {
                         <p className="text-sm text-gray-300">Buy, sell, list or just browse</p>
                       </div>
                     </div>
-                    <Button variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 w-full transition-all duration-300" onClick={() => setActiveTab("market")}>
-                      Browse Market
-                    </Button>
-                  </CardContent>
-                </Card>
+                      <Button variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 w-full transition-all duration-300" onClick={() => setActiveTab("market")}>
+                        Browse Market
+                      </Button>
+                    </CardContent>
+                  </Card>
+                </GlowCard>
               </div>
                 </div>
               </ScrollArea>}
