@@ -1,4 +1,6 @@
+
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import GameSection from '@/components/GameSection';
 import MarketplaceSection from '@/components/MarketplaceSection';
 import ProfileSection from '@/components/ProfileSection';
@@ -15,8 +17,8 @@ const Game = () => {
             Last Chad Standing
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="flex items-center justify-center space-x-6">
+          {/* Desktop Navigation - Centered */}
+          <nav className="flex items-center justify-center space-x-6 mx-auto">
             <button
               onClick={() => setActiveSection('game')}
               className={`px-6 py-3 rounded-lg font-medium transition-all duration-300 ${
