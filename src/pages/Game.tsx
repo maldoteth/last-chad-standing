@@ -426,7 +426,7 @@ const Game = () => {
       position: "Transcendent",
       price: 12800,
       change: 142.5,
-      image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png"
+      image: "/lovable-uploads/89c54fc5-22f2-44fd-bbf1-d90a653fdb22.png"
     }, {
       name: "White Base Vest",
       team: "Eternal Guardians",
