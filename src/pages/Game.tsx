@@ -421,7 +421,7 @@ const Game = () => {
       change: 156.8,
       image: "/lovable-uploads/76adb888-cbfd-4b1c-ba39-36303e53c2c0.png"
     }, {
-      name: "Reality Bender",
+      name: "Kayne Famooser",
       team: "Quantum Lords",
       position: "Transcendent",
       price: 12800,
