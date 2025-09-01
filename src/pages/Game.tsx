@@ -3344,7 +3344,7 @@ const Game = () => {
                         rarity: "blue",
                         image: "/lovable-uploads/12c90a89-5880-412c-85dc-6f52abc127b8.png"
                       }, {
-                        name: "Cool Gesture",
+                        name: "Dumbbell Singer",
                         price: 1200,
                         rarity: "green",
                         image: "/lovable-uploads/8c0bf943-2c5d-40b7-863f-93ba04863642.png"
