@@ -3334,7 +3334,7 @@ const Game = () => {
                         rarity: "special",
                         image: "/lovable-uploads/f9ba9551-eabd-4e1f-a2a9-2eeddc92114d.png"
                       }, {
-                        name: "Champion Pose",
+                        name: "Aura Farm",
                         price: 1900,
                         rarity: "silver",
                         image: "/lovable-uploads/ea386eae-1f4f-44c0-ad78-7f038df224d3.png"
