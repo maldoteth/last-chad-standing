@@ -3148,7 +3148,7 @@ const Game = () => {
                         name: "BMF Shorts",
                         price: 1200,
                         rarity: "special",
-                        image: "/lovable-uploads/77a6c004-93ed-49ee-a5d0-6056ee852612.png"
+                        image: "/lovable-uploads/6ffd60e7-d39b-442f-a71c-9ae2f491846f.png"
                       }, {
                         name: "Rapz Gloves",
                         price: 800,
