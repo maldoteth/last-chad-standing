@@ -3877,7 +3877,7 @@ const Game = () => {
                     <CardHeader className="relative z-10">
                       <div className="flex items-center justify-between mb-3">
                         <CardTitle className="text-lg md:text-2xl flex items-center space-x-2 text-white">
-                          <TrendingUp className="w-5 h-5" />
+                          <span className="text-lg">🔥</span>
                           <span>Trending</span>
                         </CardTitle>
                       </div>
