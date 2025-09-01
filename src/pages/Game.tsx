@@ -3496,7 +3496,7 @@ const Game = () => {
                 <div className="text-center">
                   <div className="flex items-center justify-center space-x-3 mb-6">
                     <div>
-                      <h1 className="text-3xl font-bold">Market</h1>
+                      <h1 className="text-3xl font-bold">The Market</h1>
                     </div>
                   </div>
                 </div>
