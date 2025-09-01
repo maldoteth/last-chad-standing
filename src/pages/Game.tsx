@@ -913,7 +913,7 @@ const Game = () => {
                           description: "Coin purchases coming soon!",
                           duration: 3000
                         })}>
-                                   <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="mr-2 h-4 w-4" />
+                                  <Coins className="mr-2 h-4 w-4" />
                                   Buy With Coins
                                 </Button>
                                 <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => toast({
@@ -921,7 +921,7 @@ const Game = () => {
                           description: "Card payments coming soon!",
                           duration: 3000
                         })}>
-                                   <span className="mr-2 text-base">💳</span>
+                                  <CreditCard className="mr-2 h-4 w-4" />
                                   Buy with Card
                                 </Button>
                                 <DrawerClose asChild>
@@ -943,7 +943,7 @@ const Game = () => {
                         description: "Coin purchases coming soon!",
                         duration: 3000
                       })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
-                                 <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4" />
+                                <Coins className="w-4 h-4" />
                                 <span>Buy With Coins</span>
                               </DropdownMenuItem>
                               <DropdownMenuItem onClick={() => toast({
@@ -951,7 +951,7 @@ const Game = () => {
                         description: "Card payments coming soon!",
                         duration: 3000
                       })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
-                                 <span className="text-base">💳</span>
+                                <CreditCard className="w-4 h-4" />
                                 <span>Buy with Card</span>
                               </DropdownMenuItem>
                             </DropdownMenuContent>
@@ -1229,22 +1229,22 @@ const Game = () => {
                           </DrawerHeader>
                           <div className="px-4 pb-8 space-y-2">
                             <Button variant="ghost" onClick={() => setSelectedCategory("all")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "all" ? "bg-white/20" : ""}`}>
-                               ⚫ All
+                              All Categories
                             </Button>
                             <Button variant="ghost" onClick={() => setSelectedCategory("skins")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "skins" ? "bg-white/20" : ""}`}>
-                               👊 Fighters
+                              Fighters
                             </Button>
                             <Button variant="ghost" onClick={() => setSelectedCategory("accessories")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "accessories" ? "bg-white/20" : ""}`}>
-                               💎 Accessories
+                              Accessories
                             </Button>
                             <Button variant="ghost" onClick={() => setSelectedCategory("mobility")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "mobility" ? "bg-white/20" : ""}`}>
-                               🚗 Mobility
+                              Mobility
                             </Button>
                             <Button variant="ghost" onClick={() => setSelectedCategory("emotes")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "emotes" ? "bg-white/20" : ""}`}>
-                               💃 Emotes
+                              Emotes
                             </Button>
                             <Button variant="ghost" onClick={() => setSelectedCategory("packs")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "packs" ? "bg-white/20" : ""}`}>
-                               🧧 Packs
+                              Packs
                             </Button>
                           </div>
                         </DrawerContent>
@@ -1256,22 +1256,22 @@ const Game = () => {
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
                           <DropdownMenuItem onClick={() => setSelectedCategory("all")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "all" ? "bg-white/20" : ""}`}>
-                             <span>⚫ All</span>
+                            <span>All Categories</span>
                           </DropdownMenuItem>
                           <DropdownMenuItem onClick={() => setSelectedCategory("skins")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "skins" ? "bg-white/20" : ""}`}>
-                             <span>👊 Fighters</span>
+                            <span>Fighters</span>
                           </DropdownMenuItem>
                           <DropdownMenuItem onClick={() => setSelectedCategory("accessories")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "accessories" ? "bg-white/20" : ""}`}>
-                             <span>💎 Accessories</span>
+                            <span>Accessories</span>
                           </DropdownMenuItem>
                           <DropdownMenuItem onClick={() => setSelectedCategory("mobility")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "mobility" ? "bg-white/20" : ""}`}>
-                             <span>🚗 Mobility</span>
+                            <span>Mobility</span>
                           </DropdownMenuItem>
                           <DropdownMenuItem onClick={() => setSelectedCategory("emotes")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "emotes" ? "bg-white/20" : ""}`}>
-                             <span>💃 Emotes</span>
+                            <span>Emotes</span>
                           </DropdownMenuItem>
                           <DropdownMenuItem onClick={() => setSelectedCategory("packs")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "packs" ? "bg-white/20" : ""}`}>
-                             <span>🧧 Packs</span>
+                            <span>Packs</span>
                           </DropdownMenuItem>
                         </DropdownMenuContent>
                       </DropdownMenu>}
@@ -1460,7 +1460,7 @@ const Game = () => {
                               description: "Coin purchases coming soon!",
                               duration: 3000
                             })}>
-                                         <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="mr-2 h-4 w-4" />
+                                        <Coins className="mr-2 h-4 w-4" />
                                         Buy With Coins
                                       </Button>
                                       <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => toast({
@@ -1468,7 +1468,7 @@ const Game = () => {
                               description: "Card payments coming soon!",
                               duration: 3000
                             })}>
-                                         <span className="mr-2 text-base">💳</span>
+                                        <CreditCard className="mr-2 h-4 w-4" />
                                         Buy with Card
                                       </Button>
                                       <DrawerClose asChild>
@@ -1585,11 +1585,11 @@ const Game = () => {
                               description: "Coin purchases coming soon!",
                               duration: 3000
                             })}>
-                                         <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="mr-2 h-4 w-4" />
+                                        <Coins className="mr-2 h-4 w-4" />
                                         Buy With Coins
                                       </Button>
                                       <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => {/* TODO: Implement card payment */}}>
-                                         <span className="mr-2 text-base">💳</span>
+                                        <CreditCard className="mr-2 h-4 w-4" />
                                         Buy with Card
                                       </Button>
                                       <DrawerClose asChild>
@@ -1706,11 +1706,11 @@ const Game = () => {
                               description: "Coin purchases coming soon!",
                               duration: 3000
                             })}>
-                                         <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="mr-2 h-4 w-4" />
+                                        <Coins className="mr-2 h-4 w-4" />
                                         Buy With Coins
                                       </Button>
                                       <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => {/* TODO: Implement card payment */}}>
-                                         <span className="mr-2 text-base">💳</span>
+                                        <CreditCard className="mr-2 h-4 w-4" />
                                         Buy with Card
                                       </Button>
                                       <DrawerClose asChild>
@@ -1731,12 +1731,12 @@ const Game = () => {
                      {(selectedCategory === "all" || selectedCategory === "packs") && <Card className={`bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden ${packsShaking ? 'animate-shake' : ''}`}>
                       <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                       <div className="absolute inset-0" style={{
-                        backgroundImage: `
+                backgroundImage: `
                           linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
                           linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
                         `,
-                        backgroundSize: '4px 4px'
-                      }} />
+                backgroundSize: '4px 4px'
+              }} />
                       
                       <CardHeader className="relative z-10">
                         <CardTitle className="flex items-center justify-between text-white">
@@ -1820,7 +1820,7 @@ const Game = () => {
                               description: "Coin purchases coming soon!",
                               duration: 3000
                             })}>
-                                            <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="mr-2 h-4 w-4" />
+                                           <Coins className="mr-2 h-4 w-4" />
                                            Buy With Coins
                                          </Button>
                                          <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => toast({
@@ -1828,7 +1828,7 @@ const Game = () => {
                               description: "Card payments coming soon!",
                               duration: 3000
                             })}>
-                                            <span className="mr-2 text-base">💳</span>
+                                           <CreditCard className="mr-2 h-4 w-4" />
                                            Buy with Card
                                          </Button>
                                          <DrawerClose asChild>
@@ -2756,7 +2756,7 @@ const Game = () => {
                             description: "Coin purchases coming soon!",
                             duration: 3000
                           })}>
-                              <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="mr-2 h-4 w-4" />
+                              <Coins className="mr-2 h-4 w-4" />
                               Buy With Coins
                             </Button>
                             <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => toast({
@@ -2764,7 +2764,7 @@ const Game = () => {
                             description: "Card payments coming soon!",
                             duration: 3000
                           })}>
-                              <span className="mr-2 text-base">💳</span>
+                              <CreditCard className="mr-2 h-4 w-4" />
                               Buy with Card
                             </Button>
                             <DrawerClose asChild>
@@ -2786,7 +2786,7 @@ const Game = () => {
                           description: "Coin purchases coming soon!",
                           duration: 3000
                         })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
-                             <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4" />
+                            <Coins className="w-4 h-4" />
                             <span>Buy With Coins</span>
                           </DropdownMenuItem>
                           <DropdownMenuItem onClick={() => toast({
@@ -2794,7 +2794,7 @@ const Game = () => {
                           description: "Card payments coming soon!",
                           duration: 3000
                         })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
-                             <span className="text-base">💳</span>
+                            <CreditCard className="w-4 h-4" />
                             <span>Buy with Card</span>
                           </DropdownMenuItem>
                         </DropdownMenuContent>
@@ -2859,22 +2859,22 @@ const Game = () => {
                           </DrawerHeader>
                           <div className="px-4 pb-8 space-y-2">
                             <Button variant="ghost" onClick={() => setSelectedCategory("all")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "all" ? "bg-white/20" : ""}`}>
-                               ⚫ All
+                              All Categories
                             </Button>
                             <Button variant="ghost" onClick={() => setSelectedCategory("skins")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "skins" ? "bg-white/20" : ""}`}>
-                               👊 Fighters
+                              Fighters
                             </Button>
                             <Button variant="ghost" onClick={() => setSelectedCategory("accessories")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "accessories" ? "bg-white/20" : ""}`}>
-                               💎 Accessories
+                              Accessories
                             </Button>
                             <Button variant="ghost" onClick={() => setSelectedCategory("mobility")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "mobility" ? "bg-white/20" : ""}`}>
-                               🚗 Mobility
+                              Mobility
                             </Button>
                             <Button variant="ghost" onClick={() => setSelectedCategory("emotes")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "emotes" ? "bg-white/20" : ""}`}>
-                               💃 Emotes
+                              Emotes
                             </Button>
                             <Button variant="ghost" onClick={() => setSelectedCategory("packs")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "packs" ? "bg-white/20" : ""}`}>
-                               🧧 Packs
+                              Packs
                             </Button>
                           </div>
                         </DrawerContent>
@@ -2886,22 +2886,22 @@ const Game = () => {
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
                           <DropdownMenuItem onClick={() => setSelectedCategory("all")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "all" ? "bg-white/20" : ""}`}>
-                             <span>⚫ All</span>
+                            <span>All Categories</span>
                           </DropdownMenuItem>
                           <DropdownMenuItem onClick={() => setSelectedCategory("skins")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "skins" ? "bg-white/20" : ""}`}>
-                             <span>👊 Fighters</span>
+                            <span>Fighters</span>
                           </DropdownMenuItem>
                           <DropdownMenuItem onClick={() => setSelectedCategory("accessories")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "accessories" ? "bg-white/20" : ""}`}>
-                             <span>💎 Accessories</span>
+                            <span>Accessories</span>
                           </DropdownMenuItem>
                           <DropdownMenuItem onClick={() => setSelectedCategory("mobility")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "mobility" ? "bg-white/20" : ""}`}>
-                             <span>🚗 Mobility</span>
+                            <span>Mobility</span>
                           </DropdownMenuItem>
                           <DropdownMenuItem onClick={() => setSelectedCategory("emotes")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "emotes" ? "bg-white/20" : ""}`}>
-                             <span>💃 Emotes</span>
+                            <span>Emotes</span>
                           </DropdownMenuItem>
                           <DropdownMenuItem onClick={() => setSelectedCategory("packs")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "packs" ? "bg-white/20" : ""}`}>
-                             <span>🧧 Packs</span>
+                            <span>Packs</span>
                           </DropdownMenuItem>
                         </DropdownMenuContent>
                       </DropdownMenu>}
@@ -2909,7 +2909,7 @@ const Game = () => {
                   
                   <div className="flex items-center justify-center space-x-3 mb-4">
                     <div>
-                      <h1 className="text-3xl font-bold">Drops</h1>
+                      <h1 className="text-3xl font-bold">Fresh Drops</h1>
                     </div>
                   </div>
                   
@@ -3078,7 +3078,7 @@ const Game = () => {
                                   description: "Coin purchases coming soon!",
                                   duration: 3000
                                 })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
-                                        <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4" />
+                                       <Coins className="w-4 h-4" />
                                        <span>Buy With Coins</span>
                                      </DropdownMenuItem>
                                      <DropdownMenuItem onClick={() => toast({
@@ -3086,7 +3086,7 @@ const Game = () => {
                                   description: "Card payments coming soon!",
                                   duration: 3000
                                 })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
-                                        <span className="text-base">💳</span>
+                                       <CreditCard className="w-4 h-4" />
                                        <span>Buy with Card</span>
                                      </DropdownMenuItem>
                                    </DropdownMenuContent>
@@ -3185,7 +3185,7 @@ const Game = () => {
                                   description: "Coin purchases coming soon!",
                                   duration: 3000
                                 })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
-                                        <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4" />
+                                       <Coins className="w-4 h-4" />
                                        <span>Buy With Coins</span>
                                      </DropdownMenuItem>
                                      <DropdownMenuItem onClick={() => toast({
@@ -3193,7 +3193,7 @@ const Game = () => {
                                   description: "Card payments coming soon!",
                                   duration: 3000
                                 })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
-                                        <span className="text-base">💳</span>
+                                       <CreditCard className="w-4 h-4" />
                                        <span>Buy with Card</span>
                                      </DropdownMenuItem>
                                    </DropdownMenuContent>
@@ -3208,12 +3208,12 @@ const Game = () => {
                    {(selectedCategory === "all" || selectedCategory === "mobility") && <Card className={`bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden transition-transform duration-300 ${mobilityShaking ? 'animate-[shake_0.5s_ease-in-out]' : ''}`}>
                      <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                      <div className="absolute inset-0" style={{
-                       backgroundImage: `
+                      backgroundImage: `
                          linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
                          linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
                        `,
-                       backgroundSize: '4px 4px'
-                     }} />
+                      backgroundSize: '4px 4px'
+                    }} />
                       <CardHeader className="relative z-10">
                         <CardTitle className="flex items-center justify-between text-white">
                           <span>Mobility</span>
@@ -3229,26 +3229,26 @@ const Game = () => {
                       </CardHeader>
                        <CardContent className="relative z-10">
                          <StoreCarousel ref={desktopMobilityCarouselRef} desktopMode={true} items={filterItemsByRarity([{
-                         name: "The Coupé Tank",
-                         price: 5000,
-                         rarity: "gold",
-                         image: "/lovable-uploads/1c6b707c-97a6-4381-bc54-de63a7cf8a31.png"
-                       }, {
-                         name: "Speed Buggy",
-                         price: 3200,
-                         rarity: "silver",
-                         image: "/lovable-uploads/b64d7801-1284-4763-b115-ca3cfa8ff315.png"
-                       }, {
-                         name: "Pit Bike",
-                         price: 4500,
-                         rarity: "blue",
-                         image: "/lovable-uploads/4e2aac54-cac6-4cf1-92ad-76bf7e788077.png"
-                       }, {
-                         name: "Pogo",
-                         price: 8000,
-                         rarity: "special",
-                         image: "/lovable-uploads/2877ff38-b9fd-4a5d-bca9-25b14f237997.png"
-                       }])} renderItem={(item, idx) => <GlowCard key={idx} className="text-white shadow-2xl cursor-pointer">
+                        name: "The Coupé Tank",
+                        price: 5000,
+                        rarity: "gold",
+                        image: "/lovable-uploads/1c6b707c-97a6-4381-bc54-de63a7cf8a31.png"
+                      }, {
+                        name: "Speed Buggy",
+                        price: 3200,
+                        rarity: "silver",
+                        image: "/lovable-uploads/b64d7801-1284-4763-b115-ca3cfa8ff315.png"
+                      }, {
+                        name: "Pit Bike",
+                        price: 4500,
+                        rarity: "blue",
+                        image: "/lovable-uploads/4e2aac54-cac6-4cf1-92ad-76bf7e788077.png"
+                      }, {
+                        name: "Pogo",
+                        price: 8000,
+                        rarity: "special",
+                        image: "/lovable-uploads/2877ff38-b9fd-4a5d-bca9-25b14f237997.png"
+                      }])} renderItem={(item, idx) => <GlowCard key={idx} className="text-white shadow-2xl cursor-pointer">
                                <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
                                <CardContent className="p-4 relative z-10">
                                 <div className="aspect-square bg-gray-800/50 rounded-lg mb-3 overflow-hidden">
@@ -3272,7 +3272,7 @@ const Game = () => {
                                   description: "Coin purchases coming soon!",
                                   duration: 3000
                                 })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
-                                         <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4" />
+                                        <Coins className="w-4 h-4" />
                                         <span>Buy With Coins</span>
                                       </DropdownMenuItem>
                                       <DropdownMenuItem onClick={() => toast({
@@ -3280,7 +3280,7 @@ const Game = () => {
                                   description: "Card payments coming soon!",
                                   duration: 3000
                                 })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
-                                         <span className="text-base">💳</span>
+                                        <CreditCard className="w-4 h-4" />
                                         <span>Buy with Card</span>
                                       </DropdownMenuItem>
                                     </DropdownMenuContent>
@@ -3379,7 +3379,7 @@ const Game = () => {
                                   description: "Coin purchases coming soon!",
                                   duration: 3000
                                 })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
-                                        <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4" />
+                                       <Coins className="w-4 h-4" />
                                        <span>Buy With Coins</span>
                                      </DropdownMenuItem>
                                      <DropdownMenuItem onClick={() => toast({
@@ -3387,7 +3387,7 @@ const Game = () => {
                                   description: "Card payments coming soon!",
                                   duration: 3000
                                 })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
-                                        <span className="text-base">💳</span>
+                                       <CreditCard className="w-4 h-4" />
                                        <span>Buy with Card</span>
                                      </DropdownMenuItem>
                                    </DropdownMenuContent>
@@ -3402,12 +3402,12 @@ const Game = () => {
                     {(selectedCategory === "all" || selectedCategory === "packs") && <Card className={`bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden ${packsShaking ? 'animate-shake' : ''}`}>
                      <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                      <div className="absolute inset-0" style={{
-                       backgroundImage: `
+                      backgroundImage: `
                          linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
                          linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
                        `,
-                       backgroundSize: '4px 4px'
-                     }} />
+                      backgroundSize: '4px 4px'
+                    }} />
                      
                      <CardHeader className="relative z-10">
                        <CardTitle className="flex items-center justify-between text-white">
@@ -3424,25 +3424,25 @@ const Game = () => {
                      </CardHeader>
                      <CardContent className="relative z-10">
                        <StoreCarousel ref={desktopPacksCarouselRef} desktopMode={true} items={filterItemsByRarity([{
-                       name: "Silver Pack",
-                       price: 1000,
-                       rarity: "silver",
-                       image: "/lovable-uploads/17c3a939-bcaa-4cdb-9b61-271b5774c7e2.png"
-                     }, {
-                       name: "Gold Pack",
-                       price: 2000,
-                       rarity: "gold",
-                       image: "/lovable-uploads/291c5734-f144-47b0-9f49-915999e921b0.png"
-                     }, {
-                       name: "EO Summer Pack",
-                       price: 3500,
-                       rarity: "special",
-                       image: "/lovable-uploads/2149e9ad-919f-49ea-8be4-90f190387d39.png"
-                     }, {
-                       name: "Wild West Pack",
-                       price: 5000,
-                       rarity: "special",
-                       image: "/lovable-uploads/5cf8ad93-f292-4e4c-b53c-eb0c4bc0f7be.png"
+                        name: "Silver Pack",
+                        price: 1000,
+                        rarity: "silver",
+                        image: "/lovable-uploads/17c3a939-bcaa-4cdb-9b61-271b5774c7e2.png"
+                      }, {
+                        name: "Gold Pack",
+                        price: 2000,
+                        rarity: "gold",
+                        image: "/lovable-uploads/291c5734-f144-47b0-9f49-915999e921b0.png"
+                      }, {
+                        name: "EO Summer Pack",
+                        price: 3500,
+                        rarity: "special",
+                        image: "/lovable-uploads/2149e9ad-919f-49ea-8be4-90f190387d39.png"
+                      }, {
+                        name: "Wild West Pack",
+                        price: 5000,
+                        rarity: "special",
+                        image: "/lovable-uploads/5cf8ad93-f292-4e4c-b53c-eb0c4bc0f7be.png"
                       }])} renderItem={(item, idx) => <GlowCard key={idx} className="cursor-pointer">
                               <div className="p-4">
                                <div className="aspect-square bg-gray-800/50 rounded-lg mb-3 overflow-hidden flex items-center justify-center">
@@ -3462,19 +3462,19 @@ const Game = () => {
                                    </DropdownMenuTrigger>
                                    <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
                                      <DropdownMenuItem onClick={() => toast({
-                                 title: "Coming Soon",
-                                 description: "Coin purchases coming soon!",
-                                 duration: 3000
-                               })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
-                                       <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4" />
+                                  title: "Coming Soon",
+                                  description: "Coin purchases coming soon!",
+                                  duration: 3000
+                                })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
+                                       <Coins className="w-4 h-4" />
                                        <span>Buy With Coins</span>
                                      </DropdownMenuItem>
                                      <DropdownMenuItem onClick={() => toast({
-                                 title: "Coming Soon",
-                                 description: "Card payments coming soon!",
-                                 duration: 3000
-                               })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
-                                       <span className="text-base">💳</span>
+                                  title: "Coming Soon",
+                                  description: "Card payments coming soon!",
+                                  duration: 3000
+                                })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
+                                       <CreditCard className="w-4 h-4" />
                                        <span>Buy with Card</span>
                                      </DropdownMenuItem>
                                    </DropdownMenuContent>
@@ -4347,7 +4347,7 @@ const Game = () => {
             });
             setBuyDialogOpen(false);
           }}>
-                 <span className="mr-2 text-base">💳</span>
+                <CreditCard className="w-4 h-4 mr-2" />
                 Buy with Card
               </Button>
               <Button variant="outline" className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 hover:text-white transition-all duration-300" onClick={() => {
@@ -4381,7 +4381,7 @@ const Game = () => {
             });
             setBuyDialogOpen(false);
           }}>
-                <span className="mr-2 text-base">💳</span>
+                <CreditCard className="w-4 h-4 mr-2" />
                 Buy with Card
               </Button>
               <Button variant="outline" className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 hover:text-white transition-all duration-300" onClick={() => {
@@ -4391,7 +4391,7 @@ const Game = () => {
             });
             setBuyDialogOpen(false);
           }}>
-                <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4 mr-2" />
+                <Coins className="w-4 h-4 mr-2" />
                 Buy with Coins
               </Button>
               <Button variant="ghost" className="text-white hover:bg-white/10 hover:text-white transition-all duration-300" onClick={() => setBuyDialogOpen(false)}>
