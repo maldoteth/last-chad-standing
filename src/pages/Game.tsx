@@ -140,6 +140,7 @@ const Game = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchExpanded, setSearchExpanded] = useState(false);
   const [mobilityShaking, setMobilityShaking] = useState(false);
+  const [packsShaking, setPacksShaking] = useState(false);
   const [settingsExpanded, setSettingsExpanded] = useState(false);
   const [objectivesView, setObjectivesView] = useState("daily");
   const [isObjectivesGlowing, setIsObjectivesGlowing] = useState(false);
@@ -187,6 +188,12 @@ const Game = () => {
   const handleMobilityNextClick = () => {
     setMobilityShaking(true);
     setTimeout(() => setMobilityShaking(false), 500);
+  };
+
+  // Handle packs shake animation
+  const handlePacksNextClick = () => {
+    setPacksShaking(true);
+    setTimeout(() => setPacksShaking(false), 500);
   };
 
   // Initialize user balance and profile on login
@@ -1720,8 +1727,8 @@ const Game = () => {
                       </CardContent>
                     </Card>}
 
-                    {/* Packs Category */}
-                    {(selectedCategory === "all" || selectedCategory === "packs") && <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                     {/* Packs Category */}
+                     {(selectedCategory === "all" || selectedCategory === "packs") && <Card className={`bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden ${packsShaking ? 'animate-shake' : ''}`}>
                       <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                       <div className="absolute inset-0" style={{
                         backgroundImage: `
@@ -1738,7 +1745,7 @@ const Game = () => {
                             <Button variant="ghost" size="sm" onClick={() => packsCarouselRef.current?.scrollToPrevious()} className="h-6 w-6 p-0 text-white hover:bg-white/20">
                               <ChevronLeft className="h-4 w-4" />
                             </Button>
-                            <Button variant="ghost" size="sm" onClick={() => packsCarouselRef.current?.scrollToNext()} className="h-6 w-6 p-0 text-white hover:bg-white/20">
+                            <Button variant="ghost" size="sm" onClick={handlePacksNextClick} className="h-6 w-6 p-0 text-white hover:bg-white/20">
                               <ChevronRight className="h-4 w-4" />
                             </Button>
                           </div>
@@ -3391,8 +3398,8 @@ const Game = () => {
                        </CardContent>
                    </Card>}
 
-                   {/* Packs Category */}
-                   {(selectedCategory === "all" || selectedCategory === "packs") && <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                    {/* Packs Category */}
+                    {(selectedCategory === "all" || selectedCategory === "packs") && <Card className={`bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden ${packsShaking ? 'animate-shake' : ''}`}>
                      <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                      <div className="absolute inset-0" style={{
                        backgroundImage: `
@@ -3409,7 +3416,7 @@ const Game = () => {
                            <Button variant="ghost" size="sm" onClick={() => desktopPacksCarouselRef.current?.scrollToPrevious()} className="h-6 w-6 p-0 text-white hover:bg-white/20">
                              <ChevronLeft className="h-4 w-4" />
                            </Button>
-                           <Button variant="ghost" size="sm" onClick={() => desktopPacksCarouselRef.current?.scrollToNext()} className="h-6 w-6 p-0 text-white hover:bg-white/20">
+                           <Button variant="ghost" size="sm" onClick={handlePacksNextClick} className="h-6 w-6 p-0 text-white hover:bg-white/20">
                              <ChevronRight className="h-4 w-4" />
                            </Button>
                          </div>
@@ -3436,27 +3443,7 @@ const Game = () => {
                        price: 5000,
                        rarity: "special",
                        image: "/lovable-uploads/5cf8ad93-f292-4e4c-b53c-eb0c4bc0f7be.png"
-                     }, {
-                       name: "Platinum Pack",
-                       price: 4500,
-                       rarity: "special",
-                       image: "/lovable-uploads/ef3aca91-a372-4313-aa94-3c2dcf946dd6.png"
-                     }, {
-                       name: "Diamond Pack",
-                       price: 5000,
-                       rarity: "special",
-                       image: "/lovable-uploads/ba9c646a-45e6-4ab3-9b25-1f069d27960b.png"
-                     }, {
-                       name: "Premium Pack",
-                       price: 2800,
-                       rarity: "gold",
-                       image: "/lovable-uploads/1615e7da-29d5-454e-a2fe-57f5abf91d56.png"
-                     }, {
-                       name: "Starter Pack",
-                       price: 500,
-                       rarity: "green",
-                       image: "/lovable-uploads/ac3e1f52-ba21-4588-9051-87eef47caf5c.png"
-                     }])} renderItem={(item, idx) => <GlowCard key={idx} className="cursor-pointer">
+                      }])} renderItem={(item, idx) => <GlowCard key={idx} className="cursor-pointer">
                               <div className="p-4">
                                <div className="aspect-square bg-gray-800/50 rounded-lg mb-3 overflow-hidden flex items-center justify-center">
                                   <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
