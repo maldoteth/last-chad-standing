@@ -1714,16 +1714,14 @@ const Game = () => {
                     </Card>}
 
                     {/* Packs Category */}
-                    {(selectedCategory === "all" || selectedCategory === "packs") && <Card className="relative overflow-hidden bg-gradient-to-br from-gray-800/50 via-gray-900/50 to-black/50 border-gray-600/30">
-                      {/* Background gradient overlays */}
-                      <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-transparent to-blue-500/5" />
-                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(147,51,234,0.1),transparent_50%)]" />
-                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(59,130,246,0.1),transparent_50%)]" />
-                      
-                      {/* Pattern overlay */}
-                      <div className="absolute inset-0 opacity-20" style={{
-                        backgroundImage: `radial-gradient(circle at 25% 25%, rgba(255,255,255,0.1) 1px, transparent 1px)`,
-                        backgroundSize: '20px 20px'
+                    {(selectedCategory === "all" || selectedCategory === "packs") && <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
+                      <div className="absolute inset-0" style={{
+                        backgroundImage: `
+                          linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
+                          linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
+                        `,
+                        backgroundSize: '4px 4px'
                       }} />
                       
                       <CardHeader className="relative z-10">
@@ -3407,16 +3405,14 @@ const Game = () => {
                    </Card>}
 
                    {/* Packs Category */}
-                   {(selectedCategory === "all" || selectedCategory === "packs") && <Card className="relative overflow-hidden bg-gradient-to-br from-gray-800/50 via-gray-900/50 to-black/50 border-gray-600/30">
-                     {/* Background gradient overlays */}
-                     <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-transparent to-blue-500/5" />
-                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(147,51,234,0.1),transparent_50%)]" />
-                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(59,130,246,0.1),transparent_50%)]" />
-                     
-                     {/* Pattern overlay */}
-                     <div className="absolute inset-0 opacity-20" style={{
-                       backgroundImage: `radial-gradient(circle at 25% 25%, rgba(255,255,255,0.1) 1px, transparent 1px)`,
-                       backgroundSize: '20px 20px'
+                   {(selectedCategory === "all" || selectedCategory === "packs") && <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                     <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
+                     <div className="absolute inset-0" style={{
+                       backgroundImage: `
+                         linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
+                         linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
+                       `,
+                       backgroundSize: '4px 4px'
                      }} />
                      
                      <CardHeader className="relative z-10">
