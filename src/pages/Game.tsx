@@ -139,6 +139,7 @@ const Game = () => {
   const [marketplaceRarity, setMarketplaceRarity] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
   const [searchExpanded, setSearchExpanded] = useState(false);
+  const [mobilityShaking, setMobilityShaking] = useState(false);
   const [settingsExpanded, setSettingsExpanded] = useState(false);
   const [objectivesView, setObjectivesView] = useState("daily");
   const [isObjectivesGlowing, setIsObjectivesGlowing] = useState(false);
@@ -181,6 +182,12 @@ const Game = () => {
   const {
     getMarketplacePrices
   } = useMarketplace();
+
+  // Handle mobility shake animation
+  const handleMobilityNextClick = () => {
+    setMobilityShaking(true);
+    setTimeout(() => setMobilityShaking(false), 500);
+  };
 
   // Initialize user balance and profile on login
   useEffect(() => {
@@ -3190,110 +3197,90 @@ const Game = () => {
                        </CardContent>
                    </Card>}
 
-                   {/* Mobility Category */}
-                   {(selectedCategory === "all" || selectedCategory === "mobility") && <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
-                    <div className="absolute inset-0" style={{
-                      backgroundImage: `
-                        linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
-                        linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
-                      `,
-                      backgroundSize: '4px 4px'
-                    }} />
-                     <CardHeader className="relative z-10">
-                       <CardTitle className="flex items-center justify-between text-white">
-                         <span>Mobility</span>
-                         <div className="flex space-x-1">
-                           <Button variant="ghost" size="sm" onClick={() => desktopMobilityCarouselRef.current?.scrollToPrevious()} className="h-6 w-6 p-0 text-white hover:bg-white/20">
-                             <ChevronLeft className="h-4 w-4" />
-                           </Button>
-                           <Button variant="ghost" size="sm" onClick={() => desktopMobilityCarouselRef.current?.scrollToNext()} className="h-6 w-6 p-0 text-white hover:bg-white/20">
-                             <ChevronRight className="h-4 w-4" />
-                           </Button>
-                         </div>
-                       </CardTitle>
-                     </CardHeader>
-                      <CardContent>
-                        <StoreCarousel ref={desktopMobilityCarouselRef} desktopMode={true} items={filterItemsByRarity([{
-                        name: "The Coupé Tank",
-                        price: 5000,
-                        rarity: "gold",
-                        image: "/lovable-uploads/1c6b707c-97a6-4381-bc54-de63a7cf8a31.png"
-                      }, {
-                        name: "Speed Buggy",
-                        price: 3200,
-                        rarity: "silver",
-                        image: "/lovable-uploads/b64d7801-1284-4763-b115-ca3cfa8ff315.png"
-                      }, {
-                        name: "Pit Bike",
-                        price: 4500,
-                        rarity: "blue",
-                        image: "/lovable-uploads/4e2aac54-cac6-4cf1-92ad-76bf7e788077.png"
-                      }, {
-                        name: "Pogo",
-                        price: 8000,
-                        rarity: "special",
-                        image: "/lovable-uploads/2877ff38-b9fd-4a5d-bca9-25b14f237997.png"
-                      }, {
-                        name: "Hover Bike",
-                        price: 6500,
-                        rarity: "gold",
-                        image: "/lovable-uploads/10a67a27-b0a7-4fbe-b4f2-7fc2474b98bb.png"
-                      }, {
-                        name: "Racing Car",
-                        price: 7200,
-                        rarity: "special",
-                        image: "/lovable-uploads/896892f1-7ebc-4852-acea-80dcdbf7c545.png"
-                      }, {
-                        name: "Jet Pack",
-                        price: 9000,
-                        rarity: "special",
-                        image: "/lovable-uploads/8090c672-9fc6-4634-ad28-0629a1a7f181.png"
-                      }, {
-                        name: "Skateboard",
-                        price: 2800,
-                        rarity: "green",
-                        image: "/lovable-uploads/7be743c8-5f8f-4016-a88a-c5e7edf73e2e.png"
-                      }])} renderItem={(item, idx) => <GlowCard key={idx} className="text-white shadow-2xl cursor-pointer">
-                              <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
-                              <CardContent className="p-4 relative z-10">
-                               <div className="aspect-square bg-gray-800/50 rounded-lg mb-3 overflow-hidden">
-                                 <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
-                               </div>
-                               <h3 className="font-semibold text-sm text-white mb-2">{item.name}</h3>
-                               <div className="flex items-center justify-between">
-                                 <div className="flex items-center space-x-1">
-                                   <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4" />
-                                   <span className="text-sm font-bold text-white">{item.price.toLocaleString()}</span>
-                                 </div>
-                                 <DropdownMenu>
-                                   <DropdownMenuTrigger asChild>
-                                     <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-7 px-3">
-                                       Buy
-                                     </Button>
-                                   </DropdownMenuTrigger>
-                                   <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
-                                     <DropdownMenuItem onClick={() => toast({
+                    {/* Mobility Category */}
+                   {(selectedCategory === "all" || selectedCategory === "mobility") && <Card className={`bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden transition-transform duration-300 ${mobilityShaking ? 'animate-[shake_0.5s_ease-in-out]' : ''}`}>
+                     <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
+                     <div className="absolute inset-0" style={{
+                       backgroundImage: `
+                         linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
+                         linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
+                       `,
+                       backgroundSize: '4px 4px'
+                     }} />
+                      <CardHeader className="relative z-10">
+                        <CardTitle className="flex items-center justify-between text-white">
+                          <span>Mobility</span>
+                          <div className="flex space-x-1">
+                            <Button variant="ghost" size="sm" onClick={() => desktopMobilityCarouselRef.current?.scrollToPrevious()} className="h-6 w-6 p-0 text-white hover:bg-white/20">
+                              <ChevronLeft className="h-4 w-4" />
+                            </Button>
+                            <Button variant="ghost" size="sm" onClick={handleMobilityNextClick} className="h-6 w-6 p-0 text-white hover:bg-white/20">
+                              <ChevronRight className="h-4 w-4" />
+                            </Button>
+                          </div>
+                        </CardTitle>
+                      </CardHeader>
+                       <CardContent className="relative z-10">
+                         <StoreCarousel ref={desktopMobilityCarouselRef} desktopMode={true} items={filterItemsByRarity([{
+                         name: "The Coupé Tank",
+                         price: 5000,
+                         rarity: "gold",
+                         image: "/lovable-uploads/1c6b707c-97a6-4381-bc54-de63a7cf8a31.png"
+                       }, {
+                         name: "Speed Buggy",
+                         price: 3200,
+                         rarity: "silver",
+                         image: "/lovable-uploads/b64d7801-1284-4763-b115-ca3cfa8ff315.png"
+                       }, {
+                         name: "Pit Bike",
+                         price: 4500,
+                         rarity: "blue",
+                         image: "/lovable-uploads/4e2aac54-cac6-4cf1-92ad-76bf7e788077.png"
+                       }, {
+                         name: "Pogo",
+                         price: 8000,
+                         rarity: "special",
+                         image: "/lovable-uploads/2877ff38-b9fd-4a5d-bca9-25b14f237997.png"
+                       }])} renderItem={(item, idx) => <GlowCard key={idx} className="text-white shadow-2xl cursor-pointer">
+                               <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
+                               <CardContent className="p-4 relative z-10">
+                                <div className="aspect-square bg-gray-800/50 rounded-lg mb-3 overflow-hidden">
+                                  <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+                                </div>
+                                <h3 className="font-semibold text-sm text-white mb-2">{item.name}</h3>
+                                <div className="flex items-center justify-between">
+                                  <div className="flex items-center space-x-1">
+                                    <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4" />
+                                    <span className="text-sm font-bold text-white">{item.price.toLocaleString()}</span>
+                                  </div>
+                                  <DropdownMenu>
+                                    <DropdownMenuTrigger asChild>
+                                      <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-7 px-3">
+                                        Buy
+                                      </Button>
+                                    </DropdownMenuTrigger>
+                                    <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
+                                      <DropdownMenuItem onClick={() => toast({
                                   title: "Coming Soon",
                                   description: "Coin purchases coming soon!",
                                   duration: 3000
                                 })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
-                                       <Coins className="w-4 h-4" />
-                                       <span>Buy With Coins</span>
-                                     </DropdownMenuItem>
-                                     <DropdownMenuItem onClick={() => toast({
+                                        <Coins className="w-4 h-4" />
+                                        <span>Buy With Coins</span>
+                                      </DropdownMenuItem>
+                                      <DropdownMenuItem onClick={() => toast({
                                   title: "Coming Soon",
                                   description: "Card payments coming soon!",
                                   duration: 3000
                                 })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
-                                       <CreditCard className="w-4 h-4" />
-                                       <span>Buy with Card</span>
-                                     </DropdownMenuItem>
-                                   </DropdownMenuContent>
-                                 </DropdownMenu>
-                               </div>
-                             </CardContent>
-                            </GlowCard>} />
+                                        <CreditCard className="w-4 h-4" />
+                                        <span>Buy with Card</span>
+                                      </DropdownMenuItem>
+                                    </DropdownMenuContent>
+                                  </DropdownMenu>
+                                 </div>
+                               </CardContent>
+                             </GlowCard>} />
                        </CardContent>
                    </Card>}
 
