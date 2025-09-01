@@ -3135,7 +3135,7 @@ const Game = () => {
                         rarity: "silver",
                         image: "/lovable-uploads/91375d1a-e829-4716-b3b6-833b58355bd9.png"
                       }, {
-                        name: "Black Combat Vest",
+                        name: "Combat Vest",
                         price: 880,
                         rarity: "gold",
                         image: "/lovable-uploads/8c7fd9f1-1128-4d45-b089-e8879cb0fa98.png"
