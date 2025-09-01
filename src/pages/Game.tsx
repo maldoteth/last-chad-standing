@@ -3342,7 +3342,7 @@ const Game = () => {
                         name: "Screen Smash",
                         price: 1700,
                         rarity: "blue",
-                        image: "/lovable-uploads/12c90a89-5880-412c-85dc-6f52abc127b8.png"
+                        image: "/lovable-uploads/f747341c-eccd-47c4-8290-0451629ec3a4.png"
                       }, {
                         name: "Dumbbell Singer",
                         price: 1200,
