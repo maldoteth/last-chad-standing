@@ -412,7 +412,7 @@ const Game = () => {
       position: "Mythic",
       price: 13500,
       change: 189.3,
-      image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png"
+      image: "/lovable-uploads/a266b13a-b169-41bf-92db-c75cf3d91c9e.png"
     }, {
       name: "Universe Destroyer",
       team: "Cosmic Force",
