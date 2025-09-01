@@ -88,7 +88,8 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
         </div>
         
         <div className="flex flex-col items-center">
-          <span className={`${text} font-bold text-green-400 cursor-pointer hover:text-green-300 transition-colors`} onClick={() => onBuyClick?.()}>
+          <span className={`${text} font-bold text-green-400 cursor-pointer hover:text-green-300 transition-colors flex items-center gap-1`} onClick={() => onBuyClick?.()}>
+            <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className={coin} />
             {formatNumberWithAbbreviation(mockSellPrice)}
           </span>
           <span className={`${label} text-green-400 font-medium cursor-pointer hover:text-green-300 transition-colors`} onClick={() => onBuyClick?.()}>
