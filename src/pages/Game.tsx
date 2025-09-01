@@ -3337,7 +3337,7 @@ const Game = () => {
                         name: "Aura Farm",
                         price: 1900,
                         rarity: "silver",
-                        image: "/lovable-uploads/ea386eae-1f4f-44c0-ad78-7f038df224d3.png"
+                        image: "/lovable-uploads/74597015-55ed-4190-91df-62af504a7e04.png"
                       }, {
                         name: "Power Move",
                         price: 1700,
