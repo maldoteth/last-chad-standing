@@ -412,7 +412,7 @@ const Game = () => {
       change: 69.5,
       image: "/lovable-uploads/cf5abf4c-cf7f-49b7-a830-49343c8d1222.png"
     }, {
-      name: "Ray Del Mar",
+      name: "Ray Del Maestro",
       team: "Space Raiders",
       position: "Elite",
       price: 9800,
@@ -1411,7 +1411,7 @@ const Game = () => {
                   rarity: "special",
                   image: "/lovable-uploads/a76e21f1-ffca-4130-bd9a-08d09167dca0.png"
                 }, {
-                  name: "Ray Del Mar",
+                  name: "Ray Del Maestro",
                   price: 2800,
                   rarity: "blue",
                   image: "/lovable-uploads/e8b33b1a-410f-4448-9b83-126b8d27f0a9.png"
@@ -3096,7 +3096,7 @@ const Game = () => {
                         rarity: "gold",
                         image: "/lovable-uploads/a76e21f1-ffca-4130-bd9a-08d09167dca0.png"
                       }, {
-                        name: "Ray Del Mar",
+                        name: "Ray Del Maestro",
                         price: 2800,
                         rarity: "blue",
                         image: "/lovable-uploads/e8b33b1a-410f-4448-9b83-126b8d27f0a9.png"
