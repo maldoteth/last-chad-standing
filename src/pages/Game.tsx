@@ -83,17 +83,17 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
     
     return <div className="flex flex-col md:flex-row md:items-center md:justify-between md:gap-4 rounded-lg p-3 min-w-[140px]">
       <div className="flex flex-col md:flex-row md:items-center md:gap-4">
-        <div className="flex items-center gap-1 mb-1 md:mb-0">
-          <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className={coin} />
+        <div className="flex items-center gap-1 mb-1 md:mb-0 justify-start">
+          <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className={`${coin} flex-shrink-0`} />
           <span className={`${text} font-bold text-foreground`}>
             {formatNumberWithAbbreviation(mockSellPrice)}
           </span>
         </div>
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1 justify-start">
           {isPositive ? (
-            <ArrowUpRight className="w-3 h-3 text-green-400" />
+            <ArrowUpRight className="w-3 h-3 text-green-400 flex-shrink-0" />
           ) : (
-            <ArrowDownRight className="w-3 h-3 text-red-400" />
+            <ArrowDownRight className="w-3 h-3 text-red-400 flex-shrink-0" />
           )}
           <span className={`${label} ${isPositive ? 'text-green-400' : 'text-red-400'}`}>
             {Math.abs(mockChange).toFixed(1)}%
