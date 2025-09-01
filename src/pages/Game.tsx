@@ -2051,7 +2051,7 @@ const Game = () => {
                           </div>
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center justify-between">
-                              <p className="text-sm md:text-xl font-semibold text-white truncate">{player.name}</p>
+                               <p className="text-sm md:text-xl font-semibold text-white">{player.name}</p>
                               {renderMarketplacePrices(player, getMarketplacePrices, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
                             </div>
                           </div>
@@ -2112,7 +2112,7 @@ const Game = () => {
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center justify-between">
                                 <div className="flex-1 min-w-0">
-                                  <p className="text-sm md:text-xl font-semibold text-white truncate">{player.name}</p>
+                                   <p className="text-sm md:text-xl font-semibold text-white">{player.name}</p>
                                   <p className={`text-xs ${player.change >= 0 ? 'text-green-400' : 'text-red-400'}`}>{player.change >= 0 ? '+' : ''}{formatNumberWithAbbreviation(player.change)}% {getMarketplacePrices(player.name, 'fighter').bestSellPrice ? `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestSellPrice)} sell` : ''} {getMarketplacePrices(player.name, 'fighter').bestBuyPrice ? `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestBuyPrice)} buy` : ''}</p>
                                 </div>
                                 {renderMarketplacePrices(player, getMarketplacePrices, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
@@ -2168,7 +2168,7 @@ const Game = () => {
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center justify-between">
                                 <div className="flex-1 min-w-0">
-                                  <p className="text-sm md:text-xl font-semibold text-white truncate">{player.name}</p>
+                                  <p className="text-sm md:text-xl font-semibold text-white">{player.name}</p>
                                   <p className={`text-xs ${player.change >= 0 ? 'text-green-400' : 'text-red-400'}`}>{player.change >= 0 ? '+' : ''}{formatNumberWithAbbreviation(player.change)}% {getMarketplacePrices(player.name, 'fighter').bestSellPrice ? `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestSellPrice)} sell` : ''} {getMarketplacePrices(player.name, 'fighter').bestBuyPrice ? `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestBuyPrice)} buy` : ''}</p>
                                 </div>
                                 {renderMarketplacePrices(player, getMarketplacePrices, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
@@ -3119,7 +3119,7 @@ const Game = () => {
                                <div className="aspect-square bg-gray-800/50 rounded-lg mb-3 overflow-hidden">
                                  <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
                                </div>
-                               <h3 className="font-semibold text-sm text-white mb-2 truncate">{item.name}</h3>
+                               <h3 className="font-semibold text-sm text-white mb-2">{item.name}</h3>
                                <div className="flex items-center justify-between">
                                  <div className="flex items-center space-x-1">
                                    <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4" />
@@ -3854,7 +3854,7 @@ const Game = () => {
                           </div>
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center justify-between">
-                              <p className="text-lg md:text-xl font-semibold text-white truncate">{player.name}</p>
+                              <p className="text-lg md:text-xl font-semibold text-white">{player.name}</p>
                               {renderMarketplacePrices(player, getMarketplacePrices, 'large', () => handleSellClick(player), () => handleBuyClick(player))}
                             </div>
                           </div>
@@ -3903,7 +3903,7 @@ const Game = () => {
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center justify-between mb-1">
                                 <div className="flex-1 min-w-0">
-                                  <p className="text-sm font-semibold text-white truncate">{player.name}</p>
+                                   <p className="text-sm font-semibold text-white">{player.name}</p>
                                   <p className={`text-xs ${player.change >= 0 ? 'text-green-400' : 'text-red-400'}`}>{player.change >= 0 ? '+' : ''}{formatNumberWithAbbreviation(player.change)}% {getMarketplacePrices(player.name, 'fighter').bestSellPrice ? `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestSellPrice)} sell` : ''} {getMarketplacePrices(player.name, 'fighter').bestBuyPrice ? `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestBuyPrice)} buy` : ''}</p>
                                 </div>
                                 {renderMarketplacePrices(player, getMarketplacePrices, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
@@ -3959,7 +3959,7 @@ const Game = () => {
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center justify-between mb-1">
                                 <div className="flex-1 min-w-0">
-                                  <p className="text-sm font-semibold text-white truncate">{player.name}</p>
+                                  <p className="text-sm font-semibold text-white">{player.name}</p>
                                   <p className={`text-xs ${player.change >= 0 ? 'text-green-400' : 'text-red-400'}`}>{player.change >= 0 ? '+' : ''}{formatNumberWithAbbreviation(player.change)}% {getMarketplacePrices(player.name, 'fighter').bestSellPrice ? `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestSellPrice)} sell` : ''} {getMarketplacePrices(player.name, 'fighter').bestBuyPrice ? `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestBuyPrice)} buy` : ''}</p>
                                 </div>
                                 {renderMarketplacePrices(player, getMarketplacePrices, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
@@ -4316,7 +4316,7 @@ const Game = () => {
                     
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center justify-between">
-                        <p className="text-sm font-medium truncate">{player.name}</p>
+                        <p className="text-sm font-medium">{player.name}</p>
                         <Badge variant="outline" className="text-xs">Lv.{player.level}</Badge>
                       </div>
                       <p className="text-xs text-muted-foreground">{player.points.toLocaleString()} XP</p>
@@ -4425,7 +4425,7 @@ const Game = () => {
                   
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between">
-                      <p className="text-sm font-medium truncate text-white">{player.name}</p>
+                      <p className="text-sm font-medium text-white">{player.name}</p>
                       <Badge variant="outline" className="text-xs bg-white/10 text-white border-white/20">Lv.{player.level}</Badge>
                     </div>
                     <p className="text-xs text-white/60">{player.points.toLocaleString()} XP</p>
