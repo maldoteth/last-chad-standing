@@ -48,9 +48,8 @@ const getTierIcon = (xp: number): string => {
 };
 
 // Function to render marketplace prices (bid/ask)
-const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: string, itemType: string) => any, size: 'small' | 'medium' | 'large' = 'medium', onSellClick?: () => void, onBuyClick?: () => void) => {
+const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: string, itemType: string) => any, isMobile: boolean, size: 'small' | 'medium' | 'large' = 'medium', onSellClick?: () => void, onBuyClick?: () => void) => {
   const prices = getMarketplacePrices(player.name, 'player');
-  const isMobile = useIsMobile(); // Use hook directly in function
   const sizeClasses = {
     small: {
       coin: 'w-3 h-3 md:w-4.5 md:h-4.5 md:-ml-1',
@@ -2083,7 +2082,7 @@ const Game = () => {
                           <div className="flex-1">
                             <div className="flex items-center justify-between">
                                <p className="text-sm md:text-xl font-semibold text-white whitespace-nowrap">{player.name}</p>
-                              {renderMarketplacePrices(player, getMarketplacePrices, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
+                               {renderMarketplacePrices(player, getMarketplacePrices, isMobile, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
                             </div>
                           </div>
                         </div>)}
@@ -2146,7 +2145,7 @@ const Game = () => {
                                    <p className="text-sm md:text-xl font-semibold text-white whitespace-nowrap">{player.name}</p>
                                   <p className={`text-xs ${player.change >= 0 ? 'text-green-400' : 'text-red-400'}`}>{player.change >= 0 ? '+' : ''}{formatNumberWithAbbreviation(player.change)}% {getMarketplacePrices(player.name, 'fighter').bestSellPrice ? `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestSellPrice)} sell` : ''} {getMarketplacePrices(player.name, 'fighter').bestBuyPrice ? `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestBuyPrice)} buy` : ''}</p>
                                 </div>
-                                {renderMarketplacePrices(player, getMarketplacePrices, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
+                                 {renderMarketplacePrices(player, getMarketplacePrices, isMobile, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
                               </div>
                                
                             </div>
@@ -2202,7 +2201,7 @@ const Game = () => {
                                   <p className="text-sm md:text-xl font-semibold text-white whitespace-nowrap">{player.name}</p>
                                   <p className={`text-xs ${player.change >= 0 ? 'text-green-400' : 'text-red-400'}`}>{player.change >= 0 ? '+' : ''}{formatNumberWithAbbreviation(player.change)}% {getMarketplacePrices(player.name, 'fighter').bestSellPrice ? `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestSellPrice)} sell` : ''} {getMarketplacePrices(player.name, 'fighter').bestBuyPrice ? `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestBuyPrice)} buy` : ''}</p>
                                 </div>
-                                {renderMarketplacePrices(player, getMarketplacePrices, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
+                                 {renderMarketplacePrices(player, getMarketplacePrices, isMobile, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
                               </div>
                                
                             </div>
@@ -3886,7 +3885,7 @@ const Game = () => {
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center justify-between">
                               <p className="text-lg md:text-xl font-semibold text-white">{player.name}</p>
-                              {renderMarketplacePrices(player, getMarketplacePrices, 'large', () => handleSellClick(player), () => handleBuyClick(player))}
+                              {renderMarketplacePrices(player, getMarketplacePrices, isMobile, 'large', () => handleSellClick(player), () => handleBuyClick(player))}
                             </div>
                           </div>
                         </div>)}
@@ -3937,7 +3936,7 @@ const Game = () => {
                                    <p className="text-sm font-semibold text-white whitespace-nowrap">{player.name}</p>
                                   <p className={`text-xs ${player.change >= 0 ? 'text-green-400' : 'text-red-400'}`}>{player.change >= 0 ? '+' : ''}{formatNumberWithAbbreviation(player.change)}% {getMarketplacePrices(player.name, 'fighter').bestSellPrice ? `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestSellPrice)} sell` : ''} {getMarketplacePrices(player.name, 'fighter').bestBuyPrice ? `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestBuyPrice)} buy` : ''}</p>
                                 </div>
-                                {renderMarketplacePrices(player, getMarketplacePrices, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
+                                 {renderMarketplacePrices(player, getMarketplacePrices, isMobile, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
                               </div>
                                
                             </div>
@@ -3993,7 +3992,7 @@ const Game = () => {
                                   <p className="text-sm font-semibold text-white whitespace-nowrap">{player.name}</p>
                                   <p className={`text-xs ${player.change >= 0 ? 'text-green-400' : 'text-red-400'}`}>{player.change >= 0 ? '+' : ''}{formatNumberWithAbbreviation(player.change)}% {getMarketplacePrices(player.name, 'fighter').bestSellPrice ? `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestSellPrice)} sell` : ''} {getMarketplacePrices(player.name, 'fighter').bestBuyPrice ? `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestBuyPrice)} buy` : ''}</p>
                                 </div>
-                                {renderMarketplacePrices(player, getMarketplacePrices, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
+                                {renderMarketplacePrices(player, getMarketplacePrices, isMobile, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
                               </div>
                                
                             </div>
