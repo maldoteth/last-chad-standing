@@ -57,7 +57,7 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
       label: 'text-[10px] md:text-sm'
     },
     medium: {
-      coin: 'w-4 h-4 md:w-5 md:h-5 md:-ml-1',
+      coin: 'w-3 h-3 md:w-5 md:h-5 md:-ml-1',
       text: 'text-sm md:text-sm',
       label: 'text-xs md:text-xs'
     },
@@ -85,7 +85,7 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
       <div className="flex flex-col items-end md:flex-row md:items-center md:gap-4">
         <div className="flex items-center gap-1 mb-1 md:mb-0 justify-start">
           <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className={`${coin} flex-shrink-0`} />
-          <span className={`${text} font-bold text-foreground`}>
+          <span className={`${text} font-bold text-foreground leading-none`}>
             {formatNumberWithAbbreviation(mockSellPrice)}
           </span>
         </div>
@@ -99,9 +99,9 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
           <Button 
             size="icon"
             variant="ghost" 
-            className="h-8 w-8 bg-transparent hover:bg-transparent"
+            className="h-6 w-6 md:h-8 md:w-8 bg-transparent hover:bg-transparent -mt-1 md:mt-0"
           >
-            <ArrowRightLeft className="w-4 h-4" />
+            <ArrowRightLeft className="w-3 h-3 md:w-4 md:h-4" />
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-32 p-2" align="end">
