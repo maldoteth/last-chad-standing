@@ -22,7 +22,7 @@ import { Input } from "@/components/ui/input";
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerTrigger, DrawerClose } from "@/components/ui/drawer";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogDescription } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Coins, ShoppingBag, Users, Package, CreditCard, Handshake, Trophy, Star, Target, ChevronRight, ChevronLeft, Bell, Play, Home, TrendingUp, UserPlus, Medal, LogOut, Settings, Info, Gift, BarChart3, LineChart, ArrowUpRight, ArrowDownRight, Search, Filter, Gamepad, Instagram, Layers, BookOpen, Youtube, X, RotateCcw, MessageCircle, Archive, ArrowRightLeft } from "lucide-react";
+import { Coins, ShoppingBag, Users, Package, CreditCard, Handshake, Trophy, Star, Target, ChevronRight, ChevronLeft, Bell, Play, Home, TrendingUp, UserPlus, Medal, LogOut, Settings, Info, Gift, BarChart3, LineChart, ArrowUpRight, ArrowDownRight, Search, Filter, Gamepad, Instagram, Layers, BookOpen, Youtube, X, RotateCcw, MessageCircle, Archive, ArrowRightLeft, ArrowUpDown } from "lucide-react";
 import { ResponsiveContainer, LineChart as RechartsLineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, PieChart, Pie, Cell, BarChart, Bar, Area, AreaChart } from 'recharts';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import cyberWarriorSkin from "@/assets/cyber-warrior-skin.png";
@@ -156,6 +156,7 @@ const Game = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [marketplaceCategory, setMarketplaceCategory] = useState("all");
   const [marketplaceRarity, setMarketplaceRarity] = useState("all");
+  const [marketplaceSortBy, setMarketplaceSortBy] = useState("highest-price");
   const [searchTerm, setSearchTerm] = useState("");
   const [searchExpanded, setSearchExpanded] = useState(false);
   const [mobilityShaking, setMobilityShaking] = useState(false);
@@ -3719,6 +3720,29 @@ const Game = () => {
                                 </DropdownMenuItem>
                                 <DropdownMenuItem onClick={() => setMarketplaceCategory("packs")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceCategory === "packs" ? "bg-white/20" : ""}`}>
                                   <span>Packs</span>
+                                </DropdownMenuItem>
+                                </DropdownMenuContent>
+                              </DropdownMenu>
+
+                            {/* Sort Dropdown */}
+                            <DropdownMenu>
+                              <DropdownMenuTrigger asChild>
+                                  <Button variant="outline" size="sm" className="bg-black/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-8 w-8">
+                                   <ArrowUpDown className="w-3 h-3" />
+                                 </Button>
+                              </DropdownMenuTrigger>
+                              <DropdownMenuContent align="center" className="w-48 bg-black/10 backdrop-blur-md border border-white/20 text-white z-[9999]">
+                                <DropdownMenuItem onClick={() => setMarketplaceSortBy("highest-price")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceSortBy === "highest-price" ? "bg-white/20" : ""}`}>
+                                  <span>Highest Price</span>
+                                </DropdownMenuItem>
+                                <DropdownMenuItem onClick={() => setMarketplaceSortBy("lowest-price")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceSortBy === "lowest-price" ? "bg-white/20" : ""}`}>
+                                  <span>Lowest Price</span>
+                                </DropdownMenuItem>
+                                <DropdownMenuItem onClick={() => setMarketplaceSortBy("highest-gain")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceSortBy === "highest-gain" ? "bg-white/20" : ""}`}>
+                                  <span>Highest % Gain</span>
+                                </DropdownMenuItem>
+                                <DropdownMenuItem onClick={() => setMarketplaceSortBy("highest-loss")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceSortBy === "highest-loss" ? "bg-white/20" : ""}`}>
+                                  <span>Highest % Loss</span>
                                 </DropdownMenuItem>
                                 </DropdownMenuContent>
                               </DropdownMenu>
