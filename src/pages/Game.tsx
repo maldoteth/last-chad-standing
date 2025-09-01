@@ -3145,7 +3145,7 @@ const Game = () => {
                         rarity: "blue",
                         image: "/lovable-uploads/e21fe8d7-5519-4b7b-bd90-6b96e74635d4.png"
                       }, {
-                        name: "Stealth Boots",
+                        name: "BMF Shorts",
                         price: 1200,
                         rarity: "special",
                         image: "/lovable-uploads/77a6c004-93ed-49ee-a5d0-6056ee852612.png"
