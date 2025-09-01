@@ -4357,7 +4357,7 @@ const Game = () => {
             });
             setBuyDialogOpen(false);
           }}>
-                <Coins className="w-4 h-4 mr-2" />
+                <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4 mr-2" />
                 Buy with Coins
               </Button>
               <Button variant="ghost" className="text-white hover:bg-white/10 hover:text-white transition-all duration-300" onClick={() => setBuyDialogOpen(false)}>
