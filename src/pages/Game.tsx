@@ -3870,10 +3870,15 @@ const Game = () => {
                             <img src={player.image} alt={player.name} className="w-full h-full object-cover" />
                           </div>
                           <div className="flex-1 min-w-0">
-                            <div className="flex items-center justify-between">
-                              <p className="text-lg md:text-xl font-semibold text-white">{player.name}</p>
-                              {renderMarketplacePrices(player, getMarketplacePrices, 'large', () => handleSellClick(player), () => handleBuyClick(player))}
-                            </div>
+                             <div className="flex items-center justify-between">
+                               <div>
+                                 <p className="text-lg md:text-xl font-semibold text-white">{player.name}</p>
+                                 <p className={`text-sm ${player.change >= 0 ? 'text-green-400' : 'text-red-400'}`}>
+                                   {player.change >= 0 ? '+' : ''}{player.change}%
+                                 </p>
+                               </div>
+                               {renderMarketplacePrices(player, getMarketplacePrices, 'large', () => handleSellClick(player), () => handleBuyClick(player))}
+                             </div>
                           </div>
                         </div>)}
                     </div>
