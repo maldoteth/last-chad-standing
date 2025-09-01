@@ -385,12 +385,12 @@ const Game = () => {
       change: 69.5,
       image: "/lovable-uploads/cf5abf4c-cf7f-49b7-a830-49343c8d1222.png"
     }, {
-      name: "Void Reaper",
+      name: "Ray Del Mar",
       team: "Space Raiders",
       position: "Elite",
       price: 9800,
       change: 62.1,
-      image: "/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png"
+      image: "/lovable-uploads/e8b33b1a-410f-4448-9b83-126b8d27f0a9.png"
     }, {
       name: "Storm Lord",
       team: "Weather Gods",
