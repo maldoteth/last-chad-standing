@@ -378,12 +378,12 @@ const Game = () => {
       change: 76.8,
       image: "/lovable-uploads/fa6496ee-f2e7-4af5-8205-7445121d8a6a.png"
     }, {
-      name: "Plasma Cannon",
+      name: "Tarragon Southslice",
       team: "Energy Corps",
       position: "Artillery",
       price: 8900,
       change: 69.5,
-      image: "/lovable-uploads/2390abe9-bd8c-4568-8198-12a97fb918e3.png"
+      image: "/lovable-uploads/cf5abf4c-cf7f-49b7-a830-49343c8d1222.png"
     }, {
       name: "Void Reaper",
       team: "Space Raiders",
