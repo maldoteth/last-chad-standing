@@ -22,7 +22,7 @@ import { Input } from "@/components/ui/input";
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerTrigger, DrawerClose } from "@/components/ui/drawer";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogDescription } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Coins, ShoppingBag, Users, Package, CreditCard, Handshake, Trophy, Star, Target, ChevronRight, ChevronLeft, Bell, Play, Home, TrendingUp, UserPlus, Medal, LogOut, Settings, Info, Gift, BarChart3, LineChart, ArrowUpRight, ArrowDownRight, Search, Filter, Gamepad, Instagram, Layers, BookOpen, Youtube, X, RotateCcw, MessageCircle, Archive } from "lucide-react";
+import { Coins, ShoppingBag, Users, Package, CreditCard, Handshake, Trophy, Star, Target, ChevronRight, ChevronLeft, Bell, Play, Home, TrendingUp, UserPlus, Medal, LogOut, Settings, Info, Gift, BarChart3, LineChart, ArrowUpRight, ArrowDownRight, Search, Filter, Gamepad, Instagram, Layers, BookOpen, Youtube, X, RotateCcw, MessageCircle, Archive, ArrowRightLeft } from "lucide-react";
 import { ResponsiveContainer, LineChart as RechartsLineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, PieChart, Pie, Cell, BarChart, Bar, Area, AreaChart } from 'recharts';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import cyberWarriorSkin from "@/assets/cyber-warrior-skin.png";
@@ -76,29 +76,63 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
     // Generate mock bid/ask prices when no real listings exist
     const mockSellPrice = Math.round(player.price * 1.15);
     const mockBuyPrice = Math.round(player.price * 0.85);
-    return <div className="flex items-start space-x-2">
-         <div className="flex flex-col">
-          <div className="flex items-center space-x-1">
-            
-            
-          </div>
-          <div className="flex justify-center ml-6">
-            
-          </div>
+    
+    // Generate mock 24hr change (random between -15% to +15%)
+    const mockChange = (Math.random() * 30 - 15);
+    const isPositive = mockChange > 0;
+    
+    return <div className="flex items-center justify-between bg-card border border-border rounded-lg p-3 min-w-[140px]">
+      <div className="flex flex-col">
+        <div className="flex items-center gap-1 mb-1">
+          <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className={coin} />
+          <span className={`${text} font-bold text-foreground`}>
+            {formatNumberWithAbbreviation(mockSellPrice)}
+          </span>
         </div>
-        
-        <Button 
-          onClick={() => onBuyClick?.()} 
-          variant="outline" 
-          className="flex flex-col items-center justify-center p-2 h-auto border-green-400/30 bg-green-400/10 hover:bg-green-400/20 text-green-400 hover:text-green-300 transition-colors"
-        >
-          <div className="flex items-center gap-1 mb-1">
-            <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className={coin} />
-            <span className={`${text} font-bold`}>{formatNumberWithAbbreviation(mockSellPrice)}</span>
+        <div className="flex items-center gap-1">
+          {isPositive ? (
+            <ArrowUpRight className="w-3 h-3 text-green-400" />
+          ) : (
+            <ArrowDownRight className="w-3 h-3 text-red-400" />
+          )}
+          <span className={`${label} ${isPositive ? 'text-green-400' : 'text-red-400'}`}>
+            {Math.abs(mockChange).toFixed(1)}%
+          </span>
+        </div>
+      </div>
+      
+      <Popover>
+        <PopoverTrigger asChild>
+          <Button 
+            size="icon"
+            variant="outline" 
+            className="h-8 w-8 rounded-full border-muted hover:bg-accent"
+          >
+            <ArrowRightLeft className="w-4 h-4" />
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent className="w-32 p-2" align="end">
+          <div className="flex flex-col gap-1">
+            <Button 
+              size="sm" 
+              variant="outline" 
+              className="text-green-400 border-green-400/30 hover:bg-green-400/10"
+              onClick={() => onBuyClick?.()}
+            >
+              Buy
+            </Button>
+            <Button 
+              size="sm" 
+              variant="outline" 
+              className="text-red-400 border-red-400/30 hover:bg-red-400/10"
+              onClick={() => onSellClick?.()}
+            >
+              Sell
+            </Button>
           </div>
-          <span className={`${label} font-medium`}>BUY</span>
-        </Button>
-      </div>;
+        </PopoverContent>
+      </Popover>
+    </div>;
   }
   return <div className="flex items-start space-x-2">
       <div className="flex items-center space-x-4">
