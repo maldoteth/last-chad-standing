@@ -3140,7 +3140,7 @@ const Game = () => {
                         rarity: "gold",
                         image: "/lovable-uploads/745baeae-f05a-4a2a-828f-45aed6d05972.png"
                       }, {
-                        name: "Tactical Backpack",
+                        name: "DHB x LCS shorts",
                         price: 990,
                         rarity: "blue",
                         image: "/lovable-uploads/8c2f941a-58db-43db-9b99-afb13cd3c36b.png"
