@@ -3677,23 +3677,22 @@ const Game = () => {
                      <CardTitle className="text-2xl md:text-3xl flex items-center justify-between text-white">
                         <span>Marketplace</span>
                           <div className="flex items-center gap-1">
-                            {/* Expandable Search */}
-                            <div className="flex items-center">
-                              {!searchExpanded ? <Button variant="outline" size="sm" className="bg-black/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-8 w-8" onClick={() => setSearchExpanded(true)}>
-                                  <Search className="w-3 h-3" />
-                                </Button> : <div className="flex items-center animate-fade-in">
-                                  <div className="relative">
-                                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-3 h-3 text-white" />
-                                    <Input placeholder="search" value={searchTerm} onChange={e => setSearchTerm(e.target.value)} onBlur={() => !searchTerm && setSearchExpanded(false)} className="pl-8 pr-3 h-8 text-xs bg-black/20 backdrop-blur-md border-white/30 text-white placeholder:text-gray-400 w-48 focus:bg-black/30 focus:border-white/40" autoFocus />
-                                  </div>
-                                  <Button variant="ghost" size="sm" className="ml-1 h-8 w-8 text-white hover:bg-white/20" onClick={() => {
-                              setSearchTerm("");
-                              setSearchExpanded(false);
-                            }}>
-                                    <X className="w-3 h-3" />
-                                  </Button>
-                                </div>}
-                            </div>
+                             {/* Expandable Search */}
+                             <div className="flex items-center">
+                               {!searchExpanded ? <Button variant="outline" size="sm" className="bg-black/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-8 w-8" onClick={() => setSearchExpanded(true)}>
+                                   <Search className="w-3 h-3" />
+                                 </Button> : <div className="flex items-center animate-fade-in">
+                                   <div className="relative">
+                                     <Button variant="ghost" size="sm" className="absolute left-1 top-1/2 transform -translate-y-1/2 h-6 w-6 text-white hover:bg-white/20 z-10" onClick={() => {
+                               setSearchTerm("");
+                               setSearchExpanded(false);
+                             }}>
+                                       <X className="w-3 h-3" />
+                                     </Button>
+                                     <Input placeholder="search" value={searchTerm} onChange={e => setSearchTerm(e.target.value)} onBlur={() => !searchTerm && setSearchExpanded(false)} className="pl-8 pr-3 h-8 text-xs bg-black/20 backdrop-blur-md border-white/30 text-white placeholder:text-gray-400 w-48 focus:bg-black/30 focus:border-white/40" autoFocus />
+                                   </div>
+                                 </div>}
+                             </div>
                             
                             {/* Category Filter */}
                             <DropdownMenu>
