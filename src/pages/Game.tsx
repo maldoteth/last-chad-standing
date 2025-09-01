@@ -371,7 +371,7 @@ const Game = () => {
       change: 89.4,
       image: "/lovable-uploads/1e5737a2-94f3-4556-9114-0b0f53307327.png"
     }, {
-      name: "Shadow Master",
+      name: "Alex Toosick",
       team: "Dark Legion",
       position: "Assassin",
       price: 8500,
