@@ -3138,7 +3138,7 @@ const Game = () => {
                         name: "Black Combat Vest",
                         price: 880,
                         rarity: "gold",
-                        image: "/lovable-uploads/745baeae-f05a-4a2a-828f-45aed6d05972.png"
+                        image: "/lovable-uploads/8c7fd9f1-1128-4d45-b089-e8879cb0fa98.png"
                       }, {
                         name: "DHB x LCS shorts",
                         price: 990,
