@@ -1655,7 +1655,7 @@ const Game = () => {
                   name: "Protest Sign",
                   price: 1200,
                   rarity: "silver",
-                  image: "/lovable-uploads/8090c672-9fc6-4634-ad28-0629a1a7f181.png"
+                  image: "/lovable-uploads/f9ba9551-eabd-4e1f-a2a9-2eeddc92114d.png"
                 }, {
                   name: "Taunt",
                   price: 950,
@@ -3332,7 +3332,7 @@ const Game = () => {
                         name: "Protest Sign",
                         price: 2200,
                         rarity: "special",
-                        image: "/lovable-uploads/c4290bdc-f68b-45db-bf53-f9551d2cb16f.png"
+                        image: "/lovable-uploads/f9ba9551-eabd-4e1f-a2a9-2eeddc92114d.png"
                       }, {
                         name: "Champion Pose",
                         price: 1900,
