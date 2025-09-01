@@ -3150,7 +3150,7 @@ const Game = () => {
                         rarity: "special",
                         image: "/lovable-uploads/77a6c004-93ed-49ee-a5d0-6056ee852612.png"
                       }, {
-                        name: "Power Gloves",
+                        name: "Rapz Gloves",
                         price: 800,
                         rarity: "silver",
                         image: "/lovable-uploads/79162f7a-0435-4ead-b016-c20194bd1b0e.png"
