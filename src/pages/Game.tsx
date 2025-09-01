@@ -407,7 +407,7 @@ const Game = () => {
       change: 234.7,
       image: "/lovable-uploads/a76e21f1-ffca-4130-bd9a-08d09167dca0.png"
     }, {
-      name: "God Slayer",
+      name: "Lean Chad",
       team: "Divine Army",
       position: "Mythic",
       price: 13500,
