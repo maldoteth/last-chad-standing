@@ -120,6 +120,32 @@ serve(async (req) => {
 
     logStep("Created checkout session", { sessionId: session.id, url: session.url });
 
+    // Store preorder record in database using service role key
+    const supabaseService = createClient(
+      Deno.env.get("SUPABASE_URL") ?? "",
+      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "",
+      { auth: { persistSession: false } }
+    );
+
+    const { error: dbError } = await supabaseService.from("preorders").insert({
+      user_id: userId,
+      email: userEmail,
+      tier_id: tierId,
+      stripe_session_id: session.id,
+      stripe_customer_id: customerId,
+      product_id: productId,
+      amount: price.unit_amount,
+      currency: price.currency,
+      status: "pending"
+    });
+
+    if (dbError) {
+      logStep("Database error", { error: dbError.message });
+      // Continue even if database insert fails - don't block checkout
+    } else {
+      logStep("Preorder record created", { sessionId: session.id });
+    }
+
     return new Response(JSON.stringify({ url: session.url }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
       status: 200,
