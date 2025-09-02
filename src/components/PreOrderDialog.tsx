@@ -128,7 +128,7 @@ const PreOrderDialog = ({ children, open: externalOpen, onOpenChange: externalOn
           >
             {selectedTier ? 'Pre-Order Now' : 'Select a Package'}
           </Button>
-          <p className="text-xs text-slate-400 mt-3">Secure payment processing • Limit 1 per customer</p>
+          
           <div className="mt-4 flex justify-center">
             <img 
               src="/lovable-uploads/7d84dfb4-4db3-4adb-87f0-36f33c0f8daa.png" 
