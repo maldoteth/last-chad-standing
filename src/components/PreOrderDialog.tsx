@@ -76,23 +76,7 @@ const PreOrderDialog = ({ children, open: externalOpen, onOpenChange: externalOn
     if (!selectedTier) return;
 
     if (!user) {
-      toast({
-        title: "Login Required",
-        description: "Log in to pre-order",
-        variant: "destructive",
-        action: (
-          <Button 
-            variant="default" 
-            size="sm" 
-            onClick={() => {
-              login();
-            }}
-            className="bg-red-800 hover:bg-red-900 text-white border-red-700"
-          >
-            Log In
-          </Button>
-        ),
-      });
+      login();
       return;
     }
 
