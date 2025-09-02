@@ -104,12 +104,17 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
             <ArrowRightLeft className="w-4 h-4" />
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-32 p-2" align="end">
+        <PopoverContent 
+          className="w-32 p-2 bg-black/90 backdrop-blur-md border border-white/20 text-white z-50" 
+          align="end" 
+          side={useIsMobile() ? "bottom" : "top"}
+          sideOffset={8}
+        >
           <div className="flex flex-col gap-1">
             <Button 
               size="sm" 
               variant="outline" 
-              className="text-green-400 border-green-400/30 hover:bg-green-400/10"
+              className="text-green-400 border-green-400/30 hover:bg-green-400/10 bg-transparent"
               onClick={() => onBuyClick?.()}
             >
               Buy
@@ -117,7 +122,7 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
             <Button 
               size="sm" 
               variant="outline" 
-              className="text-red-400 border-red-400/30 hover:bg-red-400/10"
+              className="text-red-400 border-red-400/30 hover:bg-red-400/10 bg-transparent"
               onClick={() => onSellClick?.()}
             >
               Sell
