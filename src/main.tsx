@@ -103,10 +103,12 @@ const isCloseOrBackButton = (element: Element): boolean => {
   const ariaLabel = element.getAttribute('aria-label')?.toLowerCase() || '';
   const className = element.className?.toLowerCase() || '';
   const role = element.getAttribute('role')?.toLowerCase() || '';
+  const title = element.getAttribute('title')?.toLowerCase() || '';
   
   // Look for close button indicators
   if (ariaLabel.includes('close') || ariaLabel.includes('back') || 
       className.includes('close') || className.includes('back') ||
+      title.includes('close') || title.includes('back') ||
       role === 'button') {
     return true;
   }
@@ -117,21 +119,51 @@ const isCloseOrBackButton = (element: Element): boolean => {
   
   if (textContent === '×' || textContent === '✕' || textContent === '⨯' ||
       innerHTML.includes('close') || innerHTML.includes('back') ||
-      innerHTML.includes('arrow') || innerHTML.includes('×')) {
+      innerHTML.includes('arrow') || innerHTML.includes('×') ||
+      innerHTML.includes('chevron') || innerHTML.includes('<') ||
+      innerHTML.includes('→') || innerHTML.includes('←')) {
     return true;
   }
   
-  // Check if it's positioned like a close button (top-right area)
+  // Enhanced position detection for close/back buttons
   const rect = element.getBoundingClientRect();
   const modal = element.closest('[data-privy-modal], [data-testid="privy-modal"], [data-privy-dialog-content]');
-  if (modal) {
+  if (modal && element.tagName === 'BUTTON') {
     const modalRect = modal.getBoundingClientRect();
-    const isTopRight = rect.right > modalRect.right - 60 && rect.top < modalRect.top + 60;
-    const isTopLeft = rect.left < modalRect.left + 60 && rect.top < modalRect.top + 60;
+    const isTopRight = rect.right > modalRect.right - 80 && rect.top < modalRect.top + 80;
+    const isTopLeft = rect.left < modalRect.left + 80 && rect.top < modalRect.top + 80;
     
-    if ((isTopRight || isTopLeft) && element.tagName === 'BUTTON') {
+    if (isTopRight || isTopLeft) {
       return true;
     }
+  }
+  
+  // Check for SVG icons that might be in back/close buttons
+  const svgs = element.querySelectorAll('svg');
+  for (const svg of svgs) {
+    const svgContent = svg.innerHTML?.toLowerCase() || '';
+    const svgClass = svg.getAttribute('class')?.toLowerCase() || '';
+    
+    if (svgContent.includes('path') && (
+        svgClass.includes('back') || 
+        svgClass.includes('close') || 
+        svgClass.includes('arrow') ||
+        svgClass.includes('chevron'))) {
+      return true;
+    }
+  }
+  
+  // Check if button has circular styling (common for close/back buttons)
+  const computedStyle = window.getComputedStyle(element);
+  const borderRadius = computedStyle.borderRadius;
+  const width = rect.width;
+  const height = rect.height;
+  
+  // If it's a small, roughly square button in header area, likely close/back
+  if (width > 0 && height > 0 && Math.abs(width - height) < 10 && 
+      width < 50 && height < 50 && 
+      (borderRadius.includes('%') || parseInt(borderRadius) > width / 4)) {
+    return true;
   }
   
   return false;
