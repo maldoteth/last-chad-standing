@@ -20,6 +20,7 @@ import { getAllLevelsForDisplay, getCurrentLevel, getProgressToNextLevel } from 
 import { formatNumberWithAbbreviation } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerTrigger, DrawerClose } from "@/components/ui/drawer";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogDescription } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Coins, ShoppingBag, Users, Package, CreditCard, Handshake, Trophy, Star, Target, ChevronRight, ChevronLeft, Bell, Play, Home, TrendingUp, UserPlus, Medal, LogOut, Settings, Info, Gift, BarChart3, LineChart, ArrowUpRight, ArrowDownRight, Search, Filter, Gamepad, Instagram, Layers, BookOpen, Youtube, X, RotateCcw, MessageCircle, Archive, ArrowRightLeft, ArrowUpDown } from "lucide-react";
@@ -1142,56 +1143,115 @@ const Game = () => {
               <span className="font-semibold text-sm lg:text-base">{userCoins.toLocaleString()}</span>
             </div>
             
-            {authenticated ? <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Avatar className="w-7 h-7 lg:w-8 lg:h-8 cursor-pointer">
-                    <AvatarFallback className="text-lg">
-                      {profile?.avatar_url || getTierIcon(userBalance.xp)}
-                    </AvatarFallback>
-                  </Avatar>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-64 bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden backdrop-blur-md z-50">
-                  {/* Liquid glass metallic background effects */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
-                  <div className="absolute inset-0" style={{
-                backgroundImage: `
-                      linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
-                      linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
-                    `,
-                backgroundSize: '4px 4px'
-              }} />
-                  
-                  <div className="relative z-10">
-                    <div className="px-3 py-2">
-                      <div className="flex items-center space-x-3">
-                        <div className="text-2xl">
-                          {profile?.avatar_url || '👤'}
+            {authenticated ? (
+              isMobile ? (
+                <Sheet>
+                  <SheetTrigger asChild>
+                    <Avatar className="w-7 h-7 lg:w-8 lg:h-8 cursor-pointer">
+                      <AvatarFallback className="text-lg">
+                        {profile?.avatar_url || getTierIcon(userBalance.xp)}
+                      </AvatarFallback>
+                    </Avatar>
+                  </SheetTrigger>
+                  <SheetContent side="bottom" className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl backdrop-blur-md rounded-t-xl">
+                    <div className="relative">
+                      {/* Liquid glass metallic background effects */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
+                      <div className="absolute inset-0" style={{
+                        backgroundImage: `
+                          linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
+                          linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
+                        `,
+                        backgroundSize: '4px 4px'
+                      }} />
+                      
+                      <div className="relative z-10 p-4">
+                        <div className="mb-4">
+                          <div className="flex items-center space-x-3">
+                            <div className="text-2xl">
+                              {profile?.avatar_url || '👤'}
+                            </div>
+                            <div className="flex flex-col space-y-1">
+                              <p className="text-sm font-medium leading-none text-white">
+                                {loading ? "Loading profile..." : profile?.username || 'Profile Error'}
+                              </p>
+                              <p className="text-xs leading-none text-gray-200">
+                                {user?.email?.address}
+                              </p>
+                            </div>
+                          </div>
                         </div>
-                        <div className="flex flex-col space-y-1">
-                          <p className="text-sm font-medium leading-none text-white">
-                            {loading ? "Loading profile..." : profile?.username || 'Profile Error'}
-                          </p>
-                          <p className="text-xs leading-none text-gray-200">
-                            {user?.email?.address}
-                          </p>
+                        <div className="mb-4 border-t border-white/20 pt-4">
+                          <ProgressBar xp={userBalance?.xp || 0} />
                         </div>
+                        
+                        <Button 
+                          onClick={logout} 
+                          variant="outline" 
+                          className="w-full bg-transparent border-white/20 text-white hover:bg-white/10 hover:text-white transition-all duration-300"
+                        >
+                          <LogOut className="w-4 h-4 mr-2" />
+                          Sign Out
+                        </Button>
                       </div>
                     </div>
-                    <div className="px-3 py-2 border-t border-white/20">
-                      <ProgressBar xp={userBalance?.xp || 0} />
+                  </SheetContent>
+                </Sheet>
+              ) : (
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Avatar className="w-7 h-7 lg:w-8 lg:h-8 cursor-pointer">
+                      <AvatarFallback className="text-lg">
+                        {profile?.avatar_url || getTierIcon(userBalance.xp)}
+                      </AvatarFallback>
+                    </Avatar>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className="w-64 bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden backdrop-blur-md z-50">
+                    {/* Liquid glass metallic background effects */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
+                    <div className="absolute inset-0" style={{
+                      backgroundImage: `
+                        linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
+                        linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
+                      `,
+                      backgroundSize: '4px 4px'
+                    }} />
+                    
+                    <div className="relative z-10">
+                      <div className="px-3 py-2">
+                        <div className="flex items-center space-x-3">
+                          <div className="text-2xl">
+                            {profile?.avatar_url || '👤'}
+                          </div>
+                          <div className="flex flex-col space-y-1">
+                            <p className="text-sm font-medium leading-none text-white">
+                              {loading ? "Loading profile..." : profile?.username || 'Profile Error'}
+                            </p>
+                            <p className="text-xs leading-none text-gray-200">
+                              {user?.email?.address}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="px-3 py-2 border-t border-white/20">
+                        <ProgressBar xp={userBalance?.xp || 0} />
+                      </div>
+                      
+                      <DropdownMenuSeparator className="bg-white/20" />
+                      
+                      <DropdownMenuItem onClick={logout} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 hover:text-white transition-all duration-300">
+                        <LogOut className="w-4 h-4" />
+                        <span>Sign Out</span>
+                      </DropdownMenuItem>
                     </div>
-                    
-                    <DropdownMenuSeparator className="bg-white/20" />
-                    
-                    <DropdownMenuItem onClick={logout} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 hover:text-white transition-all duration-300">
-                      <LogOut className="w-4 h-4" />
-                      <span>Sign Out</span>
-                    </DropdownMenuItem>
-                  </div>
-                </DropdownMenuContent>
-              </DropdownMenu> : <Button onClick={login} variant="outline" size="sm">
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              )
+            ) : (
+              <Button onClick={login} variant="outline" size="sm">
                 Log In
-              </Button>}
+              </Button>
+            )}
           </div>
         </div>
       </header>
