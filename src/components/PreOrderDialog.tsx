@@ -141,7 +141,7 @@ const PreOrderDialog = ({
         </div>
         
         <div className="mt-4 text-center">
-          <Button onClick={handlePreOrder} disabled={!selectedTier} className="bg-cyan-400 text-black hover:bg-cyan-300 font-exo font-semibold px-8 py-3 disabled:opacity-50 disabled:cursor-not-allowed">
+          <Button onClick={handlePreOrder} disabled={!selectedTier} className="bg-primary text-primary-foreground hover:bg-primary/90 hover:ring-1 hover:ring-primary/30 hover:shadow-lg hover:shadow-primary/20 font-exo font-semibold px-8 py-3 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300">
             {selectedTier ? 'Pre-Order Now' : 'Select a Package'}
           </Button>
           <p className="text-xs text-slate-400 mt-3">Secure payment processing</p>
