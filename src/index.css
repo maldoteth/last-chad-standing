@@ -176,3 +176,50 @@ div[style*="background"]:has([data-testid="privy-modal"]) {
   background: #000000 !important;
 }
 
+/* Force white text on all Privy text elements */
+[data-privy-modal] p,
+[data-privy-modal] span,
+[data-privy-modal] div,
+[data-privy-modal] a,
+[data-privy-modal] button,
+[data-privy-modal] label,
+[data-privy-modal] h1,
+[data-privy-modal] h2,
+[data-privy-modal] h3,
+[data-privy-modal] h4,
+[data-privy-modal] h5,
+[data-privy-modal] h6,
+[data-testid="privy-modal"] p,
+[data-testid="privy-modal"] span,
+[data-testid="privy-modal"] div,
+[data-testid="privy-modal"] a,
+[data-testid="privy-modal"] button,
+[data-testid="privy-modal"] label,
+[data-testid="privy-modal"] h1,
+[data-testid="privy-modal"] h2,
+[data-testid="privy-modal"] h3,
+[data-testid="privy-modal"] h4,
+[data-testid="privy-modal"] h5,
+[data-testid="privy-modal"] h6,
+[data-privy-dialog-content] p,
+[data-privy-dialog-content] span,
+[data-privy-dialog-content] div,
+[data-privy-dialog-content] a,
+[data-privy-dialog-content] button,
+[data-privy-dialog-content] label,
+[data-privy-dialog-content] h1,
+[data-privy-dialog-content] h2,
+[data-privy-dialog-content] h3,
+[data-privy-dialog-content] h4,
+[data-privy-dialog-content] h5,
+[data-privy-dialog-content] h6 {
+  color: #ffffff !important;
+}
+
+/* Override inline text color styles */
+[data-privy-modal] [style*="color"],
+[data-testid="privy-modal"] [style*="color"],
+[data-privy-dialog-content] [style*="color"] {
+  color: #ffffff !important;
+}
+
