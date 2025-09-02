@@ -10,6 +10,8 @@ import Blog from "./pages/Blog";
 import Game from "./pages/Game";
 import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
+import PreOrderSuccess from "./pages/PreOrderSuccess";
+import PreOrderCancel from "./pages/PreOrderCancel";
 import { AdminLogin } from "./components/AdminLogin";
 
 const queryClient = new QueryClient();
@@ -26,6 +28,8 @@ const App = () => (
           <Route path="/blog" element={<Blog />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/preorder-success" element={<PreOrderSuccess />} />
+          <Route path="/preorder-cancel" element={<PreOrderCancel />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

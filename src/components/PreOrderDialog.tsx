@@ -70,23 +70,38 @@ const PreOrderDialog = ({ children, open: externalOpen, onOpenChange: externalOn
     return () => subscription.unsubscribe();
   }, []);
 
-  const handlePreOrder = () => {
+  const handlePreOrder = async () => {
     if (!selectedTier) return;
 
-    // Check if user is logged in
-    if (!user) {
+    try {
       toast({
-        title: "Login Required",
-        description: "Please log in to continue with your pre-order.",
+        title: "Processing...",
+        description: "Redirecting to checkout...",
+      });
+
+      const { data, error } = await supabase.functions.invoke('create-preorder-checkout', {
+        body: { tierId: selectedTier }
+      });
+
+      if (error) {
+        throw error;
+      }
+
+      if (data.url) {
+        // Open Stripe checkout in a new tab
+        window.open(data.url, '_blank');
+        setIsOpen(false);
+      } else {
+        throw new Error('No checkout URL returned');
+      }
+    } catch (error) {
+      console.error('Pre-order error:', error);
+      toast({
+        title: "Error",
+        description: error.message || "Failed to process pre-order. Please try again.",
         variant: "destructive"
       });
-      return;
     }
-
-    toast({
-      title: "Coming Soon!",
-    });
-    setIsOpen(false);
   };
 
   const contentClassName = "bg-gradient-to-br from-gray-900 via-black to-gray-800 border border-gray-700/50 backdrop-blur-md text-white shadow-2xl before:absolute before:inset-0 before:bg-gradient-to-br before:from-gray-800/20 before:via-transparent before:to-gray-900/30 before:pointer-events-none";
