@@ -2613,12 +2613,17 @@ const Game = () => {
                           <div className="w-12 h-12 rounded-full overflow-hidden">
                             <img src={player.image} alt={player.name} className="w-full h-full object-cover" />
                           </div>
-                          <div className="flex-1 min-w-0">
-                            <div className="flex items-center justify-between">
-                               <p className="text-sm md:text-xl font-semibold text-white">{player.name}</p>
-                               {renderMarketplacePrices(player, getMarketplacePrices, isMobile, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
-                            </div>
-                          </div>
+                           <div className="flex-1 min-w-0">
+                             <div className="flex items-center justify-between">
+                                <div>
+                                  <p className="text-sm md:text-xl font-semibold text-white">{player.name}</p>
+                                  <p className={`text-xs ${player.trend === 'up' ? 'text-green-400' : 'text-red-400'}`}>
+                                    {player.trend === 'up' ? '+' : ''}{(((player.price - player.lastSale) / player.lastSale) * 100).toFixed(1)}%
+                                  </p>
+                                </div>
+                                {renderMarketplacePrices(player, getMarketplacePrices, isMobile, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
+                             </div>
+                           </div>
                         </div>)}
                     </div>
                     
