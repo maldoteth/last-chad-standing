@@ -176,7 +176,7 @@ div[style*="background"]:has([data-testid="privy-modal"]) {
   background: #000000 !important;
 }
 
-/* Force white text on all Privy text elements */
+/* Force white text on all Privy text elements with maximum specificity */
 [data-privy-modal] p,
 [data-privy-modal] span,
 [data-privy-modal] div,
@@ -212,14 +212,66 @@ div[style*="background"]:has([data-testid="privy-modal"]) {
 [data-privy-dialog-content] h3,
 [data-privy-dialog-content] h4,
 [data-privy-dialog-content] h5,
-[data-privy-dialog-content] h6 {
+[data-privy-dialog-content] h6,
+.privy-modal p,
+.privy-modal span,
+.privy-modal div,
+.privy-modal a,
+.privy-modal button,
+.privy-modal label,
+[class*="privy-modal"] p,
+[class*="privy-modal"] span,
+[class*="privy-modal"] div,
+[class*="privy-modal"] a,
+[class*="privy-modal"] button,
+[class*="privy-modal"] label,
+[id*="privy-modal"] p,
+[id*="privy-modal"] span,
+[id*="privy-modal"] div,
+[id*="privy-modal"] a,
+[id*="privy-modal"] button,
+[id*="privy-modal"] label,
+div[role="dialog"][aria-modal="true"] p,
+div[role="dialog"][aria-modal="true"] span,
+div[role="dialog"][aria-modal="true"] div,
+div[role="dialog"][aria-modal="true"] a,
+div[role="dialog"][aria-modal="true"] button,
+div[role="dialog"][aria-modal="true"] label {
+  color: #ffffff !important;
+  text-decoration-color: #ffffff !important;
+}
+
+/* Override inline text color styles with ultra-high specificity */
+[data-privy-modal] [style*="color"],
+[data-testid="privy-modal"] [style*="color"],
+[data-privy-dialog-content] [style*="color"],
+.privy-modal [style*="color"],
+[class*="privy-modal"] [style*="color"],
+[id*="privy-modal"] [style*="color"],
+div[role="dialog"][aria-modal="true"] [style*="color"] {
   color: #ffffff !important;
 }
 
-/* Override inline text color styles */
-[data-privy-modal] [style*="color"],
-[data-testid="privy-modal"] [style*="color"],
-[data-privy-dialog-content] [style*="color"] {
+/* Target specific Privy text classes that might exist */
+[data-privy-modal] .text-black,
+[data-privy-modal] .text-gray-900,
+[data-privy-modal] .text-gray-800,
+[data-privy-modal] .text-gray-700,
+[data-testid="privy-modal"] .text-black,
+[data-testid="privy-modal"] .text-gray-900,
+[data-testid="privy-modal"] .text-gray-800,
+[data-testid="privy-modal"] .text-gray-700,
+[data-privy-dialog-content] .text-black,
+[data-privy-dialog-content] .text-gray-900,
+[data-privy-dialog-content] .text-gray-800,
+[data-privy-dialog-content] .text-gray-700 {
+  color: #ffffff !important;
+}
+
+/* Force all text nodes to be white */
+[data-privy-modal] *:not(input):not(textarea),
+[data-testid="privy-modal"] *:not(input):not(textarea),
+[data-privy-dialog-content] *:not(input):not(textarea) {
   color: #ffffff !important;
 }
 
