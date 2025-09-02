@@ -73,6 +73,15 @@ const PreOrderDialog = ({ children, open: externalOpen, onOpenChange: externalOn
   const handlePreOrder = async () => {
     if (!selectedTier) return;
 
+    if (!user) {
+      toast({
+        title: "Login Required",
+        description: "Please log in to your account before making a pre-order.",
+        variant: "destructive"
+      });
+      return;
+    }
+
     try {
       toast({
         title: "Processing...",
