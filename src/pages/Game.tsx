@@ -5187,7 +5187,7 @@ const Game = () => {
           <DrawerContent className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
             <DrawerHeader>
               <DrawerTitle className="text-white text-center">
-                {selectedPlayer ? `Buy ${selectedPlayer.name}` : 'Buy Coins'}
+                {selectedPlayer ? `Buy ${selectedPlayer.name}` : 'Buy Crypto'}
               </DrawerTitle>
             </DrawerHeader>
             <div className="flex flex-col space-y-3 p-4">
@@ -5202,14 +5202,14 @@ const Game = () => {
                 Buy with Card
               </Button>
               <Button variant="outline" className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 hover:text-white transition-all duration-300" onClick={() => {
-            toast({
-              title: "Coin Payment",
-              description: "Coin payment functionality coming soon!"
-            });
+             toast({
+               title: "Crypto Payment",
+               description: "Crypto payment functionality coming soon!"
+             });
             setBuyDialogOpen(false);
           }}>
                 <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4 mr-2" />
-                Buy with Coins
+                 Buy with Crypto
               </Button>
               <Button variant="ghost" className="text-white hover:bg-white/10 hover:text-white transition-all duration-300" onClick={() => setBuyDialogOpen(false)}>
                 Cancel
@@ -5220,12 +5220,12 @@ const Game = () => {
           <DialogContent className="sm:max-w-md bg-black/10 backdrop-blur-md border border-white/20 text-white">
              <DialogHeader>
                <DialogTitle className="text-white">
-                 {selectedPlayer ? `Buy ${selectedPlayer.name}` : 'Buy Coins'}
+                 {selectedPlayer ? `Buy ${selectedPlayer.name}` : 'Buy Crypto'}
                </DialogTitle>
                <DialogDescription className="text-white/80">
                  {selectedPlayer 
                    ? 'Choose your payment method to purchase this player.'
-                   : 'Choose your payment method to purchase coins.'
+                   : 'Choose your payment method to purchase crypto.'
                  }
                </DialogDescription>
              </DialogHeader>
@@ -5241,14 +5241,14 @@ const Game = () => {
                 Buy with Card
               </Button>
               <Button variant="outline" className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 hover:text-white transition-all duration-300" onClick={() => {
-            toast({
-              title: "Coin Payment",
-              description: "Coin payment functionality coming soon!"
-            });
+             toast({
+               title: "Crypto Payment",
+               description: "Crypto payment functionality coming soon!"
+             });
             setBuyDialogOpen(false);
           }}>
                 <img src="/lovable-uploads/aa517b6d-c98b-4876-9f58-97246b49844b.png" alt="LCS Coin" className="w-4 h-4 mr-2" />
-                Buy with Coins
+                Buy with Crypto
               </Button>
               <Button variant="ghost" className="text-white hover:bg-white/10 hover:text-white transition-all duration-300" onClick={() => setBuyDialogOpen(false)}>
                 Cancel
