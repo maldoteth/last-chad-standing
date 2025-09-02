@@ -1535,9 +1535,9 @@ const Game = () => {
 
                 {/* Categories */}
                 <div className="space-y-4">
-{/* Fighters Category */}
-                  {(selectedCategory === "all" || selectedCategory === "skins") && <Card className="bg-gradient-to-br from-gray-750 via-gray-700 to-gray-650 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-gray-650/10 via-gray-400/5 to-gray-750/20" />
+                  {/* Fighters Category */}
+                  {(selectedCategory === "all" || selectedCategory === "skins") && <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                     <div className="absolute inset-0" style={{
                 backgroundImage: `
                         linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
@@ -1660,9 +1660,9 @@ const Game = () => {
                      </CardContent>
                    </Card>}
 
-{/* Accessories Category */}
-                   {(selectedCategory === "all" || selectedCategory === "accessories") && <Card className="bg-gradient-to-br from-gray-800 via-gray-750 to-gray-700 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-gray-700/15 via-gray-500/8 to-gray-800/25" />
+                   {/* Accessories Category */}
+                   {(selectedCategory === "all" || selectedCategory === "accessories") && <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                     <div className="absolute inset-0" style={{
                 backgroundImage: `
                         linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
@@ -1781,9 +1781,9 @@ const Game = () => {
                      </CardContent>
                    </Card>}
 
-{/* Emotes Category */}
-                   {(selectedCategory === "all" || selectedCategory === "emotes") && <Card className="bg-gradient-to-br from-gray-900 via-gray-850 to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-gray-800/25 via-gray-700/15 to-gray-900/35" />
+                   {/* Emotes Category */}
+                   {(selectedCategory === "all" || selectedCategory === "emotes") && <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                     <div className="absolute inset-0" style={{
                 backgroundImage: `
                         linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
@@ -1902,9 +1902,9 @@ const Game = () => {
                       </CardContent>
                     </Card>}
 
-{/* Packs Category */}
-                     {(selectedCategory === "all" || selectedCategory === "packs") && <Card className={`bg-gradient-to-br from-gray-950 via-gray-900 to-gray-900 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden ${packsShaking ? 'animate-shake' : ''}`}>
-                      <div className="absolute inset-0 bg-gradient-to-br from-gray-900/30 via-gray-800/20 to-gray-950/40" />
+                     {/* Packs Category */}
+                     {(selectedCategory === "all" || selectedCategory === "packs") && <Card className={`bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden ${packsShaking ? 'animate-shake' : ''}`}>
+                      <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                       <div className="absolute inset-0" style={{
                 backgroundImage: `
                           linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
@@ -3276,9 +3276,9 @@ const Game = () => {
 
                 {/* Categories */}
                 <div className="space-y-6">
-{/* Fighters Category */}
-                  {(selectedCategory === "all" || selectedCategory === "skins") && <Card className="bg-gradient-to-br from-gray-750 via-gray-700 to-gray-650 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-gray-650/10 via-gray-400/5 to-gray-750/20" />
+                  {/* Fighters Category */}
+                  {(selectedCategory === "all" || selectedCategory === "skins") && <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                     <div className="absolute inset-0" style={{
                       backgroundImage: `
                         linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
@@ -3383,9 +3383,9 @@ const Game = () => {
                        </CardContent>
                    </Card>}
 
-{/* Accessories Category */}
-                   {(selectedCategory === "all" || selectedCategory === "accessories") && <Card className="bg-gradient-to-br from-gray-800 via-gray-750 to-gray-700 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-gray-700/15 via-gray-500/8 to-gray-800/25" />
+                   {/* Accessories Category */}
+                   {(selectedCategory === "all" || selectedCategory === "accessories") && <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                     <div className="absolute inset-0" style={{
                       backgroundImage: `
                         linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
@@ -3490,9 +3490,9 @@ const Game = () => {
                        </CardContent>
                    </Card>}
 
-{/* Mobility Category */}
-                   {(selectedCategory === "all" || selectedCategory === "mobility") && <Card className={`bg-gradient-to-br from-gray-850 via-gray-800 to-gray-750 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden transition-transform duration-300 ${mobilityShaking ? 'animate-[shake_0.5s_ease-in-out]' : ''}`}>
-                     <div className="absolute inset-0 bg-gradient-to-br from-gray-750/20 via-gray-600/10 to-gray-850/30" />
+                    {/* Mobility Category */}
+                   {(selectedCategory === "all" || selectedCategory === "mobility") && <Card className={`bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden transition-transform duration-300 ${mobilityShaking ? 'animate-[shake_0.5s_ease-in-out]' : ''}`}>
+                     <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                      <div className="absolute inset-0" style={{
                       backgroundImage: `
                          linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
@@ -3577,9 +3577,9 @@ const Game = () => {
                        </CardContent>
                    </Card>}
 
-{/* Emotes Category */}
-                   {(selectedCategory === "all" || selectedCategory === "emotes") && <Card className="bg-gradient-to-br from-gray-900 via-gray-850 to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
-                     <div className="absolute inset-0 bg-gradient-to-br from-gray-800/25 via-gray-700/15 to-gray-900/35" />
+                   {/* Emotes Category */}
+                   {(selectedCategory === "all" || selectedCategory === "emotes") && <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                     <div className="absolute inset-0" style={{
                       backgroundImage: `
                         linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
@@ -3684,9 +3684,9 @@ const Game = () => {
                        </CardContent>
                    </Card>}
 
-{/* Packs Category */}
-                    {(selectedCategory === "all" || selectedCategory === "packs") && <Card className={`bg-gradient-to-br from-gray-950 via-gray-900 to-gray-900 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden ${packsShaking ? 'animate-shake' : ''}`}>
-                     <div className="absolute inset-0 bg-gradient-to-br from-gray-900/30 via-gray-800/20 to-gray-950/40" />
+                    {/* Packs Category */}
+                    {(selectedCategory === "all" || selectedCategory === "packs") && <Card className={`bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden ${packsShaking ? 'animate-shake' : ''}`}>
+                     <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                      <div className="absolute inset-0" style={{
                       backgroundImage: `
                          linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
