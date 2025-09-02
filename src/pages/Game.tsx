@@ -1278,6 +1278,9 @@ const Game = () => {
                               <p className="text-xs leading-none text-gray-200">
                                 {user?.email?.address}
                               </p>
+                              <p className="text-xs leading-none text-gray-200">
+                                Coin Balance: {userBalance?.coins || 0}
+                              </p>
                             </div>
                           </div>
                         </div>
@@ -1329,6 +1332,9 @@ const Game = () => {
                             </p>
                             <p className="text-xs leading-none text-gray-200">
                               {user?.email?.address}
+                            </p>
+                            <p className="text-xs leading-none text-gray-200">
+                              Coin Balance: {userBalance?.coins || 0}
                             </p>
                           </div>
                         </div>
