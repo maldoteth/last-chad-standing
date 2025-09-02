@@ -3787,109 +3787,6 @@ const Game = () => {
                   </div>
                 </div>
 
-                {/* Market Analytics Dashboard */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-                  {/* Total Market Value Chart */}
-                  <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
-                    <div className="absolute inset-0" style={{
-                      backgroundImage: `
-                        linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
-                        linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
-                      `,
-                      backgroundSize: '4px 4px'
-                    }} />
-                    <CardHeader className="relative z-10">
-                      <CardTitle className="text-lg flex items-center space-x-2 text-white">
-                        <BarChart3 className="w-5 h-5" />
-                        <span>Total Market Value</span>
-                      </CardTitle>
-                      <CardDescription className="text-gray-300">
-                        <div className="flex items-center space-x-2">
-                          <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4" />
-                          <span className="text-xl font-bold text-white">{currentMarketValue.toLocaleString('en-US', {
-                              maximumFractionDigits: 0
-                            })}</span>
-                        </div>
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent className="relative z-10">
-                      <div className="h-48">
-                        <ResponsiveContainer width="100%" height="100%">
-                          <AreaChart data={marketValueData}>
-                            <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
-                            <XAxis dataKey="date" tick={{
-                              fontSize: 12,
-                              fill: 'rgba(255,255,255,0.7)'
-                            }} />
-                            <YAxis tick={{
-                              fontSize: 12,
-                              fill: 'rgba(255,255,255,0.7)'
-                            }} />
-                            <Tooltip labelStyle={{
-                              color: '#000'
-                            }} contentStyle={{
-                              backgroundColor: 'rgba(0,0,0,0.8)',
-                              border: '1px solid rgba(255,255,255,0.2)',
-                              borderRadius: '8px'
-                            }} formatter={value => [Number(value).toLocaleString('en-US', {
-                              minimumFractionDigits: 2,
-                              maximumFractionDigits: 2
-                            }), 'Market Value']} />
-                            <Area type="monotone" dataKey="value" stroke="hsl(var(--primary))" fill="hsl(var(--primary))" fillOpacity={0.3} strokeWidth={2} />
-                          </AreaChart>
-                        </ResponsiveContainer>
-                      </div>
-                    </CardContent>
-                  </Card>
-
-                  {/* Live Listings Chart */}
-                  <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
-                    <div className="absolute inset-0" style={{
-                      backgroundImage: `
-                        linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
-                        linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
-                      `,
-                      backgroundSize: '4px 4px'
-                    }} />
-                    <CardHeader className="relative z-10">
-                      <CardTitle className="text-lg flex items-center space-x-2 text-white">
-                        <LineChart className="w-5 h-5" />
-                        <span>Live Transfer Listings</span>
-                      </CardTitle>
-                      <CardDescription className="text-gray-300">
-                        <span className="text-xl font-bold text-white">{currentListings} active listings</span>
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent className="relative z-10">
-                      <div className="h-48">
-                        <ResponsiveContainer width="100%" height="100%">
-                          <AreaChart data={listingsData}>
-                            <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
-                            <XAxis dataKey="date" tick={{
-                              fontSize: 12,
-                              fill: 'rgba(255,255,255,0.7)'
-                            }} />
-                            <YAxis tick={{
-                              fontSize: 12,
-                              fill: 'rgba(255,255,255,0.7)'
-                            }} tickFormatter={value => Math.round(value).toString()} />
-                            <Tooltip labelStyle={{
-                              color: '#000'
-                            }} contentStyle={{
-                              backgroundColor: 'rgba(0,0,0,0.8)',
-                              border: '1px solid rgba(255,255,255,0.2)',
-                              borderRadius: '8px'
-                            }} formatter={value => [Math.round(Number(value)), 'Listings']} />
-                            <Area type="monotone" dataKey="listings" stroke="hsl(var(--primary))" fill="hsl(var(--primary))" fillOpacity={0.3} strokeWidth={2} />
-                          </AreaChart>
-                        </ResponsiveContainer>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
-
                 {/* Trending & Gainers Section */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
                   {/* Trending List */}
@@ -4012,6 +3909,109 @@ const Game = () => {
                             </div>
                           </div>
                         ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+
+                {/* Market Analytics Dashboard - Moved below top gainers */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                  {/* Total Market Value Chart */}
+                  <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
+                    <div className="absolute inset-0" style={{
+                      backgroundImage: `
+                        linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
+                        linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
+                      `,
+                      backgroundSize: '4px 4px'
+                    }} />
+                    <CardHeader className="relative z-10">
+                      <CardTitle className="text-lg flex items-center space-x-2 text-white">
+                        <BarChart3 className="w-5 h-5" />
+                        <span>Total Market Value</span>
+                      </CardTitle>
+                      <CardDescription className="text-gray-300">
+                        <div className="flex items-center space-x-2">
+                          <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4" />
+                          <span className="text-xl font-bold text-white">{currentMarketValue.toLocaleString('en-US', {
+                              maximumFractionDigits: 0
+                            })}</span>
+                        </div>
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent className="relative z-10">
+                      <div className="h-48">
+                        <ResponsiveContainer width="100%" height="100%">
+                          <AreaChart data={marketValueData}>
+                            <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
+                            <XAxis dataKey="date" tick={{
+                              fontSize: 12,
+                              fill: 'rgba(255,255,255,0.7)'
+                            }} />
+                            <YAxis tick={{
+                              fontSize: 12,
+                              fill: 'rgba(255,255,255,0.7)'
+                            }} />
+                            <Tooltip labelStyle={{
+                              color: '#000'
+                            }} contentStyle={{
+                              backgroundColor: 'rgba(0,0,0,0.8)',
+                              border: '1px solid rgba(255,255,255,0.2)',
+                              borderRadius: '8px'
+                            }} formatter={value => [Number(value).toLocaleString('en-US', {
+                              minimumFractionDigits: 2,
+                              maximumFractionDigits: 2
+                            }), 'Market Value']} />
+                            <Area type="monotone" dataKey="value" stroke="hsl(var(--primary))" fill="hsl(var(--primary))" fillOpacity={0.3} strokeWidth={2} />
+                          </AreaChart>
+                        </ResponsiveContainer>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  {/* Live Listings Chart */}
+                  <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
+                    <div className="absolute inset-0" style={{
+                      backgroundImage: `
+                        linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
+                        linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
+                      `,
+                      backgroundSize: '4px 4px'
+                    }} />
+                    <CardHeader className="relative z-10">
+                      <CardTitle className="text-lg flex items-center space-x-2 text-white">
+                        <LineChart className="w-5 h-5" />
+                        <span>Live Transfer Listings</span>
+                      </CardTitle>
+                      <CardDescription className="text-gray-300">
+                        <span className="text-xl font-bold text-white">{currentListings} active listings</span>
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent className="relative z-10">
+                      <div className="h-48">
+                        <ResponsiveContainer width="100%" height="100%">
+                          <AreaChart data={listingsData}>
+                            <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
+                            <XAxis dataKey="date" tick={{
+                              fontSize: 12,
+                              fill: 'rgba(255,255,255,0.7)'
+                            }} />
+                            <YAxis tick={{
+                              fontSize: 12,
+                              fill: 'rgba(255,255,255,0.7)'
+                            }} tickFormatter={value => Math.round(value).toString()} />
+                            <Tooltip labelStyle={{
+                              color: '#000'
+                            }} contentStyle={{
+                              backgroundColor: 'rgba(0,0,0,0.8)',
+                              border: '1px solid rgba(255,255,255,0.2)',
+                              borderRadius: '8px'
+                            }} formatter={value => [Math.round(Number(value)), 'Listings']} />
+                            <Area type="monotone" dataKey="listings" stroke="hsl(var(--primary))" fill="hsl(var(--primary))" fillOpacity={0.3} strokeWidth={2} />
+                          </AreaChart>
+                        </ResponsiveContainer>
                       </div>
                     </CardContent>
                   </Card>
