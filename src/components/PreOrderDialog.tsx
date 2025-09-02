@@ -68,7 +68,7 @@ const PreOrderDialog = ({ children, open: externalOpen, onOpenChange: externalOn
         {preOrderTiers.map(tier => (
           <GlowCard key={tier.id} className="cursor-pointer h-full !bg-none !border-none">
             <div 
-              className={`rounded-lg p-6 h-full min-h-[400px] flex flex-col transition-all duration-200 border ${
+              className={`rounded-lg p-6 h-full min-h-[400px] md:min-h-[500px] flex flex-col transition-all duration-200 border ${
                 selectedTier === tier.id 
                   ? 'bg-gradient-to-br from-cyan-500/20 via-cyan-400/10 to-transparent border-cyan-400/50' 
                   : 'bg-gradient-to-br from-gray-800/50 via-gray-900/50 to-black/50 border-gray-600/50'
