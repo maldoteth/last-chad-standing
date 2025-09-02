@@ -89,28 +89,107 @@ const addPrivyTabletStyles = () => {
 // Apply styles immediately
 addPrivyTabletStyles();
 
-// Set up mutation observer to re-apply styles when Privy modals are added
+// Aggressive hover effect override function
+const overridePrivyHoverEffects = () => {
+  const privyElements = document.querySelectorAll(`
+    [data-privy-modal] *, 
+    [data-testid="privy-modal"] *, 
+    [data-privy-dialog-content] *,
+    div[role="dialog"][aria-modal="true"] *
+  `);
+  
+  privyElements.forEach((element: any) => {
+    if (element.style) {
+      // Store original styles
+      const originalBg = element.style.backgroundColor || '#000000';
+      const originalColor = element.style.color || '#ffffff';
+      
+      // Override mouse events
+      element.addEventListener('mouseenter', (e: any) => {
+        e.stopPropagation();
+        if (element.style) {
+          element.style.backgroundColor = '#000000';
+          element.style.background = '#000000';
+          element.style.color = '#ffffff';
+          element.style.transition = 'none';
+          element.style.transform = 'none';
+          element.style.filter = 'none';
+        }
+      }, true);
+      
+      element.addEventListener('mouseleave', (e: any) => {
+        e.stopPropagation();
+        if (element.style) {
+          element.style.backgroundColor = originalBg;
+          element.style.color = originalColor;
+        }
+      }, true);
+      
+      element.addEventListener('mouseover', (e: any) => {
+        e.stopPropagation();
+        if (element.style) {
+          element.style.backgroundColor = '#000000';
+          element.style.background = '#000000';
+          element.style.color = '#ffffff';
+        }
+      }, true);
+    }
+  });
+};
+
+// Set up mutation observer to re-apply styles and override hover effects
 const observePrivyModals = () => {
   const observer = new MutationObserver((mutations) => {
+    let shouldReapply = false;
+    
     mutations.forEach((mutation) => {
+      // Check for new nodes
       mutation.addedNodes.forEach((node) => {
         if (node.nodeType === Node.ELEMENT_NODE) {
           const element = node as Element;
-          // Check if this is a Privy modal or contains one
           if (element.querySelector?.('[data-privy-modal], [data-testid="privy-modal"], .privy-modal') ||
               element.matches?.('[data-privy-modal], [data-testid="privy-modal"], .privy-modal')) {
-            // Re-apply styles with a slight delay to ensure DOM is ready
-            setTimeout(addPrivyTabletStyles, 50);
+            shouldReapply = true;
           }
         }
       });
+      
+      // Check for style attribute changes
+      if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+        const element = mutation.target as Element;
+        if (element.closest('[data-privy-modal], [data-testid="privy-modal"], [data-privy-dialog-content]')) {
+          // Force override inline styles that might be white
+          if (element instanceof HTMLElement && element.style) {
+            if (element.style.backgroundColor?.includes('white') || 
+                element.style.backgroundColor?.includes('#fff') ||
+                element.style.background?.includes('white') ||
+                element.style.background?.includes('#fff')) {
+              element.style.backgroundColor = '#000000';
+              element.style.background = '#000000';
+              element.style.color = '#ffffff';
+            }
+          }
+        }
+      }
     });
+    
+    if (shouldReapply) {
+      setTimeout(() => {
+        addPrivyTabletStyles();
+        overridePrivyHoverEffects();
+      }, 50);
+    }
   });
 
   observer.observe(document.body, {
     childList: true,
-    subtree: true
+    subtree: true,
+    attributes: true,
+    attributeFilter: ['style', 'class']
   });
+  
+  // Also run periodically to catch any dynamic changes
+  setInterval(overridePrivyHoverEffects, 1000);
 };
 
 // Start observing after DOM is loaded
