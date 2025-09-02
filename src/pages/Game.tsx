@@ -1145,7 +1145,7 @@ const Game = () => {
                   <span className="font-semibold text-sm lg:text-base">{userCoins.toLocaleString()}</span>
                 </div>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-40 bg-black/20 backdrop-blur-xl border border-white/10 shadow-2xl relative overflow-hidden z-50">
+              <DropdownMenuContent align="center" className="w-40 bg-black/20 backdrop-blur-xl border border-white/10 shadow-2xl relative overflow-hidden z-50">
                 {/* Liquid glass metallic background effects */}
                 <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-white/10" />
                 <div className="absolute inset-0" style={{
