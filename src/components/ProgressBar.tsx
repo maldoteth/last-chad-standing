@@ -13,10 +13,10 @@ export function ProgressBar({ xp, className }: ProgressBarProps) {
   return (
     <div className={`space-y-2 ${className}`}>
       <div className="flex justify-between items-center">
-        <span className="text-sm font-medium text-foreground">
+        <span className="text-sm font-medium text-white">
           Level {currentLevel.level} - {currentLevel.name}
         </span>
-        <span className="text-xs text-muted-foreground">
+        <span className="text-xs text-gray-200">
           {currentLevel.level >= 10 ? "10,000+ XP" : `${xp} XP`}
         </span>
       </div>
@@ -25,7 +25,7 @@ export function ProgressBar({ xp, className }: ProgressBarProps) {
         <>
           <Progress value={progress.percentage} className="h-2" />
           
-          <div className="flex justify-between items-center text-xs text-muted-foreground">
+          <div className="flex justify-between items-center text-xs text-gray-200">
             <span>{progress.current}/{progress.total} XP</span>
             <span>Next: Level {currentLevel.level + 1}</span>
           </div>
