@@ -1404,22 +1404,22 @@ const Game = () => {
                           </DrawerHeader>
                           <div className="px-4 pb-8 space-y-2">
                             <Button variant="ghost" onClick={() => setSelectedCategory("all")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "all" ? "bg-white/20" : ""}`}>
-                              All Categories
+                              ⚫ All
                             </Button>
                             <Button variant="ghost" onClick={() => setSelectedCategory("skins")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "skins" ? "bg-white/20" : ""}`}>
-                              Fighters
+                              👊 Fighters
                             </Button>
                             <Button variant="ghost" onClick={() => setSelectedCategory("accessories")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "accessories" ? "bg-white/20" : ""}`}>
-                              Accessories
+                              💎 Accessories
                             </Button>
                             <Button variant="ghost" onClick={() => setSelectedCategory("mobility")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "mobility" ? "bg-white/20" : ""}`}>
-                              Mobility
+                              🚗 Mobility
                             </Button>
                             <Button variant="ghost" onClick={() => setSelectedCategory("emotes")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "emotes" ? "bg-white/20" : ""}`}>
-                              Emotes
+                              💃 Emotes
                             </Button>
                             <Button variant="ghost" onClick={() => setSelectedCategory("packs")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedCategory === "packs" ? "bg-white/20" : ""}`}>
-                              Packs
+                              🎁 Packs
                             </Button>
                           </div>
                         </DrawerContent>
@@ -1431,22 +1431,22 @@ const Game = () => {
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
                           <DropdownMenuItem onClick={() => setSelectedCategory("all")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "all" ? "bg-white/20" : ""}`}>
-                            <span>All Categories</span>
+                            <span>⚫ All</span>
                           </DropdownMenuItem>
                           <DropdownMenuItem onClick={() => setSelectedCategory("skins")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "skins" ? "bg-white/20" : ""}`}>
-                            <span>Fighters</span>
+                            <span>👊 Fighters</span>
                           </DropdownMenuItem>
                           <DropdownMenuItem onClick={() => setSelectedCategory("accessories")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "accessories" ? "bg-white/20" : ""}`}>
-                            <span>Accessories</span>
+                            <span>💎 Accessories</span>
                           </DropdownMenuItem>
                           <DropdownMenuItem onClick={() => setSelectedCategory("mobility")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "mobility" ? "bg-white/20" : ""}`}>
-                            <span>Mobility</span>
+                            <span>🚗 Mobility</span>
                           </DropdownMenuItem>
                           <DropdownMenuItem onClick={() => setSelectedCategory("emotes")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "emotes" ? "bg-white/20" : ""}`}>
-                            <span>Emotes</span>
+                            <span>💃 Emotes</span>
                           </DropdownMenuItem>
                           <DropdownMenuItem onClick={() => setSelectedCategory("packs")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "packs" ? "bg-white/20" : ""}`}>
-                            <span>Packs</span>
+                            <span>🎁 Packs</span>
                           </DropdownMenuItem>
                         </DropdownMenuContent>
                       </DropdownMenu>}
