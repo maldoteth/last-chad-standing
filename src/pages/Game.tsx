@@ -1271,21 +1271,29 @@ const Game = () => {
                             <div className="text-2xl">
                               {profile?.avatar_url || '👤'}
                             </div>
-                            <div className="flex flex-col space-y-1">
-                              <p className="text-sm font-medium leading-none text-white">
-                                {loading ? "Loading profile..." : profile?.username || 'Profile Error'}
-                              </p>
-                              <p className="text-xs leading-none text-gray-200">
-                                {user?.email?.address}
-                              </p>
-                              <p className="text-xs leading-none text-gray-200">
-                                Coin Balance: 0
-                              </p>
-                            </div>
+                             <div className="flex flex-col space-y-1">
+                               <p className="text-sm font-medium leading-none text-white">
+                                 {loading ? "Loading profile..." : profile?.username || 'Profile Error'}
+                               </p>
+                               <p className="text-xs leading-none text-gray-200">
+                                 {user?.email?.address}
+                               </p>
+                             </div>
                           </div>
                         </div>
                         <div className="mb-4 border-t border-white/20 pt-4">
                           <ProgressBar xp={userBalance?.xp || 0} />
+                        </div>
+                        <div className="mb-4 border-t border-white/20 pt-4">
+                          <div className="flex items-center space-x-3">
+                            <div className="text-2xl">
+                              <Coins className="w-6 h-6 text-yellow-400" />
+                            </div>
+                            <div className="flex flex-col">
+                              <span className="text-sm font-medium text-white">Coin Balance</span>
+                              <span className="text-xs text-gray-200">0</span>
+                            </div>
+                          </div>
                         </div>
                         
                         <Button 
@@ -1326,22 +1334,30 @@ const Game = () => {
                           <div className="text-2xl">
                             {profile?.avatar_url || '👤'}
                           </div>
-                          <div className="flex flex-col space-y-1">
-                            <p className="text-sm font-medium leading-none text-white">
-                              {loading ? "Loading profile..." : profile?.username || 'Profile Error'}
-                            </p>
-                            <p className="text-xs leading-none text-gray-200">
-                              {user?.email?.address}
-                            </p>
-                            <p className="text-xs leading-none text-gray-200">
-                              Coin Balance: 0
-                            </p>
-                          </div>
+                           <div className="flex flex-col space-y-1">
+                             <p className="text-sm font-medium leading-none text-white">
+                               {loading ? "Loading profile..." : profile?.username || 'Profile Error'}
+                             </p>
+                             <p className="text-xs leading-none text-gray-200">
+                               {user?.email?.address}
+                             </p>
+                           </div>
                         </div>
                       </div>
-                      <div className="px-3 py-2 border-t border-white/20">
-                        <ProgressBar xp={userBalance?.xp || 0} />
-                      </div>
+                       <div className="px-3 py-2 border-t border-white/20">
+                         <ProgressBar xp={userBalance?.xp || 0} />
+                       </div>
+                       <div className="px-3 py-2 border-t border-white/20">
+                         <div className="flex items-center space-x-3">
+                           <div className="text-2xl">
+                             <Coins className="w-6 h-6 text-yellow-400" />
+                           </div>
+                           <div className="flex flex-col">
+                             <span className="text-sm font-medium text-white">Coin Balance</span>
+                             <span className="text-xs text-gray-200">0</span>
+                           </div>
+                         </div>
+                       </div>
                       
                       <DropdownMenuSeparator className="bg-white/20" />
                       
