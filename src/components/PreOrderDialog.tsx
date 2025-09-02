@@ -148,7 +148,7 @@ const PreOrderDialog = ({ children, open: externalOpen, onOpenChange: externalOn
         <Button 
           onClick={handlePreOrder} 
           disabled={!selectedTier} 
-          className="w-full bg-primary text-primary-foreground hover:bg-primary/90 hover:ring-1 hover:ring-primary/30 hover:shadow-lg hover:shadow-primary/20 font-exo font-semibold px-8 py-4 h-12 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
+          className="w-full bg-primary text-primary-foreground hover:bg-primary/90 hover:ring-1 hover:ring-primary/30 hover:shadow-lg hover:shadow-primary/20 hover:shadow-[0_0_20px_rgba(38,101,203,0.4)] font-exo font-semibold px-8 py-4 h-12 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
         >
           {selectedTier ? 'Pre-Order Now' : 'Select a Package'}
         </Button>
