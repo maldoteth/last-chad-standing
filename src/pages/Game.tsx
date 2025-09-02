@@ -1287,7 +1287,7 @@ const Game = () => {
                         <div className="mb-4 border-t border-white/20 pt-4">
                           <div className="flex items-center space-x-3">
                             <div className="text-2xl">
-                              <Coins className="w-6 h-6 text-yellow-400" />
+                              <img src="/lovable-uploads/fe5d4ef8-a585-4160-86a0-ab4fe59293d2.png" alt="Coin" className="w-6 h-6" />
                             </div>
                             <div className="flex flex-col">
                               <span className="text-sm font-medium text-white">Coin Balance</span>
@@ -1350,7 +1350,7 @@ const Game = () => {
                        <div className="px-3 py-2 border-t border-white/20">
                          <div className="flex items-center space-x-3">
                            <div className="text-2xl">
-                             <Coins className="w-6 h-6 text-yellow-400" />
+                             <img src="/lovable-uploads/fe5d4ef8-a585-4160-86a0-ab4fe59293d2.png" alt="Coin" className="w-6 h-6" />
                            </div>
                            <div className="flex flex-col">
                              <span className="text-sm font-medium text-white">Coin Balance</span>
