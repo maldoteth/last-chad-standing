@@ -80,6 +80,54 @@ export type Database = {
         }
         Relationships: []
       }
+      preorders: {
+        Row: {
+          amount: number
+          created_at: string
+          currency: string
+          email: string
+          id: string
+          payment_intent_id: string | null
+          product_id: string
+          status: string
+          stripe_customer_id: string | null
+          stripe_session_id: string
+          tier_id: string
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          amount: number
+          created_at?: string
+          currency?: string
+          email: string
+          id?: string
+          payment_intent_id?: string | null
+          product_id: string
+          status?: string
+          stripe_customer_id?: string | null
+          stripe_session_id: string
+          tier_id: string
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          currency?: string
+          email?: string
+          id?: string
+          payment_intent_id?: string | null
+          product_id?: string
+          status?: string
+          stripe_customer_id?: string | null
+          stripe_session_id?: string
+          tier_id?: string
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       store_items: {
         Row: {
           category: string
