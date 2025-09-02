@@ -22,15 +22,15 @@ const NotFound = () => {
           <WarningGraphic 
             width={300} 
             height={100} 
-            color="hsl(var(--primary))"
+            color="white"
             className="drop-shadow-lg" 
           />
         </div>
         
         <div className="space-y-4">
-          <h1 className="text-6xl font-bold text-foreground">404</h1>
-          <h2 className="text-2xl font-semibold text-foreground">Page Not Found</h2>
-          <p className="text-muted-foreground text-lg">
+          <h1 className="text-6xl font-bold text-white">404</h1>
+          <h2 className="text-2xl font-semibold text-white">Page Not Found</h2>
+          <p className="text-white text-lg">
             Oops! The page you're looking for doesn't exist or has been moved.
           </p>
           
@@ -54,7 +54,7 @@ const NotFound = () => {
           </div>
         </div>
         
-        <div className="mt-8 text-xs text-muted-foreground">
+        <div className="mt-8 text-xs text-white">
           Error Code: 404 • Route: {location.pathname}
         </div>
       </Card>
