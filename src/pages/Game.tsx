@@ -4057,22 +4057,22 @@ const Game = () => {
                               </DropdownMenuTrigger>
                               <DropdownMenuContent align="center" className="w-40 bg-black/10 backdrop-blur-md border border-white/20 text-white z-[9999]">
                                 <DropdownMenuItem onClick={() => setMarketplaceCategory("all")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceCategory === "all" ? "bg-white/20" : ""}`}>
-                                  <span>All Categories</span>
+                                  <span>⚫ All</span>
                                 </DropdownMenuItem>
                                 <DropdownMenuItem onClick={() => setMarketplaceCategory("fighters")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceCategory === "fighters" ? "bg-white/20" : ""}`}>
-                                  <span>Fighters</span>
+                                  <span>👊 Fighters</span>
                                 </DropdownMenuItem>
                                 <DropdownMenuItem onClick={() => setMarketplaceCategory("mobility")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceCategory === "mobility" ? "bg-white/20" : ""}`}>
-                                  <span>Mobility</span>
+                                  <span>🚗 Mobility</span>
                                 </DropdownMenuItem>
                                 <DropdownMenuItem onClick={() => setMarketplaceCategory("accessories")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceCategory === "accessories" ? "bg-white/20" : ""}`}>
-                                  <span>Accessories</span>
+                                  <span>💎 Accessories</span>
                                 </DropdownMenuItem>
                                 <DropdownMenuItem onClick={() => setMarketplaceCategory("emotes")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceCategory === "emotes" ? "bg-white/20" : ""}`}>
-                                  <span>Emotes</span>
+                                  <span>💃 Emotes</span>
                                 </DropdownMenuItem>
                                 <DropdownMenuItem onClick={() => setMarketplaceCategory("packs")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceCategory === "packs" ? "bg-white/20" : ""}`}>
-                                  <span>Packs</span>
+                                  <span>🎁 Packs</span>
                                 </DropdownMenuItem>
                                 </DropdownMenuContent>
                               </DropdownMenu>
