@@ -48,7 +48,7 @@ const getTierIcon = (xp: number): string => {
 };
 
 // Function to render marketplace prices (bid/ask)
-const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: string, itemType: string) => any, size: 'small' | 'medium' | 'large' = 'medium', onSellClick?: () => void, onBuyClick?: () => void) => {
+const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: string, itemType: string) => any, isMobile: boolean, size: 'small' | 'medium' | 'large' = 'medium', onSellClick?: () => void, onBuyClick?: () => void) => {
   const prices = getMarketplacePrices(player.name, 'player');
   const sizeClasses = {
     small: {
@@ -107,7 +107,7 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
         <PopoverContent 
           className="w-32 p-2 bg-black/90 backdrop-blur-md border border-white/20 text-white z-50" 
           align="end" 
-          side={useIsMobile() ? "bottom" : "top"}
+          side={isMobile ? "bottom" : "top"}
           sideOffset={8}
         >
           <div className="flex flex-col gap-1">
@@ -144,6 +144,7 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
     </div>;
 };
 const Game = () => {
+  const isMobile = useIsMobile();
   const [activeTab, setActiveTab] = useState("home");
   const [gainersTimeFilter, setGainersTimeFilter] = useState("daily");
   const [trendingTimeFilter, setTrendingTimeFilter] = useState("daily");
@@ -177,7 +178,6 @@ const Game = () => {
   const desktopMobilityCarouselRef = useRef<StoreCarouselRef>(null);
   const desktopEmotesCarouselRef = useRef<StoreCarouselRef>(null);
   const desktopPacksCarouselRef = useRef<StoreCarouselRef>(null);
-  const isMobile = useIsMobile();
   const {
     toast
   } = useToast();
@@ -2126,7 +2126,7 @@ const Game = () => {
                                       `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestBuyPrice)} buy` : ''}
                                   </p>
                                 </div>
-                                {renderMarketplacePrices(player, getMarketplacePrices, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
+                                {renderMarketplacePrices(player, getMarketplacePrices, isMobile, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
                               </div>
                             </div>
                           </div>
@@ -2194,7 +2194,7 @@ const Game = () => {
                                       `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestBuyPrice)} buy` : ''}
                                   </p>
                                 </div>
-                                {renderMarketplacePrices(player, getMarketplacePrices, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
+                                {renderMarketplacePrices(player, getMarketplacePrices, isMobile, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
                               </div>
                             </div>
                           </div>
@@ -2338,7 +2338,7 @@ const Game = () => {
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center justify-between">
                                <p className="text-sm md:text-xl font-semibold text-white">{player.name}</p>
-                              {renderMarketplacePrices(player, getMarketplacePrices, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
+                               {renderMarketplacePrices(player, getMarketplacePrices, isMobile, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
                             </div>
                           </div>
                         </div>)}
@@ -3883,7 +3883,7 @@ const Game = () => {
                                       `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestBuyPrice)} buy` : ''}
                                   </p>
                                 </div>
-                                {renderMarketplacePrices(player, getMarketplacePrices, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
+                                {renderMarketplacePrices(player, getMarketplacePrices, isMobile, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
                               </div>
                             </div>
                           </div>
@@ -3951,7 +3951,7 @@ const Game = () => {
                                       `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestBuyPrice)} buy` : ''}
                                   </p>
                                 </div>
-                                {renderMarketplacePrices(player, getMarketplacePrices, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
+                                {renderMarketplacePrices(player, getMarketplacePrices, isMobile, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
                               </div>
                             </div>
                           </div>
@@ -4158,7 +4158,7 @@ const Game = () => {
                                     {player.trend === 'up' ? '+' : ''}{(((player.price - player.lastSale) / player.lastSale) * 100).toFixed(1)}%
                                   </p>
                                 </div>
-                               {renderMarketplacePrices(player, getMarketplacePrices, 'large', () => handleSellClick(player), () => handleBuyClick(player))}
+                               {renderMarketplacePrices(player, getMarketplacePrices, isMobile, 'large', () => handleSellClick(player), () => handleBuyClick(player))}
                              </div>
                           </div>
                         </div>)}
@@ -4221,7 +4221,7 @@ const Game = () => {
                                       `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestBuyPrice)} buy` : ''}
                                   </p>
                                 </div>
-                                {renderMarketplacePrices(player, getMarketplacePrices, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
+                                {renderMarketplacePrices(player, getMarketplacePrices, isMobile, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
                               </div>
                             </div>
                           </div>
@@ -4289,7 +4289,7 @@ const Game = () => {
                                       `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestBuyPrice)} buy` : ''}
                                   </p>
                                 </div>
-                                {renderMarketplacePrices(player, getMarketplacePrices, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
+                                {renderMarketplacePrices(player, getMarketplacePrices, isMobile, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
                               </div>
                             </div>
                           </div>
