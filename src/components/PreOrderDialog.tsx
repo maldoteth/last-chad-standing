@@ -56,7 +56,10 @@ const PreOrderDialog = ({ children }: PreOrderDialogProps) => {
       <DialogTrigger asChild>
         {children}
       </DialogTrigger>
-      <DialogContent className="bg-black/90 border border-white/20 backdrop-blur-sm text-white max-w-4xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="bg-gradient-to-br from-gray-900 via-black to-gray-800 border border-gray-700/50 backdrop-blur-md text-white max-w-4xl max-h-[90vh] overflow-y-auto shadow-2xl relative">
+        {/* Liquid glass metallic background effects */}
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30 pointer-events-none" />
+        <div className="relative z-10">
         <DialogHeader>
           <DialogTitle className="font-exo text-2xl text-center text-white mb-6">
             Pre-Order Last Chad Standing
@@ -137,6 +140,7 @@ const PreOrderDialog = ({ children }: PreOrderDialogProps) => {
               className="h-8 opacity-80"
             />
           </div>
+        </div>
         </div>
       </DialogContent>
     </Dialog>
