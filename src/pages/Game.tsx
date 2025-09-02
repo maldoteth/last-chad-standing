@@ -4332,7 +4332,7 @@ const Game = () => {
                     
                      {visiblePlayers < filteredMarketplacePlayers.length && <div className="mt-6 text-center">
                          <Button variant="outline" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => setVisiblePlayers(prev => Math.min(prev + 10, filteredMarketplacePlayers.length))}>
-                           Load More Players ({filteredMarketplacePlayers.length - visiblePlayers} remaining)
+                           Load More
                          </Button>
                        </div>}
                   </CardContent>
