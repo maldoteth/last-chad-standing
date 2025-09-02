@@ -150,7 +150,7 @@ const PreOrderDialog = ({ children, open: externalOpen, onOpenChange: externalOn
           <Button
             onClick={handlePayWithCrypto}
             variant="outline"
-            className="w-full border-white/20 bg-white/5 text-white hover:bg-white/10 hover:border-white/30 font-exo font-semibold px-8 py-4 h-12 transition-all duration-300 flex items-center justify-center gap-3"
+            className="w-full border-white/20 bg-white/5 text-white hover:bg-white hover:text-black hover:border-white font-exo font-semibold px-8 py-4 h-12 transition-all duration-300 flex items-center justify-center gap-3"
           >
             <Coins className="w-5 h-5" />
             Pay with Crypto
