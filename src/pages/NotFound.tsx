@@ -1,5 +1,9 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { useEffect } from "react";
+import { WarningGraphic } from "@/components/ui/warning-graphic";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Home, ArrowLeft } from "lucide-react";
 
 const NotFound = () => {
   const location = useLocation();
@@ -12,14 +16,48 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">404</h1>
-        <p className="text-xl text-gray-600 mb-4">Oops! Page not found</p>
-        <a href="/" className="text-blue-500 hover:text-blue-700 underline">
-          Return to Home
-        </a>
-      </div>
+    <div className="min-h-screen bg-gradient-to-br from-background via-background/95 to-background/90 flex items-center justify-center p-4">
+      <Card className="max-w-md w-full bg-background/80 backdrop-blur-sm border-border/50 shadow-2xl p-8 text-center">
+        <div className="flex justify-center mb-8">
+          <WarningGraphic 
+            width={300} 
+            height={100} 
+            color="hsl(var(--primary))"
+            className="drop-shadow-lg" 
+          />
+        </div>
+        
+        <div className="space-y-4">
+          <h1 className="text-6xl font-bold text-foreground">404</h1>
+          <h2 className="text-2xl font-semibold text-foreground">Page Not Found</h2>
+          <p className="text-muted-foreground text-lg">
+            Oops! The page you're looking for doesn't exist or has been moved.
+          </p>
+          
+          <div className="pt-6 space-y-3">
+            <Link to="/" className="block">
+              <Button className="w-full" size="lg">
+                <Home className="w-4 h-4 mr-2" />
+                Return Home
+              </Button>
+            </Link>
+            
+            <Button 
+              variant="outline" 
+              size="lg" 
+              className="w-full"
+              onClick={() => window.history.back()}
+            >
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              Go Back
+            </Button>
+          </div>
+        </div>
+        
+        <div className="mt-8 text-xs text-muted-foreground">
+          Error Code: 404 • Route: {location.pathname}
+        </div>
+      </Card>
     </div>
   );
 };
