@@ -104,32 +104,75 @@
   }
 }
 
-/* Privy Modal Styling - Make popup black */
-[data-privy-modal] {
-  background-color: #000000 !important;
-}
-
-[data-privy-modal] * {
-  --privy-color-background: #000000 !important;
-  --privy-color-foreground: #ffffff !important;
-}
-
-/* Override Privy modal content */
+/* Comprehensive Privy Modal Styling - Force black theme */
+[data-privy-modal],
+[data-testid="privy-modal"],
+[data-privy-dialog-content],
+.privy-modal,
+[class*="privy-modal"],
+[id*="privy-modal"],
+div[role="dialog"][aria-modal="true"],
 iframe[src*="privy"] {
   background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+/* Target all Privy elements and override CSS variables */
+[data-privy-modal] *,
+[data-testid="privy-modal"] *,
+[data-privy-dialog-content] *,
+.privy-modal *,
+[class*="privy-modal"] *,
+[id*="privy-modal"] *,
+div[role="dialog"][aria-modal="true"] * {
+  --privy-color-background: #000000 !important;
+  --privy-color-foreground: #ffffff !important;
+  --privy-color-foreground-2: #ffffff !important;
+  --privy-color-foreground-3: #cccccc !important;
+  --privy-color-accent: #000000 !important;
+  --privy-color-success: #22c55e !important;
+  --privy-color-error: #ef4444 !important;
+  --privy-color-warning: #f59e0b !important;
+}
+
+/* Override Privy modal backgrounds with high specificity */
+[data-privy-modal] > div,
+[data-testid="privy-modal"] > div,
+[data-privy-dialog-content] > div,
+.privy-modal > div,
+[class*="privy-modal"] > div,
+[id*="privy-modal"] > div {
+  background-color: #000000 !important;
+  background: #000000 !important;
 }
 
 /* Target Privy modal overlay */
-div[style*="background-color"] {
+[data-testid="privy-modal-backdrop"],
+[data-privy-backdrop],
+div[style*="background-color"]:has([data-privy-modal]),
+div[style*="background"]:has([data-testid="privy-modal"]) {
   background-color: rgba(0, 0, 0, 0.8) !important;
+  background: rgba(0, 0, 0, 0.8) !important;
 }
 
-/* Additional Privy theming */
-.privy-modal, 
-[class*="privy-modal"],
-[id*="privy-modal"],
-[data-testid*="privy-modal"] {
+/* Force black on all Privy content containers */
+[data-privy-modal] div[style],
+[data-testid="privy-modal"] div[style],
+[data-privy-dialog-content] div[style] {
   background-color: #000000 !important;
-  color: #ffffff !important;
+  background: #000000 !important;
+}
+
+/* Override inline styles */
+[data-privy-modal] [style*="background-color"],
+[data-testid="privy-modal"] [style*="background-color"],
+[data-privy-dialog-content] [style*="background-color"] {
+  background-color: #000000 !important;
+}
+
+[data-privy-modal] [style*="background:"],
+[data-testid="privy-modal"] [style*="background:"],
+[data-privy-dialog-content] [style*="background:"] {
+  background: #000000 !important;
 }
 

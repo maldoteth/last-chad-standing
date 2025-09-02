@@ -9,7 +9,7 @@ const addPrivyTabletStyles = () => {
   const style = document.createElement('style');
   style.id = 'privy-tablet-styles';
   style.textContent = `
-    /* Comprehensive Privy modal tablet styles */
+    /* Comprehensive Privy modal tablet styles with black theme */
     @media (max-width: 1024px) {
       /* Target all possible Privy modal selectors */
       [data-privy-modal],
@@ -34,6 +34,9 @@ const addPrivyTabletStyles = () => {
         animation: slideUpFromBottom 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
         margin: 0 !important;
         box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3) !important;
+        background-color: #000000 !important;
+        background: #000000 !important;
+        color: #ffffff !important;
       }
       
       /* Target Privy modal containers */
@@ -123,8 +126,8 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       appId="cmetmshr8000gib0bakyp8zxa"
       config={{
         appearance: {
-          theme: 'dark',
-          accentColor: '#ffffff',
+          theme: 'light',
+          accentColor: '#000000',
           logo: undefined,
           showWalletLoginFirst: false,
           walletChainType: 'ethereum-only',
