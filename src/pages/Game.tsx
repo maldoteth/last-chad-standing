@@ -3829,7 +3829,134 @@ const Game = () => {
                   </Card>
                 </div>
 
-                {/* All Players List / Marketplace */}  
+                {/* Trending & Gainers Section */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                  {/* Trending List */}
+                  <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
+                    <div className="absolute inset-0" style={{
+                      backgroundImage: `
+                        linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
+                        linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
+                      `,
+                      backgroundSize: '4px 4px'
+                    }} />
+                    <CardHeader className="relative z-10">
+                      <div className="flex items-center justify-between mb-3">
+                        <CardTitle className="text-lg md:text-2xl flex items-center space-x-2 text-white">
+                          <span className="text-lg">🔥</span>
+                          <span>Trending</span>
+                        </CardTitle>
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        {['daily', 'weekly', 'monthly', 'all time'].map(period => <Button key={period} variant={trendingTimeFilter === period ? "secondary" : "ghost"} size="sm" onClick={() => setTrendingTimeFilter(period)} className={`text-xs px-3 py-1 h-7 ${trendingTimeFilter === period ? "bg-white/20 text-white border-white/30" : "bg-white/5 text-gray-300 hover:bg-white/10 hover:text-white"}`}>
+                            {period.charAt(0).toUpperCase() + period.slice(1)}
+                          </Button>)}
+                      </div>
+                    </CardHeader>
+                    <CardContent className="relative z-10">
+                      <div className="space-y-3">
+                        {trendingPlayers.map((player, idx) => (
+                          <div key={`desktop-trending-${idx}`} className="flex items-center space-x-3 p-3 bg-white/5 rounded-lg hover:bg-white/15 md:hover:bg-white/20 transition-all duration-300 cursor-pointer">
+                            <div className="w-12 h-12 rounded-full overflow-hidden">
+                              <img 
+                                src={player.image} 
+                                alt={player.name} 
+                                className="w-full h-full object-cover"
+                                loading={idx < 3 ? 'eager' : 'lazy'}
+                              />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center justify-between mb-1">
+                                <div className="flex-1 min-w-0">
+                                  <p className="text-sm font-semibold text-white">{player.name}</p>
+                                  <p className={`text-xs ${player.change >= 0 ? 'text-green-400' : 'text-red-400'}`}>
+                                    {player.change >= 0 ? '+' : ''}{formatNumberWithAbbreviation(player.change)}%{' '}
+                                    {getMarketplacePrices(player.name, 'fighter').bestSellPrice ? 
+                                      `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestSellPrice)} sell` : ''}{' '}
+                                    {getMarketplacePrices(player.name, 'fighter').bestBuyPrice ? 
+                                      `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestBuyPrice)} buy` : ''}
+                                  </p>
+                                </div>
+                                {renderMarketplacePrices(player, getMarketplacePrices, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  {/* Top Gainers List */}
+                  <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
+                    <div className="absolute inset-0" style={{
+                      backgroundImage: `
+                        linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
+                        linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
+                      `,
+                      backgroundSize: '4px 4px'
+                    }} />
+                    <CardHeader className="relative z-10">
+                      <div className="flex items-center justify-between mb-3">
+                        <CardTitle className="text-lg md:text-2xl flex items-center space-x-2 text-white">
+                          <ArrowUpRight className="w-5 h-5 text-green-400" />
+                          <span>Top Gainers</span>
+                        </CardTitle>
+                      </div>
+                      <div className="flex space-x-2">
+                        {[{
+                          key: "daily",
+                          label: "Daily"
+                        }, {
+                          key: "weekly",
+                          label: "Weekly"
+                        }, {
+                          key: "monthly",
+                          label: "Monthly"
+                        }, {
+                          key: "alltime",
+                          label: "All Time"
+                        }].map(filter => <Button key={filter.key} variant={gainersTimeFilter === filter.key ? "secondary" : "ghost"} size="sm" className={`text-xs ${gainersTimeFilter === filter.key ? "bg-white/20 text-white border-white/30" : "bg-white/5 text-gray-300 hover:bg-white/10 hover:text-white"}`} onClick={() => setGainersTimeFilter(filter.key)}>
+                            {filter.label}
+                          </Button>)}
+                      </div>
+                    </CardHeader>
+                    <CardContent className="relative z-10">
+                      <div className="space-y-3">
+                        {topGainers.map((player, idx) => (
+                          <div key={`desktop-gainers-${gainersTimeFilter}-${idx}`} className="flex items-center space-x-3 p-3 bg-white/5 rounded-lg hover:bg-white/15 md:hover:bg-white/20 transition-all duration-300 cursor-pointer">
+                            <div className="w-12 h-12 rounded-full overflow-hidden">
+                              <img 
+                                src={player.image} 
+                                alt={player.name} 
+                                className="w-full h-full object-cover"
+                                loading={idx < 3 ? 'eager' : 'lazy'}
+                              />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center justify-between mb-1">
+                                <div className="flex-1 min-w-0">
+                                  <p className="text-sm font-semibold text-white">{player.name}</p>
+                                  <p className={`text-xs ${player.change >= 0 ? 'text-green-400' : 'text-red-400'}`}>
+                                    {player.change >= 0 ? '+' : ''}{formatNumberWithAbbreviation(player.change)}%{' '}
+                                    {getMarketplacePrices(player.name, 'fighter').bestSellPrice ? 
+                                      `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestSellPrice)} sell` : ''}{' '}
+                                    {getMarketplacePrices(player.name, 'fighter').bestBuyPrice ? 
+                                      `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestBuyPrice)} buy` : ''}
+                                  </p>
+                                </div>
+                                {renderMarketplacePrices(player, getMarketplacePrices, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+
+                {/* All Players List / Marketplace - Moved below gamers */}
                 <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden mb-8">
                   <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                   <div className="absolute inset-0" style={{
