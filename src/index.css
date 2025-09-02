@@ -275,3 +275,35 @@ div[role="dialog"][aria-modal="true"] [style*="color"] {
   color: #ffffff !important;
 }
 
+/* Fix hover states - ensure readable text on hover */
+[data-privy-modal] button:hover,
+[data-privy-modal] a:hover,
+[data-privy-modal] div[role="button"]:hover,
+[data-privy-modal] [data-testid*="wallet"]:hover,
+[data-privy-modal] [data-testid*="sms"]:hover,
+[data-testid="privy-modal"] button:hover,
+[data-testid="privy-modal"] a:hover,
+[data-testid="privy-modal"] div[role="button"]:hover,
+[data-testid="privy-modal"] [data-testid*="wallet"]:hover,
+[data-testid="privy-modal"] [data-testid*="sms"]:hover,
+[data-privy-dialog-content] button:hover,
+[data-privy-dialog-content] a:hover,
+[data-privy-dialog-content] div[role="button"]:hover {
+  background-color: #333333 !important;
+  color: #ffffff !important;
+}
+
+/* Override hover background for clickable elements */
+[data-privy-modal] *:hover,
+[data-testid="privy-modal"] *:hover,
+[data-privy-dialog-content] *:hover {
+  background-color: #333333 !important;
+}
+
+/* Ensure hover text stays white */
+[data-privy-modal] *:hover:not(input):not(textarea),
+[data-testid="privy-modal"] *:hover:not(input):not(textarea),
+[data-privy-dialog-content] *:hover:not(input):not(textarea) {
+  color: #ffffff !important;
+}
+
