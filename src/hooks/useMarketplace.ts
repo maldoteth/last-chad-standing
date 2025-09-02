@@ -23,6 +23,82 @@ export interface MarketplacePrices {
   hasListings: boolean;
 }
 
+// Mock data based on top gamers from different time periods
+const createMockMarketplaceListings = (): MarketplaceListing[] => {
+  const mockUsers = ['user1', 'user2', 'user3', 'user4', 'user5'];
+  
+  // High-value players from trending data
+  const highValuePlayers = [
+    // All time top performers
+    { name: "Shane Sonny", price: 15000 },
+    { name: "White Base Vest", price: 16000 },
+    { name: "Lean Chad", price: 13500 },
+    { name: "Indi", price: 14200 },
+    { name: "Kayne Famooser", price: 12800 },
+    
+    // Monthly top performers
+    { name: "DJ Mouse", price: 9200 },
+    { name: "Alex Toosick", price: 8500 },
+    { name: "Tarragon Southslice", price: 8900 },
+    { name: "Ray Del Maestro", price: 9800 },
+    { name: "John Strictland", price: 10500 },
+    
+    // Weekly top performers
+    { name: "Silverborg", price: 7300 },
+    { name: "Based Chad", price: 6800 },
+    { name: "Leroy Girthy", price: 5900 },
+    { name: "Big Dawg", price: 6400 },
+    { name: "Zombie Chan", price: 7100 },
+    
+    // Daily top performers
+    { name: "The Irish King", price: 8500 },
+    { name: "Stani Eagle", price: 9100 },
+    { name: "Speed Buggy", price: 8900 },
+    { name: "Jonesy Bones", price: 7200 },
+    { name: "Latin Legend", price: 6800 }
+  ];
+
+  const listings: MarketplaceListing[] = [];
+  
+  highValuePlayers.forEach((player, index) => {
+    // Create high-value sell listings (10-25% above base price)
+    const sellPriceMultiplier = 1.1 + (Math.random() * 0.15);
+    const sellPrice = Math.round(player.price * sellPriceMultiplier);
+    
+    listings.push({
+      id: `sell-${index}`,
+      user_id: mockUsers[index % mockUsers.length],
+      item_id: player.name,
+      item_type: 'fighter',
+      listing_type: 'sell',
+      price: sellPrice,
+      quantity: 1,
+      status: 'active',
+      created_at: new Date(Date.now() - Math.random() * 86400000).toISOString(),
+      updated_at: new Date().toISOString()
+    });
+    
+    // Create competitive buy listings (5-15% below base price)
+    const buyPriceMultiplier = 0.85 + (Math.random() * 0.1);
+    const buyPrice = Math.round(player.price * buyPriceMultiplier);
+    
+    listings.push({
+      id: `buy-${index}`,
+      user_id: mockUsers[(index + 1) % mockUsers.length],
+      item_id: player.name,
+      item_type: 'fighter',
+      listing_type: 'buy',
+      price: buyPrice,
+      quantity: 1,
+      status: 'active',
+      created_at: new Date(Date.now() - Math.random() * 86400000).toISOString(),
+      updated_at: new Date().toISOString()
+    });
+  });
+  
+  return listings.sort((a, b) => b.price - a.price); // Sort by highest prices first
+};
+
 export const useMarketplace = () => {
   const [listings, setListings] = useState<MarketplaceListing[]>([]);
   const [loading, setLoading] = useState(true);
@@ -30,14 +106,9 @@ export const useMarketplace = () => {
 
   const fetchListings = async () => {
     try {
-      const { data, error } = await supabase
-        .from('marketplace_listings')
-        .select('*')
-        .eq('status', 'active')
-        .order('created_at', { ascending: false });
-
-      if (error) throw error;
-      setListings((data || []) as MarketplaceListing[]);
+      // Use mock data with high-value listings from trending players
+      const mockListings = createMockMarketplaceListings();
+      setListings(mockListings);
     } catch (error) {
       console.error('Error fetching marketplace listings:', error);
       toast.error('Failed to load marketplace data');
