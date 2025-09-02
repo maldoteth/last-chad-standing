@@ -66,7 +66,7 @@ const PreOrderDialog = ({ children }: PreOrderDialogProps) => {
         
         <div className="grid md:grid-cols-3 gap-6">
           {preOrderTiers.map(tier => (
-            <GlowCard key={tier.id} className="cursor-pointer h-full">
+            <GlowCard key={tier.id} className="cursor-pointer h-full !bg-none !border-none">
               <div 
                 className={`rounded-lg p-6 h-full min-h-[400px] flex flex-col transition-all duration-200 border ${
                   selectedTier === tier.id 
