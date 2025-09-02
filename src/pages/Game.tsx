@@ -631,6 +631,15 @@ const Game = () => {
   const allPlayers = [
     // Fighters
     {
+      name: "mal.eth",
+      team: "Crypto Warriors", 
+      position: "Elite",
+      itemType: "fighter",
+      price: 3200,
+      lastSale: 3000,
+      trend: "up",
+      image: "/lovable-uploads/ccf83582-74cf-469c-87ba-b50ffa5da6de.png"
+    }, {
       name: "Tarragon Southslice",
       team: "Energy Corps", 
       position: "Artillery",
