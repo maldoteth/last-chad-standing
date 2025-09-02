@@ -275,7 +275,32 @@ div[role="dialog"][aria-modal="true"] [style*="color"] {
   color: #ffffff !important;
 }
 
-/* Disable problematic hover effects on Privy login buttons */
+/* Completely disable all hover effects on Privy elements */
+[data-privy-modal] *:hover,
+[data-testid="privy-modal"] *:hover,
+[data-privy-dialog-content] *:hover {
+  background-color: initial !important;
+  background: initial !important;
+  color: initial !important;
+  filter: none !important;
+  transform: none !important;
+  transition: none !important;
+  pointer-events: auto !important;
+}
+
+/* Force specific button elements to maintain original state on hover */
+[data-privy-modal] button,
+[data-privy-modal] a,
+[data-privy-modal] div[role="button"],
+[data-testid="privy-modal"] button,
+[data-testid="privy-modal"] a,
+[data-testid="privy-modal"] div[role="button"],
+[data-privy-dialog-content] button,
+[data-privy-dialog-content] a,
+[data-privy-dialog-content] div[role="button"] {
+  transition: none !important;
+}
+
 [data-privy-modal] button:hover,
 [data-privy-modal] a:hover,
 [data-privy-modal] div[role="button"]:hover,
@@ -285,7 +310,10 @@ div[role="dialog"][aria-modal="true"] [style*="color"] {
 [data-privy-dialog-content] button:hover,
 [data-privy-dialog-content] a:hover,
 [data-privy-dialog-content] div[role="button"]:hover {
-  background-color: inherit !important;
-  color: inherit !important;
+  background-color: initial !important;
+  background: initial !important;
+  color: initial !important;
+  transform: none !important;
+  filter: none !important;
 }
 
