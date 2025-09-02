@@ -25,7 +25,7 @@ export const GlowCard = ({ children, className }: GlowCardProps) => {
     <div
       ref={cardRef}
       className={cn(
-        "relative overflow-hidden rounded-lg transition-all duration-300",
+        "relative overflow-hidden rounded-lg bg-gradient-to-br from-gray-800 via-gray-900 to-black border border-gray-600/50 transition-all duration-300",
         className
       )}
       onMouseMove={handleMouseMove}
