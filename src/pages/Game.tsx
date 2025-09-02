@@ -2261,22 +2261,22 @@ const Game = () => {
                              </DrawerHeader>
                              <div className="px-4 pb-8 space-y-2">
                                <Button variant="ghost" onClick={() => setMarketplaceCategory("all")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceCategory === "all" ? "bg-white/20" : ""}`}>
-                                 All Categories
+                                  ⚫ All
                                </Button>
                                 <Button variant="ghost" onClick={() => setMarketplaceCategory("fighters")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceCategory === "fighters" ? "bg-white/20" : ""}`}>
-                                  Fighters
+                                   👊 Fighters
                                 </Button>
                                 <Button variant="ghost" onClick={() => setMarketplaceCategory("mobility")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceCategory === "mobility" ? "bg-white/20" : ""}`}>
-                                  Mobility
+                                   🚗 Mobility
                                 </Button>
                                 <Button variant="ghost" onClick={() => setMarketplaceCategory("accessories")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceCategory === "accessories" ? "bg-white/20" : ""}`}>
-                                  Accessories
+                                   💎 Accessories
                                 </Button>
                                 <Button variant="ghost" onClick={() => setMarketplaceCategory("emotes")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceCategory === "emotes" ? "bg-white/20" : ""}`}>
-                                  Emotes
+                                   💃 Emotes
                                 </Button>
                                 <Button variant="ghost" onClick={() => setMarketplaceCategory("packs")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceCategory === "packs" ? "bg-white/20" : ""}`}>
-                                  Packs
+                                   🎁 Packs
                                 </Button>
                              </div>
                            </DrawerContent>
@@ -2309,16 +2309,16 @@ const Game = () => {
                              </DrawerHeader>
                              <div className="px-4 pb-8 space-y-2">
                                <Button variant="ghost" onClick={() => setMarketplaceSortBy("highest-price")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceSortBy === "highest-price" ? "bg-white/20" : ""}`}>
-                                 Highest Price
+                                  ⬆️ Highest Price
                                </Button>
                                <Button variant="ghost" onClick={() => setMarketplaceSortBy("lowest-price")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceSortBy === "lowest-price" ? "bg-white/20" : ""}`}>
-                                 Lowest Price
+                                  ⬇️ Lowest Price
                                </Button>
                                <Button variant="ghost" onClick={() => setMarketplaceSortBy("highest-gain")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceSortBy === "highest-gain" ? "bg-white/20" : ""}`}>
-                                 Highest % Gain
+                                  📈 Highest % Gain
                                </Button>
                                <Button variant="ghost" onClick={() => setMarketplaceSortBy("highest-loss")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceSortBy === "highest-loss" ? "bg-white/20" : ""}`}>
-                                 Highest % Loss
+                                  📉 Highest % Loss
                                </Button>
                              </div>
                            </DrawerContent>
@@ -2328,18 +2328,18 @@ const Game = () => {
                                <ArrowUpDown className="w-3 h-3" />
                              </Button>
                            </DropdownMenuTrigger>
-                           <DropdownMenuContent align="center" className="w-48 bg-black/10 backdrop-blur-md border border-white/20 text-white z-[9999]">
+                           <DropdownMenuContent align="center" className="w-36 bg-black/10 backdrop-blur-md border border-white/20 text-white z-[9999]">
                              <DropdownMenuItem onClick={() => setMarketplaceSortBy("highest-price")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceSortBy === "highest-price" ? "bg-white/20" : ""}`}>
-                               <span>Highest Price</span>
+                               <span>⬆️ Highest Price</span>
                              </DropdownMenuItem>
                              <DropdownMenuItem onClick={() => setMarketplaceSortBy("lowest-price")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceSortBy === "lowest-price" ? "bg-white/20" : ""}`}>
-                               <span>Lowest Price</span>
+                               <span>⬇️ Lowest Price</span>
                              </DropdownMenuItem>
                              <DropdownMenuItem onClick={() => setMarketplaceSortBy("highest-gain")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceSortBy === "highest-gain" ? "bg-white/20" : ""}`}>
-                               <span>Highest % Gain</span>
+                               <span>📈 Highest % Gain</span>
                              </DropdownMenuItem>
                              <DropdownMenuItem onClick={() => setMarketplaceSortBy("highest-loss")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceSortBy === "highest-loss" ? "bg-white/20" : ""}`}>
-                               <span>Highest % Loss</span>
+                               <span>📉 Highest % Loss</span>
                              </DropdownMenuItem>
                            </DropdownMenuContent>
                          </DropdownMenu>}
@@ -4090,16 +4090,16 @@ const Game = () => {
                                    </DrawerHeader>
                                    <div className="px-4 pb-8 space-y-2">
                                      <Button variant="ghost" onClick={() => setMarketplaceSortBy("highest-price")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceSortBy === "highest-price" ? "bg-white/20" : ""}`}>
-                                       Highest Price
+                                        ⬆️ Highest Price
                                      </Button>
                                      <Button variant="ghost" onClick={() => setMarketplaceSortBy("lowest-price")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceSortBy === "lowest-price" ? "bg-white/20" : ""}`}>
-                                       Lowest Price
+                                        ⬇️ Lowest Price
                                      </Button>
                                      <Button variant="ghost" onClick={() => setMarketplaceSortBy("highest-gain")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceSortBy === "highest-gain" ? "bg-white/20" : ""}`}>
-                                       Highest % Gain
+                                        📈 Highest % Gain
                                      </Button>
                                      <Button variant="ghost" onClick={() => setMarketplaceSortBy("highest-loss")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceSortBy === "highest-loss" ? "bg-white/20" : ""}`}>
-                                       Highest % Loss
+                                        📉 Highest % Loss
                                      </Button>
                                    </div>
                                  </DrawerContent>
