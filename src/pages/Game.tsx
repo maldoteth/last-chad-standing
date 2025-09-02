@@ -903,11 +903,7 @@ const Game = () => {
                             <Info className="w-4 h-4 mr-2" />
                             How to play
                           </Button>
-                          <Button variant="secondary" size="default" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 transition-all duration-300" onClick={() => toast({
-                      title: "Coming Soon",
-                      description: "The game will be available soon!",
-                      duration: 4200
-                    })}>
+                          <Button variant="secondary" size="default" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 transition-all duration-300" onClick={() => setIsPreOrderOpen(true)}>
                             <Play className="w-4 h-4 mr-2" />
                             Play now
                           </Button>
@@ -2969,11 +2965,7 @@ const Game = () => {
                           <Info className="w-4 h-4 mr-2" />
                           How to play
                         </Button>
-                        <Button variant="secondary" size="default" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 transition-all duration-300" onClick={() => toast({
-                          title: "Coming Soon",
-                          description: "The game will be available soon!",
-                          duration: 4200
-                        })}>
+                        <Button variant="secondary" size="default" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 transition-all duration-300" onClick={() => setIsPreOrderOpen(true)}>
                           <Play className="w-4 h-4 mr-2" />
                           Play now
                         </Button>
