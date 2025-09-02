@@ -27,7 +27,6 @@ import { ResponsiveContainer, LineChart as RechartsLineChart, Line, XAxis, YAxis
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import cyberWarriorSkin from "@/assets/cyber-warrior-skin.png";
 import StoreCarousel, { StoreCarouselRef } from "@/components/StoreCarousel";
-import PreOrderDialog from "@/components/PreOrderDialog";
 const irishKingSkin = "/lovable-uploads/5c3f060f-4c5f-412b-8f27-eb1bebd3dd7d.png";
 const staniEagleSkin = "/lovable-uploads/37f256dc-415c-4032-82ad-db63f676284d.png";
 const bonesSkin = "/lovable-uploads/660b5122-5ce8-4f6e-af72-2c607d47ef44.png";
@@ -77,11 +76,10 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
     // Generate mock bid/ask prices when no real listings exist
     const mockSellPrice = Math.round(player.price * 1.15);
     const mockBuyPrice = Math.round(player.price * 0.85);
-    
+
     // Generate mock 24hr change (random between -15% to +15%)
-    const mockChange = (Math.random() * 30 - 15);
+    const mockChange = Math.random() * 30 - 15;
     const isPositive = mockChange > 0;
-    
     return <div className="flex items-center justify-end md:justify-between md:gap-4 rounded-lg p-3 min-w-[140px]">
       <div className="flex flex-col items-end md:flex-row md:items-center md:gap-4">
         <div className="flex items-center gap-1 mb-1 md:mb-0 justify-start">
@@ -97,11 +95,7 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
       
       {isMobile ? <Drawer>
         <DrawerTrigger asChild>
-          <Button 
-            size="icon"
-            variant="ghost" 
-            className="h-8 w-8 bg-transparent hover:bg-transparent"
-          >
+          <Button size="icon" variant="ghost" className="h-8 w-8 bg-transparent hover:bg-transparent">
             <ArrowRightLeft className="w-4 h-4" />
           </Button>
         </DrawerTrigger>
@@ -110,53 +104,26 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
             <DrawerTitle className="text-center">Trade Options</DrawerTitle>
           </DrawerHeader>
           <div className="px-4 pb-8 space-y-2">
-            <Button 
-              variant="ghost"
-              className="w-full justify-center text-green-400 border border-green-400/30 hover:bg-green-400/10"
-              onClick={() => onBuyClick?.()}
-            >
+            <Button variant="ghost" className="w-full justify-center text-green-400 border border-green-400/30 hover:bg-green-400/10" onClick={() => onBuyClick?.()}>
               Buy
             </Button>
-            <Button 
-              variant="ghost"
-              className="w-full justify-center text-red-400 border border-red-400/30 hover:bg-red-400/10"
-              onClick={() => onSellClick?.()}
-            >
+            <Button variant="ghost" className="w-full justify-center text-red-400 border border-red-400/30 hover:bg-red-400/10" onClick={() => onSellClick?.()}>
               Sell
             </Button>
           </div>
         </DrawerContent>
       </Drawer> : <Popover>
         <PopoverTrigger asChild>
-          <Button 
-            size="icon"
-            variant="ghost" 
-            className="h-8 w-8 bg-transparent hover:bg-transparent"
-          >
+          <Button size="icon" variant="ghost" className="h-8 w-8 bg-transparent hover:bg-transparent">
             <ArrowRightLeft className="w-4 h-4" />
           </Button>
         </PopoverTrigger>
-        <PopoverContent 
-          className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50" 
-          align="end" 
-          side="top"
-          sideOffset={8}
-        >
+        <PopoverContent className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50" align="end" side="top" sideOffset={8}>
           <div className="flex flex-col gap-1 p-2">
-            <Button 
-              size="sm" 
-              variant="outline" 
-              className="text-green-400 border-green-400/30 hover:bg-green-400/10 bg-transparent"
-              onClick={() => onBuyClick?.()}
-            >
+            <Button size="sm" variant="outline" className="text-green-400 border-green-400/30 hover:bg-green-400/10 bg-transparent" onClick={() => onBuyClick?.()}>
               Buy
             </Button>
-            <Button 
-              size="sm" 
-              variant="outline" 
-              className="text-red-400 border-red-400/30 hover:bg-red-400/10 bg-transparent"
-              onClick={() => onSellClick?.()}
-            >
+            <Button size="sm" variant="outline" className="text-red-400 border-red-400/30 hover:bg-red-400/10 bg-transparent" onClick={() => onSellClick?.()}>
               Sell
             </Button>
           </div>
@@ -183,7 +150,6 @@ const Game = () => {
   const [rightSidebarTab, setRightSidebarTab] = useState("rankings");
   const [userCoins] = useState(0);
   const [visiblePlayers, setVisiblePlayers] = useState(10);
-  const [isPreOrderOpen, setIsPreOrderOpen] = useState(false);
   const [selectedRarity, setSelectedRarity] = useState("all");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [marketplaceCategory, setMarketplaceCategory] = useState("all");
@@ -319,7 +285,7 @@ const Game = () => {
       name: "The Irish King",
       team: "Crimson Hawks",
       position: "Striker",
-      price: 4300,
+      price: 8500,
       change: 12.5,
       trend: "up",
       image: "/lovable-uploads/5c3f060f-4c5f-412b-8f27-eb1bebd3dd7d.png"
@@ -327,7 +293,7 @@ const Game = () => {
       name: "Jonesy Bones",
       team: "Steel Wolves",
       position: "Tank",
-      price: 3800,
+      price: 7200,
       change: -8.3,
       trend: "down",
       image: "/lovable-uploads/660b5122-5ce8-4f6e-af72-2c607d47ef44.png"
@@ -335,7 +301,7 @@ const Game = () => {
       name: "Stani Eagle",
       team: "Thunder Birds",
       position: "Speed",
-      price: 4700,
+      price: 9100,
       change: 15.7,
       trend: "up",
       image: "/lovable-uploads/37f256dc-415c-4032-82ad-db63f676284d.png"
@@ -343,7 +309,7 @@ const Game = () => {
       name: "Latin Legend",
       team: "Mountain Lions",
       position: "Defense",
-      price: 3500,
+      price: 6800,
       change: -4.2,
       trend: "down",
       image: "/lovable-uploads/2c556456-ebeb-4eec-9842-f2d31e06c58a.png"
@@ -351,7 +317,7 @@ const Game = () => {
       name: "Speed Buggy",
       team: "Flame Dragons",
       position: "Assault",
-      price: 4600,
+      price: 8900,
       change: 9.6,
       trend: "up",
       image: "/lovable-uploads/b64d7801-1284-4763-b115-ca3cfa8ff315.png"
@@ -360,7 +326,7 @@ const Game = () => {
       name: "Silverborg",
       team: "Thunder Hawks",
       position: "Speed",
-      price: 4700,
+      price: 7300,
       change: 45.2,
       trend: "up",
       image: "/lovable-uploads/fdd396d6-16bd-493f-ba2e-0c27e846ea03.png"
@@ -368,7 +334,7 @@ const Game = () => {
       name: "Based Chad",
       team: "Steel Warriors",
       position: "Tank",
-      price: 4200,
+      price: 6800,
       change: 38.7,
       trend: "up",
       image: "/lovable-uploads/335b4baf-29e6-4895-a2d4-54e4cee9fae5.png"
@@ -376,7 +342,7 @@ const Game = () => {
       name: "Leroy Girthy",
       team: "Fire Eagles",
       position: "Assault",
-      price: 3900,
+      price: 5900,
       change: 33.1,
       trend: "up",
       image: "/lovable-uploads/55728a6c-0c6b-4217-82d8-a21b16e912d6.png"
@@ -384,7 +350,7 @@ const Game = () => {
       name: "Big Dawg",
       team: "Ice Wolves",
       position: "Control",
-      price: 4500,
+      price: 6400,
       change: 29.8,
       trend: "up",
       image: "/lovable-uploads/2532e628-0d4b-465e-b350-e49def10eb26.png"
@@ -392,7 +358,7 @@ const Game = () => {
       name: "Zombie Chan",
       team: "Ground Force",
       position: "Heavy",
-      price: 3600,
+      price: 7100,
       change: 27.3,
       trend: "up",
       image: "/lovable-uploads/82fe8aed-6cfa-45b6-945c-c447349b7fe2.png"
@@ -401,7 +367,7 @@ const Game = () => {
       name: "DJ Mouse",
       team: "Mega Corps",
       position: "Destroyer",
-      price: 4800,
+      price: 9200,
       change: 89.4,
       trend: "up",
       image: "/lovable-uploads/b86689f4-6c8c-4f7f-91f0-c36052c824e6.png"
@@ -409,7 +375,7 @@ const Game = () => {
       name: "Alex Toosick",
       team: "Dark Legion",
       position: "Assassin",
-      price: 4300,
+      price: 8500,
       change: 76.8,
       trend: "up",
       image: "/lovable-uploads/fa6496ee-f2e7-4af5-8205-7445121d8a6a.png"
@@ -417,7 +383,7 @@ const Game = () => {
       name: "Tarragon Southslice",
       team: "Energy Corps",
       position: "Artillery",
-      price: 3700,
+      price: 8900,
       change: 69.5,
       trend: "up",
       image: "/lovable-uploads/cf5abf4c-cf7f-49b7-a830-49343c8d1222.png"
@@ -425,7 +391,7 @@ const Game = () => {
       name: "Ray Del Maestro",
       team: "Space Raiders",
       position: "Elite",
-      price: 4100,
+      price: 9800,
       change: 62.1,
       trend: "up",
       image: "/lovable-uploads/e8b33b1a-410f-4448-9b83-126b8d27f0a9.png"
@@ -433,7 +399,7 @@ const Game = () => {
       name: "John Strictland",
       team: "Weather Gods",
       position: "Legendary",
-      price: 4900,
+      price: 10500,
       change: 58.7,
       trend: "up",
       image: "/lovable-uploads/98664a07-8365-4512-8f3e-a0c79bd4617c.png"
@@ -442,7 +408,7 @@ const Game = () => {
       name: "Shane Sonny",
       team: "Ultimate Force",
       position: "Champion",
-      price: 4600,
+      price: 15000,
       change: 234.7,
       trend: "up",
       image: "/lovable-uploads/a76e21f1-ffca-4130-bd9a-08d09167dca0.png"
@@ -450,7 +416,7 @@ const Game = () => {
       name: "Lean Chad",
       team: "Divine Army",
       position: "Mythic",
-      price: 3800,
+      price: 13500,
       change: 189.3,
       trend: "up",
       image: "/lovable-uploads/a266b13a-b169-41bf-92db-c75cf3d91c9e.png"
@@ -458,7 +424,7 @@ const Game = () => {
       name: "Indi",
       team: "Cosmic Force",
       position: "Godlike",
-      price: 4400,
+      price: 14200,
       change: 156.8,
       trend: "up",
       image: "/lovable-uploads/76adb888-cbfd-4b1c-ba39-36303e53c2c0.png"
@@ -466,7 +432,7 @@ const Game = () => {
       name: "Kayne Famooser",
       team: "Quantum Lords",
       position: "Transcendent",
-      price: 3500,
+      price: 12800,
       change: 142.5,
       trend: "up",
       image: "/lovable-uploads/89c54fc5-22f2-44fd-bbf1-d90a653fdb22.png"
@@ -474,7 +440,7 @@ const Game = () => {
       name: "White Base Vest",
       team: "Eternal Guardians",
       position: "Supreme",
-      price: 5000,
+      price: 16000,
       change: 198.9,
       trend: "up",
       image: "/lovable-uploads/508d1509-e761-46c6-9f3a-f70e256f5a52.png"
@@ -521,35 +487,35 @@ const Game = () => {
       name: "Silverborg",
       team: "Thunder Hawks",
       position: "Speed",
-      price: 4700,
+      price: 7300,
       change: 45.2,
       image: "/lovable-uploads/fdd396d6-16bd-493f-ba2e-0c27e846ea03.png"
     }, {
       name: "Based Chad",
       team: "Steel Warriors",
       position: "Tank",
-      price: 4200,
+      price: 6800,
       change: 38.7,
       image: "/lovable-uploads/335b4baf-29e6-4895-a2d4-54e4cee9fae5.png"
     }, {
       name: "Leroy Girthy",
       team: "Fire Eagles",
       position: "Assault",
-      price: 3900,
+      price: 5900,
       change: 33.1,
       image: "/lovable-uploads/55728a6c-0c6b-4217-82d8-a21b16e912d6.png"
     }, {
       name: "Big Dawg",
       team: "Ice Wolves",
       position: "Control",
-      price: 4500,
+      price: 6400,
       change: 29.8,
       image: "/lovable-uploads/2532e628-0d4b-465e-b350-e49def10eb26.png"
     }, {
       name: "Zombie Chan",
       team: "Ground Force",
       position: "Heavy",
-      price: 3600,
+      price: 7100,
       change: 27.3,
       image: "/lovable-uploads/82fe8aed-6cfa-45b6-945c-c447349b7fe2.png"
     }],
@@ -557,35 +523,35 @@ const Game = () => {
       name: "DJ Mouse",
       team: "Mega Corps",
       position: "Destroyer",
-      price: 4800,
+      price: 9200,
       change: 89.4,
       image: "/lovable-uploads/b86689f4-6c8c-4f7f-91f0-c36052c824e6.png"
     }, {
       name: "Alex Toosick",
       team: "Dark Legion",
       position: "Assassin",
-      price: 4300,
+      price: 8500,
       change: 76.8,
       image: "/lovable-uploads/fa6496ee-f2e7-4af5-8205-7445121d8a6a.png"
     }, {
       name: "Tarragon Southslice",
       team: "Energy Corps",
       position: "Artillery",
-      price: 3700,
+      price: 8900,
       change: 69.5,
       image: "/lovable-uploads/cf5abf4c-cf7f-49b7-a830-49343c8d1222.png"
     }, {
       name: "Ray Del Maestro",
       team: "Space Raiders",
       position: "Elite",
-      price: 4100,
+      price: 9800,
       change: 62.1,
       image: "/lovable-uploads/e8b33b1a-410f-4448-9b83-126b8d27f0a9.png"
     }, {
       name: "John Strictland",
       team: "Weather Gods",
       position: "Legendary",
-      price: 4900,
+      price: 10500,
       change: 58.7,
       image: "/lovable-uploads/98664a07-8365-4512-8f3e-a0c79bd4617c.png"
     }],
@@ -593,35 +559,35 @@ const Game = () => {
       name: "Shane Sonny",
       team: "Ultimate Force",
       position: "Champion",
-      price: 4600,
+      price: 15000,
       change: 234.7,
       image: "/lovable-uploads/a76e21f1-ffca-4130-bd9a-08d09167dca0.png"
     }, {
       name: "Lean Chad",
       team: "Divine Army",
       position: "Mythic",
-      price: 3800,
+      price: 13500,
       change: 189.3,
       image: "/lovable-uploads/a266b13a-b169-41bf-92db-c75cf3d91c9e.png"
     }, {
       name: "Indi",
       team: "Cosmic Force",
       position: "Godlike",
-      price: 4400,
+      price: 14200,
       change: 156.8,
       image: "/lovable-uploads/76adb888-cbfd-4b1c-ba39-36303e53c2c0.png"
     }, {
       name: "Kayne Famooser",
       team: "Quantum Lords",
       position: "Transcendent",
-      price: 3500,
+      price: 12800,
       change: 142.5,
       image: "/lovable-uploads/89c54fc5-22f2-44fd-bbf1-d90a653fdb22.png"
     }, {
       name: "White Base Vest",
       team: "Eternal Guardians",
       position: "Supreme",
-      price: 5000,
+      price: 16000,
       change: 198.9,
       image: "/lovable-uploads/508d1509-e761-46c6-9f3a-f70e256f5a52.png"
     }]
@@ -746,7 +712,11 @@ const Game = () => {
     console.log('Tab clicked:', tabId);
     console.log('Current activeTab before:', activeTab);
     if (tabId === "lobby") {
-      setIsPreOrderOpen(true);
+      toast({
+        title: "Game releasing soon!",
+        description: "",
+        duration: 4200
+      });
     } else {
       setActiveTab(tabId);
       console.log('Setting activeTab to:', tabId);
@@ -2133,15 +2103,9 @@ const Game = () => {
                     </CardHeader>
                     <CardContent className="relative z-10">
                       <div className="space-y-2">
-                        {trendingPlayers.map((player, idx) => (
-                          <div key={`trending-${idx}`} className="flex items-center space-x-3 p-2 bg-white/5 rounded-lg">
+                        {trendingPlayers.map((player, idx) => <div key={`trending-${idx}`} className="flex items-center space-x-3 p-2 bg-white/5 rounded-lg">
                             <div className="w-12 h-12 rounded-full overflow-hidden">
-                              <img 
-                                src={player.image} 
-                                alt={player.name} 
-                                className="w-full h-full object-cover"
-                                loading={idx < 3 ? 'eager' : 'lazy'}
-                              />
+                              <img src={player.image} alt={player.name} className="w-full h-full object-cover" loading={idx < 3 ? 'eager' : 'lazy'} />
                             </div>
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center justify-between">
@@ -2149,17 +2113,14 @@ const Game = () => {
                                   <p className="text-sm md:text-xl font-semibold text-white">{player.name}</p>
                                   <p className={`text-xs ${player.change >= 0 ? 'text-green-400' : 'text-red-400'}`}>
                                     {player.change >= 0 ? '+' : ''}{formatNumberWithAbbreviation(player.change)}%{' '}
-                                    {getMarketplacePrices(player.name, 'fighter').bestSellPrice ? 
-                                      `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestSellPrice)} sell` : ''}{' '}
-                                    {getMarketplacePrices(player.name, 'fighter').bestBuyPrice ? 
-                                      `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestBuyPrice)} buy` : ''}
+                                    {getMarketplacePrices(player.name, 'fighter').bestSellPrice ? `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestSellPrice)} sell` : ''}{' '}
+                                    {getMarketplacePrices(player.name, 'fighter').bestBuyPrice ? `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestBuyPrice)} buy` : ''}
                                   </p>
                                 </div>
                                 {renderMarketplacePrices(player, getMarketplacePrices, isMobile, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
                               </div>
                             </div>
-                          </div>
-                        ))}
+                          </div>)}
                       </div>
                     </CardContent>
                   </Card>
@@ -2201,15 +2162,9 @@ const Game = () => {
                     </CardHeader>
                     <CardContent className="relative z-10">
                       <div className="space-y-2">
-                        {topGainers.map((player, idx) => (
-                          <div key={`gainers-${gainersTimeFilter}-${idx}`} className="flex items-center space-x-3 p-2 bg-white/5 rounded-lg">
+                        {topGainers.map((player, idx) => <div key={`gainers-${gainersTimeFilter}-${idx}`} className="flex items-center space-x-3 p-2 bg-white/5 rounded-lg">
                             <div className="w-12 h-12 rounded-full overflow-hidden">
-                              <img 
-                                src={player.image} 
-                                alt={player.name} 
-                                className="w-full h-full object-cover"
-                                loading={idx < 3 ? 'eager' : 'lazy'}
-                              />
+                              <img src={player.image} alt={player.name} className="w-full h-full object-cover" loading={idx < 3 ? 'eager' : 'lazy'} />
                             </div>
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center justify-between">
@@ -2217,17 +2172,14 @@ const Game = () => {
                                   <p className="text-sm md:text-xl font-semibold text-white">{player.name}</p>
                                   <p className={`text-xs ${player.change >= 0 ? 'text-green-400' : 'text-red-400'}`}>
                                     {player.change >= 0 ? '+' : ''}{formatNumberWithAbbreviation(player.change)}%{' '}
-                                    {getMarketplacePrices(player.name, 'fighter').bestSellPrice ? 
-                                      `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestSellPrice)} sell` : ''}{' '}
-                                    {getMarketplacePrices(player.name, 'fighter').bestBuyPrice ? 
-                                      `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestBuyPrice)} buy` : ''}
+                                    {getMarketplacePrices(player.name, 'fighter').bestSellPrice ? `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestSellPrice)} sell` : ''}{' '}
+                                    {getMarketplacePrices(player.name, 'fighter').bestBuyPrice ? `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestBuyPrice)} buy` : ''}
                                   </p>
                                 </div>
                                 {renderMarketplacePrices(player, getMarketplacePrices, isMobile, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
                               </div>
                             </div>
-                          </div>
-                        ))}
+                          </div>)}
                       </div>
                     </CardContent>
                   </Card>
@@ -3915,15 +3867,9 @@ const Game = () => {
                     </CardHeader>
                     <CardContent className="relative z-10">
                       <div className="space-y-3">
-                        {trendingPlayers.map((player, idx) => (
-                          <div key={`desktop-trending-${idx}`} className="flex items-center space-x-3 p-3 bg-white/5 rounded-lg hover:bg-white/15 md:hover:bg-white/20 transition-all duration-300 cursor-pointer">
+                        {trendingPlayers.map((player, idx) => <div key={`desktop-trending-${idx}`} className="flex items-center space-x-3 p-3 bg-white/5 rounded-lg hover:bg-white/15 md:hover:bg-white/20 transition-all duration-300 cursor-pointer">
                             <div className="w-12 h-12 rounded-full overflow-hidden">
-                              <img 
-                                src={player.image} 
-                                alt={player.name} 
-                                className="w-full h-full object-cover"
-                                loading={idx < 3 ? 'eager' : 'lazy'}
-                              />
+                              <img src={player.image} alt={player.name} className="w-full h-full object-cover" loading={idx < 3 ? 'eager' : 'lazy'} />
                             </div>
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center justify-between mb-1">
@@ -3931,17 +3877,14 @@ const Game = () => {
                                   <p className="text-sm font-semibold text-white">{player.name}</p>
                                   <p className={`text-xs ${player.change >= 0 ? 'text-green-400' : 'text-red-400'}`}>
                                     {player.change >= 0 ? '+' : ''}{formatNumberWithAbbreviation(player.change)}%{' '}
-                                    {getMarketplacePrices(player.name, 'fighter').bestSellPrice ? 
-                                      `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestSellPrice)} sell` : ''}{' '}
-                                    {getMarketplacePrices(player.name, 'fighter').bestBuyPrice ? 
-                                      `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestBuyPrice)} buy` : ''}
+                                    {getMarketplacePrices(player.name, 'fighter').bestSellPrice ? `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestSellPrice)} sell` : ''}{' '}
+                                    {getMarketplacePrices(player.name, 'fighter').bestBuyPrice ? `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestBuyPrice)} buy` : ''}
                                   </p>
                                 </div>
                                 {renderMarketplacePrices(player, getMarketplacePrices, isMobile, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
                               </div>
                             </div>
-                          </div>
-                        ))}
+                          </div>)}
                       </div>
                     </CardContent>
                   </Card>
@@ -3960,7 +3903,7 @@ const Game = () => {
                       <div className="flex items-center justify-between mb-3">
                         <CardTitle className="text-lg md:text-2xl flex items-center space-x-2 text-white">
                           <ArrowUpRight className="w-5 h-5 text-green-400" />
-                           <span>Gainers</span>
+                          <span>Top Gainers</span>
                         </CardTitle>
                       </div>
                       <div className="flex space-x-2">
@@ -3983,15 +3926,9 @@ const Game = () => {
                     </CardHeader>
                     <CardContent className="relative z-10">
                       <div className="space-y-3">
-                        {topGainers.map((player, idx) => (
-                          <div key={`desktop-gainers-${gainersTimeFilter}-${idx}`} className="flex items-center space-x-3 p-3 bg-white/5 rounded-lg hover:bg-white/15 md:hover:bg-white/20 transition-all duration-300 cursor-pointer">
+                        {topGainers.map((player, idx) => <div key={`desktop-gainers-${gainersTimeFilter}-${idx}`} className="flex items-center space-x-3 p-3 bg-white/5 rounded-lg hover:bg-white/15 md:hover:bg-white/20 transition-all duration-300 cursor-pointer">
                             <div className="w-12 h-12 rounded-full overflow-hidden">
-                              <img 
-                                src={player.image} 
-                                alt={player.name} 
-                                className="w-full h-full object-cover"
-                                loading={idx < 3 ? 'eager' : 'lazy'}
-                              />
+                              <img src={player.image} alt={player.name} className="w-full h-full object-cover" loading={idx < 3 ? 'eager' : 'lazy'} />
                             </div>
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center justify-between mb-1">
@@ -3999,17 +3936,14 @@ const Game = () => {
                                   <p className="text-sm font-semibold text-white">{player.name}</p>
                                   <p className={`text-xs ${player.change >= 0 ? 'text-green-400' : 'text-red-400'}`}>
                                     {player.change >= 0 ? '+' : ''}{formatNumberWithAbbreviation(player.change)}%{' '}
-                                    {getMarketplacePrices(player.name, 'fighter').bestSellPrice ? 
-                                      `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestSellPrice)} sell` : ''}{' '}
-                                    {getMarketplacePrices(player.name, 'fighter').bestBuyPrice ? 
-                                      `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestBuyPrice)} buy` : ''}
+                                    {getMarketplacePrices(player.name, 'fighter').bestSellPrice ? `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestSellPrice)} sell` : ''}{' '}
+                                    {getMarketplacePrices(player.name, 'fighter').bestBuyPrice ? `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestBuyPrice)} buy` : ''}
                                   </p>
                                 </div>
                                 {renderMarketplacePrices(player, getMarketplacePrices, isMobile, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
                               </div>
                             </div>
-                          </div>
-                        ))}
+                          </div>)}
                       </div>
                     </CardContent>
                   </Card>
@@ -4036,9 +3970,9 @@ const Game = () => {
                                  </Button> : <div className="flex items-center animate-fade-in">
                                    <div className="relative">
                                      <Button variant="ghost" size="sm" className="absolute left-1 top-1/2 transform -translate-y-1/2 h-6 w-6 text-white hover:bg-white/20 z-10" onClick={() => {
-                               setSearchTerm("");
-                               setSearchExpanded(false);
-                             }}>
+                                setSearchTerm("");
+                                setSearchExpanded(false);
+                              }}>
                                        <X className="w-3 h-3" />
                                      </Button>
                                      <Input placeholder="search" value={searchTerm} onChange={e => setSearchTerm(e.target.value)} onBlur={() => !searchTerm && setSearchExpanded(false)} className="pl-8 pr-3 h-8 text-xs bg-black/20 backdrop-blur-md border-white/30 text-white placeholder:text-gray-400 w-48 focus:bg-black/30 focus:border-white/40" autoFocus />
@@ -4209,7 +4143,7 @@ const Game = () => {
                                 <div>
                                   <p className="text-lg md:text-xl font-semibold text-white">{player.name}</p>
                                   <p className={`text-sm ${player.trend === 'up' ? 'text-green-400' : 'text-red-400'}`}>
-                                    {player.trend === 'up' ? '+' : ''}{(((player.price - player.lastSale) / player.lastSale) * 100).toFixed(1)}%
+                                    {player.trend === 'up' ? '+' : ''}{((player.price - player.lastSale) / player.lastSale * 100).toFixed(1)}%
                                   </p>
                                 </div>
                                {renderMarketplacePrices(player, getMarketplacePrices, isMobile, 'large', () => handleSellClick(player), () => handleBuyClick(player))}
@@ -4252,7 +4186,7 @@ const Game = () => {
                     backgroundSize: '4px 4px'
                   }} />
                     <CardContent className="p-6 text-center relative z-10">
-                       <Package className="w-16 h-16 mx-auto text-gray-400 mb-4" />
+                       
                        <h3 className="text-lg font-semibold mb-2 text-white">Login to View Your Locker</h3>
                        <p className="text-gray-300 mb-4">Connect your wallet to see your owned items</p>
                        <Button onClick={login} variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30">
@@ -4800,11 +4734,6 @@ const Game = () => {
             </div>
           </DialogContent>
         </Dialog>}
-
-        {/* Pre-Order Dialog */}
-        <PreOrderDialog open={isPreOrderOpen} onOpenChange={setIsPreOrderOpen}>
-          <div />
-        </PreOrderDialog>
     </div>;
 };
 export default Game;
