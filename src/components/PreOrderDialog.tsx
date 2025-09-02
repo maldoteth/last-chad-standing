@@ -36,12 +36,17 @@ const preOrderTiers: PreOrderTier[] = [{
 
 interface PreOrderDialogProps {
   children: React.ReactNode;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
 }
 
-const PreOrderDialog = ({ children }: PreOrderDialogProps) => {
+const PreOrderDialog = ({ children, open: externalOpen, onOpenChange: externalOnOpenChange }: PreOrderDialogProps) => {
   const [selectedTier, setSelectedTier] = useState<string | null>(null);
-  const [isOpen, setIsOpen] = useState(false);
+  const [internalOpen, setInternalOpen] = useState(false);
   const { toast } = useToast();
+
+  const isOpen = externalOpen !== undefined ? externalOpen : internalOpen;
+  const setIsOpen = externalOnOpenChange || setInternalOpen;
 
   const handlePreOrder = () => {
     if (!selectedTier) return;

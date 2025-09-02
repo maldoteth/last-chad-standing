@@ -27,6 +27,7 @@ import { ResponsiveContainer, LineChart as RechartsLineChart, Line, XAxis, YAxis
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import cyberWarriorSkin from "@/assets/cyber-warrior-skin.png";
 import StoreCarousel, { StoreCarouselRef } from "@/components/StoreCarousel";
+import PreOrderDialog from "@/components/PreOrderDialog";
 const irishKingSkin = "/lovable-uploads/5c3f060f-4c5f-412b-8f27-eb1bebd3dd7d.png";
 const staniEagleSkin = "/lovable-uploads/37f256dc-415c-4032-82ad-db63f676284d.png";
 const bonesSkin = "/lovable-uploads/660b5122-5ce8-4f6e-af72-2c607d47ef44.png";
@@ -182,6 +183,7 @@ const Game = () => {
   const [rightSidebarTab, setRightSidebarTab] = useState("rankings");
   const [userCoins] = useState(0);
   const [visiblePlayers, setVisiblePlayers] = useState(10);
+  const [isPreOrderOpen, setIsPreOrderOpen] = useState(false);
   const [selectedRarity, setSelectedRarity] = useState("all");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [marketplaceCategory, setMarketplaceCategory] = useState("all");
@@ -744,11 +746,7 @@ const Game = () => {
     console.log('Tab clicked:', tabId);
     console.log('Current activeTab before:', activeTab);
     if (tabId === "lobby") {
-      toast({
-        title: "Game releasing soon!",
-        description: "",
-        duration: 4200
-      });
+      setIsPreOrderOpen(true);
     } else {
       setActiveTab(tabId);
       console.log('Setting activeTab to:', tabId);
@@ -4802,6 +4800,11 @@ const Game = () => {
             </div>
           </DialogContent>
         </Dialog>}
+
+        {/* Pre-Order Dialog */}
+        <PreOrderDialog open={isPreOrderOpen} onOpenChange={setIsPreOrderOpen}>
+          <div />
+        </PreOrderDialog>
     </div>;
 };
 export default Game;
