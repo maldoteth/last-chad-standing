@@ -17,7 +17,7 @@ interface PreOrderTier {
 const preOrderTiers: PreOrderTier[] = [{
   id: 'game-only',
   name: 'Game Only',
-  price: 10,
+  price: 18,
   features: ['Full game access', 'Standard gameplay experience']
 }, {
   id: 'special-edition',
