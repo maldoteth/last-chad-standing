@@ -3172,7 +3172,7 @@ const Game = () => {
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
                            <DropdownMenuItem onClick={() => setSelectedCategory("all")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "all" ? "bg-white/20" : ""}`}>
-                             <span>⚫ All Categories</span>
+                             <span>⚫ All</span>
                            </DropdownMenuItem>
                            <DropdownMenuItem onClick={() => setSelectedCategory("skins")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedCategory === "skins" ? "bg-white/20" : ""}`}>
                              <span>👊 Fighters</span>
