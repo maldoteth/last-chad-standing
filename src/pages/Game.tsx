@@ -822,7 +822,7 @@ const Game = () => {
       price: 3000,
       lastSale: 2850,
       trend: "up",
-      image: "/lovable-uploads/dd15acda-3123-4e95-916c-ba6ef8db31fd.png"
+      image: "/lovable-uploads/edc04992-1bf6-44e1-b24d-113fdb5e21b4.png"
     }, {
       name: "Squeaky Dance",
       team: "Future Force",
@@ -2071,10 +2071,10 @@ const Game = () => {
                   rarity: "gold",
                   image: "/lovable-uploads/c076819c-8944-483c-9fd4-336da5ebba11.png"
                 }, {
-                  name: "Ultimate Flex",
-                  price: 3000,
-                  rarity: "special",
-                  image: "/lovable-uploads/dd15acda-3123-4e95-916c-ba6ef8db31fd.png"
+                name: "Ultimate Flex",
+                price: 3000,
+                rarity: "special",
+                image: "/lovable-uploads/edc04992-1bf6-44e1-b24d-113fdb5e21b4.png"
                 }])} renderItem={(item, idx) => <GlowCard key={idx} className="cursor-pointer">
                               <div className="p-3">
                                <div className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden flex items-center justify-center">
