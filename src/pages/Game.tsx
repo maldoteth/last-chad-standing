@@ -628,207 +628,342 @@ const Game = () => {
   };
   const topGainers = topGainersData[gainersTimeFilter];
   const trendingPlayers = trendingPlayersData[trendingTimeFilter];
-  const allPlayers = [{
-    name: "John Strictland",
-    team: "Weather Gods",
-    position: "Legendary",
-    price: 4900,
-    lastSale: 4600,
-    trend: "up",
-    image: "/lovable-uploads/98664a07-8365-4512-8f3e-a0c79bd4617c.png"
-  }, {
-    name: "DJ Mouse",
-    team: "Mega Corps",
-    position: "Destroyer",
-    price: 4800,
-    lastSale: 4400,
-    trend: "up",
-    image: "/lovable-uploads/b86689f4-6c8c-4f7f-91f0-c36052c824e6.png"
-  }, {
-    name: "Stani Eagle",
-    team: "Thunder Birds",
-    position: "Speed",
-    price: 4700,
-    lastSale: 4300,
-    trend: "up",
-    image: "/lovable-uploads/37f256dc-415c-4032-82ad-db63f676284d.png"
-  }, {
-    name: "Silverborg",
-    team: "Thunder Hawks",
-    position: "Speed",
-    price: 4700,
-    lastSale: 4400,
-    trend: "up",
-    image: "/lovable-uploads/fdd396d6-16bd-493f-ba2e-0c27e846ea03.png"
-  }, {
-    name: "Speed Buggy",
-    team: "Flame Dragons",
-    position: "Assault",
-    price: 4600,
-    lastSale: 4200,
-    trend: "up",
-    image: "/lovable-uploads/b64d7801-1284-4763-b115-ca3cfa8ff315.png"
-  }, {
-    name: "Shane Sonny",
-    team: "Ultimate Force",
-    position: "Champion",
-    price: 4600,
-    lastSale: 4200,
-    trend: "up",
-    image: "/lovable-uploads/a76e21f1-ffca-4130-bd9a-08d09167dca0.png"
-  }, {
-    name: "Big Dawg",
-    team: "Ice Wolves",
-    position: "Control",
-    price: 4500,
-    lastSale: 4100,
-    trend: "up",
-    image: "/lovable-uploads/2532e628-0d4b-465e-b350-e49def10eb26.png"
-  }, {
-    name: "Indi",
-    team: "Cosmic Force",
-    position: "Godlike",
-    price: 4400,
-    lastSale: 4000,
-    trend: "up",
-    image: "/lovable-uploads/76adb888-cbfd-4b1c-ba39-36303e53c2c0.png"
-  }, {
-    name: "The Irish King",
-    team: "Crimson Hawks",
-    position: "Striker",
-    price: 4300,
-    lastSale: 3900,
-    trend: "up",
-    image: "/lovable-uploads/5c3f060f-4c5f-412b-8f27-eb1bebd3dd7d.png"
-  }, {
-    name: "Alex Toosick",
-    team: "Dark Legion",
-    position: "Assassin",
-    price: 4300,
-    lastSale: 3900,
-    trend: "up",
-    image: "/lovable-uploads/fa6496ee-f2e7-4af5-8205-7445121d8a6a.png"
-  }, {
-    name: "Based Chad",
-    team: "Steel Warriors",
-    position: "Tank",
-    price: 4200,
-    lastSale: 3800,
-    trend: "up",
-    image: "/lovable-uploads/335b4baf-29e6-4895-a2d4-54e4cee9fae5.png"
-  }, {
-    name: "Ray Del Maestro",
-    team: "Space Raiders",
-    position: "Elite",
-    price: 4100,
-    lastSale: 3700,
-    trend: "up",
-    image: "/lovable-uploads/e8b33b1a-410f-4448-9b83-126b8d27f0a9.png"
-  }, {
-    name: "Leroy Girthy",
-    team: "Fire Eagles",
-    position: "Assault",
-    price: 3900,
-    lastSale: 3500,
-    trend: "up",
-    image: "/lovable-uploads/55728a6c-0c6b-4217-82d8-a21b16e912d6.png"
-  }, {
-    name: "Lean Chad",
-    team: "Divine Army",
-    position: "Mythic",
-    price: 3800,
-    lastSale: 3400,
-    trend: "up",
-    image: "/lovable-uploads/a266b13a-b169-41bf-92db-c75cf3d91c9e.png"
-  }, {
-    name: "Jonesy Bones",
-    team: "Steel Wolves",
-    position: "Tank",
-    price: 3800,
-    lastSale: 4050,
-    trend: "down",
-    image: "/lovable-uploads/660b5122-5ce8-4f6e-af72-2c607d47ef44.png"
-  }, {
-    name: "Tarragon Southslice",
-    team: "Energy Corps",
-    position: "Artillery",
-    price: 3700,
-    lastSale: 3300,
-    trend: "up",
-    image: "/lovable-uploads/cf5abf4c-cf7f-49b7-a830-49343c8d1222.png"
-  }, {
-    name: "Zombie Chan",
-    team: "Ground Force",
-    position: "Heavy",
-    price: 3600,
-    lastSale: 3200,
-    trend: "up",
-    image: "/lovable-uploads/82fe8aed-6cfa-45b6-945c-c447349b7fe2.png"
-  }, {
-    name: "Latin Legend",
-    team: "Mountain Lions",
-    position: "Defense",
-    price: 3500,
-    lastSale: 3700,
-    trend: "down",
-    image: "/lovable-uploads/2c556456-ebeb-4eec-9842-f2d31e06c58a.png"
-  }, {
-    name: "Kayne Famooser",
-    team: "Quantum Lords",
-    position: "Transcendent",
-    price: 3500,
-    lastSale: 3100,
-    trend: "up",
-    image: "/lovable-uploads/89c54fc5-22f2-44fd-bbf1-d90a653fdb22.png"
-  }, {
-    name: "Pogo",
-    team: "Dark Matter",
-    position: "Phantom",
-    price: 6100,
-    lastSale: 5200,
-    trend: "up",
-    image: "/lovable-uploads/2877ff38-b9fd-4a5d-bca9-25b14f237997.png"
-  }, {
-    name: "Blue Wing Suit",
-    team: "Sun Blazers",
-    position: "Energy",
-    price: 5500,
-    lastSale: 4750,
-    trend: "up",
-    image: "/lovable-uploads/1efc1553-007a-4b38-a982-79d9f5abbfa1.png"
-  }, {
-    name: "The Coupé Tank",
-    team: "Neon Guardians",
-    position: "Stealth",
-    price: 5300,
-    lastSale: 4900,
-    trend: "up",
-    image: "/lovable-uploads/1c6b707c-97a6-4381-bc54-de63a7cf8a31.png"
-  }, {
-    name: "Pit Bike",
-    team: "Wind Riders",
-    position: "Force",
-    price: 5200,
-    lastSale: 4100,
-    trend: "up",
-    image: "/lovable-uploads/4e2aac54-cac6-4cf1-92ad-76bf7e788077.png"
-  }, {
-    name: "Flex",
-    team: "Future Force",
-    position: "Mobility",
-    price: 4900,
-    lastSale: 4200,
-    trend: "up",
-    image: "/lovable-uploads/f52e83c2-28b7-417e-90ac-757255d1759f.png"
-  }, {
-    name: "White Base Vest",
-    team: "Eternal Guardians",
-    position: "Supreme",
-    price: 4800,
-    lastSale: 4000,
-    trend: "up",
-    image: "/lovable-uploads/508d1509-e761-46c6-9f3a-f70e256f5a52.png"
-  }].sort((a, b) => b.price - a.price);
+  const allPlayers = [
+    // Fighters
+    {
+      name: "Tarragon Southslice",
+      team: "Energy Corps", 
+      position: "Artillery",
+      itemType: "fighter",
+      price: 2800,
+      lastSale: 2650,
+      trend: "up",
+      image: "/lovable-uploads/cf5abf4c-cf7f-49b7-a830-49343c8d1222.png"
+    }, {
+      name: "The Irish King", 
+      team: "Crimson Hawks",
+      position: "Striker", 
+      itemType: "fighter",
+      price: 2500,
+      lastSale: 2300,
+      trend: "up",
+      image: "/lovable-uploads/5c3f060f-4c5f-412b-8f27-eb1bebd3dd7d.png"
+    }, {
+      name: "Ray Del Maestro",
+      team: "Space Raiders",
+      position: "Elite", 
+      itemType: "fighter",
+      price: 2800,
+      lastSale: 2600,
+      trend: "up",
+      image: "/lovable-uploads/e8b33b1a-410f-4448-9b83-126b8d27f0a9.png"
+    }, {
+      name: "Jonesy Bones",
+      team: "Steel Wolves",
+      position: "Tank", 
+      itemType: "fighter",
+      price: 2200,
+      lastSale: 2050,
+      trend: "down",
+      image: "/lovable-uploads/660b5122-5ce8-4f6e-af72-2c607d47ef44.png"
+    }, {
+      name: "Stani Eagle",
+      team: "Thunder Birds",
+      position: "Speed", 
+      itemType: "fighter",
+      price: 1800,
+      lastSale: 1650,
+      trend: "up",
+      image: "/lovable-uploads/37f256dc-415c-4032-82ad-db63f676284d.png"
+    }, {
+      name: "Latin Legend",
+      team: "Mountain Lions",
+      position: "Defense", 
+      itemType: "fighter",
+      price: 1500,
+      lastSale: 1400,
+      trend: "down",
+      image: "/lovable-uploads/2c556456-ebeb-4eec-9842-f2d31e06c58a.png"
+    }, {
+      name: "Shane Sonny",
+      team: "Ultimate Force",
+      position: "Champion", 
+      itemType: "fighter",
+      price: 1200,
+      lastSale: 1100,
+      trend: "up",
+      image: "/lovable-uploads/a76e21f1-ffca-4130-bd9a-08d09167dca0.png"
+    }, {
+      name: "John Strictland",
+      team: "Weather Gods",
+      position: "Legendary", 
+      itemType: "fighter",
+      price: 1000,
+      lastSale: 950,
+      trend: "up",
+      image: "/lovable-uploads/98664a07-8365-4512-8f3e-a0c79bd4617c.png"
+    },
+    // Vehicles  
+    {
+      name: "Pogo",
+      team: "Dark Matter",
+      position: "Phantom", 
+      itemType: "vehicle",
+      price: 8000,
+      lastSale: 7500,
+      trend: "up",
+      image: "/lovable-uploads/2877ff38-b9fd-4a5d-bca9-25b14f237997.png"
+    }, {
+      name: "The Coupé Tank",
+      team: "Neon Guardians",
+      position: "Stealth", 
+      itemType: "vehicle",
+      price: 5000,
+      lastSale: 4800,
+      trend: "up",
+      image: "/lovable-uploads/1c6b707c-97a6-4381-bc54-de63a7cf8a31.png"
+    }, {
+      name: "Pit Bike", 
+      team: "Wind Riders",
+      position: "Force", 
+      itemType: "vehicle",
+      price: 4500,
+      lastSale: 4200,
+      trend: "up",
+      image: "/lovable-uploads/4e2aac54-cac6-4cf1-92ad-76bf7e788077.png"
+    }, {
+      name: "Speed Buggy",
+      team: "Flame Dragons",
+      position: "Assault", 
+      itemType: "vehicle", 
+      price: 3200,
+      lastSale: 3000,
+      trend: "up",
+      image: "/lovable-uploads/b64d7801-1284-4763-b115-ca3cfa8ff315.png"
+    },
+    // Emotes
+    {
+      name: "Ultimate Flex",
+      team: "Future Force",
+      position: "Mobility", 
+      itemType: "emote",
+      price: 3000,
+      lastSale: 2850,
+      trend: "up",
+      image: "/lovable-uploads/dd15acda-3123-4e95-916c-ba6ef8db31fd.png"
+    }, {
+      name: "Squeaky Dance",
+      team: "Future Force",
+      position: "Mobility", 
+      itemType: "emote",
+      price: 2500,
+      lastSale: 2300,
+      trend: "up",
+      image: "/lovable-uploads/5c8c027e-3baf-4550-96a9-ba0715d11506.png"
+    }, {
+      name: "Fists Up",
+      team: "Future Force",
+      position: "Mobility", 
+      itemType: "emote",
+      price: 1800,
+      lastSale: 1650,
+      trend: "up",
+      image: "/lovable-uploads/370bd874-ad5c-467d-b844-55688b1a0f9a.png"
+    }, {
+      name: "Power Pose",
+      team: "Future Force",
+      position: "Mobility", 
+      itemType: "emote",
+      price: 1600,
+      lastSale: 1500,
+      trend: "up",
+      image: "/lovable-uploads/c076819c-8944-483c-9fd4-336da5ebba11.png"
+    }, {
+      name: "u want sum?",
+      team: "Future Force",
+      position: "Mobility", 
+      itemType: "emote",
+      price: 1500,
+      lastSale: 1400,
+      trend: "up",
+      image: "/lovable-uploads/30d419b4-79a9-459c-b37b-42099ffd6273.png"
+    }, {
+      name: "Protest Sign",
+      team: "Future Force",
+      position: "Mobility", 
+      itemType: "emote",
+      price: 1200,
+      lastSale: 1100,
+      trend: "up",
+      image: "/lovable-uploads/f9ba9551-eabd-4e1f-a2a9-2eeddc92114d.png"
+    }, {
+      name: "Taunt",
+      team: "Future Force",
+      position: "Mobility", 
+      itemType: "emote",
+      price: 950,
+      lastSale: 900,
+      trend: "up",
+      image: "/lovable-uploads/13bff6a8-5c37-4ca1-928f-3b3c98952224.png"
+    }, {
+      name: "Flex",
+      team: "Future Force",
+      position: "Mobility", 
+      itemType: "emote",
+      price: 800,
+      lastSale: 750,
+      trend: "up",
+      image: "/lovable-uploads/f52e83c2-28b7-417e-90ac-757255d1759f.png"
+    },
+    // Packs
+    {
+      name: "Wild West Pack",
+      team: "Pack Masters",
+      position: "Supreme", 
+      itemType: "pack",
+      price: 5000,
+      lastSale: 4800,
+      trend: "up",
+      image: "/lovable-uploads/5cf8ad93-f292-4e4c-b53c-eb0c4bc0f7be.png"
+    }, {
+      name: "Diamond Pack",
+      team: "Pack Masters",
+      position: "Supreme", 
+      itemType: "pack",
+      price: 5000,
+      lastSale: 4900,
+      trend: "up",
+      image: "/lovable-uploads/ba9c646a-45e6-4ab3-9b25-1f069d27960b.png"
+    }, {
+      name: "Platinum Pack",
+      team: "Pack Masters",
+      position: "Supreme", 
+      itemType: "pack",
+      price: 4500,
+      lastSale: 4300,
+      trend: "up",
+      image: "/lovable-uploads/ef3aca91-a372-4313-aa94-3c2dcf946dd6.png"
+    }, {
+      name: "EO Summer Pack",
+      team: "Pack Masters",
+      position: "Supreme", 
+      itemType: "pack",
+      price: 3500,
+      lastSale: 3300,
+      trend: "up",
+      image: "/lovable-uploads/2149e9ad-919f-49ea-8be4-90f190387d39.png"
+    }, {
+      name: "Premium Pack",
+      team: "Pack Masters",
+      position: "Supreme", 
+      itemType: "pack",
+      price: 2800,
+      lastSale: 2650,
+      trend: "up",
+      image: "/lovable-uploads/1615e7da-29d5-454e-a2fe-57f5abf91d56.png"
+    }, {
+      name: "Gold Pack",
+      team: "Pack Masters",
+      position: "Supreme", 
+      itemType: "pack",
+      price: 2000,
+      lastSale: 1900,
+      trend: "up",
+      image: "/lovable-uploads/291c5734-f144-47b0-9f49-915999e921b0.png"
+    }, {
+      name: "Silver Pack",
+      team: "Pack Masters",
+      position: "Supreme", 
+      itemType: "pack",
+      price: 1000,
+      lastSale: 950,
+      trend: "up",
+      image: "/lovable-uploads/17c3a939-bcaa-4cdb-9b61-271b5774c7e2.png"
+    }, {
+      name: "Starter Pack",
+      team: "Pack Masters",
+      position: "Supreme", 
+      itemType: "pack",
+      price: 500,
+      lastSale: 480,
+      trend: "up",
+      image: "/lovable-uploads/ac3e1f52-ba21-4588-9051-87eef47caf5c.png"
+    },
+    // Accessories
+    {
+      name: "Elite Armor",
+      team: "Gear Masters",
+      position: "Supreme", 
+      itemType: "accessory",
+      price: 1200,
+      lastSale: 1150,
+      trend: "up",
+      image: "/lovable-uploads/c4290bdc-f68b-45db-bf53-f9551d2cb16f.png"
+    }, {
+      name: "Combat Helmet",
+      team: "Gear Masters",
+      position: "Supreme", 
+      itemType: "accessory",
+      price: 800,
+      lastSale: 760,
+      trend: "up",
+      image: "/lovable-uploads/896892f1-7ebc-4852-acea-80dcdbf7c545.png"
+    }, {
+      name: "White Base Vest",
+      team: "Gear Masters",
+      position: "Supreme", 
+      itemType: "accessory",
+      price: 750,
+      lastSale: 700,
+      trend: "up",
+      image: "/lovable-uploads/508d1509-e761-46c6-9f3a-f70e256f5a52.png"
+    }, {
+      name: "Battle Boots",
+      team: "Gear Masters",
+      position: "Supreme", 
+      itemType: "accessory",
+      price: 650,
+      lastSale: 620,
+      trend: "up",
+      image: "/lovable-uploads/7d84dfb4-4db3-4adb-87f0-36f33c0f8daa.png"
+    }, {
+      name: "Red Wing Suit",
+      team: "Gear Masters",
+      position: "Supreme", 
+      itemType: "accessory",
+      price: 600,
+      lastSale: 580,
+      trend: "up",
+      image: "/lovable-uploads/2eec4a9a-97d3-4ba4-9508-2eeef0011139.png"
+    }, {
+      name: "Grey Base Vest",
+      team: "Gear Masters",
+      position: "Supreme", 
+      itemType: "accessory",
+      price: 550,
+      lastSale: 520,
+      trend: "up",
+      image: "/lovable-uploads/91375d1a-e829-4716-b3b6-833b58355bd9.png"
+    }, {
+      name: "Blue Wing Suit",
+      team: "Gear Masters",
+      position: "Supreme", 
+      itemType: "accessory",
+      price: 450,
+      lastSale: 430,
+      trend: "up",
+      image: "/lovable-uploads/1efc1553-007a-4b38-a982-79d9f5abbfa1.png"
+    }, {
+      name: "Tactical Gloves",
+      team: "Gear Masters",
+      position: "Supreme", 
+      itemType: "accessory",
+      price: 350,
+      lastSale: 330,
+      trend: "up",
+      image: "/lovable-uploads/4c80b2cf-0ea7-49a2-96b8-58ecbfa7623a.png"
+    }
+  ].sort((a, b) => b.price - a.price);
   const currentMarketValue = marketValueData[marketValueData.length - 1]?.value || 0;
   const currentListings = Math.round(listingsData[listingsData.length - 1]?.listings || 0);
 
