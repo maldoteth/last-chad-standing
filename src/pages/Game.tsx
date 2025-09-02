@@ -770,15 +770,6 @@ const Game = () => {
       trend: "up",
       image: "/lovable-uploads/370bd874-ad5c-467d-b844-55688b1a0f9a.png"
     }, {
-      name: "Power Pose",
-      team: "Future Force",
-      position: "Mobility", 
-      itemType: "emote",
-      price: 1600,
-      lastSale: 1500,
-      trend: "up",
-      image: "/lovable-uploads/c076819c-8944-483c-9fd4-336da5ebba11.png"
-    }, {
       name: "u want sum?",
       team: "Future Force",
       position: "Mobility", 
@@ -796,15 +787,6 @@ const Game = () => {
       lastSale: 1100,
       trend: "up",
       image: "/lovable-uploads/f9ba9551-eabd-4e1f-a2a9-2eeddc92114d.png"
-    }, {
-      name: "Taunt",
-      team: "Future Force",
-      position: "Mobility", 
-      itemType: "emote",
-      price: 950,
-      lastSale: 900,
-      trend: "up",
-      image: "/lovable-uploads/13bff6a8-5c37-4ca1-928f-3b3c98952224.png"
     }, {
       name: "Flex",
       team: "Future Force",
@@ -826,24 +808,6 @@ const Game = () => {
       trend: "up",
       image: "/lovable-uploads/5cf8ad93-f292-4e4c-b53c-eb0c4bc0f7be.png"
     }, {
-      name: "Diamond Pack",
-      team: "Pack Masters",
-      position: "Supreme", 
-      itemType: "pack",
-      price: 5000,
-      lastSale: 4900,
-      trend: "up",
-      image: "/lovable-uploads/ba9c646a-45e6-4ab3-9b25-1f069d27960b.png"
-    }, {
-      name: "Platinum Pack",
-      team: "Pack Masters",
-      position: "Supreme", 
-      itemType: "pack",
-      price: 4500,
-      lastSale: 4300,
-      trend: "up",
-      image: "/lovable-uploads/ef3aca91-a372-4313-aa94-3c2dcf946dd6.png"
-    }, {
       name: "EO Summer Pack",
       team: "Pack Masters",
       position: "Supreme", 
@@ -852,15 +816,6 @@ const Game = () => {
       lastSale: 3300,
       trend: "up",
       image: "/lovable-uploads/2149e9ad-919f-49ea-8be4-90f190387d39.png"
-    }, {
-      name: "Premium Pack",
-      team: "Pack Masters",
-      position: "Supreme", 
-      itemType: "pack",
-      price: 2800,
-      lastSale: 2650,
-      trend: "up",
-      image: "/lovable-uploads/1615e7da-29d5-454e-a2fe-57f5abf91d56.png"
     }, {
       name: "Gold Pack",
       team: "Pack Masters",
@@ -879,36 +834,9 @@ const Game = () => {
       lastSale: 950,
       trend: "up",
       image: "/lovable-uploads/17c3a939-bcaa-4cdb-9b61-271b5774c7e2.png"
-    }, {
-      name: "Starter Pack",
-      team: "Pack Masters",
-      position: "Supreme", 
-      itemType: "pack",
-      price: 500,
-      lastSale: 480,
-      trend: "up",
-      image: "/lovable-uploads/ac3e1f52-ba21-4588-9051-87eef47caf5c.png"
     },
     // Accessories
     {
-      name: "Elite Armor",
-      team: "Gear Masters",
-      position: "Supreme", 
-      itemType: "accessory",
-      price: 1200,
-      lastSale: 1150,
-      trend: "up",
-      image: "/lovable-uploads/c4290bdc-f68b-45db-bf53-f9551d2cb16f.png"
-    }, {
-      name: "Combat Helmet",
-      team: "Gear Masters",
-      position: "Supreme", 
-      itemType: "accessory",
-      price: 800,
-      lastSale: 760,
-      trend: "up",
-      image: "/lovable-uploads/896892f1-7ebc-4852-acea-80dcdbf7c545.png"
-    }, {
       name: "White Base Vest",
       team: "Gear Masters",
       position: "Supreme", 
@@ -917,15 +845,6 @@ const Game = () => {
       lastSale: 700,
       trend: "up",
       image: "/lovable-uploads/508d1509-e761-46c6-9f3a-f70e256f5a52.png"
-    }, {
-      name: "Battle Boots",
-      team: "Gear Masters",
-      position: "Supreme", 
-      itemType: "accessory",
-      price: 650,
-      lastSale: 620,
-      trend: "up",
-      image: "/lovable-uploads/7d84dfb4-4db3-4adb-87f0-36f33c0f8daa.png"
     }, {
       name: "Red Wing Suit",
       team: "Gear Masters",
@@ -953,15 +872,6 @@ const Game = () => {
       lastSale: 430,
       trend: "up",
       image: "/lovable-uploads/1efc1553-007a-4b38-a982-79d9f5abbfa1.png"
-    }, {
-      name: "Tactical Gloves",
-      team: "Gear Masters",
-      position: "Supreme", 
-      itemType: "accessory",
-      price: 350,
-      lastSale: 330,
-      trend: "up",
-      image: "/lovable-uploads/4c80b2cf-0ea7-49a2-96b8-58ecbfa7623a.png"
     }
   ].sort((a, b) => b.price - a.price);
   const currentMarketValue = marketValueData[marketValueData.length - 1]?.value || 0;
