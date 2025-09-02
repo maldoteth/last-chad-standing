@@ -966,7 +966,42 @@ const Game = () => {
     const searchLower = search.toLowerCase();
     return players.filter(player => player.name.toLowerCase().includes(searchLower) || player.team.toLowerCase().includes(searchLower) || player.position.toLowerCase().includes(searchLower));
   };
-  const filteredMarketplacePlayers = filterMarketplaceBySearch(filterMarketplaceByRarity(filterMarketplaceByCategory(allPlayers, marketplaceCategory), marketplaceRarity), searchTerm);
+  const sortMarketplacePlayers = (players: any[], sortBy: string) => {
+    const sorted = [...players];
+    
+    switch (sortBy) {
+      case "highest-price":
+        return sorted.sort((a, b) => b.price - a.price);
+      case "lowest-price":
+        return sorted.sort((a, b) => a.price - b.price);
+      case "highest-gain":
+        return sorted.sort((a, b) => {
+          const aGain = ((a.price - a.lastSale) / a.lastSale) * 100;
+          const bGain = ((b.price - b.lastSale) / b.lastSale) * 100;
+          return bGain - aGain;
+        });
+      case "highest-loss":
+        return sorted.sort((a, b) => {
+          const aLoss = ((a.price - a.lastSale) / a.lastSale) * 100;
+          const bLoss = ((b.price - b.lastSale) / b.lastSale) * 100;
+          // Sort by most negative (largest losses first)
+          return aLoss - bLoss;
+        });
+      default:
+        return sorted;
+    }
+  };
+  
+  const filteredAndSortedMarketplacePlayers = sortMarketplacePlayers(
+    filterMarketplaceBySearch(
+      filterMarketplaceByRarity(
+        filterMarketplaceByCategory(allPlayers, marketplaceCategory), 
+        marketplaceRarity
+      ), 
+      searchTerm
+    ), 
+    marketplaceSortBy
+  );
 
   // Debug logging for activeTab changes
   console.log('Current activeTab:', activeTab);
@@ -2609,7 +2644,7 @@ const Game = () => {
                   </CardHeader>
                   <CardContent className="relative z-10">
                     <div className="space-y-2">
-                      {allPlayers.slice(0, visiblePlayers).map((player, idx) => <div key={idx} className="flex items-center space-x-3 p-3 bg-white/5 rounded-lg hover:bg-white/10 transition-colors">
+                       {filteredAndSortedMarketplacePlayers.slice(0, visiblePlayers).map((player, idx) => <div key={idx} className="flex items-center space-x-3 p-3 bg-white/5 rounded-lg hover:bg-white/10 transition-colors">
                           <div className="w-12 h-12 rounded-full overflow-hidden">
                             <img src={player.image} alt={player.name} className="w-full h-full object-cover" />
                           </div>
@@ -2627,11 +2662,11 @@ const Game = () => {
                         </div>)}
                     </div>
                     
-                    {visiblePlayers < allPlayers.length && <div className="mt-4 text-center">
-                        <Button variant="outline" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => setVisiblePlayers(prev => Math.min(prev + 10, allPlayers.length))}>
-                          Load More
-                        </Button>
-                      </div>}
+                     {visiblePlayers < filteredAndSortedMarketplacePlayers.length && <div className="mt-4 text-center">
+                         <Button variant="outline" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => setVisiblePlayers(prev => Math.min(prev + 10, filteredAndSortedMarketplacePlayers.length))}>
+                           Load More
+                         </Button>
+                       </div>}
                   </CardContent>
                 </Card>
 
@@ -4425,7 +4460,7 @@ const Game = () => {
                     </CardHeader>
                    <CardContent className="relative z-10">
                      <div className="space-y-3">
-                       {filteredMarketplacePlayers.slice(0, visiblePlayers).map((player, idx) => <div key={idx} className="flex items-center space-x-4 p-4 bg-white/5 rounded-lg hover:bg-white/15 md:hover:bg-white/20 transition-all duration-300 mb-3 last:mb-0 cursor-pointer">
+                       {filteredAndSortedMarketplacePlayers.slice(0, visiblePlayers).map((player, idx) => <div key={idx} className="flex items-center space-x-4 p-4 bg-white/5 rounded-lg hover:bg-white/15 md:hover:bg-white/20 transition-all duration-300 mb-3 last:mb-0 cursor-pointer">
                           <div className="w-16 h-16 rounded-full overflow-hidden">
                             <img src={player.image} alt={player.name} className="w-full h-full object-cover" />
                           </div>
@@ -4443,11 +4478,11 @@ const Game = () => {
                         </div>)}
                     </div>
                     
-                     {visiblePlayers < filteredMarketplacePlayers.length && <div className="mt-6 text-center">
-                         <Button variant="outline" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => setVisiblePlayers(prev => Math.min(prev + 10, filteredMarketplacePlayers.length))}>
-                           Load More
-                         </Button>
-                       </div>}
+                      {visiblePlayers < filteredAndSortedMarketplacePlayers.length && <div className="mt-6 text-center">
+                          <Button variant="outline" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => setVisiblePlayers(prev => Math.min(prev + 10, filteredAndSortedMarketplacePlayers.length))}>
+                            Load More
+                          </Button>
+                        </div>}
                   </CardContent>
                  </Card>
 
