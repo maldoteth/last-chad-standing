@@ -136,7 +136,7 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
             <ArrowRightLeft className="w-4 h-4" />
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
+        <DropdownMenuContent align="center" className="w-32 bg-white/5 backdrop-blur-xl border border-white/10 text-white z-50 shadow-xl">
           <DropdownMenuItem 
             onClick={() => onBuyClick?.()}
             className="flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10"
