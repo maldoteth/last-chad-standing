@@ -94,7 +94,38 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
         </div>
       </div>
       
-      <Popover>
+      {isMobile ? <Drawer>
+        <DrawerTrigger asChild>
+          <Button 
+            size="icon"
+            variant="ghost" 
+            className="h-8 w-8 bg-transparent hover:bg-transparent"
+          >
+            <ArrowRightLeft className="w-4 h-4" />
+          </Button>
+        </DrawerTrigger>
+        <DrawerContent className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
+          <DrawerHeader>
+            <DrawerTitle className="text-center">Trade Options</DrawerTitle>
+          </DrawerHeader>
+          <div className="px-4 pb-8 space-y-2">
+            <Button 
+              variant="ghost"
+              className="w-full justify-center text-green-400 border border-green-400/30 hover:bg-green-400/10"
+              onClick={() => onBuyClick?.()}
+            >
+              Buy
+            </Button>
+            <Button 
+              variant="ghost"
+              className="w-full justify-center text-red-400 border border-red-400/30 hover:bg-red-400/10"
+              onClick={() => onSellClick?.()}
+            >
+              Sell
+            </Button>
+          </div>
+        </DrawerContent>
+      </Drawer> : <Popover>
         <PopoverTrigger asChild>
           <Button 
             size="icon"
@@ -107,7 +138,7 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
         <PopoverContent 
           className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50" 
           align="end" 
-          side={isMobile ? "bottom" : "top"}
+          side="top"
           sideOffset={8}
         >
           <div className="flex flex-col gap-1 p-2">
@@ -129,7 +160,7 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
             </Button>
           </div>
         </PopoverContent>
-      </Popover>
+      </Popover>}
     </div>;
   }
   return <div className="flex items-start space-x-2">
