@@ -1152,7 +1152,7 @@ const Game = () => {
                     
                     <div className="flex flex-col space-y-3">
                       <Button
-                        className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 hover:text-white transition-all duration-300"
+                        className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 hover:text-white transition-all duration-300 px-8 py-4 h-12"
                         onClick={() => {
                           if (!authenticated) {
                             login();
@@ -1169,7 +1169,7 @@ const Game = () => {
                       
                       <Button
                         variant="outline"
-                        className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 hover:text-white transition-all duration-300"
+                        className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 hover:text-white transition-all duration-300 px-8 py-4 h-12"
                         onClick={() => {
                           if (!authenticated) {
                             login();
