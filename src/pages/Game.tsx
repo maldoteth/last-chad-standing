@@ -126,8 +126,8 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
             </Button>
           </div>
         </DrawerContent>
-      </Drawer> : <Popover>
-        <PopoverTrigger asChild>
+      </Drawer> : <DropdownMenu>
+        <DropdownMenuTrigger asChild>
           <Button 
             size="icon"
             variant="ghost" 
@@ -135,33 +135,22 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
           >
             <ArrowRightLeft className="w-4 h-4" />
           </Button>
-        </PopoverTrigger>
-        <PopoverContent 
-          className="w-40 bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden backdrop-blur-md z-50" 
-          align="end" 
-          side="top"
-          sideOffset={8}
-        >
-          <div className="flex flex-col gap-1 p-1">
-            <Button 
-              size="sm" 
-              variant="ghost" 
-              className="justify-start text-green-400 hover:bg-green-400/10 hover:text-green-300 transition-colors"
-              onClick={() => onBuyClick?.()}
-            >
-              💰 Buy
-            </Button>
-            <Button 
-              size="sm" 
-              variant="ghost" 
-              className="justify-start text-red-400 hover:bg-red-400/10 hover:text-red-300 transition-colors"
-              onClick={() => onSellClick?.()}
-            >
-              💸 Sell
-            </Button>
-          </div>
-        </PopoverContent>
-      </Popover>}
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
+          <DropdownMenuItem 
+            onClick={() => onBuyClick?.()}
+            className="flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10"
+          >
+            <span>💰 Buy</span>
+          </DropdownMenuItem>
+          <DropdownMenuItem 
+            onClick={() => onSellClick?.()}
+            className="flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10"
+          >
+            <span>💸 Sell</span>
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>}
     </div>;
   }
   return <div className="flex items-start space-x-2">
