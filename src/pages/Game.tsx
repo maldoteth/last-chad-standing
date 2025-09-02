@@ -667,6 +667,24 @@ const Game = () => {
       trend: "down",
       image: "/lovable-uploads/660b5122-5ce8-4f6e-af72-2c607d47ef44.png"
     }, {
+      name: "Protest Sign",
+      team: "Future Force",
+      position: "Mobility", 
+      itemType: "emote",
+      price: 2200,
+      lastSale: 2100,
+      trend: "up",
+      image: "/lovable-uploads/f9ba9551-eabd-4e1f-a2a9-2eeddc92114d.png"
+    }, {
+      name: "Aura Farm",
+      team: "Future Force",
+      position: "Mobility", 
+      itemType: "emote",
+      price: 1900,
+      lastSale: 1850,
+      trend: "up",
+      image: "/lovable-uploads/74597015-55ed-4190-91df-62af504a7e04.png"
+    }, {
       name: "Stani Eagle",
       team: "Thunder Birds",
       position: "Speed", 
@@ -675,6 +693,15 @@ const Game = () => {
       lastSale: 1650,
       trend: "up",
       image: "/lovable-uploads/37f256dc-415c-4032-82ad-db63f676284d.png"
+    }, {
+      name: "Screen Smash",
+      team: "Future Force",
+      position: "Mobility", 
+      itemType: "emote",
+      price: 1700,
+      lastSale: 1650,
+      trend: "up",
+      image: "/lovable-uploads/f747341c-eccd-47c4-8290-0451629ec3a4.png"
     }, {
       name: "Latin Legend",
       team: "Mountain Lions",
@@ -694,6 +721,24 @@ const Game = () => {
       trend: "up",
       image: "/lovable-uploads/a76e21f1-ffca-4130-bd9a-08d09167dca0.png"
     }, {
+      name: "Dumbbell Singer",
+      team: "Future Force",
+      position: "Mobility", 
+      itemType: "emote",
+      price: 1200,
+      lastSale: 1150,
+      trend: "up",
+      image: "/lovable-uploads/2c2096de-f308-4a16-865b-31c36a14a080.png"
+    }, {
+      name: "BMF Shorts",
+      team: "Gear Masters",
+      position: "Supreme", 
+      itemType: "accessory",
+      price: 1200,
+      lastSale: 1150,
+      trend: "up",
+      image: "/lovable-uploads/6ffd60e7-d39b-442f-a71c-9ae2f491846f.png"
+    }, {
       name: "John Strictland",
       team: "Weather Gods",
       position: "Legendary", 
@@ -702,6 +747,33 @@ const Game = () => {
       lastSale: 950,
       trend: "up",
       image: "/lovable-uploads/98664a07-8365-4512-8f3e-a0c79bd4617c.png"
+    }, {
+      name: "DHB x LCS shorts",
+      team: "Gear Masters",
+      position: "Supreme", 
+      itemType: "accessory",
+      price: 990,
+      lastSale: 950,
+      trend: "up",
+      image: "/lovable-uploads/e21fe8d7-5519-4b7b-bd90-6b96e74635d4.png"
+    }, {
+      name: "Combat Vest",
+      team: "Gear Masters",
+      position: "Supreme", 
+      itemType: "accessory",
+      price: 880,
+      lastSale: 850,
+      trend: "up",
+      image: "/lovable-uploads/8c7fd9f1-1128-4d45-b089-e8879cb0fa98.png"
+    }, {
+      name: "Rapz Gloves",
+      team: "Gear Masters",
+      position: "Supreme", 
+      itemType: "accessory",
+      price: 800,
+      lastSale: 780,
+      trend: "up",
+      image: "/lovable-uploads/9320a71d-c3b8-4922-938c-5e759907fcf6.png"
     },
     // Vehicles  
     {
@@ -778,15 +850,6 @@ const Game = () => {
       lastSale: 1400,
       trend: "up",
       image: "/lovable-uploads/30d419b4-79a9-459c-b37b-42099ffd6273.png"
-    }, {
-      name: "Protest Sign",
-      team: "Future Force",
-      position: "Mobility", 
-      itemType: "emote",
-      price: 1200,
-      lastSale: 1100,
-      trend: "up",
-      image: "/lovable-uploads/f9ba9551-eabd-4e1f-a2a9-2eeddc92114d.png"
     }, {
       name: "Flex",
       team: "Future Force",
