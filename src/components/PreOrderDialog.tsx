@@ -83,7 +83,7 @@ const PreOrderDialog = ({ children, open: externalOpen, onOpenChange: externalOn
                 <div className="text-center mb-4">
                   <h3 className="font-exo text-xl font-semibold mb-2">{tier.name}</h3>
                   <div className="mb-4">
-                    <div className="text-3xl font-bold text-primary">${tier.price}</div>
+                    <div className="text-3xl font-bold text-cyan-400">${tier.price}</div>
                     {tier.originalValue && (
                       <div className="text-sm text-slate-400">
                         <span className="line-through">${tier.originalValue} value</span>
