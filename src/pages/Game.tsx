@@ -629,21 +629,45 @@ const Game = () => {
   const topGainers = topGainersData[gainersTimeFilter];
   const trendingPlayers = trendingPlayersData[trendingTimeFilter];
   const allPlayers = [{
-    name: "The Irish King",
-    team: "Crimson Hawks",
-    position: "Striker",
-    price: 8500,
-    lastSale: 7500,
+    name: "Indi",
+    team: "Cosmic Force",
+    position: "Godlike",
+    price: 12400,
+    lastSale: 11800,
     trend: "up",
-    image: "/lovable-uploads/5c3f060f-4c5f-412b-8f27-eb1bebd3dd7d.png"
+    image: "/lovable-uploads/76adb888-cbfd-4b1c-ba39-36303e53c2c0.png"
   }, {
-    name: "Speed Buggy",
-    team: "Flame Dragons",
-    position: "Assault",
-    price: 8900,
-    lastSale: 8100,
+    name: "Shane Sonny",
+    team: "Ultimate Force",
+    position: "Champion",
+    price: 11600,
+    lastSale: 10200,
     trend: "up",
-    image: "/lovable-uploads/b64d7801-1284-4763-b115-ca3cfa8ff315.png"
+    image: "/lovable-uploads/a76e21f1-ffca-4130-bd9a-08d09167dca0.png"
+  }, {
+    name: "Kayne Famooser",
+    team: "Quantum Lords",
+    position: "Transcendent",
+    price: 10500,
+    lastSale: 9800,
+    trend: "up",
+    image: "/lovable-uploads/89c54fc5-22f2-44fd-bbf1-d90a653fdb22.png"
+  }, {
+    name: "John Strictland",
+    team: "Weather Gods",
+    position: "Legendary",
+    price: 9900,
+    lastSale: 9200,
+    trend: "up",
+    image: "/lovable-uploads/98664a07-8365-4512-8f3e-a0c79bd4617c.png"
+  }, {
+    name: "Lean Chad",
+    team: "Divine Army",
+    position: "Mythic",
+    price: 9300,
+    lastSale: 8600,
+    trend: "up",
+    image: "/lovable-uploads/a266b13a-b169-41bf-92db-c75cf3d91c9e.png"
   }, {
     name: "Stani Eagle",
     team: "Thunder Birds",
@@ -653,6 +677,46 @@ const Game = () => {
     trend: "up",
     image: "/lovable-uploads/37f256dc-415c-4032-82ad-db63f676284d.png"
   }, {
+    name: "Speed Buggy",
+    team: "Flame Dragons",
+    position: "Assault",
+    price: 8900,
+    lastSale: 8100,
+    trend: "up",
+    image: "/lovable-uploads/b64d7801-1284-4763-b115-ca3cfa8ff315.png"
+  }, {
+    name: "The Irish King",
+    team: "Crimson Hawks",
+    position: "Striker",
+    price: 8500,
+    lastSale: 7500,
+    trend: "up",
+    image: "/lovable-uploads/5c3f060f-4c5f-412b-8f27-eb1bebd3dd7d.png"
+  }, {
+    name: "DJ Mouse",
+    team: "Mega Corps",
+    position: "Destroyer",
+    price: 8100,
+    lastSale: 7400,
+    trend: "up",
+    image: "/lovable-uploads/b86689f4-6c8c-4f7f-91f0-c36052c824e6.png"
+  }, {
+    name: "Silverborg",
+    team: "Thunder Hawks",
+    position: "Speed",
+    price: 7700,
+    lastSale: 7200,
+    trend: "up",
+    image: "/lovable-uploads/fdd396d6-16bd-493f-ba2e-0c27e846ea03.png"
+  }, {
+    name: "Alex Toosick",
+    team: "Dark Legion",
+    position: "Assassin",
+    price: 7300,
+    lastSale: 6800,
+    trend: "up",
+    image: "/lovable-uploads/fa6496ee-f2e7-4af5-8205-7445121d8a6a.png"
+  }, {
     name: "Jonesy Bones",
     team: "Steel Wolves",
     position: "Tank",
@@ -660,6 +724,14 @@ const Game = () => {
     lastSale: 7850,
     trend: "down",
     image: "/lovable-uploads/660b5122-5ce8-4f6e-af72-2c607d47ef44.png"
+  }, {
+    name: "Ray Del Maestro",
+    team: "Space Raiders",
+    position: "Elite",
+    price: 6900,
+    lastSale: 6400,
+    trend: "up",
+    image: "/lovable-uploads/e8b33b1a-410f-4448-9b83-126b8d27f0a9.png"
   }, {
     name: "Latin Legend",
     team: "Mountain Lions",
@@ -669,6 +741,22 @@ const Game = () => {
     trend: "down",
     image: "/lovable-uploads/2c556456-ebeb-4eec-9842-f2d31e06c58a.png"
   }, {
+    name: "Big Dawg",
+    team: "Ice Wolves",
+    position: "Control",
+    price: 6500,
+    lastSale: 5900,
+    trend: "up",
+    image: "/lovable-uploads/2532e628-0d4b-465e-b350-e49def10eb26.png"
+  }, {
+    name: "Based Chad",
+    team: "Steel Warriors",
+    position: "Tank",
+    price: 6200,
+    lastSale: 5700,
+    trend: "up",
+    image: "/lovable-uploads/335b4baf-29e6-4895-a2d4-54e4cee9fae5.png"
+  }, {
     name: "Pogo",
     team: "Dark Matter",
     position: "Phantom",
@@ -676,6 +764,22 @@ const Game = () => {
     lastSale: 5200,
     trend: "up",
     image: "/lovable-uploads/2877ff38-b9fd-4a5d-bca9-25b14f237997.png"
+  }, {
+    name: "Leroy Girthy",
+    team: "Fire Eagles",
+    position: "Assault",
+    price: 5900,
+    lastSale: 5300,
+    trend: "up",
+    image: "/lovable-uploads/55728a6c-0c6b-4217-82d8-a21b16e912d6.png"
+  }, {
+    name: "Tarragon Southslice",
+    team: "Energy Corps",
+    position: "Artillery",
+    price: 5700,
+    lastSale: 5100,
+    trend: "up",
+    image: "/lovable-uploads/cf5abf4c-cf7f-49b7-a830-49343c8d1222.png"
   }, {
     name: "Blue Wing Suit",
     team: "Sun Blazers",
@@ -685,29 +789,45 @@ const Game = () => {
     trend: "up",
     image: "/lovable-uploads/1efc1553-007a-4b38-a982-79d9f5abbfa1.png"
   }, {
-    name: "Pit Bike",
+    name: "The Coupé Tank",
     team: "Neon Guardians",
     position: "Stealth",
+    price: 5300,
+    lastSale: 4900,
+    trend: "up",
+    image: "/lovable-uploads/1c6b707c-97a6-4381-bc54-de63a7cf8a31.png"
+  }, {
+    name: "Pit Bike",
+    team: "Wind Riders",
+    position: "Force",
     price: 5200,
     lastSale: 4100,
     trend: "up",
     image: "/lovable-uploads/4e2aac54-cac6-4cf1-92ad-76bf7e788077.png"
   }, {
     name: "Flex",
-    team: "Wind Riders",
-    position: "Force",
+    team: "Future Force",
+    position: "Mobility",
     price: 4900,
     lastSale: 4200,
     trend: "up",
     image: "/lovable-uploads/f52e83c2-28b7-417e-90ac-757255d1759f.png"
   }, {
     name: "White Base Vest",
-    team: "Future Force",
-    position: "Mobility",
+    team: "Eternal Guardians",
+    position: "Supreme",
     price: 4800,
     lastSale: 4000,
     trend: "up",
     image: "/lovable-uploads/508d1509-e761-46c6-9f3a-f70e256f5a52.png"
+  }, {
+    name: "Zombie Chan",
+    team: "Ground Force",
+    position: "Heavy",
+    price: 4600,
+    lastSale: 4100,
+    trend: "up",
+    image: "/lovable-uploads/82fe8aed-6cfa-45b6-945c-c447349b7fe2.png"
   }].sort((a, b) => b.price - a.price);
   const currentMarketValue = marketValueData[marketValueData.length - 1]?.value || 0;
   const currentListings = Math.round(listingsData[listingsData.length - 1]?.listings || 0);
