@@ -22,7 +22,7 @@ const preOrderTiers: PreOrderTier[] = [{
 }, {
   id: 'special-edition',
   name: 'Special Edition',
-  price: 100,
+  price: 88,
   originalValue: 200,
   popular: true,
   features: ['Early access', '15 skin packs', '15 cosmetic packs', 'Worth $200 total value']
