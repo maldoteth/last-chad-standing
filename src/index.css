@@ -275,45 +275,114 @@ div[role="dialog"][aria-modal="true"] [style*="color"] {
   color: #ffffff !important;
 }
 
-/* Completely disable all hover effects on Privy elements */
+/* ULTRA-AGGRESSIVE HOVER EFFECT PREVENTION FOR PRIVY */
+
+/* Target all elements with inline background styles and force them black on hover */
+[data-privy-modal] *[style*="background"]:hover,
+[data-testid="privy-modal"] *[style*="background"]:hover,
+[data-privy-dialog-content] *[style*="background"]:hover,
+div[role="dialog"][aria-modal="true"] *[style*="background"]:hover {
+  background: #000000 !important;
+  background-color: #000000 !important;
+}
+
+/* Target white/light background overrides specifically */
+[data-privy-modal] *[style*="background: white"]:hover,
+[data-privy-modal] *[style*="background: #fff"]:hover,
+[data-privy-modal] *[style*="background: #ffffff"]:hover,
+[data-privy-modal] *[style*="background-color: white"]:hover,
+[data-privy-modal] *[style*="background-color: #fff"]:hover,
+[data-privy-modal] *[style*="background-color: #ffffff"]:hover,
+[data-testid="privy-modal"] *[style*="background: white"]:hover,
+[data-testid="privy-modal"] *[style*="background: #fff"]:hover,
+[data-testid="privy-modal"] *[style*="background: #ffffff"]:hover,
+[data-testid="privy-modal"] *[style*="background-color: white"]:hover,
+[data-testid="privy-modal"] *[style*="background-color: #fff"]:hover,
+[data-testid="privy-modal"] *[style*="background-color: #ffffff"]:hover {
+  background: #000000 !important;
+  background-color: #000000 !important;
+}
+
+/* Completely disable ALL hover states with maximum specificity */
+[data-privy-modal] *:hover,
+[data-testid="privy-modal"] *:hover,
+[data-privy-dialog-content] *:hover,
+div[role="dialog"][aria-modal="true"] *:hover,
+.privy-modal *:hover,
+[class*="privy-modal"] *:hover,
+[id*="privy-modal"] *:hover {
+  background: #000000 !important;
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border-color: #ffffff !important;
+  outline-color: #ffffff !important;
+  box-shadow: none !important;
+  filter: none !important;
+  transform: none !important;
+  transition: none !important;
+  animation: none !important;
+  opacity: 1 !important;
+}
+
+/* Override CSS custom properties that might control hover states */
 [data-privy-modal] *:hover,
 [data-testid="privy-modal"] *:hover,
 [data-privy-dialog-content] *:hover {
-  background-color: initial !important;
-  background: initial !important;
-  color: initial !important;
-  filter: none !important;
-  transform: none !important;
-  transition: none !important;
-  pointer-events: auto !important;
+  --hover-bg: #000000 !important;
+  --hover-background: #000000 !important;
+  --hover-color: #ffffff !important;
+  --bg-hover: #000000 !important;
+  --background-hover: #000000 !important;
+  --color-hover: #ffffff !important;
 }
 
-/* Force specific button elements to maintain original state on hover */
-[data-privy-modal] button,
-[data-privy-modal] a,
-[data-privy-modal] div[role="button"],
-[data-testid="privy-modal"] button,
-[data-testid="privy-modal"] a,
-[data-testid="privy-modal"] div[role="button"],
-[data-privy-dialog-content] button,
-[data-privy-dialog-content] a,
-[data-privy-dialog-content] div[role="button"] {
-  transition: none !important;
-}
-
+/* Force button elements to never change on hover with ultra-high specificity */
 [data-privy-modal] button:hover,
-[data-privy-modal] a:hover,
+[data-privy-modal] a:hover, 
 [data-privy-modal] div[role="button"]:hover,
+[data-privy-modal] span[role="button"]:hover,
 [data-testid="privy-modal"] button:hover,
 [data-testid="privy-modal"] a:hover,
 [data-testid="privy-modal"] div[role="button"]:hover,
+[data-testid="privy-modal"] span[role="button"]:hover,
 [data-privy-dialog-content] button:hover,
 [data-privy-dialog-content] a:hover,
-[data-privy-dialog-content] div[role="button"]:hover {
-  background-color: initial !important;
-  background: initial !important;
-  color: initial !important;
+[data-privy-dialog-content] div[role="button"]:hover,
+[data-privy-dialog-content] span[role="button"]:hover,
+div[role="dialog"][aria-modal="true"] button:hover,
+div[role="dialog"][aria-modal="true"] a:hover,
+div[role="dialog"][aria-modal="true"] div[role="button"]:hover,
+div[role="dialog"][aria-modal="true"] span[role="button"]:hover {
+  background: #000000 !important;
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border-color: #ffffff !important;
   transform: none !important;
   filter: none !important;
+  opacity: 1 !important;
+  box-shadow: none !important;
+  transition: none !important;
+  animation: none !important;
+}
+
+/* Remove all transitions and animations to prevent hover effects */
+[data-privy-modal] *,
+[data-testid="privy-modal"] *,
+[data-privy-dialog-content] *,
+div[role="dialog"][aria-modal="true"] * {
+  transition: none !important;
+  animation: none !important;
+}
+
+/* Override any possible pseudo-element hover effects */
+[data-privy-modal] *:hover::before,
+[data-privy-modal] *:hover::after,
+[data-testid="privy-modal"] *:hover::before,
+[data-testid="privy-modal"] *:hover::after,
+[data-privy-dialog-content] *:hover::before,
+[data-privy-dialog-content] *:hover::after {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border-color: #ffffff !important;
 }
 
