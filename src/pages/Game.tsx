@@ -1288,7 +1288,7 @@ const Game = () => {
                           <div className="flex items-center justify-between">
                             <div className="flex items-center space-x-3">
                               <div className="text-2xl">
-                                <img src="/lovable-uploads/fe5d4ef8-a585-4160-86a0-ab4fe59293d2.png" alt="Coin" className="w-6 h-6" />
+                                <img src="/lovable-uploads/c32465ca-8811-443a-a73c-b57225210592.png" alt="Coin" className="w-6 h-6" />
                               </div>
                               <div className="flex flex-col">
                                 <span className="text-sm font-medium text-white">Coin Balance</span>
@@ -1364,7 +1364,7 @@ const Game = () => {
                           <div className="flex items-center justify-between">
                             <div className="flex items-center space-x-3">
                               <div className="text-2xl">
-                                <img src="/lovable-uploads/fe5d4ef8-a585-4160-86a0-ab4fe59293d2.png" alt="Coin" className="w-6 h-6" />
+                                <img src="/lovable-uploads/c32465ca-8811-443a-a73c-b57225210592.png" alt="Coin" className="w-6 h-6" />
                               </div>
                               <div className="flex flex-col">
                                 <span className="text-sm font-medium text-white">Coin Balance</span>
