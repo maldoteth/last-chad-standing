@@ -2292,7 +2292,7 @@ const Game = () => {
                                <DrawerTitle className="text-center">Search</DrawerTitle>
                              </DrawerHeader>
                              <div className="px-4 pb-8">
-                               <Input placeholder="Search players..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="bg-white/10 border-white/20 text-white placeholder:text-gray-400" />
+                               <Input placeholder="Type" value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="bg-white/10 border-white/20 text-white placeholder:text-gray-400" />
                              </div>
                            </DrawerContent>
                          </Drawer>
