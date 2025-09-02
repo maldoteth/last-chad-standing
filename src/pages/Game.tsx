@@ -3775,11 +3775,11 @@ const Game = () => {
                                      </Button>
                                    </DropdownMenuTrigger>
                                    <DropdownMenuContent align="start" className="w-full lg:w-full bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
-                                      <DropdownMenuItem onClick={handleBuyWithCoinsClick} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
+                                       <DropdownMenuItem onClick={handleBuyWithCoinsClick} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 transition-all duration-300">
                                         <Coins className="w-4 h-4" />
                                         <span>Buy With Coins</span>
                                       </DropdownMenuItem>
-                                      <DropdownMenuItem onClick={handleBuyWithCardClick} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
+                                       <DropdownMenuItem onClick={handleBuyWithCardClick} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 transition-all duration-300">
                                         <CreditCard className="w-4 h-4" />
                                         <span>Buy with Card</span>
                                       </DropdownMenuItem>
