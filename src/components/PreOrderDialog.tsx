@@ -147,7 +147,7 @@ const PreOrderDialog = ({ children, open: externalOpen, onOpenChange: externalOn
         >
           <SheetHeader>
             <SheetTitle className="font-exo text-2xl text-center text-white mb-6">
-              Pre-Order Last Chad Standing
+              Pre-Oder LCS
             </SheetTitle>
           </SheetHeader>
           {renderContent()}
@@ -164,7 +164,7 @@ const PreOrderDialog = ({ children, open: externalOpen, onOpenChange: externalOn
       <DialogContent className={`${contentClassName} max-w-4xl max-h-[90vh] overflow-y-auto`}>
         <DialogHeader>
           <DialogTitle className="font-exo text-2xl text-center text-white mb-6">
-            Pre-Order Last Chad Standing
+            Pre-Oder LCS
           </DialogTitle>
         </DialogHeader>
         {renderContent()}
