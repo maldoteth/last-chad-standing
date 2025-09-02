@@ -716,7 +716,7 @@ const Game = () => {
       team: "Mountain Lions",
       position: "Defense", 
       itemType: "fighters",
-      price: 1500,
+      price: 1200,
       lastSale: 1400,
       trend: "down",
       image: "/lovable-uploads/2c556456-ebeb-4eec-9842-f2d31e06c58a.png"
@@ -725,9 +725,9 @@ const Game = () => {
       team: "Ultimate Force",
       position: "Champion", 
       itemType: "fighters",
-      price: 1200,
+      price: 950,
       lastSale: 1100,
-      trend: "up",
+      trend: "down",
       image: "/lovable-uploads/a76e21f1-ffca-4130-bd9a-08d09167dca0.png"
     }, {
       name: "Dumbbell Singer",
@@ -761,18 +761,18 @@ const Game = () => {
       team: "Gear Masters",
       position: "Supreme", 
       itemType: "accessories",
-      price: 990,
+      price: 850,
       lastSale: 950,
-      trend: "up",
+      trend: "down",
       image: "/lovable-uploads/e21fe8d7-5519-4b7b-bd90-6b96e74635d4.png"
     }, {
       name: "Combat Vest",
       team: "Gear Masters",
       position: "Supreme", 
       itemType: "accessories",
-      price: 880,
+      price: 750,
       lastSale: 850,
-      trend: "up",
+      trend: "down",
       image: "/lovable-uploads/8c7fd9f1-1128-4d45-b089-e8879cb0fa98.png"
     }, {
       name: "Rapz Gloves",
