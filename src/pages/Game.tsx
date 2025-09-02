@@ -1154,9 +1154,13 @@ const Game = () => {
                       <Button
                         className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 hover:text-white transition-all duration-300"
                         onClick={() => {
-                          toast({
-                            title: "Coming Soon!",
-                          });
+                          if (!authenticated) {
+                            login();
+                          } else {
+                            toast({
+                              title: "Coming Soon!",
+                            });
+                          }
                         }}
                       >
                         <CreditCard className="w-4 h-4 mr-2" />
@@ -1167,9 +1171,13 @@ const Game = () => {
                         variant="outline"
                         className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 hover:text-white transition-all duration-300"
                         onClick={() => {
-                          toast({
-                            title: "Coming Soon!",
-                          });
+                          if (!authenticated) {
+                            login();
+                          } else {
+                            toast({
+                              title: "Coming Soon!",
+                            });
+                          }
                         }}
                       >
                         <Wallet className="w-4 h-4 mr-2" />
@@ -1201,9 +1209,13 @@ const Game = () => {
                   <div className="relative z-10">
                     <DropdownMenuItem 
                       onClick={() => {
-                        toast({
-                          title: "Coming Soon!",
-                        });
+                        if (!authenticated) {
+                          login();
+                        } else {
+                          toast({
+                            title: "Coming Soon!",
+                          });
+                        }
                       }} 
                       className="flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 hover:text-white transition-all duration-300"
                     >
@@ -1213,9 +1225,13 @@ const Game = () => {
                     
                     <DropdownMenuItem 
                       onClick={() => {
-                        toast({
-                          title: "Coming Soon!",
-                        });
+                        if (!authenticated) {
+                          login();
+                        } else {
+                          toast({
+                            title: "Coming Soon!",
+                          });
+                        }
                       }} 
                       className="flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 hover:text-white transition-all duration-300"
                     >
