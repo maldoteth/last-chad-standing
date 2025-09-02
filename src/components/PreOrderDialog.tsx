@@ -99,7 +99,7 @@ const PreOrderDialog = ({ children, open: externalOpen, onOpenChange: externalOn
             <div 
               className={`rounded-lg p-6 h-full min-h-[400px] md:min-h-[500px] flex flex-col transition-all duration-200 border ${
                 selectedTier === tier.id 
-                  ? 'bg-gradient-to-br from-[#284e8b]/20 via-[#284e8b]/10 to-transparent border-[#284e8b]/50' 
+                  ? 'bg-gradient-to-br from-[#2665cb]/20 via-[#2665cb]/10 to-transparent border-[#2665cb]/50' 
                   : 'bg-gradient-to-br from-gray-800/50 via-gray-900/50 to-black/50 border-gray-600/50'
               }`}
               onClick={() => setSelectedTier(tier.id)}
@@ -107,11 +107,11 @@ const PreOrderDialog = ({ children, open: externalOpen, onOpenChange: externalOn
               <div className="text-center mb-4">
                 <h3 className="font-exo text-xl font-semibold mb-2">{tier.name}</h3>
                 <div className="mb-4">
-                  <div className="text-3xl font-bold" style={{ color: '#284e8b' }}>${tier.price}</div>
+                  <div className="text-3xl font-bold" style={{ color: '#2665cb' }}>${tier.price}</div>
                   {tier.originalValue && (
                     <div className="text-sm text-slate-400">
                       <span className="line-through">${tier.originalValue} value</span>
-                       <span style={{ color: '#284e8b' }} className="ml-2">
+                       <span style={{ color: '#2665cb' }} className="ml-2">
                          Save ${tier.originalValue - tier.price}
                        </span>
                     </div>
@@ -122,7 +122,7 @@ const PreOrderDialog = ({ children, open: externalOpen, onOpenChange: externalOn
               <ul className="space-y-3 mb-6 flex-1">
                 {tier.features.map((feature, index) => (
                   <li key={index} className="flex items-center text-sm">
-                    <Check style={{ color: '#284e8b' }} className="w-4 h-4 mr-3 flex-shrink-0" />
+                    <Check style={{ color: '#2665cb' }} className="w-4 h-4 mr-3 flex-shrink-0" />
                     <span>{feature}</span>
                   </li>
                 ))}
@@ -131,11 +131,11 @@ const PreOrderDialog = ({ children, open: externalOpen, onOpenChange: externalOn
               <div className="flex justify-center mt-auto">
                 <div className={`w-4 h-4 rounded-full border-2 ${
                   selectedTier === tier.id 
-                    ? 'border-[#284e8b]' 
+                    ? 'border-[#2665cb]' 
                     : 'border-white/40'
-                } ${selectedTier === tier.id ? 'bg-[#284e8b]' : ''}`}>
+                } ${selectedTier === tier.id ? 'bg-[#2665cb]' : ''}`}>
                   {selectedTier === tier.id && (
-                    <div className="w-full h-full rounded-full bg-[#284e8b]"></div>
+                    <div className="w-full h-full rounded-full bg-[#2665cb]"></div>
                   )}
                 </div>
               </div>
