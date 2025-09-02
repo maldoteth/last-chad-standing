@@ -527,3 +527,86 @@ div[role="dialog"][aria-modal="true"] * {
   stroke: #000000 !important;
 }
 
+/* REMOVE GREY CIRCLE BACKGROUNDS FROM CLOSE AND BACK BUTTONS */
+
+/* Target close button containers - remove grey background */
+[data-privy-modal] button[aria-label*="close"],
+[data-privy-modal] button[aria-label*="Close"],
+[data-testid="privy-modal"] button[aria-label*="close"],
+[data-testid="privy-modal"] button[aria-label*="Close"],
+[data-privy-dialog-content] button[aria-label*="close"],
+[data-privy-dialog-content] button[aria-label*="Close"] {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Target back button containers - remove grey background */
+[data-privy-modal] button[aria-label*="back"],
+[data-privy-modal] button[aria-label*="Back"],
+[data-testid="privy-modal"] button[aria-label*="back"],
+[data-testid="privy-modal"] button[aria-label*="Back"],
+[data-privy-dialog-content] button[aria-label*="back"],
+[data-privy-dialog-content] button[aria-label*="Back"] {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Target circular buttons in header area that might be close/back buttons */
+[data-privy-modal] header button,
+[data-privy-modal] [class*="header"] button,
+[data-privy-modal] [class*="top"] button,
+[data-testid="privy-modal"] header button,
+[data-testid="privy-modal"] [class*="header"] button,
+[data-testid="privy-modal"] [class*="top"] button,
+[data-privy-dialog-content] header button,
+[data-privy-dialog-content] [class*="header"] button,
+[data-privy-dialog-content] [class*="top"] button {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Target any button with circular styling - remove backgrounds */
+[data-privy-modal] button[style*="border-radius"],
+[data-privy-modal] button[class*="close"],
+[data-privy-modal] [class*="close-button"],
+[data-testid="privy-modal"] button[style*="border-radius"],
+[data-testid="privy-modal"] button[class*="close"],
+[data-testid="privy-modal"] [class*="close-button"],
+[data-privy-dialog-content] button[style*="border-radius"],
+[data-privy-dialog-content] button[class*="close"],
+[data-privy-dialog-content] [class*="close-button"] {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Hover states - keep backgrounds transparent */
+[data-privy-modal] button[aria-label*="close"]:hover,
+[data-privy-modal] button[aria-label*="Close"]:hover,
+[data-privy-modal] button[aria-label*="back"]:hover,
+[data-privy-modal] button[aria-label*="Back"]:hover,
+[data-testid="privy-modal"] button[aria-label*="close"]:hover,
+[data-testid="privy-modal"] button[aria-label*="Close"]:hover,
+[data-testid="privy-modal"] button[aria-label*="back"]:hover,
+[data-testid="privy-modal"] button[aria-label*="Back"]:hover,
+[data-privy-dialog-content] button[aria-label*="close"]:hover,
+[data-privy-dialog-content] button[aria-label*="Close"]:hover,
+[data-privy-dialog-content] button[aria-label*="back"]:hover,
+[data-privy-dialog-content] button[aria-label*="Back"]:hover {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
