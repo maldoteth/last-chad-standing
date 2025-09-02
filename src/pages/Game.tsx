@@ -1600,7 +1600,7 @@ const Game = () => {
                               </DrawerHeader>
                               <div className="p-4 space-y-3">
                                 <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={handleBuyWithCoinsClick}>
-                                  <Coins className="mr-2 h-4 w-4" />
+                                 <img src="/lovable-uploads/aa517b6d-c98b-4876-9f58-97246b49844b.png" alt="LCS Coin" className="mr-2 h-4 w-4" />
                                   Buy With Coins
                                 </Button>
                                 <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={handleBuyWithCardClick}>
@@ -1622,7 +1622,7 @@ const Game = () => {
                             </DropdownMenuTrigger>
                             <DropdownMenuContent align="center" className="w-full bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
                               <DropdownMenuItem onClick={handleBuyWithCoinsClick} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
-                                <Coins className="w-4 h-4" />
+                                 <img src="/lovable-uploads/aa517b6d-c98b-4876-9f58-97246b49844b.png" alt="LCS Coin" className="w-4 h-4" />
                                 <span>Buy With Coins</span>
                               </DropdownMenuItem>
                               <DropdownMenuItem onClick={handleBuyWithCardClick} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
@@ -2131,7 +2131,7 @@ const Game = () => {
                                     </DrawerHeader>
                                     <div className="p-4 space-y-3">
                                         <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={handleBuyWithCoinsClick}>
-                                          <Coins className="mr-2 h-4 w-4" />
+                                           <img src="/lovable-uploads/aa517b6d-c98b-4876-9f58-97246b49844b.png" alt="LCS Coin" className="mr-2 h-4 w-4" />
                                           Buy With Coins
                                         </Button>
                                         <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={handleBuyWithCardClick}>
@@ -2248,7 +2248,7 @@ const Game = () => {
                                     </DrawerHeader>
                                     <div className="p-4 space-y-3">
                                         <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={handleBuyWithCoinsClick}>
-                                        <Coins className="mr-2 h-4 w-4" />
+                                         <img src="/lovable-uploads/aa517b6d-c98b-4876-9f58-97246b49844b.png" alt="LCS Coin" className="mr-2 h-4 w-4" />
                                         Buy With Coins
                                       </Button>
                                       <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => {/* TODO: Implement card payment */}}>
@@ -2369,7 +2369,7 @@ const Game = () => {
                               description: "Coin purchases coming soon!",
                               duration: 3000
                             })}>
-                                        <Coins className="mr-2 h-4 w-4" />
+                                         <img src="/lovable-uploads/aa517b6d-c98b-4876-9f58-97246b49844b.png" alt="LCS Coin" className="mr-2 h-4 w-4" />
                                         Buy With Coins
                                       </Button>
                                       <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => {/* TODO: Implement card payment */}}>
@@ -2479,7 +2479,7 @@ const Game = () => {
                                        </DrawerHeader>
                                        <div className="p-4 space-y-3">
                                         <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={handleBuyWithCoinsClick}>
-                                          <Coins className="mr-2 h-4 w-4" />
+                                           <img src="/lovable-uploads/aa517b6d-c98b-4876-9f58-97246b49844b.png" alt="LCS Coin" className="mr-2 h-4 w-4" />
                                           Buy With Coins
                                         </Button>
                                         <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={handleBuyWithCardClick}>
@@ -3518,7 +3518,7 @@ const Game = () => {
                           </DrawerHeader>
                           <div className="p-4 space-y-3">
             <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={handleBuyWithCoinsClick}>
-              <Coins className="mr-2 h-4 w-4" />
+              <img src="/lovable-uploads/aa517b6d-c98b-4876-9f58-97246b49844b.png" alt="LCS Coin" className="mr-2 h-4 w-4" />
               Buy With Coins
             </Button>
             <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={handleBuyWithCardClick}>
@@ -3540,7 +3540,7 @@ const Game = () => {
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="center" className="w-full bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
                           <DropdownMenuItem onClick={handleBuyWithCoinsClick} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
-                            <Coins className="w-4 h-4" />
+                             <img src="/lovable-uploads/aa517b6d-c98b-4876-9f58-97246b49844b.png" alt="LCS Coin" className="w-4 h-4" />
                             <span>Buy With Coins</span>
                           </DropdownMenuItem>
                           <DropdownMenuItem onClick={handleBuyWithCardClick} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
@@ -3824,7 +3824,7 @@ const Game = () => {
                                    </DropdownMenuTrigger>
                                    <DropdownMenuContent align="start" className="w-full lg:w-full bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
                                        <DropdownMenuItem onClick={handleBuyWithCoinsClick} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 transition-all duration-300">
-                                        <Coins className="w-4 h-4" />
+                                         <img src="/lovable-uploads/aa517b6d-c98b-4876-9f58-97246b49844b.png" alt="LCS Coin" className="w-4 h-4" />
                                         <span>Buy With Coins</span>
                                       </DropdownMenuItem>
                                        <DropdownMenuItem onClick={handleBuyWithCardClick} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 transition-all duration-300">
@@ -3923,7 +3923,7 @@ const Game = () => {
                                    </DropdownMenuTrigger>
                                    <DropdownMenuContent align="center" className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
                                       <DropdownMenuItem onClick={handleBuyWithCoinsClick} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
-                                        <Coins className="w-4 h-4" />
+                                         <img src="/lovable-uploads/aa517b6d-c98b-4876-9f58-97246b49844b.png" alt="LCS Coin" className="w-4 h-4" />
                                         <span>Buy With Coins</span>
                                       </DropdownMenuItem>
                                       <DropdownMenuItem onClick={handleBuyWithCardClick} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
@@ -4006,7 +4006,7 @@ const Game = () => {
                                   description: "Coin purchases coming soon!",
                                   duration: 3000
                                 })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
-                                        <Coins className="w-4 h-4" />
+                                         <img src="/lovable-uploads/aa517b6d-c98b-4876-9f58-97246b49844b.png" alt="LCS Coin" className="w-4 h-4" />
                                         <span>Buy With Coins</span>
                                       </DropdownMenuItem>
                                       <DropdownMenuItem onClick={() => toast({
@@ -4113,7 +4113,7 @@ const Game = () => {
                                   description: "Coin purchases coming soon!",
                                   duration: 3000
                                 })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
-                                       <Coins className="w-4 h-4" />
+                                        <img src="/lovable-uploads/aa517b6d-c98b-4876-9f58-97246b49844b.png" alt="LCS Coin" className="w-4 h-4" />
                                        <span>Buy With Coins</span>
                                      </DropdownMenuItem>
                                      <DropdownMenuItem onClick={() => toast({
@@ -4200,7 +4200,7 @@ const Game = () => {
                                   description: "Coin purchases coming soon!",
                                   duration: 3000
                                 })} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-gradient-to-br hover:from-gray-800/30 hover:via-black/20 hover:to-gray-900/40 hover:backdrop-blur-md transition-all duration-300">
-                                       <Coins className="w-4 h-4" />
+                                       <img src="/lovable-uploads/aa517b6d-c98b-4876-9f58-97246b49844b.png" alt="LCS Coin" className="w-4 h-4" />
                                        <span>Buy With Coins</span>
                                      </DropdownMenuItem>
                                      <DropdownMenuItem onClick={() => toast({
@@ -5247,7 +5247,7 @@ const Game = () => {
             });
             setBuyDialogOpen(false);
           }}>
-                <Coins className="w-4 h-4 mr-2" />
+                <img src="/lovable-uploads/aa517b6d-c98b-4876-9f58-97246b49844b.png" alt="LCS Coin" className="w-4 h-4 mr-2" />
                 Buy with Coins
               </Button>
               <Button variant="ghost" className="text-white hover:bg-white/10 hover:text-white transition-all duration-300" onClick={() => setBuyDialogOpen(false)}>
