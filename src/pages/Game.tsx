@@ -86,7 +86,7 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
       <div className="flex flex-col items-end md:flex-row md:items-center md:gap-4">
         <div className="flex items-center gap-1 mb-1 md:mb-0 justify-start">
           <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className={`${coin} flex-shrink-0`} />
-          <span className={`${text} font-bold text-foreground`}>
+          <span className={`${text} font-bold text-foreground mt-1 md:mt-0`}>
             {formatNumberWithAbbreviation(mockSellPrice)}
           </span>
         </div>
