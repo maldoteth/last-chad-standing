@@ -89,6 +89,54 @@ const addPrivyTabletStyles = () => {
 // Apply styles immediately
 addPrivyTabletStyles();
 
+// Helper function to detect if an element is a close or back button
+const isCloseOrBackButton = (element: Element): boolean => {
+  // Check if it's a button element
+  if (element.tagName !== 'BUTTON') {
+    // Check if it's inside a button
+    const buttonParent = element.closest('button');
+    if (!buttonParent) return false;
+    element = buttonParent;
+  }
+  
+  // Check various attributes and properties that indicate close/back buttons
+  const ariaLabel = element.getAttribute('aria-label')?.toLowerCase() || '';
+  const className = element.className?.toLowerCase() || '';
+  const role = element.getAttribute('role')?.toLowerCase() || '';
+  
+  // Look for close button indicators
+  if (ariaLabel.includes('close') || ariaLabel.includes('back') || 
+      className.includes('close') || className.includes('back') ||
+      role === 'button') {
+    return true;
+  }
+  
+  // Check if it contains close/back icon (X, arrow, etc.)
+  const textContent = element.textContent?.trim() || '';
+  const innerHTML = element.innerHTML?.toLowerCase() || '';
+  
+  if (textContent === '×' || textContent === '✕' || textContent === '⨯' ||
+      innerHTML.includes('close') || innerHTML.includes('back') ||
+      innerHTML.includes('arrow') || innerHTML.includes('×')) {
+    return true;
+  }
+  
+  // Check if it's positioned like a close button (top-right area)
+  const rect = element.getBoundingClientRect();
+  const modal = element.closest('[data-privy-modal], [data-testid="privy-modal"], [data-privy-dialog-content]');
+  if (modal) {
+    const modalRect = modal.getBoundingClientRect();
+    const isTopRight = rect.right > modalRect.right - 60 && rect.top < modalRect.top + 60;
+    const isTopLeft = rect.left < modalRect.left + 60 && rect.top < modalRect.top + 60;
+    
+    if ((isTopRight || isTopLeft) && element.tagName === 'BUTTON') {
+      return true;
+    }
+  }
+  
+  return false;
+};
+
 // Aggressive hover effect override function
 const overridePrivyHoverEffects = () => {
   const privyElements = document.querySelectorAll(`
@@ -100,14 +148,38 @@ const overridePrivyHoverEffects = () => {
   
   privyElements.forEach((element: any) => {
     if (element.style) {
-      // Store original styles
+      // Check if this is a close or back button
+      const isButton = isCloseOrBackButton(element);
+      
+      if (isButton) {
+        // For close/back buttons, only force transparent background and black icons
+        element.style.background = 'transparent';
+        element.style.backgroundColor = 'transparent';
+        element.style.border = 'none';
+        element.style.borderRadius = '0';
+        element.style.boxShadow = 'none';
+        
+        // Force icon colors to black for visibility
+        const svgs = element.querySelectorAll('svg, path');
+        svgs.forEach((svg: any) => {
+          if (svg.style) {
+            svg.style.fill = '#000000';
+            svg.style.stroke = '#000000';
+            svg.style.color = '#000000';
+          }
+        });
+        
+        return; // Skip the rest of the processing for close/back buttons
+      }
+      
+      // Store original styles for non-button elements
       const originalBg = element.style.backgroundColor || '#000000';
       const originalColor = element.style.color || '#ffffff';
       
-      // Override mouse events
+      // Override mouse events for regular elements
       element.addEventListener('mouseenter', (e: any) => {
         e.stopPropagation();
-        if (element.style) {
+        if (element.style && !isCloseOrBackButton(element)) {
           element.style.backgroundColor = '#000000';
           element.style.background = '#000000';
           element.style.color = '#ffffff';
@@ -119,7 +191,7 @@ const overridePrivyHoverEffects = () => {
       
       element.addEventListener('mouseleave', (e: any) => {
         e.stopPropagation();
-        if (element.style) {
+        if (element.style && !isCloseOrBackButton(element)) {
           element.style.backgroundColor = originalBg;
           element.style.color = originalColor;
         }
@@ -127,7 +199,7 @@ const overridePrivyHoverEffects = () => {
       
       element.addEventListener('mouseover', (e: any) => {
         e.stopPropagation();
-        if (element.style) {
+        if (element.style && !isCloseOrBackButton(element)) {
           element.style.backgroundColor = '#000000';
           element.style.background = '#000000';
           element.style.color = '#ffffff';
