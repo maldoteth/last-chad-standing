@@ -285,7 +285,7 @@ const PreOrderDialog = ({ children, open: externalOpen, onOpenChange: externalOn
       <DialogTrigger asChild>
         {children}
       </DialogTrigger>
-      <DialogContent className={`${contentClassName} max-w-2xl max-h-[90vh] overflow-y-auto`}>
+      <DialogContent className={`${contentClassName} max-w-4xl max-h-[90vh] overflow-y-auto`}>
         <DialogHeader>
           <DialogTitle className="font-exo text-2xl text-center text-white mb-6">
             Pre-Oder LCS
