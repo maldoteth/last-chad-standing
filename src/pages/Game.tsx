@@ -2428,7 +2428,7 @@ const Game = () => {
               backgroundSize: '4px 4px'
             }} />
                     <CardContent className="p-6 text-center relative z-10">
-                      <Package className="w-16 h-16 mx-auto text-gray-400 mb-4" />
+                      <Archive className="w-16 h-16 mx-auto text-gray-400 mb-4" />
                       <h3 className="text-lg font-semibold mb-2 text-white">Login to View Your Locker</h3>
                       <p className="text-gray-300 mb-4">Connect your wallet to see your owned items</p>
                       <Button onClick={login} variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30">
@@ -2455,7 +2455,7 @@ const Game = () => {
                        <CardContent className="relative z-10">
                          <div className="text-center py-8">
                            <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-3">
-                             <Package className="w-6 h-6 text-gray-400" />
+                             <Archive className="w-6 h-6 text-gray-400" />
                            </div>
                            <p className="text-gray-300 text-sm">No fighters owned yet</p>
                            <p className="text-xs text-gray-400 mt-1">Visit the store to purchase fighters</p>
@@ -2485,7 +2485,7 @@ const Game = () => {
                        <CardContent className="relative z-10">
                          <div className="text-center py-8">
                            <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-3">
-                             <Package className="w-6 h-6 text-gray-400" />
+                             <Archive className="w-6 h-6 text-gray-400" />
                            </div>
                            <p className="text-gray-300 text-sm">No accessories owned yet</p>
                            <p className="text-xs text-gray-400 mt-1">Visit the store to purchase shoes, backpacks, and hats</p>
@@ -2515,7 +2515,7 @@ const Game = () => {
                        <CardContent className="relative z-10">
                          <div className="text-center py-8">
                            <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-3">
-                             <Package className="w-6 h-6 text-gray-400" />
+                             <Archive className="w-6 h-6 text-gray-400" />
                            </div>
                            <p className="text-gray-300 text-sm">No vehicles owned yet</p>
                            <p className="text-xs text-gray-400 mt-1">Visit the store to purchase bikes, cars, and hovercrafts</p>
@@ -2545,7 +2545,7 @@ const Game = () => {
                        <CardContent className="relative z-10">
                          <div className="text-center py-8">
                            <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-3">
-                             <Package className="w-6 h-6 text-gray-400" />
+                             <Archive className="w-6 h-6 text-gray-400" />
                            </div>
                            <p className="text-gray-300 text-sm">No packs owned yet</p>
                            <p className="text-xs text-gray-400 mt-1">Visit the store to purchase item packs</p>
@@ -4252,7 +4252,7 @@ const Game = () => {
                     backgroundSize: '4px 4px'
                   }} />
                     <CardContent className="p-6 text-center relative z-10">
-                       <Package className="w-16 h-16 mx-auto text-gray-400 mb-4" />
+                       <Archive className="w-16 h-16 mx-auto text-gray-400 mb-4" />
                        <h3 className="text-lg font-semibold mb-4 text-white">Login to View Your Locker</h3>
                        <Button onClick={login} variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30">
                          Login
@@ -4278,7 +4278,7 @@ const Game = () => {
                        <CardContent className="relative z-10">
                          <div className="text-center py-12">
                            <div className="w-16 h-16 bg-gray-800/50 rounded-full flex items-center justify-center mx-auto mb-4">
-                             <Package className="w-8 h-8 text-gray-400" />
+                             <Archive className="w-8 h-8 text-gray-400" />
                            </div>
                            <p className="text-gray-300">No fighters owned yet</p>
                            <p className="text-sm text-gray-400 mt-1">Visit the store to purchase fighters</p>
@@ -4308,7 +4308,7 @@ const Game = () => {
                        <CardContent className="relative z-10">
                          <div className="text-center py-12">
                            <div className="w-16 h-16 bg-gray-800/50 rounded-full flex items-center justify-center mx-auto mb-4">
-                             <Package className="w-8 h-8 text-gray-400" />
+                             <Archive className="w-8 h-8 text-gray-400" />
                            </div>
                            <p className="text-gray-300">No accessories owned yet</p>
                            <p className="text-sm text-gray-400 mt-1">Visit the store to purchase shoes, backpacks, and hats</p>
@@ -4338,7 +4338,7 @@ const Game = () => {
                        <CardContent className="relative z-10">
                          <div className="text-center py-12">
                            <div className="w-16 h-16 bg-gray-800/50 rounded-full flex items-center justify-center mx-auto mb-4">
-                             <Package className="w-8 h-8 text-gray-400" />
+                             <Archive className="w-8 h-8 text-gray-400" />
                            </div>
                            <p className="text-gray-300">No vehicles owned yet</p>
                            <p className="text-sm text-gray-400 mt-1">Visit the store to purchase cars, golf buggies, and more</p>
@@ -4368,7 +4368,7 @@ const Game = () => {
                        <CardContent className="relative z-10">
                          <div className="text-center py-12">
                            <div className="w-16 h-16 bg-gray-800/50 rounded-full flex items-center justify-center mx-auto mb-4">
-                             <Package className="w-8 h-8 text-gray-400" />
+                             <Archive className="w-8 h-8 text-gray-400" />
                            </div>
                            <p className="text-gray-300">No packs owned yet</p>
                            <p className="text-sm text-gray-400 mt-1">Visit the store to purchase item packs</p>
