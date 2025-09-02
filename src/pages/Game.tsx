@@ -1146,24 +1146,13 @@ const Game = () => {
                     <span className="font-semibold text-sm lg:text-base">{userCoins.toLocaleString()}</span>
                   </div>
                 </SheetTrigger>
-                <SheetContent side="bottom" className="bg-gradient-to-br from-gray-900 via-black to-gray-800 border border-gray-700/50 backdrop-blur-md text-white shadow-2xl rounded-t-xl max-h-[90vh] overflow-y-auto">
-                  <div className="relative">
-                    {/* Liquid glass metallic background effects */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30 pointer-events-none" />
-                    <div className="absolute inset-0 pointer-events-none" style={{
-                      backgroundImage: `
-                        linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
-                        linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
-                      `,
-                      backgroundSize: '4px 4px'
-                    }} />
+                <SheetContent side="bottom" className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
+                  <div className="p-4">
+                    <h3 className="text-lg font-semibold text-white text-center mb-4">Buy Coins</h3>
                     
-                    <div className="relative z-10 p-4 space-y-3">
-                      <h3 className="text-lg font-semibold text-white text-center mb-4">Buy Coins</h3>
-                      
+                    <div className="flex flex-col space-y-3">
                       <Button
-                        variant="outline"
-                        className="w-full bg-transparent border-white/20 text-white hover:bg-white/10 hover:text-white transition-all duration-300"
+                        className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 hover:text-white transition-all duration-300"
                         onClick={() => {
                           toast({
                             title: "Coming Soon!",
@@ -1176,7 +1165,7 @@ const Game = () => {
                       
                       <Button
                         variant="outline"
-                        className="w-full bg-transparent border-white/20 text-white hover:bg-white/10 hover:text-white transition-all duration-300"
+                        className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 hover:text-white transition-all duration-300"
                         onClick={() => {
                           toast({
                             title: "Coming Soon!",
