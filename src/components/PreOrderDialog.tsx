@@ -66,12 +66,12 @@ const PreOrderDialog = ({ children }: PreOrderDialogProps) => {
         
         <div className="grid md:grid-cols-3 gap-6">
           {preOrderTiers.map(tier => (
-            <GlowCard key={tier.id} className="cursor-pointer">
+            <GlowCard key={tier.id} className="cursor-pointer rounded-lg">
               <div 
-                className={`relative rounded-lg p-6 transition-all duration-200 ${
+                className={`relative rounded-lg p-6 border transition-all duration-200 ${
                   selectedTier === tier.id 
-                    ? 'bg-gradient-to-br from-cyan-500/20 via-cyan-400/10 to-transparent' 
-                    : 'bg-gradient-to-br from-gray-800/50 via-gray-900/50 to-black/50'
+                    ? 'bg-gradient-to-br from-cyan-500/20 via-cyan-400/10 to-transparent border-cyan-400/50' 
+                    : 'bg-gradient-to-br from-gray-800/50 via-gray-900/50 to-black/50 border-gray-600/50'
                 } ${tier.popular ? 'ring-2 ring-cyan-400/50' : ''}`} 
                 onClick={() => setSelectedTier(tier.id)}
               >
