@@ -2624,7 +2624,7 @@ const Game = () => {
                     
                     {visiblePlayers < allPlayers.length && <div className="mt-4 text-center">
                         <Button variant="outline" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => setVisiblePlayers(prev => Math.min(prev + 10, allPlayers.length))}>
-                          Load More Players
+                          Load More
                         </Button>
                       </div>}
                   </CardContent>
