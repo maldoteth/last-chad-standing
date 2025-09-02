@@ -949,7 +949,7 @@ const Game = () => {
   // Filter marketplace players
   const filterMarketplaceByCategory = (players: any[], category: string) => {
     if (category === "all") return players;
-    return players.filter(player => player.position.toLowerCase() === category.toLowerCase());
+    return players.filter(player => player.itemType === category);
   };
   const filterMarketplaceByRarity = (players: any[], rarity: string) => {
     if (rarity === "all") return players;
