@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
@@ -6,6 +6,8 @@ import { Check } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { GlowCard } from '@/components/ui/spotlight-card';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { supabase } from '@/integrations/supabase/client';
+import type { User } from '@supabase/supabase-js';
 
 interface PreOrderTier {
   id: string;
@@ -45,14 +47,41 @@ interface PreOrderDialogProps {
 const PreOrderDialog = ({ children, open: externalOpen, onOpenChange: externalOnOpenChange }: PreOrderDialogProps) => {
   const [selectedTier, setSelectedTier] = useState<string | null>(null);
   const [internalOpen, setInternalOpen] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
   const { toast } = useToast();
   const isMobile = useIsMobile();
 
   const isOpen = externalOpen !== undefined ? externalOpen : internalOpen;
   const setIsOpen = externalOnOpenChange || setInternalOpen;
 
+  useEffect(() => {
+    // Get initial session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+    });
+
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        setUser(session?.user ?? null);
+      }
+    );
+
+    return () => subscription.unsubscribe();
+  }, []);
+
   const handlePreOrder = () => {
     if (!selectedTier) return;
+
+    // Check if user is logged in
+    if (!user) {
+      toast({
+        title: "Login Required",
+        description: "Please log in to continue with your pre-order.",
+        variant: "destructive"
+      });
+      return;
+    }
 
     toast({
       title: "Coming Soon!",
