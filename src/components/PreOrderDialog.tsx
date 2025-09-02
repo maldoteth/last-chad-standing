@@ -7,6 +7,7 @@ import { useToast } from '@/hooks/use-toast';
 import { GlowCard } from '@/components/ui/spotlight-card';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { supabase } from '@/integrations/supabase/client';
+import { usePrivy } from '@privy-io/react-auth';
 import type { User } from '@supabase/supabase-js';
 
 interface PreOrderTier {
@@ -49,6 +50,7 @@ const PreOrderDialog = ({ children, open: externalOpen, onOpenChange: externalOn
   const [internalOpen, setInternalOpen] = useState(false);
   const [user, setUser] = useState<User | null>(null);
   const { toast } = useToast();
+  const { login } = usePrivy();
   const isMobile = useIsMobile();
 
   const isOpen = externalOpen !== undefined ? externalOpen : internalOpen;
@@ -77,7 +79,19 @@ const PreOrderDialog = ({ children, open: externalOpen, onOpenChange: externalOn
       toast({
         title: "Login Required",
         description: "Log in to pre-order",
-        variant: "destructive"
+        variant: "destructive",
+        action: (
+          <Button 
+            variant="default" 
+            size="sm" 
+            onClick={() => {
+              login();
+            }}
+            className="bg-primary hover:bg-primary/90"
+          >
+            Log In
+          </Button>
+        ),
       });
       return;
     }
