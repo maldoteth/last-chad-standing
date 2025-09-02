@@ -386,3 +386,142 @@ div[role="dialog"][aria-modal="true"] * {
   border-color: #ffffff !important;
 }
 
+/* SPECIFIC FIX: Make close and back button icons BLACK (not white) */
+
+/* Target close button and back button SVG icons specifically */
+[data-privy-modal] button[aria-label*="close"] svg,
+[data-privy-modal] button[aria-label*="Close"] svg,
+[data-privy-modal] button[aria-label*="back"] svg,
+[data-privy-modal] button[aria-label*="Back"] svg,
+[data-testid="privy-modal"] button[aria-label*="close"] svg,
+[data-testid="privy-modal"] button[aria-label*="Close"] svg,
+[data-testid="privy-modal"] button[aria-label*="back"] svg,
+[data-testid="privy-modal"] button[aria-label*="Back"] svg,
+[data-privy-dialog-content] button[aria-label*="close"] svg,
+[data-privy-dialog-content] button[aria-label*="Close"] svg,
+[data-privy-dialog-content] button[aria-label*="back"] svg,
+[data-privy-dialog-content] button[aria-label*="Back"] svg {
+  color: #000000 !important;
+  fill: #000000 !important;
+  stroke: #000000 !important;
+}
+
+/* Target all SVG paths, lines, circles inside close/back buttons */
+[data-privy-modal] button[aria-label*="close"] svg *,
+[data-privy-modal] button[aria-label*="Close"] svg *,
+[data-privy-modal] button[aria-label*="back"] svg *,
+[data-privy-modal] button[aria-label*="Back"] svg *,
+[data-testid="privy-modal"] button[aria-label*="close"] svg *,
+[data-testid="privy-modal"] button[aria-label*="Close"] svg *,
+[data-testid="privy-modal"] button[aria-label*="back"] svg *,
+[data-testid="privy-modal"] button[aria-label*="Back"] svg *,
+[data-privy-dialog-content] button[aria-label*="close"] svg *,
+[data-privy-dialog-content] button[aria-label*="Close"] svg *,
+[data-privy-dialog-content] button[aria-label*="back"] svg *,
+[data-privy-dialog-content] button[aria-label*="Back"] svg * {
+  color: #000000 !important;
+  fill: #000000 !important;
+  stroke: #000000 !important;
+}
+
+/* Target buttons in header/top area that typically contain close/back icons */
+[data-privy-modal] header button svg,
+[data-privy-modal] header button svg *,
+[data-privy-modal] [class*="header"] button svg,
+[data-privy-modal] [class*="header"] button svg *,
+[data-privy-modal] [class*="top"] button svg,
+[data-privy-modal] [class*="top"] button svg *,
+[data-testid="privy-modal"] header button svg,
+[data-testid="privy-modal"] header button svg *,
+[data-testid="privy-modal"] [class*="header"] button svg,
+[data-testid="privy-modal"] [class*="header"] button svg *,
+[data-testid="privy-modal"] [class*="top"] button svg,
+[data-testid="privy-modal"] [class*="top"] button svg *,
+[data-privy-dialog-content] header button svg,
+[data-privy-dialog-content] header button svg *,
+[data-privy-dialog-content] [class*="header"] button svg,
+[data-privy-dialog-content] [class*="header"] button svg *,
+[data-privy-dialog-content] [class*="top"] button svg,
+[data-privy-dialog-content] [class*="top"] button svg * {
+  color: #000000 !important;
+  fill: #000000 !important;
+  stroke: #000000 !important;
+}
+
+/* Target circular buttons that might be close buttons */
+[data-privy-modal] button[style*="border-radius"] svg,
+[data-privy-modal] button[style*="border-radius"] svg *,
+[data-privy-modal] button[class*="close"] svg,
+[data-privy-modal] button[class*="close"] svg *,
+[data-privy-modal] [class*="close-button"] svg,
+[data-privy-modal] [class*="close-button"] svg *,
+[data-testid="privy-modal"] button[style*="border-radius"] svg,
+[data-testid="privy-modal"] button[style*="border-radius"] svg *,
+[data-testid="privy-modal"] button[class*="close"] svg,
+[data-testid="privy-modal"] button[class*="close"] svg *,
+[data-testid="privy-modal"] [class*="close-button"] svg,
+[data-testid="privy-modal"] [class*="close-button"] svg *,
+[data-privy-dialog-content] button[style*="border-radius"] svg,
+[data-privy-dialog-content] button[style*="border-radius"] svg *,
+[data-privy-dialog-content] button[class*="close"] svg,
+[data-privy-dialog-content] button[class*="close"] svg *,
+[data-privy-dialog-content] [class*="close-button"] svg,
+[data-privy-dialog-content] [class*="close-button"] svg * {
+  color: #000000 !important;
+  fill: #000000 !important;
+  stroke: #000000 !important;
+}
+
+/* Target any SVG with typical close/back icons patterns */
+[data-privy-modal] button svg[viewBox="0 0 24 24"],
+[data-privy-modal] button svg[viewBox="0 0 16 16"],
+[data-privy-modal] button svg[width="24"],
+[data-privy-modal] button svg[height="24"],
+[data-testid="privy-modal"] button svg[viewBox="0 0 24 24"],
+[data-testid="privy-modal"] button svg[viewBox="0 0 16 16"],
+[data-testid="privy-modal"] button svg[width="24"],
+[data-testid="privy-modal"] button svg[height="24"],
+[data-privy-dialog-content] button svg[viewBox="0 0 24 24"],
+[data-privy-dialog-content] button svg[viewBox="0 0 16 16"],
+[data-privy-dialog-content] button svg[width="24"],
+[data-privy-dialog-content] button svg[height="24"] {
+  color: #000000 !important;
+  fill: #000000 !important;
+  stroke: #000000 !important;
+}
+
+[data-privy-modal] button svg[viewBox="0 0 24 24"] *,
+[data-privy-modal] button svg[viewBox="0 0 16 16"] *,
+[data-privy-modal] button svg[width="24"] *,
+[data-privy-modal] button svg[height="24"] *,
+[data-testid="privy-modal"] button svg[viewBox="0 0 24 24"] *,
+[data-testid="privy-modal"] button svg[viewBox="0 0 16 16"] *,
+[data-testid="privy-modal"] button svg[width="24"] *,
+[data-testid="privy-modal"] button svg[height="24"] *,
+[data-privy-dialog-content] button svg[viewBox="0 0 24 24"] *,
+[data-privy-dialog-content] button svg[viewBox="0 0 16 16"] *,
+[data-privy-dialog-content] button svg[width="24"] *,
+[data-privy-dialog-content] button svg[height="24"] * {
+  color: #000000 !important;
+  fill: #000000 !important;
+  stroke: #000000 !important;
+}
+
+/* Hover and focus states for button icons - keep them black */
+[data-privy-modal] button:hover svg,
+[data-privy-modal] button:hover svg *,
+[data-privy-modal] button:focus svg,
+[data-privy-modal] button:focus svg *,
+[data-testid="privy-modal"] button:hover svg,
+[data-testid="privy-modal"] button:hover svg *,
+[data-testid="privy-modal"] button:focus svg,
+[data-testid="privy-modal"] button:focus svg *,
+[data-privy-dialog-content] button:hover svg,
+[data-privy-dialog-content] button:hover svg *,
+[data-privy-dialog-content] button:focus svg,
+[data-privy-dialog-content] button:focus svg * {
+  color: #000000 !important;
+  fill: #000000 !important;
+  stroke: #000000 !important;
+}
+
