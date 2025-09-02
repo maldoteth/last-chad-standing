@@ -22,14 +22,14 @@ const preOrderTiers: PreOrderTier[] = [{
 }, {
   id: 'special-edition',
   name: 'Special Edition',
-  price: 420,
+  price: 69,
   originalValue: 200,
   popular: true,
   features: ['Early access', '15 skin packs', '15 cosmetic packs', 'Worth $200 total value']
 }, {
   id: 'ultimate-edition',
   name: 'Ultimate Edition',
-  price: 500,
+  price: 420,
   originalValue: 1000,
   features: ['First access privilege', 'Exclusive in-game badge', '50 skin packs', '50 cosmetic packs', '50 ultimate packs', 'Worth $1000 total value']
 }];
