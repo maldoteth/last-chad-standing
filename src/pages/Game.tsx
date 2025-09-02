@@ -4109,7 +4109,7 @@ const Game = () => {
                                    <ArrowUpDown className="w-3 h-3" />
                                  </Button>
                               </DropdownMenuTrigger>
-                              <DropdownMenuContent align="center" className="w-48 bg-black/10 backdrop-blur-md border border-white/20 text-white z-[9999]">
+                               <DropdownMenuContent align="center" className="w-36 bg-black/10 backdrop-blur-md border border-white/20 text-white z-[9999]">
                                 <DropdownMenuItem onClick={() => setMarketplaceSortBy("highest-price")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceSortBy === "highest-price" ? "bg-white/20" : ""}`}>
                                   <span>⬆️ Highest Price</span>
                                 </DropdownMenuItem>
