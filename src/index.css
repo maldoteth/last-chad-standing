@@ -275,17 +275,13 @@ div[role="dialog"][aria-modal="true"] [style*="color"] {
   color: #ffffff !important;
 }
 
-/* Fix hover states - ensure readable text on hover */
+/* High specificity hover rules for buttons and interactive elements */
 [data-privy-modal] button:hover,
 [data-privy-modal] a:hover,
 [data-privy-modal] div[role="button"]:hover,
-[data-privy-modal] [data-testid*="wallet"]:hover,
-[data-privy-modal] [data-testid*="sms"]:hover,
 [data-testid="privy-modal"] button:hover,
 [data-testid="privy-modal"] a:hover,
 [data-testid="privy-modal"] div[role="button"]:hover,
-[data-testid="privy-modal"] [data-testid*="wallet"]:hover,
-[data-testid="privy-modal"] [data-testid*="sms"]:hover,
 [data-privy-dialog-content] button:hover,
 [data-privy-dialog-content] a:hover,
 [data-privy-dialog-content] div[role="button"]:hover {
@@ -293,17 +289,37 @@ div[role="dialog"][aria-modal="true"] [style*="color"] {
   color: #ffffff !important;
 }
 
-/* Override hover background for clickable elements */
-[data-privy-modal] *:hover,
-[data-testid="privy-modal"] *:hover,
-[data-privy-dialog-content] *:hover {
+/* Specific targeting for wallet and SMS buttons with maximum specificity */
+[data-privy-modal] [data-testid*="wallet"]:hover,
+[data-privy-modal] [data-testid*="sms"]:hover,
+[data-testid="privy-modal"] [data-testid*="wallet"]:hover,
+[data-testid="privy-modal"] [data-testid*="sms"]:hover,
+[data-privy-dialog-content] [data-testid*="wallet"]:hover,
+[data-privy-dialog-content] [data-testid*="sms"]:hover,
+[data-privy-modal] button[data-testid*="wallet"]:hover,
+[data-privy-modal] button[data-testid*="sms"]:hover,
+[data-testid="privy-modal"] button[data-testid*="wallet"]:hover,
+[data-testid="privy-modal"] button[data-testid*="sms"]:hover,
+[data-privy-dialog-content] button[data-testid*="wallet"]:hover,
+[data-privy-dialog-content] button[data-testid*="sms"]:hover {
+  background-color: #333333 !important;
+  color: #ffffff !important;
+}
+
+/* Override any conflicting hover backgrounds with dark theme */
+[data-privy-modal] .hover\:bg-white:hover,
+[data-privy-modal] .hover\:bg-gray-100:hover,
+[data-testid="privy-modal"] .hover\:bg-white:hover,
+[data-testid="privy-modal"] .hover\:bg-gray-100:hover,
+[data-privy-dialog-content] .hover\:bg-white:hover,
+[data-privy-dialog-content] .hover\:bg-gray-100:hover {
   background-color: #333333 !important;
 }
 
-/* Ensure hover text stays white */
-[data-privy-modal] *:hover:not(input):not(textarea),
-[data-testid="privy-modal"] *:hover:not(input):not(textarea),
-[data-privy-dialog-content] *:hover:not(input):not(textarea) {
+/* Ensure all hover text in Privy modals stays white */
+[data-privy-modal] *:hover,
+[data-testid="privy-modal"] *:hover,
+[data-privy-dialog-content] *:hover {
   color: #ffffff !important;
 }
 
