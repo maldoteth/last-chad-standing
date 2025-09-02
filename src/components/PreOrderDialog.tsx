@@ -22,7 +22,7 @@ const preOrderTiers: PreOrderTier[] = [{
   id: 'game-only',
   name: 'Game Only',
   price: 18,
-  features: ['Full game access', 'Standard gameplay experience']
+  features: ['Full game access', 'Standard gameplay experience', 'Combo of Packs']
 }, {
   id: 'special-edition',
   name: 'Special Edition',
