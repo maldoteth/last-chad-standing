@@ -4187,10 +4187,10 @@ const Game = () => {
                                      <div className="w-3 h-3 rounded-full bg-gray-300" />
                                      <span>Legendary</span>
                                    </DropdownMenuItem>
-                                   <DropdownMenuItem onClick={() => setMarketplaceRarity("gold")} className={`w-full justify-start text-white hover:bg-white/10 ${marketplaceRarity === "gold" ? "bg-white/20" : ""}`}>
-                                     <div className="w-3 h-3 rounded-full bg-yellow-400" />
-                                     <span>Mythical</span>
-                                   </DropdownMenuItem>
+                                    <DropdownMenuItem onClick={() => setMarketplaceRarity("gold")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceRarity === "gold" ? "bg-white/20" : ""}`}>
+                                      <div className="w-3 h-3 rounded-full bg-yellow-400" />
+                                      <span>Mythical</span>
+                                    </DropdownMenuItem>
                                    <DropdownMenuItem onClick={() => setMarketplaceRarity("special")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceRarity === "special" ? "bg-white/20" : ""}`}>
                                      <div className="w-3 h-3 rounded-full bg-gradient-to-r from-purple-400 via-pink-400 to-yellow-400" />
                                      <span>Special</span>
