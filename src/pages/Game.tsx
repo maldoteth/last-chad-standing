@@ -3960,7 +3960,7 @@ const Game = () => {
                       <div className="flex items-center justify-between mb-3">
                         <CardTitle className="text-lg md:text-2xl flex items-center space-x-2 text-white">
                           <ArrowUpRight className="w-5 h-5 text-green-400" />
-                          <span>Top Gainers</span>
+                           <span>Gainers</span>
                         </CardTitle>
                       </div>
                       <div className="flex space-x-2">
