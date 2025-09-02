@@ -157,8 +157,7 @@ const PreOrderDialog = ({ children, open: externalOpen, onOpenChange: externalOn
           <img 
             src="/lovable-uploads/7d84dfb4-4db3-4adb-87f0-36f33c0f8daa.png" 
             alt="Powered by Stripe" 
-            className="h-6 opacity-80 brightness-0 invert" 
-            style={{ filter: 'brightness(0) invert(1) sepia(1) saturate(5) hue-rotate(210deg) brightness(0.8)' }}
+            className="h-6 opacity-80"
           />
         </div>
       </div>
