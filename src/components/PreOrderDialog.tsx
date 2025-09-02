@@ -87,7 +87,7 @@ const PreOrderDialog = ({ children, open: externalOpen, onOpenChange: externalOn
             onClick={() => {
               login();
             }}
-            className="bg-primary hover:bg-primary/90"
+            className="bg-red-800 hover:bg-red-900 text-white border-red-700"
           >
             Log In
           </Button>
