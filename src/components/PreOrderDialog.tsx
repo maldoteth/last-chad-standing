@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
-import { Check } from 'lucide-react';
+import { Check, CreditCard, Coins, ArrowLeft } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { GlowCard } from '@/components/ui/spotlight-card';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -47,12 +47,24 @@ interface PreOrderDialogProps {
 const PreOrderDialog = ({ children, open: externalOpen, onOpenChange: externalOnOpenChange }: PreOrderDialogProps) => {
   const [selectedTier, setSelectedTier] = useState<string | null>(null);
   const [internalOpen, setInternalOpen] = useState(false);
+  const [showPaymentMethod, setShowPaymentMethod] = useState(false);
   const { toast } = useToast();
   const { user, authenticated, login } = usePrivy();
   const isMobile = useIsMobile();
 
   const isOpen = externalOpen !== undefined ? externalOpen : internalOpen;
-  const setIsOpen = externalOnOpenChange || setInternalOpen;
+  const setIsOpen = (open: boolean) => {
+    if (externalOnOpenChange) {
+      externalOnOpenChange(open);
+    } else {
+      setInternalOpen(open);
+    }
+    
+    // Reset to tier selection when dialog closes
+    if (!open) {
+      setShowPaymentMethod(false);
+    }
+  };
 
   const handlePreOrder = async () => {
     if (!selectedTier) return;
@@ -61,6 +73,13 @@ const PreOrderDialog = ({ children, open: externalOpen, onOpenChange: externalOn
       login();
       return;
     }
+
+    // Show payment method selection instead of going directly to Stripe
+    setShowPaymentMethod(true);
+  };
+
+  const handlePayWithCard = async () => {
+    if (!selectedTier) return;
 
     try {
       toast({
@@ -93,9 +112,73 @@ const PreOrderDialog = ({ children, open: externalOpen, onOpenChange: externalOn
     }
   };
 
+  const handlePayWithCrypto = async () => {
+    // TODO: Implement crypto payment logic
+    toast({
+      title: "Coming Soon",
+      description: "Crypto payment is not available yet.",
+    });
+  };
+
+  const handleBackToTiers = () => {
+    setShowPaymentMethod(false);
+  };
+
   const contentClassName = "bg-gradient-to-br from-gray-900 via-black to-gray-800 border border-gray-700/50 backdrop-blur-md text-white shadow-2xl before:absolute before:inset-0 before:bg-gradient-to-br before:from-gray-800/20 before:via-transparent before:to-gray-900/30 before:pointer-events-none";
 
-  const renderContent = () => (
+  const renderPaymentMethodSelection = () => {
+    const selectedTierData = preOrderTiers.find(tier => tier.id === selectedTier);
+    
+    return (
+      <>
+        <div className="text-center mb-8">
+          <h3 className="font-exo text-xl font-semibold mb-2">Choose Payment Method</h3>
+          <p className="text-slate-400 mb-4">
+            {selectedTierData?.name} - ${selectedTierData?.price}
+          </p>
+        </div>
+
+        <div className="space-y-4 max-w-md mx-auto">
+          <Button
+            onClick={handlePayWithCard}
+            className="w-full bg-primary text-primary-foreground hover:bg-primary/90 hover:ring-1 hover:ring-primary/30 hover:shadow-lg hover:shadow-primary/20 hover:shadow-[0_0_20px_rgba(38,101,203,0.4)] font-exo font-semibold px-8 py-4 h-12 transition-all duration-300 flex items-center justify-center gap-3"
+          >
+            <CreditCard className="w-5 h-5" />
+            Pay with Card
+          </Button>
+
+          <Button
+            onClick={handlePayWithCrypto}
+            variant="outline"
+            className="w-full border-white/20 bg-white/5 text-white hover:bg-white/10 hover:border-white/30 font-exo font-semibold px-8 py-4 h-12 transition-all duration-300 flex items-center justify-center gap-3"
+          >
+            <Coins className="w-5 h-5" />
+            Pay with Crypto
+          </Button>
+
+          <Button
+            onClick={handleBackToTiers}
+            variant="ghost"
+            className="w-full text-slate-400 hover:text-white hover:bg-white/5 font-exo font-medium px-8 py-2 h-10 transition-all duration-300 flex items-center justify-center gap-2"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Back to Packages
+          </Button>
+        </div>
+
+        <div className="mt-8 flex justify-center">
+          <img 
+            src="/lovable-uploads/7d84dfb4-4db3-4adb-87f0-36f33c0f8daa.png" 
+            alt="Powered by Stripe" 
+            className="h-6 opacity-80 brightness-0 saturate-100"
+            style={{ filter: 'brightness(0) saturate(100%) invert(35%) sepia(78%) saturate(2446%) hue-rotate(214deg) brightness(97%) contrast(90%)' }}
+          />
+        </div>
+      </>
+    );
+  };
+
+  const renderTierSelection = () => (
     <>
       <div className="grid md:grid-cols-3 gap-6">
         {preOrderTiers.map(tier => (
@@ -168,6 +251,13 @@ const PreOrderDialog = ({ children, open: externalOpen, onOpenChange: externalOn
       </div>
     </>
   );
+
+  const renderContent = () => {
+    if (showPaymentMethod) {
+      return renderPaymentMethodSelection();
+    }
+    return renderTierSelection();
+  };
 
   if (isMobile) {
     return (
