@@ -66,9 +66,9 @@ const PreOrderDialog = ({ children }: PreOrderDialogProps) => {
         
         <div className="grid md:grid-cols-3 gap-6">
           {preOrderTiers.map(tier => (
-            <GlowCard key={tier.id} className="cursor-pointer rounded-lg">
+            <GlowCard key={tier.id} className="cursor-pointer rounded-lg h-full">
               <div 
-                className={`relative rounded-lg p-6 border transition-all duration-200 ${
+                className={`relative rounded-lg p-6 border h-full min-h-[450px] flex flex-col transition-all duration-200 ${
                   selectedTier === tier.id 
                     ? 'bg-gradient-to-br from-cyan-500/20 via-cyan-400/10 to-transparent border-cyan-400/50' 
                     : 'bg-gradient-to-br from-gray-800/50 via-gray-900/50 to-black/50 border-gray-600/50'
@@ -98,7 +98,7 @@ const PreOrderDialog = ({ children }: PreOrderDialogProps) => {
                   </div>
                 </div>
                 
-                <ul className="space-y-3 mb-6">
+                <ul className="space-y-3 mb-6 flex-grow">
                   {tier.features.map((feature, index) => (
                     <li key={index} className="flex items-center text-sm">
                       <Check className="w-4 h-4 text-cyan-400 mr-3 flex-shrink-0" />
@@ -107,7 +107,7 @@ const PreOrderDialog = ({ children }: PreOrderDialogProps) => {
                   ))}
                 </ul>
                 
-                <div className="flex justify-center">
+                <div className="flex justify-center mt-auto">
                   <div className={`w-4 h-4 rounded-full border-2 ${
                     selectedTier === tier.id 
                       ? 'border-cyan-400 bg-cyan-400' 
