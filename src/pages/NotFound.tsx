@@ -45,7 +45,7 @@ const NotFound = () => {
             <Button 
               variant="outline" 
               size="lg" 
-              className="w-full"
+              className="w-full text-white"
               onClick={() => window.history.back()}
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
