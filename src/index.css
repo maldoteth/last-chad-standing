@@ -146,13 +146,15 @@ div[role="dialog"][aria-modal="true"] * {
   background: #000000 !important;
 }
 
-/* Target Privy modal overlay */
+/* Target Privy modal overlay - Beautiful blur glass effect */
 [data-testid="privy-modal-backdrop"],
 [data-privy-backdrop],
 div[style*="background-color"]:has([data-privy-modal]),
 div[style*="background"]:has([data-testid="privy-modal"]) {
-  background-color: rgba(0, 0, 0, 0.8) !important;
-  background: rgba(0, 0, 0, 0.8) !important;
+  background-color: rgba(0, 0, 0, 0.3) !important;
+  background: rgba(0, 0, 0, 0.3) !important;
+  backdrop-filter: blur(12px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(180%) !important;
 }
 
 /* Force black on all Privy content containers */
