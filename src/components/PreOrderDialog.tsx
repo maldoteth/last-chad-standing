@@ -75,13 +75,6 @@ const PreOrderDialog = ({ children }: PreOrderDialogProps) => {
                 } ${tier.popular ? 'ring-2 ring-cyan-400/50' : ''}`} 
                 onClick={() => setSelectedTier(tier.id)}
               >
-                {tier.popular && (
-                  <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                    <span className="bg-cyan-400 text-black px-3 py-1 rounded-full text-xs md:text-sm font-semibold whitespace-nowrap">
-                      MOST POPULAR
-                    </span>
-                  </div>
-                )}
                 
                 <div className="text-center mb-4">
                   <h3 className="font-exo text-xl font-semibold mb-2">{tier.name}</h3>
