@@ -1285,14 +1285,27 @@ const Game = () => {
                           <ProgressBar xp={userBalance?.xp || 0} />
                         </div>
                         <div className="mb-4 border-t border-white/20 pt-4">
-                          <div className="flex items-center space-x-3">
-                            <div className="text-2xl">
-                              <img src="/lovable-uploads/fe5d4ef8-a585-4160-86a0-ab4fe59293d2.png" alt="Coin" className="w-6 h-6" />
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center space-x-3">
+                              <div className="text-2xl">
+                                <img src="/lovable-uploads/fe5d4ef8-a585-4160-86a0-ab4fe59293d2.png" alt="Coin" className="w-6 h-6" />
+                              </div>
+                              <div className="flex flex-col">
+                                <span className="text-sm font-medium text-white">Coin Balance</span>
+                                <span className="text-xs text-gray-200">0</span>
+                              </div>
                             </div>
-                            <div className="flex flex-col">
-                              <span className="text-sm font-medium text-white">Coin Balance</span>
-                              <span className="text-xs text-gray-200">0</span>
-                            </div>
+                            <Button 
+                              size="sm" 
+                              variant="outline" 
+                              className="bg-transparent border-white/20 text-white hover:bg-white/10 hover:text-white transition-all duration-300 text-xs px-2 py-1"
+                              onClick={() => {
+                                setSelectedPlayer(null);
+                                setBuyDialogOpen(true);
+                              }}
+                            >
+                              Buy
+                            </Button>
                           </div>
                         </div>
                         
@@ -1347,17 +1360,30 @@ const Game = () => {
                        <div className="px-3 py-2 border-t border-white/20">
                          <ProgressBar xp={userBalance?.xp || 0} />
                        </div>
-                       <div className="px-3 py-2 border-t border-white/20">
-                         <div className="flex items-center space-x-3">
-                           <div className="text-2xl">
-                             <img src="/lovable-uploads/fe5d4ef8-a585-4160-86a0-ab4fe59293d2.png" alt="Coin" className="w-6 h-6" />
-                           </div>
-                           <div className="flex flex-col">
-                             <span className="text-sm font-medium text-white">Coin Balance</span>
-                             <span className="text-xs text-gray-200">0</span>
-                           </div>
-                         </div>
-                       </div>
+                        <div className="px-3 py-2 border-t border-white/20">
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center space-x-3">
+                              <div className="text-2xl">
+                                <img src="/lovable-uploads/fe5d4ef8-a585-4160-86a0-ab4fe59293d2.png" alt="Coin" className="w-6 h-6" />
+                              </div>
+                              <div className="flex flex-col">
+                                <span className="text-sm font-medium text-white">Coin Balance</span>
+                                <span className="text-xs text-gray-200">0</span>
+                              </div>
+                            </div>
+                            <Button 
+                              size="sm" 
+                              variant="outline" 
+                              className="bg-transparent border-white/20 text-white hover:bg-white/10 hover:text-white transition-all duration-300 text-xs px-2 py-1"
+                              onClick={() => {
+                                setSelectedPlayer(null);
+                                setBuyDialogOpen(true);
+                              }}
+                            >
+                              Buy
+                            </Button>
+                          </div>
+                        </div>
                       
                       <DropdownMenuSeparator className="bg-white/20" />
                       
@@ -5160,7 +5186,9 @@ const Game = () => {
       {isMobile ? <Drawer open={buyDialogOpen} onOpenChange={setBuyDialogOpen}>
           <DrawerContent className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
             <DrawerHeader>
-              <DrawerTitle className="text-white text-center">Buy {selectedPlayer?.name}</DrawerTitle>
+              <DrawerTitle className="text-white text-center">
+                {selectedPlayer ? `Buy ${selectedPlayer.name}` : 'Buy Coins'}
+              </DrawerTitle>
             </DrawerHeader>
             <div className="flex flex-col space-y-3 p-4">
               <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 hover:text-white transition-all duration-300" onClick={() => {
@@ -5190,12 +5218,17 @@ const Game = () => {
           </DrawerContent>
         </Drawer> : <Dialog open={buyDialogOpen} onOpenChange={setBuyDialogOpen}>
           <DialogContent className="sm:max-w-md bg-black/10 backdrop-blur-md border border-white/20 text-white">
-            <DialogHeader>
-              <DialogTitle className="text-white">Buy {selectedPlayer?.name}</DialogTitle>
-              <DialogDescription className="text-white/80">
-                Choose your payment method to purchase this player.
-              </DialogDescription>
-            </DialogHeader>
+             <DialogHeader>
+               <DialogTitle className="text-white">
+                 {selectedPlayer ? `Buy ${selectedPlayer.name}` : 'Buy Coins'}
+               </DialogTitle>
+               <DialogDescription className="text-white/80">
+                 {selectedPlayer 
+                   ? 'Choose your payment method to purchase this player.'
+                   : 'Choose your payment method to purchase coins.'
+                 }
+               </DialogDescription>
+             </DialogHeader>
             <div className="flex flex-col space-y-3 pt-4">
               <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 hover:text-white transition-all duration-300" onClick={() => {
             toast({
