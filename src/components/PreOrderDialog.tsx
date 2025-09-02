@@ -76,7 +76,7 @@ const PreOrderDialog = ({ children, open: externalOpen, onOpenChange: externalOn
     if (!user) {
       toast({
         title: "Login Required",
-        description: "Please log in to your account before making a pre-order.",
+        description: "Log in to pre-order",
         variant: "destructive"
       });
       return;
