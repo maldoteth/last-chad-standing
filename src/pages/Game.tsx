@@ -137,27 +137,27 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
           </Button>
         </PopoverTrigger>
         <PopoverContent 
-          className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50" 
+          className="w-40 bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden backdrop-blur-md z-50" 
           align="end" 
           side="top"
           sideOffset={8}
         >
-          <div className="flex flex-col gap-1 p-2">
+          <div className="flex flex-col gap-1 p-1">
             <Button 
               size="sm" 
-              variant="outline" 
-              className="text-green-400 border-green-400/30 hover:bg-green-400/10 bg-transparent"
+              variant="ghost" 
+              className="justify-start text-green-400 hover:bg-green-400/10 hover:text-green-300 transition-colors"
               onClick={() => onBuyClick?.()}
             >
-              Buy
+              💰 Buy
             </Button>
             <Button 
               size="sm" 
-              variant="outline" 
-              className="text-red-400 border-red-400/30 hover:bg-red-400/10 bg-transparent"
+              variant="ghost" 
+              className="justify-start text-red-400 hover:bg-red-400/10 hover:text-red-300 transition-colors"
               onClick={() => onSellClick?.()}
             >
-              Sell
+              💸 Sell
             </Button>
           </div>
         </PopoverContent>
