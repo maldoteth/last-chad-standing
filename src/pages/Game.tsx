@@ -824,15 +824,6 @@ const Game = () => {
     },
     // Emotes
     {
-      name: "Ultimate Flex",
-      team: "Future Force",
-      position: "Mobility", 
-      itemType: "emote",
-      price: 3000,
-      lastSale: 2850,
-      trend: "up",
-      image: "/lovable-uploads/edc04992-1bf6-44e1-b24d-113fdb5e21b4.png"
-    }, {
       name: "Squeaky Dance",
       team: "Future Force",
       position: "Mobility", 
