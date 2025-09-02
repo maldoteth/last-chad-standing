@@ -4253,8 +4253,7 @@ const Game = () => {
                   }} />
                     <CardContent className="p-6 text-center relative z-10">
                        <Package className="w-16 h-16 mx-auto text-gray-400 mb-4" />
-                       <h3 className="text-lg font-semibold mb-2 text-white">Login to View Your Locker</h3>
-                       <p className="text-gray-300 mb-4">Connect your wallet to see your owned items</p>
+                       <h3 className="text-lg font-semibold mb-4 text-white">Login to View Your Locker</h3>
                        <Button onClick={login} variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30">
                          Login
                        </Button>
