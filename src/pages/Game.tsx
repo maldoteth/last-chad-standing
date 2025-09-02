@@ -283,8 +283,10 @@ const Game = () => {
 
   // Handle sell click
   const handleSellClick = (player: any) => {
-    setSelectedPlayer(player);
-    setSellDialogOpen(true);
+    toast({
+      title: "Item not found in locker",
+      variant: "destructive",
+    });
   };
 
   // Handle buy click
