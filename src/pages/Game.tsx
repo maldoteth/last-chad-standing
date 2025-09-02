@@ -146,7 +146,7 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
             <Button 
               size="sm" 
               variant="outline" 
-              className="w-full text-green-400 border-green-400/30 hover:bg-green-400/10 bg-transparent"
+              className="w-full text-green-400 border-green-400/30 hover:bg-green-400/10 hover:text-green-400 bg-transparent"
               onClick={() => onBuyClick?.()}
             >
               Buy
@@ -154,7 +154,7 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
             <Button 
               size="sm" 
               variant="outline" 
-              className="w-full text-red-400 border-red-400/30 hover:bg-red-400/10 bg-transparent"
+              className="w-full text-red-400 border-red-400/30 hover:bg-red-400/10 hover:text-red-400 bg-transparent"
               onClick={() => onSellClick?.()}
             >
               Sell
