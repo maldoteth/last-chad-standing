@@ -4111,16 +4111,16 @@ const Game = () => {
                               </DropdownMenuTrigger>
                               <DropdownMenuContent align="center" className="w-48 bg-black/10 backdrop-blur-md border border-white/20 text-white z-[9999]">
                                 <DropdownMenuItem onClick={() => setMarketplaceSortBy("highest-price")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceSortBy === "highest-price" ? "bg-white/20" : ""}`}>
-                                  <span>Highest Price</span>
+                                  <span>⬆️ Highest Price</span>
                                 </DropdownMenuItem>
                                 <DropdownMenuItem onClick={() => setMarketplaceSortBy("lowest-price")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceSortBy === "lowest-price" ? "bg-white/20" : ""}`}>
-                                  <span>Lowest Price</span>
+                                  <span>⬇️ Lowest Price</span>
                                 </DropdownMenuItem>
                                 <DropdownMenuItem onClick={() => setMarketplaceSortBy("highest-gain")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceSortBy === "highest-gain" ? "bg-white/20" : ""}`}>
-                                  <span>Highest % Gain</span>
+                                  <span>📈 Highest % Gain</span>
                                 </DropdownMenuItem>
                                 <DropdownMenuItem onClick={() => setMarketplaceSortBy("highest-loss")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${marketplaceSortBy === "highest-loss" ? "bg-white/20" : ""}`}>
-                                  <span>Highest % Loss</span>
+                                  <span>📉 Highest % Loss</span>
                                 </DropdownMenuItem>
                                 </DropdownMenuContent>
                               </DropdownMenu>}
