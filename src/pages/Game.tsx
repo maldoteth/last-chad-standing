@@ -1279,7 +1279,7 @@ const Game = () => {
                                 {user?.email?.address}
                               </p>
                               <p className="text-xs leading-none text-gray-200">
-                                Coin Balance: {userBalance?.coins || 0}
+                                Coin Balance: 0
                               </p>
                             </div>
                           </div>
@@ -1334,7 +1334,7 @@ const Game = () => {
                               {user?.email?.address}
                             </p>
                             <p className="text-xs leading-none text-gray-200">
-                              Coin Balance: {userBalance?.coins || 0}
+                              Coin Balance: 0
                             </p>
                           </div>
                         </div>
