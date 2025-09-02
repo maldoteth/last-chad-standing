@@ -671,7 +671,7 @@ const Game = () => {
       team: "Steel Wolves",
       position: "Tank", 
       itemType: "fighters",
-      price: 2200,
+      price: 1900,
       lastSale: 2050,
       trend: "down",
       image: "/lovable-uploads/660b5122-5ce8-4f6e-af72-2c607d47ef44.png"
