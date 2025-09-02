@@ -981,7 +981,12 @@ const Game = () => {
           return bGain - aGain;
         });
       case "highest-loss":
-        return sorted.sort((a, b) => {
+        // Filter to only show losses (negative percentage changes), then sort by largest losses first
+        const lossesOnly = sorted.filter(player => {
+          const percentChange = ((player.price - player.lastSale) / player.lastSale) * 100;
+          return percentChange < 0; // Only include actual losses
+        });
+        return lossesOnly.sort((a, b) => {
           const aLoss = ((a.price - a.lastSale) / a.lastSale) * 100;
           const bLoss = ((b.price - b.lastSale) / b.lastSale) * 100;
           // Sort by most negative (largest losses first)
