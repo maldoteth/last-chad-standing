@@ -50,17 +50,15 @@ serve(async (req) => {
 
     // Get authenticated user (optional for pre-orders)
     const authHeader = req.headers.get("Authorization");
-    let userEmail = "guest@example.com"; // Default for guest checkout
     let userId = null;
 
     if (authHeader) {
       try {
         const token = authHeader.replace("Bearer ", "");
         const { data } = await supabaseClient.auth.getUser(token);
-        if (data.user?.email) {
-          userEmail = data.user.email;
+        if (data.user?.id) {
           userId = data.user.id;
-          logStep("Authenticated user found", { userEmail, userId });
+          logStep("Authenticated user found", { userId });
         }
       } catch (error) {
         logStep("Authentication failed, proceeding with guest checkout", { error: error.message });
@@ -73,16 +71,6 @@ serve(async (req) => {
     const stripe = new Stripe(Deno.env.get("STRIPE_SECRET_KEY") || "", {
       apiVersion: "2023-10-16",
     });
-
-    // Check if a Stripe customer record exists for this user
-    let customerId;
-    if (userEmail !== "guest@example.com") {
-      const customers = await stripe.customers.list({ email: userEmail, limit: 1 });
-      if (customers.data.length > 0) {
-        customerId = customers.data[0].id;
-        logStep("Found existing customer", { customerId });
-      }
-    }
 
     // Get the product details from Stripe
     const product = await stripe.products.retrieve(productId);
@@ -99,10 +87,8 @@ serve(async (req) => {
       amount: price.unit_amount 
     });
 
-    // Create a one-time payment session for the pre-order
+    // Create a one-time payment session for the pre-order (no auto-populated email)
     const session = await stripe.checkout.sessions.create({
-      customer: customerId,
-      customer_email: customerId ? undefined : userEmail,
       line_items: [
         {
           price: price.id,
@@ -129,10 +115,10 @@ serve(async (req) => {
 
     const { error: dbError } = await supabaseService.from("preorders").insert({
       user_id: userId,
-      email: userEmail,
+      email: null, // Will be populated after payment completion
       tier_id: tierId,
       stripe_session_id: session.id,
-      stripe_customer_id: customerId,
+      stripe_customer_id: null, // No pre-existing customer
       product_id: productId,
       amount: price.unit_amount,
       currency: price.currency,
