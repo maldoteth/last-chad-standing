@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import Documents from "./pages/Documents";
 import Blog from "./pages/Blog";
 import Game from "./pages/Game";
+import Lobby from "./pages/Lobby";
 import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
 import { AdminLogin } from "./components/AdminLogin";
@@ -25,6 +26,7 @@ const App = () => (
           <Route path="/docs" element={<Documents />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/game" element={<Game />} />
+          <Route path="/lobby" element={<Lobby />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/admin/login" element={<AdminLogin />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

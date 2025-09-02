@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import SocialLinks from '@/components/SocialLinks';
 import OrientationPrompt from '@/components/OrientationPrompt';
 import PreOrderDialog from '@/components/PreOrderDialog';
@@ -12,6 +13,7 @@ const Index = () => {
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
   const {
     toast
   } = useToast();
@@ -120,6 +122,14 @@ const Index = () => {
       {/* Bottom Center - Action Buttons */}
       <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-30">
         <div className="flex gap-4">
+          {/* Play Game Button */}
+          <button 
+            onClick={() => navigate('/lobby')}
+            className="border border-cyan-400/40 bg-cyan-400/10 backdrop-blur-sm text-cyan-300 rounded-lg font-inter text-sm transition-colors hover:bg-cyan-400/20 hover:border-cyan-400/60 py-[8px] px-[28px] font-medium"
+          >
+            Enter Game
+          </button>
+
           {/* Get Notified Button */}
           <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
@@ -144,7 +154,7 @@ const Index = () => {
 
           {/* Pre-Order Button */}
           <PreOrderDialog>
-            <button className="border border-cyan-400/40 bg-cyan-400/10 backdrop-blur-sm text-cyan-300 rounded-lg font-inter text-sm transition-colors hover:bg-cyan-400/20 hover:border-cyan-400/60 py-[8px] px-[28px] font-medium">
+            <button className="border border-white/20 bg-black/10 backdrop-blur-sm text-white rounded-lg font-inter text-sm transition-colors hover:bg-white/10 hover:border-white/40 py-[8px] px-[28px] font-medium">
               Pre-Order
             </button>
           </PreOrderDialog>
