@@ -105,12 +105,12 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
           </Button>
         </PopoverTrigger>
         <PopoverContent 
-          className="w-32 p-2 bg-black/90 backdrop-blur-md border border-white/20 text-white z-50" 
+          className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50" 
           align="end" 
           side={isMobile ? "bottom" : "top"}
           sideOffset={8}
         >
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col gap-1 p-2">
             <Button 
               size="sm" 
               variant="outline" 
