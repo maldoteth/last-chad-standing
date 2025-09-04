@@ -12,6 +12,8 @@ export interface StoreItem {
   rarity: string;
   image_url: string | null;
   is_active: boolean;
+  first_release_date?: string;
+  total_purchased?: number;
 }
 
 export interface UserBalance {
@@ -39,7 +41,7 @@ export const useStore = () => {
   const fetchStoreItems = async () => {
     const { data, error } = await supabase
       .from('store_items')
-      .select('*')
+      .select('*, first_release_date, total_purchased')
       .eq('is_active', true)
       .order('created_at', { ascending: false });
 

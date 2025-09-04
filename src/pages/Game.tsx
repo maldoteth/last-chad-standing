@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { usePrivy } from '@privy-io/react-auth';
 import { useNavigate } from "react-router-dom";
-import { useStore } from "@/hooks/useStore";
+import { useStore, StoreItem } from "@/hooks/useStore";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useMarketplace } from "@/hooks/useMarketplace";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -29,6 +29,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import cyberWarriorSkin from "@/assets/cyber-warrior-skin.png";
 import StoreCarousel, { StoreCarouselRef } from "@/components/StoreCarousel";
 import PreOrderDialog from "@/components/PreOrderDialog";
+import { StorePurchaseDialog } from "@/components/StorePurchaseDialog";
 const irishKingSkin = "/lovable-uploads/5c3f060f-4c5f-412b-8f27-eb1bebd3dd7d.png";
 const staniEagleSkin = "/lovable-uploads/37f256dc-415c-4032-82ad-db63f676284d.png";
 const bonesSkin = "/lovable-uploads/660b5122-5ce8-4f6e-af72-2c607d47ef44.png";
@@ -202,6 +203,8 @@ const Game = () => {
   const [sellDialogOpen, setSellDialogOpen] = useState(false);
   const [buyDialogOpen, setBuyDialogOpen] = useState(false);
   const [selectedPlayer, setSelectedPlayer] = useState<any>(null);
+  const [purchaseDialogOpen, setPurchaseDialogOpen] = useState(false);
+  const [selectedStoreItem, setSelectedStoreItem] = useState<StoreItem | null>(null);
   const objectivesRef = useRef<HTMLDivElement>(null);
   const fightersCarouselRef = useRef<StoreCarouselRef>(null);
   const accessoriesCarouselRef = useRef<StoreCarouselRef>(null);
@@ -223,8 +226,10 @@ const Game = () => {
   } = usePrivy();
   const navigate = useNavigate();
   const {
+    storeItems,
     purchaseItem,
-    userBalance
+    userBalance,
+    loading: storeLoading
   } = useStore();
   const {
     profile,
@@ -338,6 +343,20 @@ const Game = () => {
   const handleBuyClick = (player: any) => {
     setSelectedPlayer(player);
     setBuyDialogOpen(true);
+  };
+
+  // Handle store item image click
+  const handleStoreItemClick = (item: StoreItem) => {
+    setSelectedStoreItem(item);
+    setPurchaseDialogOpen(true);
+  };
+
+  // Get store items by category
+  const getStoreItemsByCategory = (category: string) => {
+    return storeItems.filter(item => 
+      item.category.toLowerCase() === category.toLowerCase() || 
+      category === 'all'
+    );
   };
 
   // Mock data for market analytics
@@ -2067,88 +2086,50 @@ const Game = () => {
                       
                     </CardHeader>
                     <CardContent>
-                        <StoreCarousel ref={fightersCarouselRef} items={filterItemsByRarity([{
-                  name: "Shane Sonny",
-                  price: 1200,
-                  rarity: "special",
-                  image: "/lovable-uploads/a76e21f1-ffca-4130-bd9a-08d09167dca0.png"
-                }, {
-                  name: "Ray Del Maestro",
-                  price: 2800,
-                  rarity: "blue",
-                  image: "/lovable-uploads/e8b33b1a-410f-4448-9b83-126b8d27f0a9.png"
-                }, {
-                  name: "John Strictland",
-                  price: 1000,
-                  rarity: "special",
-                  image: "/lovable-uploads/98664a07-8365-4512-8f3e-a0c79bd4617c.png"
-                }, {
-                  name: "Tarragon Southslice",
-                  price: 2800,
-                  rarity: "gold",
-                  image: "/lovable-uploads/cf5abf4c-cf7f-49b7-a830-49343c8d1222.png"
-                }, {
-                  name: "The Irish King",
-                  price: 2500,
-                  rarity: "gold",
-                  image: irishKingSkin
-                }, {
-                  name: "Stani Eagle",
-                  price: 1800,
-                  rarity: "blue",
-                  image: staniEagleSkin
-                }, {
-                  name: "Jonesy Bones",
-                  price: 2200,
-                  rarity: "silver",
-                  image: bonesSkin
-                }, {
-                  name: "Latin Legend",
-                  price: 1500,
-                  rarity: "green",
-                  image: latinLegendSkin
-                }])} renderItem={(item, idx) => <GlowCard key={idx} className="cursor-pointer">
-                              <div className="p-3">
-                               <div className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden">
-                                 <img src={item.image} alt={item.name} className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" />
-                               </div>
-                              <h3 className="font-semibold text-xs text-white mb-1">{item.name}</h3>
-                              <div className="flex items-center justify-between">
-                                <div className="flex items-center space-x-1">
-                                  <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
-                                  <span className="text-xs font-bold text-white">{item.price.toLocaleString()}</span>
-                                </div>
-                                <Drawer>
-                                  <DrawerTrigger asChild>
-                                     <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
-                                       <ShoppingBag className={`${isMobile ? 'h-3 w-3' : 'mr-1 h-2 w-2'}`} />
-                                       {!isMobile && "Buy"}
-                                     </Button>
-                                  </DrawerTrigger>
-                                   <DrawerContent className="bg-black/10 backdrop-blur-md border-t border-white/20 text-white transition-all duration-300">
-                                    <DrawerHeader>
-                                      <DrawerTitle className="text-white text-center">Purchase {item.name}</DrawerTitle>
-                                    </DrawerHeader>
-                                    <div className="p-4 space-y-3">
-                                        <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={handleBuyWithCoinsClick}>
-                                           <img src="/lovable-uploads/aa517b6d-c98b-4876-9f58-97246b49844b.png" alt="LCS Coin" className="mr-2 h-4 w-4" />
-                                          Buy With Coins
-                                        </Button>
-                                        <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={handleBuyWithCardClick}>
-                                          <CreditCard className="mr-2 h-4 w-4" />
-                                          Buy with Card
-                                        </Button>
-                                      <DrawerClose asChild>
-                                         <Button variant="outline" className="w-full border-white/20 text-white hover:bg-white/10 hover:text-white">
-                                          Cancel
-                                        </Button>
-                                      </DrawerClose>
+                        <StoreCarousel 
+                          ref={fightersCarouselRef} 
+                          items={filterItemsByRarity(getStoreItemsByCategory('fighters').map(item => ({
+                            name: item.name,
+                            price: item.price,
+                            rarity: item.rarity,
+                            image: item.image_url || "/placeholder.svg"
+                          })))} 
+                          renderItem={(item, idx) => {
+                            const storeItem = getStoreItemsByCategory('fighters')[idx];
+                            return (
+                              <GlowCard key={idx} className="cursor-pointer">
+                                <div className="p-3">
+                                  <div 
+                                    className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden cursor-pointer"
+                                    onClick={() => storeItem && handleStoreItemClick(storeItem)}
+                                  >
+                                    <img 
+                                      src={item.image} 
+                                      alt={item.name} 
+                                      className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" 
+                                    />
+                                  </div>
+                                  <h3 className="font-semibold text-xs text-white mb-1">{item.name}</h3>
+                                  <div className="flex items-center justify-between">
+                                    <div className="flex items-center space-x-1">
+                                      <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
+                                      <span className="text-xs font-bold text-white">{item.price.toLocaleString()}</span>
                                     </div>
-                                  </DrawerContent>
-                                </Drawer>
-                               </div>
-                             </div>
-                           </GlowCard>} />
+                                    <Button 
+                                      size="sm" 
+                                      variant="secondary" 
+                                      className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2"
+                                      onClick={() => storeItem && handleStoreItemClick(storeItem)}
+                                    >
+                                      <ShoppingBag className={`${isMobile ? 'h-3 w-3' : 'mr-1 h-2 w-2'}`} />
+                                      {!isMobile && "Buy"}
+                                    </Button>
+                                  </div>
+                                </div>
+                              </GlowCard>
+                            );
+                          }} 
+                        />
                      </CardContent>
                    </Card>}
 
@@ -5249,6 +5230,13 @@ const Game = () => {
         <PreOrderDialog open={isPreOrderOpen} onOpenChange={setIsPreOrderOpen}>
           <div />
         </PreOrderDialog>
+
+        {/* Store Purchase Dialog */}
+        <StorePurchaseDialog
+          isOpen={purchaseDialogOpen}
+          onClose={() => setPurchaseDialogOpen(false)}
+          item={selectedStoreItem}
+        />
     </div>;
 };
 export default Game;
