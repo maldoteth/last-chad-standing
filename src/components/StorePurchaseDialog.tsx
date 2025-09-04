@@ -140,7 +140,7 @@ export const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
           <img 
             src="/lovable-uploads/aa517b6d-c98b-4876-9f58-97246b49844b.png" 
             alt="LCS Coin" 
-            className="w-6 h-6" 
+            className="w-6 h-6 -mt-0.5" 
           />
           <span className="text-2xl font-bold text-white">
             {formatNumberWithAbbreviation(item.price)}
