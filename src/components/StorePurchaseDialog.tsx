@@ -212,7 +212,11 @@ export const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
             className="w-full flex items-center gap-2 bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/30 text-white"
             disabled={authenticated && userBalance.coins < item.price}
           >
-            <Coins className="w-4 h-4" />
+            <img 
+              src="/lovable-uploads/aa517b6d-c98b-4876-9f58-97246b49844b.png" 
+              alt="LCS Coin" 
+              className="w-4 h-4" 
+            />
             Purchase with Coins
           </Button>
           
