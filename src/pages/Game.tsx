@@ -4723,7 +4723,6 @@ const Game = () => {
                           <CardTitle className="text-white">
                             <span>Fighters</span>
                           </CardTitle>
-                         <CardDescription className="text-gray-300">Your fighters collection</CardDescription>
                        </CardHeader>
                        <CardContent className="relative z-10">
                          <div className="text-center py-12">
@@ -4750,10 +4749,9 @@ const Game = () => {
                       backgroundSize: '4px 4px'
                     }} />
                       <CardHeader className="relative z-10">
-                         <CardTitle className="text-white">
-                           <span>Accessories</span>
-                         </CardTitle>
-                        <CardDescription className="text-gray-300">Your accessories collection</CardDescription>
+                          <CardTitle className="text-white">
+                            <span>Accessories</span>
+                          </CardTitle>
                       </CardHeader>
                        <CardContent className="relative z-10">
                          <div className="text-center py-12">
@@ -4780,10 +4778,9 @@ const Game = () => {
                       backgroundSize: '4px 4px'
                     }} />
                        <CardHeader className="relative z-10">
-                          <CardTitle className="text-white">
-                            <span>Mobility</span>
-                          </CardTitle>
-                         <CardDescription className="text-gray-300">Your vehicles collection</CardDescription>
+                           <CardTitle className="text-white">
+                             <span>Mobility</span>
+                           </CardTitle>
                        </CardHeader>
                        <CardContent className="relative z-10">
                          <div className="text-center py-12">
@@ -4810,10 +4807,9 @@ const Game = () => {
                       backgroundSize: '4px 4px'
                     }} />
                        <CardHeader className="relative z-10">
-                          <CardTitle className="text-white">
-                            <span>Packs</span>
-                          </CardTitle>
-                         <CardDescription className="text-gray-300">Your packs collection</CardDescription>
+                           <CardTitle className="text-white">
+                             <span>Packs</span>
+                           </CardTitle>
                        </CardHeader>
                        <CardContent className="relative z-10">
                          <div className="text-center py-12">
