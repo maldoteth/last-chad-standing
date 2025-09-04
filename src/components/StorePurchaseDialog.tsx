@@ -115,13 +115,11 @@ export const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
 
       {/* Item Image */}
       <div className="flex justify-center">
-        <div className="relative p-4 rounded-xl bg-white/5 backdrop-blur-sm">
-          <img
-            src={item.image_url || "/placeholder.svg"}
-            alt={item.name}
-            className="w-32 h-32 md:w-40 md:h-40 object-contain rounded-xl"
-          />
-        </div>
+        <img
+          src={item.image_url || "/placeholder.svg"}
+          alt={item.name}
+          className="w-32 h-32 md:w-40 md:h-40 object-contain rounded-xl"
+        />
       </div>
 
       {/* Item Details */}
