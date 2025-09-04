@@ -6,8 +6,7 @@ import { useStore } from "@/hooks/useStore";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerClose } from "@/components/ui/drawer";
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetClose } from "@/components/ui/sheet";
-import { Coins, CreditCard, X, Calendar, TrendingUp } from "lucide-react";
+import { CreditCard, X, Calendar, TrendingUp } from "lucide-react";
 import { formatNumberWithAbbreviation } from "@/lib/utils";
 
 interface StorePurchaseDialogProps {
@@ -239,39 +238,14 @@ export const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
     </div>
   );
 
-  if (isMobile) {
-    return (
-      <Drawer open={isOpen} onOpenChange={onClose}>
-        <DrawerContent className="bg-black/20 backdrop-blur-xl border border-white/20 max-h-[90vh] shadow-2xl">
-          <DrawerHeader>
-            <DrawerTitle className="text-center text-white">Purchase Item</DrawerTitle>
-          </DrawerHeader>
-          <DialogContent />
-        </DrawerContent>
-      </Drawer>
-    );
-  }
-
   return (
-    <Sheet open={isOpen} onOpenChange={onClose}>
-      <SheetContent 
-        side="bottom" 
-        className="bg-black/20 backdrop-blur-xl border border-white/20 max-h-[90vh] overflow-y-auto shadow-2xl"
-      >
-        <SheetHeader>
-          <SheetTitle className="text-center text-white">Purchase Item</SheetTitle>
-          <SheetClose asChild>
-            <Button 
-              variant="ghost" 
-              size="icon" 
-              className="absolute top-4 right-4 text-white/70 hover:text-white hover:bg-white/10"
-            >
-              <X className="h-4 w-4" />
-            </Button>
-          </SheetClose>
-        </SheetHeader>
+    <Drawer open={isOpen} onOpenChange={onClose}>
+      <DrawerContent className="bg-black/20 backdrop-blur-xl border border-white/20 max-h-[90vh] shadow-2xl">
+        <DrawerHeader>
+          <DrawerTitle className="text-center text-white">Purchase Item</DrawerTitle>
+        </DrawerHeader>
         <DialogContent />
-      </SheetContent>
-    </Sheet>
+      </DrawerContent>
+    </Drawer>
   );
 };
