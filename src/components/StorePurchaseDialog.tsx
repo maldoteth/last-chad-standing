@@ -106,7 +106,7 @@ export const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
           <Button 
             variant="ghost" 
             size="icon" 
-            className="absolute top-4 right-4 z-10"
+            className="absolute top-4 right-4 z-10 text-white/70 hover:text-white hover:bg-white/10"
           >
             <X className="h-4 w-4" />
           </Button>
@@ -115,7 +115,7 @@ export const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
 
       {/* Item Image */}
       <div className="flex justify-center">
-        <div className="relative">
+        <div className="relative p-4 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10">
           <img
             src={item.image_url || "/placeholder.svg"}
             alt={item.name}
@@ -127,24 +127,24 @@ export const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
       {/* Item Details */}
       <div className="space-y-4">
         <div className="text-center">
-          <h3 className="text-xl md:text-2xl font-bold text-foreground mb-2">
+          <h3 className="text-xl md:text-2xl font-bold text-white mb-2">
             {item.name}
           </h3>
           {item.description && (
-            <p className="text-muted-foreground text-sm md:text-base">
+            <p className="text-white/70 text-sm md:text-base">
               {item.description}
             </p>
           )}
         </div>
 
         {/* Price */}
-        <div className="flex items-center justify-center gap-2 py-3 px-4 bg-card rounded-lg border">
+        <div className="flex items-center justify-center gap-2 py-3 px-4 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20">
           <img 
             src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" 
             alt="LCS Coin" 
             className="w-6 h-6" 
           />
-          <span className="text-2xl font-bold text-foreground">
+          <span className="text-2xl font-bold text-white">
             {formatNumberWithAbbreviation(item.price)}
           </span>
         </div>
@@ -153,38 +153,38 @@ export const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
         <div className="grid grid-cols-2 gap-4">
           {/* Rarity */}
           <div className="space-y-2">
-            <span className="text-sm text-muted-foreground">Rarity</span>
-            <Badge className={`${getRarityColor(item.rarity)} font-medium capitalize`}>
+            <span className="text-sm text-white/70">Rarity</span>
+            <Badge className={`${getRarityColor(item.rarity)} font-medium capitalize border`}>
               {item.rarity}
             </Badge>
           </div>
 
           {/* Category */}
           <div className="space-y-2">
-            <span className="text-sm text-muted-foreground">Category</span>
-            <Badge variant="outline" className="capitalize">
+            <span className="text-sm text-white/70">Category</span>
+            <Badge className="capitalize bg-white/10 text-white border-white/20 hover:bg-white/20">
               {item.category}
             </Badge>
           </div>
 
           {/* First Release Date */}
           <div className="space-y-2">
-            <span className="text-sm text-muted-foreground flex items-center gap-1">
+            <span className="text-sm text-white/70 flex items-center gap-1">
               <Calendar className="w-3 h-3" />
               First Release
             </span>
-            <span className="text-sm font-medium">
+            <span className="text-sm font-medium text-white">
               {formatDate(item.first_release_date)}
             </span>
           </div>
 
           {/* Total Purchased */}
           <div className="space-y-2">
-            <span className="text-sm text-muted-foreground flex items-center gap-1">
+            <span className="text-sm text-white/70 flex items-center gap-1">
               <TrendingUp className="w-3 h-3" />
               Total Purchased
             </span>
-            <span className="text-sm font-medium">
+            <span className="text-sm font-medium text-white">
               {formatNumberWithAbbreviation(item.total_purchased || 0)}
             </span>
           </div>
@@ -192,7 +192,7 @@ export const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
 
         {/* User Balance Display */}
         {authenticated && (
-          <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+          <div className="flex items-center justify-center gap-2 text-sm text-white/70">
             <span>Your balance:</span>
             <div className="flex items-center gap-1">
               <img 
@@ -200,7 +200,7 @@ export const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
                 alt="LCS Coin" 
                 className="w-4 h-4" 
               />
-              <span className="font-medium">
+              <span className="font-medium text-white">
                 {formatNumberWithAbbreviation(userBalance.coins)}
               </span>
             </div>
@@ -211,7 +211,7 @@ export const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
         <div className="space-y-3 pt-4">
           <Button
             onClick={handlePurchaseWithCoins}
-            className="w-full flex items-center gap-2 bg-primary hover:bg-primary/90"
+            className="w-full flex items-center gap-2 bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/30 text-white"
             disabled={authenticated && userBalance.coins < item.price}
           >
             <Coins className="w-4 h-4" />
@@ -220,8 +220,7 @@ export const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
           
           <Button
             onClick={handlePurchaseWithCard}
-            variant="outline"
-            className="w-full flex items-center gap-2"
+            className="w-full flex items-center gap-2 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 text-white"
           >
             <CreditCard className="w-4 h-4" />
             Purchase with Card
@@ -230,7 +229,7 @@ export const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
 
         {/* Insufficient Funds Warning */}
         {authenticated && userBalance.coins < item.price && (
-          <div className="text-center text-sm text-destructive bg-destructive/10 p-3 rounded-lg">
+          <div className="text-center text-sm text-red-300 bg-red-500/20 backdrop-blur-sm p-3 rounded-lg border border-red-500/30">
             Insufficient coins. You need {formatNumberWithAbbreviation(item.price - userBalance.coins)} more coins.
           </div>
         )}
@@ -241,9 +240,9 @@ export const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
   if (isMobile) {
     return (
       <Drawer open={isOpen} onOpenChange={onClose}>
-        <DrawerContent className="bg-background/95 backdrop-blur-md border border-border max-h-[90vh]">
+        <DrawerContent className="bg-black/20 backdrop-blur-xl border border-white/20 max-h-[90vh] shadow-2xl">
           <DrawerHeader>
-            <DrawerTitle className="text-center">Purchase Item</DrawerTitle>
+            <DrawerTitle className="text-center text-white">Purchase Item</DrawerTitle>
           </DrawerHeader>
           <DialogContent />
         </DrawerContent>
@@ -255,15 +254,15 @@ export const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
     <Sheet open={isOpen} onOpenChange={onClose}>
       <SheetContent 
         side="bottom" 
-        className="bg-background/95 backdrop-blur-md border border-border max-h-[90vh] overflow-y-auto"
+        className="bg-black/20 backdrop-blur-xl border border-white/20 max-h-[90vh] overflow-y-auto shadow-2xl"
       >
         <SheetHeader>
-          <SheetTitle className="text-center">Purchase Item</SheetTitle>
+          <SheetTitle className="text-center text-white">Purchase Item</SheetTitle>
           <SheetClose asChild>
             <Button 
               variant="ghost" 
               size="icon" 
-              className="absolute top-4 right-4"
+              className="absolute top-4 right-4 text-white/70 hover:text-white hover:bg-white/10"
             >
               <X className="h-4 w-4" />
             </Button>
