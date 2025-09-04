@@ -28,6 +28,7 @@ import { ResponsiveContainer, LineChart as RechartsLineChart, Line, XAxis, YAxis
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import cyberWarriorSkin from "@/assets/cyber-warrior-skin.png";
 import StoreCarousel, { StoreCarouselRef } from "@/components/StoreCarousel";
+import StoreSection from "@/components/StoreSection";
 import PreOrderDialog from "@/components/PreOrderDialog";
 import { StorePurchaseDialog } from "@/components/StorePurchaseDialog";
 const irishKingSkin = "/lovable-uploads/5c3f060f-4c5f-412b-8f27-eb1bebd3dd7d.png";
@@ -975,7 +976,8 @@ const Game = () => {
       trend: "up",
       image: "/lovable-uploads/508d1509-e761-46c6-9f3a-f70e256f5a52.png"
     }, {
-      name: "Red Wing Suit",
+                      </CardContent>
+                    </Card>}
       team: "Gear Masters",
       position: "Supreme", 
       itemType: "accessory",
@@ -2165,88 +2167,13 @@ const Game = () => {
                       
                     </CardHeader>
                     <CardContent>
-                       <StoreCarousel ref={accessoriesCarouselRef} items={filterItemsByRarity([{
-                  name: "Red Wing Suit",
-                  price: 600,
-                  rarity: "blue",
-                  image: "/lovable-uploads/2eec4a9a-97d3-4ba4-9508-2eeef0011139.png"
-                }, {
-                  name: "Blue Wing Suit",
-                  price: 450,
-                  rarity: "green",
-                  image: "/lovable-uploads/1efc1553-007a-4b38-a982-79d9f5abbfa1.png"
-                }, {
-                  name: "White Base Vest",
-                  price: 750,
-                  rarity: "special",
-                  image: "/lovable-uploads/508d1509-e761-46c6-9f3a-f70e256f5a52.png"
-                }, {
-                  name: "Grey Base Vest",
-                  price: 550,
-                  rarity: "silver",
-                  image: "/lovable-uploads/91375d1a-e829-4716-b3b6-833b58355bd9.png"
-                }, {
-                  name: "Combat Helmet",
-                  price: 800,
-                  rarity: "gold",
-                  image: "/lovable-uploads/896892f1-7ebc-4852-acea-80dcdbf7c545.png"
-                }, {
-                  name: "Tactical Gloves",
-                  price: 350,
-                  rarity: "green",
-                  image: "/lovable-uploads/4c80b2cf-0ea7-49a2-96b8-58ecbfa7623a.png"
-                }, {
-                  name: "Elite Armor",
-                  price: 1200,
-                  rarity: "special",
-                  image: "/lovable-uploads/c4290bdc-f68b-45db-bf53-f9551d2cb16f.png"
-                }, {
-                  name: "Battle Boots",
-                  price: 650,
-                  rarity: "blue",
-                  image: "/lovable-uploads/7d84dfb4-4db3-4adb-87f0-36f33c0f8daa.png"
-                }])} renderItem={(item, idx) => <GlowCard key={idx} className="cursor-pointer">
-                              <div className="p-3">
-                               <div className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden">
-                                 <img src={item.image} alt={item.name} className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" />
-                               </div>
-                              <h3 className="font-semibold text-xs text-white mb-1">{item.name}</h3>
-                              <div className="flex items-center justify-between">
-                                <div className="flex items-center space-x-1">
-                                  <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
-                                  <span className="text-xs font-bold text-white">{item.price.toLocaleString()}</span>
-                                </div>
-                                <Drawer>
-                                  <DrawerTrigger asChild>
-                                     <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
-                                       <ShoppingBag className={`${isMobile ? 'h-3 w-3' : 'mr-1 h-2 w-2'}`} />
-                                       {!isMobile && "Buy"}
-                                     </Button>
-                                  </DrawerTrigger>
-                                   <DrawerContent className="bg-black/10 backdrop-blur-md border-t border-white/20 text-white transition-all duration-300">
-                                    <DrawerHeader>
-                                      <DrawerTitle className="text-white text-center">Purchase {item.name}</DrawerTitle>
-                                    </DrawerHeader>
-                                    <div className="p-4 space-y-3">
-                                        <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={handleBuyWithCoinsClick}>
-                                         <img src="/lovable-uploads/aa517b6d-c98b-4876-9f58-97246b49844b.png" alt="LCS Coin" className="mr-2 h-4 w-4" />
-                                        Buy With Coins
-                                      </Button>
-                                      <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => {/* TODO: Implement card payment */}}>
-                                        <CreditCard className="mr-2 h-4 w-4" />
-                                        Buy with Card
-                                      </Button>
-                                      <DrawerClose asChild>
-                                         <Button variant="outline" className="w-full border-white/20 text-white hover:bg-white/10 hover:text-white">
-                                          Cancel
-                                        </Button>
-                                      </DrawerClose>
-                                    </div>
-                                  </DrawerContent>
-                                </Drawer>
-                               </div>
-                             </div>
-                           </GlowCard>} />
+                        <StoreSection
+                          ref={accessoriesCarouselRef}
+                          category="accessories"
+                          items={getStoreItemsByCategory('accessories')}
+                          selectedRarity={selectedRarity}
+                          onItemClick={handleStoreItemClick}
+                        />
                      </CardContent>
                    </Card>}
 
@@ -2282,8 +2209,15 @@ const Game = () => {
                       
                     </CardHeader>
                     <CardContent>
-                       <StoreCarousel ref={emotesCarouselRef} items={filterItemsByRarity([{
-                  name: "Flex",
+                        <StoreSection
+                          ref={emotesCarouselRef}
+                          category="emotes"
+                          items={getStoreItemsByCategory('emotes')}
+                          selectedRarity={selectedRarity}
+                          onItemClick={handleStoreItemClick}
+                        />
+                      </CardContent>
+                    </Card>}
                   price: 800,
                   rarity: "blue",
                   image: "/lovable-uploads/f52e83c2-28b7-417e-90ac-757255d1759f.png"
@@ -2396,8 +2330,15 @@ const Game = () => {
                         </CardTitle>
                       </CardHeader>
                       <CardContent className="relative z-10">
-                        <StoreCarousel ref={packsCarouselRef} items={filterItemsByRarity([{
-                  name: "Silver Pack",
+                         <StoreSection
+                           ref={packsCarouselRef}
+                           category="packs"
+                           items={getStoreItemsByCategory('packs')}
+                           selectedRarity={selectedRarity}
+                           onItemClick={handleStoreItemClick}
+                         />
+                         </CardContent>
+                       </Card>}
                   price: 1000,
                   rarity: "silver",
                   image: "/lovable-uploads/17c3a939-bcaa-4cdb-9b61-271b5774c7e2.png"
@@ -3840,7 +3781,14 @@ const Game = () => {
                        </CardTitle>
                      </CardHeader>
                       <CardContent>
-                        <StoreCarousel ref={desktopAccessoriesCarouselRef} desktopMode={true} items={filterItemsByRarity([{
+                         <StoreSection
+                           ref={desktopAccessoriesCarouselRef}
+                           category="accessories"
+                           items={getStoreItemsByCategory('accessories')}
+                           selectedRarity={selectedRarity}
+                           onItemClick={handleStoreItemClick}
+                           desktopMode={true}
+                         />
                         name: "Red Wing Suit",
                         price: 600,
                         rarity: "blue",
@@ -4026,7 +3974,14 @@ const Game = () => {
                        </CardTitle>
                      </CardHeader>
                       <CardContent>
-                        <StoreCarousel ref={desktopEmotesCarouselRef} desktopMode={true} items={filterItemsByRarity([{
+                         <StoreSection
+                           ref={desktopEmotesCarouselRef}
+                           category="emotes"
+                           items={getStoreItemsByCategory('emotes')}
+                           selectedRarity={selectedRarity}
+                           onItemClick={handleStoreItemClick}
+                           desktopMode={true}
+                         />
                         name: "Flex",
                         price: 800,
                         rarity: "blue",
@@ -4134,7 +4089,14 @@ const Game = () => {
                        </CardTitle>
                      </CardHeader>
                      <CardContent className="relative z-10">
-                       <StoreCarousel ref={desktopPacksCarouselRef} desktopMode={true} items={filterItemsByRarity([{
+                        <StoreSection
+                          ref={desktopPacksCarouselRef}
+                          category="packs"
+                          items={getStoreItemsByCategory('packs')}
+                          selectedRarity={selectedRarity}
+                          onItemClick={handleStoreItemClick}
+                          desktopMode={true}
+                        />
                         name: "Silver Pack",
                         price: 1000,
                         rarity: "silver",
