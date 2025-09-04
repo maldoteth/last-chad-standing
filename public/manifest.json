@@ -1,0 +1,27 @@
+{
+  "name": "Last Chad Standing - MMA Battle Royale",
+  "short_name": "Last Chad Standing",
+  "description": "The first MMA Battle Royale game",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#000000",
+  "background_color": "#000000",
+  "categories": ["games", "entertainment"],
+  "lang": "en",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/lovable-uploads/cc27bea2-f433-4a4e-b95c-5822864bf481.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/lovable-uploads/cc27bea2-f433-4a4e-b95c-5822864bf481.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
