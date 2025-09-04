@@ -138,7 +138,7 @@ export const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
         {/* Price */}
         <div className="flex items-center justify-center gap-2 py-3 px-4 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20">
           <img 
-            src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" 
+            src="/lovable-uploads/aa517b6d-c98b-4876-9f58-97246b49844b.png" 
             alt="LCS Coin" 
             className="w-6 h-6" 
           />
@@ -194,7 +194,7 @@ export const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
             <span>Your balance:</span>
             <div className="flex items-center gap-1">
               <img 
-                src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" 
+                src="/lovable-uploads/aa517b6d-c98b-4876-9f58-97246b49844b.png" 
                 alt="LCS Coin" 
                 className="w-4 h-4" 
               />
