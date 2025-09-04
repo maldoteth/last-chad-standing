@@ -2943,8 +2943,7 @@ const Game = () => {
                            <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-3">
                              <Archive className="w-6 h-6 text-gray-400" />
                            </div>
-                           <p className="text-gray-300 text-sm">No fighters owned yet</p>
-                           <p className="text-xs text-gray-400 mt-1">Visit the store to purchase fighters</p>
+                            <p className="text-gray-300 text-sm">No fighters owned yet</p>
                            <Button onClick={() => setActiveTab("store")} variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 mt-3">
                              Browse Store
                            </Button>
@@ -2973,8 +2972,7 @@ const Game = () => {
                            <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-3">
                              <Archive className="w-6 h-6 text-gray-400" />
                            </div>
-                           <p className="text-gray-300 text-sm">No accessories owned yet</p>
-                           <p className="text-xs text-gray-400 mt-1">Visit the store to purchase shoes, backpacks, and hats</p>
+                            <p className="text-gray-300 text-sm">No accessories owned yet</p>
                            <Button onClick={() => setActiveTab("store")} variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 mt-3">
                              Browse Store
                            </Button>
@@ -3003,8 +3001,7 @@ const Game = () => {
                            <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-3">
                              <Archive className="w-6 h-6 text-gray-400" />
                            </div>
-                           <p className="text-gray-300 text-sm">No vehicles owned yet</p>
-                           <p className="text-xs text-gray-400 mt-1">Visit the store to purchase bikes, cars, and hovercrafts</p>
+                            <p className="text-gray-300 text-sm">No vehicles owned yet</p>
                            <Button onClick={() => setActiveTab("store")} variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 mt-3">
                              Browse Store
                            </Button>
@@ -3033,8 +3030,7 @@ const Game = () => {
                            <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-3">
                              <Archive className="w-6 h-6 text-gray-400" />
                            </div>
-                           <p className="text-gray-300 text-sm">No packs owned yet</p>
-                           <p className="text-xs text-gray-400 mt-1">Visit the store to purchase item packs</p>
+                            <p className="text-gray-300 text-sm">No packs owned yet</p>
                            <Button onClick={() => setActiveTab("store")} variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 mt-3">
                              Browse Store
                            </Button>
@@ -4729,8 +4725,7 @@ const Game = () => {
                            <div className="w-16 h-16 bg-gray-800/50 rounded-full flex items-center justify-center mx-auto mb-4">
                              <Archive className="w-8 h-8 text-gray-400" />
                            </div>
-                           <p className="text-gray-300">No fighters owned yet</p>
-                           <p className="text-sm text-gray-400 mt-1">Visit the store to purchase fighters</p>
+                            <p className="text-gray-300">No fighters owned yet</p>
                            <Button onClick={() => setActiveTab("store")} variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 mt-4">
                              Browse Store
                            </Button>
@@ -4758,8 +4753,7 @@ const Game = () => {
                            <div className="w-16 h-16 bg-gray-800/50 rounded-full flex items-center justify-center mx-auto mb-4">
                              <Archive className="w-8 h-8 text-gray-400" />
                            </div>
-                           <p className="text-gray-300">No accessories owned yet</p>
-                           <p className="text-sm text-gray-400 mt-1">Visit the store to purchase shoes, backpacks, and hats</p>
+                            <p className="text-gray-300">No accessories owned yet</p>
                            <Button onClick={() => setActiveTab("store")} variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 mt-4">
                              Browse Store
                            </Button>
@@ -4787,8 +4781,7 @@ const Game = () => {
                            <div className="w-16 h-16 bg-gray-800/50 rounded-full flex items-center justify-center mx-auto mb-4">
                              <Archive className="w-8 h-8 text-gray-400" />
                            </div>
-                           <p className="text-gray-300">No vehicles owned yet</p>
-                           <p className="text-sm text-gray-400 mt-1">Visit the store to purchase cars, golf buggies, and more</p>
+                            <p className="text-gray-300">No vehicles owned yet</p>
                            <Button onClick={() => setActiveTab("store")} variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 mt-4">
                              Browse Store
                            </Button>
@@ -4816,8 +4809,7 @@ const Game = () => {
                            <div className="w-16 h-16 bg-gray-800/50 rounded-full flex items-center justify-center mx-auto mb-4">
                              <Archive className="w-8 h-8 text-gray-400" />
                            </div>
-                           <p className="text-gray-300">No packs owned yet</p>
-                           <p className="text-sm text-gray-400 mt-1">Visit the store to purchase item packs</p>
+                            <p className="text-gray-300">No packs owned yet</p>
                            <Button onClick={() => setActiveTab("store")} variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 mt-4">
                              Browse Store
                            </Button>
