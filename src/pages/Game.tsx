@@ -2128,11 +2128,10 @@ const Game = () => {
                                      variant="secondary" 
                                      className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-7 flex items-center justify-center gap-1"
                                      onClick={() => storeItem && handleStoreItemClick(storeItem)}
-                                   >
-                                     <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
-                                     <span>{item.price.toLocaleString()}</span>
-                                     <ShoppingBag className="h-3 w-3" />
-                                   </Button>
+                                    >
+                                      <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
+                                      <span>{item.price.toLocaleString()}</span>
+                                    </Button>
                                 </div>
                               </GlowCard>
                             );
@@ -2207,11 +2206,10 @@ const Game = () => {
                                      variant="secondary" 
                                      className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-7 flex items-center justify-center gap-1"
                                      onClick={() => storeItem && handleStoreItemClick(storeItem)}
-                                   >
-                                     <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
-                                     <span>{item.price.toLocaleString()}</span>
-                                     <ShoppingBag className="h-3 w-3" />
-                                   </Button>
+                                    >
+                                      <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
+                                      <span>{item.price.toLocaleString()}</span>
+                                    </Button>
                                 </div>
                               </GlowCard>
                             );
@@ -2286,11 +2284,10 @@ const Game = () => {
                                      variant="secondary" 
                                      className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-7 flex items-center justify-center gap-1"
                                      onClick={() => storeItem && handleStoreItemClick(storeItem)}
-                                   >
-                                     <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
-                                     <span>{item.price.toLocaleString()}</span>
-                                     <ShoppingBag className="h-3 w-3" />
-                                   </Button>
+                                    >
+                                      <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
+                                      <span>{item.price.toLocaleString()}</span>
+                                    </Button>
                                 </div>
                               </GlowCard>
                             );
@@ -2358,11 +2355,10 @@ const Game = () => {
                                      variant="secondary" 
                                      className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-7 flex items-center justify-center gap-1"
                                      onClick={() => storeItem && handleStoreItemClick(storeItem)}
-                                   >
-                                     <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
-                                     <span>{item.price.toLocaleString()}</span>
-                                     <ShoppingBag className="h-3 w-3" />
-                                   </Button>
+                                    >
+                                      <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
+                                      <span>{item.price.toLocaleString()}</span>
+                                    </Button>
                                 </div>
                               </GlowCard>
                             );
