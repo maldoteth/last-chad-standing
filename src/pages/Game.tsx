@@ -2123,20 +2123,15 @@ const Game = () => {
                                        {getRarityDisplayName(item.rarity)}
                                      </Badge>
                                    </div>
-                                   <div className="flex items-center justify-end mb-2">
-                                     <div className="flex items-center space-x-1">
-                                       <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
-                                       <span className="text-xs font-bold text-white">{item.price.toLocaleString()}</span>
-                                     </div>
-                                   </div>
                                    <Button 
                                      size="sm" 
                                      variant="secondary" 
-                                     className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6"
+                                     className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-7 flex items-center justify-center gap-1"
                                      onClick={() => storeItem && handleStoreItemClick(storeItem)}
                                    >
-                                     <ShoppingBag className="h-3 w-3 mr-1" />
-                                     Buy
+                                     <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
+                                     <span>{item.price.toLocaleString()}</span>
+                                     <ShoppingBag className="h-3 w-3" />
                                    </Button>
                                 </div>
                               </GlowCard>
@@ -2207,20 +2202,15 @@ const Game = () => {
                                        {getRarityDisplayName(item.rarity)}
                                      </Badge>
                                    </div>
-                                   <div className="flex items-center justify-end mb-2">
-                                     <div className="flex items-center space-x-1">
-                                       <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
-                                       <span className="text-xs font-bold text-white">{item.price.toLocaleString()}</span>
-                                     </div>
-                                   </div>
                                    <Button 
                                      size="sm" 
                                      variant="secondary" 
-                                     className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6"
+                                     className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-7 flex items-center justify-center gap-1"
                                      onClick={() => storeItem && handleStoreItemClick(storeItem)}
                                    >
-                                     <ShoppingBag className="h-3 w-3 mr-1" />
-                                     Buy
+                                     <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
+                                     <span>{item.price.toLocaleString()}</span>
+                                     <ShoppingBag className="h-3 w-3" />
                                    </Button>
                                 </div>
                               </GlowCard>
@@ -2291,20 +2281,15 @@ const Game = () => {
                                        {getRarityDisplayName(item.rarity)}
                                      </Badge>
                                    </div>
-                                   <div className="flex items-center justify-end mb-2">
-                                     <div className="flex items-center space-x-1">
-                                       <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
-                                       <span className="text-xs font-bold text-white">{item.price.toLocaleString()}</span>
-                                     </div>
-                                   </div>
                                    <Button 
                                      size="sm" 
                                      variant="secondary" 
-                                     className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6"
+                                     className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-7 flex items-center justify-center gap-1"
                                      onClick={() => storeItem && handleStoreItemClick(storeItem)}
                                    >
-                                     <ShoppingBag className="h-3 w-3 mr-1" />
-                                     Buy
+                                     <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
+                                     <span>{item.price.toLocaleString()}</span>
+                                     <ShoppingBag className="h-3 w-3" />
                                    </Button>
                                 </div>
                               </GlowCard>
@@ -2368,20 +2353,15 @@ const Game = () => {
                                        {getRarityDisplayName(item.rarity)}
                                      </Badge>
                                    </div>
-                                   <div className="flex items-center justify-end mb-2">
-                                     <div className="flex items-center space-x-1">
-                                       <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
-                                       <span className="text-xs font-bold text-white">{item.price.toLocaleString()}</span>
-                                     </div>
-                                   </div>
                                    <Button 
                                      size="sm" 
                                      variant="secondary" 
-                                     className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6"
+                                     className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-7 flex items-center justify-center gap-1"
                                      onClick={() => storeItem && handleStoreItemClick(storeItem)}
                                    >
-                                     <ShoppingBag className="h-3 w-3 mr-1" />
-                                     Buy
+                                     <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
+                                     <span>{item.price.toLocaleString()}</span>
+                                     <ShoppingBag className="h-3 w-3" />
                                    </Button>
                                 </div>
                               </GlowCard>
