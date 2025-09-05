@@ -1562,18 +1562,18 @@ const Game = () => {
                   </div>
                 </div>
 
-                {/* Action Cards Grid - 2 columns on mobile, 4 columns on tablet */}
+                {/* Action Cards Grid - 2 columns on mobile */}
                 <div className="px-4 pb-4">
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                    <GlowCard className="cursor-pointer md:col-span-2 md:order-2">
+                  <div className="grid grid-cols-2 gap-3">
+                    <GlowCard className="cursor-pointer">
                       <CardContent className="p-4 flex flex-col h-full">
                         <div className="flex items-center space-x-1 mb-2">
                           <Trophy className="w-4 h-4 text-white" />
                           <span className="text-xs font-medium text-white">Quests!</span>
                         </div>
                         <h3 className="text-sm font-bold mb-1">Smash that XP</h3>
-                        <p className="text-gray-300 text-xs mb-3 md:mb-6 flex-1">by completing all quests</p>
-                        <Button variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 text-xs h-7 relative z-10 transition-all duration-300 md:mt-4" onClick={() => {
+                        <p className="text-gray-300 text-xs mb-3 flex-1">by completing all quests</p>
+                        <Button variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 text-xs h-7 relative z-10 transition-all duration-300" onClick={() => {
                     setObjectivesView("quests");
                     setTimeout(() => {
                       objectivesRef.current?.scrollIntoView({
@@ -1587,13 +1587,13 @@ const Game = () => {
                       </CardContent>
                     </GlowCard>
 
-                    <GlowCard className="cursor-pointer md:col-span-2 md:order-3">
-                      <CardContent className="p-4 flex flex-col h-full">
+                    <GlowCard className="cursor-pointer">
+                      <CardContent className="p-4">
                         <div className="flex items-center space-x-1 mb-2">
                           <Gift className="w-4 h-4" />
                           <span className="text-xs font-medium">Packs</span>
                         </div>
-                        <div className="space-y-1 mb-3 flex-1">
+                        <div className="space-y-1 mb-3">
                           <div className="flex items-center justify-between">
                             <span className="text-xs text-gray-300 font-semibold">SILVER</span>
                             <span className="text-xs">x0</span>
