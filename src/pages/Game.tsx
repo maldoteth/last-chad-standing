@@ -3687,13 +3687,15 @@ const Game = () => {
                                      {getRarityDisplayName(item.rarity)}
                                    </Badge>
                                  </div>
-                                <div className="flex items-center justify-end">
+                                <div className="flex items-center justify-between">
+                                  <div className="flex items-center space-x-1">
+                                    <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4" />
+                                    <span className="text-sm font-bold text-white">{item.price.toLocaleString()}</span>
+                                  </div>
                                   <DropdownMenu>
                                     <DropdownMenuTrigger asChild>
-                                      <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-7 px-3 flex items-center gap-1">
-                                        <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
-                                        <span>{item.price.toLocaleString()}</span>
-                                        <ChevronRight className="w-3 h-3" />
+                                      <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-7 px-3">
+                                        Buy
                                       </Button>
                                     </DropdownMenuTrigger>
                                     <DropdownMenuContent align="start" className="w-full lg:w-full bg-black/10 backdrop-blur-md border border-white/20 text-white z-50">
@@ -3708,9 +3710,8 @@ const Game = () => {
                                     </DropdownMenuContent>
                                   </DropdownMenu>
                                 </div>
-                               </div>
-                             </CardContent>
-                            </GlowCard>} />
+                              </CardContent>
+                             </GlowCard>} />
                        </CardContent>
                    </Card>}
 
@@ -3819,10 +3820,10 @@ const Game = () => {
                                         <span>Buy with Card</span>
                                       </DropdownMenuItem>
                                    </DropdownMenuContent>
-                                 </DropdownMenu>
-                               </div>
-                             </CardContent>
-                            </GlowCard>} />
+                                  </DropdownMenu>
+                                </div>
+                              </CardContent>
+                             </GlowCard>} />
                        </CardContent>
                    </Card>}
 
@@ -3927,10 +3928,10 @@ const Game = () => {
                                         <span>Buy with Card</span>
                                       </DropdownMenuItem>
                                     </DropdownMenuContent>
-                                  </DropdownMenu>
-                                 </div>
-                               </CardContent>
-                             </GlowCard>} />
+                                   </DropdownMenu>
+                                  </div>
+                                </CardContent>
+                              </GlowCard>} />
                        </CardContent>
                    </Card>}
 
@@ -4055,10 +4056,10 @@ const Game = () => {
                                        <span>Buy with Card</span>
                                      </DropdownMenuItem>
                                    </DropdownMenuContent>
-                                 </DropdownMenu>
-                               </div>
-                             </CardContent>
-                            </GlowCard>} />
+                                  </DropdownMenu>
+                                </div>
+                              </CardContent>
+                             </GlowCard>} />
                        </CardContent>
                    </Card>}
 
@@ -4163,10 +4164,9 @@ const Game = () => {
                                        <span>Buy with Card</span>
                                      </DropdownMenuItem>
                                    </DropdownMenuContent>
-                                 </DropdownMenu>
-                                </div>
-                              </div>
-                            </GlowCard>} />
+                                  </DropdownMenu>
+                                 </div>
+                             </GlowCard>} />
                        </CardContent>
                    </Card>}
                   </div>
