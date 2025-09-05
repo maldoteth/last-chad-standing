@@ -1588,12 +1588,12 @@ const Game = () => {
                     </GlowCard>
 
                     <GlowCard className="cursor-pointer md:col-span-2 md:order-3">
-                      <CardContent className="p-4">
+                      <CardContent className="p-4 flex flex-col h-full">
                         <div className="flex items-center space-x-1 mb-2">
                           <Gift className="w-4 h-4" />
                           <span className="text-xs font-medium">Packs</span>
                         </div>
-                        <div className="space-y-1 mb-3">
+                        <div className="space-y-1 mb-3 flex-1">
                           <div className="flex items-center justify-between">
                             <span className="text-xs text-gray-300 font-semibold">SILVER</span>
                             <span className="text-xs">x0</span>
