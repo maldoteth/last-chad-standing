@@ -86,19 +86,6 @@ const addPrivyTabletStyles = () => {
 // Apply styles immediately
 addPrivyTabletStyles();
 
-// Register service worker for PWA
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js', { scope: '/' })
-      .then((registration) => {
-        console.log('SW registered: ', registration);
-      })
-      .catch((registrationError) => {
-        console.log('SW registration failed: ', registrationError);
-      });
-  });
-}
-
 // Set up mutation observer to re-apply styles when Privy modals are added
 const observePrivyModals = () => {
   const observer = new MutationObserver((mutations) => {
