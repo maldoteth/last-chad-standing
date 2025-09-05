@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerClose } from "@/components/ui/drawer";
 import { CreditCard, X, Calendar, TrendingUp } from "lucide-react";
-import { formatNumberWithAbbreviation } from "@/lib/utils";
+import { formatNumberWithAbbreviation, getRarityColor, getRarityDisplayName } from "@/lib/utils";
 
 interface StorePurchaseDialogProps {
   isOpen: boolean;
@@ -78,15 +78,6 @@ export const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
     });
   };
 
-  const getRarityColor = (rarity: string) => {
-    switch (rarity.toLowerCase()) {
-      case 'legendary': return 'bg-orange-500/20 text-orange-400 border-orange-500/50';
-      case 'epic': return 'bg-purple-500/20 text-purple-400 border-purple-500/50';
-      case 'rare': return 'bg-blue-500/20 text-blue-400 border-blue-500/50';
-      case 'uncommon': return 'bg-green-500/20 text-green-400 border-green-500/50';
-      default: return 'bg-gray-500/20 text-gray-400 border-gray-500/50';
-    }
-  };
 
   const formatDate = (dateString?: string) => {
     if (!dateString) return 'Unknown';
@@ -151,8 +142,8 @@ export const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
           {/* Rarity */}
           <div className="space-y-2">
             <span className="text-sm text-white/70">Rarity</span>
-            <Badge className={`${getRarityColor(item.rarity)} font-medium capitalize border`}>
-              {item.rarity}
+            <Badge className={`${getRarityColor(item.rarity)} font-medium border`}>
+              {getRarityDisplayName(item.rarity)}
             </Badge>
           </div>
 
