@@ -3819,13 +3819,16 @@ const Game = () => {
                                         <CreditCard className="w-4 h-4" />
                                         <span>Buy with Card</span>
                                       </DropdownMenuItem>
-                                   </DropdownMenuContent>
+                                    </DropdownMenuContent>
                                   </DropdownMenu>
                                 </div>
                               </CardContent>
-                             </GlowCard>} />
-                       </CardContent>
-                   </Card>}
+                            </GlowCard>
+                          ))}
+                        </div>
+                      </ScrollArea>
+                    </CardContent>
+                  </Card>
 
                     {/* Mobility Category */}
                    {(selectedCategory === "all" || selectedCategory === "mobility") && <Card className={`bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden transition-transform duration-300 ${mobilityShaking ? 'animate-[shake_0.5s_ease-in-out]' : ''}`}>
@@ -3927,13 +3930,16 @@ const Game = () => {
                                         <CreditCard className="w-4 h-4" />
                                         <span>Buy with Card</span>
                                       </DropdownMenuItem>
-                                    </DropdownMenuContent>
+                                     </DropdownMenuContent>
                                    </DropdownMenu>
                                   </div>
                                 </CardContent>
-                              </GlowCard>} />
-                       </CardContent>
-                   </Card>}
+                              </GlowCard>
+                            ))}
+                          </div>
+                        </ScrollArea>
+                      </CardContent>
+                    </Card>
 
                    {/* Emotes Category */}
                    {(selectedCategory === "all" || selectedCategory === "emotes") && <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
@@ -4055,13 +4061,16 @@ const Game = () => {
                                        <CreditCard className="w-4 h-4" />
                                        <span>Buy with Card</span>
                                      </DropdownMenuItem>
-                                   </DropdownMenuContent>
+                                     </DropdownMenuContent>
                                   </DropdownMenu>
                                 </div>
                               </CardContent>
-                             </GlowCard>} />
-                       </CardContent>
-                   </Card>}
+                            </GlowCard>
+                          ))}
+                        </div>
+                      </ScrollArea>
+                    </main>
+                  </div>
 
                     {/* Packs Category */}
                     {(selectedCategory === "all" || selectedCategory === "packs") && <Card className={`bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden ${packsShaking ? 'animate-shake' : ''}`}>
@@ -4165,14 +4174,18 @@ const Game = () => {
                                      </DropdownMenuItem>
                                    </DropdownMenuContent>
                                   </DropdownMenu>
-                                 </div>
-                             </GlowCard>} />
-                       </CardContent>
-                   </Card>}
-                  </div>
+                                </div>
+                              </CardContent>
+                            </GlowCard>
+                          ))}
+                        </div>
+                      </ScrollArea>
+                    </CardContent>
+                  </Card>
                 </div>
-                 </div>
-               </ScrollArea>}
+              </div>
+            </div>
+          </ScrollArea>
 
             {activeTab === "market" && <ScrollArea className="h-full">
                 <div className="p-6">
