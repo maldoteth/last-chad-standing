@@ -3600,25 +3600,29 @@ const Game = () => {
                             <div className="w-3 h-3 rounded-full bg-black" />
                             <span>All Rarities</span>
                           </DropdownMenuItem>
-                          <DropdownMenuItem onClick={() => setSelectedRarity("green")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "green" ? "bg-white/20" : ""}`}>
-                            <div className="w-3 h-3 rounded-full bg-green-500" />
-                            <span>Regular</span>
+                          <DropdownMenuItem onClick={() => setSelectedRarity("common")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "common" ? "bg-white/20" : ""}`}>
+                            <div className={`w-3 h-3 rounded-full ${getRarityFilterColor("common")}`} />
+                            <span>{getRarityDisplayName("common")}</span>
                           </DropdownMenuItem>
-                          <DropdownMenuItem onClick={() => setSelectedRarity("blue")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "blue" ? "bg-white/20" : ""}`}>
-                            <div className="w-3 h-3 rounded-full bg-blue-500" />
-                            <span>Rare</span>
+                          <DropdownMenuItem onClick={() => setSelectedRarity("uncommon")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "uncommon" ? "bg-white/20" : ""}`}>
+                            <div className={`w-3 h-3 rounded-full ${getRarityFilterColor("uncommon")}`} />
+                            <span>{getRarityDisplayName("uncommon")}</span>
                           </DropdownMenuItem>
-                          <DropdownMenuItem onClick={() => setSelectedRarity("silver")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "silver" ? "bg-white/20" : ""}`}>
-                            <div className="w-3 h-3 rounded-full bg-gray-300" />
-                            <span>Legendary</span>
+                          <DropdownMenuItem onClick={() => setSelectedRarity("rare")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "rare" ? "bg-white/20" : ""}`}>
+                            <div className={`w-3 h-3 rounded-full ${getRarityFilterColor("rare")}`} />
+                            <span>{getRarityDisplayName("rare")}</span>
                           </DropdownMenuItem>
-                          <DropdownMenuItem onClick={() => setSelectedRarity("gold")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "gold" ? "bg-white/20" : ""}`}>
-                            <div className="w-3 h-3 rounded-full bg-yellow-400" />
-                            <span>Mythical</span>
+                          <DropdownMenuItem onClick={() => setSelectedRarity("epic")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "epic" ? "bg-white/20" : ""}`}>
+                            <div className={`w-3 h-3 rounded-full ${getRarityFilterColor("epic")}`} />
+                            <span>{getRarityDisplayName("epic")}</span>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem onClick={() => setSelectedRarity("legendary")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "legendary" ? "bg-white/20" : ""}`}>
+                            <div className={`w-3 h-3 rounded-full ${getRarityFilterColor("legendary")}`} />
+                            <span>{getRarityDisplayName("legendary")}</span>
                           </DropdownMenuItem>
                           <DropdownMenuItem onClick={() => setSelectedRarity("special")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "special" ? "bg-white/20" : ""}`}>
-                            <div className="w-3 h-3 rounded-full bg-gradient-to-r from-purple-400 via-pink-400 to-yellow-400" />
-                            <span>Special</span>
+                            <div className={`w-3 h-3 rounded-full ${getRarityFilterColor("special")}`} />
+                            <span>{getRarityDisplayName("special")}</span>
                           </DropdownMenuItem>
                         </DropdownMenuContent>
                       </DropdownMenu>}
@@ -3697,7 +3701,12 @@ const Game = () => {
                                <div className="aspect-square bg-gray-800/50 rounded-lg mb-3 overflow-hidden">
                                  <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
                                </div>
-                                <h3 className="font-semibold text-sm text-white mb-2 truncate">{item.name}</h3>
+                                 <h3 className="font-semibold text-sm text-white mb-2 truncate">{item.name}</h3>
+                                 <div className="flex items-center justify-between mb-2">
+                                   <Badge variant="outline" className={`text-[10px] px-1 py-0 h-4 ${getRarityColor(item.rarity)}`}>
+                                     {getRarityDisplayName(item.rarity)}
+                                   </Badge>
+                                 </div>
                                <div className="flex items-center justify-between">
                                  <div className="flex items-center space-x-1">
                                    <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4" />
@@ -3796,7 +3805,12 @@ const Game = () => {
                                <div className="aspect-square bg-gray-800/50 rounded-lg mb-3 overflow-hidden">
                                  <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
                                </div>
-                               <h3 className="font-semibold text-sm text-white mb-2">{item.name}</h3>
+                                <h3 className="font-semibold text-sm text-white mb-2">{item.name}</h3>
+                                <div className="flex items-center justify-between mb-2">
+                                  <Badge variant="outline" className={`text-[10px] px-1 py-0 h-4 ${getRarityColor(item.rarity)}`}>
+                                    {getRarityDisplayName(item.rarity)}
+                                  </Badge>
+                                </div>
                                <div className="flex items-center justify-between">
                                  <div className="flex items-center space-x-1">
                                    <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4" />
@@ -3875,7 +3889,12 @@ const Game = () => {
                                 <div className="aspect-square bg-gray-800/50 rounded-lg mb-3 overflow-hidden">
                                   <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
                                 </div>
-                                <h3 className="font-semibold text-sm text-white mb-2">{item.name}</h3>
+                                 <h3 className="font-semibold text-sm text-white mb-2">{item.name}</h3>
+                                 <div className="flex items-center justify-between mb-2">
+                                   <Badge variant="outline" className={`text-[10px] px-1 py-0 h-4 ${getRarityColor(item.rarity)}`}>
+                                     {getRarityDisplayName(item.rarity)}
+                                   </Badge>
+                                 </div>
                                 <div className="flex items-center justify-between">
                                   <div className="flex items-center space-x-1">
                                     <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4" />
@@ -3982,7 +4001,12 @@ const Game = () => {
                                <div className="aspect-square bg-gray-800/50 rounded-lg mb-3 overflow-hidden flex items-center justify-center">
                                   {item.image.startsWith('/') || item.image.startsWith('http') ? <img src={item.image} alt={item.name} className="w-full h-full object-cover" /> : <div className="text-6xl">{item.image}</div>}
                                </div>
-                               <h3 className="font-semibold text-sm text-white mb-2">{item.name}</h3>
+                                <h3 className="font-semibold text-sm text-white mb-2">{item.name}</h3>
+                                <div className="flex items-center justify-between mb-2">
+                                  <Badge variant="outline" className={`text-[10px] px-1 py-0 h-4 ${getRarityColor(item.rarity)}`}>
+                                    {getRarityDisplayName(item.rarity)}
+                                  </Badge>
+                                </div>
                                <div className="flex items-center justify-between">
                                  <div className="flex items-center space-x-1">
                                    <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4" />
@@ -4069,7 +4093,12 @@ const Game = () => {
                                <div className="aspect-square bg-gray-800/50 rounded-lg mb-3 overflow-hidden flex items-center justify-center">
                                   <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
                                </div>
-                               <h3 className="font-semibold text-sm text-white mb-2">{item.name}</h3>
+                                <h3 className="font-semibold text-sm text-white mb-2">{item.name}</h3>
+                                <div className="flex items-center justify-between mb-2">
+                                  <Badge variant="outline" className={`text-[10px] px-1 py-0 h-4 ${getRarityColor(item.rarity)}`}>
+                                    {getRarityDisplayName(item.rarity)}
+                                  </Badge>
+                                </div>
                                <div className="flex items-center justify-between">
                                  <div className="flex items-center space-x-1">
                                    <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4" />
