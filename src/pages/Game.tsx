@@ -2165,88 +2165,50 @@ const Game = () => {
                       
                     </CardHeader>
                     <CardContent>
-                       <StoreCarousel ref={accessoriesCarouselRef} items={filterItemsByRarity([{
-                  name: "Red Wing Suit",
-                  price: 600,
-                  rarity: "blue",
-                  image: "/lovable-uploads/2eec4a9a-97d3-4ba4-9508-2eeef0011139.png"
-                }, {
-                  name: "Blue Wing Suit",
-                  price: 450,
-                  rarity: "green",
-                  image: "/lovable-uploads/1efc1553-007a-4b38-a982-79d9f5abbfa1.png"
-                }, {
-                  name: "White Base Vest",
-                  price: 750,
-                  rarity: "special",
-                  image: "/lovable-uploads/508d1509-e761-46c6-9f3a-f70e256f5a52.png"
-                }, {
-                  name: "Grey Base Vest",
-                  price: 550,
-                  rarity: "silver",
-                  image: "/lovable-uploads/91375d1a-e829-4716-b3b6-833b58355bd9.png"
-                }, {
-                  name: "Combat Helmet",
-                  price: 800,
-                  rarity: "gold",
-                  image: "/lovable-uploads/896892f1-7ebc-4852-acea-80dcdbf7c545.png"
-                }, {
-                  name: "Tactical Gloves",
-                  price: 350,
-                  rarity: "green",
-                  image: "/lovable-uploads/4c80b2cf-0ea7-49a2-96b8-58ecbfa7623a.png"
-                }, {
-                  name: "Elite Armor",
-                  price: 1200,
-                  rarity: "special",
-                  image: "/lovable-uploads/c4290bdc-f68b-45db-bf53-f9551d2cb16f.png"
-                }, {
-                  name: "Battle Boots",
-                  price: 650,
-                  rarity: "blue",
-                  image: "/lovable-uploads/7d84dfb4-4db3-4adb-87f0-36f33c0f8daa.png"
-                }])} renderItem={(item, idx) => <GlowCard key={idx} className="cursor-pointer">
-                              <div className="p-3">
-                               <div className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden">
-                                 <img src={item.image} alt={item.name} className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" />
-                               </div>
-                              <h3 className="font-semibold text-xs text-white mb-1">{item.name}</h3>
-                              <div className="flex items-center justify-between">
-                                <div className="flex items-center space-x-1">
-                                  <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
-                                  <span className="text-xs font-bold text-white">{item.price.toLocaleString()}</span>
-                                </div>
-                                <Drawer>
-                                  <DrawerTrigger asChild>
-                                     <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
-                                       <ShoppingBag className={`${isMobile ? 'h-3 w-3' : 'mr-1 h-2 w-2'}`} />
-                                       {!isMobile && "Buy"}
-                                     </Button>
-                                  </DrawerTrigger>
-                                   <DrawerContent className="bg-black/10 backdrop-blur-md border-t border-white/20 text-white transition-all duration-300">
-                                    <DrawerHeader>
-                                      <DrawerTitle className="text-white text-center">Purchase {item.name}</DrawerTitle>
-                                    </DrawerHeader>
-                                    <div className="p-4 space-y-3">
-                                        <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={handleBuyWithCoinsClick}>
-                                         <img src="/lovable-uploads/aa517b6d-c98b-4876-9f58-97246b49844b.png" alt="LCS Coin" className="mr-2 h-4 w-4" />
-                                        Buy With Coins
-                                      </Button>
-                                      <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => {/* TODO: Implement card payment */}}>
-                                        <CreditCard className="mr-2 h-4 w-4" />
-                                        Buy with Card
-                                      </Button>
-                                      <DrawerClose asChild>
-                                         <Button variant="outline" className="w-full border-white/20 text-white hover:bg-white/10 hover:text-white">
-                                          Cancel
-                                        </Button>
-                                      </DrawerClose>
+                        <StoreCarousel 
+                          ref={accessoriesCarouselRef} 
+                          items={filterItemsByRarity(getStoreItemsByCategory('accessories').map(item => ({
+                            name: item.name,
+                            price: item.price,
+                            rarity: item.rarity,
+                            image: item.image_url || "/placeholder.svg"
+                          })))} 
+                          renderItem={(item, idx) => {
+                            const storeItem = getStoreItemsByCategory('accessories')[idx];
+                            return (
+                              <GlowCard key={idx} className="cursor-pointer">
+                                <div className="p-3">
+                                  <div 
+                                    className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden cursor-pointer"
+                                    onClick={() => storeItem && handleStoreItemClick(storeItem)}
+                                  >
+                                    <img 
+                                      src={item.image} 
+                                      alt={item.name} 
+                                      className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" 
+                                    />
+                                  </div>
+                                  <h3 className="font-semibold text-xs text-white mb-1">{item.name}</h3>
+                                  <div className="flex items-center justify-between">
+                                    <div className="flex items-center space-x-1">
+                                      <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
+                                      <span className="text-xs font-bold text-white">{item.price.toLocaleString()}</span>
                                     </div>
-                                  </DrawerContent>
-                                </Drawer>
-                               </div>
-                             </div>
-                           </GlowCard>} />
+                                    <Button 
+                                      size="sm" 
+                                      variant="secondary" 
+                                      className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2"
+                                      onClick={() => storeItem && handleStoreItemClick(storeItem)}
+                                    >
+                                      <ShoppingBag className={`${isMobile ? 'h-3 w-3' : 'mr-1 h-2 w-2'}`} />
+                                      {!isMobile && "Buy"}
+                                    </Button>
+                                  </div>
+                                </div>
+                              </GlowCard>
+                            );
+                          }} 
+                        />
                      </CardContent>
                    </Card>}
 
@@ -2282,92 +2244,50 @@ const Game = () => {
                       
                     </CardHeader>
                     <CardContent>
-                       <StoreCarousel ref={emotesCarouselRef} items={filterItemsByRarity([{
-                  name: "Flex",
-                  price: 800,
-                  rarity: "blue",
-                  image: "/lovable-uploads/f52e83c2-28b7-417e-90ac-757255d1759f.png"
-                }, {
-                  name: "Fists Up",
-                  price: 1800,
-                  rarity: "gold",
-                  image: "/lovable-uploads/370bd874-ad5c-467d-b844-55688b1a0f9a.png"
-                }, {
-                  name: "Squeaky Dance",
-                  price: 2500,
-                  rarity: "special",
-                  image: "/lovable-uploads/5c8c027e-3baf-4550-96a9-ba0715d11506.png"
-                }, {
-                  name: "u want sum?",
-                  price: 1500,
-                  rarity: "gold",
-                  image: "/lovable-uploads/30d419b4-79a9-459c-b37b-42099ffd6273.png"
-                }, {
-                  name: "Protest Sign",
-                  price: 1200,
-                  rarity: "silver",
-                  image: "/lovable-uploads/f9ba9551-eabd-4e1f-a2a9-2eeddc92114d.png"
-                }, {
-                  name: "Taunt",
-                  price: 950,
-                  rarity: "blue",
-                  image: "/lovable-uploads/13bff6a8-5c37-4ca1-928f-3b3c98952224.png"
-                }, {
-                  name: "Power Pose",
-                  price: 1600,
-                  rarity: "gold",
-                  image: "/lovable-uploads/c076819c-8944-483c-9fd4-336da5ebba11.png"
-                }, {
-                name: "Ultimate Flex",
-                price: 3000,
-                rarity: "special",
-                image: "/lovable-uploads/edc04992-1bf6-44e1-b24d-113fdb5e21b4.png"
-                }])} renderItem={(item, idx) => <GlowCard key={idx} className="cursor-pointer">
-                              <div className="p-3">
-                               <div className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden flex items-center justify-center">
-                                  {item.image.startsWith('/') || item.image.startsWith('http') ? <img src={item.image} alt={item.name} className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" /> : <div className="text-4xl hover:scale-110 transition-transform duration-300">{item.image}</div>}
-                               </div>
-                              <h3 className="font-semibold text-xs text-white mb-1">{item.name}</h3>
-                              <div className="flex items-center justify-between">
-                                <div className="flex items-center space-x-1">
-                                  <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
-                                  <span className="text-xs font-bold text-white">{item.price.toLocaleString()}</span>
-                                </div>
-                                <Drawer>
-                                  <DrawerTrigger asChild>
-                                     <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
-                                       <ShoppingBag className={`${isMobile ? 'h-3 w-3' : 'mr-1 h-2 w-2'}`} />
-                                       {!isMobile && "Buy"}
-                                     </Button>
-                                  </DrawerTrigger>
-                                   <DrawerContent className="bg-black/10 backdrop-blur-md border-t border-white/20 text-white transition-all duration-300">
-                                    <DrawerHeader>
-                                      <DrawerTitle className="text-white text-center">Purchase {item.name}</DrawerTitle>
-                                    </DrawerHeader>
-                                    <div className="p-4 space-y-3">
-                                      <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => toast({
-                              title: "Coming Soon",
-                              description: "Coin purchases coming soon!",
-                              duration: 3000
-                            })}>
-                                         <img src="/lovable-uploads/aa517b6d-c98b-4876-9f58-97246b49844b.png" alt="LCS Coin" className="mr-2 h-4 w-4" />
-                                        Buy With Coins
-                                      </Button>
-                                      <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={() => {/* TODO: Implement card payment */}}>
-                                        <CreditCard className="mr-2 h-4 w-4" />
-                                        Buy with Card
-                                      </Button>
-                                      <DrawerClose asChild>
-                                         <Button variant="outline" className="w-full border-white/20 text-white hover:bg-white/10 hover:text-white">
-                                          Cancel
-                                        </Button>
-                                      </DrawerClose>
+                        <StoreCarousel 
+                          ref={emotesCarouselRef} 
+                          items={filterItemsByRarity(getStoreItemsByCategory('emotes').map(item => ({
+                            name: item.name,
+                            price: item.price,
+                            rarity: item.rarity,
+                            image: item.image_url || "/placeholder.svg"
+                          })))} 
+                          renderItem={(item, idx) => {
+                            const storeItem = getStoreItemsByCategory('emotes')[idx];
+                            return (
+                              <GlowCard key={idx} className="cursor-pointer">
+                                <div className="p-3">
+                                  <div 
+                                    className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden flex items-center justify-center cursor-pointer"
+                                    onClick={() => storeItem && handleStoreItemClick(storeItem)}
+                                  >
+                                    <img 
+                                      src={item.image} 
+                                      alt={item.name} 
+                                      className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" 
+                                    />
+                                  </div>
+                                  <h3 className="font-semibold text-xs text-white mb-1">{item.name}</h3>
+                                  <div className="flex items-center justify-between">
+                                    <div className="flex items-center space-x-1">
+                                      <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
+                                      <span className="text-xs font-bold text-white">{item.price.toLocaleString()}</span>
                                     </div>
-                                  </DrawerContent>
-                                </Drawer>
-                               </div>
-                             </div>
-                           </GlowCard>} />
+                                    <Button 
+                                      size="sm" 
+                                      variant="secondary" 
+                                      className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2"
+                                      onClick={() => storeItem && handleStoreItemClick(storeItem)}
+                                    >
+                                      <ShoppingBag className={`${isMobile ? 'h-3 w-3' : 'mr-1 h-2 w-2'}`} />
+                                      {!isMobile && "Buy"}
+                                    </Button>
+                                  </div>
+                                </div>
+                              </GlowCard>
+                            );
+                          }} 
+                        />
                       </CardContent>
                     </Card>}
 
@@ -2396,88 +2316,50 @@ const Game = () => {
                         </CardTitle>
                       </CardHeader>
                       <CardContent className="relative z-10">
-                        <StoreCarousel ref={packsCarouselRef} items={filterItemsByRarity([{
-                  name: "Silver Pack",
-                  price: 1000,
-                  rarity: "silver",
-                  image: "/lovable-uploads/17c3a939-bcaa-4cdb-9b61-271b5774c7e2.png"
-                }, {
-                  name: "Gold Pack",
-                  price: 2000,
-                  rarity: "gold",
-                  image: "/lovable-uploads/291c5734-f144-47b0-9f49-915999e921b0.png"
-                }, {
-                  name: "EO Summer Pack",
-                  price: 3500,
-                  rarity: "special",
-                  image: "/lovable-uploads/2149e9ad-919f-49ea-8be4-90f190387d39.png"
-                }, {
-                  name: "Wild West Pack",
-                  price: 5000,
-                  rarity: "special",
-                  image: "/lovable-uploads/5cf8ad93-f292-4e4c-b53c-eb0c4bc0f7be.png"
-                }, {
-                  name: "Platinum Pack",
-                  price: 4500,
-                  rarity: "special",
-                  image: "/lovable-uploads/ef3aca91-a372-4313-aa94-3c2dcf946dd6.png"
-                }, {
-                  name: "Diamond Pack",
-                  price: 5000,
-                  rarity: "special",
-                  image: "/lovable-uploads/ba9c646a-45e6-4ab3-9b25-1f069d27960b.png"
-                }, {
-                  name: "Premium Pack",
-                  price: 2800,
-                  rarity: "gold",
-                  image: "/lovable-uploads/1615e7da-29d5-454e-a2fe-57f5abf91d56.png"
-                }, {
-                  name: "Starter Pack",
-                  price: 500,
-                  rarity: "green",
-                  image: "/lovable-uploads/ac3e1f52-ba21-4588-9051-87eef47caf5c.png"
-                }])} renderItem={(item, idx) => <GlowCard key={idx} className="cursor-pointer">
-                               <div className="p-3">
-                                 <div className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden flex items-center justify-center">
-                                    <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
-                                 </div>
-                                 <h3 className="font-semibold text-xs text-white mb-1">{item.name}</h3>
-                                 <div className="flex items-center justify-between">
-                                   <div className="flex items-center space-x-1">
-                                     <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
-                                     <span className="text-xs font-bold text-white">{item.price.toLocaleString()}</span>
-                                   </div>
-                                   <Drawer>
-                                     <DrawerTrigger asChild>
-                                       <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2">
-                                        <ShoppingBag className={`${isMobile ? 'h-3 w-3' : 'mr-1 h-2 w-2'}`} />
-                                        {!isMobile && "Buy"}
-                                       </Button>
-                                     </DrawerTrigger>
-                                     <DrawerContent className="bg-black/10 backdrop-blur-md border-t border-white/20 text-white transition-all duration-300">
-                                       <DrawerHeader>
-                                         <DrawerTitle className="text-white text-center">Purchase {item.name}</DrawerTitle>
-                                       </DrawerHeader>
-                                       <div className="p-4 space-y-3">
-                                        <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={handleBuyWithCoinsClick}>
-                                           <img src="/lovable-uploads/aa517b6d-c98b-4876-9f58-97246b49844b.png" alt="LCS Coin" className="mr-2 h-4 w-4" />
-                                          Buy With Coins
-                                        </Button>
-                                        <Button className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20" onClick={handleBuyWithCardClick}>
-                                          <CreditCard className="mr-2 h-4 w-4" />
-                                          Buy with Card
-                                        </Button>
-                                         <DrawerClose asChild>
-                                           <Button variant="outline" className="w-full border-white/20 text-white hover:bg-white/10 hover:text-white">
-                                             Cancel
-                                           </Button>
-                                         </DrawerClose>
-                                       </div>
-                                     </DrawerContent>
-                                   </Drawer>
-                                 </div>
-                               </div>
-                             </GlowCard>} />
+                         <StoreCarousel 
+                          ref={packsCarouselRef} 
+                          items={filterItemsByRarity(getStoreItemsByCategory('packs').map(item => ({
+                            name: item.name,
+                            price: item.price,
+                            rarity: item.rarity,
+                            image: item.image_url || "/placeholder.svg"
+                          })))} 
+                          renderItem={(item, idx) => {
+                            const storeItem = getStoreItemsByCategory('packs')[idx];
+                            return (
+                              <GlowCard key={idx} className="cursor-pointer">
+                                <div className="p-3">
+                                  <div 
+                                    className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden flex items-center justify-center cursor-pointer"
+                                    onClick={() => storeItem && handleStoreItemClick(storeItem)}
+                                  >
+                                    <img 
+                                      src={item.image} 
+                                      alt={item.name} 
+                                      className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" 
+                                    />
+                                  </div>
+                                  <h3 className="font-semibold text-xs text-white mb-1">{item.name}</h3>
+                                  <div className="flex items-center justify-between">
+                                    <div className="flex items-center space-x-1">
+                                      <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
+                                      <span className="text-xs font-bold text-white">{item.price.toLocaleString()}</span>
+                                    </div>
+                                    <Button 
+                                      size="sm" 
+                                      variant="secondary" 
+                                      className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-6 px-2"
+                                      onClick={() => storeItem && handleStoreItemClick(storeItem)}
+                                    >
+                                      <ShoppingBag className={`${isMobile ? 'h-3 w-3' : 'mr-1 h-2 w-2'}`} />
+                                      {!isMobile && "Buy"}
+                                    </Button>
+                                  </div>
+                                </div>
+                              </GlowCard>
+                            );
+                          }} 
+                        />
                         </CardContent>
                       </Card>}
                   </div>
