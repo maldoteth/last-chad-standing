@@ -2117,8 +2117,8 @@ const Game = () => {
                                       className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" 
                                     />
                                   </div>
-                                   <h3 className="font-semibold text-xs text-white mb-1">{item.name}</h3>
-                                   <div className="flex items-center justify-between mb-2">
+                                   <div className="mb-1 md:mb-2 md:flex md:items-center md:justify-between">
+                                     <h3 className="font-semibold text-xs text-white mb-1 md:mb-0">{item.name}</h3>
                                      <Badge variant="outline" className={`text-[10px] px-1 py-0 h-4 ${getRarityColor(item.rarity)}`}>
                                        {getRarityDisplayName(item.rarity)}
                                      </Badge>
@@ -2196,8 +2196,8 @@ const Game = () => {
                                       className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" 
                                     />
                                   </div>
-                                   <h3 className="font-semibold text-xs text-white mb-1">{item.name}</h3>
-                                   <div className="flex items-center justify-between mb-2">
+                                   <div className="mb-1 md:mb-2 md:flex md:items-center md:justify-between">
+                                     <h3 className="font-semibold text-xs text-white mb-1 md:mb-0">{item.name}</h3>
                                      <Badge variant="outline" className={`text-[10px] px-1 py-0 h-4 ${getRarityColor(item.rarity)}`}>
                                        {getRarityDisplayName(item.rarity)}
                                      </Badge>
@@ -2275,8 +2275,8 @@ const Game = () => {
                                       className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" 
                                     />
                                   </div>
-                                   <h3 className="font-semibold text-xs text-white mb-1">{item.name}</h3>
-                                   <div className="flex items-center justify-between mb-2">
+                                   <div className="mb-1 md:mb-2 md:flex md:items-center md:justify-between">
+                                     <h3 className="font-semibold text-xs text-white mb-1 md:mb-0">{item.name}</h3>
                                      <Badge variant="outline" className={`text-[10px] px-1 py-0 h-4 ${getRarityColor(item.rarity)}`}>
                                        {getRarityDisplayName(item.rarity)}
                                      </Badge>
@@ -2347,8 +2347,8 @@ const Game = () => {
                                       className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" 
                                     />
                                   </div>
-                                   <h3 className="font-semibold text-xs text-white mb-1">{item.name}</h3>
-                                   <div className="flex items-center justify-between mb-2">
+                                   <div className="mb-1 md:mb-2 md:flex md:items-center md:justify-between">
+                                     <h3 className="font-semibold text-xs text-white mb-1 md:mb-0">{item.name}</h3>
                                      <Badge variant="outline" className={`text-[10px] px-1 py-0 h-4 ${getRarityColor(item.rarity)}`}>
                                        {getRarityDisplayName(item.rarity)}
                                      </Badge>
