@@ -582,7 +582,7 @@ const Game = () => {
       position: "Force",
       price: 4900,
       change: 15.9,
-      image: "/lovable-uploads/4e2aac54-cac6-4cf1-92ad-76bf7e788077.png"
+      image: "/lovable-uploads/2d5ccc85-d9e9-4c45-b684-159b0bb83745.png"
     }],
     weekly: [{
       name: "Silverborg",
@@ -878,7 +878,7 @@ const Game = () => {
       price: 4500,
       lastSale: 4200,
       trend: "up",
-      image: "/lovable-uploads/4e2aac54-cac6-4cf1-92ad-76bf7e788077.png"
+      image: "/lovable-uploads/2d5ccc85-d9e9-4c45-b684-159b0bb83745.png"
     }, {
       name: "Speed Buggy",
       team: "Flame Dragons",
