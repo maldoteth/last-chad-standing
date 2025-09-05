@@ -1565,27 +1565,31 @@ const Game = () => {
                 {/* Action Cards Grid - 2 columns on mobile */}
                 <div className="px-4 pb-4">
                   <div className="grid grid-cols-2 gap-3">
-                    <GlowCard className="cursor-pointer">
-                      <CardContent className="p-4 flex flex-col h-full">
-                        <div className="flex items-center space-x-1 mb-2">
-                          <Trophy className="w-4 h-4 text-white" />
-                          <span className="text-xs font-medium text-white">Quests!</span>
-                        </div>
-                        <h3 className="text-sm font-bold mb-1">Smash that XP</h3>
-                        <p className="text-gray-300 text-xs mb-3 flex-1">by completing all quests</p>
+                    <div className="relative">
+                      <GlowCard className="cursor-pointer">
+                        <CardContent className="p-4 flex flex-col h-full">
+                          <div className="flex items-center space-x-1 mb-2">
+                            <Trophy className="w-4 h-4 text-white" />
+                            <span className="text-xs font-medium text-white">Quests!</span>
+                          </div>
+                          <h3 className="text-sm font-bold mb-1">Smash that XP</h3>
+                          <p className="text-gray-300 text-xs mb-3 flex-1">by completing all quests</p>
+                        </CardContent>
+                      </GlowCard>
+                      <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2">
                         <Button variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 text-xs h-7 relative z-10 transition-all duration-300" onClick={() => {
-                    setObjectivesView("quests");
-                    setTimeout(() => {
-                      objectivesRef.current?.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                      });
-                    }, 100);
-                  }}>
+                      setObjectivesView("quests");
+                      setTimeout(() => {
+                        objectivesRef.current?.scrollIntoView({
+                          behavior: 'smooth',
+                          block: 'start'
+                        });
+                      }, 100);
+                    }}>
                           Show Quests
                         </Button>
-                      </CardContent>
-                    </GlowCard>
+                      </div>
+                    </div>
 
                     <GlowCard className="cursor-pointer">
                       <CardContent className="p-4">
