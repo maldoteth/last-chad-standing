@@ -13,7 +13,6 @@ import NotFound from "./pages/NotFound";
 import PreOrderSuccess from "./pages/PreOrderSuccess";
 import PreOrderCancel from "./pages/PreOrderCancel";
 import { AdminLogin } from "./components/AdminLogin";
-import { PWAInstallPrompt } from "./components/PWAInstallPrompt";
 
 const queryClient = new QueryClient();
 
@@ -35,7 +34,6 @@ const App = () => (
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
-      <PWAInstallPrompt />
     </TooltipProvider>
   </QueryClientProvider>
 );
