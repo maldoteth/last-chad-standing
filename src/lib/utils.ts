@@ -49,7 +49,7 @@ export function getRarityColor(rarity: string): string {
     case 'legendary':
       return 'bg-orange-500/20 text-orange-400 border-orange-500/50';
     case 'special':
-      return 'bg-gradient-to-r from-pink-500/20 via-purple-500/20 to-yellow-500/20 text-transparent bg-clip-text border-pink-500/50';
+      return 'bg-gradient-to-r from-pink-400/30 via-purple-400/30 to-yellow-400/30 text-white border-pink-400/60';
     default:
       return 'bg-gray-500/20 text-gray-400 border-gray-500/50';
   }
