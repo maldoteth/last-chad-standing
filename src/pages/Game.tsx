@@ -1573,7 +1573,7 @@ const Game = () => {
                         </div>
                         <h3 className="text-sm font-bold mb-1">Smash that XP</h3>
                         <p className="text-gray-300 text-xs mb-3 md:mb-6 flex-1">by completing all quests</p>
-                        <Button variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 text-xs h-7 relative z-10 transition-all duration-300 md:mt-2" onClick={() => {
+                        <Button variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 text-xs h-7 relative z-10 transition-all duration-300 md:mt-4" onClick={() => {
                     setObjectivesView("quests");
                     setTimeout(() => {
                       objectivesRef.current?.scrollIntoView({
