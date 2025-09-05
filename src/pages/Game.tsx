@@ -208,6 +208,7 @@ const Game = () => {
   const objectivesRef = useRef<HTMLDivElement>(null);
   const fightersCarouselRef = useRef<StoreCarouselRef>(null);
   const accessoriesCarouselRef = useRef<StoreCarouselRef>(null);
+  const mobilityCarouselRef = useRef<StoreCarouselRef>(null);
   const emotesCarouselRef = useRef<StoreCarouselRef>(null);
   const packsCarouselRef = useRef<StoreCarouselRef>(null);
   const desktopFightersCarouselRef = useRef<StoreCarouselRef>(null);
@@ -2222,7 +2223,85 @@ const Game = () => {
                      </CardContent>
                    </Card>}
 
-                   {/* Emotes Category */}
+                    {/* Mobility Category */}
+                    {(selectedCategory === "all" || selectedCategory === "mobility") && <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
+                     <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
+                     <div className="absolute inset-0" style={{
+                 backgroundImage: `
+                         linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
+                         linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
+                       `,
+                 backgroundSize: '4px 4px'
+               }} />
+                     <CardHeader className="relative z-10">
+                       <CardTitle className="flex items-center justify-between text-white">
+                         <span>Mobility</span>
+                         <div className="flex items-center space-x-3">
+                           {/* Navigation arrows for carousel - only show when more than 4 items */}
+                           <div className="flex items-center space-x-1">
+                             <Button variant="ghost" size="sm" className="h-6 w-6 p-0 text-white/70 hover:text-white hover:bg-white/10" onClick={() => {
+                         mobilityCarouselRef.current?.scrollToPrevious();
+                       }}>
+                               <ChevronLeft className="h-4 w-4" />
+                             </Button>
+                             <Button variant="ghost" size="sm" className="h-6 w-6 p-0 text-white/70 hover:text-white hover:bg-white/10" onClick={() => {
+                         mobilityCarouselRef.current?.scrollToNext();
+                       }}>
+                               <ChevronRight className="h-4 w-4" />
+                             </Button>
+                          </div>
+                         </div>
+                       </CardTitle>
+                       
+                     </CardHeader>
+                     <CardContent>
+                         <StoreCarousel 
+                           ref={mobilityCarouselRef} 
+                           items={filterItemsByRarity(getStoreItemsByCategory('mobility').map(item => ({
+                             name: item.name,
+                             price: item.price,
+                             rarity: item.rarity,
+                             image: item.image_url || "/placeholder.svg"
+                           })))} 
+                           renderItem={(item, idx) => {
+                             const storeItem = getStoreItemsByCategory('mobility')[idx];
+                             return (
+                               <GlowCard key={idx} className="cursor-pointer">
+                                 <div className="p-3">
+                                   <div 
+                                     className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden flex items-center justify-center cursor-pointer"
+                                     onClick={() => storeItem && handleStoreItemClick(storeItem)}
+                                   >
+                                     <img 
+                                       src={item.image} 
+                                       alt={item.name} 
+                                       className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" 
+                                     />
+                                   </div>
+                                    <div className="mb-1 md:mb-2 md:flex md:items-center md:justify-between">
+                                      <h3 className="font-semibold text-xs text-white mb-1 md:mb-0">{item.name}</h3>
+                                      <Badge variant="outline" className={`text-[10px] px-1 py-0 h-4 ${getRarityColor(item.rarity)}`}>
+                                        {getRarityDisplayName(item.rarity)}
+                                      </Badge>
+                                    </div>
+                                    <Button 
+                                      size="sm" 
+                                      variant="secondary" 
+                                      className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-7 flex items-center justify-center gap-1"
+                                      onClick={() => storeItem && handleStoreItemClick(storeItem)}
+                                     >
+                                       <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
+                                       <span>{item.price.toLocaleString()}</span>
+                                     </Button>
+                                 </div>
+                               </GlowCard>
+                             );
+                           }} 
+                         />
+                      </CardContent>
+                    </Card>}
+
+                    {/* Emotes Category */}
                    {(selectedCategory === "all" || selectedCategory === "emotes") && <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                     <div className="absolute inset-0" style={{
