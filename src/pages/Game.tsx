@@ -17,7 +17,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { ProgressBar } from "@/components/ProgressBar";
 import { useProfile } from "@/hooks/useProfile";
 import { getAllLevelsForDisplay, getCurrentLevel, getProgressToNextLevel } from "@/lib/progressSystem";
-import { formatNumberWithAbbreviation } from "@/lib/utils";
+import { formatNumberWithAbbreviation, getRarityFilterColor, getRarityDisplayName, getRarityColor, RARITY_TYPES } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerTrigger, DrawerClose } from "@/components/ui/drawer";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -1994,25 +1994,29 @@ const Game = () => {
                               <div className="w-3 h-3 rounded-full bg-black mr-2" />
                               All Rarities
                             </Button>
-                            <Button variant="ghost" onClick={() => setSelectedRarity("green")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedRarity === "green" ? "bg-white/20" : ""}`}>
-                              <div className="w-3 h-3 rounded-full bg-green-500 mr-2" />
-                              Regular
+                            <Button variant="ghost" onClick={() => setSelectedRarity("common")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedRarity === "common" ? "bg-white/20" : ""}`}>
+                              <div className={`w-3 h-3 rounded-full ${getRarityFilterColor("common")} mr-2`} />
+                              {getRarityDisplayName("common")}
                             </Button>
-                            <Button variant="ghost" onClick={() => setSelectedRarity("blue")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedRarity === "blue" ? "bg-white/20" : ""}`}>
-                              <div className="w-3 h-3 rounded-full bg-blue-500 mr-2" />
-                              Rare
+                            <Button variant="ghost" onClick={() => setSelectedRarity("uncommon")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedRarity === "uncommon" ? "bg-white/20" : ""}`}>
+                              <div className={`w-3 h-3 rounded-full ${getRarityFilterColor("uncommon")} mr-2`} />
+                              {getRarityDisplayName("uncommon")}
                             </Button>
-                            <Button variant="ghost" onClick={() => setSelectedRarity("silver")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedRarity === "silver" ? "bg-white/20" : ""}`}>
-                              <div className="w-3 h-3 rounded-full bg-gray-300 mr-2" />
-                              Legendary
+                            <Button variant="ghost" onClick={() => setSelectedRarity("rare")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedRarity === "rare" ? "bg-white/20" : ""}`}>
+                              <div className={`w-3 h-3 rounded-full ${getRarityFilterColor("rare")} mr-2`} />
+                              {getRarityDisplayName("rare")}
                             </Button>
-                            <Button variant="ghost" onClick={() => setSelectedRarity("gold")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedRarity === "gold" ? "bg-white/20" : ""}`}>
-                              <div className="w-3 h-3 rounded-full bg-yellow-400 mr-2" />
-                              Mythical
+                            <Button variant="ghost" onClick={() => setSelectedRarity("epic")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedRarity === "epic" ? "bg-white/20" : ""}`}>
+                              <div className={`w-3 h-3 rounded-full ${getRarityFilterColor("epic")} mr-2`} />
+                              {getRarityDisplayName("epic")}
+                            </Button>
+                            <Button variant="ghost" onClick={() => setSelectedRarity("legendary")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedRarity === "legendary" ? "bg-white/20" : ""}`}>
+                              <div className={`w-3 h-3 rounded-full ${getRarityFilterColor("legendary")} mr-2`} />
+                              {getRarityDisplayName("legendary")}
                             </Button>
                             <Button variant="ghost" onClick={() => setSelectedRarity("special")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedRarity === "special" ? "bg-white/20" : ""}`}>
-                              <div className="w-3 h-3 rounded-full bg-gradient-to-r from-purple-400 via-pink-400 to-yellow-400 mr-2" />
-                              Special
+                              <div className={`w-3 h-3 rounded-full ${getRarityFilterColor("special")} mr-2`} />
+                              {getRarityDisplayName("special")}
                             </Button>
                           </div>
                         </DrawerContent>
@@ -2027,25 +2031,29 @@ const Game = () => {
                             <div className="w-3 h-3 rounded-full bg-black" />
                             <span>All Rarities</span>
                           </DropdownMenuItem>
-                          <DropdownMenuItem onClick={() => setSelectedRarity("green")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "green" ? "bg-white/20" : ""}`}>
-                            <div className="w-3 h-3 rounded-full bg-green-500" />
-                            <span>Regular</span>
+                          <DropdownMenuItem onClick={() => setSelectedRarity("common")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "common" ? "bg-white/20" : ""}`}>
+                            <div className={`w-3 h-3 rounded-full ${getRarityFilterColor("common")}`} />
+                            <span>{getRarityDisplayName("common")}</span>
                           </DropdownMenuItem>
-                          <DropdownMenuItem onClick={() => setSelectedRarity("blue")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "blue" ? "bg-white/20" : ""}`}>
-                            <div className="w-3 h-3 rounded-full bg-blue-500" />
-                            <span>Rare</span>
+                          <DropdownMenuItem onClick={() => setSelectedRarity("uncommon")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "uncommon" ? "bg-white/20" : ""}`}>
+                            <div className={`w-3 h-3 rounded-full ${getRarityFilterColor("uncommon")}`} />
+                            <span>{getRarityDisplayName("uncommon")}</span>
                           </DropdownMenuItem>
-                          <DropdownMenuItem onClick={() => setSelectedRarity("silver")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "silver" ? "bg-white/20" : ""}`}>
-                            <div className="w-3 h-3 rounded-full bg-gray-300" />
-                            <span>Legendary</span>
+                          <DropdownMenuItem onClick={() => setSelectedRarity("rare")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "rare" ? "bg-white/20" : ""}`}>
+                            <div className={`w-3 h-3 rounded-full ${getRarityFilterColor("rare")}`} />
+                            <span>{getRarityDisplayName("rare")}</span>
                           </DropdownMenuItem>
-                          <DropdownMenuItem onClick={() => setSelectedRarity("gold")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "gold" ? "bg-white/20" : ""}`}>
-                            <div className="w-3 h-3 rounded-full bg-yellow-400" />
-                            <span>Mythical</span>
+                          <DropdownMenuItem onClick={() => setSelectedRarity("epic")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "epic" ? "bg-white/20" : ""}`}>
+                            <div className={`w-3 h-3 rounded-full ${getRarityFilterColor("epic")}`} />
+                            <span>{getRarityDisplayName("epic")}</span>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem onClick={() => setSelectedRarity("legendary")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "legendary" ? "bg-white/20" : ""}`}>
+                            <div className={`w-3 h-3 rounded-full ${getRarityFilterColor("legendary")}`} />
+                            <span>{getRarityDisplayName("legendary")}</span>
                           </DropdownMenuItem>
                           <DropdownMenuItem onClick={() => setSelectedRarity("special")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "special" ? "bg-white/20" : ""}`}>
-                            <div className="w-3 h-3 rounded-full bg-gradient-to-r from-purple-400 via-pink-400 to-yellow-400" />
-                            <span>Special</span>
+                            <div className={`w-3 h-3 rounded-full ${getRarityFilterColor("special")}`} />
+                            <span>{getRarityDisplayName("special")}</span>
                           </DropdownMenuItem>
                         </DropdownMenuContent>
                       </DropdownMenu>}
@@ -2109,7 +2117,12 @@ const Game = () => {
                                       className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" 
                                     />
                                   </div>
-                                  <h3 className="font-semibold text-xs text-white mb-1">{item.name}</h3>
+                                   <h3 className="font-semibold text-xs text-white mb-1">{item.name}</h3>
+                                   <div className="flex items-center justify-between mb-2">
+                                     <Badge variant="outline" className={`text-[10px] px-1 py-0 h-4 ${getRarityColor(item.rarity)}`}>
+                                       {getRarityDisplayName(item.rarity)}
+                                     </Badge>
+                                   </div>
                                   <div className="flex items-center justify-between">
                                     <div className="flex items-center space-x-1">
                                       <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
@@ -2188,7 +2201,12 @@ const Game = () => {
                                       className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" 
                                     />
                                   </div>
-                                  <h3 className="font-semibold text-xs text-white mb-1">{item.name}</h3>
+                                   <h3 className="font-semibold text-xs text-white mb-1">{item.name}</h3>
+                                   <div className="flex items-center justify-between mb-2">
+                                     <Badge variant="outline" className={`text-[10px] px-1 py-0 h-4 ${getRarityColor(item.rarity)}`}>
+                                       {getRarityDisplayName(item.rarity)}
+                                     </Badge>
+                                   </div>
                                   <div className="flex items-center justify-between">
                                     <div className="flex items-center space-x-1">
                                       <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
@@ -2267,7 +2285,12 @@ const Game = () => {
                                       className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" 
                                     />
                                   </div>
-                                  <h3 className="font-semibold text-xs text-white mb-1">{item.name}</h3>
+                                   <h3 className="font-semibold text-xs text-white mb-1">{item.name}</h3>
+                                   <div className="flex items-center justify-between mb-2">
+                                     <Badge variant="outline" className={`text-[10px] px-1 py-0 h-4 ${getRarityColor(item.rarity)}`}>
+                                       {getRarityDisplayName(item.rarity)}
+                                     </Badge>
+                                   </div>
                                   <div className="flex items-center justify-between">
                                     <div className="flex items-center space-x-1">
                                       <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
@@ -2339,7 +2362,12 @@ const Game = () => {
                                       className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" 
                                     />
                                   </div>
-                                  <h3 className="font-semibold text-xs text-white mb-1">{item.name}</h3>
+                                   <h3 className="font-semibold text-xs text-white mb-1">{item.name}</h3>
+                                   <div className="flex items-center justify-between mb-2">
+                                     <Badge variant="outline" className={`text-[10px] px-1 py-0 h-4 ${getRarityColor(item.rarity)}`}>
+                                       {getRarityDisplayName(item.rarity)}
+                                     </Badge>
+                                   </div>
                                   <div className="flex items-center justify-between">
                                     <div className="flex items-center space-x-1">
                                       <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
@@ -3626,12 +3654,12 @@ const Game = () => {
                          <StoreCarousel ref={desktopFightersCarouselRef} desktopMode={true} items={filterItemsByRarity([{
                         name: "Shane Sonny",
                         price: 1200,
-                        rarity: "gold",
+                        rarity: "legendary",
                         image: "/lovable-uploads/a76e21f1-ffca-4130-bd9a-08d09167dca0.png"
                       }, {
                         name: "Ray Del Maestro",
                         price: 2800,
-                        rarity: "blue",
+                        rarity: "rare",
                         image: "/lovable-uploads/e8b33b1a-410f-4448-9b83-126b8d27f0a9.png"
                       }, {
                         name: "John Strictland",
@@ -3641,27 +3669,27 @@ const Game = () => {
                       }, {
                         name: "Tarragon Southslice",
                         price: 2800,
-                        rarity: "gold",
+                        rarity: "legendary",
                         image: "/lovable-uploads/cf5abf4c-cf7f-49b7-a830-49343c8d1222.png"
                       }, {
                         name: "The Irish King",
                         price: 2500,
-                        rarity: "gold",
+                        rarity: "legendary",
                         image: irishKingSkin
                       }, {
                         name: "Stani Eagle",
                         price: 1800,
-                        rarity: "blue",
+                        rarity: "rare",
                         image: staniEagleSkin
                       }, {
                         name: "Jonesy Bones",
                         price: 2200,
-                        rarity: "silver",
+                        rarity: "epic",
                         image: bonesSkin
                       }, {
                         name: "Latin Legend",
                         price: 1500,
-                        rarity: "green",
+                        rarity: "common",
                         image: latinLegendSkin
                       }])} renderItem={(item, idx) => <GlowCard key={idx} className="text-white shadow-2xl cursor-pointer">
                               <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
@@ -3725,12 +3753,12 @@ const Game = () => {
                         <StoreCarousel ref={desktopAccessoriesCarouselRef} desktopMode={true} items={filterItemsByRarity([{
                         name: "Red Wing Suit",
                         price: 600,
-                        rarity: "blue",
+                        rarity: "rare",
                         image: "/lovable-uploads/2eec4a9a-97d3-4ba4-9508-2eeef0011139.png"
                       }, {
                         name: "Blue Wing Suit",
                         price: 450,
-                        rarity: "green",
+                        rarity: "common",
                         image: "/lovable-uploads/1efc1553-007a-4b38-a982-79d9f5abbfa1.png"
                       }, {
                         name: "White Base Vest",
@@ -3740,17 +3768,17 @@ const Game = () => {
                       }, {
                         name: "Grey Base Vest",
                         price: 550,
-                        rarity: "silver",
+                        rarity: "epic",
                         image: "/lovable-uploads/91375d1a-e829-4716-b3b6-833b58355bd9.png"
                       }, {
                         name: "Combat Vest",
                         price: 880,
-                        rarity: "gold",
+                        rarity: "legendary",
                         image: "/lovable-uploads/8c7fd9f1-1128-4d45-b089-e8879cb0fa98.png"
                       }, {
                         name: "DHB x LCS shorts",
                         price: 990,
-                        rarity: "blue",
+                        rarity: "rare",
                         image: "/lovable-uploads/e21fe8d7-5519-4b7b-bd90-6b96e74635d4.png"
                       }, {
                         name: "BMF Shorts",
@@ -3760,7 +3788,7 @@ const Game = () => {
                       }, {
                         name: "Rapz Gloves",
                         price: 800,
-                        rarity: "silver",
+                        rarity: "epic",
                         image: "/lovable-uploads/9320a71d-c3b8-4922-938c-5e759907fcf6.png"
                       }])} renderItem={(item, idx) => <GlowCard key={idx} className="text-white shadow-2xl cursor-pointer">
                               <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
@@ -3824,17 +3852,17 @@ const Game = () => {
                          <StoreCarousel ref={desktopMobilityCarouselRef} desktopMode={true} items={filterItemsByRarity([{
                         name: "The Coupé Tank",
                         price: 5000,
-                        rarity: "gold",
+                        rarity: "legendary",
                         image: "/lovable-uploads/1c6b707c-97a6-4381-bc54-de63a7cf8a31.png"
                       }, {
                         name: "Speed Buggy",
                         price: 3200,
-                        rarity: "silver",
+                        rarity: "epic",
                         image: "/lovable-uploads/b64d7801-1284-4763-b115-ca3cfa8ff315.png"
                       }, {
                         name: "Pit Bike",
                         price: 4500,
-                        rarity: "blue",
+                        rarity: "rare",
                         image: "/lovable-uploads/4e2aac54-cac6-4cf1-92ad-76bf7e788077.png"
                       }, {
                         name: "Pogo",
@@ -3911,12 +3939,12 @@ const Game = () => {
                         <StoreCarousel ref={desktopEmotesCarouselRef} desktopMode={true} items={filterItemsByRarity([{
                         name: "Flex",
                         price: 800,
-                        rarity: "blue",
+                        rarity: "rare",
                         image: "/lovable-uploads/f52e83c2-28b7-417e-90ac-757255d1759f.png"
                       }, {
                         name: "Fists Up",
                         price: 1800,
-                        rarity: "gold",
+                        rarity: "legendary",
                         image: "/lovable-uploads/370bd874-ad5c-467d-b844-55688b1a0f9a.png"
                       }, {
                         name: "Squeaky Dance",
@@ -3926,7 +3954,7 @@ const Game = () => {
                       }, {
                         name: "u want sum?",
                         price: 1500,
-                        rarity: "gold",
+                        rarity: "legendary",
                         image: "/lovable-uploads/30d419b4-79a9-459c-b37b-42099ffd6273.png"
                       }, {
                         name: "Protest Sign",
@@ -3936,17 +3964,17 @@ const Game = () => {
                       }, {
                         name: "Aura Farm",
                         price: 1900,
-                        rarity: "silver",
+                        rarity: "epic",
                         image: "/lovable-uploads/74597015-55ed-4190-91df-62af504a7e04.png"
                       }, {
                         name: "Screen Smash",
                         price: 1700,
-                        rarity: "blue",
+                        rarity: "rare",
                         image: "/lovable-uploads/f747341c-eccd-47c4-8290-0451629ec3a4.png"
                       }, {
                         name: "Dumbbell Singer",
                         price: 1200,
-                        rarity: "green",
+                        rarity: "common",
                         image: "/lovable-uploads/2c2096de-f308-4a16-865b-31c36a14a080.png"
                       }])} renderItem={(item, idx) => <GlowCard key={idx} className="text-white shadow-2xl cursor-pointer">
                               <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
@@ -4019,12 +4047,12 @@ const Game = () => {
                        <StoreCarousel ref={desktopPacksCarouselRef} desktopMode={true} items={filterItemsByRarity([{
                         name: "Silver Pack",
                         price: 1000,
-                        rarity: "silver",
+                        rarity: "epic",
                         image: "/lovable-uploads/17c3a939-bcaa-4cdb-9b61-271b5774c7e2.png"
                       }, {
                         name: "Gold Pack",
                         price: 2000,
-                        rarity: "gold",
+                        rarity: "legendary",
                         image: "/lovable-uploads/291c5734-f144-47b0-9f49-915999e921b0.png"
                       }, {
                         name: "EO Summer Pack",
