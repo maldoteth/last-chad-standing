@@ -1565,7 +1565,7 @@ const Game = () => {
                 {/* Action Cards Grid - 2 columns on mobile */}
                 <div className="px-4 pb-4">
                   <div className="grid grid-cols-2 gap-3">
-                    <GlowCard className="cursor-pointer">
+                    <GlowCard className="cursor-pointer h-full">
                       <CardContent className="p-4 flex flex-col h-full">
                         <div className="flex items-center space-x-1 mb-2">
                           <Trophy className="w-4 h-4 text-white" />
@@ -1587,7 +1587,7 @@ const Game = () => {
                       </CardContent>
                     </GlowCard>
 
-                    <GlowCard className="cursor-pointer">
+                    <GlowCard className="cursor-pointer h-full">
                       <CardContent className="p-4 flex flex-col h-full">
                         <div className="flex items-center space-x-1 mb-2">
                           <Gift className="w-4 h-4" />
