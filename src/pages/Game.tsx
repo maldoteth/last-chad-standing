@@ -2003,9 +2003,9 @@ const Game = () => {
                               <div className={`w-3 h-3 rounded-full ${getRarityFilterColor("common")} mr-2`} />
                               {getRarityDisplayName("common")}
                             </Button>
-                            <Button variant="ghost" onClick={() => setSelectedRarity("uncommon")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedRarity === "uncommon" ? "bg-white/20" : ""}`}>
-                              <div className={`w-3 h-3 rounded-full ${getRarityFilterColor("uncommon")} mr-2`} />
-                              {getRarityDisplayName("uncommon")}
+                            <Button variant="ghost" onClick={() => setSelectedRarity("sparse")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedRarity === "sparse" ? "bg-white/20" : ""}`}>
+                              <div className={`w-3 h-3 rounded-full ${getRarityFilterColor("sparse")} mr-2`} />
+                              {getRarityDisplayName("sparse")}
                             </Button>
                             <Button variant="ghost" onClick={() => setSelectedRarity("rare")} className={`w-full justify-start text-white hover:bg-white/10 ${selectedRarity === "rare" ? "bg-white/20" : ""}`}>
                               <div className={`w-3 h-3 rounded-full ${getRarityFilterColor("rare")} mr-2`} />
@@ -2040,9 +2040,9 @@ const Game = () => {
                             <div className={`w-3 h-3 rounded-full ${getRarityFilterColor("common")}`} />
                             <span>{getRarityDisplayName("common")}</span>
                           </DropdownMenuItem>
-                          <DropdownMenuItem onClick={() => setSelectedRarity("uncommon")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "uncommon" ? "bg-white/20" : ""}`}>
-                            <div className={`w-3 h-3 rounded-full ${getRarityFilterColor("uncommon")}`} />
-                            <span>{getRarityDisplayName("uncommon")}</span>
+                          <DropdownMenuItem onClick={() => setSelectedRarity("sparse")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "sparse" ? "bg-white/20" : ""}`}>
+                            <div className={`w-3 h-3 rounded-full ${getRarityFilterColor("sparse")}`} />
+                            <span>{getRarityDisplayName("sparse")}</span>
                           </DropdownMenuItem>
                           <DropdownMenuItem onClick={() => setSelectedRarity("rare")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "rare" ? "bg-white/20" : ""}`}>
                             <div className={`w-3 h-3 rounded-full ${getRarityFilterColor("rare")}`} />
@@ -3663,9 +3663,9 @@ const Game = () => {
                             <div className={`w-3 h-3 rounded-full ${getRarityFilterColor("common")}`} />
                             <span>{getRarityDisplayName("common")}</span>
                           </DropdownMenuItem>
-                          <DropdownMenuItem onClick={() => setSelectedRarity("uncommon")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "uncommon" ? "bg-white/20" : ""}`}>
-                            <div className={`w-3 h-3 rounded-full ${getRarityFilterColor("uncommon")}`} />
-                            <span>{getRarityDisplayName("uncommon")}</span>
+                          <DropdownMenuItem onClick={() => setSelectedRarity("sparse")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "sparse" ? "bg-white/20" : ""}`}>
+                            <div className={`w-3 h-3 rounded-full ${getRarityFilterColor("sparse")}`} />
+                            <span>{getRarityDisplayName("sparse")}</span>
                           </DropdownMenuItem>
                           <DropdownMenuItem onClick={() => setSelectedRarity("rare")} className={`flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 ${selectedRarity === "rare" ? "bg-white/20" : ""}`}>
                             <div className={`w-3 h-3 rounded-full ${getRarityFilterColor("rare")}`} />
