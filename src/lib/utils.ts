@@ -25,7 +25,7 @@ export function formatNumberWithAbbreviation(num: number): string {
 // Rarity system utilities
 export const RARITY_TYPES = {
   common: 'common',
-  sparse: 'sparse', 
+  uncommon: 'uncommon', 
   rare: 'rare',
   epic: 'epic',
   legendary: 'legendary',
@@ -40,7 +40,7 @@ export function getRarityColor(rarity: string): string {
   switch (rarityLower) {
     case 'common':
       return 'bg-gray-500/20 text-gray-300 border-gray-500/50';
-    case 'sparse':
+    case 'uncommon':
       return 'bg-green-500/20 text-green-400 border-green-500/50';
     case 'rare':
       return 'bg-blue-500/20 text-blue-400 border-blue-500/50';
@@ -61,7 +61,7 @@ export function getRarityFilterColor(rarity: string): string {
   switch (rarityLower) {
     case 'common':
       return 'bg-gray-500';
-    case 'sparse':
+    case 'uncommon':
       return 'bg-green-500';
     case 'rare':
       return 'bg-blue-500';
@@ -82,8 +82,8 @@ export function getRarityDisplayName(rarity: string): string {
   switch (rarityLower) {
     case 'common':
       return 'Common';
-    case 'sparse':
-      return 'Sparse';
+    case 'uncommon':
+      return 'Uncommon';
     case 'rare':
       return 'Rare';
     case 'epic':
@@ -102,7 +102,7 @@ export function getRaritySortOrder(rarity: string): number {
   
   switch (rarityLower) {
     case 'common': return 1;
-    case 'sparse': return 2;
+    case 'uncommon': return 2;
     case 'rare': return 3;
     case 'epic': return 4;
     case 'legendary': return 5;
