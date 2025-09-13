@@ -23,7 +23,7 @@ import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerTrigger, Drawer
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogDescription } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Coins, ShoppingBag, Users, Package, CreditCard, Handshake, Trophy, Star, Target, ChevronRight, ChevronLeft, Bell, Play, Home, TrendingUp, UserPlus, Medal, LogOut, Settings, Info, Gift, BarChart3, LineChart, ArrowUpRight, ArrowDownRight, Search, Filter, Gamepad, Instagram, Layers, BookOpen, Youtube, X, RotateCcw, MessageCircle, Archive, ArrowRightLeft, ArrowUpDown, Wallet, Edit3, Check } from "lucide-react";
+import { Coins, ShoppingBag, Users, Package, CreditCard, Handshake, Trophy, Star, Target, ChevronRight, ChevronLeft, Bell, Play, Home, TrendingUp, UserPlus, Medal, LogOut, Settings, Info, Gift, BarChart3, LineChart, ArrowUpRight, ArrowDownRight, Search, Filter, Gamepad, Instagram, Layers, BookOpen, Youtube, X, RotateCcw, MessageCircle, Archive, ArrowRightLeft, ArrowUpDown, Wallet, Edit3, Check, Plus, Copy } from "lucide-react";
 import { ResponsiveContainer, LineChart as RechartsLineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, PieChart, Pie, Cell, BarChart, Bar, Area, AreaChart } from 'recharts';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import cyberWarriorSkin from "@/assets/cyber-warrior-skin.png";
@@ -261,6 +261,42 @@ const Game = () => {
       setEditingUsername('');
     } catch (error) {
       // Error is handled in the updateUsername function
+    }
+  };
+
+  // Handle wallet address copy
+  const handleCopyWalletAddress = async () => {
+    if (!user?.linkedAccounts?.length) {
+      toast({
+        title: "No wallet connected",
+        description: "Please connect a wallet first",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    const wallet = user.linkedAccounts.find(account => account.type === 'wallet');
+    if (!wallet) {
+      toast({
+        title: "No wallet found",
+        description: "No wallet address available to copy",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    try {
+      await navigator.clipboard.writeText(wallet.address);
+      toast({
+        title: "Address copied!",
+        description: `${wallet.address.slice(0, 6)}...${wallet.address.slice(-4)} copied to clipboard`
+      });
+    } catch (error) {
+      toast({
+        title: "Copy failed",
+        description: "Failed to copy wallet address",
+        variant: "destructive"
+      });
     }
   };
 
@@ -1353,30 +1389,40 @@ const Game = () => {
                        <div className="px-3 py-2 border-t border-white/20">
                          <ProgressBar xp={userBalance?.xp || 0} />
                        </div>
-                        <div className="px-3 py-2 border-t border-white/20">
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center space-x-3">
-                              <div className="text-2xl">
-                                <img src="/lovable-uploads/c32465ca-8811-443a-a73c-b57225210592.png" alt="Coin" className="w-6 h-6" />
-                              </div>
-                              <div className="flex flex-col">
-                                <span className="text-sm font-medium text-white">Coin Balance</span>
-                                <span className="text-xs text-gray-200">0</span>
-                              </div>
-                            </div>
-                            <Button 
-                              size="sm" 
-                              variant="outline" 
-                              className="bg-transparent border-white/20 text-white hover:bg-white/10 hover:text-white transition-all duration-300 text-xs px-2 py-1"
-                              onClick={() => {
-                                setSelectedPlayer(null);
-                                setBuyDialogOpen(true);
-                              }}
-                            >
-                              Buy
-                            </Button>
-                          </div>
-                        </div>
+                         <div className="px-3 py-2 border-t border-white/20">
+                           <div className="flex items-center justify-between">
+                             <div className="flex items-center space-x-3">
+                               <div className="text-2xl">
+                                 <img src="/lovable-uploads/c32465ca-8811-443a-a73c-b57225210592.png" alt="Coin" className="w-6 h-6" />
+                               </div>
+                               <div className="flex flex-col">
+                                 <span className="text-sm font-medium text-white">Coin Balance</span>
+                                 <span className="text-xs text-gray-200">0</span>
+                               </div>
+                             </div>
+                             <div className="flex items-center space-x-2">
+                               <Button 
+                                 size="sm" 
+                                 variant="outline" 
+                                 className="bg-transparent border-white/20 text-white hover:bg-white/10 hover:text-white transition-all duration-300 text-xs px-2 py-1"
+                                 onClick={handleCopyWalletAddress}
+                               >
+                                 <Plus className="w-3 h-3" />
+                               </Button>
+                               <Button 
+                                 size="sm" 
+                                 variant="outline" 
+                                 className="bg-transparent border-white/20 text-white hover:bg-white/10 hover:text-white transition-all duration-300 text-xs px-2 py-1"
+                                 onClick={() => {
+                                   setSelectedPlayer(null);
+                                   setBuyDialogOpen(true);
+                                 }}
+                               >
+                                 Buy
+                               </Button>
+                             </div>
+                           </div>
+                         </div>
                       
                       <DropdownMenuSeparator className="bg-white/20" />
                       
