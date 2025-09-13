@@ -204,11 +204,70 @@ export const useProfile = () => {
     }
   }, [user?.id, authenticated]);
 
+  const updateUsername = async (newUsername: string) => {
+    if (!user?.id || !authenticated || !profile) {
+      throw new Error('User must be authenticated with profile to update username');
+    }
+
+    // Basic validation
+    if (!newUsername || newUsername.trim().length < 3 || newUsername.trim().length > 20) {
+      throw new Error('Username must be between 3 and 20 characters');
+    }
+
+    try {
+      setLoading(true);
+      
+      const { data, error } = await supabase
+        .from('user_profiles')
+        .update({ username: newUsername.trim() })
+        .eq('user_id', user.id)
+        .select()
+        .single();
+
+      if (error) {
+        console.error('Error updating username:', error);
+        throw error;
+      }
+
+      // Update local profile state
+      const tierIcon = getTierIcon(userBalance?.xp || 0);
+      const updatedProfile = {
+        ...data,
+        avatar_url: tierIcon
+      };
+      setProfile(updatedProfile);
+      
+      toast({
+        title: "Username updated!",
+        description: `Your username is now ${newUsername}`,
+      });
+
+      return updatedProfile;
+    } catch (error: any) {
+      console.error('Error in updateUsername function:', error);
+      
+      const errorMessage = error?.code === '23505' 
+        ? "Username already taken. Please try a different one."
+        : error?.message || "Unable to update username. Please try again.";
+      
+      toast({
+        title: "Update failed",
+        description: errorMessage,
+        variant: "destructive",
+      });
+      
+      throw error;
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return {
     profile,
     loading,
     createProfile,
     fetchProfile,
+    updateUsername,
     // Removed functions: updateProfile, uploadAvatar
   };
 };

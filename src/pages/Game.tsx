@@ -23,7 +23,7 @@ import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerTrigger, Drawer
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogDescription } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Coins, ShoppingBag, Users, Package, CreditCard, Handshake, Trophy, Star, Target, ChevronRight, ChevronLeft, Bell, Play, Home, TrendingUp, UserPlus, Medal, LogOut, Settings, Info, Gift, BarChart3, LineChart, ArrowUpRight, ArrowDownRight, Search, Filter, Gamepad, Instagram, Layers, BookOpen, Youtube, X, RotateCcw, MessageCircle, Archive, ArrowRightLeft, ArrowUpDown, Wallet } from "lucide-react";
+import { Coins, ShoppingBag, Users, Package, CreditCard, Handshake, Trophy, Star, Target, ChevronRight, ChevronLeft, Bell, Play, Home, TrendingUp, UserPlus, Medal, LogOut, Settings, Info, Gift, BarChart3, LineChart, ArrowUpRight, ArrowDownRight, Search, Filter, Gamepad, Instagram, Layers, BookOpen, Youtube, X, RotateCcw, MessageCircle, Archive, ArrowRightLeft, ArrowUpDown, Wallet, Edit3, Check } from "lucide-react";
 import { ResponsiveContainer, LineChart as RechartsLineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, PieChart, Pie, Cell, BarChart, Bar, Area, AreaChart } from 'recharts';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import cyberWarriorSkin from "@/assets/cyber-warrior-skin.png";
@@ -236,11 +236,33 @@ const Game = () => {
     profile,
     loading,
     createProfile,
-    fetchProfile
+    fetchProfile,
+    updateUsername
   } = useProfile();
   const {
     getMarketplacePrices
   } = useMarketplace();
+
+  // Username editing state
+  const [isEditingUsername, setIsEditingUsername] = useState(false);
+  const [editingUsername, setEditingUsername] = useState('');
+
+  // Handle username update
+  const handleUsernameUpdate = async () => {
+    if (!editingUsername.trim() || editingUsername.trim() === profile?.username) {
+      setIsEditingUsername(false);
+      setEditingUsername('');
+      return;
+    }
+
+    try {
+      await updateUsername(editingUsername.trim());
+      setIsEditingUsername(false);
+      setEditingUsername('');
+    } catch (error) {
+      // Error is handled in the updateUsername function
+    }
+  };
 
   // Handle mobility shake animation
   const handleMobilityNextClick = () => {
@@ -1263,14 +1285,69 @@ const Game = () => {
                           <div className="text-2xl">
                             {profile?.avatar_url || '👤'}
                           </div>
-                           <div className="flex flex-col space-y-1">
-                             <p className="text-sm font-medium leading-none text-white">
-                               {loading ? "Loading profile..." : profile?.username || 'Profile Error'}
-                             </p>
-                             <p className="text-xs leading-none text-gray-200">
-                               {user?.email?.address}
-                             </p>
-                           </div>
+                            <div className="flex flex-col space-y-1 flex-1">
+                              {isEditingUsername ? (
+                                <div className="flex items-center space-x-2">
+                                  <Input
+                                    value={editingUsername}
+                                    onChange={(e) => setEditingUsername(e.target.value)}
+                                    className="bg-transparent border-white/20 text-white text-sm h-6 px-2"
+                                    placeholder="Enter username"
+                                    maxLength={20}
+                                    onKeyDown={(e) => {
+                                      if (e.key === 'Enter') {
+                                        handleUsernameUpdate();
+                                      } else if (e.key === 'Escape') {
+                                        setIsEditingUsername(false);
+                                        setEditingUsername('');
+                                      }
+                                    }}
+                                  />
+                                  <div className="flex items-center space-x-1">
+                                    <Button
+                                      size="sm"
+                                      variant="ghost"
+                                      className="h-6 w-6 p-0 hover:bg-green-500/20 text-green-400 hover:text-green-300"
+                                      onClick={handleUsernameUpdate}
+                                      disabled={loading}
+                                    >
+                                      <Check className="w-3 h-3" />
+                                    </Button>
+                                    <Button
+                                      size="sm"
+                                      variant="ghost"
+                                      className="h-6 w-6 p-0 hover:bg-red-500/20 text-red-400 hover:text-red-300"
+                                      onClick={() => {
+                                        setIsEditingUsername(false);
+                                        setEditingUsername('');
+                                      }}
+                                    >
+                                      <X className="w-3 h-3" />
+                                    </Button>
+                                  </div>
+                                </div>
+                              ) : (
+                                <div className="flex items-center justify-between">
+                                  <p className="text-sm font-medium leading-none text-white">
+                                    {loading ? "Loading profile..." : profile?.username || 'Profile Error'}
+                                  </p>
+                                  <Button
+                                    size="sm"
+                                    variant="ghost"
+                                    className="h-6 w-6 p-0 hover:bg-white/10 text-gray-400 hover:text-white transition-all duration-300"
+                                    onClick={() => {
+                                      setEditingUsername(profile?.username || '');
+                                      setIsEditingUsername(true);
+                                    }}
+                                  >
+                                    <Edit3 className="w-3 h-3" />
+                                  </Button>
+                                </div>
+                              )}
+                              <p className="text-xs leading-none text-gray-200">
+                                {user?.email?.address}
+                              </p>
+                            </div>
                         </div>
                       </div>
                        <div className="px-3 py-2 border-t border-white/20">
