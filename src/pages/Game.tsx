@@ -79,11 +79,10 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
     // Generate mock bid/ask prices when no real listings exist
     const mockSellPrice = Math.round(player.price * 1.15);
     const mockBuyPrice = Math.round(player.price * 0.85);
-    
+
     // Generate mock 24hr change (random between -15% to +15%)
-    const mockChange = (Math.random() * 30 - 15);
+    const mockChange = Math.random() * 30 - 15;
     const isPositive = mockChange > 0;
-    
     return <div className="flex items-center justify-end md:justify-between md:gap-4 rounded-lg p-3 min-w-[140px]">
       <div className="flex flex-col items-end md:flex-row md:items-center md:gap-4">
         <div className="flex items-center gap-1 mb-1 md:mb-0 justify-start">
@@ -99,11 +98,7 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
       
       {isMobile ? <Drawer>
         <DrawerTrigger asChild>
-          <Button 
-            size="icon"
-            variant="ghost" 
-            className="h-8 w-8 bg-transparent hover:bg-transparent"
-          >
+          <Button size="icon" variant="ghost" className="h-8 w-8 bg-transparent hover:bg-transparent">
             <ArrowRightLeft className="w-4 h-4" />
           </Button>
         </DrawerTrigger>
@@ -112,53 +107,26 @@ const renderMarketplacePrices = (player: any, getMarketplacePrices: (itemId: str
             <DrawerTitle className="text-center">Trade Options</DrawerTitle>
           </DrawerHeader>
           <div className="px-4 pb-8 space-y-2">
-            <Button 
-              variant="ghost"
-              className="w-full justify-center text-green-400 border border-green-400/30 hover:bg-green-400/10"
-              onClick={() => onBuyClick?.()}
-            >
+            <Button variant="ghost" className="w-full justify-center text-green-400 border border-green-400/30 hover:bg-green-400/10" onClick={() => onBuyClick?.()}>
               Buy
             </Button>
-            <Button 
-              variant="ghost"
-              className="w-full justify-center text-red-400 border border-red-400/30 hover:bg-red-400/10"
-              onClick={() => onSellClick?.()}
-            >
+            <Button variant="ghost" className="w-full justify-center text-red-400 border border-red-400/30 hover:bg-red-400/10" onClick={() => onSellClick?.()}>
               Sell
             </Button>
           </div>
         </DrawerContent>
       </Drawer> : <Popover>
         <PopoverTrigger asChild>
-          <Button 
-            size="icon"
-            variant="ghost" 
-            className="h-8 w-8 bg-transparent hover:bg-transparent"
-          >
+          <Button size="icon" variant="ghost" className="h-8 w-8 bg-transparent hover:bg-transparent">
             <ArrowRightLeft className="w-4 h-4" />
           </Button>
         </PopoverTrigger>
-        <PopoverContent 
-          className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50 p-1" 
-          align="center" 
-          side="bottom"
-          sideOffset={8}
-        >
+        <PopoverContent className="w-32 bg-black/10 backdrop-blur-md border border-white/20 text-white z-50 p-1" align="center" side="bottom" sideOffset={8}>
           <div className="flex flex-col gap-1">
-            <Button 
-              size="sm" 
-              variant="outline" 
-              className="w-full text-green-400 border-green-400/30 hover:bg-green-400/10 hover:text-green-400 bg-transparent"
-              onClick={() => onBuyClick?.()}
-            >
+            <Button size="sm" variant="outline" className="w-full text-green-400 border-green-400/30 hover:bg-green-400/10 hover:text-green-400 bg-transparent" onClick={() => onBuyClick?.()}>
               Buy
             </Button>
-            <Button 
-              size="sm" 
-              variant="outline" 
-              className="w-full text-red-400 border-red-400/30 hover:bg-red-400/10 hover:text-red-400 bg-transparent"
-              onClick={() => onSellClick?.()}
-            >
+            <Button size="sm" variant="outline" className="w-full text-red-400 border-red-400/30 hover:bg-red-400/10 hover:text-red-400 bg-transparent" onClick={() => onSellClick?.()}>
               Sell
             </Button>
           </div>
@@ -254,7 +222,6 @@ const Game = () => {
       setEditingUsername('');
       return;
     }
-
     try {
       await updateUsername(editingUsername.trim());
       setIsEditingUsername(false);
@@ -274,7 +241,6 @@ const Game = () => {
       });
       return;
     }
-
     const wallet = user.linkedAccounts.find(account => account.type === 'wallet');
     if (!wallet) {
       toast({
@@ -284,7 +250,6 @@ const Game = () => {
       });
       return;
     }
-
     try {
       await navigator.clipboard.writeText(wallet.address);
       toast({
@@ -350,7 +315,7 @@ const Game = () => {
   const handleSellClick = (player: any) => {
     toast({
       title: "Item not found in locker",
-      variant: "destructive",
+      variant: "destructive"
     });
   };
 
@@ -360,15 +325,12 @@ const Game = () => {
       toast({
         title: "Sign in required",
         description: "Please sign in to purchase with coins",
-        action: (
-          <Button size="sm" onClick={login}>
+        action: <Button size="sm" onClick={login}>
             Sign In
           </Button>
-        )
       });
       return;
     }
-    
     toast({
       title: "Coming Soon",
       description: "Coin purchases coming soon!",
@@ -380,17 +342,14 @@ const Game = () => {
   const handleBuyWithCardClick = () => {
     if (!authenticated) {
       toast({
-        title: "Sign in required", 
+        title: "Sign in required",
         description: "Please sign in to purchase with card",
-        action: (
-          <Button size="sm" onClick={login}>
+        action: <Button size="sm" onClick={login}>
             Sign In
           </Button>
-        )
       });
       return;
     }
-    
     toast({
       title: "Coming Soon",
       description: "Card payments coming soon!",
@@ -412,10 +371,7 @@ const Game = () => {
 
   // Get store items by category
   const getStoreItemsByCategory = (category: string) => {
-    return storeItems.filter(item => 
-      item.category.toLowerCase() === category.toLowerCase() || 
-      category === 'all'
-    );
+    return storeItems.filter(item => item.category.toLowerCase() === category.toLowerCase() || category === 'all');
   };
 
   // Mock data for market analytics
@@ -754,314 +710,313 @@ const Game = () => {
   const topGainers = topGainersData[gainersTimeFilter];
   const trendingPlayers = trendingPlayersData[trendingTimeFilter];
   const allPlayers = [
-    // Fighters
-    {
-      name: "mal.eth",
-      team: "Crypto Warriors", 
-      position: "Elite",
-      itemType: "fighters",
-      price: 3200,
-      lastSale: 3000,
-      trend: "up",
-      image: "/lovable-uploads/ccf83582-74cf-469c-87ba-b50ffa5da6de.png"
-    }, {
-      name: "Tarragon Southslice",
-      team: "Energy Corps", 
-      position: "Artillery",
-      itemType: "fighters",
-      price: 2800,
-      lastSale: 2650,
-      trend: "up",
-      image: "/lovable-uploads/cf5abf4c-cf7f-49b7-a830-49343c8d1222.png"
-    }, {
-      name: "The Irish King", 
-      team: "Crimson Hawks",
-      position: "Striker", 
-      itemType: "fighters",
-      price: 2500,
-      lastSale: 2300,
-      trend: "up",
-      image: "/lovable-uploads/5c3f060f-4c5f-412b-8f27-eb1bebd3dd7d.png"
-    }, {
-      name: "Ray Del Maestro",
-      team: "Space Raiders",
-      position: "Elite", 
-      itemType: "fighters",
-      price: 2800,
-      lastSale: 2600,
-      trend: "up",
-      image: "/lovable-uploads/e8b33b1a-410f-4448-9b83-126b8d27f0a9.png"
-    }, {
-      name: "Jonesy Bones",
-      team: "Steel Wolves",
-      position: "Tank", 
-      itemType: "fighters",
-      price: 1900,
-      lastSale: 2050,
-      trend: "down",
-      image: "/lovable-uploads/660b5122-5ce8-4f6e-af72-2c607d47ef44.png"
-    }, {
-      name: "Protest Sign",
-      team: "Future Force",
-      position: "Mobility", 
-      itemType: "emotes",
-      price: 2200,
-      lastSale: 2100,
-      trend: "up",
-      image: "/lovable-uploads/f9ba9551-eabd-4e1f-a2a9-2eeddc92114d.png"
-    }, {
-      name: "Aura Farm",
-      team: "Future Force",
-      position: "Mobility", 
-      itemType: "emotes",
-      price: 1900,
-      lastSale: 1850,
-      trend: "up",
-      image: "/lovable-uploads/74597015-55ed-4190-91df-62af504a7e04.png"
-    }, {
-      name: "Stani Eagle",
-      team: "Thunder Birds",
-      position: "Speed", 
-      itemType: "fighters",
-      price: 1800,
-      lastSale: 1650,
-      trend: "up",
-      image: "/lovable-uploads/37f256dc-415c-4032-82ad-db63f676284d.png"
-    }, {
-      name: "Screen Smash",
-      team: "Future Force",
-      position: "Mobility", 
-      itemType: "emotes",
-      price: 1700,
-      lastSale: 1650,
-      trend: "up",
-      image: "/lovable-uploads/f747341c-eccd-47c4-8290-0451629ec3a4.png"
-    }, {
-      name: "Latin Legend",
-      team: "Mountain Lions",
-      position: "Defense", 
-      itemType: "fighters",
-      price: 1200,
-      lastSale: 1400,
-      trend: "down",
-      image: "/lovable-uploads/2c556456-ebeb-4eec-9842-f2d31e06c58a.png"
-    }, {
-      name: "Shane Sonny",
-      team: "Ultimate Force",
-      position: "Champion", 
-      itemType: "fighters",
-      price: 950,
-      lastSale: 1100,
-      trend: "down",
-      image: "/lovable-uploads/a76e21f1-ffca-4130-bd9a-08d09167dca0.png"
-    }, {
-      name: "Dumbbell Singer",
-      team: "Future Force",
-      position: "Mobility", 
-      itemType: "emotes",
-      price: 1200,
-      lastSale: 1150,
-      trend: "up",
-      image: "/lovable-uploads/2c2096de-f308-4a16-865b-31c36a14a080.png"
-    }, {
-      name: "BMF Shorts",
-      team: "Gear Masters",
-      position: "Supreme", 
-      itemType: "accessories",
-      price: 1200,
-      lastSale: 1150,
-      trend: "up",
-      image: "/lovable-uploads/6ffd60e7-d39b-442f-a71c-9ae2f491846f.png"
-    }, {
-      name: "John Strictland",
-      team: "Weather Gods",
-      position: "Legendary", 
-      itemType: "fighters",
-      price: 1000,
-      lastSale: 950,
-      trend: "up",
-      image: "/lovable-uploads/98664a07-8365-4512-8f3e-a0c79bd4617c.png"
-    }, {
-      name: "DHB x LCS shorts",
-      team: "Gear Masters",
-      position: "Supreme", 
-      itemType: "accessories",
-      price: 850,
-      lastSale: 950,
-      trend: "down",
-      image: "/lovable-uploads/e21fe8d7-5519-4b7b-bd90-6b96e74635d4.png"
-    }, {
-      name: "Combat Vest",
-      team: "Gear Masters",
-      position: "Supreme", 
-      itemType: "accessories",
-      price: 750,
-      lastSale: 850,
-      trend: "down",
-      image: "/lovable-uploads/8c7fd9f1-1128-4d45-b089-e8879cb0fa98.png"
-    }, {
-      name: "Rapz Gloves",
-      team: "Gear Masters",
-      position: "Supreme", 
-      itemType: "accessories",
-      price: 800,
-      lastSale: 780,
-      trend: "up",
-      image: "/lovable-uploads/9320a71d-c3b8-4922-938c-5e759907fcf6.png"
-    },
-    // Vehicles  
-    {
-      name: "Pogo",
-      team: "Dark Matter",
-      position: "Phantom", 
-      itemType: "mobility",
-      price: 8000,
-      lastSale: 7500,
-      trend: "up",
-      image: "/lovable-uploads/2877ff38-b9fd-4a5d-bca9-25b14f237997.png"
-    }, {
-      name: "The Coupé Tank",
-      team: "Neon Guardians",
-      position: "Stealth", 
-      itemType: "mobility",
-      price: 5000,
-      lastSale: 4800,
-      trend: "up",
-      image: "/lovable-uploads/1c6b707c-97a6-4381-bc54-de63a7cf8a31.png"
-    }, {
-      name: "Pit Bike", 
-      team: "Wind Riders",
-      position: "Force", 
-      itemType: "mobility",
-      price: 4500,
-      lastSale: 4200,
-      trend: "up",
-      image: "/lovable-uploads/2d5ccc85-d9e9-4c45-b684-159b0bb83745.png"
-    }, {
-      name: "Speed Buggy",
-      team: "Flame Dragons",
-      position: "Assault", 
-      itemType: "mobility", 
-      price: 3200,
-      lastSale: 3000,
-      trend: "up",
-      image: "/lovable-uploads/b64d7801-1284-4763-b115-ca3cfa8ff315.png"
-    },
-    // Emotes
-    {
-      name: "Squeaky Dance",
-      team: "Future Force",
-      position: "Mobility", 
-      itemType: "emotes",
-      price: 2500,
-      lastSale: 2300,
-      trend: "up",
-      image: "/lovable-uploads/5c8c027e-3baf-4550-96a9-ba0715d11506.png"
-    }, {
-      name: "Fists Up",
-      team: "Future Force",
-      position: "Mobility", 
-      itemType: "emotes",
-      price: 1800,
-      lastSale: 1650,
-      trend: "up",
-      image: "/lovable-uploads/370bd874-ad5c-467d-b844-55688b1a0f9a.png"
-    }, {
-      name: "u want sum?",
-      team: "Future Force",
-      position: "Mobility", 
-      itemType: "emotes",
-      price: 1500,
-      lastSale: 1400,
-      trend: "up",
-      image: "/lovable-uploads/30d419b4-79a9-459c-b37b-42099ffd6273.png"
-    }, {
-      name: "Flex",
-      team: "Future Force",
-      position: "Mobility", 
-      itemType: "emotes",
-      price: 800,
-      lastSale: 750,
-      trend: "up",
-      image: "/lovable-uploads/f52e83c2-28b7-417e-90ac-757255d1759f.png"
-    },
-    // Packs
-    {
-      name: "Wild West Pack",
-      team: "Pack Masters",
-      position: "Supreme", 
-      itemType: "packs",
-      price: 5000,
-      lastSale: 4800,
-      trend: "up",
-      image: "/lovable-uploads/5cf8ad93-f292-4e4c-b53c-eb0c4bc0f7be.png"
-    }, {
-      name: "EO Summer Pack",
-      team: "Pack Masters",
-      position: "Supreme", 
-      itemType: "packs",
-      price: 3500,
-      lastSale: 3300,
-      trend: "up",
-      image: "/lovable-uploads/2149e9ad-919f-49ea-8be4-90f190387d39.png"
-    }, {
-      name: "Gold Pack",
-      team: "Pack Masters",
-      position: "Supreme", 
-      itemType: "packs",
-      price: 2000,
-      lastSale: 1900,
-      trend: "up",
-      image: "/lovable-uploads/291c5734-f144-47b0-9f49-915999e921b0.png"
-    }, {
-      name: "Silver Pack",
-      team: "Pack Masters",
-      position: "Supreme", 
-      itemType: "packs",
-      price: 1000,
-      lastSale: 950,
-      trend: "up",
-      image: "/lovable-uploads/17c3a939-bcaa-4cdb-9b61-271b5774c7e2.png"
-    },
-    // Accessories
-    {
-      name: "White Base Vest",
-      team: "Gear Masters",
-      position: "Supreme", 
-      itemType: "accessory",
-      price: 750,
-      lastSale: 700,
-      trend: "up",
-      image: "/lovable-uploads/508d1509-e761-46c6-9f3a-f70e256f5a52.png"
-    }, {
-      name: "Red Wing Suit",
-      team: "Gear Masters",
-      position: "Supreme", 
-      itemType: "accessory",
-      price: 600,
-      lastSale: 580,
-      trend: "up",
-      image: "/lovable-uploads/2eec4a9a-97d3-4ba4-9508-2eeef0011139.png"
-    }, {
-      name: "Grey Base Vest",
-      team: "Gear Masters",
-      position: "Supreme", 
-      itemType: "accessory",
-      price: 550,
-      lastSale: 520,
-      trend: "up",
-      image: "/lovable-uploads/91375d1a-e829-4716-b3b6-833b58355bd9.png"
-    }, {
-      name: "Blue Wing Suit",
-      team: "Gear Masters",
-      position: "Supreme", 
-      itemType: "accessory",
-      price: 450,
-      lastSale: 430,
-      trend: "up",
-      image: "/lovable-uploads/1efc1553-007a-4b38-a982-79d9f5abbfa1.png"
-    }
-  ].sort((a, b) => b.price - a.price);
+  // Fighters
+  {
+    name: "mal.eth",
+    team: "Crypto Warriors",
+    position: "Elite",
+    itemType: "fighters",
+    price: 3200,
+    lastSale: 3000,
+    trend: "up",
+    image: "/lovable-uploads/ccf83582-74cf-469c-87ba-b50ffa5da6de.png"
+  }, {
+    name: "Tarragon Southslice",
+    team: "Energy Corps",
+    position: "Artillery",
+    itemType: "fighters",
+    price: 2800,
+    lastSale: 2650,
+    trend: "up",
+    image: "/lovable-uploads/cf5abf4c-cf7f-49b7-a830-49343c8d1222.png"
+  }, {
+    name: "The Irish King",
+    team: "Crimson Hawks",
+    position: "Striker",
+    itemType: "fighters",
+    price: 2500,
+    lastSale: 2300,
+    trend: "up",
+    image: "/lovable-uploads/5c3f060f-4c5f-412b-8f27-eb1bebd3dd7d.png"
+  }, {
+    name: "Ray Del Maestro",
+    team: "Space Raiders",
+    position: "Elite",
+    itemType: "fighters",
+    price: 2800,
+    lastSale: 2600,
+    trend: "up",
+    image: "/lovable-uploads/e8b33b1a-410f-4448-9b83-126b8d27f0a9.png"
+  }, {
+    name: "Jonesy Bones",
+    team: "Steel Wolves",
+    position: "Tank",
+    itemType: "fighters",
+    price: 1900,
+    lastSale: 2050,
+    trend: "down",
+    image: "/lovable-uploads/660b5122-5ce8-4f6e-af72-2c607d47ef44.png"
+  }, {
+    name: "Protest Sign",
+    team: "Future Force",
+    position: "Mobility",
+    itemType: "emotes",
+    price: 2200,
+    lastSale: 2100,
+    trend: "up",
+    image: "/lovable-uploads/f9ba9551-eabd-4e1f-a2a9-2eeddc92114d.png"
+  }, {
+    name: "Aura Farm",
+    team: "Future Force",
+    position: "Mobility",
+    itemType: "emotes",
+    price: 1900,
+    lastSale: 1850,
+    trend: "up",
+    image: "/lovable-uploads/74597015-55ed-4190-91df-62af504a7e04.png"
+  }, {
+    name: "Stani Eagle",
+    team: "Thunder Birds",
+    position: "Speed",
+    itemType: "fighters",
+    price: 1800,
+    lastSale: 1650,
+    trend: "up",
+    image: "/lovable-uploads/37f256dc-415c-4032-82ad-db63f676284d.png"
+  }, {
+    name: "Screen Smash",
+    team: "Future Force",
+    position: "Mobility",
+    itemType: "emotes",
+    price: 1700,
+    lastSale: 1650,
+    trend: "up",
+    image: "/lovable-uploads/f747341c-eccd-47c4-8290-0451629ec3a4.png"
+  }, {
+    name: "Latin Legend",
+    team: "Mountain Lions",
+    position: "Defense",
+    itemType: "fighters",
+    price: 1200,
+    lastSale: 1400,
+    trend: "down",
+    image: "/lovable-uploads/2c556456-ebeb-4eec-9842-f2d31e06c58a.png"
+  }, {
+    name: "Shane Sonny",
+    team: "Ultimate Force",
+    position: "Champion",
+    itemType: "fighters",
+    price: 950,
+    lastSale: 1100,
+    trend: "down",
+    image: "/lovable-uploads/a76e21f1-ffca-4130-bd9a-08d09167dca0.png"
+  }, {
+    name: "Dumbbell Singer",
+    team: "Future Force",
+    position: "Mobility",
+    itemType: "emotes",
+    price: 1200,
+    lastSale: 1150,
+    trend: "up",
+    image: "/lovable-uploads/2c2096de-f308-4a16-865b-31c36a14a080.png"
+  }, {
+    name: "BMF Shorts",
+    team: "Gear Masters",
+    position: "Supreme",
+    itemType: "accessories",
+    price: 1200,
+    lastSale: 1150,
+    trend: "up",
+    image: "/lovable-uploads/6ffd60e7-d39b-442f-a71c-9ae2f491846f.png"
+  }, {
+    name: "John Strictland",
+    team: "Weather Gods",
+    position: "Legendary",
+    itemType: "fighters",
+    price: 1000,
+    lastSale: 950,
+    trend: "up",
+    image: "/lovable-uploads/98664a07-8365-4512-8f3e-a0c79bd4617c.png"
+  }, {
+    name: "DHB x LCS shorts",
+    team: "Gear Masters",
+    position: "Supreme",
+    itemType: "accessories",
+    price: 850,
+    lastSale: 950,
+    trend: "down",
+    image: "/lovable-uploads/e21fe8d7-5519-4b7b-bd90-6b96e74635d4.png"
+  }, {
+    name: "Combat Vest",
+    team: "Gear Masters",
+    position: "Supreme",
+    itemType: "accessories",
+    price: 750,
+    lastSale: 850,
+    trend: "down",
+    image: "/lovable-uploads/8c7fd9f1-1128-4d45-b089-e8879cb0fa98.png"
+  }, {
+    name: "Rapz Gloves",
+    team: "Gear Masters",
+    position: "Supreme",
+    itemType: "accessories",
+    price: 800,
+    lastSale: 780,
+    trend: "up",
+    image: "/lovable-uploads/9320a71d-c3b8-4922-938c-5e759907fcf6.png"
+  },
+  // Vehicles  
+  {
+    name: "Pogo",
+    team: "Dark Matter",
+    position: "Phantom",
+    itemType: "mobility",
+    price: 8000,
+    lastSale: 7500,
+    trend: "up",
+    image: "/lovable-uploads/2877ff38-b9fd-4a5d-bca9-25b14f237997.png"
+  }, {
+    name: "The Coupé Tank",
+    team: "Neon Guardians",
+    position: "Stealth",
+    itemType: "mobility",
+    price: 5000,
+    lastSale: 4800,
+    trend: "up",
+    image: "/lovable-uploads/1c6b707c-97a6-4381-bc54-de63a7cf8a31.png"
+  }, {
+    name: "Pit Bike",
+    team: "Wind Riders",
+    position: "Force",
+    itemType: "mobility",
+    price: 4500,
+    lastSale: 4200,
+    trend: "up",
+    image: "/lovable-uploads/2d5ccc85-d9e9-4c45-b684-159b0bb83745.png"
+  }, {
+    name: "Speed Buggy",
+    team: "Flame Dragons",
+    position: "Assault",
+    itemType: "mobility",
+    price: 3200,
+    lastSale: 3000,
+    trend: "up",
+    image: "/lovable-uploads/b64d7801-1284-4763-b115-ca3cfa8ff315.png"
+  },
+  // Emotes
+  {
+    name: "Squeaky Dance",
+    team: "Future Force",
+    position: "Mobility",
+    itemType: "emotes",
+    price: 2500,
+    lastSale: 2300,
+    trend: "up",
+    image: "/lovable-uploads/5c8c027e-3baf-4550-96a9-ba0715d11506.png"
+  }, {
+    name: "Fists Up",
+    team: "Future Force",
+    position: "Mobility",
+    itemType: "emotes",
+    price: 1800,
+    lastSale: 1650,
+    trend: "up",
+    image: "/lovable-uploads/370bd874-ad5c-467d-b844-55688b1a0f9a.png"
+  }, {
+    name: "u want sum?",
+    team: "Future Force",
+    position: "Mobility",
+    itemType: "emotes",
+    price: 1500,
+    lastSale: 1400,
+    trend: "up",
+    image: "/lovable-uploads/30d419b4-79a9-459c-b37b-42099ffd6273.png"
+  }, {
+    name: "Flex",
+    team: "Future Force",
+    position: "Mobility",
+    itemType: "emotes",
+    price: 800,
+    lastSale: 750,
+    trend: "up",
+    image: "/lovable-uploads/f52e83c2-28b7-417e-90ac-757255d1759f.png"
+  },
+  // Packs
+  {
+    name: "Wild West Pack",
+    team: "Pack Masters",
+    position: "Supreme",
+    itemType: "packs",
+    price: 5000,
+    lastSale: 4800,
+    trend: "up",
+    image: "/lovable-uploads/5cf8ad93-f292-4e4c-b53c-eb0c4bc0f7be.png"
+  }, {
+    name: "EO Summer Pack",
+    team: "Pack Masters",
+    position: "Supreme",
+    itemType: "packs",
+    price: 3500,
+    lastSale: 3300,
+    trend: "up",
+    image: "/lovable-uploads/2149e9ad-919f-49ea-8be4-90f190387d39.png"
+  }, {
+    name: "Gold Pack",
+    team: "Pack Masters",
+    position: "Supreme",
+    itemType: "packs",
+    price: 2000,
+    lastSale: 1900,
+    trend: "up",
+    image: "/lovable-uploads/291c5734-f144-47b0-9f49-915999e921b0.png"
+  }, {
+    name: "Silver Pack",
+    team: "Pack Masters",
+    position: "Supreme",
+    itemType: "packs",
+    price: 1000,
+    lastSale: 950,
+    trend: "up",
+    image: "/lovable-uploads/17c3a939-bcaa-4cdb-9b61-271b5774c7e2.png"
+  },
+  // Accessories
+  {
+    name: "White Base Vest",
+    team: "Gear Masters",
+    position: "Supreme",
+    itemType: "accessory",
+    price: 750,
+    lastSale: 700,
+    trend: "up",
+    image: "/lovable-uploads/508d1509-e761-46c6-9f3a-f70e256f5a52.png"
+  }, {
+    name: "Red Wing Suit",
+    team: "Gear Masters",
+    position: "Supreme",
+    itemType: "accessory",
+    price: 600,
+    lastSale: 580,
+    trend: "up",
+    image: "/lovable-uploads/2eec4a9a-97d3-4ba4-9508-2eeef0011139.png"
+  }, {
+    name: "Grey Base Vest",
+    team: "Gear Masters",
+    position: "Supreme",
+    itemType: "accessory",
+    price: 550,
+    lastSale: 520,
+    trend: "up",
+    image: "/lovable-uploads/91375d1a-e829-4716-b3b6-833b58355bd9.png"
+  }, {
+    name: "Blue Wing Suit",
+    team: "Gear Masters",
+    position: "Supreme",
+    itemType: "accessory",
+    price: 450,
+    lastSale: 430,
+    trend: "up",
+    image: "/lovable-uploads/1efc1553-007a-4b38-a982-79d9f5abbfa1.png"
+  }].sort((a, b) => b.price - a.price);
   const currentMarketValue = marketValueData[marketValueData.length - 1]?.value || 0;
   const currentListings = Math.round(listingsData[listingsData.length - 1]?.listings || 0);
 
@@ -1093,7 +1048,6 @@ const Game = () => {
   };
   const sortMarketplacePlayers = (players: any[], sortBy: string) => {
     const sorted = [...players];
-    
     switch (sortBy) {
       case "highest-price":
         return sorted.sort((a, b) => b.price - a.price);
@@ -1101,19 +1055,19 @@ const Game = () => {
         return sorted.sort((a, b) => a.price - b.price);
       case "highest-gain":
         return sorted.sort((a, b) => {
-          const aGain = ((a.price - a.lastSale) / a.lastSale) * 100;
-          const bGain = ((b.price - b.lastSale) / b.lastSale) * 100;
+          const aGain = (a.price - a.lastSale) / a.lastSale * 100;
+          const bGain = (b.price - b.lastSale) / b.lastSale * 100;
           return bGain - aGain;
         });
       case "highest-loss":
         // Filter to only show losses (negative percentage changes), then sort by largest losses first
         const lossesOnly = sorted.filter(player => {
-          const percentChange = ((player.price - player.lastSale) / player.lastSale) * 100;
+          const percentChange = (player.price - player.lastSale) / player.lastSale * 100;
           return percentChange < 0; // Only include actual losses
         });
         return lossesOnly.sort((a, b) => {
-          const aLoss = ((a.price - a.lastSale) / a.lastSale) * 100;
-          const bLoss = ((b.price - b.lastSale) / b.lastSale) * 100;
+          const aLoss = (a.price - a.lastSale) / a.lastSale * 100;
+          const bLoss = (b.price - b.lastSale) / b.lastSale * 100;
           // Sort by most negative (largest losses first)
           return aLoss - bLoss;
         });
@@ -1121,17 +1075,7 @@ const Game = () => {
         return sorted;
     }
   };
-  
-  const filteredAndSortedMarketplacePlayers = sortMarketplacePlayers(
-    filterMarketplaceBySearch(
-      filterMarketplaceByRarity(
-        filterMarketplaceByCategory(allPlayers, marketplaceCategory), 
-        marketplaceRarity
-      ), 
-      searchTerm
-    ), 
-    marketplaceSortBy
-  );
+  const filteredAndSortedMarketplacePlayers = sortMarketplacePlayers(filterMarketplaceBySearch(filterMarketplaceByRarity(filterMarketplaceByCategory(allPlayers, marketplaceCategory), marketplaceRarity), searchTerm), marketplaceSortBy);
 
   // Debug logging for activeTab changes
   console.log('Current activeTab:', activeTab);
@@ -1217,9 +1161,7 @@ const Game = () => {
             </div>
             
             
-            {authenticated ? (
-              isMobile ? (
-                <Sheet>
+            {authenticated ? isMobile ? <Sheet>
                   <SheetTrigger asChild>
                     <Avatar className="w-7 h-7 lg:w-8 lg:h-8 cursor-pointer">
                       <AvatarFallback className="text-lg">
@@ -1232,12 +1174,12 @@ const Game = () => {
                       {/* Liquid glass metallic background effects */}
                       <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                       <div className="absolute inset-0" style={{
-                        backgroundImage: `
+                  backgroundImage: `
                           linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
                           linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
                         `,
-                        backgroundSize: '4px 4px'
-                      }} />
+                  backgroundSize: '4px 4px'
+                }} />
                       
                       <div className="relative z-10 p-4">
                         <div className="mb-4">
@@ -1269,34 +1211,23 @@ const Game = () => {
                                 <span className="text-xs text-gray-200">0</span>
                               </div>
                             </div>
-                            <Button 
-                              size="sm" 
-                              variant="outline" 
-                              className="bg-transparent border-white/20 text-white hover:bg-white/10 hover:text-white transition-all duration-300 text-xs px-2 py-1"
-                              onClick={() => {
-                                setSelectedPlayer(null);
-                                setBuyDialogOpen(true);
-                              }}
-                            >
+                            <Button size="sm" variant="outline" className="bg-transparent border-white/20 text-white hover:bg-white/10 hover:text-white transition-all duration-300 text-xs px-2 py-1" onClick={() => {
+                        setSelectedPlayer(null);
+                        setBuyDialogOpen(true);
+                      }}>
                               Buy
                             </Button>
                           </div>
                         </div>
                         
-                        <Button 
-                          onClick={logout} 
-                          variant="outline" 
-                          className="w-full bg-transparent border-white/20 text-white hover:bg-white/10 hover:text-white transition-all duration-300"
-                        >
+                        <Button onClick={logout} variant="outline" className="w-full bg-transparent border-white/20 text-white hover:bg-white/10 hover:text-white transition-all duration-300">
                           <LogOut className="w-4 h-4 mr-2" />
                           Sign Out
                         </Button>
                       </div>
                     </div>
                   </SheetContent>
-                </Sheet>
-              ) : (
-                <DropdownMenu>
+                </Sheet> : <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Avatar className="w-7 h-7 lg:w-8 lg:h-8 cursor-pointer">
                       <AvatarFallback className="text-lg">
@@ -1308,12 +1239,12 @@ const Game = () => {
                     {/* Liquid glass metallic background effects */}
                     <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                     <div className="absolute inset-0" style={{
-                      backgroundImage: `
+                backgroundImage: `
                         linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
                         linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
                       `,
-                      backgroundSize: '4px 4px'
-                    }} />
+                backgroundSize: '4px 4px'
+              }} />
                     
                     <div className="relative z-10">
                       <div className="px-3 py-2">
@@ -1322,64 +1253,37 @@ const Game = () => {
                             {profile?.avatar_url || '👤'}
                           </div>
                             <div className="flex flex-col space-y-1 flex-1">
-                              {isEditingUsername ? (
-                                <div className="flex items-center space-x-2">
-                                  <Input
-                                    value={editingUsername}
-                                    onChange={(e) => setEditingUsername(e.target.value)}
-                                    className="bg-transparent border-white/20 text-white text-sm h-6 px-2"
-                                    placeholder="Enter username"
-                                    maxLength={20}
-                                    onKeyDown={(e) => {
-                                      if (e.key === 'Enter') {
-                                        handleUsernameUpdate();
-                                      } else if (e.key === 'Escape') {
-                                        setIsEditingUsername(false);
-                                        setEditingUsername('');
-                                      }
-                                    }}
-                                  />
+                              {isEditingUsername ? <div className="flex items-center space-x-2">
+                                  <Input value={editingUsername} onChange={e => setEditingUsername(e.target.value)} className="bg-transparent border-white/20 text-white text-sm h-6 px-2" placeholder="Enter username" maxLength={20} onKeyDown={e => {
+                          if (e.key === 'Enter') {
+                            handleUsernameUpdate();
+                          } else if (e.key === 'Escape') {
+                            setIsEditingUsername(false);
+                            setEditingUsername('');
+                          }
+                        }} />
                                   <div className="flex items-center space-x-1">
-                                    <Button
-                                      size="sm"
-                                      variant="ghost"
-                                      className="h-6 w-6 p-0 hover:bg-green-500/20 text-green-400 hover:text-green-300"
-                                      onClick={handleUsernameUpdate}
-                                      disabled={loading}
-                                    >
+                                    <Button size="sm" variant="ghost" className="h-6 w-6 p-0 hover:bg-green-500/20 text-green-400 hover:text-green-300" onClick={handleUsernameUpdate} disabled={loading}>
                                       <Check className="w-3 h-3" />
                                     </Button>
-                                    <Button
-                                      size="sm"
-                                      variant="ghost"
-                                      className="h-6 w-6 p-0 hover:bg-red-500/20 text-red-400 hover:text-red-300"
-                                      onClick={() => {
-                                        setIsEditingUsername(false);
-                                        setEditingUsername('');
-                                      }}
-                                    >
+                                    <Button size="sm" variant="ghost" className="h-6 w-6 p-0 hover:bg-red-500/20 text-red-400 hover:text-red-300" onClick={() => {
+                            setIsEditingUsername(false);
+                            setEditingUsername('');
+                          }}>
                                       <X className="w-3 h-3" />
                                     </Button>
                                   </div>
-                                </div>
-                              ) : (
-                                <div className="flex items-center justify-between">
+                                </div> : <div className="flex items-center justify-between">
                                   <p className="text-sm font-medium leading-none text-white">
                                     {loading ? "Loading profile..." : profile?.username || 'Profile Error'}
                                   </p>
-                                  <Button
-                                    size="sm"
-                                    variant="ghost"
-                                    className="h-6 w-6 p-0 hover:bg-white/10 text-gray-400 hover:text-white transition-all duration-300"
-                                    onClick={() => {
-                                      setEditingUsername(profile?.username || '');
-                                      setIsEditingUsername(true);
-                                    }}
-                                  >
+                                  <Button size="sm" variant="ghost" className="h-6 w-6 p-0 hover:bg-white/10 text-gray-400 hover:text-white transition-all duration-300" onClick={() => {
+                          setEditingUsername(profile?.username || '');
+                          setIsEditingUsername(true);
+                        }}>
                                     <Edit3 className="w-3 h-3" />
                                   </Button>
-                                </div>
-                              )}
+                                </div>}
                               <p className="text-xs leading-none text-gray-200">
                                 {user?.email?.address}
                               </p>
@@ -1401,23 +1305,13 @@ const Game = () => {
                                </div>
                              </div>
                              <div className="flex items-center space-x-2">
-                                <Button 
-                                  size="sm" 
-                                  variant="outline" 
-                                  className="bg-transparent border-white/20 text-white hover:bg-white/10 hover:text-white transition-all duration-300 text-xs px-2 py-1"
-                                  onClick={handleCopyWalletAddress}
-                                >
+                                <Button size="sm" variant="outline" className="bg-transparent border-white/20 text-white hover:bg-white/10 hover:text-white transition-all duration-300 text-xs px-2 py-1" onClick={handleCopyWalletAddress}>
                                   <Copy className="w-3 h-3" />
                                </Button>
-                               <Button 
-                                 size="sm" 
-                                 variant="outline" 
-                                 className="bg-transparent border-white/20 text-white hover:bg-white/10 hover:text-white transition-all duration-300 text-xs px-2 py-1"
-                                 onClick={() => {
-                                   setSelectedPlayer(null);
-                                   setBuyDialogOpen(true);
-                                 }}
-                               >
+                               <Button size="sm" variant="outline" className="bg-transparent border-white/20 text-white hover:bg-white/10 hover:text-white transition-all duration-300 text-xs px-2 py-1" onClick={() => {
+                        setSelectedPlayer(null);
+                        setBuyDialogOpen(true);
+                      }}>
                                  Buy
                                </Button>
                              </div>
@@ -1432,13 +1326,9 @@ const Game = () => {
                       </DropdownMenuItem>
                     </div>
                   </DropdownMenuContent>
-                </DropdownMenu>
-              )
-            ) : (
-              <Button onClick={login} variant="outline" size="sm">
+                </DropdownMenu> : <Button onClick={login} variant="outline" size="sm">
                 Log In
-              </Button>
-            )}
+              </Button>}
           </div>
         </div>
       </header>
@@ -1592,16 +1482,17 @@ const Game = () => {
                           <span className="text-xs font-medium text-white">Quests!</span>
                         </div>
                         <h3 className="text-sm font-bold mb-1">Smash that XP</h3>
-                        <p className="text-gray-300 text-xs mb-3">by completing all quests</p>
+                        <p className="text-gray-300 text-xs mb-3">by completing all quests
+ </p>
                         <Button variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 text-xs h-7 relative z-10 transition-all duration-300 w-full" onClick={() => {
-                          setObjectivesView("quests");
-                          setTimeout(() => {
-                            objectivesRef.current?.scrollIntoView({
-                              behavior: 'smooth',
-                              block: 'start'
-                            });
-                          }, 100);
-                        }}>
+                    setObjectivesView("quests");
+                    setTimeout(() => {
+                      objectivesRef.current?.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                      });
+                    }, 100);
+                  }}>
                           Show Quests
                         </Button>
                       </CardContent>
@@ -2114,28 +2005,17 @@ const Game = () => {
                       
                     </CardHeader>
                     <CardContent>
-                        <StoreCarousel 
-                          ref={fightersCarouselRef} 
-                          items={filterItemsByRarity(getStoreItemsByCategory('fighters').map(item => ({
-                            name: item.name,
-                            price: item.price,
-                            rarity: item.rarity,
-                            image: item.image_url || "/placeholder.svg"
-                          })))} 
-                          renderItem={(item, idx) => {
-                            const storeItem = getStoreItemsByCategory('fighters')[idx];
-                            return (
-                              <GlowCard key={idx} className="cursor-pointer">
+                        <StoreCarousel ref={fightersCarouselRef} items={filterItemsByRarity(getStoreItemsByCategory('fighters').map(item => ({
+                  name: item.name,
+                  price: item.price,
+                  rarity: item.rarity,
+                  image: item.image_url || "/placeholder.svg"
+                })))} renderItem={(item, idx) => {
+                  const storeItem = getStoreItemsByCategory('fighters')[idx];
+                  return <GlowCard key={idx} className="cursor-pointer">
                                 <div className="p-3">
-                                  <div 
-                                    className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden cursor-pointer"
-                                    onClick={() => storeItem && handleStoreItemClick(storeItem)}
-                                  >
-                                    <img 
-                                      src={item.image} 
-                                      alt={item.name} 
-                                      className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" 
-                                    />
+                                  <div className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden cursor-pointer" onClick={() => storeItem && handleStoreItemClick(storeItem)}>
+                                    <img src={item.image} alt={item.name} className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" />
                                   </div>
                                    <div className="mb-1 md:mb-2 md:flex md:items-center md:justify-between">
                                      <h3 className="font-semibold text-xs text-white mb-1 md:mb-0">{item.name}</h3>
@@ -2143,20 +2023,13 @@ const Game = () => {
                                        {getRarityDisplayName(item.rarity)}
                                      </Badge>
                                    </div>
-                                   <Button 
-                                     size="sm" 
-                                     variant="secondary" 
-                                     className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-7 flex items-center justify-center gap-1"
-                                     onClick={() => storeItem && handleStoreItemClick(storeItem)}
-                                    >
+                                   <Button size="sm" variant="secondary" className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-7 flex items-center justify-center gap-1" onClick={() => storeItem && handleStoreItemClick(storeItem)}>
                                       <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
                                       <span>{item.price.toLocaleString()}</span>
                                     </Button>
                                 </div>
-                              </GlowCard>
-                            );
-                          }} 
-                        />
+                              </GlowCard>;
+                }} />
                      </CardContent>
                    </Card>}
 
@@ -2192,28 +2065,17 @@ const Game = () => {
                       
                     </CardHeader>
                     <CardContent>
-                        <StoreCarousel 
-                          ref={accessoriesCarouselRef} 
-                          items={filterItemsByRarity(getStoreItemsByCategory('accessories').map(item => ({
-                            name: item.name,
-                            price: item.price,
-                            rarity: item.rarity,
-                            image: item.image_url || "/placeholder.svg"
-                          })))} 
-                          renderItem={(item, idx) => {
-                            const storeItem = getStoreItemsByCategory('accessories')[idx];
-                            return (
-                              <GlowCard key={idx} className="cursor-pointer">
+                        <StoreCarousel ref={accessoriesCarouselRef} items={filterItemsByRarity(getStoreItemsByCategory('accessories').map(item => ({
+                  name: item.name,
+                  price: item.price,
+                  rarity: item.rarity,
+                  image: item.image_url || "/placeholder.svg"
+                })))} renderItem={(item, idx) => {
+                  const storeItem = getStoreItemsByCategory('accessories')[idx];
+                  return <GlowCard key={idx} className="cursor-pointer">
                                 <div className="p-3">
-                                  <div 
-                                    className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden cursor-pointer"
-                                    onClick={() => storeItem && handleStoreItemClick(storeItem)}
-                                  >
-                                    <img 
-                                      src={item.image} 
-                                      alt={item.name} 
-                                      className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" 
-                                    />
+                                  <div className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden cursor-pointer" onClick={() => storeItem && handleStoreItemClick(storeItem)}>
+                                    <img src={item.image} alt={item.name} className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" />
                                   </div>
                                    <div className="mb-1 md:mb-2 md:flex md:items-center md:justify-between">
                                      <h3 className="font-semibold text-xs text-white mb-1 md:mb-0">{item.name}</h3>
@@ -2221,20 +2083,13 @@ const Game = () => {
                                        {getRarityDisplayName(item.rarity)}
                                      </Badge>
                                    </div>
-                                   <Button 
-                                     size="sm" 
-                                     variant="secondary" 
-                                     className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-7 flex items-center justify-center gap-1"
-                                     onClick={() => storeItem && handleStoreItemClick(storeItem)}
-                                    >
+                                   <Button size="sm" variant="secondary" className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-7 flex items-center justify-center gap-1" onClick={() => storeItem && handleStoreItemClick(storeItem)}>
                                       <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
                                       <span>{item.price.toLocaleString()}</span>
                                     </Button>
                                 </div>
-                              </GlowCard>
-                            );
-                          }} 
-                        />
+                              </GlowCard>;
+                }} />
                      </CardContent>
                    </Card>}
 
@@ -2242,12 +2097,12 @@ const Game = () => {
                     {(selectedCategory === "all" || selectedCategory === "mobility") && <Card className="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden">
                      <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
                      <div className="absolute inset-0" style={{
-                 backgroundImage: `
+                backgroundImage: `
                          linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.02) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.02) 75%),
                          linear-gradient(-45deg, transparent 25%, rgba(255,255,255,0.01) 25%, rgba(255,255,255,0.01) 50%, transparent 50%, transparent 75%, rgba(255,255,255,0.01) 75%)
                        `,
-                 backgroundSize: '4px 4px'
-               }} />
+                backgroundSize: '4px 4px'
+              }} />
                      <CardHeader className="relative z-10">
                        <CardTitle className="flex items-center justify-between text-white">
                          <span>Mobility</span>
@@ -2255,13 +2110,13 @@ const Game = () => {
                            {/* Navigation arrows for carousel - only show when more than 4 items */}
                            <div className="flex items-center space-x-1">
                              <Button variant="ghost" size="sm" className="h-6 w-6 p-0 text-white/70 hover:text-white hover:bg-white/10" onClick={() => {
-                         mobilityCarouselRef.current?.scrollToPrevious();
-                       }}>
+                        mobilityCarouselRef.current?.scrollToPrevious();
+                      }}>
                                <ChevronLeft className="h-4 w-4" />
                              </Button>
                              <Button variant="ghost" size="sm" className="h-6 w-6 p-0 text-white/70 hover:text-white hover:bg-white/10" onClick={() => {
-                         mobilityCarouselRef.current?.scrollToNext();
-                       }}>
+                        mobilityCarouselRef.current?.scrollToNext();
+                      }}>
                                <ChevronRight className="h-4 w-4" />
                              </Button>
                           </div>
@@ -2270,28 +2125,17 @@ const Game = () => {
                        
                      </CardHeader>
                      <CardContent>
-                         <StoreCarousel 
-                           ref={mobilityCarouselRef} 
-                           items={filterItemsByRarity(getStoreItemsByCategory('mobility').map(item => ({
-                             name: item.name,
-                             price: item.price,
-                             rarity: item.rarity,
-                             image: item.image_url || "/placeholder.svg"
-                           })))} 
-                           renderItem={(item, idx) => {
-                             const storeItem = getStoreItemsByCategory('mobility')[idx];
-                             return (
-                               <GlowCard key={idx} className="cursor-pointer">
+                         <StoreCarousel ref={mobilityCarouselRef} items={filterItemsByRarity(getStoreItemsByCategory('mobility').map(item => ({
+                  name: item.name,
+                  price: item.price,
+                  rarity: item.rarity,
+                  image: item.image_url || "/placeholder.svg"
+                })))} renderItem={(item, idx) => {
+                  const storeItem = getStoreItemsByCategory('mobility')[idx];
+                  return <GlowCard key={idx} className="cursor-pointer">
                                  <div className="p-3">
-                                   <div 
-                                     className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden flex items-center justify-center cursor-pointer"
-                                     onClick={() => storeItem && handleStoreItemClick(storeItem)}
-                                   >
-                                     <img 
-                                       src={item.image} 
-                                       alt={item.name} 
-                                       className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" 
-                                     />
+                                   <div className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden flex items-center justify-center cursor-pointer" onClick={() => storeItem && handleStoreItemClick(storeItem)}>
+                                     <img src={item.image} alt={item.name} className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" />
                                    </div>
                                     <div className="mb-1 md:mb-2 md:flex md:items-center md:justify-between">
                                       <h3 className="font-semibold text-xs text-white mb-1 md:mb-0">{item.name}</h3>
@@ -2299,20 +2143,13 @@ const Game = () => {
                                         {getRarityDisplayName(item.rarity)}
                                       </Badge>
                                     </div>
-                                    <Button 
-                                      size="sm" 
-                                      variant="secondary" 
-                                      className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-7 flex items-center justify-center gap-1"
-                                      onClick={() => storeItem && handleStoreItemClick(storeItem)}
-                                     >
+                                    <Button size="sm" variant="secondary" className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-7 flex items-center justify-center gap-1" onClick={() => storeItem && handleStoreItemClick(storeItem)}>
                                        <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
                                        <span>{item.price.toLocaleString()}</span>
                                      </Button>
                                  </div>
-                               </GlowCard>
-                             );
-                           }} 
-                         />
+                               </GlowCard>;
+                }} />
                       </CardContent>
                     </Card>}
 
@@ -2348,28 +2185,17 @@ const Game = () => {
                       
                     </CardHeader>
                     <CardContent>
-                        <StoreCarousel 
-                          ref={emotesCarouselRef} 
-                          items={filterItemsByRarity(getStoreItemsByCategory('emotes').map(item => ({
-                            name: item.name,
-                            price: item.price,
-                            rarity: item.rarity,
-                            image: item.image_url || "/placeholder.svg"
-                          })))} 
-                          renderItem={(item, idx) => {
-                            const storeItem = getStoreItemsByCategory('emotes')[idx];
-                            return (
-                              <GlowCard key={idx} className="cursor-pointer">
+                        <StoreCarousel ref={emotesCarouselRef} items={filterItemsByRarity(getStoreItemsByCategory('emotes').map(item => ({
+                  name: item.name,
+                  price: item.price,
+                  rarity: item.rarity,
+                  image: item.image_url || "/placeholder.svg"
+                })))} renderItem={(item, idx) => {
+                  const storeItem = getStoreItemsByCategory('emotes')[idx];
+                  return <GlowCard key={idx} className="cursor-pointer">
                                 <div className="p-3">
-                                  <div 
-                                    className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden flex items-center justify-center cursor-pointer"
-                                    onClick={() => storeItem && handleStoreItemClick(storeItem)}
-                                  >
-                                    <img 
-                                      src={item.image} 
-                                      alt={item.name} 
-                                      className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" 
-                                    />
+                                  <div className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden flex items-center justify-center cursor-pointer" onClick={() => storeItem && handleStoreItemClick(storeItem)}>
+                                    <img src={item.image} alt={item.name} className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" />
                                   </div>
                                    <div className="mb-1 md:mb-2 md:flex md:items-center md:justify-between">
                                      <h3 className="font-semibold text-xs text-white mb-1 md:mb-0">{item.name}</h3>
@@ -2377,20 +2203,13 @@ const Game = () => {
                                        {getRarityDisplayName(item.rarity)}
                                      </Badge>
                                    </div>
-                                   <Button 
-                                     size="sm" 
-                                     variant="secondary" 
-                                     className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-7 flex items-center justify-center gap-1"
-                                     onClick={() => storeItem && handleStoreItemClick(storeItem)}
-                                    >
+                                   <Button size="sm" variant="secondary" className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-7 flex items-center justify-center gap-1" onClick={() => storeItem && handleStoreItemClick(storeItem)}>
                                       <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
                                       <span>{item.price.toLocaleString()}</span>
                                     </Button>
                                 </div>
-                              </GlowCard>
-                            );
-                          }} 
-                        />
+                              </GlowCard>;
+                }} />
                       </CardContent>
                     </Card>}
 
@@ -2419,28 +2238,17 @@ const Game = () => {
                         </CardTitle>
                       </CardHeader>
                       <CardContent className="relative z-10">
-                         <StoreCarousel 
-                          ref={packsCarouselRef} 
-                          items={filterItemsByRarity(getStoreItemsByCategory('packs').map(item => ({
-                            name: item.name,
-                            price: item.price,
-                            rarity: item.rarity,
-                            image: item.image_url || "/placeholder.svg"
-                          })))} 
-                          renderItem={(item, idx) => {
-                            const storeItem = getStoreItemsByCategory('packs')[idx];
-                            return (
-                              <GlowCard key={idx} className="cursor-pointer">
+                         <StoreCarousel ref={packsCarouselRef} items={filterItemsByRarity(getStoreItemsByCategory('packs').map(item => ({
+                  name: item.name,
+                  price: item.price,
+                  rarity: item.rarity,
+                  image: item.image_url || "/placeholder.svg"
+                })))} renderItem={(item, idx) => {
+                  const storeItem = getStoreItemsByCategory('packs')[idx];
+                  return <GlowCard key={idx} className="cursor-pointer">
                                 <div className="p-3">
-                                  <div 
-                                    className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden flex items-center justify-center cursor-pointer"
-                                    onClick={() => storeItem && handleStoreItemClick(storeItem)}
-                                  >
-                                    <img 
-                                      src={item.image} 
-                                      alt={item.name} 
-                                      className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" 
-                                    />
+                                  <div className="aspect-square bg-gray-800/50 rounded-lg mb-2 overflow-hidden flex items-center justify-center cursor-pointer" onClick={() => storeItem && handleStoreItemClick(storeItem)}>
+                                    <img src={item.image} alt={item.name} className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" />
                                   </div>
                                    <div className="mb-1 md:mb-2 md:flex md:items-center md:justify-between">
                                      <h3 className="font-semibold text-xs text-white mb-1 md:mb-0">{item.name}</h3>
@@ -2448,20 +2256,13 @@ const Game = () => {
                                        {getRarityDisplayName(item.rarity)}
                                      </Badge>
                                    </div>
-                                   <Button 
-                                     size="sm" 
-                                     variant="secondary" 
-                                     className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-7 flex items-center justify-center gap-1"
-                                     onClick={() => storeItem && handleStoreItemClick(storeItem)}
-                                    >
+                                   <Button size="sm" variant="secondary" className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-7 flex items-center justify-center gap-1" onClick={() => storeItem && handleStoreItemClick(storeItem)}>
                                       <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3" />
                                       <span>{item.price.toLocaleString()}</span>
                                     </Button>
                                 </div>
-                              </GlowCard>
-                            );
-                          }} 
-                        />
+                              </GlowCard>;
+                }} />
                         </CardContent>
                       </Card>}
                   </div>
@@ -2580,15 +2381,9 @@ const Game = () => {
                     </CardHeader>
                     <CardContent className="relative z-10">
                       <div className="space-y-2">
-                        {trendingPlayers.map((player, idx) => (
-                          <div key={`trending-${idx}`} className="flex items-center space-x-3 p-2 bg-white/5 rounded-lg">
+                        {trendingPlayers.map((player, idx) => <div key={`trending-${idx}`} className="flex items-center space-x-3 p-2 bg-white/5 rounded-lg">
                             <div className="w-12 h-12 rounded-full overflow-hidden">
-                              <img 
-                                src={player.image} 
-                                alt={player.name} 
-                                className="w-full h-full object-cover"
-                                loading={idx < 3 ? 'eager' : 'lazy'}
-                              />
+                              <img src={player.image} alt={player.name} className="w-full h-full object-cover" loading={idx < 3 ? 'eager' : 'lazy'} />
                             </div>
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center justify-between">
@@ -2596,17 +2391,14 @@ const Game = () => {
                                   <p className="text-sm md:text-xl font-semibold text-white">{player.name}</p>
                                   <p className={`text-xs ${player.change >= 0 ? 'text-green-400' : 'text-red-400'}`}>
                                     {player.change >= 0 ? '+' : ''}{formatNumberWithAbbreviation(player.change)}%{' '}
-                                    {getMarketplacePrices(player.name, 'fighter').bestSellPrice ? 
-                                      `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestSellPrice)} sell` : ''}{' '}
-                                    {getMarketplacePrices(player.name, 'fighter').bestBuyPrice ? 
-                                      `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestBuyPrice)} buy` : ''}
+                                    {getMarketplacePrices(player.name, 'fighter').bestSellPrice ? `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestSellPrice)} sell` : ''}{' '}
+                                    {getMarketplacePrices(player.name, 'fighter').bestBuyPrice ? `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestBuyPrice)} buy` : ''}
                                   </p>
                                 </div>
                                 {renderMarketplacePrices(player, getMarketplacePrices, isMobile, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
                               </div>
                             </div>
-                          </div>
-                        ))}
+                          </div>)}
                       </div>
                     </CardContent>
                   </Card>
@@ -2648,15 +2440,9 @@ const Game = () => {
                     </CardHeader>
                     <CardContent className="relative z-10">
                       <div className="space-y-2">
-                        {topGainers.map((player, idx) => (
-                          <div key={`gainers-${gainersTimeFilter}-${idx}`} className="flex items-center space-x-3 p-2 bg-white/5 rounded-lg">
+                        {topGainers.map((player, idx) => <div key={`gainers-${gainersTimeFilter}-${idx}`} className="flex items-center space-x-3 p-2 bg-white/5 rounded-lg">
                             <div className="w-12 h-12 rounded-full overflow-hidden">
-                              <img 
-                                src={player.image} 
-                                alt={player.name} 
-                                className="w-full h-full object-cover"
-                                loading={idx < 3 ? 'eager' : 'lazy'}
-                              />
+                              <img src={player.image} alt={player.name} className="w-full h-full object-cover" loading={idx < 3 ? 'eager' : 'lazy'} />
                             </div>
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center justify-between">
@@ -2664,17 +2450,14 @@ const Game = () => {
                                   <p className="text-sm md:text-xl font-semibold text-white">{player.name}</p>
                                   <p className={`text-xs ${player.change >= 0 ? 'text-green-400' : 'text-red-400'}`}>
                                     {player.change >= 0 ? '+' : ''}{formatNumberWithAbbreviation(player.change)}%{' '}
-                                    {getMarketplacePrices(player.name, 'fighter').bestSellPrice ? 
-                                      `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestSellPrice)} sell` : ''}{' '}
-                                    {getMarketplacePrices(player.name, 'fighter').bestBuyPrice ? 
-                                      `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestBuyPrice)} buy` : ''}
+                                    {getMarketplacePrices(player.name, 'fighter').bestSellPrice ? `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestSellPrice)} sell` : ''}{' '}
+                                    {getMarketplacePrices(player.name, 'fighter').bestBuyPrice ? `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestBuyPrice)} buy` : ''}
                                   </p>
                                 </div>
                                 {renderMarketplacePrices(player, getMarketplacePrices, isMobile, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
                               </div>
                             </div>
-                          </div>
-                        ))}
+                          </div>)}
                       </div>
                     </CardContent>
                   </Card>
@@ -2841,7 +2624,7 @@ const Game = () => {
                                 <div>
                                   <p className="text-sm md:text-xl font-semibold text-white">{player.name}</p>
                                   <p className={`text-xs ${player.trend === 'up' ? 'text-green-400' : 'text-red-400'}`}>
-                                    {player.trend === 'up' ? '+' : ''}{(((player.price - player.lastSale) / player.lastSale) * 100).toFixed(1)}%
+                                    {player.trend === 'up' ? '+' : ''}{((player.price - player.lastSale) / player.lastSale * 100).toFixed(1)}%
                                   </p>
                                 </div>
                                 {renderMarketplacePrices(player, getMarketplacePrices, isMobile, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
@@ -3729,25 +3512,17 @@ const Game = () => {
                        </CardTitle>
                      </CardHeader>
                       <CardContent>
-                         <StoreCarousel 
-                          ref={desktopFightersCarouselRef} 
-                          desktopMode={true}
-                          items={filterItemsByRarity(getStoreItemsByCategory('fighters').map(item => ({
-                            name: item.name,
-                            price: item.price,
-                            rarity: item.rarity,
-                            image: item.image_url || ''
-                          })))} 
-                          renderItem={(displayItem, idx) => {
-                            const storeItem = storeItems.find(item => item.name === displayItem.name);
-                            return (
-                              <GlowCard key={idx} className="text-white shadow-2xl cursor-pointer">
+                         <StoreCarousel ref={desktopFightersCarouselRef} desktopMode={true} items={filterItemsByRarity(getStoreItemsByCategory('fighters').map(item => ({
+                        name: item.name,
+                        price: item.price,
+                        rarity: item.rarity,
+                        image: item.image_url || ''
+                      })))} renderItem={(displayItem, idx) => {
+                        const storeItem = storeItems.find(item => item.name === displayItem.name);
+                        return <GlowCard key={idx} className="text-white shadow-2xl cursor-pointer">
                                 <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
                                 <CardContent className="p-4 relative z-10">
-                                 <div 
-                                   className="aspect-square bg-gray-800/50 rounded-lg mb-3 overflow-hidden cursor-pointer hover:scale-110 transition-transform duration-300"
-                                   onClick={() => storeItem && handleStoreItemClick(storeItem)}
-                                 >
+                                 <div className="aspect-square bg-gray-800/50 rounded-lg mb-3 overflow-hidden cursor-pointer hover:scale-110 transition-transform duration-300" onClick={() => storeItem && handleStoreItemClick(storeItem)}>
                                    <img src={displayItem.image} alt={displayItem.name} className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" />
                                  </div>
                                    <h3 className="font-semibold text-sm text-white mb-2 truncate">{displayItem.name}</h3>
@@ -3761,19 +3536,13 @@ const Game = () => {
                                      <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4" />
                                      <span className="text-sm font-bold text-white">{displayItem.price.toLocaleString()}</span>
                                    </div>
-                                   <Button 
-                                     size="sm" 
-                                     variant="secondary" 
-                                     className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-7 px-3 cursor-pointer"
-                                     onClick={() => storeItem && handleStoreItemClick(storeItem)}
-                                   >
+                                   <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-7 px-3 cursor-pointer" onClick={() => storeItem && handleStoreItemClick(storeItem)}>
                                      Buy
                                    </Button>
                                  </div>
                                </CardContent>
-                              </GlowCard>
-                            );
-                          }} />
+                              </GlowCard>;
+                      }} />
                        </CardContent>
                    </Card>}
 
@@ -3801,25 +3570,17 @@ const Game = () => {
                        </CardTitle>
                      </CardHeader>
                       <CardContent>
-                        <StoreCarousel 
-                          ref={desktopAccessoriesCarouselRef} 
-                          desktopMode={true}
-                          items={filterItemsByRarity(getStoreItemsByCategory('accessories').map(item => ({
-                            name: item.name,
-                            price: item.price,
-                            rarity: item.rarity,
-                            image: item.image_url || ''
-                          })))} 
-                          renderItem={(displayItem, idx) => {
-                            const storeItem = storeItems.find(item => item.name === displayItem.name);
-                            return (
-                              <GlowCard key={idx} className="text-white shadow-2xl cursor-pointer">
+                        <StoreCarousel ref={desktopAccessoriesCarouselRef} desktopMode={true} items={filterItemsByRarity(getStoreItemsByCategory('accessories').map(item => ({
+                        name: item.name,
+                        price: item.price,
+                        rarity: item.rarity,
+                        image: item.image_url || ''
+                      })))} renderItem={(displayItem, idx) => {
+                        const storeItem = storeItems.find(item => item.name === displayItem.name);
+                        return <GlowCard key={idx} className="text-white shadow-2xl cursor-pointer">
                                 <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
                                 <CardContent className="p-4 relative z-10">
-                                 <div 
-                                   className="aspect-square bg-gray-800/50 rounded-lg mb-3 overflow-hidden cursor-pointer hover:scale-110 transition-transform duration-300"
-                                   onClick={() => storeItem && handleStoreItemClick(storeItem)}
-                                 >
+                                 <div className="aspect-square bg-gray-800/50 rounded-lg mb-3 overflow-hidden cursor-pointer hover:scale-110 transition-transform duration-300" onClick={() => storeItem && handleStoreItemClick(storeItem)}>
                                    <img src={displayItem.image} alt={displayItem.name} className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" />
                                  </div>
                                   <h3 className="font-semibold text-sm text-white mb-2">{displayItem.name}</h3>
@@ -3833,19 +3594,13 @@ const Game = () => {
                                      <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4" />
                                      <span className="text-sm font-bold text-white">{displayItem.price.toLocaleString()}</span>
                                    </div>
-                                   <Button 
-                                     size="sm" 
-                                     variant="secondary" 
-                                     className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-7 px-3 cursor-pointer"
-                                     onClick={() => storeItem && handleStoreItemClick(storeItem)}
-                                   >
+                                   <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-7 px-3 cursor-pointer" onClick={() => storeItem && handleStoreItemClick(storeItem)}>
                                      Buy
                                    </Button>
                                  </div>
                                </CardContent>
-                              </GlowCard>
-                            );
-                          }} />
+                              </GlowCard>;
+                      }} />
                        </CardContent>
                    </Card>}
 
@@ -3873,25 +3628,17 @@ const Game = () => {
                         </CardTitle>
                       </CardHeader>
                        <CardContent className="relative z-10">
-                         <StoreCarousel 
-                          ref={desktopMobilityCarouselRef} 
-                          desktopMode={true}
-                          items={filterItemsByRarity(getStoreItemsByCategory('mobility').map(item => ({
-                            name: item.name,
-                            price: item.price,
-                            rarity: item.rarity,
-                            image: item.image_url || ''
-                          })))} 
-                          renderItem={(displayItem, idx) => {
-                            const storeItem = storeItems.find(item => item.name === displayItem.name);
-                            return (
-                              <GlowCard key={idx} className="text-white shadow-2xl cursor-pointer">
+                         <StoreCarousel ref={desktopMobilityCarouselRef} desktopMode={true} items={filterItemsByRarity(getStoreItemsByCategory('mobility').map(item => ({
+                        name: item.name,
+                        price: item.price,
+                        rarity: item.rarity,
+                        image: item.image_url || ''
+                      })))} renderItem={(displayItem, idx) => {
+                        const storeItem = storeItems.find(item => item.name === displayItem.name);
+                        return <GlowCard key={idx} className="text-white shadow-2xl cursor-pointer">
                                 <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
                                 <CardContent className="p-4 relative z-10">
-                                 <div 
-                                   className="aspect-square bg-gray-800/50 rounded-lg mb-3 overflow-hidden cursor-pointer hover:scale-110 transition-transform duration-300"
-                                   onClick={() => storeItem && handleStoreItemClick(storeItem)}
-                                 >
+                                 <div className="aspect-square bg-gray-800/50 rounded-lg mb-3 overflow-hidden cursor-pointer hover:scale-110 transition-transform duration-300" onClick={() => storeItem && handleStoreItemClick(storeItem)}>
                                    <img src={displayItem.image} alt={displayItem.name} className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" />
                                  </div>
                                    <h3 className="font-semibold text-sm text-white mb-2">{displayItem.name}</h3>
@@ -3905,19 +3652,13 @@ const Game = () => {
                                       <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4" />
                                       <span className="text-sm font-bold text-white">{displayItem.price.toLocaleString()}</span>
                                     </div>
-                                    <Button 
-                                      size="sm" 
-                                      variant="secondary" 
-                                      className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-7 px-3 cursor-pointer"
-                                      onClick={() => storeItem && handleStoreItemClick(storeItem)}
-                                    >
+                                    <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-7 px-3 cursor-pointer" onClick={() => storeItem && handleStoreItemClick(storeItem)}>
                                       Buy
                                     </Button>
                                   </div>
                                 </CardContent>
-                              </GlowCard>
-                            );
-                          }} />
+                              </GlowCard>;
+                      }} />
                        </CardContent>
                    </Card>}
 
@@ -3945,29 +3686,18 @@ const Game = () => {
                        </CardTitle>
                      </CardHeader>
                       <CardContent>
-                        <StoreCarousel 
-                          ref={desktopEmotesCarouselRef} 
-                          desktopMode={true}
-                          items={filterItemsByRarity(getStoreItemsByCategory('emotes').map(item => ({
-                            name: item.name,
-                            price: item.price,
-                            rarity: item.rarity,
-                            image: item.image_url || ''
-                          })))} 
-                          renderItem={(displayItem, idx) => {
-                            const storeItem = storeItems.find(item => item.name === displayItem.name);
-                            return (
-                              <GlowCard key={idx} className="text-white shadow-2xl cursor-pointer">
+                        <StoreCarousel ref={desktopEmotesCarouselRef} desktopMode={true} items={filterItemsByRarity(getStoreItemsByCategory('emotes').map(item => ({
+                        name: item.name,
+                        price: item.price,
+                        rarity: item.rarity,
+                        image: item.image_url || ''
+                      })))} renderItem={(displayItem, idx) => {
+                        const storeItem = storeItems.find(item => item.name === displayItem.name);
+                        return <GlowCard key={idx} className="text-white shadow-2xl cursor-pointer">
                                 <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-800/50 to-gray-900/80" />
                                 <CardContent className="p-4 relative z-10">
-                                 <div 
-                                   className="aspect-square bg-gray-800/50 rounded-lg mb-3 overflow-hidden flex items-center justify-center cursor-pointer hover:scale-110 transition-transform duration-300"
-                                   onClick={() => storeItem && handleStoreItemClick(storeItem)}
-                                 >
-                                    {displayItem.image.startsWith('/') || displayItem.image.startsWith('http') ? 
-                                      <img src={displayItem.image} alt={displayItem.name} className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" /> : 
-                                      <div className="text-6xl">{displayItem.image}</div>
-                                    }
+                                 <div className="aspect-square bg-gray-800/50 rounded-lg mb-3 overflow-hidden flex items-center justify-center cursor-pointer hover:scale-110 transition-transform duration-300" onClick={() => storeItem && handleStoreItemClick(storeItem)}>
+                                    {displayItem.image.startsWith('/') || displayItem.image.startsWith('http') ? <img src={displayItem.image} alt={displayItem.name} className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" /> : <div className="text-6xl">{displayItem.image}</div>}
                                  </div>
                                   <h3 className="font-semibold text-sm text-white mb-2">{displayItem.name}</h3>
                                   <div className="flex items-center justify-between mb-2">
@@ -3980,19 +3710,13 @@ const Game = () => {
                                      <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4" />
                                      <span className="text-sm font-bold text-white">{displayItem.price.toLocaleString()}</span>
                                    </div>
-                                   <Button 
-                                     size="sm" 
-                                     variant="secondary" 
-                                     className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-7 px-3 cursor-pointer"
-                                     onClick={() => storeItem && handleStoreItemClick(storeItem)}
-                                   >
+                                   <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-7 px-3 cursor-pointer" onClick={() => storeItem && handleStoreItemClick(storeItem)}>
                                      Buy
                                    </Button>
                                  </div>
                                </CardContent>
-                              </GlowCard>
-                            );
-                          }} />
+                              </GlowCard>;
+                      }} />
                        </CardContent>
                    </Card>}
 
@@ -4021,24 +3745,16 @@ const Game = () => {
                        </CardTitle>
                      </CardHeader>
                      <CardContent className="relative z-10">
-                       <StoreCarousel 
-                          ref={desktopPacksCarouselRef} 
-                          desktopMode={true}
-                          items={filterItemsByRarity(getStoreItemsByCategory('packs').map(item => ({
-                            name: item.name,
-                            price: item.price,
-                            rarity: item.rarity,
-                            image: item.image_url || ''
-                          })))} 
-                          renderItem={(displayItem, idx) => {
-                            const storeItem = storeItems.find(item => item.name === displayItem.name);
-                            return (
-                              <GlowCard key={idx} className="cursor-pointer">
+                       <StoreCarousel ref={desktopPacksCarouselRef} desktopMode={true} items={filterItemsByRarity(getStoreItemsByCategory('packs').map(item => ({
+                        name: item.name,
+                        price: item.price,
+                        rarity: item.rarity,
+                        image: item.image_url || ''
+                      })))} renderItem={(displayItem, idx) => {
+                        const storeItem = storeItems.find(item => item.name === displayItem.name);
+                        return <GlowCard key={idx} className="cursor-pointer">
                                 <div className="p-4">
-                                 <div 
-                                   className="aspect-square bg-gray-800/50 rounded-lg mb-3 overflow-hidden flex items-center justify-center cursor-pointer hover:scale-110 transition-transform duration-300"
-                                   onClick={() => storeItem && handleStoreItemClick(storeItem)}
-                                 >
+                                 <div className="aspect-square bg-gray-800/50 rounded-lg mb-3 overflow-hidden flex items-center justify-center cursor-pointer hover:scale-110 transition-transform duration-300" onClick={() => storeItem && handleStoreItemClick(storeItem)}>
                                     <img src={displayItem.image} alt={displayItem.name} className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" />
                                  </div>
                                    <h3 className="font-semibold text-sm text-white mb-2">{displayItem.name}</h3>
@@ -4052,19 +3768,13 @@ const Game = () => {
                                       <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4" />
                                       <span className="text-sm font-bold text-white">{displayItem.price.toLocaleString()}</span>
                                     </div>
-                                    <Button 
-                                      size="sm" 
-                                      variant="secondary" 
-                                      className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-7 px-3 cursor-pointer"
-                                      onClick={() => storeItem && handleStoreItemClick(storeItem)}
-                                    >
+                                    <Button size="sm" variant="secondary" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-7 px-3 cursor-pointer" onClick={() => storeItem && handleStoreItemClick(storeItem)}>
                                       Buy
                                     </Button>
                                   </div>
                                 </div>
-                              </GlowCard>
-                            );
-                          }} />
+                              </GlowCard>;
+                      }} />
                        </CardContent>
                    </Card>}
                   </div>
@@ -4214,15 +3924,9 @@ const Game = () => {
                     </CardHeader>
                     <CardContent className="relative z-10">
                       <div className="space-y-3">
-                        {trendingPlayers.map((player, idx) => (
-                          <div key={`desktop-trending-${idx}`} className="flex items-center space-x-3 p-3 bg-white/5 rounded-lg hover:bg-white/15 md:hover:bg-white/20 transition-all duration-300 cursor-pointer">
+                        {trendingPlayers.map((player, idx) => <div key={`desktop-trending-${idx}`} className="flex items-center space-x-3 p-3 bg-white/5 rounded-lg hover:bg-white/15 md:hover:bg-white/20 transition-all duration-300 cursor-pointer">
                             <div className="w-12 h-12 rounded-full overflow-hidden">
-                              <img 
-                                src={player.image} 
-                                alt={player.name} 
-                                className="w-full h-full object-cover"
-                                loading={idx < 3 ? 'eager' : 'lazy'}
-                              />
+                              <img src={player.image} alt={player.name} className="w-full h-full object-cover" loading={idx < 3 ? 'eager' : 'lazy'} />
                             </div>
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center justify-between mb-1">
@@ -4230,17 +3934,14 @@ const Game = () => {
                                   <p className="text-sm font-semibold text-white">{player.name}</p>
                                   <p className={`text-xs ${player.change >= 0 ? 'text-green-400' : 'text-red-400'}`}>
                                     {player.change >= 0 ? '+' : ''}{formatNumberWithAbbreviation(player.change)}%{' '}
-                                    {getMarketplacePrices(player.name, 'fighter').bestSellPrice ? 
-                                      `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestSellPrice)} sell` : ''}{' '}
-                                    {getMarketplacePrices(player.name, 'fighter').bestBuyPrice ? 
-                                      `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestBuyPrice)} buy` : ''}
+                                    {getMarketplacePrices(player.name, 'fighter').bestSellPrice ? `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestSellPrice)} sell` : ''}{' '}
+                                    {getMarketplacePrices(player.name, 'fighter').bestBuyPrice ? `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestBuyPrice)} buy` : ''}
                                   </p>
                                 </div>
                                 {renderMarketplacePrices(player, getMarketplacePrices, isMobile, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
                               </div>
                             </div>
-                          </div>
-                        ))}
+                          </div>)}
                       </div>
                     </CardContent>
                   </Card>
@@ -4282,15 +3983,9 @@ const Game = () => {
                     </CardHeader>
                     <CardContent className="relative z-10">
                       <div className="space-y-3">
-                        {topGainers.map((player, idx) => (
-                          <div key={`desktop-gainers-${gainersTimeFilter}-${idx}`} className="flex items-center space-x-3 p-3 bg-white/5 rounded-lg hover:bg-white/15 md:hover:bg-white/20 transition-all duration-300 cursor-pointer">
+                        {topGainers.map((player, idx) => <div key={`desktop-gainers-${gainersTimeFilter}-${idx}`} className="flex items-center space-x-3 p-3 bg-white/5 rounded-lg hover:bg-white/15 md:hover:bg-white/20 transition-all duration-300 cursor-pointer">
                             <div className="w-12 h-12 rounded-full overflow-hidden">
-                              <img 
-                                src={player.image} 
-                                alt={player.name} 
-                                className="w-full h-full object-cover"
-                                loading={idx < 3 ? 'eager' : 'lazy'}
-                              />
+                              <img src={player.image} alt={player.name} className="w-full h-full object-cover" loading={idx < 3 ? 'eager' : 'lazy'} />
                             </div>
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center justify-between mb-1">
@@ -4298,17 +3993,14 @@ const Game = () => {
                                   <p className="text-sm font-semibold text-white">{player.name}</p>
                                   <p className={`text-xs ${player.change >= 0 ? 'text-green-400' : 'text-red-400'}`}>
                                     {player.change >= 0 ? '+' : ''}{formatNumberWithAbbreviation(player.change)}%{' '}
-                                    {getMarketplacePrices(player.name, 'fighter').bestSellPrice ? 
-                                      `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestSellPrice)} sell` : ''}{' '}
-                                    {getMarketplacePrices(player.name, 'fighter').bestBuyPrice ? 
-                                      `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestBuyPrice)} buy` : ''}
+                                    {getMarketplacePrices(player.name, 'fighter').bestSellPrice ? `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestSellPrice)} sell` : ''}{' '}
+                                    {getMarketplacePrices(player.name, 'fighter').bestBuyPrice ? `${formatNumberWithAbbreviation(getMarketplacePrices(player.name, 'fighter').bestBuyPrice)} buy` : ''}
                                   </p>
                                 </div>
                                 {renderMarketplacePrices(player, getMarketplacePrices, isMobile, 'medium', () => handleSellClick(player), () => handleBuyClick(player))}
                               </div>
                             </div>
-                          </div>
-                        ))}
+                          </div>)}
                       </div>
                     </CardContent>
                   </Card>
@@ -4335,9 +4027,9 @@ const Game = () => {
                                  </Button> : <div className="flex items-center animate-fade-in">
                                    <div className="relative">
                                      <Button variant="ghost" size="sm" className="absolute left-1 top-1/2 transform -translate-y-1/2 h-6 w-6 text-white hover:bg-white/20 z-10" onClick={() => {
-                               setSearchTerm("");
-                               setSearchExpanded(false);
-                             }}>
+                                setSearchTerm("");
+                                setSearchExpanded(false);
+                              }}>
                                        <X className="w-3 h-3" />
                                      </Button>
                                      <Input placeholder="search" value={searchTerm} onChange={e => setSearchTerm(e.target.value)} onBlur={() => !searchTerm && setSearchExpanded(false)} className="pl-8 pr-3 h-8 text-xs bg-black/20 backdrop-blur-md border-white/30 text-white placeholder:text-gray-400 w-48 focus:bg-black/30 focus:border-white/40" autoFocus />
@@ -4508,7 +4200,7 @@ const Game = () => {
                                 <div>
                                   <p className="text-lg md:text-xl font-semibold text-white">{player.name}</p>
                                   <p className={`text-sm ${player.trend === 'up' ? 'text-green-400' : 'text-red-400'}`}>
-                                    {player.trend === 'up' ? '+' : ''}{(((player.price - player.lastSale) / player.lastSale) * 100).toFixed(1)}%
+                                    {player.trend === 'up' ? '+' : ''}{((player.price - player.lastSale) / player.lastSale * 100).toFixed(1)}%
                                   </p>
                                 </div>
                                {renderMarketplacePrices(player, getMarketplacePrices, isMobile, 'large', () => handleSellClick(player), () => handleBuyClick(player))}
@@ -5043,10 +4735,10 @@ const Game = () => {
                 Buy with Card
               </Button>
               <Button variant="outline" className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 hover:text-white transition-all duration-300" onClick={() => {
-             toast({
-               title: "Crypto Payment",
-               description: "Crypto payment functionality coming soon!"
-             });
+            toast({
+              title: "Crypto Payment",
+              description: "Crypto payment functionality coming soon!"
+            });
             setBuyDialogOpen(false);
           }}>
                 <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-4 h-4 mr-2" />
@@ -5064,10 +4756,7 @@ const Game = () => {
                  {selectedPlayer ? `Buy ${selectedPlayer.name}` : 'Buy Crypto'}
                </DialogTitle>
                <DialogDescription className="text-white/80">
-                 {selectedPlayer 
-                   ? 'Choose your payment method to purchase this player.'
-                   : 'Choose your payment method to purchase crypto.'
-                 }
+                 {selectedPlayer ? 'Choose your payment method to purchase this player.' : 'Choose your payment method to purchase crypto.'}
                </DialogDescription>
              </DialogHeader>
             <div className="flex flex-col space-y-3 pt-4">
@@ -5082,10 +4771,10 @@ const Game = () => {
                 Buy with Card
               </Button>
               <Button variant="outline" className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 hover:text-white transition-all duration-300" onClick={() => {
-             toast({
-               title: "Crypto Payment",
-               description: "Crypto payment functionality coming soon!"
-             });
+            toast({
+              title: "Crypto Payment",
+              description: "Crypto payment functionality coming soon!"
+            });
             setBuyDialogOpen(false);
           }}>
                 <img src="/lovable-uploads/aa517b6d-c98b-4876-9f58-97246b49844b.png" alt="LCS Coin" className="w-4 h-4 mr-2" />
@@ -5104,11 +4793,7 @@ const Game = () => {
         </PreOrderDialog>
 
         {/* Store Purchase Dialog */}
-        <StorePurchaseDialog
-          isOpen={purchaseDialogOpen}
-          onClose={() => setPurchaseDialogOpen(false)}
-          item={selectedStoreItem}
-        />
+        <StorePurchaseDialog isOpen={purchaseDialogOpen} onClose={() => setPurchaseDialogOpen(false)} item={selectedStoreItem} />
     </div>;
 };
 export default Game;
