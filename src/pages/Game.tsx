@@ -1401,13 +1401,13 @@ const Game = () => {
                                </div>
                              </div>
                              <div className="flex items-center space-x-2">
-                               <Button 
-                                 size="sm" 
-                                 variant="outline" 
-                                 className="bg-transparent border-white/20 text-white hover:bg-white/10 hover:text-white transition-all duration-300 text-xs px-2 py-1"
-                                 onClick={handleCopyWalletAddress}
-                               >
-                                 <Plus className="w-3 h-3" />
+                                <Button 
+                                  size="sm" 
+                                  variant="outline" 
+                                  className="bg-transparent border-white/20 text-white hover:bg-white/10 hover:text-white transition-all duration-300 text-xs px-2 py-1"
+                                  onClick={handleCopyWalletAddress}
+                                >
+                                  <Copy className="w-3 h-3" />
                                </Button>
                                <Button 
                                  size="sm" 
