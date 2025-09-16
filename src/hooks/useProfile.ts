@@ -108,7 +108,7 @@ export const useProfile = () => {
         .from('user_balances')
         .upsert({
           user_id: user.id,
-          coins: 1000,
+          coins: 0,
           xp: 0
         }, {
           onConflict: 'user_id',

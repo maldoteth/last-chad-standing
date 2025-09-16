@@ -72,7 +72,7 @@ export const useStore = () => {
       // Create initial balance for new user
       const { data: newBalance, error: insertError } = await supabase
         .from('user_balances')
-        .insert({ user_id: user.id, coins: 1000, xp: 0 })
+        .insert({ user_id: user.id, coins: 0, xp: 0 })
         .select('coins, xp')
         .single();
 
