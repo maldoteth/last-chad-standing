@@ -140,7 +140,7 @@ export const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
         {/* Item Properties */}
         <div className="grid grid-cols-2 gap-4">
           {/* Rarity */}
-          <div className="space-y-3">
+          <div className="space-y-6">
             <span className="text-sm text-white/70">Rarity</span>
             <Badge className={`${getRarityColor(item.rarity)} font-medium border`}>
               {getRarityDisplayName(item.rarity)}
@@ -148,7 +148,7 @@ export const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
           </div>
 
           {/* Category */}
-          <div className="space-y-3">
+          <div className="space-y-6">
             <span className="text-sm text-white/70">Category</span>
             <Badge className="capitalize bg-white/10 text-white border-white/20 hover:bg-white/20">
               {item.category}
@@ -156,7 +156,7 @@ export const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
           </div>
 
           {/* First Release Date */}
-          <div className="space-y-3">
+          <div className="space-y-6">
             <span className="text-sm text-white/70 flex items-center gap-1">
               <Calendar className="w-3 h-3" />
               First Release
@@ -167,7 +167,7 @@ export const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
           </div>
 
           {/* Total Purchased */}
-          <div className="space-y-3">
+          <div className="space-y-6">
             <span className="text-sm text-white/70 flex items-center gap-1">
               <TrendingUp className="w-3 h-3" />
               Total Purchased
