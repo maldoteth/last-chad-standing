@@ -140,16 +140,14 @@ export const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
         {/* Item Properties */}
         <div className="grid grid-cols-2 gap-4">
           {/* Rarity */}
-          <div className="space-y-6">
-            <span className="text-sm text-white/70">Rarity</span>
+          <div>
             <Badge className={`${getRarityColor(item.rarity)} font-medium border`}>
               {getRarityDisplayName(item.rarity)}
             </Badge>
           </div>
 
           {/* Category */}
-          <div className="space-y-6">
-            <span className="text-sm text-white/70">Category</span>
+          <div>
             <Badge className="capitalize bg-white/10 text-white border-white/20 hover:bg-white/20">
               {item.category}
             </Badge>
