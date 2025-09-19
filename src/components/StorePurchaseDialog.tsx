@@ -159,7 +159,7 @@ export const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
               <Calendar className="w-3 h-3" />
               First Release
             </span>
-            <span className="text-sm font-medium text-white">
+            <span className="text-sm font-medium text-white ml-4">
               {formatDate(item.first_release_date)}
             </span>
           </div>
