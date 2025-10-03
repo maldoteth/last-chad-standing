@@ -2793,7 +2793,7 @@ const Game = () => {
         {/* Desktop Layout - Hidden on mobile */}
         <div className="hidden lg:flex lg:min-h-screen w-full">
           {/* Left Sidebar - Desktop only */}
-          <aside className="w-80 bg-black border-r border-border p-6 space-y-6 overflow-y-auto h-screen">
+          <aside className="w-80 bg-black border-r border-border p-6 space-y-6 overflow-y-auto h-screen scrollbar-hide">
             <div className="relative">
               {/* Desktop: Hover Card + Popover */}
               {!isMobile ? <div className="relative">
