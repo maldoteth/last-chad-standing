@@ -267,7 +267,7 @@ const PreOrderDialog = ({ children, open: externalOpen, onOpenChange: externalOn
         </SheetTrigger>
         <SheetContent 
           side="bottom" 
-          className={`${contentClassName} max-h-[90vh] overflow-y-auto rounded-t-xl`}
+          className={`${contentClassName} max-h-[90vh] overflow-y-auto rounded-t-xl scrollbar-hide`}
         >
           <SheetHeader>
             <SheetTitle className="font-exo text-2xl text-center text-white mb-6">
@@ -285,7 +285,7 @@ const PreOrderDialog = ({ children, open: externalOpen, onOpenChange: externalOn
       <DialogTrigger asChild>
         {children}
       </DialogTrigger>
-      <DialogContent className={`${contentClassName} max-w-4xl max-h-[90vh] overflow-y-auto`}>
+      <DialogContent className={`${contentClassName} max-w-4xl max-h-[90vh] overflow-y-auto scrollbar-hide`}>
         <DialogHeader>
           <DialogTitle className="font-exo text-2xl text-center text-white mb-6">
             Pre-Oder LCS
