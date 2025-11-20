@@ -299,14 +299,8 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      generate_random_username: {
-        Args: Record<PropertyKey, never>
-        Returns: string
-      }
-      get_tier_icon: {
-        Args: { xp_amount: number }
-        Returns: string
-      }
+      generate_random_username: { Args: never; Returns: string }
+      get_tier_icon: { Args: { xp_amount: number }; Returns: string }
     }
     Enums: {
       [_ in never]: never
