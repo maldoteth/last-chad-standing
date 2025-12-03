@@ -1,8 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { PrivyProvider } from '@privy-io/react-auth';
+import { SmartWalletsProvider } from '@privy-io/react-auth/smart-wallets';
 import App from "./App.tsx";
 import "./index.css";
+import { base, baseSepolia } from "viem/chains";
+import { ProfileProvider } from "./context/profileContext.tsx";
+// Add this line at the very top of the file
+import { Buffer } from "buffer";
+import { SocketProvider } from "./context/SocketContext.tsx";
+import { NotificationProvider } from "./context/notificationContext.tsx";
+if (!window.Buffer) window.Buffer = Buffer;
 
 // Add comprehensive tablet-friendly modal styles for Privy
 const addPrivyTabletStyles = () => {
@@ -73,13 +81,13 @@ const addPrivyTabletStyles = () => {
       }
     }
   `;
-  
+
   // Remove existing style if present
   const existingStyle = document.getElementById('privy-tablet-styles');
   if (existingStyle) {
     existingStyle.remove();
   }
-  
+
   document.head.appendChild(style);
 };
 
@@ -95,7 +103,7 @@ const observePrivyModals = () => {
           const element = node as Element;
           // Check if this is a Privy modal or contains one
           if (element.querySelector?.('[data-privy-modal], [data-testid="privy-modal"], .privy-modal') ||
-              element.matches?.('[data-privy-modal], [data-testid="privy-modal"], .privy-modal')) {
+            element.matches?.('[data-privy-modal], [data-testid="privy-modal"], .privy-modal')) {
             // Re-apply styles with a slight delay to ensure DOM is ready
             setTimeout(addPrivyTabletStyles, 50);
           }
@@ -120,7 +128,7 @@ if (document.readyState === 'loading') {
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <PrivyProvider
-      appId="cmetmshr8000gib0bakyp8zxa"
+      appId={import.meta.env.VITE_APPID}
       config={{
         appearance: {
           theme: 'dark',
@@ -128,14 +136,25 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           logo: undefined,
           showWalletLoginFirst: false,
           walletChainType: 'ethereum-only',
-          walletList: ['metamask', 'coinbase_wallet', 'wallet_connect'],
         },
+        defaultChain: baseSepolia,
+        supportedChains: [baseSepolia],
         embeddedWallets: {
-          createOnLogin: 'users-without-wallets',
+          ethereum: {
+            createOnLogin: 'users-without-wallets',
+          }
         },
       }}
     >
-      <App />
+      <SmartWalletsProvider>
+        <ProfileProvider>
+          <SocketProvider>
+            <NotificationProvider>
+              <App />
+            </NotificationProvider>
+          </SocketProvider>
+        </ProfileProvider>
+      </SmartWalletsProvider>
     </PrivyProvider>
-  </React.StrictMode>
+  </React.StrictMode >
 );
