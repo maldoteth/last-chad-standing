@@ -10,10 +10,11 @@ export interface StoreItem {
   price: number;
   category: string;
   rarity: string;
-  image_url: string | null;
+  image_url: string;
   is_active: boolean;
   first_release_date?: string;
   total_purchased?: number;
+  max_supply?: number;
 }
 
 export interface UserBalance {
@@ -24,9 +25,9 @@ export interface UserBalance {
 export interface UserInventoryItem {
   id: string;
   item_id: string;
-  quantity: number;
-  purchased_at: string;
-  store_items: StoreItem;
+  quantity: number | null;
+  purchase_date: string;
+  store_item?: StoreItem;
 }
 
 export const useStore = () => {
@@ -41,7 +42,7 @@ export const useStore = () => {
   const fetchStoreItems = async () => {
     const { data, error } = await supabase
       .from('store_items')
-      .select('*, first_release_date, total_purchased')
+      .select('*')
       .eq('is_active', true)
       .order('created_at', { ascending: false });
 
@@ -53,14 +54,15 @@ export const useStore = () => {
     setStoreItems(data || []);
   };
 
-  // Fetch user balance
+  // Fetch user balance from Users table
   const fetchUserBalance = async () => {
     if (!user?.id) return;
 
+    // First try to find user by privy_id
     const { data, error } = await supabase
-      .from('user_balances')
+      .from('Users')
       .select('coins, xp')
-      .eq('user_id', user.id)
+      .eq('privy_id', user.id)
       .maybeSingle();
 
     if (error) {
@@ -68,46 +70,55 @@ export const useStore = () => {
       return;
     }
 
-    if (!data) {
-      // Create initial balance for new user
-      const { data: newBalance, error: insertError } = await supabase
-        .from('user_balances')
-        .insert({ user_id: user.id, coins: 0, xp: 0 })
-        .select('coins, xp')
-        .single();
-
-      if (insertError) {
-        console.error('Error creating user balance:', insertError);
-        return;
-      }
-
-      setUserBalance({ coins: newBalance.coins, xp: newBalance.xp });
-    } else {
-      setUserBalance({ coins: data.coins, xp: data.xp });
+    if (data) {
+      setUserBalance({ 
+        coins: Number(data.coins) || 0, 
+        xp: Number(data.xp) || 0 
+      });
     }
   };
 
-  // Fetch user inventory
+  // Fetch user inventory from Locker table
   const fetchUserInventory = async () => {
     if (!user?.id) return;
 
+    // Get user id from Users table first
+    const { data: userData, error: userError } = await supabase
+      .from('Users')
+      .select('id')
+      .eq('privy_id', user.id)
+      .maybeSingle();
+
+    if (userError || !userData) {
+      console.error('Error fetching user:', userError);
+      return;
+    }
+
     const { data, error } = await supabase
-      .from('user_inventory')
+      .from('Locker')
       .select(`
         id,
         item_id,
         quantity,
-        purchased_at,
+        purchase_date,
         store_items (*)
       `)
-      .eq('user_id', user.id);
+      .eq('user_id', userData.id);
 
     if (error) {
       console.error('Error fetching user inventory:', error);
       return;
     }
 
-    setUserInventory(data || []);
+    const inventoryItems: UserInventoryItem[] = (data || []).map(item => ({
+      id: item.id,
+      item_id: item.item_id,
+      quantity: item.quantity,
+      purchase_date: item.purchase_date,
+      store_item: item.store_items as unknown as StoreItem
+    }));
+
+    setUserInventory(inventoryItems);
   };
 
   // Purchase item
@@ -131,40 +142,57 @@ export const useStore = () => {
     }
 
     try {
-      // Start transaction
+      // Get user id from Users table
+      const { data: userData, error: userError } = await supabase
+        .from('Users')
+        .select('id, coins')
+        .eq('privy_id', user.id)
+        .single();
+
+      if (userError || !userData) {
+        throw new Error('User not found');
+      }
+
+      // Update user coins
       const { error: balanceError } = await supabase
-        .from('user_balances')
-        .update({ coins: userBalance.coins - price })
-        .eq('user_id', user.id);
+        .from('Users')
+        .update({ coins: Number(userData.coins) - price })
+        .eq('id', userData.id);
 
       if (balanceError) {
         throw balanceError;
       }
 
-      // Add to inventory
-      const { error: inventoryError } = await supabase
-        .from('user_inventory')
-        .upsert(
-          { user_id: user.id, item_id: itemId, quantity: 1 },
-          { onConflict: 'user_id,item_id' }
-        );
+      // Add to Locker (inventory)
+      const { error: lockerError } = await supabase
+        .from('Locker')
+        .insert({
+          user_id: userData.id,
+          item_id: itemId,
+          quantity: 1,
+          coins: price,
+          total_purchased_locker_item: 1
+        });
 
-      if (inventoryError) {
-        throw inventoryError;
+      if (lockerError) {
+        throw lockerError;
       }
 
       // Record transaction
       const { error: transactionError } = await supabase
-        .from('transactions')
+        .from('Transactions')
         .insert({
-          user_id: user.id,
+          user_id: userData.id,
           item_id: itemId,
           amount: price,
-          transaction_type: 'purchase'
+          coins: price,
+          paymentMethod: 'coin',
+          status: 'success'
         });
 
       if (transactionError) {
-        throw transactionError;
+        console.error('Transaction record error:', transactionError);
+        // Don't fail the purchase for transaction logging errors
       }
 
       // Update local state

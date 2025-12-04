@@ -83,8 +83,9 @@ const Admin = () => {
       price: parseInt(formData.price),
       category: formData.category,
       rarity: formData.rarity,
-      image_url: formData.image_url || null,
-      is_active: formData.is_active
+      image_url: formData.image_url || '/placeholder.svg',
+      is_active: formData.is_active,
+      first_release_date: new Date().toISOString()
     };
 
     try {
