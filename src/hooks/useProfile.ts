@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { usePrivy } from '@privy-io/react-auth';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from '@/hooks/use-toast';
-import { getCurrentLevel } from '@/lib/progressSystem';
 import { useStore } from '@/hooks/useStore';
 
 interface UserProfile {
@@ -41,10 +40,11 @@ export const useProfile = () => {
     try {
       setLoading(true);
       
+      // Fetch from Users table using privy_id
       const { data, error } = await supabase
-        .from('user_profiles')
+        .from('Users')
         .select('*')
-        .eq('user_id', user.id)
+        .eq('privy_id', user.id)
         .maybeSingle();
 
       if (error && error.code !== 'PGRST116') {
@@ -52,12 +52,16 @@ export const useProfile = () => {
         return;
       }
 
-      // Add tier icon as avatar_url based on current XP
+      // Map Users table to UserProfile interface
       if (data) {
-        const tierIcon = getTierIcon(userBalance?.xp || 0);
+        const tierIcon = getTierIcon(Number(data.xp) || 0);
         setProfile({
-          ...data,
-          avatar_url: tierIcon
+          id: data.id,
+          user_id: data.id,
+          username: data.name,
+          avatar_url: tierIcon,
+          created_at: data.created_at,
+          updated_at: data.updated_at
         });
       }
     } catch (error) {
@@ -77,96 +81,74 @@ export const useProfile = () => {
       setLoading(true);
       console.log('Creating profile for user:', user.id);
       
-      // Check if profile already exists
-      const { data: existingProfile, error: checkError } = await supabase
-        .from('user_profiles')
+      // Check if user already exists in Users table
+      const { data: existingUser, error: checkError } = await supabase
+        .from('Users')
         .select('*')
-        .eq('user_id', user.id)
+        .eq('privy_id', user.id)
         .maybeSingle();
 
       if (checkError) {
-        console.error('Error checking existing profile:', checkError);
+        console.error('Error checking existing user:', checkError);
         throw checkError;
       }
 
-      if (existingProfile) {
-        console.log('Profile already exists:', existingProfile);
-        const tierIcon = getTierIcon(userBalance?.xp || 0);
-        const profileWithIcon = {
-          ...existingProfile,
-          avatar_url: tierIcon
+      if (existingUser) {
+        console.log('User already exists:', existingUser);
+        const tierIcon = getTierIcon(Number(existingUser.xp) || 0);
+        const profileWithIcon: UserProfile = {
+          id: existingUser.id,
+          user_id: existingUser.id,
+          username: existingUser.name,
+          avatar_url: tierIcon,
+          created_at: existingUser.created_at,
+          updated_at: existingUser.updated_at
         };
         setProfile(profileWithIcon);
         return profileWithIcon;
       }
 
-      // Use upsert logic to handle potential duplicate keys
-      console.log('Creating new profile and balance for user:', user.id);
-
-      // First, upsert user balance (handle duplicates gracefully)
-      const { data: balanceData, error: balanceError } = await supabase
-        .from('user_balances')
-        .upsert({
-          user_id: user.id,
+      // Create new user in Users table
+      const defaultName = `User_${user.id.slice(0, 8)}`;
+      const { data: newUser, error: createError } = await supabase
+        .from('Users')
+        .insert({
+          privy_id: user.id,
+          name: defaultName,
           coins: 0,
           xp: 0
-        }, {
-          onConflict: 'user_id',
-          ignoreDuplicates: false
         })
         .select()
         .single();
 
-      if (balanceError) {
-        console.error('Error upserting user balance:', balanceError);
-        throw balanceError;
+      if (createError) {
+        console.error('Error creating user:', createError);
+        throw createError;
       }
 
-      console.log('User balance upserted:', balanceData);
+      console.log('User created successfully:', newUser);
 
-      // Then create profile - trigger will auto-generate username
-      const { data: profileData, error: profileError } = await supabase
-        .from('user_profiles')
-        .upsert({
-          user_id: user.id,
-        }, {
-          onConflict: 'user_id',
-          ignoreDuplicates: false
-        })
-        .select()
-        .single();
-
-      if (profileError) {
-        console.error('Error upserting profile:', profileError);
-        throw profileError;
-      }
-
-      if (!profileData) {
-        console.error('No profile data returned from upsert');
-        throw new Error('No profile data returned from upsert');
-      }
-
-      console.log('Profile upserted successfully:', profileData);
-
-      // Add tier icon as avatar_url
-      const tierIcon = getTierIcon(balanceData.xp);
-      const profileWithIcon = {
-        ...profileData,
-        avatar_url: tierIcon
+      const tierIcon = getTierIcon(0);
+      const profileWithIcon: UserProfile = {
+        id: newUser.id,
+        user_id: newUser.id,
+        username: newUser.name,
+        avatar_url: tierIcon,
+        created_at: newUser.created_at,
+        updated_at: newUser.updated_at
       };
       
       setProfile(profileWithIcon);
       
       toast({
         title: "Welcome!",
-        description: `Profile ready: ${profileData.username}`,
+        description: `Profile ready: ${newUser.name}`,
       });
 
       return profileWithIcon;
     } catch (error: any) {
       console.error('Error in createProfile function:', error);
       
-      // Handle specific database constraint errors
       const errorMessage = error?.code === '23505' 
         ? "Profile already exists. Please try logging in again."
         : "Unable to create your profile. Please try again.";
@@ -218,9 +200,9 @@ export const useProfile = () => {
       setLoading(true);
       
       const { data, error } = await supabase
-        .from('user_profiles')
-        .update({ username: newUsername.trim() })
-        .eq('user_id', user.id)
+        .from('Users')
+        .update({ name: newUsername.trim() })
+        .eq('privy_id', user.id)
         .select()
         .single();
 
@@ -231,9 +213,13 @@ export const useProfile = () => {
 
       // Update local profile state
       const tierIcon = getTierIcon(userBalance?.xp || 0);
-      const updatedProfile = {
-        ...data,
-        avatar_url: tierIcon
+      const updatedProfile: UserProfile = {
+        id: data.id,
+        user_id: data.id,
+        username: data.name,
+        avatar_url: tierIcon,
+        created_at: data.created_at,
+        updated_at: data.updated_at
       };
       setProfile(updatedProfile);
       
@@ -268,6 +254,5 @@ export const useProfile = () => {
     createProfile,
     fetchProfile,
     updateUsername,
-    // Removed functions: updateProfile, uploadAvatar
   };
 };
