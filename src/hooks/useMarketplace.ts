@@ -23,6 +23,8 @@ export interface MarketplacePrices {
   hasListings: boolean;
 }
 
+// This hook uses the Locker table for marketplace functionality
+// Items listed for sale in the Locker table serve as marketplace listings
 export const useMarketplace = () => {
   const [listings, setListings] = useState<MarketplaceListing[]>([]);
   const [loading, setLoading] = useState(true);
@@ -30,14 +32,31 @@ export const useMarketplace = () => {
 
   const fetchListings = async () => {
     try {
+      // Fetch items listed for sale from Locker table
       const { data, error } = await supabase
-        .from('marketplace_listings')
+        .from('Locker')
         .select('*')
-        .eq('status', 'active')
-        .order('created_at', { ascending: false });
+        .eq('listed_for_sale', true)
+        .order('listed_at', { ascending: false });
 
       if (error) throw error;
-      setListings((data || []) as MarketplaceListing[]);
+      
+      // Transform Locker data to MarketplaceListing format
+      const transformedListings: MarketplaceListing[] = (data || []).map(item => ({
+        id: item.id,
+        user_id: item.user_id,
+        item_id: item.item_id,
+        item_type: 'store_item',
+        listing_type: 'sell' as const,
+        price: item.sale_price || item.coins,
+        quantity: item.listed_quantity || 1,
+        status: item.resale_status || 'active',
+        created_at: item.listed_at || item.created_at,
+        updated_at: item.created_at,
+        expires_at: item.sale_end_date || undefined
+      }));
+      
+      setListings(transformedListings);
     } catch (error) {
       console.error('Error fetching marketplace listings:', error);
       toast.error('Failed to load marketplace data');
@@ -83,21 +102,37 @@ export const useMarketplace = () => {
     }
 
     try {
-      const { error } = await supabase
-        .from('marketplace_listings')
-        .insert({
-          user_id: user.id,
-          item_id: itemId,
-          item_type: itemType,
-          listing_type: listingType,
-          price,
-          quantity
-        });
+      // Get user's database ID
+      const { data: userData, error: userError } = await supabase
+        .from('Users')
+        .select('id')
+        .eq('privy_id', user.id)
+        .single();
 
-      if (error) throw error;
+      if (userError || !userData) {
+        toast.error('User not found');
+        return false;
+      }
+
+      // For sell listings, update the Locker entry
+      if (listingType === 'sell') {
+        const { error } = await supabase
+          .from('Locker')
+          .update({
+            listed_for_sale: true,
+            sale_price: price,
+            listed_quantity: quantity,
+            listed_at: new Date().toISOString(),
+            resale_status: 'listed'
+          })
+          .eq('user_id', userData.id)
+          .eq('item_id', itemId);
+
+        if (error) throw error;
+      }
 
       toast.success(`${listingType === 'sell' ? 'Sell' : 'Buy'} order created successfully!`);
-      await fetchListings(); // Refresh listings
+      await fetchListings();
       return true;
     } catch (error) {
       console.error('Error creating listing:', error);
@@ -109,14 +144,20 @@ export const useMarketplace = () => {
   const cancelListing = async (listingId: string): Promise<boolean> => {
     try {
       const { error } = await supabase
-        .from('marketplace_listings')
-        .update({ status: 'cancelled' })
+        .from('Locker')
+        .update({ 
+          listed_for_sale: false,
+          resale_status: 'not_listed',
+          sale_price: null,
+          listed_quantity: null,
+          listed_at: null
+        })
         .eq('id', listingId);
 
       if (error) throw error;
 
       toast.success('Listing cancelled successfully!');
-      await fetchListings(); // Refresh listings
+      await fetchListings();
       return true;
     } catch (error) {
       console.error('Error cancelling listing:', error);

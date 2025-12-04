@@ -4,7 +4,7 @@ import { supabase } from '@/integrations/supabase/client';
 interface AdminUser {
   id: string;
   email: string;
-  password_hash: string;
+  password: string | null;
 }
 
 interface LoginResult {
@@ -56,8 +56,8 @@ export const adminLogin = async (email: string, password: string): Promise<Login
     
     // Fetch admin user from database
     const { data: adminUsers, error } = await supabase
-      .from('admin_users')
-      .select('*')
+      .from('AdminUsers')
+      .select('id, email, password')
       .eq('email', email.toLowerCase())
       .limit(1);
 
@@ -75,11 +75,15 @@ export const adminLogin = async (email: string, password: string): Promise<Login
 
     const adminUser = adminUsers[0] as AdminUser;
     console.log('Found admin user:', adminUser.email);
-    console.log('Stored hash:', adminUser.password_hash);
+
+    if (!adminUser.password) {
+      console.log('No password set for admin user');
+      return { success: false, error: 'Invalid credentials' };
+    }
 
     // Verify password
-    console.log('Comparing password:', password);
-    const isValidPassword = await bcrypt.compare(password, adminUser.password_hash);
+    console.log('Comparing password');
+    const isValidPassword = await bcrypt.compare(password, adminUser.password);
     console.log('Password comparison result:', isValidPassword);
     
     if (!isValidPassword) {
