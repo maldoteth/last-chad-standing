@@ -1,87 +1,79 @@
-import React, { useState } from 'react';
+'use client';
+
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
+import { usePrivy } from '@privy-io/react-auth';
 import { adminLogin } from '@/lib/adminAuth';
+import { useApi } from '@/Api/apiFunction';
+import { handleError } from '@/Api/handleError';
+import { isAdminAuthenticated, adminLogout, getAdminSession } from '@/lib/adminAuth';
 
-export const AdminLogin = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate();
+export default function AdminLogin() {
   const { toast } = useToast();
+  const navigate = useNavigate();
+  const { post } = useApi();
+  const { login, logout, ready, authenticated, user } = usePrivy();
+  const [adminSession, setAdminSession] = useState<any>(null);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
+  const isVerifying = useRef(false);
+  const hasVerified = useRef(false);
+
+  const verifyAdmin = useCallback(async () => {
+    // Prevent duplicate calls
+    if (!ready || !authenticated || !user) return;
+    if (isVerifying.current || hasVerified.current) return;
+
+    isVerifying.current = true;
 
     try {
-      const result = await adminLogin(email, password);
+      const payload = {
+        walletAddress: user.wallet?.address,
+        email: user.email?.address,
+        privy_id: user?.id,
+      };
+
+      const result = await post("admin/login", payload);
+
       if (result.success) {
-        toast({
-          title: "Login successful",
-          description: "Welcome to the admin panel",
-        });
-        navigate('/admin');
-      } else {
-        toast({
-          title: "Login failed",
-          description: result.error || "Invalid credentials",
-          variant: "destructive",
-        });
+        await adminLogin({ ...result.admin, token: result.token });
+        hasVerified.current = true;
+        window.location.replace('/admin');
       }
-    } catch (error) {
-      toast({
-        title: "Login failed",
-        description: "An unexpected error occurred",
-        variant: "destructive",
-      });
+    } catch (err) {
+      handleError(err);
     } finally {
-      setIsLoading(false);
+      isVerifying.current = false;
     }
-  };
+  }, [authenticated]);
+
+  useEffect(() => {
+    verifyAdmin();
+  }, [authenticated]);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-background">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
           <CardTitle className="text-2xl">Admin Login</CardTitle>
-          <CardDescription>
-            Sign in to access the admin panel
-          </CardDescription>
+          <CardDescription>Sign in with Privy to access the admin panel</CardDescription>
         </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="admin@lcs.com"
-                required
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
-              <Input
-                id="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-            </div>
-            <Button type="submit" className="w-full" disabled={isLoading}>
-              {isLoading ? 'Signing in...' : 'Sign In'}
+        <CardContent className="flex flex-col items-center">
+          {!ready ? (
+            <p>Loading Privy...</p>
+          ) : authenticated ? (
+            <Button onClick={logout} variant="destructive" className="w-full">
+              Logout
             </Button>
-          </form>
+          ) : (
+            <Button onClick={login} className="w-full">
+              Sign in Admin
+            </Button>
+          )}
         </CardContent>
       </Card>
     </div>
   );
-};
+}

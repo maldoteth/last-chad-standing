@@ -8,10 +8,14 @@ import { GlowCard } from '@/components/ui/spotlight-card';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { supabase } from '@/integrations/supabase/client';
 import { usePrivy } from '@privy-io/react-auth';
+import { axiosInstance } from '@/Api/BaseUrl';
+import { useApi } from '@/Api/apiFunction';
+
 
 interface PreOrderTier {
   id: string;
   name: string;
+  priceId: string;
   price: number;
   originalValue?: number;
   features: string[];
@@ -22,6 +26,7 @@ const preOrderTiers: PreOrderTier[] = [{
   id: 'game-only',
   name: 'Classic Edition',
   price: 18,
+  priceId: 'price_1SITbFRwKQXuAwb689xDyax7',
   features: ['Full game access', 'Standard gameplay experience', 'Combo of Packs']
 }, {
   id: 'special-edition',
@@ -29,12 +34,14 @@ const preOrderTiers: PreOrderTier[] = [{
   price: 69,
   originalValue: 200,
   popular: true,
+  priceId: 'price_1SITbpRwKQXuAwb6xoWGfwx1',
   features: ['Early access', 'Special Pack Bundle', 'Worth $200 total value']
 }, {
   id: 'ultimate-edition',
   name: 'Ultimate Edition',
   price: 420,
   originalValue: 1000,
+  priceId: 'price_1SITcSRwKQXuAwb69uL6Rx6C',
   features: ['First access privilege', 'Exclusive in-game badge', 'Ultimate Pack Bundle', 'Worth $1000 total value']
 }];
 
@@ -51,15 +58,16 @@ const PreOrderDialog = ({ children, open: externalOpen, onOpenChange: externalOn
   const { toast } = useToast();
   const { user, authenticated, login } = usePrivy();
   const isMobile = useIsMobile();
-
+  const { post } = useApi()
   const isOpen = externalOpen !== undefined ? externalOpen : internalOpen;
+  const preOrderData: PreOrderTier = preOrderTiers?.find(item => item?.id === selectedTier) || null
   const setIsOpen = (open: boolean) => {
     if (externalOnOpenChange) {
       externalOnOpenChange(open);
     } else {
       setInternalOpen(open);
     }
-    
+
     // Reset to tier selection when dialog closes
     if (!open) {
       setShowPaymentMethod(false);
@@ -87,17 +95,22 @@ const PreOrderDialog = ({ children, open: externalOpen, onOpenChange: externalOn
         description: "Redirecting to checkout...",
       });
 
-      const { data, error } = await supabase.functions.invoke('create-preorder-checkout', {
-        body: { tierId: selectedTier }
-      });
+      // const { data, error } = await supabase.functions.invoke('create-preorder-checkout', {
+      //   body: { tierId: selectedTier }
+      // });
+      const response = post('payment/checkout-session', {
+        priceId: preOrderData?.priceId,
+        coins: preOrderData?.price * 100
+      })
 
-      if (error) {
-        throw error;
-      }
+      // if (error) {
+      //   throw error;
+      // }
+      const { url } = (await response)
 
-      if (data.url) {
+      if (url) {
         // Open Stripe checkout in a new tab
-        window.open(data.url, '_blank');
+        window.open(url, '_blank');
         setIsOpen(false);
       } else {
         throw new Error('No checkout URL returned');
@@ -128,7 +141,7 @@ const PreOrderDialog = ({ children, open: externalOpen, onOpenChange: externalOn
 
   const renderPaymentMethodSelection = () => {
     const selectedTierData = preOrderTiers.find(tier => tier.id === selectedTier);
-    
+
     return (
       <>
         <div className="text-center mb-8">
@@ -141,7 +154,7 @@ const PreOrderDialog = ({ children, open: externalOpen, onOpenChange: externalOn
         <div className="space-y-4 max-w-md mx-auto">
           <Button
             onClick={handlePayWithCard}
-            className="w-full bg-primary text-primary-foreground hover:bg-primary/90 hover:ring-1 hover:ring-primary/30 hover:shadow-lg hover:shadow-primary/20 hover:shadow-[0_0_20px_rgba(38,101,203,0.4)] font-exo font-semibold px-8 py-4 h-12 transition-all duration-300 flex items-center justify-center gap-3"
+            className="w-full bg-primary text-primary-foreground hover:bg-primary/90 hover:ring-1 hover:ring-primary/30 hover:shadow-primary/20 hover:shadow-[0_0_20px_rgba(38,101,203,0.4)] font-exo font-semibold px-8 py-4 h-12 transition-all duration-300 flex items-center justify-center gap-3"
           >
             <CreditCard className="w-5 h-5" />
             Pay with Card
@@ -167,9 +180,9 @@ const PreOrderDialog = ({ children, open: externalOpen, onOpenChange: externalOn
         </div>
 
         <div className="mt-8 flex justify-center">
-          <img 
-            src="/lovable-uploads/7d84dfb4-4db3-4adb-87f0-36f33c0f8daa.png" 
-            alt="Powered by Stripe" 
+          <img
+            src="/lovable-uploads/7d84dfb4-4db3-4adb-87f0-36f33c0f8daa.png"
+            alt="Powered by Stripe"
             className="h-6 opacity-80 brightness-0 saturate-100"
             style={{ filter: 'brightness(0) saturate(100%) invert(35%) sepia(78%) saturate(2446%) hue-rotate(214deg) brightness(97%) contrast(90%)' }}
           />
@@ -181,14 +194,13 @@ const PreOrderDialog = ({ children, open: externalOpen, onOpenChange: externalOn
   const renderTierSelection = () => (
     <>
       <div className="grid md:grid-cols-3 gap-6">
-        {preOrderTiers.map(tier => (
-          <GlowCard key={tier.id} className="cursor-pointer h-full !bg-none !border-none">
-            <div 
-              className={`rounded-lg p-6 h-full min-h-[400px] md:min-h-[420px] flex flex-col transition-all duration-200 border ${
-                selectedTier === tier.id 
-                  ? 'bg-gradient-to-br from-[#2665cb]/20 via-[#2665cb]/10 to-transparent border-[#2665cb]/50' 
-                  : 'bg-gradient-to-br from-gray-800/50 via-gray-900/50 to-black/50 border-gray-600/50'
-              }`}
+        {preOrderTiers.map((tier, index) => (
+          <GlowCard key={index} className="cursor-pointer h-full !bg-none !border-none">
+            <div
+              className={`rounded-lg p-6 h-full min-h-[400px] md:min-h-[420px] flex flex-col transition-all duration-200 border ${selectedTier === tier.id
+                ? 'bg-gradient-to-br from-[#2665cb]/20 via-[#2665cb]/10 to-transparent border-[#2665cb]/50'
+                : 'bg-gradient-to-br from-gray-800/50 via-gray-900/50 to-black/50 border-gray-600/50'
+                }`}
               onClick={() => setSelectedTier(tier.id)}
             >
               <div className="text-center mb-4">
@@ -198,14 +210,14 @@ const PreOrderDialog = ({ children, open: externalOpen, onOpenChange: externalOn
                   {tier.originalValue && (
                     <div className="text-sm text-slate-400">
                       <span className="line-through">${tier.originalValue} value</span>
-                       <span style={{ color: '#2665cb' }} className="ml-2">
-                         Save ${tier.originalValue - tier.price}
-                       </span>
+                      <span style={{ color: '#2665cb' }} className="ml-2">
+                        Save ${tier.originalValue - tier.price}
+                      </span>
                     </div>
                   )}
                 </div>
               </div>
-              
+
               <ul className="space-y-3 mb-6 flex-1">
                 {tier.features.map((feature, index) => (
                   <li key={index} className="flex items-center text-sm">
@@ -214,13 +226,12 @@ const PreOrderDialog = ({ children, open: externalOpen, onOpenChange: externalOn
                   </li>
                 ))}
               </ul>
-              
+
               <div className="flex justify-center mt-auto">
-                <div className={`w-4 h-4 rounded-full border-2 ${
-                  selectedTier === tier.id 
-                    ? 'border-[#2665cb]' 
-                    : 'border-white/40'
-                } ${selectedTier === tier.id ? 'bg-[#2665cb]' : ''}`}>
+                <div className={`w-4 h-4 rounded-full border-2 ${selectedTier === tier.id
+                  ? 'border-[#2665cb]'
+                  : 'border-white/40'
+                  } ${selectedTier === tier.id ? 'bg-[#2665cb]' : ''}`}>
                   {selectedTier === tier.id && (
                     <div className="w-full h-full rounded-full bg-[#2665cb]"></div>
                   )}
@@ -230,20 +241,20 @@ const PreOrderDialog = ({ children, open: externalOpen, onOpenChange: externalOn
           </GlowCard>
         ))}
       </div>
-      
+
       <div className="mt-4 text-center">
-        <Button 
-          onClick={handlePreOrder} 
-          disabled={!selectedTier} 
-          className="w-full bg-primary text-primary-foreground hover:bg-primary/90 hover:ring-1 hover:ring-primary/30 hover:shadow-lg hover:shadow-primary/20 hover:shadow-[0_0_20px_rgba(38,101,203,0.4)] font-exo font-semibold px-8 py-4 h-12 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
+        <Button
+          onClick={handlePreOrder}
+          disabled={!selectedTier}
+          className="w-full bg-primary text-primary-foreground hover:bg-primary/90 hover:ring-1 hover:ring-primary/30 hover:shadow-primary/20 hover:shadow-[0_0_20px_rgba(38,101,203,0.4)] font-exo font-semibold px-8 py-4 h-12 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
         >
           {selectedTier ? 'Pre-Order Now' : 'Select a Package'}
         </Button>
-        
+
         <div className="mt-4 flex justify-center">
-          <img 
-            src="/lovable-uploads/7d84dfb4-4db3-4adb-87f0-36f33c0f8daa.png" 
-            alt="Powered by Stripe" 
+          <img
+            src="/lovable-uploads/7d84dfb4-4db3-4adb-87f0-36f33c0f8daa.png"
+            alt="Powered by Stripe"
             className="h-6 opacity-80 brightness-0 saturate-100"
             style={{ filter: 'brightness(0) saturate(100%) invert(35%) sepia(78%) saturate(2446%) hue-rotate(214deg) brightness(97%) contrast(90%)' }}
           />
@@ -265,9 +276,9 @@ const PreOrderDialog = ({ children, open: externalOpen, onOpenChange: externalOn
         <SheetTrigger asChild>
           {children}
         </SheetTrigger>
-        <SheetContent 
-          side="bottom" 
-          className={`${contentClassName} max-h-[90vh] overflow-y-auto rounded-t-xl scrollbar-hide`}
+        <SheetContent
+          side="bottom"
+          className={`${contentClassName} max-h-[90vh] overflow-y-auto rounded-t-xl  custom-scroll`}
         >
           <SheetHeader>
             <SheetTitle className="font-exo text-2xl text-center text-white mb-6">
@@ -285,7 +296,7 @@ const PreOrderDialog = ({ children, open: externalOpen, onOpenChange: externalOn
       <DialogTrigger asChild>
         {children}
       </DialogTrigger>
-      <DialogContent className={`${contentClassName} max-w-4xl max-h-[90vh] overflow-y-auto scrollbar-hide`}>
+      <DialogContent className={`${contentClassName} max-w-4xl max-h-[90vh] overflow-y-auto custom-scroll`}>
         <DialogHeader>
           <DialogTitle className="font-exo text-2xl text-center text-white mb-6">
             Pre-Oder LCS
