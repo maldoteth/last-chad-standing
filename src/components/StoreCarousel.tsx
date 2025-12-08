@@ -26,8 +26,8 @@ export interface StoreCarouselRef {
 const StoreCarousel = forwardRef<StoreCarouselRef, StoreCarouselProps>(({ items, renderItem, desktopMode = false }, ref) => {
   const isMobile = useIsMobile();
   const isDesktopLayout = !isMobile || desktopMode;
-  const itemsPerSlide = isDesktopLayout ? 4 : 4;
-  
+  const itemsPerSlide = 4;
+
   // Group items into sets for display
   const itemGroups = [];
   for (let i = 0; i < items.length; i += itemsPerSlide) {
@@ -37,7 +37,7 @@ const StoreCarousel = forwardRef<StoreCarouselRef, StoreCarouselProps>(({ items,
   if (itemGroups.length <= 1) {
     // If only one group, show in regular grid without carousel
     return (
-      <div className={isDesktopLayout ? "grid grid-cols-4 gap-4" : "grid grid-cols-2 gap-3"}>
+      <div className={isDesktopLayout ? "grid xl:grid-cols-4 lg:grid-cols-2 md:grid-cols-4 gap-4" : "grid grid-cols-2 md:grid-cols-4 gap-3"}>
         {items.map((item, idx) => renderItem(item, idx))}
       </div>
     );
@@ -45,7 +45,7 @@ const StoreCarousel = forwardRef<StoreCarouselRef, StoreCarouselProps>(({ items,
 
   const CarouselWithRef = () => {
     const { scrollPrev, scrollNext } = useCarousel();
-    
+
     useImperativeHandle(ref, () => ({
       scrollToPrevious: scrollPrev,
       scrollToNext: scrollNext,
@@ -60,7 +60,7 @@ const StoreCarousel = forwardRef<StoreCarouselRef, StoreCarouselProps>(({ items,
       <CarouselContent>
         {itemGroups.map((group, groupIdx) => (
           <CarouselItem key={groupIdx}>
-            <div className={isDesktopLayout ? "grid grid-cols-4 gap-4" : "grid grid-cols-2 gap-3"}>
+            <div className={isDesktopLayout ? "grid xl:grid-cols-4 lg:grid-cols-2 md:grid-cols-4 gap-4" : "grid grid-cols-2 md:grid-cols-4 gap-3"}>
               {group.map((item, idx) => renderItem(item, groupIdx * itemsPerSlide + idx))}
             </div>
           </CarouselItem>

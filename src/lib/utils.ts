@@ -7,7 +7,7 @@ export function cn(...inputs: ClassValue[]) {
 
 export function formatNumberWithAbbreviation(num: number): string {
   let formatted: string;
-  
+
   if (num >= 1000000000) {
     formatted = (num / 1000000000).toFixed(2) + 'b'
   } else if (num >= 1000000) {
@@ -17,7 +17,7 @@ export function formatNumberWithAbbreviation(num: number): string {
   } else {
     formatted = num.toFixed(2)
   }
-  
+
   // Remove .00 if it exists
   return formatted.replace(/\.00([kmb]?)$/, '$1')
 }
@@ -25,7 +25,7 @@ export function formatNumberWithAbbreviation(num: number): string {
 // Rarity system utilities
 export const RARITY_TYPES = {
   common: 'common',
-  sparse: 'sparse', 
+  sparse: 'sparse',
   rare: 'rare',
   epic: 'epic',
   legendary: 'legendary',
@@ -35,8 +35,8 @@ export const RARITY_TYPES = {
 export type RarityType = keyof typeof RARITY_TYPES;
 
 export function getRarityColor(rarity: string): string {
-  const rarityLower = rarity.toLowerCase() as RarityType;
-  
+  const rarityLower = rarity?.toLowerCase() as RarityType;
+
   switch (rarityLower) {
     case 'common':
       return 'bg-gray-500/20 text-gray-300 border-gray-500/50';
@@ -56,8 +56,8 @@ export function getRarityColor(rarity: string): string {
 }
 
 export function getRarityFilterColor(rarity: string): string {
-  const rarityLower = rarity.toLowerCase() as RarityType;
-  
+  const rarityLower = rarity?.toLowerCase() as RarityType;
+
   switch (rarityLower) {
     case 'common':
       return 'bg-gray-500';
@@ -77,8 +77,8 @@ export function getRarityFilterColor(rarity: string): string {
 }
 
 export function getRarityDisplayName(rarity: string): string {
-  const rarityLower = rarity.toLowerCase() as RarityType;
-  
+  const rarityLower = rarity?.toLowerCase() as RarityType;
+
   switch (rarityLower) {
     case 'common':
       return 'Common';
@@ -93,13 +93,13 @@ export function getRarityDisplayName(rarity: string): string {
     case 'special':
       return 'Special';
     default:
-      return rarity.charAt(0).toUpperCase() + rarity.slice(1);
+      return rarity?.charAt(0).toUpperCase() + rarity?.slice(1);
   }
 }
 
 export function getRaritySortOrder(rarity: string): number {
-  const rarityLower = rarity.toLowerCase() as RarityType;
-  
+  const rarityLower = rarity?.toLowerCase() as RarityType;
+
   switch (rarityLower) {
     case 'common': return 1;
     case 'sparse': return 2;
@@ -109,4 +109,87 @@ export function getRaritySortOrder(rarity: string): number {
     case 'special': return 6;
     default: return 0;
   }
+}
+
+/**
+ * Convert ISO/UTC timestamp to YYYY-MM-DD format
+ * @param {string | Date} timestamp
+ * @returns {string} formatted date
+ */
+export function formatDateToYMD(timestamp: string) {
+  if (!timestamp) return "";
+
+  const date: any = new Date(timestamp);
+
+  if (isNaN(date)) return ""; // invalid date fallback
+
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0"); // months are 0-indexed
+  const day = String(date.getDate()).padStart(2, "0");
+
+  return `${year}-${month}-${day}`;
+}
+
+
+export const getTierIcon = (xp: number): string => {
+  if (xp >= 10000) return '👑'; // King Chad (Level 10+)
+  if (xp >= 9000) return '💪'; // Giga Chad (Level 9)
+  if (xp >= 8000) return '👊'; // Chad (Level 8)
+  if (xp >= 7000) return '⭐'; // Superstar (Level 7)
+  if (xp >= 6000) return '🏆'; // Champ (Level 6)
+  if (xp >= 5000) return '🥊'; // Pro (Level 5)
+  if (xp >= 4000) return '⚔️'; // Fighter (Level 4)
+  if (xp >= 3000) return '🏃'; // Athlete (Level 3)
+  if (xp >= 2000) return '✊'; // Sparrer (Level 2)
+  if (xp >= 1000) return '🎯'; // Trainee (Level 1)
+  return '👤'; // Recruit (Level 0)
+};
+
+export const coinToUsd = 0.001
+
+export const CATEGORIES = [
+  { id: "all", label: "All", icon: "⚫" },
+  { id: "skins", label: "Fighters", icon: "👊" },
+  { id: "accessories", label: "Accessories", icon: "💎" },
+  { id: "mobility", label: "Mobility", icon: "🚗" },
+  { id: "emotes", label: "Emotes", icon: "💃" },
+  { id: "packs", label: "Packs", icon: "🎁" }
+];
+
+export const RARITIES = ["common", "sparse", "rare", "epic", "legendary", "special"];
+export const generateUniqueWeb3Name =() => {
+  const prefixes = [
+    "Crypto", "Block", "Chain", "Token", "NFT", "DeFi", "Meta",
+    "Web3", "Coin", "Smart", "Cyber", "Quantum", "Pixel",
+    "Code", "Algo", "Bit", "Ether", "Game", "Tech", "Digital"
+  ];
+
+  const suffixes = [
+    "King", "Master", "Warrior", "Slayer", "Champion", "Gamer",
+    "Player", "Hero", "Trader", "Ninja", "Crusher", "Lord",
+    "Changer", "Savvy", "Nomad", "Sage", "Builder", "Hunter",
+    "Link", "Wizard", "Beast"
+  ];
+
+  // 🔹 Helper functions
+  const randomItem = arr => arr[Math.floor(Math.random() * arr.length)];
+  const randomNum = () => Math.floor(100 + Math.random() * 900); // 3-digit
+  const randomBool = () => Math.random() > 0.5;
+
+  // 🔹 Pick words
+  const prefix = randomItem(prefixes);
+  const suffix = randomItem(suffixes);
+
+  // 🔹 Randomize order (prefix first or suffix first)
+  let name = randomBool() ? `${prefix}${suffix}` : `${suffix}${prefix}`;
+
+  // 🔹 Add random number at end
+  name += randomNum();
+
+  // 🔹 Randomly choose capital or lowercase start
+  if (!randomBool()) {
+    name = name.charAt(0).toLowerCase() + name.slice(1);
+  }
+
+  return name;
 }
