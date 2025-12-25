@@ -147,6 +147,18 @@ export const getTierIcon = (xp: number): string => {
 
 export const coinToUsd = 0.001
 
+/**
+ * Abbreviate a username to a maximum length with ellipsis
+ * @param name - The username to abbreviate
+ * @param maxLength - Maximum characters before truncation (default: 11)
+ * @returns Abbreviated username with ... if truncated
+ */
+export function abbreviateUsername(name: string, maxLength: number = 11): string {
+  if (!name) return '';
+  if (name.length <= maxLength) return name;
+  return name.slice(0, maxLength) + '...';
+}
+
 export const CATEGORIES = [
   { id: "all", label: "All", icon: "⚫" },
   { id: "skins", label: "Fighters", icon: "👊" },
