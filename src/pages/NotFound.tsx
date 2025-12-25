@@ -42,15 +42,16 @@ const NotFound = () => {
               </Button>
             </Link>
             
-            <Button 
-              variant="outline" 
-              size="lg" 
-              className="w-full text-white"
-              onClick={() => window.history.back()}
-            >
-              <ArrowLeft className="w-4 h-4 mr-2" />
-              Go Back
-            </Button>
+            <Link to="/" className="block">
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="w-full text-white"
+              >
+                <ArrowLeft className="w-4 h-4 mr-2" />
+                Go Back
+              </Button>
+            </Link>
           </div>
         </div>
         
