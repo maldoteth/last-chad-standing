@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerClose } from "@/components/ui/drawer";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { CreditCard, X, Calendar, TrendingUp, List } from "lucide-react";
-import { coinToUsd, formatNumberWithAbbreviation, getRarityColor, getRarityDisplayName } from "@/lib/utils";
+import { coinToUsd, formatNumberWithAbbreviation, getRarityColor, getRarityDisplayName, abbreviateUsername } from "@/lib/utils";
 import { useStore } from "@/context/storeData";
 import { Spinner } from "./ui/spinner";
 import { useApi } from "@/Api/apiFunction";
@@ -63,6 +63,7 @@ export interface LockerItem extends StoreItem {
   change_type?: string | null;
   total_purchased_locker_item?: number | null;
   is_sell_item?: boolean | null;
+  user_name?: string;
 }
 
 interface StorePurchaseDialogProps {
@@ -422,6 +423,12 @@ const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
                   <h3 className="text-xl md:text-2xl font-bold text-white mb-2">
                     {item.name}
                   </h3>
+                  {/* Seller name for marketplace items */}
+                  {isLockerItem && 'user_name' in item && item.user_name && (
+                    <p className="text-sm text-white/60 mb-2">
+                      Seller: <span className="text-white/80 font-medium">{abbreviateUsername(item.user_name)}</span>
+                    </p>
+                  )}
                   {item.description && (
                     <p className="text-white/70 text-sm md:text-base">
                       {item.description}
