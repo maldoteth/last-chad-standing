@@ -503,7 +503,7 @@ const Header = () => {
                 <DrawerContent className="bg-black/10 backdrop-blur-md border border-white/20 text-white">
                     <DrawerHeader>
                         <DrawerTitle className="text-white text-center">
-                            {selectedPlayer ? `Buy ${selectedPlayer.name}` : 'Buy Crypto'}
+                            {selectedPlayer ? `Buy ${selectedPlayer.name}` : 'Buy Chad Coins'}
                         </DrawerTitle>
                     </DrawerHeader>
                     <BuyDialogContent
@@ -515,10 +515,10 @@ const Header = () => {
                 <DialogContent className="sm:max-w-md bg-black/10 backdrop-blur-md border border-white/20 text-white">
                     <DialogHeader>
                         <DialogTitle className="text-white">
-                            {selectedPlayer ? `Buy ${selectedPlayer.name}` : 'Buy Crypto'}
+                            {selectedPlayer ? `Buy ${selectedPlayer.name}` : 'Buy Chad Coins'}
                         </DialogTitle>
                         <DialogDescription className="text-white/80">
-                            {selectedPlayer ? 'Choose your payment method to purchase this player.' : 'Choose your payment method to purchase crypto.'}
+                            {selectedPlayer ? 'Choose your payment method to purchase this player.' : 'Choose your payment method to buy Chad Coins.'}
                         </DialogDescription>
                     </DialogHeader>
                     <BuyDialogContent
