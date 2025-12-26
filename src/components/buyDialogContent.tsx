@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { CreditCard, Loader2, Coins } from "lucide-react";
+import { CreditCard, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useApi } from "@/Api/apiFunction";
 import { CheckPrivy, CryptoPaymentProps } from "@/lib/checkPrivy";
@@ -147,7 +147,11 @@ const BuyDialogContent: React.FC<BuyDialogContentProps> = ({ selectedPlayer, onC
               onClick={() => setSelectedCoins(preset.coins)}
             >
               <div className="flex gap-1 items-center justify-center py-1">
-                <Coins className="w-4 h-4 mb-1" />
+                <img
+                  src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png"
+                  alt="LCS Coin"
+                  className="w-4 h-4"
+                />
                 <span className="font-bold">{preset.label}</span>
               </div>
             </Button>
