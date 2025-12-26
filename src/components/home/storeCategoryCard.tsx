@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import { StoreItem } from "@/context/storeData";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -23,8 +23,17 @@ const StoreCategoryCard = ({
   category?: string;
   shaking?: boolean;
 }) => {
+  const [isShaking, setIsShaking] = useState(false);
+
+  const handleScrollBlocked = useCallback(() => {
+    setIsShaking(true);
+    setTimeout(() => setIsShaking(false), 500);
+  }, []);
+
+  const shouldShake = shaking || isShaking;
+
   return (
-    <Card id={category} className={`bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden ${shaking ? 'animate-shake' : ''}`}>
+    <Card id={category} className={`bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white border border-gray-700/50 shadow-2xl relative overflow-hidden ${shouldShake ? 'animate-shake' : ''}`}>
       <div className="absolute inset-0 bg-gradient-to-br from-gray-800/20 via-transparent to-gray-900/30" />
       <div className="absolute inset-0" style={{
         backgroundImage: `
@@ -63,6 +72,7 @@ const StoreCategoryCard = ({
           ref={carouselRef}
           desktopMode={desktopMode}
           items={items}
+          onScrollBlocked={handleScrollBlocked}
           renderItem={(item, idx) => (
             <StoreItemCard key={idx} item={item} onClick={onItemClick} />
           )}
