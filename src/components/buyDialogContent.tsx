@@ -215,7 +215,7 @@ const BuyDialogContent: React.FC<BuyDialogContentProps> = ({ selectedPlayer, onC
                 alt="LCS Coin"
                 className="w-4 h-4 mr-2"
               />
-              Pay ${usdValue} with Crypto
+              Pay ${usdValue} with Wallet
             </>
           )}
         </Button>
