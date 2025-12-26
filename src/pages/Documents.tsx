@@ -574,56 +574,110 @@ There are environmental traps like collapsing floors, explosive barrels, and nat
 
                         <br />
 
-                        <h2 className="text-3xl font-bold">10. Basic Controls</h2>
-                        <p>The following are the default controls for Last Chad Standing on PC and consoles. Players can customize controls in the settings.</p>
+                        <h2 className="text-3xl font-bold">10. Controls</h2>
+                        <p>The following are the default controls for Last Chad Standing. Players can customize controls in the settings.</p>
                         
-                        <div className="grid md:grid-cols-2 gap-6">
-                          <div className="bg-gray-50 p-4 rounded-lg">
+                        {/* Inputs Section */}
+                        <div className="mt-6 space-y-6">
+                          <h3 className="text-xl font-bold text-gray-800 border-b border-gray-300 pb-2">▼ Inputs</h3>
+                          
+                          {/* Character Controls */}
+                          <div className="space-y-4">
+                            <h4 className="text-lg font-semibold text-gray-700">▼ Character</h4>
+                            
+                            <div className="grid md:grid-cols-2 gap-4">
+                              {/* Movement */}
+                              <div className="bg-gray-800 rounded-lg overflow-hidden">
+                                <div className="bg-gray-700 px-4 py-2 text-center">
+                                  <span className="text-gray-200 font-medium">Movement</span>
+                                </div>
+                                <div className="divide-y divide-gray-700">
+                                  <div className="flex justify-between px-4 py-2 text-sm"><span className="text-gray-300">Move</span><span className="text-gray-400">WASD</span></div>
+                                  <div className="flex justify-between px-4 py-2 text-sm"><span className="text-gray-300">Sprint</span><span className="text-gray-400">Left Shift</span></div>
+                                  <div className="flex justify-between px-4 py-2 text-sm"><span className="text-gray-300">Crouch</span><span className="text-gray-400">Left Ctrl</span></div>
+                                  <div className="flex justify-between px-4 py-2 text-sm"><span className="text-gray-300">Jump</span><span className="text-gray-400">Space</span></div>
+                                  <div className="flex justify-between px-4 py-2 text-sm"><span className="text-gray-300">Double Jump</span><span className="text-gray-400">Space (Double Tap)</span></div>
+                                  <div className="flex justify-between px-4 py-2 text-sm"><span className="text-gray-300">Dash</span><span className="text-gray-400">Left Shift (Tap) + WASD</span></div>
+                                  <div className="flex justify-between px-4 py-2 text-sm"><span className="text-gray-300">Dodge</span><span className="text-gray-400">Left Alt (Tap) + WASD</span></div>
+                                  <div className="flex justify-between px-4 py-2 text-sm"><span className="text-gray-300">Lean</span><span className="text-gray-400">Q / E</span></div>
+                                  <div className="flex justify-between px-4 py-2 text-sm"><span className="text-gray-300">Swap shoulders</span><span className="text-gray-400">B</span></div>
+                                </div>
+                              </div>
 
-                            <br />
+                              {/* Close Combat */}
+                              <div className="bg-gray-800 rounded-lg overflow-hidden">
+                                <div className="bg-gray-700 px-4 py-2 text-center">
+                                  <span className="text-gray-200 font-medium">Close Combat</span>
+                                </div>
+                                <div className="divide-y divide-gray-700">
+                                  <div className="flex justify-between px-4 py-2 text-sm"><span className="text-gray-300">Simple punch</span><span className="text-gray-400">LMB</span></div>
+                                  <div className="flex justify-between px-4 py-2 text-sm"><span className="text-gray-300">Block</span><span className="text-gray-400">RMB</span></div>
+                                  <div className="flex justify-between px-4 py-2 text-sm"><span className="text-gray-300">Attack from air</span><span className="text-gray-400">Jump + LMB</span></div>
+                                  <div className="flex justify-between px-4 py-2 text-sm"><span className="text-gray-300">Splash attack from air</span><span className="text-gray-400">Jump + ALT + LMB</span></div>
+                                  <div className="flex justify-between px-4 py-2 text-sm"><span className="text-gray-300">Super combo attack</span><span className="text-gray-400">Left Shift + LMB</span></div>
+                                  <div className="flex justify-between px-4 py-2 text-sm"><span className="text-gray-300">Stealth Kill</span><span className="text-gray-400">Left Alt + LMB</span></div>
+                                </div>
+                              </div>
+                            </div>
 
-                            <h3 className="text-2xl font-bold">PC Controls</h3>
-                            <ul className="space-y-1 text-sm">
-                              <li><strong>W/A/S/D:</strong> Move forward, left, backward, right</li>
-                              <li><strong>Mouse Movement:</strong> Camera control</li>
-                              <li><strong>Left Mouse Button:</strong> Punch/Combos</li>
-                              <li><strong>Right Mouse Button:</strong> Kick/Combos</li>
-                              <li><strong>E:</strong> Interact (pick up items, activate objects)</li>
-                              <li><strong>F:</strong> Grapple/Throw</li>
-                              <li><strong>R:</strong> Execute/Finishers (when prompt appears)</li>
-                              <li><strong>Shift:</strong> Sprint</li>
-                              <li><strong>Spacebar:</strong> Jump</li>
-                              <li><strong>Ctrl (Hold):</strong> Crouch/Slide (while sprinting)</li>
-                              <li><strong>C:</strong> Block/Parry</li>
-                              <li><strong>V:</strong> Quick Dodge</li>
-                              <li><strong>1/2/3:</strong> Weapon select (if equipped)</li>
-                              <li><strong>G:</strong> Throw weapon</li>
-                              <li><strong>M:</strong> Large map (full screen)</li>
-                              <li><strong>Esc:</strong> Pause/Options</li>
-                            </ul>
+                            <div className="grid md:grid-cols-3 gap-4">
+                              {/* Devices */}
+                              <div className="bg-gray-800 rounded-lg overflow-hidden">
+                                <div className="bg-gray-700 px-4 py-2 text-center">
+                                  <span className="text-gray-200 font-medium">Devices</span>
+                                </div>
+                                <div className="divide-y divide-gray-700">
+                                  <div className="flex justify-between px-4 py-2 text-sm"><span className="text-gray-300">Night vision</span><span className="text-gray-400">N</span></div>
+                                  <div className="flex justify-between px-4 py-2 text-sm"><span className="text-gray-300">Thermal Vision</span><span className="text-gray-400">T</span></div>
+                                </div>
+                              </div>
+
+                              {/* Common */}
+                              <div className="bg-gray-800 rounded-lg overflow-hidden">
+                                <div className="bg-gray-700 px-4 py-2 text-center">
+                                  <span className="text-gray-200 font-medium">Common</span>
+                                </div>
+                                <div className="divide-y divide-gray-700">
+                                  <div className="flex justify-between px-4 py-2 text-sm"><span className="text-gray-300">Save game</span><span className="text-gray-400">F5</span></div>
+                                  <div className="flex justify-between px-4 py-2 text-sm"><span className="text-gray-300">Throw AI Baiter</span><span className="text-gray-400">ALT + B</span></div>
+                                  <div className="flex justify-between px-4 py-2 text-sm"><span className="text-gray-300">Open pause menu</span><span className="text-gray-400">Esc</span></div>
+                                  <div className="flex justify-between px-4 py-2 text-sm"><span className="text-gray-300">Ladder (Accelerate)</span><span className="text-gray-400">Left Ctrl</span></div>
+                                  <div className="flex justify-between px-4 py-2 text-sm"><span className="text-gray-300">Open world map</span><span className="text-gray-400">M</span></div>
+                                  <div className="flex justify-between px-4 py-2 text-sm"><span className="text-gray-300">Swap weapons</span><span className="text-gray-400">Mouse Wheel</span></div>
+                                </div>
+                              </div>
+
+                              {/* Grenades */}
+                              <div className="bg-gray-800 rounded-lg overflow-hidden">
+                                <div className="bg-gray-700 px-4 py-2 text-center">
+                                  <span className="text-gray-200 font-medium">Grenades</span>
+                                </div>
+                                <div className="divide-y divide-gray-700">
+                                  <div className="flex justify-between px-4 py-2 text-sm"><span className="text-gray-300">Throw grenade</span><span className="text-gray-400">G</span></div>
+                                  <div className="flex justify-between px-4 py-2 text-sm"><span className="text-gray-300">Open the list of available grenades</span><span className="text-gray-400">ALT + X</span></div>
+                                </div>
+                              </div>
+                            </div>
                           </div>
 
-                          <div className="bg-gray-50 p-4 rounded-lg">
-
-                            <br />
-
-                            <h3 className="text-2xl font-bold">Console Controls (PlayStation/Xbox)</h3>
-                            <ul className="space-y-1 text-sm">
-                              <li><strong>Left Stick:</strong> Move</li>
-                              <li><strong>Right Stick:</strong> Camera</li>
-                              <li><strong>R2/RT:</strong> Punch/Combos</li>
-                              <li><strong>L2/LT:</strong> Kick/Combos</li>
-                              <li><strong>Square/X:</strong> Interact</li>
-                              <li><strong>Circle/B:</strong> Grapple/Throw</li>
-                              <li><strong>Triangle/Y:</strong> Execute/Finisher</li>
-                              <li><strong>X/A:</strong> Jump</li>
-                              <li><strong>R1/RB:</strong> Block/Parry</li>
-                              <li><strong>L1/LB:</strong> Quick Dodge</li>
-                              <li><strong>L3 (Click Left Stick):</strong> Sprint</li>
-                              <li><strong>R3 (Click Right Stick):</strong> Crouch/Slide</li>
-                              <li><strong>L1 + R1:</strong> Special Ability</li>
-                              <li><strong>Options/Menu:</strong> Pause/Map</li>
-                            </ul>
+                          {/* Vehicles Controls */}
+                          <div className="space-y-4">
+                            <h4 className="text-lg font-semibold text-gray-700">▼ Vehicles</h4>
+                            
+                            <div className="grid md:grid-cols-1 gap-4 max-w-md">
+                              {/* Common Vehicle Controls */}
+                              <div className="bg-gray-800 rounded-lg overflow-hidden">
+                                <div className="bg-gray-700 px-4 py-2 text-center">
+                                  <span className="text-gray-200 font-medium">Common</span>
+                                </div>
+                                <div className="divide-y divide-gray-700">
+                                  <div className="flex justify-between px-4 py-2 text-sm"><span className="text-gray-300">Throttle</span><span className="text-gray-400">W / A</span></div>
+                                  <div className="flex justify-between px-4 py-2 text-sm"><span className="text-gray-300">Handbrake</span><span className="text-gray-400">Space</span></div>
+                                  <div className="flex justify-between px-4 py-2 text-sm"><span className="text-gray-300">Lights</span><span className="text-gray-400">R</span></div>
+                                  <div className="flex justify-between px-4 py-2 text-sm"><span className="text-gray-300">Exit</span><span className="text-gray-400">F</span></div>
+                                </div>
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </section>
