@@ -272,17 +272,6 @@ const StoreTab = () => {
               />
             )}
 
-            {(selectedCategory === "all" || selectedCategory === "mobility") && (
-              <StoreCategoryCard
-                title="Mobility"
-                items={filterHiddenStoreItems(filterItemsByRarity(mapItemsToDisplay(getStoreItemsByCategory('mobility'))))}
-                onItemClick={handleStoreItemClick}
-                carouselRef={carouselRefs.mobility}
-                desktopMode={!isMobile}
-                category='mobility'
-              />
-            )}
-
             {(selectedCategory === "all" || selectedCategory === "emotes") && (
               <StoreCategoryCard
                 title="Emotes"
@@ -291,6 +280,17 @@ const StoreTab = () => {
                 carouselRef={carouselRefs.emotes}
                 desktopMode={!isMobile}
                 category='emotes'
+              />
+            )}
+
+            {(selectedCategory === "all" || selectedCategory === "mobility") && (
+              <StoreCategoryCard
+                title="Mobility"
+                items={filterHiddenStoreItems(filterItemsByRarity(mapItemsToDisplay(getStoreItemsByCategory('mobility'))))}
+                onItemClick={handleStoreItemClick}
+                carouselRef={carouselRefs.mobility}
+                desktopMode={!isMobile}
+                category='mobility'
               />
             )}
 
