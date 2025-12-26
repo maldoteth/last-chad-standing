@@ -123,7 +123,8 @@ const Header = () => {
             await navigator.clipboard.writeText(wallet.address);
             toast({
                 title: "Address copied!",
-                description: `${wallet.address.slice(0, 6)}...${wallet.address.slice(-4)} copied to clipboard`
+                description: `${wallet.address.slice(0, 6)}...${wallet.address.slice(-4)} copied to clipboard`,
+                icon: <img src="/base-logo.png" alt="Base" className="w-8 h-8 rounded-md" />
             });
         } catch (error) {
             toast({
