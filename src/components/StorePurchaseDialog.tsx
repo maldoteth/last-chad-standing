@@ -392,7 +392,7 @@ const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
   return (
     <>
       <Drawer open={isOpen} onOpenChange={onClose}>
-        <DrawerContent className="bg-black/20 backdrop-blur-3xl border-t border-white/5 max-h-[85vh]">
+        <DrawerContent className="bg-black/5 backdrop-blur-3xl border-t border-white/5 max-h-[85vh]">
           <DrawerHeader className="relative py-4 border-b border-white/5">
             <DrawerClose asChild>
               <Button
