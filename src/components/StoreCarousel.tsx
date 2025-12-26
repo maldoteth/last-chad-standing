@@ -1,4 +1,4 @@
-import React, { forwardRef, useImperativeHandle } from 'react';
+import React, { forwardRef, useImperativeHandle, useEffect, useRef } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -16,6 +16,7 @@ interface StoreCarouselProps {
   items: StoreItem[];
   renderItem: (item: StoreItem, idx: number) => React.ReactNode;
   desktopMode?: boolean;
+  onScrollBlocked?: () => void;
 }
 
 export interface StoreCarouselRef {
@@ -23,7 +24,7 @@ export interface StoreCarouselRef {
   scrollToNext: () => void;
 }
 
-const StoreCarousel = forwardRef<StoreCarouselRef, StoreCarouselProps>(({ items, renderItem, desktopMode = false }, ref) => {
+const StoreCarousel = forwardRef<StoreCarouselRef, StoreCarouselProps>(({ items, renderItem, desktopMode = false, onScrollBlocked }, ref) => {
   const isMobile = useIsMobile();
   const isDesktopLayout = !isMobile || desktopMode;
   const itemsPerSlide = 3;
@@ -44,11 +45,23 @@ const StoreCarousel = forwardRef<StoreCarouselRef, StoreCarouselProps>(({ items,
   }
 
   const CarouselWithRef = () => {
-    const { scrollPrev, scrollNext } = useCarousel();
+    const { scrollPrev, scrollNext, canScrollPrev, canScrollNext } = useCarousel();
 
     useImperativeHandle(ref, () => ({
-      scrollToPrevious: scrollPrev,
-      scrollToNext: scrollNext,
+      scrollToPrevious: () => {
+        if (!canScrollPrev) {
+          onScrollBlocked?.();
+        } else {
+          scrollPrev();
+        }
+      },
+      scrollToNext: () => {
+        if (!canScrollNext) {
+          onScrollBlocked?.();
+        } else {
+          scrollNext();
+        }
+      },
     }));
 
     return null;
