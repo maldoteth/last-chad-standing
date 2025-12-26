@@ -25,7 +25,7 @@ import SessionSigners from "../session-signers";
 const HomeTab = () => {
     const isMobile = useIsMobile();
     const [isPreOrderOpen, setIsPreOrderOpen] = useState(false);
-    const [objectivesView, setObjectivesView] = useState<"weekly" | "daily" | "quests">("weekly");
+    const [objectivesView, setObjectivesView] = useState<"weekly" | "daily">("weekly");
 
     const [sellDialogOpen, setSellDialogOpen] = useState(false);
     const [selectedPlayer, setSelectedPlayer] = useState<any>(null);
@@ -238,14 +238,14 @@ const HomeTab = () => {
                         <GlowCard className="cursor-pointer">
                             <CardContent className="p-4">
                                 <div className="flex items-center space-x-1 mb-2">
-                                    <Trophy className="w-4 h-4 text-white" />
-                                    <span className="text-xs font-medium text-white">Quests!</span>
+                                    <Target className="w-4 h-4 text-white" />
+                                    <span className="text-xs font-medium text-white">Objectives</span>
                                 </div>
                                 <h3 className="text-sm font-bold mb-1">Smash that XP</h3>
-                                <p className="text-gray-300 text-xs mb-3">by completing all quests
+                                <p className="text-gray-300 text-xs mb-3">by completing objectives
                                 </p>
                                 <Button variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 text-xs h-7 relative z-10 transition-all duration-300 w-full" onClick={() => {
-                                    setObjectivesView("quests");
+                                    setObjectivesView("daily");
                                     setTimeout(() => {
                                         objectivesRef.current?.scrollIntoView({
                                             behavior: 'smooth',
@@ -253,7 +253,7 @@ const HomeTab = () => {
                                         });
                                     }, 100);
                                 }}>
-                                    Show Quests
+                                    Show Objectives
                                 </Button>
                             </CardContent>
                         </GlowCard>
@@ -407,15 +407,15 @@ const HomeTab = () => {
                     <GlowCard className="col-span-4 cursor-pointer">
                         <CardContent className="p-6">
                             <div className="flex items-center space-x-2 mb-4">
-                                <Trophy className="w-5 h-5 text-white" />
-                                <span className="text-sm font-medium text-white">Quests!</span>
+                                <Target className="w-5 h-5 text-white" />
+                                <span className="text-sm font-medium text-white">Objectives</span>
                             </div>
                             <h3 className="text-lg font-bold mb-2">Smash that XP</h3>
-                            <p className="text-gray-300 text-sm mb-4">by completing all quests</p>
+                            <p className="text-gray-300 text-sm mb-4">by completing objectives</p>
                             <Button variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 w-full relative z-10 transition-all duration-300" onClick={() => {
-                                setObjectivesView("quests");
+                                setObjectivesView("daily");
                             }}>
-                                Show Quests
+                                Show Objectives
                             </Button>
                         </CardContent>
                     </GlowCard>
