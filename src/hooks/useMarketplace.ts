@@ -58,11 +58,12 @@ export const useMarketplace = () => {
       const response = await get(`locker-item/market-place/?page=1`, {}, { cache: true, revalidate: true, ttl: 5000 });
       if (response.success) {
         const storeItemsData = response?.items?.map((item: any) => {
-          const { store_items, ...rest } = item || {};
+          const { store_items, Users, ...rest } = item || {};
           return {
             ...(store_items || {}),
             ...rest,
             store_id: store_items?.id,
+            user_name: Users?.name || item?.user_name,
           };
         });
         setListings(storeItemsData);
@@ -105,11 +106,12 @@ export const useMarketplace = () => {
       const response = await get(`locker-item/market-place/?page=1`, { type: 'up', dateFilter }, { cache: true, revalidate: true, ttl: 5000 });
       if (response.success) {
         const storeItemsData = response?.items?.map((item: any) => {
-          const { store_items, ...rest } = item || {};
+          const { store_items, Users, ...rest } = item || {};
           return {
             ...(store_items || {}),
             ...rest,
             store_id: store_items?.id,
+            user_name: Users?.name || item?.user_name,
           };
         });
         setListGainer(storeItemsData);
@@ -126,11 +128,12 @@ export const useMarketplace = () => {
       const response = await get(`locker-item/market-place/?page=1`, { type: 'up', dateFilter, isTrending: true }, { cache: true, revalidate: true, ttl: 5000 });
       if (response.success) {
         const storeItemsData = response?.items?.map((item: any) => {
-          const { store_items, ...rest } = item || {};
+          const { store_items, Users, ...rest } = item || {};
           return {
             ...(store_items || {}),
             ...rest,
             store_id: store_items?.id,
+            user_name: Users?.name || item?.user_name,
           };
         });
         setListTrending(storeItemsData);
