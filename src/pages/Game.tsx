@@ -41,7 +41,7 @@ const Game = () => {
   const [activeTab, setActiveTab] = useState("home");
   const [rightSidebarTab, setRightSidebarTab] = useState("rankings");
   const [isPreOrderOpen, setIsPreOrderOpen] = useState(false);
-  const [objectivesView, setObjectivesView] = useState<"weekly" | "daily" | "quests">("weekly");
+  const [objectivesView, setObjectivesView] = useState<"weekly" | "daily">("weekly");
   const [isObjectivesGlowing, setIsObjectivesGlowing] = useState(false);
 
   const [sellDialogOpen, setSellDialogOpen] = useState(false);
