@@ -135,9 +135,9 @@ const PriceDisplay = ({
         <img
           src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png"
           alt="LCS Coin"
-          className="w-8 h-8"
+          className="w-6 h-6"
         />
-        <span className="text-3xl font-bold text-white">
+        <span className="text-2xl font-bold text-white">
           {formatNumberWithAbbreviation(price)}
         </span>
       </>
