@@ -290,13 +290,24 @@ export const CheckPrivy = ({ dollarAmount = 0, onComplete, ethToUsdRate = 0 }: C
 
           {/* Transaction Button */}
           {insufficientBalance ?
-            <button
-              onClick={handleFundWallet}
-              disabled={isLoading}
-              className={`w-full px-4 py-3 text-sm font-medium rounded-lg transition-colors bg-gray-900 text-white hover:bg-gray-800`}
-            >
-              Insufficient Balance Add Fund
-            </button> :
+            <div className="space-y-2">
+              <button
+                onClick={handleFundWallet}
+                disabled={isLoading}
+                className={`w-full px-4 py-3 text-sm font-medium rounded-lg transition-colors bg-gray-900 text-white hover:bg-gray-800`}
+              >
+                Acquire ETH
+              </button>
+              <button
+                onClick={async () => {
+                  await navigator.clipboard.writeText(wallets[0].address);
+                  toast.success("Address copied to clipboard!");
+                }}
+                className="w-full px-4 py-3 text-sm font-medium rounded-lg transition-colors bg-white/20 text-white hover:bg-white/30 border border-white/25"
+              >
+                Copy Address
+              </button>
+            </div> :
             <button
               onClick={sendTransaction}
               disabled={insufficientBalance}
