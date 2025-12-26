@@ -7,7 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { formatNumberWithAbbreviation } from "@/lib/utils";
+import { formatNumberWithAbbreviation, abbreviateUsername } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { TrendingUp, BarChart3, LineChart, ArrowUpRight, Search, Filter, Layers, X, ArrowRightLeft, ArrowUpDown } from "lucide-react";
@@ -117,6 +117,13 @@ const PlayerListItem = ({
                         <p className="text-sm md:text-base lg:text-lg font-semibold text-white truncate">
                             {player.name}
                         </p>
+
+                        {/* Seller name */}
+                        {player.user_name && (
+                            <p className="text-xs text-gray-400">
+                                Seller: {abbreviateUsername(player.user_name)}
+                            </p>
+                        )}
 
                         {/* ✅ Dynamic percentChange display */}
                         <p className={`text-xs md:text-sm ${isUp ? 'text-green-400' : 'text-red-400'}`}>
