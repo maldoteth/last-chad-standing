@@ -141,7 +141,7 @@ const BuyDialogContent: React.FC<BuyDialogContentProps> = ({ selectedPlayer, onC
                 relative overflow-hidden duration-100
                 ${selectedCoins === preset.coins
                   ? 'bg-gradient-to-r from-purple-500 to-pink-500 border-purple-400 text-white scale-105'
-                  : 'bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30'
+                  : 'bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 hover:text-white'
                 }
               `}
               onClick={() => setSelectedCoins(preset.coins)}
