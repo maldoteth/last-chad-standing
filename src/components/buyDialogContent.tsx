@@ -222,7 +222,7 @@ const BuyDialogContent: React.FC<BuyDialogContentProps> = ({ selectedPlayer, onC
 
         <Button
           variant="ghost"
-          className="text-white hover:bg-white/10 hover:text-white transition-all duration-300"
+          className="w-full text-white hover:bg-white/10 hover:text-white transition-all duration-300"
           onClick={onClose}
           disabled={isLoadingCard || isLoading}
         >
