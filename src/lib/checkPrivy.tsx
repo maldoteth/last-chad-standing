@@ -28,10 +28,7 @@ export const CheckPrivy = ({ dollarAmount = 0, onComplete, ethToUsdRate = 0 }: C
 
   const ethAmount = dollarAmount / ethToUsdRate;
   // 1000000000000000000n = 1 ETH
-  // 115465441193450n = 0.00011546544119345 ETH
   const TX_AMOUNT = BigInt(Math.floor(ethAmount * 1e18));
-  const GAS_BUFFER = 1.5;
-  const REQUIRED_AMOUNT = BigInt(Math.floor(ethAmount * GAS_BUFFER * 1e18));
   const [adminWallet, setAdminWallet] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
@@ -50,7 +47,7 @@ export const CheckPrivy = ({ dollarAmount = 0, onComplete, ethToUsdRate = 0 }: C
       try {
         const bal = await client.getBalance({ address });
         setBalance(bal);
-        setInsufficientBalance(bal < REQUIRED_AMOUNT);
+        setInsufficientBalance(bal < TX_AMOUNT);
         // if (bal < REQUIRED_AMOUNT) {
         //   handleFundWallet()
         // }
@@ -164,7 +161,7 @@ export const CheckPrivy = ({ dollarAmount = 0, onComplete, ethToUsdRate = 0 }: C
       return;
     }
 
-    if (balance === null || balance < REQUIRED_AMOUNT) {
+    if (balance === null || balance < TX_AMOUNT) {
       toast.error("Insufficient balance! Please add funds to your wallet.");
       return;
     }
@@ -189,7 +186,7 @@ export const CheckPrivy = ({ dollarAmount = 0, onComplete, ethToUsdRate = 0 }: C
         options: {
           chain: base,
           asset: "native-currency",
-          amount: (Number(REQUIRED_AMOUNT) / 1e18) as any, // ETH needed
+          amount: (Number(TX_AMOUNT) / 1e18) as any, // ETH needed
         }
       });
 
@@ -269,9 +266,9 @@ export const CheckPrivy = ({ dollarAmount = 0, onComplete, ethToUsdRate = 0 }: C
                 </p>
               </div>
               <div className="p-3 rounded-md bg-black/50 backdrop-blur-2xl border border-gray-200">
-                <p className="text-xs text-white/80 mb-1">Required Amount</p>
+                <p className="text-xs text-white/80 mb-1">Payment Amount</p>
                 <p className="text-sm font-semibold text-white">
-                  {(Number(REQUIRED_AMOUNT) / 1e18).toFixed(6)} ETH
+                  {(Number(TX_AMOUNT) / 1e18).toFixed(6)} ETH
                 </p>
               </div>
             </div>
@@ -283,7 +280,7 @@ export const CheckPrivy = ({ dollarAmount = 0, onComplete, ethToUsdRate = 0 }: C
                 <p className="text-xs text-orange-800">
                   Please add{" "}
                   <span className="font-semibold">
-                    {((Number(REQUIRED_AMOUNT) - Number(balance)) / 1e18).toFixed(6)} ETH
+                    {((Number(TX_AMOUNT) - Number(balance)) / 1e18).toFixed(6)} ETH
                   </span>{" "}
                   to your wallet to proceed with the transaction.
                 </p>
@@ -308,7 +305,7 @@ export const CheckPrivy = ({ dollarAmount = 0, onComplete, ethToUsdRate = 0 }: C
                 : "bg-gray-900 text-white hover:bg-gray-800"
                 }`}
             >
-              `Send Transaction (${(Number(REQUIRED_AMOUNT) / 1e18).toFixed(6)} ETH)
+              Send Transaction ({(Number(TX_AMOUNT) / 1e18).toFixed(6)} ETH)
             </button>}
 
           {/* Transaction Hash */}
