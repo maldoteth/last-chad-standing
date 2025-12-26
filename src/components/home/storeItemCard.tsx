@@ -26,7 +26,7 @@ const StoreItemCard = ({
         </div>
 
         <div className="mb-1 md:mb-2 md:flex md:items-center md:justify-between">
-          <h3 className="font-semibold text-xs text-white mb-1 md:mb-0 truncate">
+          <h3 className="font-semibold text-xs md:text-lg lg:text-xs text-white mb-1 md:mb-0 truncate">
             {item.name}
           </h3>
           <Badge
