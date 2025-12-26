@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerClose } from "@/components/ui/drawer";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { X } from "lucide-react";
+import { X, ZoomIn } from "lucide-react";
 import { coinToUsd, formatNumberWithAbbreviation, getRarityColor, getRarityDisplayName, abbreviateUsername } from "@/lib/utils";
 import { useStore } from "@/context/storeData";
 import { Spinner } from "./ui/spinner";
@@ -163,6 +163,7 @@ const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
   const { wallets } = useWallets()
   const { profile } = useProfile()
   const { sendTransaction } = useSendTransaction();
+  const [isImageExpanded, setIsImageExpanded] = useState(false);
   // 👇 Sell Modal state
   const [sellModalOpen, setSellModalOpen] = useState(false);
   const [tokenIds, setTokenIds] = useState<any[]>();
@@ -410,14 +411,42 @@ const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
               {/* Main Content - Horizontal on larger screens */}
               <div className="flex flex-col items-center gap-6">
                 
-                {/* Image */}
-                <div className="w-32 h-32 md:w-40 md:h-40 rounded-xl overflow-hidden bg-white/5">
+                {/* Image - Clickable to expand */}
+                <div 
+                  className="relative w-32 h-32 md:w-40 md:h-40 rounded-xl overflow-hidden bg-white/5 cursor-pointer group"
+                  onClick={() => setIsImageExpanded(true)}
+                >
                   <img
                     src={item?.ImgGatewayUrl || item.image_url || "/placeholder.svg"}
                     alt={item.name}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                   />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+                    <ZoomIn className="w-6 h-6 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </div>
                 </div>
+
+                {/* Expanded Image Modal */}
+                {isImageExpanded && (
+                  <div 
+                    className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
+                    onClick={() => setIsImageExpanded(false)}
+                  >
+                    <div className="relative max-w-[90vw] max-h-[90vh]">
+                      <img
+                        src={item?.ImgGatewayUrl || item.image_url || "/placeholder.svg"}
+                        alt={item.name}
+                        className="max-w-full max-h-[85vh] object-contain rounded-2xl"
+                      />
+                      <button
+                        onClick={() => setIsImageExpanded(false)}
+                        className="absolute -top-3 -right-3 w-8 h-8 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-colors"
+                      >
+                        <X className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
+                )}
 
                 {/* Info Section */}
                 <div className="flex-1 text-center space-y-4 w-full max-w-sm">
