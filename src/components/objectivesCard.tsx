@@ -11,7 +11,7 @@ import { ObjectiveCategory, ObjectiveType, useRank } from "@/context/rankData"
 import { toast } from "@/hooks/use-toast";
 import { useProfile } from "@/context/profileContext";
 
-type ObjectivesView = "weekly" | "daily" | "quests"
+type ObjectivesView = "weekly" | "daily"
 
 interface ObjectivesCardProps {
     objectivesView: ObjectivesView
@@ -94,9 +94,7 @@ export default function ObjectivesCard({
                         <span>
                             {objectivesView === "weekly"
                                 ? "Weekly Objectives"
-                                : objectivesView === "daily"
-                                    ? "Daily Objectives"
-                                    : "Quests"}
+                                : "Daily Objectives"}
                         </span>
                     </div>
                     <Button
