@@ -419,11 +419,20 @@ const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
                   {/* Stats Row */}
                   <div className="flex justify-center gap-8 py-3 border-y border-white/5">
                     <StatItem label="Released" value={formatDate(item.first_release_date)} />
-                    <StatItem label="Sold" value={formatNumberWithAbbreviation(item.total_purchased || 0)} />
+                    <StatItem label="Sold" value={`${item.total_purchased || 0}/500`} />
                     {isUserPurchased && (
                       <StatItem label="Owned" value={formatNumberWithAbbreviation(item?.quantity || 0)} />
                     )}
                   </div>
+                  
+                  {/* Sold Out Badge */}
+                  {(item.total_purchased || 0) >= 500 && !isUserPurchased && (
+                    <div className="text-center py-2">
+                      <Badge variant="outline" className="text-red-400 border-red-400/30 bg-red-500/10 px-4 py-1">
+                        Sold Out
+                      </Badge>
+                    </div>
+                  )}
 
                   {/* Price Section */}
                   <div className="py-4">
@@ -464,7 +473,7 @@ const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
                   )}
 
                   {/* Purchase Button */}
-                  {!isUserPurchased && (
+                  {!isUserPurchased && (item.total_purchased || 0) < 500 && (
                     <div className="space-y-3">
                       <Button
                         onClick={handlePurchaseWithCoins}
