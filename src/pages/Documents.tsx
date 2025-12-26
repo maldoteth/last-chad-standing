@@ -589,15 +589,15 @@ There are environmental traps like collapsing floors, explosive barrels, and nat
                                   <span className="text-gray-200 font-medium">Movement</span>
                                 </div>
                                 <div className="divide-y divide-gray-700">
-                                  <div className="flex justify-between px-4 py-2 text-sm"><span className="text-gray-300">Move</span><span className="text-gray-400">WASD</span></div>
-                                  <div className="flex justify-between px-4 py-2 text-sm"><span className="text-gray-300">Sprint</span><span className="text-gray-400">Left Shift</span></div>
-                                  <div className="flex justify-between px-4 py-2 text-sm"><span className="text-gray-300">Crouch</span><span className="text-gray-400">Left Ctrl</span></div>
-                                  <div className="flex justify-between px-4 py-2 text-sm"><span className="text-gray-300">Jump</span><span className="text-gray-400">Space</span></div>
-                                  <div className="flex justify-between px-4 py-2 text-sm"><span className="text-gray-300">Double Jump</span><span className="text-gray-400">Space (Double Tap)</span></div>
-                                  <div className="flex justify-between px-4 py-2 text-sm"><span className="text-gray-300">Dash</span><span className="text-gray-400">Left Shift (Tap) + WASD</span></div>
-                                  <div className="flex justify-between px-4 py-2 text-sm"><span className="text-gray-300">Dodge</span><span className="text-gray-400">Left Alt (Tap) + WASD</span></div>
-                                  <div className="flex justify-between px-4 py-2 text-sm"><span className="text-gray-300">Lean</span><span className="text-gray-400">Q / E</span></div>
-                                  <div className="flex justify-between px-4 py-2 text-sm"><span className="text-gray-300">Swap shoulders</span><span className="text-gray-400">B</span></div>
+                                  <div className="flex flex-col sm:flex-row sm:justify-between px-4 py-3 sm:py-2 text-sm gap-1 sm:gap-0"><span className="text-gray-300 font-medium sm:font-normal">Move</span><span className="text-gray-400 text-xs sm:text-sm">WASD</span></div>
+                                  <div className="flex flex-col sm:flex-row sm:justify-between px-4 py-3 sm:py-2 text-sm gap-1 sm:gap-0"><span className="text-gray-300 font-medium sm:font-normal">Sprint</span><span className="text-gray-400 text-xs sm:text-sm">Left Shift</span></div>
+                                  <div className="flex flex-col sm:flex-row sm:justify-between px-4 py-3 sm:py-2 text-sm gap-1 sm:gap-0"><span className="text-gray-300 font-medium sm:font-normal">Crouch</span><span className="text-gray-400 text-xs sm:text-sm">Left Ctrl</span></div>
+                                  <div className="flex flex-col sm:flex-row sm:justify-between px-4 py-3 sm:py-2 text-sm gap-1 sm:gap-0"><span className="text-gray-300 font-medium sm:font-normal">Jump</span><span className="text-gray-400 text-xs sm:text-sm">Space</span></div>
+                                  <div className="flex flex-col sm:flex-row sm:justify-between px-4 py-3 sm:py-2 text-sm gap-1 sm:gap-0"><span className="text-gray-300 font-medium sm:font-normal">Double Jump</span><span className="text-gray-400 text-xs sm:text-sm">Space (Double Tap)</span></div>
+                                  <div className="flex flex-col sm:flex-row sm:justify-between px-4 py-3 sm:py-2 text-sm gap-1 sm:gap-0"><span className="text-gray-300 font-medium sm:font-normal">Dash</span><span className="text-gray-400 text-xs sm:text-sm">Left Shift (Tap) + WASD</span></div>
+                                  <div className="flex flex-col sm:flex-row sm:justify-between px-4 py-3 sm:py-2 text-sm gap-1 sm:gap-0"><span className="text-gray-300 font-medium sm:font-normal">Dodge</span><span className="text-gray-400 text-xs sm:text-sm">Left Alt (Tap) + WASD</span></div>
+                                  <div className="flex flex-col sm:flex-row sm:justify-between px-4 py-3 sm:py-2 text-sm gap-1 sm:gap-0"><span className="text-gray-300 font-medium sm:font-normal">Lean</span><span className="text-gray-400 text-xs sm:text-sm">Q / E</span></div>
+                                  <div className="flex flex-col sm:flex-row sm:justify-between px-4 py-3 sm:py-2 text-sm gap-1 sm:gap-0"><span className="text-gray-300 font-medium sm:font-normal">Swap shoulders</span><span className="text-gray-400 text-xs sm:text-sm">B</span></div>
                                 </div>
                               </div>
 
@@ -624,8 +624,8 @@ There are environmental traps like collapsing floors, explosive barrels, and nat
                                   <span className="text-gray-200 font-medium">Devices</span>
                                 </div>
                                 <div className="divide-y divide-gray-700">
-                                  <div className="flex justify-between px-4 py-2 text-sm"><span className="text-gray-300">Night vision</span><span className="text-gray-400">N</span></div>
-                                  <div className="flex justify-between px-4 py-2 text-sm"><span className="text-gray-300">Thermal Vision</span><span className="text-gray-400">T</span></div>
+                                  <div className="flex flex-col sm:flex-row sm:justify-between px-4 py-3 sm:py-2 text-sm gap-1 sm:gap-0"><span className="text-gray-300 font-medium sm:font-normal">Night vision</span><span className="text-gray-400 text-xs sm:text-sm">N</span></div>
+                                  <div className="flex flex-col sm:flex-row sm:justify-between px-4 py-3 sm:py-2 text-sm gap-1 sm:gap-0"><span className="text-gray-300 font-medium sm:font-normal">Thermal Vision</span><span className="text-gray-400 text-xs sm:text-sm">T</span></div>
                                 </div>
                               </div>
 
@@ -635,12 +635,12 @@ There are environmental traps like collapsing floors, explosive barrels, and nat
                                   <span className="text-gray-200 font-medium">Common</span>
                                 </div>
                                 <div className="divide-y divide-gray-700">
-                                  <div className="flex justify-between px-4 py-2 text-sm"><span className="text-gray-300">Save game</span><span className="text-gray-400">F5</span></div>
-                                  <div className="flex justify-between px-4 py-2 text-sm"><span className="text-gray-300">Throw AI Baiter</span><span className="text-gray-400">ALT + B</span></div>
-                                  <div className="flex justify-between px-4 py-2 text-sm"><span className="text-gray-300">Open pause menu</span><span className="text-gray-400">Esc</span></div>
-                                  <div className="flex justify-between px-4 py-2 text-sm"><span className="text-gray-300">Ladder (Accelerate)</span><span className="text-gray-400">Left Ctrl</span></div>
-                                  <div className="flex justify-between px-4 py-2 text-sm"><span className="text-gray-300">Open world map</span><span className="text-gray-400">M</span></div>
-                                  <div className="flex justify-between px-4 py-2 text-sm"><span className="text-gray-300">Swap weapons</span><span className="text-gray-400">Mouse Wheel</span></div>
+                                  <div className="flex flex-col sm:flex-row sm:justify-between px-4 py-3 sm:py-2 text-sm gap-1 sm:gap-0"><span className="text-gray-300 font-medium sm:font-normal">Save game</span><span className="text-gray-400 text-xs sm:text-sm">F5</span></div>
+                                  <div className="flex flex-col sm:flex-row sm:justify-between px-4 py-3 sm:py-2 text-sm gap-1 sm:gap-0"><span className="text-gray-300 font-medium sm:font-normal">Throw AI Baiter</span><span className="text-gray-400 text-xs sm:text-sm">ALT + B</span></div>
+                                  <div className="flex flex-col sm:flex-row sm:justify-between px-4 py-3 sm:py-2 text-sm gap-1 sm:gap-0"><span className="text-gray-300 font-medium sm:font-normal">Open pause menu</span><span className="text-gray-400 text-xs sm:text-sm">Esc</span></div>
+                                  <div className="flex flex-col sm:flex-row sm:justify-between px-4 py-3 sm:py-2 text-sm gap-1 sm:gap-0"><span className="text-gray-300 font-medium sm:font-normal">Ladder (Accelerate)</span><span className="text-gray-400 text-xs sm:text-sm">Left Ctrl</span></div>
+                                  <div className="flex flex-col sm:flex-row sm:justify-between px-4 py-3 sm:py-2 text-sm gap-1 sm:gap-0"><span className="text-gray-300 font-medium sm:font-normal">Open world map</span><span className="text-gray-400 text-xs sm:text-sm">M</span></div>
+                                  <div className="flex flex-col sm:flex-row sm:justify-between px-4 py-3 sm:py-2 text-sm gap-1 sm:gap-0"><span className="text-gray-300 font-medium sm:font-normal">Swap weapons</span><span className="text-gray-400 text-xs sm:text-sm">Mouse Wheel</span></div>
                                 </div>
                               </div>
 
@@ -650,8 +650,8 @@ There are environmental traps like collapsing floors, explosive barrels, and nat
                                   <span className="text-gray-200 font-medium">Grenades</span>
                                 </div>
                                 <div className="divide-y divide-gray-700">
-                                  <div className="flex justify-between px-4 py-2 text-sm"><span className="text-gray-300">Throw grenade</span><span className="text-gray-400">G</span></div>
-                                  <div className="flex justify-between px-4 py-2 text-sm"><span className="text-gray-300">Open the list of available grenades</span><span className="text-gray-400">ALT + X</span></div>
+                                  <div className="flex flex-col sm:flex-row sm:justify-between px-4 py-3 sm:py-2 text-sm gap-1 sm:gap-0"><span className="text-gray-300 font-medium sm:font-normal">Throw grenade</span><span className="text-gray-400 text-xs sm:text-sm">G</span></div>
+                                  <div className="flex flex-col sm:flex-row sm:justify-between px-4 py-3 sm:py-2 text-sm gap-1 sm:gap-0"><span className="text-gray-300 font-medium sm:font-normal">Open the list of available grenades</span><span className="text-gray-400 text-xs sm:text-sm">ALT + X</span></div>
                                 </div>
                               </div>
                             </div>
@@ -668,10 +668,10 @@ There are environmental traps like collapsing floors, explosive barrels, and nat
                                   <span className="text-gray-200 font-medium">Common</span>
                                 </div>
                                 <div className="divide-y divide-gray-700">
-                                  <div className="flex justify-between px-4 py-2 text-sm"><span className="text-gray-300">Throttle</span><span className="text-gray-400">W / A</span></div>
-                                  <div className="flex justify-between px-4 py-2 text-sm"><span className="text-gray-300">Handbrake</span><span className="text-gray-400">Space</span></div>
-                                  <div className="flex justify-between px-4 py-2 text-sm"><span className="text-gray-300">Lights</span><span className="text-gray-400">R</span></div>
-                                  <div className="flex justify-between px-4 py-2 text-sm"><span className="text-gray-300">Exit</span><span className="text-gray-400">F</span></div>
+                                  <div className="flex flex-col sm:flex-row sm:justify-between px-4 py-3 sm:py-2 text-sm gap-1 sm:gap-0"><span className="text-gray-300 font-medium sm:font-normal">Throttle</span><span className="text-gray-400 text-xs sm:text-sm">W / A</span></div>
+                                  <div className="flex flex-col sm:flex-row sm:justify-between px-4 py-3 sm:py-2 text-sm gap-1 sm:gap-0"><span className="text-gray-300 font-medium sm:font-normal">Handbrake</span><span className="text-gray-400 text-xs sm:text-sm">Space</span></div>
+                                  <div className="flex flex-col sm:flex-row sm:justify-between px-4 py-3 sm:py-2 text-sm gap-1 sm:gap-0"><span className="text-gray-300 font-medium sm:font-normal">Lights</span><span className="text-gray-400 text-xs sm:text-sm">R</span></div>
+                                  <div className="flex flex-col sm:flex-row sm:justify-between px-4 py-3 sm:py-2 text-sm gap-1 sm:gap-0"><span className="text-gray-300 font-medium sm:font-normal">Exit</span><span className="text-gray-400 text-xs sm:text-sm">F</span></div>
                                 </div>
                               </div>
                             </div>
