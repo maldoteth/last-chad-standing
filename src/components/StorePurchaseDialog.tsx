@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerClose } from "@/components/ui/drawer";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { CreditCard, X, Calendar, TrendingUp, List } from "lucide-react";
+import { X } from "lucide-react";
 import { coinToUsd, formatNumberWithAbbreviation, getRarityColor, getRarityDisplayName, abbreviateUsername } from "@/lib/utils";
 import { useStore } from "@/context/storeData";
 import { Spinner } from "./ui/spinner";
@@ -75,60 +75,44 @@ interface StorePurchaseDialogProps {
 
 // Stat Item Component
 const StatItem = ({
-  icon: Icon,
   label,
   value,
-  className
 }: {
-  icon: React.ComponentType<any>;
   label: string;
   value: string;
-  className?: string
 }) => (
-  <div className={`flex flex-col gap-0.5 ${className}`}>
-    <span className="text-xs text-white/50 uppercase tracking-wide inline-flex items-center gap-1.5">
-      <Icon className="w-3.5 h-3.5" />
-      {label}
-    </span>
-    <span className="text-sm font-semibold text-white">
-      {value}
-    </span>
+  <div className="text-center">
+    <p className="text-white/40 text-xs uppercase tracking-wider mb-0.5">{label}</p>
+    <p className="text-white text-sm font-medium">{value}</p>
   </div>
 );
 
 // Balance Display Component
 const BalanceDisplay = ({
   balance,
-  label = "Your balance:"
 }: {
   balance: number;
-  label?: string;
 }) => (
-  <div className="flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-gradient-to-r from-amber-500/10 to-yellow-500/10 border border-amber-500/20">
-    <span className="text-sm text-white/70">{label}</span>
-    <div className="flex items-center gap-1.5">
-      <img
-        src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png"
-        alt="LCS Coin"
-        className="w-5 h-5"
-      />
-      <span className="font-bold text-white text-lg">
-        {formatNumberWithAbbreviation(balance)}
-      </span>
-    </div>
+  <div className="flex items-center justify-center gap-1.5 text-white/50 text-sm">
+    <span>Balance:</span>
+    <img
+      src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png"
+      alt="LCS Coin"
+      className="w-4 h-4"
+    />
+    <span className="text-white font-medium">{formatNumberWithAbbreviation(balance)}</span>
   </div>
 );
 
 // Price Display Component
 const PriceDisplay = ({ price }: { price: number }) => (
-  <div className="relative overflow-hidden flex items-center justify-center gap-3 py-4 px-6 bg-gradient-to-r from-purple-600/30 via-purple-500/20 to-purple-600/30 rounded-2xl border border-purple-500/30 shadow-lg shadow-purple-500/10">
-    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent" />
+  <div className="flex items-center justify-center gap-2">
     <img
       src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png"
       alt="LCS Coin"
-      className="w-8 h-8 relative z-10"
+      className="w-7 h-7"
     />
-    <span className="text-3xl font-bold text-white relative z-10">
+    <span className="text-3xl font-bold text-white">
       {formatNumberWithAbbreviation(price)}
     </span>
   </div>
@@ -379,142 +363,138 @@ const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
   return (
     <>
       <Drawer open={isOpen} onOpenChange={onClose}>
-        <DrawerContent className="bg-gradient-to-b from-gray-900/98 via-gray-950/98 to-black/98 backdrop-blur-2xl border border-white/10 max-h-[90vh] shadow-2xl">
-          <DrawerHeader className="relative pb-2">
-            <DrawerTitle className="text-center text-white/90 text-lg font-semibold tracking-wide">
-              Purchase Item
-            </DrawerTitle>
+        <DrawerContent className="bg-[#0a0a0c] border-t border-white/5 max-h-[85vh]">
+          <DrawerHeader className="relative py-4 border-b border-white/5">
             <DrawerClose asChild>
               <Button
                 variant="ghost"
                 size="icon"
-                className="absolute top-0 right-4 text-white/50 hover:text-white hover:bg-white/10 rounded-full transition-all"
+                className="absolute top-3 right-3 text-white/40 hover:text-white hover:bg-white/5 rounded-full h-8 w-8"
               >
-                <X className="h-5 w-5" />
+                <X className="h-4 w-4" />
               </Button>
             </DrawerClose>
+            <DrawerTitle className="sr-only">Purchase Item</DrawerTitle>
           </DrawerHeader>
 
-          <ScrollArea className="max-h-[calc(90vh-80px)] overflow-y-auto custom-scroll">
-            {authenticated && (isUserPurchased && item?.quantity > 0) && (
-              <div className="px-6 pb-4">
-                {item.is_sell_item ? (
-                  <Button variant="secondary" disabled={isLoadingCard} onClick={() => handleIsSellItem({ is_sell_item: false })} className="w-full">
-                    {isLoadingCard && <Spinner color="gray" />} Remove from Marketplace
-                  </Button>
-                ) : (
-                  <Button variant="destructive" disabled={isLoadingCard} onClick={() => handleOpenSellModal()} className="w-full">
-                    {isLoadingCard && <Spinner color="white" />} Sell on Marketplace
-                  </Button>
-                )}
-              </div>
-            )}
-
-            <div className="flex flex-col gap-5 px-6 pb-8">
-              {/* Item Image with glow effect */}
-              <div className="flex justify-center pt-2">
-                <div className="relative">
-                  <div className="absolute inset-0 bg-gradient-to-b from-purple-500/20 to-transparent rounded-2xl blur-2xl scale-110" />
+          <ScrollArea className="max-h-[calc(85vh-60px)] overflow-y-auto">
+            <div className="px-6 py-6">
+              {/* Main Content - Horizontal on larger screens */}
+              <div className="flex flex-col items-center gap-6">
+                
+                {/* Image */}
+                <div className="w-32 h-32 md:w-40 md:h-40 rounded-xl overflow-hidden bg-white/5">
                   <img
                     src={item?.ImgGatewayUrl || item.image_url || "/placeholder.svg"}
                     alt={item.name}
-                    className="relative w-36 h-36 md:w-44 md:h-44 object-contain rounded-2xl border border-white/10 shadow-xl"
+                    className="w-full h-full object-cover"
                   />
                 </div>
-              </div>
 
-              {/* Item Details */}
-              <div className="space-y-5">
-                <div className="text-center space-y-2">
-                  <h3 className="text-2xl md:text-3xl font-bold text-white tracking-tight">
-                    {item.name}
-                  </h3>
-                  {/* Seller name for marketplace items */}
-                  {isLockerItem && 'user_name' in item && item.user_name && (
-                    <p className="text-sm text-white/50">
-                      Seller: <span className="text-purple-400 font-medium">{abbreviateUsername(item.user_name)}</span>
-                    </p>
-                  )}
-                  {item.description && (
-                    <p className="text-white/60 text-sm md:text-base max-w-sm mx-auto">
-                      {item.description}
-                    </p>
-                  )}
-                </div>
-
-                {/* Price */}
-                {isUserPurchased ? <PriceDisplay price={item.coins} /> :
-                  (isLockerItem && 'sale_price' in item) ? <PriceDisplay price={item?.sale_price} /> :
-                    <PriceDisplay price={item.price} />}
-
-                {/* Badges Row */}
-                <div className="flex items-center justify-center gap-3 flex-wrap">
-                  <Badge className={`${getRarityColor(item?.rarity)} font-semibold border px-3 py-1`}>
-                    {getRarityDisplayName(item?.rarity)}
-                  </Badge>
-                  <Badge className="capitalize bg-white/10 text-white border-white/20 hover:bg-white/20 px-3 py-1">
-                    {item.category}
-                  </Badge>
-                </div>
-
-                {/* Stats Grid */}
-                <div className="grid grid-cols-2 gap-4 p-4 rounded-xl bg-white/5 border border-white/10">
-
-                  <StatItem
-                    icon={Calendar}
-                    label="First Release"
-                    value={formatDate(item.first_release_date)}
-                  />
-                  <StatItem
-                    icon={TrendingUp}
-                    label="Total Sold"
-                    value={formatNumberWithAbbreviation(item.total_purchased || 0)}
-                  />
-                  {isUserPurchased && (
-                    <StatItem
-                      icon={Calendar}
-                      label="Purchased At"
-                      value={formatDate(item?.purchase_date)}
-                    />
-                  )}
-                  {isUserPurchased && (
-                    <StatItem
-                      icon={List}
-                      label="Available Qty"
-                      value={formatNumberWithAbbreviation(item?.quantity || 0)}
-                    />
-                  )}
-                </div>
-
-                {/* User Balance Display */}
-                {!isUserPurchased && authenticated && (
-                  <BalanceDisplay balance={userBalance.coins} />
-                )}
-
-                {/* Purchase Button */}
-                {!isUserPurchased && (
-                  <div className="pt-2">
-                    <Button
-                      onClick={handlePurchaseWithCoins}
-                      className="w-full h-12 flex items-center justify-center gap-2.5 bg-gradient-to-r from-purple-600 via-purple-500 to-purple-600 hover:from-purple-500 hover:via-purple-400 hover:to-purple-500 text-white font-semibold text-base rounded-xl shadow-lg shadow-purple-500/25 transition-all duration-300 hover:shadow-purple-500/40 hover:scale-[1.02] active:scale-[0.98]"
-                      disabled={insufficientFunds || isSubmintLoading || isLoadingCard || isLoading}
-                    >
-                      <img
-                        src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png"
-                        alt="LCS Coin"
-                        className="w-5 h-5"
-                      />
-                      {(isSubmintLoading || isLoading) ? <Spinner color="white" /> : insufficientFunds ? 'Insufficient Balance' : 'Purchase with Coins'}
-                    </Button>
+                {/* Info Section */}
+                <div className="flex-1 text-center space-y-4 w-full max-w-sm">
+                  {/* Name & Description */}
+                  <div>
+                    <h2 className="text-xl font-semibold text-white mb-1">{item.name}</h2>
+                    {item.description && (
+                      <p className="text-white/50 text-sm">{item.description}</p>
+                    )}
+                    {isLockerItem && 'user_name' in item && item.user_name && (
+                      <p className="text-white/40 text-xs mt-2">
+                        Sold by {abbreviateUsername(item.user_name)}
+                      </p>
+                    )}
                   </div>
-                )}
 
-                {/* Insufficient Funds Warning */}
-                {!isUserPurchased && insufficientFunds && (
-                  <div className="text-center text-sm text-red-300 bg-red-500/10 backdrop-blur-sm p-3 rounded-xl border border-red-500/20">
-                    You need <span className="font-semibold">{formatNumberWithAbbreviation(item.price - userBalance.coins)}</span> more coins to purchase.
+                  {/* Badges */}
+                  <div className="flex items-center justify-center gap-2">
+                    <Badge variant="outline" className={`${getRarityColor(item?.rarity)} text-xs`}>
+                      {getRarityDisplayName(item?.rarity)}
+                    </Badge>
+                    <Badge variant="outline" className="capitalize text-white/60 border-white/10 text-xs">
+                      {item.category}
+                    </Badge>
                   </div>
-                )}
+
+                  {/* Stats Row */}
+                  <div className="flex justify-center gap-8 py-3 border-y border-white/5">
+                    <StatItem label="Released" value={formatDate(item.first_release_date)} />
+                    <StatItem label="Sold" value={formatNumberWithAbbreviation(item.total_purchased || 0)} />
+                    {isUserPurchased && (
+                      <StatItem label="Owned" value={formatNumberWithAbbreviation(item?.quantity || 0)} />
+                    )}
+                  </div>
+
+                  {/* Price Section */}
+                  <div className="py-4">
+                    {isUserPurchased ? <PriceDisplay price={item.coins} /> :
+                      (isLockerItem && 'sale_price' in item) ? <PriceDisplay price={item?.sale_price} /> :
+                        <PriceDisplay price={item.price} />}
+                    
+                    {!isUserPurchased && authenticated && (
+                      <div className="mt-3">
+                        <BalanceDisplay balance={userBalance.coins} />
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Actions */}
+                  {authenticated && isUserPurchased && item?.quantity > 0 && (
+                    <div>
+                      {item.is_sell_item ? (
+                        <Button 
+                          variant="outline" 
+                          disabled={isLoadingCard} 
+                          onClick={() => handleIsSellItem({ is_sell_item: false })}
+                          className="text-white/70 border-white/10 hover:bg-white/5 hover:text-white"
+                        >
+                          {isLoadingCard && <Spinner color="gray" />} Remove from Marketplace
+                        </Button>
+                      ) : (
+                        <Button 
+                          variant="outline"
+                          disabled={isLoadingCard} 
+                          onClick={() => handleOpenSellModal()}
+                          className="text-white/70 border-white/10 hover:bg-white/5 hover:text-white"
+                        >
+                          {isLoadingCard && <Spinner color="white" />} Sell on Marketplace
+                        </Button>
+                      )}
+                    </div>
+                  )}
+
+                  {/* Purchase Button */}
+                  {!isUserPurchased && (
+                    <div className="space-y-3">
+                      <Button
+                        onClick={handlePurchaseWithCoins}
+                        className="w-full h-11 bg-white text-black font-medium hover:bg-white/90 transition-colors"
+                        disabled={insufficientFunds || isSubmintLoading || isLoadingCard || isLoading}
+                      >
+                        {(isSubmintLoading || isLoading) ? (
+                          <Spinner color="gray" />
+                        ) : insufficientFunds ? (
+                          'Insufficient Balance'
+                        ) : (
+                          <>
+                            <img
+                              src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png"
+                              alt="LCS Coin"
+                              className="w-4 h-4 mr-2"
+                            />
+                            Purchase
+                          </>
+                        )}
+                      </Button>
+                      
+                      {insufficientFunds && (
+                        <p className="text-red-400/80 text-xs text-center">
+                          You need {formatNumberWithAbbreviation(item.price - userBalance.coins)} more coins
+                        </p>
+                      )}
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </ScrollArea>
