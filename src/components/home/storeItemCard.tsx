@@ -40,13 +40,13 @@ const StoreItemCard = ({
         <Button
           size="sm"
           variant="secondary"
-          className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs h-7 flex items-center justify-center gap-1"
+          className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 text-xs md:text-sm lg:text-xs h-7 md:h-9 lg:h-7 flex items-center justify-center gap-1"
           onClick={() => onClick(item.raw)}
         >
           <img
             src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png"
             alt="LCS Coin"
-            className="w-3 h-3"
+            className="w-3 h-3 md:w-4 md:h-4 lg:w-3 lg:h-3"
           />
           <span>{item.price.toLocaleString()}</span>
         </Button>
