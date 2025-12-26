@@ -25,13 +25,13 @@ const StoreItemCard = ({
           />
         </div>
 
-        <div className="mb-1 md:mb-2 md:flex md:items-center md:justify-between">
-          <h3 className="font-semibold text-xs md:text-lg lg:text-xs text-white mb-1 md:mb-0 truncate">
+        <div className="mb-1 md:mb-2 flex items-center justify-between gap-1">
+          <h3 className="font-semibold text-xs md:text-lg lg:text-xs text-white truncate flex-1">
             {item.name}
           </h3>
           <Badge
             variant="outline"
-            className={`text-[10px] px-1 py-0 h-4 ${getRarityColor(item.rarity)}`}
+            className={`text-[10px] px-1 py-0 h-4 shrink-0 ${getRarityColor(item.rarity)}`}
           >
             {getRarityDisplayName(item.rarity)}
           </Badge>
