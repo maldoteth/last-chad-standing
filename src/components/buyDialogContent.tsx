@@ -29,14 +29,11 @@ const BuyDialogContent: React.FC<BuyDialogContentProps> = ({ selectedPlayer, onC
   // Coin presets
   const coinPresets = [
     { coins: 100, label: "100" },
-    { coins: 500, label: "500" },
-    { coins: 800, label: "800" },
     { coins: 1000, label: "1K" },
-    { coins: 2000, label: "2K" },
-    { coins: 3000, label: "3K" },
-    { coins: 5000, label: "5K" },
     { coins: 10000, label: "10K" },
-    { coins: 20000, label: "20K" },
+    { coins: 100000, label: "100K" },
+    { coins: 1000000, label: "1M" },
+    { coins: 10000000, label: "10M" },
   ];
 
   const usdValue = (selectedCoins * coinToUsd).toFixed(2);
