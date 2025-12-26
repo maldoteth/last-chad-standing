@@ -14,7 +14,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { getCurrentLevel, getProgressToNextLevel } from "@/lib/progressSystem";
-import { getTierIcon, abbreviateUsername } from "@/lib/utils";
+import { getTierIcon } from "@/lib/utils";
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerTrigger, DrawerClose } from "@/components/ui/drawer";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogDescription } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -388,7 +388,7 @@ const Game = () => {
 
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center justify-between">
-                    <p className="text-sm font-medium truncate">{abbreviateUsername(player?.user_id?.name)}</p>
+                    <p className="text-sm font-medium truncate max-w-[100px]">{player?.user_id?.name}</p>
                     <Badge variant="outline" className="text-xs">Lv.{player.level}</Badge>
                   </div>
                   <p className="text-xs text-muted-foreground">{player.total_XP} XP</p>

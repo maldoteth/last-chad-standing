@@ -10,7 +10,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from "@/components/ui/dropdown-menu";
 
 import { ProgressBar } from "@/components/ProgressBar";
-import { getTierIcon, abbreviateUsername } from "@/lib/utils";
+import { getTierIcon } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerTrigger, DrawerClose } from "@/components/ui/drawer";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -487,7 +487,7 @@ const Header = () => {
 
                                     <div className="flex-1 min-w-0">
                                         <div className="flex items-center justify-between">
-                                            <p className="text-sm font-medium text-white truncate">{abbreviateUsername(player?.user_id?.name)}</p>
+                                            <p className="text-sm font-medium text-white truncate max-w-[100px]">{player?.user_id?.name}</p>
                                             <Badge variant="outline" className="text-xs bg-white/10 text-white border-white/20">Lv.{player.level}</Badge>
                                         </div>
                                         <p className="text-xs text-white/60">{player.total_XP} XP</p>
