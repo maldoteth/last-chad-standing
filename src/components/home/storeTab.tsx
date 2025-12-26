@@ -111,7 +111,7 @@ const StoreTab = () => {
   };
 
   // Items to hide from Fresh Drops store
-  const HIDDEN_STORE_ITEMS = ["Conquisto D'ior", "Helicopter", "Bonsey Bones", "Attack Copter", "bonsey", "copter", "Jonesy Bones", "jonesy"];
+  const HIDDEN_STORE_ITEMS = ["Conquisto D'ior", "Helicopter", "Bonsey Bones", "Attack Copter", "bonsey", "copter", "Jonesy Bones", "jonesy", "dirt bike", "pong", "Dirt Bike", "Pong"];
   
   const filterHiddenStoreItems = (items: any[]) =>
     items.filter(item => 
