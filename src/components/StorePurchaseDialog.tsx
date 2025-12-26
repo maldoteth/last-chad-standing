@@ -104,18 +104,44 @@ const BalanceDisplay = ({
   </div>
 );
 
-// Price Display Component
-const PriceDisplay = ({ price }: { price: number }) => (
-  <div className="flex items-center justify-center gap-2">
-    <img
-      src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png"
-      alt="LCS Coin"
-      className="w-7 h-7"
-    />
-    <span className="text-3xl font-bold text-white">
-      {formatNumberWithAbbreviation(price)}
-    </span>
-  </div>
+// Price Display Component (Clickable)
+const PriceDisplay = ({ 
+  price, 
+  onClick, 
+  disabled, 
+  loading,
+  insufficientFunds 
+}: { 
+  price: number; 
+  onClick?: () => void; 
+  disabled?: boolean;
+  loading?: boolean;
+  insufficientFunds?: boolean;
+}) => (
+  <button
+    onClick={onClick}
+    disabled={disabled || !onClick}
+    className={`flex items-center justify-center gap-2 px-6 py-3 rounded-2xl transition-all duration-300 ${
+      onClick && !disabled
+        ? 'bg-white/10 hover:bg-white/20 hover:scale-105 cursor-pointer active:scale-95 backdrop-blur-sm border border-white/10'
+        : ''
+    } ${disabled ? 'opacity-50 cursor-not-allowed' : ''} ${insufficientFunds ? 'border-red-500/30' : ''}`}
+  >
+    {loading ? (
+      <Spinner color="white" />
+    ) : (
+      <>
+        <img
+          src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png"
+          alt="LCS Coin"
+          className="w-8 h-8"
+        />
+        <span className="text-3xl font-bold text-white">
+          {formatNumberWithAbbreviation(price)}
+        </span>
+      </>
+    )}
+  </button>
 );
 
 const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
@@ -363,7 +389,7 @@ const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
   return (
     <>
       <Drawer open={isOpen} onOpenChange={onClose}>
-        <DrawerContent className="bg-[#0a0a0c] border-t border-white/5 max-h-[85vh]">
+        <DrawerContent className="bg-black/40 backdrop-blur-2xl border-t border-white/10 max-h-[85vh]">
           <DrawerHeader className="relative py-4 border-b border-white/5">
             <DrawerClose asChild>
               <Button
@@ -434,15 +460,34 @@ const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
                     </div>
                   )}
 
-                  {/* Price Section */}
+                  {/* Price Section - Clickable to Buy */}
                   <div className="py-4">
-                    {isUserPurchased ? <PriceDisplay price={item.coins} /> :
-                      (isLockerItem && 'sale_price' in item) ? <PriceDisplay price={item?.sale_price} /> :
-                        <PriceDisplay price={item.price} />}
+                    {isUserPurchased ? (
+                      <PriceDisplay price={item.coins} />
+                    ) : (isLockerItem && 'sale_price' in item) ? (
+                      <PriceDisplay 
+                        price={item?.sale_price} 
+                        onClick={(item.total_purchased || 0) < 500 ? handlePurchaseWithCoins : undefined}
+                        disabled={insufficientFunds || isSubmintLoading || isLoadingCard || isLoading}
+                        loading={isSubmintLoading || isLoading}
+                        insufficientFunds={insufficientFunds}
+                      />
+                    ) : (
+                      <PriceDisplay 
+                        price={item.price}
+                        onClick={(item.total_purchased || 0) < 500 ? handlePurchaseWithCoins : undefined}
+                        disabled={insufficientFunds || isSubmintLoading || isLoadingCard || isLoading}
+                        loading={isSubmintLoading || isLoading}
+                        insufficientFunds={insufficientFunds}
+                      />
+                    )}
                     
                     {!isUserPurchased && authenticated && (
                       <div className="mt-3">
                         <BalanceDisplay balance={userBalance.coins} />
+                        {insufficientFunds && (
+                          <p className="text-red-400/70 text-xs mt-1">Insufficient balance</p>
+                        )}
                       </div>
                     )}
                   </div>
@@ -472,37 +517,6 @@ const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
                     </div>
                   )}
 
-                  {/* Purchase Button */}
-                  {!isUserPurchased && (item.total_purchased || 0) < 500 && (
-                    <div className="space-y-3">
-                      <Button
-                        onClick={handlePurchaseWithCoins}
-                        className="w-full h-11 bg-white text-black font-medium hover:bg-white/90 transition-colors"
-                        disabled={insufficientFunds || isSubmintLoading || isLoadingCard || isLoading}
-                      >
-                        {(isSubmintLoading || isLoading) ? (
-                          <Spinner color="gray" />
-                        ) : insufficientFunds ? (
-                          'Insufficient Balance'
-                        ) : (
-                          <>
-                            <img
-                              src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png"
-                              alt="LCS Coin"
-                              className="w-4 h-4 mr-2"
-                            />
-                            Purchase
-                          </>
-                        )}
-                      </Button>
-                      
-                      {insufficientFunds && (
-                        <p className="text-red-400/80 text-xs text-center">
-                          You need {formatNumberWithAbbreviation(item.price - userBalance.coins)} more coins
-                        </p>
-                      )}
-                    </div>
-                  )}
                 </div>
               </div>
             </div>
