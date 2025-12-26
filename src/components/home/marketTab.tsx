@@ -263,7 +263,16 @@ const MarketTab = () => {
         // }
     };
 
-    const filteredAndSortedMarketplacePlayers = sortMarketplacePlayers(filterMarketplaceBySearch(filterMarketplaceByRarity(filterMarketplaceByCategory(itemsData, marketplaceCategory), marketplaceRarity), searchTerm), marketplaceSortBy);
+    // Items to hide from marketplace (temporary, for investigation)
+    const HIDDEN_MARKETPLACE_ITEMS = ["Ray Del Maestro", "Dangerous fighter"];
+    const filterHiddenItems = (players: any[]) => 
+        players.filter(player => 
+            !HIDDEN_MARKETPLACE_ITEMS.some(hidden => 
+                player.name?.toLowerCase().includes(hidden.toLowerCase())
+            )
+        );
+
+    const filteredAndSortedMarketplacePlayers = sortMarketplacePlayers(filterMarketplaceBySearch(filterMarketplaceByRarity(filterMarketplaceByCategory(filterHiddenItems(itemsData), marketplaceCategory), marketplaceRarity), searchTerm), marketplaceSortBy);
     const timeFilters = [
         { key: "daily", label: isMobile ? "24H" : "Daily" },
         { key: "weekly", label: isMobile ? "7D" : "Weekly" },
