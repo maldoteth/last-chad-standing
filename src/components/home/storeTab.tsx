@@ -110,6 +110,16 @@ const StoreTab = () => {
     );
   };
 
+  // Items to hide from Fresh Drops store
+  const HIDDEN_STORE_ITEMS = ["Conquisto D'ior", "Helicopter"];
+  
+  const filterHiddenStoreItems = (items: any[]) =>
+    items.filter(item => 
+      !HIDDEN_STORE_ITEMS.some(hidden => 
+        item.name?.toLowerCase().includes(hidden.toLowerCase())
+      )
+    );
+
   const filterItemsByRarity = (items: any[]) => {
     if (selectedRarity === "all") return items;
     return items.filter((item: any) => item.rarity === selectedRarity);
@@ -243,7 +253,7 @@ const StoreTab = () => {
             {(selectedCategory === "all" || selectedCategory === "skins") && (
               <StoreCategoryCard
                 title="Fighters"
-                items={filterItemsByRarity(mapItemsToDisplay(getStoreItemsByCategory('fighters')))}
+                items={filterHiddenStoreItems(filterItemsByRarity(mapItemsToDisplay(getStoreItemsByCategory('fighters'))))}
                 onItemClick={handleStoreItemClick}
                 carouselRef={carouselRefs.fighters}
                 category='fighters'
@@ -254,7 +264,7 @@ const StoreTab = () => {
             {(selectedCategory === "all" || selectedCategory === "accessories") && (
               <StoreCategoryCard
                 title="Accessories"
-                items={filterItemsByRarity(mapItemsToDisplay(getStoreItemsByCategory('accessories')))}
+                items={filterHiddenStoreItems(filterItemsByRarity(mapItemsToDisplay(getStoreItemsByCategory('accessories'))))}
                 onItemClick={handleStoreItemClick}
                 carouselRef={carouselRefs.accessories}
                 desktopMode={!isMobile}
@@ -265,7 +275,7 @@ const StoreTab = () => {
             {(selectedCategory === "all" || selectedCategory === "mobility") && (
               <StoreCategoryCard
                 title="Mobility"
-                items={filterItemsByRarity(mapItemsToDisplay(getStoreItemsByCategory('mobility')))}
+                items={filterHiddenStoreItems(filterItemsByRarity(mapItemsToDisplay(getStoreItemsByCategory('mobility'))))}
                 onItemClick={handleStoreItemClick}
                 carouselRef={carouselRefs.mobility}
                 desktopMode={!isMobile}
@@ -276,7 +286,7 @@ const StoreTab = () => {
             {(selectedCategory === "all" || selectedCategory === "emotes") && (
               <StoreCategoryCard
                 title="Emotes"
-                items={filterItemsByRarity(mapItemsToDisplay(getStoreItemsByCategory('emotes')))}
+                items={filterHiddenStoreItems(filterItemsByRarity(mapItemsToDisplay(getStoreItemsByCategory('emotes'))))}
                 onItemClick={handleStoreItemClick}
                 carouselRef={carouselRefs.emotes}
                 desktopMode={!isMobile}
@@ -287,7 +297,7 @@ const StoreTab = () => {
             {(selectedCategory === "all" || selectedCategory === "packs") && (
               <StoreCategoryCard
                 title="Packs"
-                items={filterItemsByRarity(mapItemsToDisplay(getStoreItemsByCategory('packs')))}
+                items={filterHiddenStoreItems(filterItemsByRarity(mapItemsToDisplay(getStoreItemsByCategory('packs'))))}
                 onItemClick={handleStoreItemClick}
                 carouselRef={carouselRefs.packs}
                 desktopMode={!isMobile}
