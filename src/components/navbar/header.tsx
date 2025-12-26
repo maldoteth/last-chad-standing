@@ -15,7 +15,8 @@ import { Input } from "@/components/ui/input";
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerTrigger, DrawerClose } from "@/components/ui/drawer";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogDescription } from "@/components/ui/dialog";
-import { Bell, Medal, LogOut, X, Edit3, Check, Copy, CreditCard, Upload } from "lucide-react";
+import { Bell, Medal, LogOut, X, Edit3, Check, Copy, CreditCard, Upload, History } from "lucide-react";
+import TransactionHistory from "../TransactionHistory";
 import { tabItems } from "@/lib/data";
 import { useRank } from "@/context/rankData";
 import { useApi } from "@/Api/apiFunction";
@@ -30,6 +31,7 @@ const Header = () => {
     const isMobile = useIsMobile();
     const [activeTab, setActiveTab] = useState("home");
     const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
+    const [isHistoryOpen, setIsHistoryOpen] = useState(false);
 
     const [isRankingsOpen, setIsRankingsOpen] = useState(false);
     const [buyDialogOpen, setBuyDialogOpen] = useState(false);
@@ -266,6 +268,11 @@ const Header = () => {
                                             </div>
                                         </div>
 
+                                        <Button onClick={() => setIsHistoryOpen(true)} variant="outline" className="w-full bg-transparent border-white/20 text-white hover:bg-white/10 hover:text-white transition-all duration-300">
+                                            <History className="w-4 h-4 mr-2" />
+                                            Transaction History
+                                        </Button>
+
                                         <Button onClick={logout} variant="outline" className="w-full bg-transparent border-white/20 text-white hover:bg-white/10 hover:text-white transition-all duration-300">
                                             <LogOut className="w-4 h-4 mr-2" />
                                             Sign Out
@@ -440,6 +447,11 @@ const Header = () => {
                                         </div>
                                     )}
 
+                                    <DropdownMenuItem onClick={() => setIsHistoryOpen(true)} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 hover:text-white transition-all duration-300">
+                                        <History className="w-4 h-4" />
+                                        <span>Transaction History</span>
+                                    </DropdownMenuItem>
+
                                     <DropdownMenuItem onClick={logout} className="flex items-center space-x-2 cursor-pointer text-white hover:bg-white/10 hover:text-white transition-all duration-300">
                                         <LogOut className="w-4 h-4" />
                                         <span>Sign Out</span>
@@ -498,6 +510,28 @@ const Header = () => {
                     </div>
                 </DrawerContent>
             </Drawer>
+
+            {/* Transaction History - Mobile: Drawer, Desktop: Dialog */}
+            {isMobile ? <Drawer open={isHistoryOpen} onOpenChange={setIsHistoryOpen}>
+                <DrawerContent className="bg-black/20 backdrop-blur-md border-white/10 max-h-[80vh]">
+                    <DrawerHeader>
+                        <DrawerTitle className="text-center text-white">Transaction History</DrawerTitle>
+                    </DrawerHeader>
+                    <div className="px-4 pb-6">
+                        <TransactionHistory />
+                    </div>
+                </DrawerContent>
+            </Drawer> : <Dialog open={isHistoryOpen} onOpenChange={setIsHistoryOpen}>
+                <DialogContent className="sm:max-w-lg bg-gradient-to-br from-gray-900 via-black to-gray-800 border border-white/20 text-white">
+                    <DialogHeader>
+                        <DialogTitle className="text-white">Transaction History</DialogTitle>
+                        <DialogDescription className="text-white/60">
+                            View all your transactions including purchases, trades, and coin buys.
+                        </DialogDescription>
+                    </DialogHeader>
+                    <TransactionHistory />
+                </DialogContent>
+            </Dialog>}
 
             {/* Buy Dialog - Mobile: Drawer, Desktop: Dialog */}
             {isMobile ? <Drawer open={buyDialogOpen} onOpenChange={setBuyDialogOpen}>
