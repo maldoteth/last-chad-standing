@@ -266,13 +266,15 @@ const MarketTab = () => {
     // Items to hide from marketplace (temporary, for investigation)
     const HIDDEN_MARKETPLACE_ITEMS = ["Ray Del Maestro", "Dangerous fighter", "Conquisto D'ior", "Helicopter"];
     const filterHiddenItems = (players: any[]) => 
-        players.filter(player => 
+        players?.filter(player => 
             !HIDDEN_MARKETPLACE_ITEMS.some(hidden => 
                 player.name?.toLowerCase().includes(hidden.toLowerCase())
             )
-        );
+        ) || [];
 
     const filteredAndSortedMarketplacePlayers = sortMarketplacePlayers(filterMarketplaceBySearch(filterMarketplaceByRarity(filterMarketplaceByCategory(filterHiddenItems(itemsData), marketplaceCategory), marketplaceRarity), searchTerm), marketplaceSortBy);
+    const filteredTrending = filterHiddenItems(listTrending);
+    const filteredGainers = filterHiddenItems(listGainer);
     const timeFilters = [
         { key: "daily", label: isMobile ? "24H" : "Daily" },
         { key: "weekly", label: isMobile ? "7D" : "Weekly" },
@@ -395,7 +397,7 @@ const MarketTab = () => {
                                 </CardHeader>
                                 <CardContent className="relative z-10">
                                     <div className="space-y-2 md:space-y-3">
-                                        {listTrending?.map((player, idx) => (
+                                        {filteredTrending?.map((player, idx) => (
                                             <PlayerListItem profile={profile} key={`trending-${idx}`} player={player} getMarketplacePrices={getMarketplacePrices} isMobile={isMobile} size="medium" onSellClick={handleSellClick} onBuyClick={handleBuyClick} index={idx} />
                                         ))}
                                     </div>
@@ -416,7 +418,7 @@ const MarketTab = () => {
                                 </CardHeader>
                                 <CardContent className="relative z-10">
                                     <div className="space-y-2 md:space-y-3">
-                                        {listGainer?.map((player, idx) => (
+                                        {filteredGainers?.map((player, idx) => (
                                             <PlayerListItem profile={profile} key={`gainers-${gainersTimeFilter}-${idx}`} player={player} getMarketplacePrices={getMarketplacePrices} isMobile={isMobile} size="medium" onSellClick={handleSellClick} onBuyClick={handleBuyClick} index={idx} />
                                         ))}
                                     </div>
