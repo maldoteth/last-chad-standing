@@ -26,6 +26,7 @@ const HomeTab = () => {
     const isMobile = useIsMobile();
     const [isPreOrderOpen, setIsPreOrderOpen] = useState(false);
     const [objectivesView, setObjectivesView] = useState<"weekly" | "daily">("weekly");
+    const [isObjectivesGlowing, setIsObjectivesGlowing] = useState(false);
 
     const [sellDialogOpen, setSellDialogOpen] = useState(false);
     const [selectedPlayer, setSelectedPlayer] = useState<any>(null);
@@ -370,7 +371,7 @@ const HomeTab = () => {
                     <ObjectivesCard
                         objectivesView={objectivesView}
                         setObjectivesView={setObjectivesView}
-                        isObjectivesGlowing={true}
+                        isObjectivesGlowing={isObjectivesGlowing}
                     />
                 </div>
             </>}
@@ -414,6 +415,9 @@ const HomeTab = () => {
                             <p className="text-gray-300 text-sm mb-4">by completing objectives</p>
                             <Button variant="secondary" size="sm" className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 w-full relative z-10 transition-all duration-300" onClick={() => {
                                 setObjectivesView("daily");
+                                setIsObjectivesGlowing(true);
+                                objectivesRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                setTimeout(() => setIsObjectivesGlowing(false), 2000);
                             }}>
                                 Show Objectives
                             </Button>
