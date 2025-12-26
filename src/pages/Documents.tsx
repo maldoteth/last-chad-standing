@@ -190,9 +190,6 @@ const Documents = () => {
       title: "Controls",
       href: "#controls"
     }, {
-      title: "Combat Mechanics",
-      href: "#combat-mechanics"
-    }, {
       title: "Weapons & Inventory",
       href: "#weapons-inventory"
     }, {
@@ -682,69 +679,6 @@ There are environmental traps like collapsing floors, explosive barrels, and nat
                         </div>
                       </section>
 
-                      {/* Combat Mechanics */}
-                      <section id="combat-mechanics" className="mb-12">
-
-                        <br />
-
-                        <h2 className="text-3xl font-bold">11. Combat Mechanics</h2>
-                        <p>The core of Last Chad Standing revolves around melee combat, blending fast reflexes, precise timing, and smart environmental use.</p>
-                        
-                        <br />
-                        
-                        <br />
-
-                        <h3 className="text-2xl font-bold">Attack Types</h3>
-                        <ul>
-                          <li><strong>Punch/Combos (LMB/R2):</strong> Quick, basic attacks that deal moderate damage but are harder to counter. Ideal for rapid combos.</li>
-                          <li><strong>Kick/Combos (RMB/L2):</strong> Slower, more powerful strikes. These can break through blocks but leave you open to counters if missed.</li>
-                          <li><strong>Combos:</strong> Chaining punch and kick attacks in various sequences triggers character-specific combos for extra damage or stuns. Example: Punch-Punch-Kick = Overhead Slam Combo. Combos vary based on character type (Brawler, Ninja, etc.).</li>
-                        </ul>
-
-                        <br />
-
-                        <h3 className="text-2xl font-bold">Grappling (F/Circle/B)</h3>
-                        <ul>
-                          <li><strong>Grapple:</strong> Initiate a grapple on a nearby opponent to engage in close-quarters combat. Grapples can be countered with a well-timed block or dodge.</li>
-                          <li><strong>Throws:</strong> After a successful grapple, use directional inputs to throw your opponent into environmental hazards or towards other players.</li>
-                          <li><strong>Special Throws:</strong> Each fighter has unique throws that differ based on their fighting style (e.g., Brawler performs a suplex; Ninja flips the enemy over).</li>
-                        </ul>
-
-                        <br />
-
-                        <h3 className="text-2xl font-bold">Blocking and Parrying</h3>
-                        <ul>
-                          <li><strong>Block (C/R1):</strong> Deflects incoming punch attacks but depletes stamina with each hit.</li>
-                          <li><strong>Parry:</strong> If timed perfectly, pressing the block button just as an opponent strikes will parry their attack, opening them up for a devastating counterattack.</li>
-                        </ul>
-
-                        <br />
-
-                        <h3 className="text-2xl font-bold">Dodging and Sprinting</h3>
-                        <ul>
-                          <li><strong>Quick Dodge (V/L1):</strong> Evade enemy attacks with a swift side step. Dodging consumes stamina but can avoid kick attacks or grapples.</li>
-                          <li><strong>Sprint (Shift/L3):</strong> Use sprint to quickly cover ground or charge towards enemies. While sprinting, players can perform sliding attacks, which knock down opponents.</li>
-                        </ul>
-
-                        <br />
-
-                        <h3 className="text-2xl font-bold">Special Abilities (Q/L1 + R1)</h3>
-                        <p>Each character class has a unique special ability that recharges over time or when certain conditions are met (e.g., landing consecutive hits). Abilities vary greatly but are game-changing when used strategically:</p>
-                        <ul>
-                          <li><strong>Brawler:</strong> Ground slam, causing area-of-effect damage.</li>
-                          <li><strong>Ninja:</strong> Cloaking for a brief period of invisibility.</li>
-                          <li><strong>Brute:</strong> Temporary damage immunity.</li>
-                        </ul>
-
-                        <br />
-
-                        <h3 className="text-2xl font-bold">Finishers (R/Triangle/Y)</h3>
-                        <p>Finishers are unique, gory executions that players can perform when an opponent's health is critically low (triggered when a finisher icon appears).</p>
-                        <ul>
-                          <li><strong>Execution Prompt:</strong> When close to a low-health opponent, press the execute button to perform a brutal finishing move.</li>
-                          <li><strong>Customization:</strong> Players can customize their finisher animations based on NFTs or earned achievements.</li>
-                        </ul>
-                      </section>
 
                       {/* Weapons and Inventory */}
                       <section id="weapons-inventory" className="mb-12">
