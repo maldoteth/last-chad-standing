@@ -145,7 +145,7 @@ export const getTierIcon = (xp: number): string => {
   return '👤'; // Recruit (Level 0)
 };
 
-export const coinToUsd = 0.001
+export const coinToUsd = 0.0002
 
 /**
  * Abbreviate a username to a maximum length with ellipsis
