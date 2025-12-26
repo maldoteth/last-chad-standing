@@ -73,6 +73,21 @@ interface StorePurchaseDialogProps {
   isLockerItem?: boolean
 }
 
+// Get max supply based on rarity
+const getRarityMaxSupply = (rarity?: string): number => {
+  switch (rarity?.toLowerCase()) {
+    case 'legendary':
+      return 100;
+    case 'epic':
+      return 200;
+    case 'rare':
+      return 300;
+    case 'sparse':
+    default:
+      return 500;
+  }
+};
+
 // Stat Item Component
 const StatItem = ({
   label,
@@ -482,14 +497,14 @@ const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
                   {/* Stats Row */}
                   <div className="flex justify-center gap-8 py-3 border-y border-white/5">
                     <StatItem label="Released" value={formatDate(item.first_release_date)} />
-                    <StatItem label="Sold" value={`${item.total_purchased || 0}/500`} />
+                    <StatItem label="Sold" value={`${item.total_purchased || 0}/${getRarityMaxSupply(item.rarity)}`} />
                     {isUserPurchased && (
                       <StatItem label="Owned" value={formatNumberWithAbbreviation(item?.quantity || 0)} />
                     )}
                   </div>
                   
                   {/* Sold Out Badge */}
-                  {(item.total_purchased || 0) >= 500 && !isUserPurchased && (
+                  {(item.total_purchased || 0) >= getRarityMaxSupply(item.rarity) && !isUserPurchased && (
                     <div className="text-center py-2">
                       <Badge variant="outline" className="text-red-400 border-red-400/30 bg-red-500/10 px-4 py-1">
                         Sold Out
@@ -504,7 +519,7 @@ const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
                     ) : (isLockerItem && 'sale_price' in item) ? (
                       <PriceDisplay 
                         price={item?.sale_price} 
-                        onClick={(item.total_purchased || 0) < 500 ? handlePurchaseWithCoins : undefined}
+                        onClick={(item.total_purchased || 0) < getRarityMaxSupply(item.rarity) ? handlePurchaseWithCoins : undefined}
                         disabled={insufficientFunds || isSubmintLoading || isLoadingCard || isLoading}
                         loading={isSubmintLoading || isLoading}
                         insufficientFunds={insufficientFunds}
@@ -512,7 +527,7 @@ const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
                     ) : (
                       <PriceDisplay 
                         price={item.price}
-                        onClick={(item.total_purchased || 0) < 500 ? handlePurchaseWithCoins : undefined}
+                        onClick={(item.total_purchased || 0) < getRarityMaxSupply(item.rarity) ? handlePurchaseWithCoins : undefined}
                         disabled={insufficientFunds || isSubmintLoading || isLoadingCard || isLoading}
                         loading={isSubmintLoading || isLoading}
                         insufficientFunds={insufficientFunds}
