@@ -82,8 +82,8 @@ export default function ObjectivesCard({
 
     return (
         <Card
-            className={`bg-black border-gray-700 transition-all duration-500 ease-in-out cursor-pointer hover:bg-black/80 ${isObjectivesGlowing
-                ? "ring-1 ring-primary/30 shadow-lg shadow-primary/20"
+            className={`bg-black border-gray-700 transition-all duration-300 ease-in-out cursor-pointer hover:bg-black/80 ${isObjectivesGlowing
+                ? "ring-2 ring-primary/60 shadow-[0_0_20px_rgba(var(--primary-rgb),0.4)] animate-pulse"
                 : ""
                 }`}
         >
