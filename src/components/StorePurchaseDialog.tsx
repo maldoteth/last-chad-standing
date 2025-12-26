@@ -429,10 +429,10 @@ const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
                 {/* Expanded Image Modal */}
                 {isImageExpanded && (
                   <div 
-                    className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
+                    className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 md:pb-[100px]"
                     onClick={() => setIsImageExpanded(false)}
                   >
-                    <div className="relative max-w-[90vw] max-h-[90vh]">
+                    <div className="relative max-w-[90vw] max-h-[90vh] md:-translate-y-[50px]">
                       <img
                         src={item?.ImgGatewayUrl || item.image_url || "/placeholder.svg"}
                         alt={item.name}
