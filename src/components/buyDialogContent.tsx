@@ -228,6 +228,10 @@ const BuyDialogContent: React.FC<BuyDialogContentProps> = ({ selectedPlayer, onC
         >
           Cancel
         </Button>
+
+        <p className="text-white/40 text-xs text-center">
+          Coins are currently non-transferable in-game credits
+        </p>
       </div>
     </div>
   );
