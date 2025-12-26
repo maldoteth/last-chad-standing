@@ -205,9 +205,15 @@ const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
     }
   };
   useEffect(() => {
-
     fetchToken();
   }, [item]);
+
+  // Reset image expanded state when dialog closes
+  useEffect(() => {
+    if (!isOpen) {
+      setIsImageExpanded(false);
+    }
+  }, [isOpen]);
   const handleTransferPrivyNft = async () => {
     try {
       const TOKEN_ID =  tokenIds?.length > 0 ? tokenIds[0] : ''
