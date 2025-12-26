@@ -607,12 +607,12 @@ There are environmental traps like collapsing floors, explosive barrels, and nat
                                   <span className="text-gray-200 font-medium">Close Combat</span>
                                 </div>
                                 <div className="divide-y divide-gray-700">
-                                  <div className="flex justify-between px-4 py-2 text-sm"><span className="text-gray-300">Simple punch</span><span className="text-gray-400">LMB</span></div>
-                                  <div className="flex justify-between px-4 py-2 text-sm"><span className="text-gray-300">Block</span><span className="text-gray-400">RMB</span></div>
-                                  <div className="flex justify-between px-4 py-2 text-sm"><span className="text-gray-300">Attack from air</span><span className="text-gray-400">Jump + LMB</span></div>
-                                  <div className="flex justify-between px-4 py-2 text-sm"><span className="text-gray-300">Splash attack from air</span><span className="text-gray-400">Jump + ALT + LMB</span></div>
-                                  <div className="flex justify-between px-4 py-2 text-sm"><span className="text-gray-300">Super combo attack</span><span className="text-gray-400">Left Shift + LMB</span></div>
-                                  <div className="flex justify-between px-4 py-2 text-sm"><span className="text-gray-300">Stealth Kill</span><span className="text-gray-400">Left Alt + LMB</span></div>
+                                  <div className="flex flex-col sm:flex-row sm:justify-between px-4 py-3 sm:py-2 text-sm gap-1 sm:gap-0"><span className="text-gray-300 font-medium sm:font-normal">Simple punch</span><span className="text-gray-400 text-xs sm:text-sm">LMB</span></div>
+                                  <div className="flex flex-col sm:flex-row sm:justify-between px-4 py-3 sm:py-2 text-sm gap-1 sm:gap-0"><span className="text-gray-300 font-medium sm:font-normal">Block</span><span className="text-gray-400 text-xs sm:text-sm">RMB</span></div>
+                                  <div className="flex flex-col sm:flex-row sm:justify-between px-4 py-3 sm:py-2 text-sm gap-1 sm:gap-0"><span className="text-gray-300 font-medium sm:font-normal">Attack from air</span><span className="text-gray-400 text-xs sm:text-sm">Jump + LMB</span></div>
+                                  <div className="flex flex-col sm:flex-row sm:justify-between px-4 py-3 sm:py-2 text-sm gap-1 sm:gap-0"><span className="text-gray-300 font-medium sm:font-normal">Splash attack from air</span><span className="text-gray-400 text-xs sm:text-sm">Jump + ALT + LMB</span></div>
+                                  <div className="flex flex-col sm:flex-row sm:justify-between px-4 py-3 sm:py-2 text-sm gap-1 sm:gap-0"><span className="text-gray-300 font-medium sm:font-normal">Super combo attack</span><span className="text-gray-400 text-xs sm:text-sm">Left Shift + LMB</span></div>
+                                  <div className="flex flex-col sm:flex-row sm:justify-between px-4 py-3 sm:py-2 text-sm gap-1 sm:gap-0"><span className="text-gray-300 font-medium sm:font-normal">Stealth Kill</span><span className="text-gray-400 text-xs sm:text-sm">Left Alt + LMB</span></div>
                                 </div>
                               </div>
                             </div>
