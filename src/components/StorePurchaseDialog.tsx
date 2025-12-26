@@ -473,7 +473,7 @@ const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
                 <div className="flex-1 text-center space-y-4 w-full max-w-sm">
                   {/* Name & Description */}
                   <div>
-                    <h2 className="text-xl font-semibold text-white mb-1">{item.name}</h2>
+                    <h2 className="text-2xl font-semibold text-white mb-1">{item.name}</h2>
                     {item.description && (
                       <p className="text-white/50 text-sm">{item.description}</p>
                     )}
