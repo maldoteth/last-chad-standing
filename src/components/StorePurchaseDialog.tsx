@@ -118,15 +118,16 @@ const PriceDisplay = ({
   loading?: boolean;
   insufficientFunds?: boolean;
 }) => (
-  <button
-    onClick={onClick}
-    disabled={disabled || !onClick}
-    className={`flex items-center justify-center gap-2 px-6 py-3 rounded-2xl transition-all duration-300 ${
-      onClick && !disabled
-        ? 'bg-white/10 hover:bg-white/20 hover:scale-105 cursor-pointer active:scale-95 backdrop-blur-sm border border-white/10'
-        : ''
-    } ${disabled ? 'opacity-50 cursor-not-allowed' : ''} ${insufficientFunds ? 'border-red-500/30' : ''}`}
-  >
+  <div className="flex justify-center w-full">
+    <button
+      onClick={onClick}
+      disabled={disabled || !onClick}
+      className={`flex items-center justify-center gap-2 px-6 py-3 rounded-2xl transition-all duration-300 mx-auto ${
+        onClick && !disabled
+          ? 'bg-white/10 hover:bg-white/20 hover:scale-105 cursor-pointer active:scale-95 backdrop-blur-sm border border-white/10'
+          : ''
+      } ${disabled ? 'opacity-50 cursor-not-allowed' : ''} ${insufficientFunds ? 'border-red-500/30' : ''}`}
+    >
     {loading ? (
       <Spinner color="white" />
     ) : (
@@ -141,7 +142,8 @@ const PriceDisplay = ({
         </span>
       </>
     )}
-  </button>
+    </button>
+  </div>
 );
 
 const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
@@ -389,7 +391,7 @@ const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
   return (
     <>
       <Drawer open={isOpen} onOpenChange={onClose}>
-        <DrawerContent className="bg-black/40 backdrop-blur-2xl border-t border-white/10 max-h-[85vh]">
+        <DrawerContent className="bg-black/20 backdrop-blur-3xl border-t border-white/5 max-h-[85vh]">
           <DrawerHeader className="relative py-4 border-b border-white/5">
             <DrawerClose asChild>
               <Button
