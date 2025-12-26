@@ -250,9 +250,24 @@ export const CheckPrivy = ({ dollarAmount = 0, onComplete, ethToUsdRate = 0 }: C
               <div className={`w-2 h-2 rounded-full ${insufficientBalance ? 'bg-orange-400' : 'bg-green-500'}`} />
               <h3 className="text-sm font-medium text-white">Wallet Address</h3>
             </div>
-            <p className="text-xs font-mono text-white break-all bg-black/50 backdrop-blur-2xl p-2 rounded border border-gray-200">
-              {wallets[0].address}
-            </p>
+            <div className="flex items-center gap-2">
+              <p className="text-xs font-mono text-white break-all bg-black/50 backdrop-blur-2xl p-2 rounded border border-gray-200 flex-1">
+                {wallets[0].address}
+              </p>
+              <button
+                onClick={async () => {
+                  await navigator.clipboard.writeText(wallets[0].address);
+                  toast.success("Address copied!");
+                }}
+                className="p-2 rounded bg-black/50 border border-gray-200 text-white hover:bg-white/20 transition-colors shrink-0"
+                title="Copy address"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect width="14" height="14" x="8" y="8" rx="2" ry="2"/>
+                  <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
+                </svg>
+              </button>
+            </div>
           </div>
 
           {/* Balance Overview */}
