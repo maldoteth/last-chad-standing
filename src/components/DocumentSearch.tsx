@@ -110,7 +110,7 @@ const DocumentSearch: React.FC<DocumentSearchProps> = ({ isOpen, onClose, isMobi
     {
       sectionId: 'token-economy',
       title: 'Token Distribution',
-      content: 'Total Supply: 100,000,000,000 coins. Public: 30% (30B coins) - 100% unlock at TGE. Team: 15% (15B coins) - 12 month cliff + 20% daily linear per year. Foundation: 15% (15B coins) - 20% a year linear daily. Airdrops: 15% (15B coins) - 100% TGE unlock. Ecosystem Rewards: 10% (10B coins) - 20% per year daily linear. LP: 10% (10B coins) - 100% TGE unlock. Advisors: 5% (5B coins) - 12 month cliff + 20% daily linear per year.'
+      content: 'Total Supply: 100,000,000,000 coins. Public: 30% (30B coins) - 100% unlock at TGE. Team: 15% (15B coins) - 12 month cliff + 20% daily linear per year. Foundation: 15% (15B coins) - 20% a year linear daily. Airdrops: 15% (15B coins) - 12 month cliff + 50% daily linear per year. Ecosystem Rewards: 10% (10B coins) - 20% per year daily linear. LP: 10% (10B coins) - 100% TGE unlock. Advisors: 5% (5B coins) - 12 month cliff + 20% daily linear per year.'
     },
     {
       sectionId: 'genesis-chads',
