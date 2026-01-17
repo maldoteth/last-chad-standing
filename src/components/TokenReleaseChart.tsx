@@ -36,11 +36,11 @@ const TokenReleaseChart = () => {
         advisorTokens = Math.min(5, 5 * 0.25 * yearsAfterCliff);
       }
       
-      // Airdrops: 15B - 12 month cliff + 50% per year linear (reaches 100% in 2 years after cliff)
+      // Airdrops: 15B - 12 month cliff + 1 year linear (reaches 100% in 1 year after cliff)
       let airdropsTokens = 0;
       if (day > 365) { // 12 months = 365 days cliff
         const yearsAfterCliff = (day - 365) / 365;
-        airdropsTokens = Math.min(15, 15 * 0.5 * yearsAfterCliff);
+        airdropsTokens = Math.min(15, 15 * yearsAfterCliff);
       }
       
       // Foundation: 15B - 20% a year linear daily
