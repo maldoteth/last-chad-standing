@@ -36,8 +36,12 @@ const TokenReleaseChart = () => {
         advisorTokens = Math.min(5, 5 * 0.25 * yearsAfterCliff);
       }
       
-      // Airdrops: 15B - 100% at TGE
-      const airdropsTokens = 15;
+      // Airdrops: 15B - 12 month cliff + 50% per year linear (reaches 100% in 2 years after cliff)
+      let airdropsTokens = 0;
+      if (day > 365) { // 12 months = 365 days cliff
+        const yearsAfterCliff = (day - 365) / 365;
+        airdropsTokens = Math.min(15, 15 * 0.5 * yearsAfterCliff);
+      }
       
       // Foundation: 15B - 20% a year linear daily
       const foundationTokens = Math.min(15, 15 * 0.2 * year);
@@ -145,7 +149,7 @@ const TokenReleaseChart = () => {
           />
           
           {/* Stack areas from bottom to top - logical hierarchy */}
-          {/* Bottom layer: 100% TGE unlock (stable base) */}
+          {/* Bottom layer: 100% TGE unlock (Public + LP) */}
           <Area
             type="monotone"
             dataKey="Public"

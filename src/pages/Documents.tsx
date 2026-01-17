@@ -897,7 +897,7 @@ This means fighters truly own their digital assets and can trade them freely wit
                             <li><strong>Foundation:</strong> 15% (15B coins)<br />
                               <span className="text-sm text-gray-600">20% a year linear daily</span></li>
                             <li><strong>Airdrops:</strong> 15% (15B coins)<br />
-                              <span className="text-sm text-gray-600">100% TGE unlock</span></li>
+                              <span className="text-sm text-gray-600">12 month cliff + 50% daily linear per year</span></li>
                             <li><strong>Ecosystem Rewards:</strong> 10% (10B coins)<br />
                               <span className="text-sm text-gray-600">20% per year daily linear</span></li>
                             <li><strong>LP:</strong> 10% (10B coins)<br />
