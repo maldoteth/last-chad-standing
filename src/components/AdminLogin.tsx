@@ -29,6 +29,10 @@ export default function AdminLogin() {
     isVerifying.current = true;
 
     try {
+      // Clear old tokens to ensure a clean login
+      localStorage.removeItem('token');
+      localStorage.removeItem('admin_token');
+      
       const payload = {
         walletAddress: user.wallet?.address,
         email: user.email?.address,
@@ -50,8 +54,10 @@ export default function AdminLogin() {
   }, [authenticated]);
 
   useEffect(() => {
-    verifyAdmin();
-  }, [authenticated]);
+    if (authenticated && !hasVerified.current && !isVerifying.current) {
+      verifyAdmin();
+    }
+  }, [authenticated, verifyAdmin]);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-background">

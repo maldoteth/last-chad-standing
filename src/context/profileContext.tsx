@@ -139,6 +139,12 @@ export const ProfileProvider = ({ children }: { children: ReactNode }) => {
         const newIcon = getTierIcon(profile.xp || 0);
         setProfile(prev => (prev ? { ...prev, avatar_url: newIcon } : null));
     };
+    useEffect(() => {
+        if (authenticated && user?.id && !profile && !loading) {
+            createProfile();
+        }
+    }, [authenticated, user?.id, profile, loading]);
+
     useSocketEvent('update:user', (user: UserProfile) => {
         if (!user) return;
         const newIcon = getTierIcon(user.xp || 0);

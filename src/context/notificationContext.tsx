@@ -1,7 +1,7 @@
 'use client';
 
 import { useApi } from '@/Api/apiFunction';
-import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useEffect, useState, ReactNode, useRef } from 'react';
 
 export interface Notification {
     id: string;
@@ -27,14 +27,6 @@ interface NotificationContextType {
 
 const NotificationContext = createContext<NotificationContextType | undefined>(undefined);
 
-export const useNotifications = (): NotificationContextType => {
-    const context = useContext(NotificationContext);
-    if (!context) {
-        throw new Error('useNotifications must be used within a NotificationProvider');
-    }
-    return context;
-};
-
 interface Props {
     children: ReactNode;
 }
@@ -52,8 +44,13 @@ export const NotificationProvider: React.FC<Props> = ({ children }) => {
     // ---------------------
     // Fetch Notifications (with pagination & unread filter)
     // ---------------------
+    const isFetchingRef = useRef(false);
+    const isFetchingCountRef = useRef(false);
+
     const fetchNotifications = async (options?: { unread_only?: string; page?: number }) => {
+        if (isFetchingRef.current) return;
         try {
+            isFetchingRef.current = true;
             setLoading(true);
 
             const res = await get(`notifications`, { page: options?.page, unread_only: options?.unread_only });
@@ -67,20 +64,22 @@ export const NotificationProvider: React.FC<Props> = ({ children }) => {
             console.error('❌ Error fetching notifications:', err);
         } finally {
             setLoading(false);
+            isFetchingRef.current = false;
         }
     };
 
-    // ---------------------
-    // Fetch Unread Count
-    // ---------------------
     const fetchUnreadCount = async () => {
+        if (isFetchingCountRef.current) return;
         try {
+            isFetchingCountRef.current = true;
             const res = await get('notifications/count');
             if (res.success) {
                 setUnreadCount(res.count || 0);
             }
         } catch (err) {
             console.error('❌ Error fetching unread count:', err);
+        } finally {
+            isFetchingCountRef.current = false;
         }
     };
 
@@ -109,7 +108,10 @@ export const NotificationProvider: React.FC<Props> = ({ children }) => {
     };
 
     useEffect(() => {
-        refreshAll();
+        const token = localStorage.getItem('token');
+        if (token) {
+            refreshAll();
+        }
     }, []);
 
     return (
@@ -130,4 +132,12 @@ export const NotificationProvider: React.FC<Props> = ({ children }) => {
             {children}
         </NotificationContext.Provider>
     );
+};
+
+export const useNotifications = (): NotificationContextType => {
+    const context = useContext(NotificationContext);
+    if (!context) {
+        throw new Error('useNotifications must be used within a NotificationProvider');
+    }
+    return context;
 };
