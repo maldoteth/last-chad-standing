@@ -6,6 +6,7 @@ import React, {
   useEffect,
   useState,
   ReactNode,
+  useRef,
 } from "react";
 import { useApi } from "@/Api/apiFunction";
 import { useSocketEvent } from "./SocketContext";
@@ -153,12 +154,20 @@ export const RankProvider = ({ children }: { children: ReactNode }) => {
       console.error("Error fetching objectives:", error);
     }
   };
+  const isFetchingObjectivesRef = useRef(false);
   const fetchObjectiveUserData = async () => {
+    if (isFetchingObjectivesRef.current || !authenticated) return;
     try {
+      isFetchingObjectivesRef.current = true;
       const response = await get("objective/user");
-      setObjectiveUserData(response?.data as ObjectiveProgress[]);
-    } catch (error) {
+      if (response?.success) {
+        setObjectiveUserData(response?.data as ObjectiveProgress[]);
+      }
+    } catch (error: any) {
       console.error("Error fetching objectives:", error);
+      // Don't log logout on 430 here to avoid loops
+    } finally {
+      isFetchingObjectivesRef.current = false;
     }
   };
 

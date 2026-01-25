@@ -66,7 +66,7 @@ export function useApi() {
             fetchRequest(method, endpoint, dataOrParams, {
               ...options,
               revalidate: false,
-            }).catch(() => {});
+            }).catch(() => { });
           }
           return Promise.resolve(cached.data);
         } else {
@@ -118,7 +118,7 @@ export function useApi() {
           return data;
         })
         .catch((error) => {
-          if (error?.response?.status === 430) handleUserLogout();
+          // if (error?.response?.status === 430) handleUserLogout(); // Removed: 430 is rate limit, not session expiry
           throw error;
         })
         .finally(() => {

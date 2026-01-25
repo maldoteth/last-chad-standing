@@ -14,6 +14,7 @@ import StorePurchaseDialog  from "../StorePurchaseDialog";
 import { getRarityFilterColor, getRarityDisplayName, getRarityColor, CATEGORIES, RARITIES } from "@/lib/utils";
 import { Skeleton } from "../ui/skeleton";
 import StoreCategoryCard from "./storeCategoryCard";
+import { supabase } from "@/integrations/supabase/client";
 
 // Filter Button Component
 const FilterButton = ({
@@ -126,14 +127,43 @@ const StoreTab = () => {
   };
 
   const mapItemsToDisplay = (items: any[]) =>
-    items.map((item: any) => ({
-      ...item,
-      name: item.name,
-      price: item.price,
-      rarity: item.rarity,
-      image: item.image_url || "/placeholder.svg",
-      raw: item,
-    }));
+    items.map((item: any) => {
+      let displayUrl = item.ImgGatewayUrl || item.image_url || item.image;
+      
+      if (displayUrl) {
+        // 1. Detect and fix broken Pinata URLs (extract filename from URL)
+        if (displayUrl.includes('pinata.cloud/ipfs/')) {
+          const parts = displayUrl.split('/ipfs/');
+          const path = parts[parts.length - 1];
+          if (!(path.startsWith('Qm') || path.startsWith('bafy'))) {
+            // Extract JUST the filename if it's nested or a full URL
+            const cleanPath = decodeURIComponent(path).split('/').pop() || path;
+            const { data: { publicUrl } } = supabase.storage.from('items').getPublicUrl(cleanPath);
+            displayUrl = publicUrl;
+          }
+        } 
+        // 2. Resolve relative paths
+        else if (!displayUrl.startsWith('http')) {
+          const isIPFS = displayUrl.startsWith('Qm') || displayUrl.startsWith('bafy');
+          if (isIPFS) {
+            displayUrl = `https://gateway.pinata.cloud/ipfs/${displayUrl}`;
+          } else {
+            const cleanPath = decodeURIComponent(displayUrl).split('/').pop() || displayUrl;
+            const { data: { publicUrl } } = supabase.storage.from('items').getPublicUrl(cleanPath);
+            displayUrl = publicUrl;
+          }
+        }
+      }
+
+      return {
+        ...item,
+        name: item.name,
+        price: item.price,
+        rarity: item.rarity,
+        image: displayUrl || "/placeholder.svg",
+        raw: item,
+      };
+    });
 
   const renderCategoryFilters = (isMobile: boolean) => (
     <>
@@ -253,10 +283,10 @@ const StoreTab = () => {
             {(selectedCategory === "all" || selectedCategory === "skins") && (
               <StoreCategoryCard
                 title="Fighters"
-                items={filterHiddenStoreItems(filterItemsByRarity(mapItemsToDisplay(getStoreItemsByCategory('fighters'))))}
+                items={filterHiddenStoreItems(filterItemsByRarity(mapItemsToDisplay(getStoreItemsByCategory('skins'))))}
                 onItemClick={handleStoreItemClick}
                 carouselRef={carouselRefs.fighters}
-                category='fighters'
+                category='skins'
                 desktopMode={!isMobile}
               />
             )}

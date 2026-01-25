@@ -9,9 +9,14 @@ export const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   (config) => {
+    // Priority: Use Admin Token if available, otherwise regular token
+    const adminToken = localStorage.getItem('admin_token');
     const token = localStorage.getItem('token');
-    if (token) {
-      config.headers['Authorization'] = `Bearer ${token}`;
+
+    const finalToken = adminToken || token;
+
+    if (finalToken) {
+      config.headers['Authorization'] = `Bearer ${finalToken}`;
     }
     return config;
   },
