@@ -26,12 +26,13 @@ export interface StoreItem {
   rarity?: string;
   sale_end_date?: string;
   sale_start_date?: string;
-  max_supply?: string;
+  max_supply?: string | number;
   nftAddress?: string;
   nft_address?: string;
   nftDeployWalletId?: string;
   nft_deploy_wallet_id?: string;
   nftBuyerWalletId?: string;
+  user_id?: string;
 }
 
 export interface UserBalance {
