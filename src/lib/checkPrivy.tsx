@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useWallets, usePrivy, useFundWallet } from "@privy-io/react-auth";
 import { createPublicClient, createWalletClient, http, custom, formatEther } from "viem";
 import { base } from "viem/chains";
-import type { Address, ByteArray } from "viem";
-import { useApi } from "@/Api/apiFunction";
+import type { Address } from "viem";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Copy } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 export interface CryptoPaymentProps { hash: string, address: string, exchangeRate: number, cryptoAmount: number, amount: number }
 
@@ -27,7 +27,6 @@ export const CheckPrivy = ({ dollarAmount = 0, onComplete, ethToUsdRate = 0 }: C
   const [insufficientBalance, setInsufficientBalance] = useState(false);
   const activeWallet = wallets.find(w => w.walletClientType !== 'privy') || wallets[0];
   const isEmailOrSmsAuth = authenticated && user && activeWallet?.walletClientType === 'privy';
-  const { post, get } = useApi()
   const { fundWallet, } = useFundWallet();
 
   const ethAmount = dollarAmount / ethToUsdRate;
@@ -72,15 +71,23 @@ export const CheckPrivy = ({ dollarAmount = 0, onComplete, ethToUsdRate = 0 }: C
   const handleGetAdminWallet = async () => {
     try {
       setIsLoading(true)
-      const response = await get('admin/wallet')
-      setAdminWallet(response?.wallet?.address)
+      const { data, error } = await supabase
+        .from('AdminWallet')
+        .select('address')
+        .eq('is_active', true)
+        .limit(1)
+        .single();
+
+      if (error) throw error;
+      setAdminWallet(data?.address || '')
     } catch (error) {
-      console.log(error)
+      console.error("Error fetching admin wallet from Supabase:", error);
     }
     finally {
       setIsLoading(false)
     }
   }
+
   useEffect(() => {
     handleGetAdminWallet()
   }, []);
@@ -97,17 +104,17 @@ export const CheckPrivy = ({ dollarAmount = 0, onComplete, ethToUsdRate = 0 }: C
       const provider = await activeWallet.getEthereumProvider();
 
       try {
-        await provider.request({
+        await (provider as any).request({
           method: "wallet_switchEthereumChain",
           params: [{ chainId: "0x2105" }], 
         });
       } catch (switchError: any) {
         if (switchError.code === 4902) {
-          await provider.request({
+          await (provider as any).request({
             method: "wallet_addEthereumChain",
             params: [
               {
-                chainId: "0x2105", // 8453 decimal
+                chainId: "0x2105", 
                 chainName: "Base Mainnet",
                 nativeCurrency: { name: "Ether", symbol: "ETH", decimals: 18 },
                 rpcUrls: ["https://mainnet.base.org"],
@@ -116,7 +123,7 @@ export const CheckPrivy = ({ dollarAmount = 0, onComplete, ethToUsdRate = 0 }: C
             ],
           });
 
-          await provider.request({
+          await (provider as any).request({
             method: "wallet_switchEthereumChain",
             params: [{ chainId: "0x2105" }],
           });
@@ -128,7 +135,7 @@ export const CheckPrivy = ({ dollarAmount = 0, onComplete, ethToUsdRate = 0 }: C
       const client = createWalletClient({
         account: address,
         chain: base, 
-        transport: custom(provider),
+        transport: custom(provider as any),
       });
 
       const hash = await client.sendTransaction({
@@ -154,6 +161,7 @@ export const CheckPrivy = ({ dollarAmount = 0, onComplete, ethToUsdRate = 0 }: C
       toast.error('Transaction failed. Check console for details.');
     }
   };
+
   const sendTransaction = async () => {
     if (!activeWallet) {
       toast.info('Please connect your wallet first!')
@@ -179,7 +187,6 @@ export const CheckPrivy = ({ dollarAmount = 0, onComplete, ethToUsdRate = 0 }: C
     const address = activeWallet.address as Address;
 
     try {
-      // Round to 6 decimals to avoid Privy internal parsing errors with long decimals
       const formattedAmount = Number(formatEther(TX_AMOUNT)).toFixed(6);
       
       await fundWallet({
@@ -217,7 +224,6 @@ export const CheckPrivy = ({ dollarAmount = 0, onComplete, ethToUsdRate = 0 }: C
 
   return (
     <div className="max-w-lg mx-auto space-y-4">
-      {/* Wallet Management Header */}
       <div className="border border-white/20 rounded-lg p-4 bg-white/5 backdrop-blur-3xl">
         <div className="flex flex-col gap-3">
           <div className="flex items-center justify-between">
@@ -265,7 +271,6 @@ export const CheckPrivy = ({ dollarAmount = 0, onComplete, ethToUsdRate = 0 }: C
         </div>
       </div>
 
-      {/* Balance & Payment Details */}
       {activeWallet && (
         <div className="border border-white/20 rounded-lg p-4 bg-white/5 backdrop-blur-3xl space-y-4">
           <div className="grid grid-cols-2 gap-3">
@@ -285,7 +290,7 @@ export const CheckPrivy = ({ dollarAmount = 0, onComplete, ethToUsdRate = 0 }: C
 
           {insufficientBalance && (
             <div className="p-3 bg-orange-500/10 border border-orange-500/20 rounded text-[11px] text-orange-300">
-              Insufficient ETH for payment and gas. Please add funds to your wallet {activeWallet.walletClientType === 'privy' ? 'or link MetaMask' : ''}.
+              Insufficient ETH for payment and gas. Please add funds to your wallet.
             </div>
           )}
 
@@ -320,7 +325,6 @@ export const CheckPrivy = ({ dollarAmount = 0, onComplete, ethToUsdRate = 0 }: C
         </div>
       )}
 
-      {/* Transaction Success */}
       {txHash && (
         <div className="border border-green-500/30 rounded-lg p-4 bg-green-500/10 text-center space-y-2">
           <p className="text-sm font-bold text-green-400">Payment Sent!</p>

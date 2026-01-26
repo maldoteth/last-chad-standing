@@ -1,47 +1,46 @@
 "use client";
 
-import { useState, useMemo, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { usePrivy, useSessionSigners } from "@privy-io/react-auth";
-import { useApi } from "@/Api/apiFunction";
 import { adminLogin } from "@/lib/adminAuth";
 import { toast } from "@/hooks/use-toast";
-import { handleError } from "@/Api/handleError";
 import { useProfile } from "@/context/profileContext";
+import { supabase } from "@/integrations/supabase/client";
 
 
 const SessionSigners = ({ quorumId, isSigner, isAdmin = false }: { quorumId: string, isSigner: boolean, isAdmin?: boolean }) => {
   const { user, ready } = usePrivy()
   const { updateUsername } = useProfile()
   const { addSessionSigners, } = useSessionSigners();
-  const { put, post } = useApi()
   const [isAdded, setIsAdded] = useState(false);
-  const handleUpadateAdmin = async () => {
+
+  const handleUpdateAdmin = async () => {
     try {
-      const payload = {
-        isSigner: true
-      };
+      // For Admin, we update the AdminUsers table
+      const { data, error } = await supabase
+        .from('AdminUsers')
+        .update({ isSigner: true })
+        .eq('privy_id', user?.id)
+        .select()
+        .single();
 
-      const result = await put("admin", payload);
+      if (error) throw error;
 
-      if (result.success) {
-        adminLogin({ ...result?.admin, token: result?.token });
+      if (data) {
+        // Sync local session
+        const currentSession = JSON.parse(localStorage.getItem('admin_session') || '{}');
+        adminLogin({ ...currentSession, isSigner: true });
 
         toast({
-          title: "Login successful",
-          description: "Welcome to the admin panel",
-        });
-
-      } else {
-        toast({
-          title: "Access denied",
-          description: "You are not authorized as an admin",
-          variant: "destructive",
+          title: "Session Authorized",
+          description: "Signer registered successfully",
         });
       }
-    } catch (error) {
-      handleError(error);
+    } catch (error: any) {
+        console.error("Error updating admin signer status:", error);
     }
   }
+
   const isAddingRef = useRef(false);
   const handleAddSessionSigners = useCallback(async () => {
     if (!ready || !user?.wallet?.address || isAdded || isSigner) {
@@ -53,6 +52,8 @@ const SessionSigners = ({ quorumId, isSigner, isAdmin = false }: { quorumId: str
 
     try {
       let signerId = quorumId
+      
+      // If Admin and no quorumId, try to re-auth/get quorumId via Edge Function
       if (isAdmin && !quorumId) {
         const payload = {
           walletAddress: user.wallet?.address,
@@ -60,9 +61,12 @@ const SessionSigners = ({ quorumId, isSigner, isAdmin = false }: { quorumId: str
           privy_id: user?.id,
         };
 
-        const result = await post("admin/login", payload);
-        if (result.success) {
-          signerId=result?.admin?.quorumId
+        const { data: result, error } = await supabase.functions.invoke('admin-login', {
+            body: payload
+        });
+
+        if (!error && result.success) {
+          signerId = result?.admin?.quorumId;
           await adminLogin({ ...result.admin, token: result.token });
         }
       }
@@ -73,7 +77,7 @@ const SessionSigners = ({ quorumId, isSigner, isAdmin = false }: { quorumId: str
       }
 
       const sessionSigner = await addSessionSigners({
-        address: user.wallet.address,
+        address: user.wallet.address as `0x${string}`,
         signers: [
           {
             signerId: signerId,
@@ -81,10 +85,11 @@ const SessionSigners = ({ quorumId, isSigner, isAdmin = false }: { quorumId: str
           },
         ],
       });
+
       if (sessionSigner.user) {
         setIsAdded(true);
         if (isAdmin) {
-          handleUpadateAdmin()
+          handleUpdateAdmin()
         } else {
           await updateUsername({
             isSigner: true,
@@ -92,19 +97,17 @@ const SessionSigners = ({ quorumId, isSigner, isAdmin = false }: { quorumId: str
         }
       }
     } catch (error: any) {
-      console.error(error)
-      // If duplicate signer error, mark as added to stop retrying
+      console.error("❌ Add Session Signer Error:", error)
       if (error?.message?.includes('Duplicate signer')) {
         setIsAdded(true);
       }
     } finally {
       isAddingRef.current = false;
     }
-  }, [ready, quorumId, user?.wallet?.address, isSigner, isAdded, isAdmin]);
+  }, [ready, quorumId, user?.wallet?.address, isSigner, isAdded, isAdmin, user?.id, addSessionSigners, updateUsername]);
 
   useEffect(() => {
     if (ready && user?.wallet?.address && !isAdded && !isSigner) {
-      // Increased delay and added a check for the embedded wallet
       const timer = setTimeout(() => {
         if (ready && user?.wallet?.address) {
           handleAddSessionSigners();

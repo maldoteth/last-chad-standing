@@ -9,10 +9,10 @@ import React, {
   useRef,
 } from "react";
 import { useSupabase } from "@/hooks/useSupabase";
-import { useSocketEvent } from "./SocketContext";
 import { useProfile } from "./profileContext";
 import { usePrivy } from "@privy-io/react-auth";
 import { useLocation } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
 
 // Types
 export interface Level {
@@ -55,7 +55,7 @@ export interface ObjectiveProgress {
   objective_id: string
   currentCount: number
   completed: boolean
-  startDate: string // ISO 8601 date string from Supabase (e.g., "2025-10-15T12:00:00Z")
+  startDate: string 
   endDate?: string | null
   lastUpdated: string
   type: ObjectiveType
@@ -73,7 +73,6 @@ export interface Objective {
   updated_at?: string
 }
 
-// Context type
 interface RankContextType {
   rankingData: any[];
   levelsData: Level[];
@@ -83,10 +82,8 @@ interface RankContextType {
   isLoading: boolean;
 }
 
-// Create context
 const RankContext = createContext<RankContextType | undefined>(undefined);
 
-// Provider component
 export const RankProvider = ({ children }: { children: ReactNode }) => {
   const [rankingData, setRankingData] = useState<any[]>([]);
   const [levelsData, setLevelData] = useState<Level[]>([]);
@@ -97,36 +94,6 @@ export const RankProvider = ({ children }: { children: ReactNode }) => {
   const { user, authenticated } = usePrivy();
   const { pathname } = useLocation()
   const isAdmin = pathname.startsWith('/admin')
-
-  useSocketEvent("update:ranking", (data) => {
-    if (!data) return;
-
-    setRankingData((prevData) => {
-      const newEntries = Array.isArray(data) ? data : [data];
-      const updated = [...prevData];
-
-      newEntries.forEach((entry) => {
-        const entryId = entry.id;
-        const existingIndex = updated.findIndex((item) => item.id === entryId);
-        if (existingIndex !== -1) {
-          updated[existingIndex] = { ...updated[existingIndex], ...entry };
-        } else {
-          updated.push(entry);
-        }
-      });
-
-      const sorted = [...updated].sort(
-        (a, b) => Number(b.total_XP) - Number(a.total_XP)
-      );
-
-      const ranked = sorted.map((item, index) => ({
-        ...item,
-        rank: index + 1,
-      }));
-
-      return ranked;
-    });
-  });
 
   const fetchLevelsData = async () => {
     try {
@@ -160,6 +127,7 @@ export const RankProvider = ({ children }: { children: ReactNode }) => {
       console.error("Error fetching objectives:", error);
     }
   };
+
   const isFetchingObjectivesRef = useRef(false);
   const fetchObjectiveUserData = async () => {
     if (isFetchingObjectivesRef.current || !authenticated || !user?.id) return;
@@ -170,18 +138,59 @@ export const RankProvider = ({ children }: { children: ReactNode }) => {
         setObjectiveUserData(response.data as ObjectiveProgress[]);
       }
     } catch (error: any) {
-      console.error("Error fetching objectives:", error);
+      console.error("Error fetching user objectives:", error);
     } finally {
       isFetchingObjectivesRef.current = false;
     }
   };
 
-
-  useSocketEvent("update:objectiveProgress", (data) => { fetchObjectiveUserData() })
+  // 💡 Realtime Subscriptions
   useEffect(() => {
-    if (isAdmin) {
-      return
+    if (isAdmin) return;
+
+    // 🏆 Rankings Subscription
+    const performanceChannel = supabase
+      .channel('public:Performances')
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'Performances' },
+        () => {
+          console.log('🏆 Rankings updated via Realtime');
+          fetchRanksData();
+        }
+      )
+      .subscribe();
+
+    // 🎯 Personal Objectives Subscription
+    let objectiveChannel: any;
+    if (authenticated && user?.id) {
+      objectiveChannel = supabase
+        .channel(`objectives-${user.id}`)
+        .on(
+          'postgres_changes',
+          { 
+            event: '*', 
+            schema: 'public', 
+            table: 'ObjectiveProgress',
+            filter: `user_id=eq.${user.id}`
+          },
+          () => {
+            console.log('🎯 Objectives updated via Realtime');
+            fetchObjectiveUserData();
+          }
+        )
+        .subscribe();
     }
+
+    return () => {
+      supabase.removeChannel(performanceChannel);
+      if (objectiveChannel) supabase.removeChannel(objectiveChannel);
+    };
+  }, [isAdmin, authenticated, user?.id]);
+
+  useEffect(() => {
+    if (isAdmin) return;
+    
     const fetchAllData = async () => {
       setIsLoading(true);
       await Promise.all([
@@ -193,16 +202,11 @@ export const RankProvider = ({ children }: { children: ReactNode }) => {
     };
 
     fetchAllData();
-  }, []);
+  }, [isAdmin]);
+
   useEffect(() => {
     if (authenticated) {
-      const fetchAllData = async () => {
-        setIsLoading(true);
-        await fetchObjectiveUserData()
-        setIsLoading(false);
-      };
-
-      fetchAllData();
+      fetchObjectiveUserData();
     }
   }, [authenticated]);
 
@@ -222,7 +226,6 @@ export const RankProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-// Hook for consuming context
 export const useRank = () => {
   const context = useContext(RankContext);
   if (!context) {
