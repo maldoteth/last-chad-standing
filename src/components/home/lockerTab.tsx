@@ -160,11 +160,7 @@ const LockerTab = () => {
                 setStoreItems(storeItemsData);
             }
         } catch (error) {
-            toast({
-                title: "Error",
-                description: "Failed to fetch store items",
-                variant: "destructive",
-            });
+            console.error("Failed to fetch store items:", error);
         } finally {
             setLoading(false);
         }
