@@ -250,6 +250,7 @@ const LockerTab = () => {
                 isOpen={dialogOpen}
                 onClose={() => setDialogOpen(false)}
                 item={selectedItem as any}
+                onSuccess={fetchStoreItems}
             />
         </>
     );
