@@ -331,7 +331,7 @@ const Documents = () => {
               <div className="bg-white rounded-lg shadow-sm border border-gray-200">
                 <ScrollArea className="h-[calc(100vh-8rem)]">
                   <div className="p-8">
-                    <div className="prose prose-gray max-w-none">
+                    <div className="prose prose-gray max-w-none [&_p]:text-gray-700 [&_li]:text-gray-700 [&_td]:text-gray-700 [&_th]:text-gray-700 [&_span]:text-gray-700">
                       
 
                       {/* Game Blueprint Header */}
