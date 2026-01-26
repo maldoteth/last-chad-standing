@@ -13,8 +13,8 @@ serve(async (req) => {
 
   try {
     const password = "admin42069"
-    const saltRounds = 10
-    const hashedPassword = await bcrypt.hash(password, saltRounds)
+    const salt = await bcrypt.genSalt(10)
+    const hashedPassword = await bcrypt.hash(password, salt)
     
     console.log('Password:', password)
     console.log('Hash:', hashedPassword)
@@ -36,8 +36,9 @@ serve(async (req) => {
     )
   } catch (error) {
     console.error('Error:', error)
+    const errorMessage = error instanceof Error ? error.message : String(error);
     return new Response(
-      JSON.stringify({ error: error.message }),
+      JSON.stringify({ error: errorMessage }),
       { 
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
         status: 400,
