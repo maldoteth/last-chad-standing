@@ -114,16 +114,28 @@ export const deployNFTContract = async (params: DeployContractParams) => {
   try {
     console.log("🚀 Deploying NFT contract...");
 
-    const hash = await (walletClient as any).deployContract({
+    // Format bytecode: Ensure it has 0x prefix
+    const formattedBytecode = params.bytecode.startsWith('0x')
+      ? params.bytecode
+      : `0x${params.bytecode}` as Hex;
+
+    console.log("📦 Bytecode length:", formattedBytecode.length);
+
+    // Manually set gas to avoid "intrinsic gas too low" error
+    const hash = await walletClient.deployContract({
       abi: CONTRACT_ABI,
-      bytecode: params.bytecode,
+      bytecode: formattedBytecode,
+      account: account.address,
+      chain: base,
       args: [
         params.name,
         params.symbol,
         params.baseURI,
         BigInt(params.maxSupply),
       ],
-    });
+      gas: BigInt(3_000_000), // Manual gas limit for large contracts
+      // Let the network auto-calculate gas price for Base (very cheap)
+    } as any);
 
     console.log("📝 Deployment tx hash:", hash);
 
