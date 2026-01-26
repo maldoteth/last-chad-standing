@@ -11,7 +11,7 @@ import { X, ZoomIn } from "lucide-react";
 import { coinToUsd, formatNumberWithAbbreviation, getRarityColor, getRarityDisplayName, abbreviateUsername } from "@/lib/utils";
 import { useStore } from "@/context/storeData";
 import { Spinner } from "./ui/spinner";
-import { useApi } from "@/Api/apiFunction";
+import { useSupabase } from "@/hooks/useSupabase";
 import {
   Address,
   createWalletClient,
@@ -173,7 +173,7 @@ const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
   const { authenticated, login } = usePrivy();
   const { purchaseItem, purchaseTokenId, userBalance, isSubmintLoading, } = useStore();
   const [isLoadingCard, setIsLoadingCard] = useState(false);
-  const { post, put, get } = useApi()
+  const { getContractToken, updateLockerItem, supabase: supabaseInstance } = useSupabase();
   const [isLoading, setIsLoading] = useState(false);
   const { user } = usePrivy()
   const { wallets } = useWallets()
@@ -205,11 +205,10 @@ const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
     }
   };
   const fetchToken = async () => {
-    if (item?.nftAddress && 'item_id' in item) {
+    if (item?.nftAddress && 'item_id' in item && item.user_id) {
       try {
-        const data = await get('locker-item/token', { contractId: item.nftAddress, item_id: item?.item_id, userId: item?.user_id });
-        const tokenId = data?.item
-        console.log(data)
+        const res = await getContractToken(item.nftAddress as string, item.item_id, item.user_id);
+        const tokenId = res?.data;
         if (!tokenId?.token_id) {
           fetchBalance()
         } else {
@@ -249,13 +248,16 @@ const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
         throw new Error(`Missing NFT details for transfer! WALLET_ID: ${buyerWalletId}, CONTRACT: ${contractAddress}.`);
       }
 
-      const { txHash } = await post('privy-nft/safe-transfer', {
-        WALLET_ID: buyerWalletId,
-        RECIPIENT: userWallet,
-        NFT_CONTRACT: contractAddress,
-        TOKEN_ID: TOKEN_ID == 0 ? TOKEN_ID + 1 : TOKEN_ID
-      })
-      return txHash?.hash
+      const { data, error } = await supabase.functions.invoke('safe-transfer', {
+        body: {
+            WALLET_ID: buyerWalletId,
+            RECIPIENT: userWallet,
+            NFT_CONTRACT: contractAddress,
+            TOKEN_ID: TOKEN_ID == 0 ? TOKEN_ID + 1 : TOKEN_ID
+        }
+      });
+      if (error) throw error;
+      return data?.txHash?.hash;
     } catch (error) {
       throw (error)
     }
@@ -276,12 +278,15 @@ const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
         throw new Error(`Missing NFT details! WALLET_ID: ${walletId}, CONTRACT: ${contractAddress}. Please recreate the item in Admin.`);
       }
 
-      const { mintTx } = await post('privy-nft/mint', {
-        WALLET_ID: walletId,
-        RECIPIENT: userWallet,
-        NFT_CONTRACT: contractAddress
-      })
-      return mintTx?.hash
+      const { data, error } = await supabase.functions.invoke('mint-nft', {
+        body: {
+            WALLET_ID: walletId,
+            RECIPIENT: userWallet,
+            NFT_CONTRACT: contractAddress
+        }
+      });
+      if (error) throw error;
+      return data?.mintTx?.hash;
     } catch (error) {
       throw (error)
     }
@@ -387,11 +392,11 @@ const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
     try {
       setIsLoadingCard(true);
 
-      const response = await put(`locker-item/${item?.id}`, { is_sell_item });
+      const response = await updateLockerItem(item?.id as string, { is_sell_item });
       if (response?.success) {
         toast({
           title: "Success",
-          description: response?.message,
+          description: "Locker item updated",
         });
         onClose();
       }
@@ -429,19 +434,21 @@ const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
 
     try {
       setIsLoading(true);
-      const response = await put(`locker-item/${item.id}`, {
+      const response = await updateLockerItem(item.id, {
         is_sell_item: true,
         sale_price: salePrice,
         sale_end_date: saleEndDate,
-        listed_quantity: listedQuantity
+        listed_quantity: listedQuantity,
+        listed_at: new Date().toISOString(),
+        listed_for_sale: true
       });
 
       if (response?.success) {
-        toast({ title: "Success", description: response.message });
+        toast({ title: "Success", description: "Item listed on marketplace" });
         setSellModalOpen(false);
         onClose();
       } else {
-        toast({ title: "Error", description: response?.message || "Something went wrong", variant: "destructive" });
+        toast({ title: "Error", description: "Something went wrong", variant: "destructive" });
       }
     } catch (error: any) {
       console.error("Sell Item error:", error);

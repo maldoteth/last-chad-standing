@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState, ReactNode } from "react";
 import { usePrivy, useWallets } from "@privy-io/react-auth";
-import { useApi } from "@/Api/apiFunction";
+import { useSupabase } from "@/hooks/useSupabase";
 import { generateUniqueWeb3Name } from "@/lib/utils";
 import { handleError } from "@/Api/handleError";
 import { useSearchParams } from "react-router-dom";
@@ -66,7 +66,7 @@ const ProfileContext = createContext<ProfileContextValue | undefined>(undefined)
 
 export const ProfileProvider = ({ children }: { children: ReactNode }) => {
     const { user, authenticated, logout, } = usePrivy();
-    const { get, post, put } = useApi();
+    const { getUserProfile, loginOrCreateUser, updateUser } = useSupabase();
     // const [searchParams] = useSearchParams()
     const [profile, setProfile] = useState<UserProfile | null>(null);
     const [loading, setLoading] = useState(false);
@@ -76,10 +76,10 @@ export const ProfileProvider = ({ children }: { children: ReactNode }) => {
 
         try {
             setLoading(true);
-            const { data } = await get("users");
-            if (data) {
-                const tierIcon = getTierIcon(data?.xp || 0);
-                setProfile({ ...data, avatar_url: tierIcon });
+            const response = await getUserProfile(user.id);
+            if (response.success && response.data) {
+                const tierIcon = getTierIcon(response.data?.xp || 0);
+                setProfile({ ...response.data, avatar_url: tierIcon });
             }
         } catch (error) {
             console.error("❌ Error fetching profile:", error);
@@ -100,12 +100,13 @@ export const ProfileProvider = ({ children }: { children: ReactNode }) => {
                 ? { name: generateUniqueWeb3Name(), email: user.email?.address, privy_id: user.id, referred_by }
                 : { name: generateUniqueWeb3Name(), wallet_address: user?.wallet?.address, privy_id: user.id, referred_by };
 
-            const res = await post("users/login", body);
-            if (res.success) {
-                const data = res?.user
-                localStorage.setItem('token', res.token)
-                const tierIcon = getTierIcon(data?.xp || 0);
-                setProfile({ ...data, avatar_url: tierIcon });
+            const res = await loginOrCreateUser(body);
+            if (res.success && res.user) {
+                if (res.token) {
+                    localStorage.setItem('token', res.token);
+                }
+                const tierIcon = getTierIcon(res.user?.xp || 0);
+                setProfile({ ...res.user, avatar_url: tierIcon });
             }
         } catch (error) {
             console.error("❌ Error creating profile:", error);
@@ -120,11 +121,10 @@ export const ProfileProvider = ({ children }: { children: ReactNode }) => {
         if (!profile?.id) return;
         try {
             setLoading(true);
-            const res = await put("users/", data);
-            if (res.success) {
-                const data = res?.user
-                const tierIcon = getTierIcon(data?.xp || 0);
-                setProfile({ ...data, avatar_url: tierIcon });
+            const res = await updateUser(profile.id, data);
+            if (res.success && res.data) {
+                const tierIcon = getTierIcon(res.data?.xp || 0);
+                setProfile({ ...res.data, avatar_url: tierIcon });
             }
         } catch (error) {
             console.error("❌ Error updating username:", error);

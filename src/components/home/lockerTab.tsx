@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Archive } from "lucide-react";
-import { useApi } from "@/Api/apiFunction";
+import { useSupabase } from "@/hooks/useSupabase";
 import { useStore, StoreItem } from "@/context/storeData";
 import { Skeleton } from "@/components/ui/skeleton";
 import { StoreCarouselRef } from "@/components/StoreCarousel";
@@ -87,8 +87,8 @@ const LockerLoginCard = ({ onLogin }: { onLogin: () => void }) => (
 );
 
 const LockerTab = () => {
-    const { login, authenticated } = usePrivy();
-    const { get } = useApi();
+    const { login, authenticated, user } = usePrivy();
+    const { getLockerItems } = useSupabase();
     const [searchParams, setSearchParams] = useSearchParams();
     const isMobile = useIsMobile();
     const [loading, setLoading] = useState(true);
@@ -145,16 +145,18 @@ const LockerTab = () => {
         });
     })
     const fetchStoreItems = useCallback(async () => {
+        if (!user?.id) return;
         setLoading(true);
         try {
-            const response = await get(`locker-item/?page=1`, {}, { cache: true, revalidate: true, ttl: 5000 });
+            const response = await getLockerItems(user.id, 1, 100);
             if (response.success) {
-                const storeItemsData = response?.items?.map(item => {
-                    const { store_items, ...rest } = item || {};
+                const storeItemsData = response?.items?.map((item: any) => {
+                    const storeItem = item.item || {};
                     return {
-                        ...(store_items || {}),
-                        ...rest,
-                        store_id: store_items?.id,
+                        ...storeItem,
+                        ...item,
+                        store_id: storeItem.id,
+                        image_url: storeItem.image_url // ensuring mapping
                     };
                 });
                 setStoreItems(storeItemsData);
@@ -168,7 +170,7 @@ const LockerTab = () => {
         } finally {
             setLoading(false);
         }
-    }, [authenticated]);
+    }, [user?.id, getLockerItems]);
     useEffect(() => {
         if (authenticated) {
             fetchStoreItems()

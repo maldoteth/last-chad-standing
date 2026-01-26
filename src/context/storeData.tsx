@@ -4,8 +4,7 @@ import React, { createContext, useContext, useEffect, useState, ReactNode } from
 import { usePrivy } from "@privy-io/react-auth";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
-import { axiosInstance } from "@/Api/BaseUrl";
-import { useApi } from "@/Api/apiFunction";
+import { useSupabase } from "@/hooks/useSupabase";
 import { useProfile } from "./profileContext";
 import { useSocketEvent } from "./SocketContext";
 import { useLocation } from "react-router-dom";
@@ -17,8 +16,8 @@ export interface StoreItem {
   description: string | null;
   price: number;
   category: string;
-  position: string;
-  image: string | null;
+  position?: string;
+  image?: string | null;
   is_active: boolean;
   first_release_date?: string;
   total_purchased?: number;
@@ -33,7 +32,6 @@ export interface StoreItem {
   nftDeployWalletId?: string;
   nft_deploy_wallet_id?: string;
   nftBuyerWalletId?: string;
-  nft_buyer_wallet_id?: string;
 }
 
 export interface UserBalance {
@@ -60,7 +58,7 @@ const StoreContext = createContext<StoreContextType | undefined>(undefined);
 export const StoreProvider = ({ children }: { children: ReactNode }) => {
   const { user } = usePrivy();
   const { toast } = useToast();
-  const { get, post, put } = useApi();
+  const { getStoreItems, purchaseStoreItem, purchaseLockerItem } = useSupabase();
   const { profile } = useProfile()
   const [storeItems, setStoreItems] = useState<StoreItem[]>([]);
   const [userBalance, setUserBalance] = useState<UserBalance>({ coins: 0, xp: 0 });
@@ -104,9 +102,9 @@ export const StoreProvider = ({ children }: { children: ReactNode }) => {
   const fetchStoreItems = async () => {
     setLoading(true);
     try {
-      const response = await get(`store-item/?page=1`, {}, { cache: true, revalidate: true, ttl: 5000 });
+      const response = await getStoreItems(1, 100); // Get first 100 items
       if (response.success) {
-        const resData: StoreItem[] = response.items
+        const resData: StoreItem[] = response.items as any;
 
         setStoreItems(resData?.filter(item => !!item.is_active));
       } else {
@@ -147,22 +145,27 @@ export const StoreProvider = ({ children }: { children: ReactNode }) => {
     }
 
     try {
-      // API transaction example
       setIsSubmintLoading(true)
-      const response = await put(`store-item/buy/${itemId}`, { mintTx, nftBuyerWalletId });
+      const response = await purchaseStoreItem({
+        itemId,
+        userId: profile?.id || '',
+        price,
+        mintTx,
+        nftBuyerWalletId
+      });
 
       // Update local balance
-      if (response.success) {
-        const userData = response?.user
-        setUserBalance({ coins: userData.coins, xp: userData.xp });
+      if (response.success && response.user) {
+        setUserBalance({ coins: response.user.coins, xp: response.user.xp });
 
         toast({
           title: "Purchase successful!",
           description: `You purchased ${itemName} for ${price} coins.`,
         });
+        return true;
+      } else {
+        throw new Error(response.error || 'Purchase failed');
       }
-
-      return true;
     } catch (error) {
       console.error("Error purchasing item:", error);
       toast({
@@ -196,22 +199,28 @@ export const StoreProvider = ({ children }: { children: ReactNode }) => {
     }
 
     try {
-      // API transaction example
       setIsSubmintLoading(true)
-      const response = await put(`locker-item/buy/${itemId}`, { mintTx, nftBuyerWalletId, TOKEN_ID });
+      const response = await purchaseLockerItem({
+        lockerId: itemId,
+        userId: profile?.id || '',
+        price,
+        mintTx,
+        nftBuyerWalletId,
+        tokenId: TOKEN_ID
+      });
 
       // Update local balance
-      if (response.success) {
-        const userData = response?.user
-        setUserBalance({ coins: userData.coins, xp: userData.xp });
+      if (response.success && response.user) {
+        setUserBalance({ coins: response.user.coins, xp: response.user.xp });
 
         toast({
           title: "Purchase successful!",
           description: `You purchased ${itemName} for ${price} coins.`,
         });
+        return true;
+      } else {
+        throw new Error(response.error || 'Purchase failed');
       }
-
-      return true;
     } catch (error) {
       console.error("Error purchasing item:", error);
       toast({

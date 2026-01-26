@@ -8,7 +8,7 @@ import React, {
   ReactNode,
   useRef,
 } from "react";
-import { useApi } from "@/Api/apiFunction";
+import { useSupabase } from "@/hooks/useSupabase";
 import { useSocketEvent } from "./SocketContext";
 import { useProfile } from "./profileContext";
 import { usePrivy } from "@privy-io/react-auth";
@@ -93,7 +93,7 @@ export const RankProvider = ({ children }: { children: ReactNode }) => {
   const [objectivesData, setObjectiveData] = useState<ObjectiveData[]>([]);
   const [objectivesUserData, setObjectiveUserData] = useState<ObjectiveProgress[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const { get } = useApi();
+  const { getLevels, getRanks, getObjectives, getUserObjectives } = useSupabase();
   const { user, authenticated } = usePrivy();
   const { pathname } = useLocation()
   const isAdmin = pathname.startsWith('/admin')
@@ -130,8 +130,10 @@ export const RankProvider = ({ children }: { children: ReactNode }) => {
 
   const fetchLevelsData = async () => {
     try {
-      const response = await get("level");
-      setLevelData(response?.data);
+      const response = await getLevels();
+      if (response.success) {
+        setLevelData(response.data);
+      }
     } catch (error) {
       console.error("Error fetching levels:", error);
     }
@@ -139,8 +141,10 @@ export const RankProvider = ({ children }: { children: ReactNode }) => {
 
   const fetchRanksData = async () => {
     try {
-      const response = await get("ranks");
-      setRankingData(response?.data);
+      const response = await getRanks();
+      if (response.success) {
+        setRankingData(response.data);
+      }
     } catch (error) {
       console.error("Error fetching ranks:", error);
     }
@@ -148,24 +152,25 @@ export const RankProvider = ({ children }: { children: ReactNode }) => {
 
   const fetchObjectiveData = async () => {
     try {
-      const response = await get("objective");
-      setObjectiveData(response?.data as ObjectiveData[]);
+      const response = await getObjectives();
+      if (response.success) {
+        setObjectiveData(response.data as ObjectiveData[]);
+      }
     } catch (error) {
       console.error("Error fetching objectives:", error);
     }
   };
   const isFetchingObjectivesRef = useRef(false);
   const fetchObjectiveUserData = async () => {
-    if (isFetchingObjectivesRef.current || !authenticated) return;
+    if (isFetchingObjectivesRef.current || !authenticated || !user?.id) return;
     try {
       isFetchingObjectivesRef.current = true;
-      const response = await get("objective/user");
-      if (response?.success) {
-        setObjectiveUserData(response?.data as ObjectiveProgress[]);
+      const response = await getUserObjectives(user.id);
+      if (response.success) {
+        setObjectiveUserData(response.data as ObjectiveProgress[]);
       }
     } catch (error: any) {
       console.error("Error fetching objectives:", error);
-      // Don't log logout on 430 here to avoid loops
     } finally {
       isFetchingObjectivesRef.current = false;
     }

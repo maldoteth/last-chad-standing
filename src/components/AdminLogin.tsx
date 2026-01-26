@@ -1,22 +1,16 @@
 'use client';
 
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useCallback, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { useToast } from '@/hooks/use-toast';
 import { usePrivy } from '@privy-io/react-auth';
 import { adminLogin } from '@/lib/adminAuth';
-import { useApi } from '@/Api/apiFunction';
 import { handleError } from '@/Api/handleError';
-import { isAdminAuthenticated, adminLogout, getAdminSession } from '@/lib/adminAuth';
+import { useSupabase } from '@/hooks/useSupabase';
 
 export default function AdminLogin() {
-  const { toast } = useToast();
-  const navigate = useNavigate();
-  const { post } = useApi();
   const { login, logout, ready, authenticated, user } = usePrivy();
-  const [adminSession, setAdminSession] = useState<any>(null);
+  const { loginAdmin } = useSupabase();
 
   const isVerifying = useRef(false);
   const hasVerified = useRef(false);
@@ -39,7 +33,7 @@ export default function AdminLogin() {
         privy_id: user?.id,
       };
 
-      const result = await post("admin/login", payload);
+      const result = await loginAdmin(payload);
 
       if (result.success) {
         await adminLogin({ ...result.admin, token: result.token });
@@ -51,7 +45,7 @@ export default function AdminLogin() {
     } finally {
       isVerifying.current = false;
     }
-  }, [authenticated]);
+  }, [ready, authenticated, user, loginAdmin]);
 
   useEffect(() => {
     if (authenticated && !hasVerified.current && !isVerifying.current) {
@@ -68,7 +62,7 @@ export default function AdminLogin() {
         </CardHeader>
         <CardContent className="flex flex-col items-center">
           {!ready ? (
-            <p>Loading Privy...</p>
+            <p className="text-white">Loading Privy...</p>
           ) : authenticated ? (
             <Button onClick={logout} variant="destructive" className="w-full">
               Logout
