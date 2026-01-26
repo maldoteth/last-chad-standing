@@ -22,7 +22,7 @@ import { ArrowLeft, Plus, Edit, Trash2, LogOut, Loader2, Copy } from "lucide-rea
 import { useToast } from "@/hooks/use-toast";
 import { isAdminAuthenticated, adminLogout, getAdminSession } from '@/lib/adminAuth';
 import { uploadFile, uploadPinataFile } from "@/Api/uploadFile";
-import { useApi } from "@/Api/apiFunction";
+import { useSupabase } from "@/hooks/useSupabase";
 import { formatDateToYMD } from "@/lib/utils";
 import { StoreItem } from "@/context/storeData";
 import { deployNFTContract, getContractInfo, getUserWalletBalance, mintNFT } from "@/utils/nftContractUtils";
@@ -55,7 +55,15 @@ const Admin = () => {
   const [isLoading, setIsLoading] = useState(false);
   const location = useLocation()
   const [uploading, setUploading] = useState(false);
-  const { post, get, put, deleteData } = useApi();
+  const { 
+    getStoreItems: fetchStoreItemsFromDB,
+    createStoreItem,
+    updateStoreItem,
+    deleteStoreItem,
+    getAdminWallet,
+    setAdminWallet: saveAdminWallet,
+    generateNFTMetadata
+  } = useSupabase();
   const [formData, setFormData] = useState({
     name: '',
     description: '',
@@ -102,62 +110,17 @@ const Admin = () => {
 
   const handleGenerateMetadata = async (data: any) => {
     try {
-      // Try backend first
-      const result = await post('store-item/generate-metadata', data)
-      return {
-        gatewayUrl: result.gatewayUrl, 
-        ipfsHash: result.ipfsHash, 
-        local_folder_url: result.local_folder_url, 
-        baseURI: result.baseURI, 
-        symbol: result.symbol, 
-        name: result.name
-      }
+      const result = await generateNFTMetadata({
+        name: data.name,
+        description: data.description,
+        image: data.ImgGatewayUrl || data.image_url,
+        rarity: data.rarity,
+        category: data.category
+      });
+      return result;
     } catch (error) {
-      console.warn("Backend metadata generation failed, trying FRONTEND fallback...", error);
-      // Frontend Fallback: Create metadata JSON and upload to Supabase
-      try {
-        const metadata = {
-          name: data.name,
-          description: data.description,
-          image: data.ImgGatewayUrl || data.image_url,
-          attributes: [
-            { trait_type: "Rarity", value: data.rarity },
-            { trait_type: "Category", value: data.category }
-          ]
-        };
-
-        // ERC721 expects baseURI + tokenId. We'll use a unique folder and name the file '1'
-        const folderName = `item-${Date.now()}`;
-        const fileName = `${folderName}/1`; // The contract will look for baseURI + "1"
-        const blob = new Blob([JSON.stringify(metadata)], { type: 'application/json' });
-        const file = new File([blob], "1"); // Internal name '1'
-
-        const { error: uploadError } = await supabase.storage
-          .from('items')
-          .upload(fileName, file);
-
-        if (uploadError) throw uploadError;
-
-        const { data: { publicUrl } } = supabase.storage
-          .from('items')
-          .getPublicUrl(fileName);
-
-        const baseURI = publicUrl.replace("/1", "/");
-
-        console.log("✅ Frontend Metadata Fallback Success. BaseURI:", baseURI);
-
-        return {
-          gatewayUrl: publicUrl,
-          ipfsHash: folderName,
-          local_folder_url: publicUrl,
-          baseURI: baseURI,
-          symbol: data.name.substring(0, 3).toUpperCase(),
-          name: data.name
-        };
-      } catch (fallbackError) {
-        console.error("Frontend metadata fallback also failed:", fallbackError);
-        throw error;
-      }
+      console.error("Metadata generation failed:", error);
+      throw error;
     }
   }
 
@@ -219,7 +182,7 @@ const Admin = () => {
   const fetchStoreItems = async () => {
     setLoading(true);
     try {
-      const response = await get(`store-item/?page=${currentPage}`);
+      const response = await fetchStoreItemsFromDB(currentPage, 10);
 
       if (response.success) {
         setStoreItems(response.items);
@@ -347,31 +310,14 @@ const Admin = () => {
       
       console.log('📤 Final Payload for DB:', payload);
 
-      // 5. Save to Database with Fallback
+      // 5. Save to Database
       if (editingItem) {
-        try {
-          response = await put(`store-item/${editingItem.id}`, payload);
-        } catch (apiError) {
-          const { error } = await supabase
-            .from('store_items')
-            .update(payload)
-            .eq('id', editingItem.id);
-          if (error) throw error;
-          response = { success: true };
-        }
+        response = await updateStoreItem(editingItem.id, payload);
       } else {
-        try {
-          response = await post('store-item', payload);
-        } catch (apiError) {
-          const { error } = await supabase
-            .from('store_items')
-            .insert({
-              ...payload,
-              total_purchased: 0
-            });
-          if (error) throw error;
-          response = { success: true };
-        }
+        response = await createStoreItem({
+          ...payload,
+          total_purchased: 0
+        });
       }
 
       if (response.success) {
@@ -419,7 +365,7 @@ const Admin = () => {
   const handleGetAdminWallet = async () => {
     try {
       setIsLoading(true)
-      const response = await get('admin/wallet')
+      const response = await getAdminWallet()
       if (response?.wallet?.address) {
         setAdminWallet(response.wallet.address)
       }
@@ -460,7 +406,7 @@ const Admin = () => {
 
     setDeleting(id);
     try {
-      const response = await deleteData(`store-item/${id}`);
+      const response = await deleteStoreItem(id);
       if (response.success) {
         toast({ title: "Success", description: "Item deleted successfully" });
         fetchStoreItems();
@@ -484,8 +430,7 @@ const Admin = () => {
   const toggleActive = async (item: StoreItem) => {
     setToggling(item.id);
     try {
-      const response = await put(`store-item/${item.id}`, {
-        ...item,
+      const response = await updateStoreItem(item.id, {
         is_active: !item.is_active
       });
 

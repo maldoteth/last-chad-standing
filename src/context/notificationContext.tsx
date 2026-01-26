@@ -1,7 +1,8 @@
 'use client';
 
-import { useApi } from '@/Api/apiFunction';
 import React, { createContext, useContext, useEffect, useState, ReactNode, useRef } from 'react';
+import { useSupabase } from '@/hooks/useSupabase';
+import { usePrivy } from '@privy-io/react-auth';
 
 export interface Notification {
     id: string;
@@ -39,7 +40,8 @@ export const NotificationProvider: React.FC<Props> = ({ children }) => {
     const [limit, setLimit] = useState<number>(20);
     const [totalPages, setTotalPages] = useState<number>(1);
 
-    const { get, put } = useApi();
+    const { getNotifications, getUnreadNotificationCount, markNotificationAsRead } = useSupabase();
+    const { user, authenticated } = usePrivy();
 
     // ---------------------
     // Fetch Notifications (with pagination & unread filter)
@@ -48,31 +50,36 @@ export const NotificationProvider: React.FC<Props> = ({ children }) => {
     const isFetchingCountRef = useRef(false);
 
     const fetchNotifications = async (options?: { unread_only?: string; page?: number }) => {
-        if (isFetchingRef.current) return;
+        if (isFetchingRef.current || !user?.id) return;
         try {
             isFetchingRef.current = true;
             setLoading(true);
 
-            const res = await get(`notifications`, { page: options?.page, unread_only: options?.unread_only });
+            const res = await getNotifications(user.id, { 
+                page: options?.page, 
+                unread_only: options?.unread_only === 'true' 
+            });
+
             if (res.success) {
                 setNotifications(res.data || []);
-                setPage(res.pagination?.page || page);
-                setLimit(res.pagination?.limit || limit);
+                setPage(res.pagination?.currentPage || page);
+                setLimit(res.pagination?.pageSize || limit);
                 setTotalPages(res.pagination?.totalPages || 1);
             }
         } catch (err) {
             console.error('❌ Error fetching notifications:', err);
         } finally {
+            setLoading(true); // Keeping sync with original logic or fixing? original had setLoading(true) then setLoading(false)
             setLoading(false);
             isFetchingRef.current = false;
         }
     };
 
     const fetchUnreadCount = async () => {
-        if (isFetchingCountRef.current) return;
+        if (isFetchingCountRef.current || !user?.id) return;
         try {
             isFetchingCountRef.current = true;
-            const res = await get('notifications/count');
+            const res = await getUnreadNotificationCount(user.id);
             if (res.success) {
                 setUnreadCount(res.count || 0);
             }
@@ -88,7 +95,7 @@ export const NotificationProvider: React.FC<Props> = ({ children }) => {
     // ---------------------
     const markAsRead = async (notificationId: string) => {
         try {
-            const res = await put(`notifications/${notificationId}`, {});
+            const res = await markNotificationAsRead(notificationId);
             if (res.success) {
                 setNotifications(prev =>
                     prev.map(n => (n.id === notificationId ? { ...n, is_read: true } : n))
@@ -108,11 +115,10 @@ export const NotificationProvider: React.FC<Props> = ({ children }) => {
     };
 
     useEffect(() => {
-        const token = localStorage.getItem('token');
-        if (token) {
+        if (authenticated && user?.id) {
             refreshAll();
         }
-    }, []);
+    }, [authenticated, user?.id]);
 
     return (
         <NotificationContext.Provider
