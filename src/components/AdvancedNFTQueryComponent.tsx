@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import { createPublicClient, http, getContract } from "viem";
+import { createPublicClient, http, getContract, multicall } from "viem";
 import { base } from "viem/chains";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -89,12 +89,13 @@ const AdvancedNFTQueryComponent = () => {
 
     setLoading(true);
     try {
-      const bal = await (client as any).readContract({
+      const nft = getContract({
         address: contractAddress as `0x${string}`,
         abi: NFT_ABI,
-        functionName: "balanceOf",
-        args: [walletAddress as `0x${string}`],
-      }) as bigint;
+        client,
+      });
+
+      const bal = await nft.read.balanceOf([walletAddress as `0x${string}`]);
       setBalance(bal);
       setOwnedNFTs([]);
       setPagination({
@@ -125,25 +126,24 @@ const AdvancedNFTQueryComponent = () => {
 
     setLoadingDetails(true);
     try {
+      const nft = getContract({
+        address: contractAddress as `0x${string}`,
+        abi: NFT_ABI,
+        client,
+      });
+
       const startIdx = (page - 1) * pagination.itemsPerPage;
       const endIdx = Math.min(startIdx + pagination.itemsPerPage, Number(balance));
       const owned: OwnedNFT[] = [];
 
       // Fetch token IDs for this page
       for (let i = startIdx; i < endIdx; i++) {
-        const tokenId = await (client as any).readContract({
-          address: contractAddress as `0x${string}`,
-          abi: NFT_ABI,
-          functionName: "tokenOfOwnerByIndex",
-          args: [walletAddress as `0x${string}`, BigInt(i)],
-        }) as bigint;
+        const tokenId = await nft.read.tokenOfOwnerByIndex([
+          walletAddress as `0x${string}`,
+          BigInt(i),
+        ]);
 
-        const uri = await (client as any).readContract({
-          address: contractAddress as `0x${string}`,
-          abi: NFT_ABI,
-          functionName: "tokenURI",
-          args: [tokenId],
-        }) as string;
+        const uri = await nft.read.tokenURI([tokenId]);
 
         owned.push({
           id: tokenId.toString(),

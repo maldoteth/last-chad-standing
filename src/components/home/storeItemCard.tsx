@@ -19,7 +19,7 @@ const StoreItemCard = ({
           onClick={() => onClick(item.raw)}
         >
           <img
-            src={item.image}
+            src={item?.ImgGatewayUrl || item.image}
             alt={item.name}
             className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
           />

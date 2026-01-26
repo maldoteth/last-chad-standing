@@ -1,5 +1,4 @@
 // components/NFTDeployMintRefactored.tsx
-// components/NFTDeployMintRefactored.tsx
 import React, { useState } from "react";
 import { useWallets, usePrivy } from "@privy-io/react-auth";
 import type { Address, Hex } from "viem";
@@ -8,7 +7,6 @@ import {
   deployNFTContract,
   mintNFT,
   getContractInfo,
-  type MintParams,
 } from "@/utils/nftContractUtils";
 import { MyNFTsGallery } from "./nftGallery";
 
@@ -176,20 +174,11 @@ export const NFTDeployMintRefactored: React.FC = () => {
         successMessage: null,
       }));
 
-      // Get the wallet provider from Privy
-      const embeddedWallet = wallets.find(w => w.walletClientType === 'privy');
-      const provider = embeddedWallet ? await embeddedWallet.getEthereumProvider() : null;
-      
-      if (!provider) {
-        throw new Error("No wallet provider available");
-      }
-
       const result = await mintNFT({
         contractAddress: ui.contractAddress as Address,
         toAddress: user.wallet.address as Address,
         userAddress: user.wallet.address as Address,
-        quantity: 1,
-        provider: provider as any,
+        quantity: 1
       });
 
       setUi((prev) => ({

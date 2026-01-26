@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { CreditCard, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
+import { useApi } from "@/Api/apiFunction";
 import { CheckPrivy, CryptoPaymentProps } from "@/lib/checkPrivy";
 import { coinToUsd } from "@/lib/utils";
 import { useProfile } from "@/context/profileContext";
 import useEthToUsdRate from "@/lib/useEthrate";
-import { usePrivy } from "@privy-io/react-auth";
 
 interface BuyDialogContentProps {
   selectedPlayer?: {
@@ -19,14 +18,14 @@ interface BuyDialogContentProps {
 
 const BuyDialogContent: React.FC<BuyDialogContentProps> = ({ selectedPlayer, onClose }) => {
   const { toast } = useToast();
-  const { profile, fetchProfile } = useProfile()
-  const { user } = usePrivy();
+  const { post } = useApi();
   const [isLoadingCard, setIsLoadingCard] = useState(false);
   const [showCheckPrivy, setShowCheckPrivy] = useState(false);
   const [selectedCoins, setSelectedCoins] = useState<number>(500);
   const [isLoading, setIsLoading] = useState(false);
+  const { fetchProfile } = useProfile()
   const ethToUsdRate = useEthToUsdRate();
-
+// You can use this rate when calculating ethAmount etc.
   // Coin presets
   const coinPresets = [
     { coins: 100, label: "100" },
@@ -43,26 +42,16 @@ const BuyDialogContent: React.FC<BuyDialogContentProps> = ({ selectedPlayer, onC
     try {
       setIsLoadingCard(true);
 
-      // Call Stripe checkout session API via Edge Function
-      const { data, error } = await supabase.functions.invoke("create-checkout-session", {
-        body: {
-          cartItems: [{
-            name: `${selectedCoins} Coins`,
-            price: parseFloat(usdValue)
-          }],
-          metadata: {
-            userId: profile?.id || user?.id,
-            type: 'coin_purchase',
-            coins: selectedCoins
-          }
-        }
+      // Call Stripe checkout session API
+      const response = await post("payment/checkout-session", {
+        cartItems: [{
+          name: `${selectedCoins} Coins`,
+          price: parseFloat(usdValue)
+        }],
       });
-
-      if (error) throw error;
-
       // Redirect to Stripe checkout if URL is provided
-      if (data?.url) {
-        window.location.href = data.url;
+      if (response?.url) {
+        window.location.href = response.url;
       } else {
         toast({
           title: "Success",
@@ -74,7 +63,7 @@ const BuyDialogContent: React.FC<BuyDialogContentProps> = ({ selectedPlayer, onC
       console.error("Stripe checkout error:", error);
       toast({
         title: "Payment Error",
-        description: error.message || "Failed to initialize payment. Please try again.",
+        description: error.response?.data?.message || "Failed to initialize payment. Please try again.",
         variant: "destructive"
       });
     } finally {
@@ -86,46 +75,40 @@ const BuyDialogContent: React.FC<BuyDialogContentProps> = ({ selectedPlayer, onC
     try {
       setIsLoading(true);
 
-      // Call payment verification Edge Function
-      const { data: res, error } = await supabase.functions.invoke("verify-preorder-payment", {
-        body: {
-          coins: selectedCoins,
-          txHash: data?.hash,
-          depositAddress: data?.address,
-          exchangeRate: data?.exchangeRate,
-          cryptoAmount: data?.cryptoAmount,
-          amount: data?.amount,
-          type: 'crypto_coin_purchase',
-          userId: profile?.id
-        }
+      // Call Stripe checkout session API
+      const response = await post("payment/crypto", {
+        coins: selectedCoins,
+        txHash: data?.hash,
+        depositAddress: data?.address,
+        exchangeRate: data?.exchangeRate,
+        cryptoAmount: data?.cryptoAmount,
+        amount: data?.amount
       });
-
-      if (error) throw error;
-      
-      if (res?.success) {
+      // Redirect to Stripe checkout if URL is provided
+      if (response?.success) {
         toast({
           title: "Success",
-          description: res?.message || "Payment processed successfully",
+          description: response?.message,
         });
         await fetchProfile()
       }
 
     } catch (error: any) {
-      console.error("Crypto payment verification error:", error);
+      console.error("Stripe checkout error:", error);
       toast({
         title: "Payment Error",
-        description: error.message || "Failed to verify payment. Please try again.",
+        description: error.response?.data?.message || "Failed to payment. Please try again.",
         variant: "destructive"
       });
     } finally {
       setIsLoading(false);
     }
   };
-
   const handleCryptoPayment = () => {
     setShowCheckPrivy(true);
   };
 
+  // If CheckPrivy is shown, render it instead of the buttons
   if (showCheckPrivy) {
     return (
       <div className="">
@@ -141,12 +124,14 @@ const BuyDialogContent: React.FC<BuyDialogContentProps> = ({ selectedPlayer, onC
 
   return (
     <div className="flex flex-col space-y-4 p-4">
+      {/* Coin Presets Section */}
       <div className="space-y-3">
         <div className="flex items-center justify-between">
           <h3 className="text-white text-sm font-medium">Select Coins</h3>
           <span className="text-white/60 text-xs">1 Coin = ${coinToUsd}</span>
         </div>
 
+        {/* Coin Preset Buttons */}
         <div className="grid grid-cols-3 gap-2">
           {coinPresets.map((preset, index) => (
             <Button
@@ -173,6 +158,7 @@ const BuyDialogContent: React.FC<BuyDialogContentProps> = ({ selectedPlayer, onC
           ))}
         </div>
 
+        {/* Selected Amount Display */}
         <div className="bg-white/5 backdrop-blur-md border border-white/20 rounded-lg p-4 mt-3">
           <div className="flex items-center justify-between">
             <div>
@@ -191,6 +177,7 @@ const BuyDialogContent: React.FC<BuyDialogContentProps> = ({ selectedPlayer, onC
         </div>
       </div>
 
+      {/* Payment Methods */}
       <div className="space-y-3 pt-2">
         <Button
           className="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/30 hover:text-white transition-all duration-300"

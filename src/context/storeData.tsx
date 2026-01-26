@@ -4,8 +4,10 @@ import React, { createContext, useContext, useEffect, useState, ReactNode } from
 import { usePrivy } from "@privy-io/react-auth";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
-import { useSupabase } from "@/hooks/useSupabase";
+import { axiosInstance } from "@/Api/BaseUrl";
+import { useApi } from "@/Api/apiFunction";
 import { useProfile } from "./profileContext";
+import { useSocketEvent } from "./SocketContext";
 import { useLocation } from "react-router-dom";
 
 // ---------- Types ----------
@@ -15,8 +17,8 @@ export interface StoreItem {
   description: string | null;
   price: number;
   category: string;
-  position?: string;
-  image?: string | null;
+  position: string;
+  image: string | null;
   is_active: boolean;
   first_release_date?: string;
   total_purchased?: number;
@@ -25,13 +27,7 @@ export interface StoreItem {
   rarity?: string;
   sale_end_date?: string;
   sale_start_date?: string;
-  max_supply?: string | number;
-  nftAddress?: string;
-  nft_address?: string;
-  nftDeployWalletId?: string;
-  nft_deploy_wallet_id?: string;
-  nftBuyerWalletId?: string;
-  user_id?: string;
+  max_supply?: string;
 }
 
 export interface UserBalance {
@@ -58,7 +54,7 @@ const StoreContext = createContext<StoreContextType | undefined>(undefined);
 export const StoreProvider = ({ children }: { children: ReactNode }) => {
   const { user } = usePrivy();
   const { toast } = useToast();
-  const { getStoreItems, purchaseStoreItem, purchaseLockerItem } = useSupabase();
+  const { get, post, put } = useApi();
   const { profile } = useProfile()
   const [storeItems, setStoreItems] = useState<StoreItem[]>([]);
   const [userBalance, setUserBalance] = useState<UserBalance>({ coins: 0, xp: 0 });
@@ -69,31 +65,42 @@ export const StoreProvider = ({ children }: { children: ReactNode }) => {
   const { pathname } = useLocation()
   const isAdmin = pathname.startsWith('/admin')
 
-  // ---------- Realtime Subscriptions ----------
-  useEffect(() => {
-    const channel = supabase
-      .channel('store-updates')
-      .on(
-        'postgres_changes',
-        { event: '*', schema: 'public', table: 'store_items' },
-        () => {
-          console.log('🛒 Store items updated via Realtime');
-          fetchStoreItems();
-        }
-      )
-      .subscribe();
+  // ---------- Fetch store items ----------
+  useSocketEvent("storeItems", (data) => {
+    if (!data) return;
 
-    return () => {
-      supabase.removeChannel(channel);
-    };
-  }, []);
+    setStoreItems((prevData) => {
+      const newEntries = Array.isArray(data) ? data : [data];
+      let updated = [...prevData];
+
+      newEntries.forEach((entry) => {
+        const entryId = entry.id;
+        const existingIndex = updated.findIndex((item) => item.id === entryId);
+
+        if (entry.is_active === false) {
+          if (existingIndex !== -1) {
+            updated.splice(existingIndex, 1);
+          }
+          return;
+        }
+
+        if (existingIndex !== -1) {
+          updated[existingIndex] = { ...updated[existingIndex], ...entry };
+        } else {
+          updated.push(entry);
+        }
+      });
+
+      return updated;
+    });
+  });
 
   const fetchStoreItems = async () => {
     setLoading(true);
     try {
-      const response = await getStoreItems(1, 100); // Get first 100 items
+      const response = await get(`store-item/?page=1`, {}, { cache: true, revalidate: true, ttl: 5000 });
       if (response.success) {
-        const resData: StoreItem[] = response.items as any;
+        const resData: StoreItem[] = response.items
 
         setStoreItems(resData?.filter(item => !!item.is_active));
       } else {
@@ -134,27 +141,22 @@ export const StoreProvider = ({ children }: { children: ReactNode }) => {
     }
 
     try {
+      // API transaction example
       setIsSubmintLoading(true)
-      const response = await purchaseStoreItem({
-        itemId,
-        userId: profile?.id || '',
-        price,
-        mintTx,
-        nftBuyerWalletId
-      });
+      const response = await put(`store-item/buy/${itemId}`, { mintTx, nftBuyerWalletId });
 
       // Update local balance
-      if (response.success && response.user) {
-        setUserBalance({ coins: response.user.coins, xp: response.user.xp });
+      if (response.success) {
+        const userData = response?.user
+        setUserBalance({ coins: userData.coins, xp: userData.xp });
 
         toast({
           title: "Purchase successful!",
           description: `You purchased ${itemName} for ${price} coins.`,
         });
-        return true;
-      } else {
-        throw new Error(response.error || 'Purchase failed');
       }
+
+      return true;
     } catch (error) {
       console.error("Error purchasing item:", error);
       toast({
@@ -188,28 +190,22 @@ export const StoreProvider = ({ children }: { children: ReactNode }) => {
     }
 
     try {
+      // API transaction example
       setIsSubmintLoading(true)
-      const response = await purchaseLockerItem({
-        lockerId: itemId,
-        userId: profile?.id || '',
-        price,
-        mintTx,
-        nftBuyerWalletId,
-        tokenId: TOKEN_ID
-      });
+      const response = await put(`locker-item/buy/${itemId}`, { mintTx, nftBuyerWalletId, TOKEN_ID });
 
       // Update local balance
-      if (response.success && response.user) {
-        setUserBalance({ coins: response.user.coins, xp: response.user.xp });
+      if (response.success) {
+        const userData = response?.user
+        setUserBalance({ coins: userData.coins, xp: userData.xp });
 
         toast({
           title: "Purchase successful!",
           description: `You purchased ${itemName} for ${price} coins.`,
         });
-        return true;
-      } else {
-        throw new Error(response.error || 'Purchase failed');
       }
+
+      return true;
     } catch (error) {
       console.error("Error purchasing item:", error);
       toast({

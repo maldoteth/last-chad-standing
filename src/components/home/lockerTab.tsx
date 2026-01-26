@@ -6,9 +6,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Archive } from "lucide-react";
-import { useSupabase } from "@/hooks/useSupabase";
+import { useApi } from "@/Api/apiFunction";
 import { useStore, StoreItem } from "@/context/storeData";
-import { useProfile } from "@/context/profileContext";
 import { Skeleton } from "@/components/ui/skeleton";
 import { StoreCarouselRef } from "@/components/StoreCarousel";
 import StoreCategoryCard from "./storeCategoryCard";
@@ -88,9 +87,8 @@ const LockerLoginCard = ({ onLogin }: { onLogin: () => void }) => (
 );
 
 const LockerTab = () => {
-    const { login, authenticated, user } = usePrivy();
-    const { profile } = useProfile();
-    const { getLockerItems } = useSupabase();
+    const { login, authenticated } = usePrivy();
+    const { get } = useApi();
     const [searchParams, setSearchParams] = useSearchParams();
     const isMobile = useIsMobile();
     const [loading, setLoading] = useState(true);
@@ -147,18 +145,16 @@ const LockerTab = () => {
         });
     })
     const fetchStoreItems = useCallback(async () => {
-        if (!profile?.id) return;
         setLoading(true);
         try {
-            const response = await getLockerItems(profile.id, 1, 100);
+            const response = await get(`locker-item/?page=1`, {}, { cache: true, revalidate: true, ttl: 5000 });
             if (response.success) {
-                const storeItemsData = response?.items?.map((item: any) => {
-                    const storeItem = item.item || {};
+                const storeItemsData = response?.items?.map(item => {
+                    const { store_items, ...rest } = item || {};
                     return {
-                        ...storeItem,
-                        ...item,
-                        store_id: storeItem.id,
-                        image_url: storeItem.image_url // ensuring mapping
+                        ...(store_items || {}),
+                        ...rest,
+                        store_id: store_items?.id,
                     };
                 });
                 setStoreItems(storeItemsData);
@@ -172,12 +168,12 @@ const LockerTab = () => {
         } finally {
             setLoading(false);
         }
-    }, [profile?.id, getLockerItems]);
+    }, [authenticated]);
     useEffect(() => {
-        if (authenticated && profile?.id) {
+        if (authenticated) {
             fetchStoreItems()
         }
-    }, [authenticated, profile?.id]);
+    }, [authenticated]);
     const renderCategory = (title: string, category: string, emptyText: string, refKey: keyof typeof carouselRefs) => {
         const items = getStoreItemsByCategory(category);
 
@@ -249,8 +245,7 @@ const LockerTab = () => {
             <StorePurchaseDialog
                 isOpen={dialogOpen}
                 onClose={() => setDialogOpen(false)}
-                item={selectedItem as any}
-                onSuccess={fetchStoreItems}
+                item={selectedItem}
             />
         </>
     );
