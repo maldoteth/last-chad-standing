@@ -3,6 +3,7 @@
 import React, { createContext, useContext, useEffect, useState, ReactNode, useRef } from 'react';
 import { useSupabase } from '@/hooks/useSupabase';
 import { usePrivy } from '@privy-io/react-auth';
+import { supabase } from '@/integrations/supabase/client';
 
 export interface Notification {
     id: string;
@@ -117,6 +118,28 @@ export const NotificationProvider: React.FC<Props> = ({ children }) => {
     useEffect(() => {
         if (authenticated && user?.id) {
             refreshAll();
+
+            // 💡 Enable Realtime Subscription
+            const channel = supabase
+                .channel(`notifications-${user.id}`)
+                .on(
+                    'postgres_changes',
+                    {
+                        event: 'INSERT',
+                        schema: 'public',
+                        table: 'Notification',
+                        filter: `user_id=eq.${user.id}`
+                    },
+                    (payload) => {
+                        console.log('📬 New notification received via Realtime:', payload);
+                        refreshAll();
+                    }
+                )
+                .subscribe();
+
+            return () => {
+                supabase.removeChannel(channel);
+            };
         }
     }, [authenticated, user?.id]);
 

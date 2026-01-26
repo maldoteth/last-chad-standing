@@ -19,7 +19,6 @@ import { Bell, Medal, LogOut, X, Edit3, Check, Copy, CreditCard, Upload, History
 import TransactionHistory from "../TransactionHistory";
 import { tabItems } from "@/lib/data";
 import { useRank } from "@/context/rankData";
-import { useApi } from "@/Api/apiFunction";
 import BuyDialogContent from "../buyDialogContent";
 import { useProfile } from "@/context/profileContext";
 import { uploadFile } from "@/Api/uploadFile";
@@ -37,7 +36,6 @@ const Header = () => {
     const [buyDialogOpen, setBuyDialogOpen] = useState(false);
     const [selectedPlayer, setSelectedPlayer] = useState<any>(null);
     const { rankingData } = useRank()
-    const { get } = useApi()
     const {
         toast
     } = useToast();
