@@ -8,6 +8,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Archive } from "lucide-react";
 import { useSupabase } from "@/hooks/useSupabase";
 import { useStore, StoreItem } from "@/context/storeData";
+import { useProfile } from "@/context/profileContext";
 import { Skeleton } from "@/components/ui/skeleton";
 import { StoreCarouselRef } from "@/components/StoreCarousel";
 import StoreCategoryCard from "./storeCategoryCard";
@@ -88,6 +89,7 @@ const LockerLoginCard = ({ onLogin }: { onLogin: () => void }) => (
 
 const LockerTab = () => {
     const { login, authenticated, user } = usePrivy();
+    const { profile } = useProfile();
     const { getLockerItems } = useSupabase();
     const [searchParams, setSearchParams] = useSearchParams();
     const isMobile = useIsMobile();
@@ -145,10 +147,10 @@ const LockerTab = () => {
         });
     })
     const fetchStoreItems = useCallback(async () => {
-        if (!user?.id) return;
+        if (!profile?.id) return;
         setLoading(true);
         try {
-            const response = await getLockerItems(user.id, 1, 100);
+            const response = await getLockerItems(profile.id, 1, 100);
             if (response.success) {
                 const storeItemsData = response?.items?.map((item: any) => {
                     const storeItem = item.item || {};
@@ -170,12 +172,12 @@ const LockerTab = () => {
         } finally {
             setLoading(false);
         }
-    }, [user?.id, getLockerItems]);
+    }, [profile?.id, getLockerItems]);
     useEffect(() => {
-        if (authenticated) {
+        if (authenticated && profile?.id) {
             fetchStoreItems()
         }
-    }, [authenticated]);
+    }, [authenticated, profile?.id]);
     const renderCategory = (title: string, category: string, emptyText: string, refKey: keyof typeof carouselRefs) => {
         const items = getStoreItemsByCategory(category);
 

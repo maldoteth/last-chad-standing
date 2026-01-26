@@ -207,10 +207,10 @@ export const RankProvider = ({ children }: { children: ReactNode }) => {
   }, [isAdmin]);
 
   useEffect(() => {
-    if (authenticated) {
+    if (authenticated && profile?.id) {
       fetchObjectiveUserData();
     }
-  }, [authenticated]);
+  }, [authenticated, profile?.id]);
 
   return (
     <RankContext.Provider
