@@ -185,7 +185,7 @@ const Admin = () => {
       const response = await fetchStoreItemsFromDB(currentPage, 10);
 
       if (response.success) {
-        setStoreItems(response.items);
+        setStoreItems(response.items as any);
         setTotalItems(response.pagination.total);
         setTotalPages(response.pagination.totalPages);
       } else {

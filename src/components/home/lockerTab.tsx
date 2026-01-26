@@ -247,7 +247,7 @@ const LockerTab = () => {
             <StorePurchaseDialog
                 isOpen={dialogOpen}
                 onClose={() => setDialogOpen(false)}
-                item={selectedItem}
+                item={selectedItem as any}
             />
         </>
     );

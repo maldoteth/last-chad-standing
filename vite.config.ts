@@ -14,13 +14,38 @@ export default defineConfig(({ mode }) => ({
     react(),
     mode === 'development' &&
     componentTagger(),
-    NodeGlobalsPolyfillPlugin({
-      buffer: true,
-    }),
   ].filter(Boolean),
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  define: {
+    'global': 'globalThis',
+    'process.env': {},
+  },
+  optimizeDeps: {
+    esbuildOptions: {
+      define: {
+        global: 'globalThis'
+      },
+      plugins: [
+        NodeGlobalsPolyfillPlugin({
+          buffer: true,
+          process: true,
+        }),
+      ]
+    }
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'vendor-privy': ['@privy-io/react-auth'],
+          'vendor-wagmi': ['wagmi', 'viem'],
+        }
+      }
+    }
+  }
 }));
+
