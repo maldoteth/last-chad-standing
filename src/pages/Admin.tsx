@@ -281,8 +281,8 @@ const Admin = () => {
       
       const { provider } = await walletProvider()
       
-      // Better address fetching from Privy
-      const address = (user?.smartWallet?.address || user?.wallet?.address || wallets[0]?.address) as Address;
+      // Prioritize the EOA wallet (where user usually has gas money)
+      const address = (user?.wallet?.address || user?.smartWallet?.address || wallets[0]?.address) as Address;
       
       console.log('🚀 Starting Deployment...', {
         address,
@@ -307,7 +307,12 @@ const Admin = () => {
       }
       const deploymentResult = await deployNFTContract(deployParams);
       const contractAddress = deploymentResult.contractAddress as Address;
-      console.log('Contract deployed at:', contractAddress);
+      
+      if (!contractAddress || contractAddress === '0x0000000000000000000000000000000000000000') {
+        throw new Error("Deployment failed: Received invalid contract address.");
+      }
+      
+      console.log('✅ Contract deployed at:', contractAddress);
 
       // 3. Mint NFT
       const mintParams: any = {
@@ -319,7 +324,9 @@ const Admin = () => {
       }
       const mintResult = await mintNFT(mintParams);
       const mintTx = mintResult.transactionHash;
-      console.log('NFT minted. Tx hash:', mintTx);
+      console.log('✅ NFT minted. Tx hash:', mintTx);
+
+      const walletId = user?.wallet?.id || user?.smartWallet?.address || (user as any)?.id;
 
       // 4. Prepare Payload
       const payload = {
@@ -327,12 +334,18 @@ const Admin = () => {
         ...metaData,
         price: Number(formData.price),
         max_supply: Number(formData.max_supply),
+        // CRITICAL: Map both naming styles
         nftAddress: contractAddress,
+        nft_address: contractAddress, 
+        nftDeployWalletId: walletId,
+        nft_deploy_wallet_id: walletId,
         deploymentTxHash: deploymentResult.transactionHash,
         mintingTxHash: mintTx,
         userAddress: address,
-        is_active: formData.is_active || true
+        is_active: true
       };
+      
+      console.log('📤 Final Payload for DB:', payload);
 
       // 5. Save to Database with Fallback
       if (editingItem) {

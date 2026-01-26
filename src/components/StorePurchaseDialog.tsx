@@ -235,10 +235,24 @@ const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
       const TOKEN_ID =  tokenIds?.length > 0 ? tokenIds[0] : ''
 
       const userWallet = user.wallet.address as Address
-      const { txHash } = await post('privy-nft/safe-transfer', {
-        WALLET_ID: item?.nftBuyerWalletId,
+      const buyerWalletId = item?.nftBuyerWalletId || (item as any)?.nft_buyer_wallet_id;
+      const contractAddress = item.nftAddress || (item as any)?.nft_address;
+
+      console.log("🛠️ Transfer Request Details:", {
+        WALLET_ID: buyerWalletId,
         RECIPIENT: userWallet,
-        NFT_CONTRACT: item.nftAddress,
+        NFT_CONTRACT: contractAddress,
+        TOKEN_ID: TOKEN_ID
+      });
+
+      if (!buyerWalletId || !contractAddress) {
+        throw new Error(`Missing NFT details for transfer! WALLET_ID: ${buyerWalletId}, CONTRACT: ${contractAddress}.`);
+      }
+
+      const { txHash } = await post('privy-nft/safe-transfer', {
+        WALLET_ID: buyerWalletId,
+        RECIPIENT: userWallet,
+        NFT_CONTRACT: contractAddress,
         TOKEN_ID: TOKEN_ID == 0 ? TOKEN_ID + 1 : TOKEN_ID
       })
       return txHash?.hash
@@ -249,10 +263,23 @@ const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
   const handleSendPrivyNft = async () => {
     try {
       const userWallet = user.wallet.address as Address
-      const { mintTx } = await post('privy-nft/mint', {
-        WALLET_ID: item?.nftDeployWalletId,
+      const walletId = item?.nftDeployWalletId || (item as any)?.nft_deploy_wallet_id || (item as any)?.nftDeployWalletId;
+      const contractAddress = item.nftAddress || (item as any)?.nft_address;
+
+      console.log("🛠️ Minting Request Details:", {
+        WALLET_ID: walletId,
         RECIPIENT: userWallet,
-        NFT_CONTRACT: item.nftAddress
+        NFT_CONTRACT: contractAddress
+      });
+
+      if (!walletId || !contractAddress) {
+        throw new Error(`Missing NFT details! WALLET_ID: ${walletId}, CONTRACT: ${contractAddress}. Please recreate the item in Admin.`);
+      }
+
+      const { mintTx } = await post('privy-nft/mint', {
+        WALLET_ID: walletId,
+        RECIPIENT: userWallet,
+        NFT_CONTRACT: contractAddress
       })
       return mintTx?.hash
     } catch (error) {
