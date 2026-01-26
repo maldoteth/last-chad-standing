@@ -4,6 +4,7 @@ import React, { createContext, useContext, useEffect, useState, ReactNode, useRe
 import { useSupabase } from '@/hooks/useSupabase';
 import { usePrivy } from '@privy-io/react-auth';
 import { supabase } from '@/integrations/supabase/client';
+import { useProfile } from './profileContext';
 
 export interface Notification {
     id: string;
@@ -43,6 +44,7 @@ export const NotificationProvider: React.FC<Props> = ({ children }) => {
 
     const { getNotifications, getUnreadNotificationCount, markNotificationAsRead } = useSupabase();
     const { user, authenticated } = usePrivy();
+    const { profile } = useProfile();
 
     // ---------------------
     // Fetch Notifications (with pagination & unread filter)
@@ -51,12 +53,12 @@ export const NotificationProvider: React.FC<Props> = ({ children }) => {
     const isFetchingCountRef = useRef(false);
 
     const fetchNotifications = async (options?: { unread_only?: string; page?: number }) => {
-        if (isFetchingRef.current || !user?.id) return;
+        if (isFetchingRef.current || !profile?.id) return;
         try {
             isFetchingRef.current = true;
             setLoading(true);
 
-            const res = await getNotifications(user.id, { 
+            const res = await getNotifications(profile.id, { 
                 page: options?.page, 
                 unread_only: options?.unread_only === 'true' 
             });
@@ -77,10 +79,10 @@ export const NotificationProvider: React.FC<Props> = ({ children }) => {
     };
 
     const fetchUnreadCount = async () => {
-        if (isFetchingCountRef.current || !user?.id) return;
+        if (isFetchingCountRef.current || !profile?.id) return;
         try {
             isFetchingCountRef.current = true;
-            const res = await getUnreadNotificationCount(user.id);
+            const res = await getUnreadNotificationCount(profile.id);
             if (res.success) {
                 setUnreadCount(res.count || 0);
             }
@@ -116,19 +118,19 @@ export const NotificationProvider: React.FC<Props> = ({ children }) => {
     };
 
     useEffect(() => {
-        if (authenticated && user?.id) {
+        if (authenticated && profile?.id) {
             refreshAll();
 
             // 💡 Enable Realtime Subscription
             const channel = supabase
-                .channel(`notifications-${user.id}`)
+                .channel(`notifications-${profile.id}`)
                 .on(
                     'postgres_changes',
                     {
                         event: 'INSERT',
                         schema: 'public',
                         table: 'Notification',
-                        filter: `user_id=eq.${user.id}`
+                        filter: `user_id=eq.${profile.id}`
                     },
                     (payload) => {
                         console.log('📬 New notification received via Realtime:', payload);
@@ -141,7 +143,7 @@ export const NotificationProvider: React.FC<Props> = ({ children }) => {
                 supabase.removeChannel(channel);
             };
         }
-    }, [authenticated, user?.id]);
+    }, [authenticated, user?.id, profile?.id]);
 
     return (
         <NotificationContext.Provider

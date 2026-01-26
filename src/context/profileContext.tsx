@@ -4,7 +4,6 @@ import { useSupabase } from "@/hooks/useSupabase";
 import { generateUniqueWeb3Name } from "@/lib/utils";
 import { handleError } from "@/Api/handleError";
 import { useSearchParams } from "react-router-dom";
-import { useSocketEmit, useSocketEvent } from "./SocketContext";
 
 // ---------------- Types ----------------
 export interface Performance {
@@ -145,12 +144,7 @@ export const ProfileProvider = ({ children }: { children: ReactNode }) => {
         }
     }, [authenticated, user?.id, profile, loading]);
 
-    useSocketEvent('update:user', (user: UserProfile) => {
-        if (!user) return;
-        const newIcon = getTierIcon(user.xp || 0);
-        const data = { ...user, avatar_url: newIcon }
-        setProfile(data);
-    })
+    // Real-time updates handled by Supabase Realtime in specific contexts (Notification/Rank)
 
     return (
         <ProfileContext.Provider

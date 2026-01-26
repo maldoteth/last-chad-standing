@@ -6,7 +6,6 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { useSupabase } from "@/hooks/useSupabase";
 import { useProfile } from "./profileContext";
-import { useSocketEvent } from "./SocketContext";
 import { useLocation } from "react-router-dom";
 
 // ---------- Types ----------
@@ -70,35 +69,24 @@ export const StoreProvider = ({ children }: { children: ReactNode }) => {
   const { pathname } = useLocation()
   const isAdmin = pathname.startsWith('/admin')
 
-  // ---------- Fetch store items ----------
-  useSocketEvent("storeItems", (data) => {
-    if (!data) return;
-
-    setStoreItems((prevData) => {
-      const newEntries = Array.isArray(data) ? data : [data];
-      let updated = [...prevData];
-
-      newEntries.forEach((entry) => {
-        const entryId = entry.id;
-        const existingIndex = updated.findIndex((item) => item.id === entryId);
-
-        if (entry.is_active === false) {
-          if (existingIndex !== -1) {
-            updated.splice(existingIndex, 1);
-          }
-          return;
+  // ---------- Realtime Subscriptions ----------
+  useEffect(() => {
+    const channel = supabase
+      .channel('store-updates')
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'store_items' },
+        () => {
+          console.log('🛒 Store items updated via Realtime');
+          fetchStoreItems();
         }
+      )
+      .subscribe();
 
-        if (existingIndex !== -1) {
-          updated[existingIndex] = { ...updated[existingIndex], ...entry };
-        } else {
-          updated.push(entry);
-        }
-      });
-
-      return updated;
-    });
-  });
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, []);
 
   const fetchStoreItems = async () => {
     setLoading(true);
