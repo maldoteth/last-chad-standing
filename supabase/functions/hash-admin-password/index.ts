@@ -21,8 +21,8 @@ serve(async (req) => {
 
     // Hash the password "admin42069"
     const password = "admin42069"
-    const salt = await bcrypt.genSalt(10)
-    const hashedPassword = await bcrypt.hash(password, salt)
+    const saltRounds = 10
+    const hashedPassword = await bcrypt.hash(password, saltRounds)
 
     // Update the admin user with the correct hash
     const { error } = await supabaseClient
@@ -46,9 +46,8 @@ serve(async (req) => {
       },
     )
   } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : String(error);
     return new Response(
-      JSON.stringify({ error: errorMessage }),
+      JSON.stringify({ error: error.message }),
       { 
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
         status: 400,

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useToast } from "@/hooks/use-toast";
 import { EIP1193Provider, getEmbeddedConnectedWallet, usePrivy, useSendTransaction, useWallets } from '@privy-io/react-auth';
-import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerClose } from "@/components/ui/drawer";
@@ -11,7 +10,7 @@ import { X, ZoomIn } from "lucide-react";
 import { coinToUsd, formatNumberWithAbbreviation, getRarityColor, getRarityDisplayName, abbreviateUsername } from "@/lib/utils";
 import { useStore } from "@/context/storeData";
 import { Spinner } from "./ui/spinner";
-import { useSupabase } from "@/hooks/useSupabase";
+import { useApi } from "@/Api/apiFunction";
 import {
   Address,
   createWalletClient,
@@ -71,8 +70,7 @@ interface StorePurchaseDialogProps {
   isOpen: boolean;
   onClose: () => void;
   item: StoreItem | LockerItem | null;
-  isLockerItem?: boolean;
-  onSuccess?: () => void;
+  isLockerItem?: boolean
 }
 
 // Get max supply based on rarity
@@ -167,15 +165,14 @@ const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
   isOpen,
   onClose,
   item,
-  isLockerItem = false,
-  onSuccess
+  isLockerItem = false
 }) => {
   const isMobile = useIsMobile();
   const { toast } = useToast();
   const { authenticated, login } = usePrivy();
   const { purchaseItem, purchaseTokenId, userBalance, isSubmintLoading, } = useStore();
   const [isLoadingCard, setIsLoadingCard] = useState(false);
-  const { getContractToken, updateLockerItem, supabase: supabaseInstance } = useSupabase();
+  const { post, put, get } = useApi()
   const [isLoading, setIsLoading] = useState(false);
   const { user } = usePrivy()
   const { wallets } = useWallets()
@@ -196,26 +193,22 @@ const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
           item.nftAddress as Address,
           item.userAddress || user?.wallet?.address as Address
         );
-        
-        if (Array.isArray(data) && data.length === 2 && Array.isArray(data[1])) {
-          setTokenIds(data[1].map(id => Number(id)));
-        } else {
-          const converted = data?.toString();
-          const numbers = converted.split(",")
-            .map(Number)
-            .filter((v, i, a) => a.indexOf(v) === i);
-          setTokenIds(numbers);
-        }
+        const converted = data?.toString()
+        const numbers = converted.split(",")
+          .map(Number)
+          .filter((v, i, a) => a.indexOf(v) === i)
+        setTokenIds(numbers)
       } catch (error) {
         console.error("Error fetching user balance:", error);
       }
     }
   };
   const fetchToken = async () => {
-    if (item?.nftAddress && 'item_id' in item && item.user_id) {
+    if (item?.nftAddress && 'item_id' in item) {
       try {
-        const res = await getContractToken(item.nftAddress as string, item.item_id, item.user_id);
-        const tokenId = res?.data;
+        const data = await get('locker-item/token', { contractId: item.nftAddress, item_id: item?.item_id, userId: item?.user_id });
+        const tokenId = data?.item
+        console.log(data)
         if (!tokenId?.token_id) {
           fetchBalance()
         } else {
@@ -241,30 +234,13 @@ const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
       const TOKEN_ID =  tokenIds?.length > 0 ? tokenIds[0] : ''
 
       const userWallet = user.wallet.address as Address
-      const buyerWalletId = item?.nftBuyerWalletId || (item as any)?.nft_buyer_wallet_id;
-      const contractAddress = item.nftAddress || (item as any)?.nft_address;
-
-      console.log("🛠️ Transfer Request Details:", {
-        WALLET_ID: buyerWalletId,
+      const { txHash } = await post('privy-nft/safe-transfer', {
+        WALLET_ID: item?.nftBuyerWalletId,
         RECIPIENT: userWallet,
-        NFT_CONTRACT: contractAddress,
-        TOKEN_ID: TOKEN_ID
-      });
-
-      if (!buyerWalletId || !contractAddress) {
-        throw new Error(`Missing NFT details for transfer! WALLET_ID: ${buyerWalletId}, CONTRACT: ${contractAddress}.`);
-      }
-
-      const { data, error } = await supabase.functions.invoke('safe-transfer', {
-        body: {
-            WALLET_ID: buyerWalletId,
-            RECIPIENT: userWallet,
-            NFT_CONTRACT: contractAddress,
-            TOKEN_ID: TOKEN_ID == 0 ? TOKEN_ID + 1 : TOKEN_ID
-        }
-      });
-      if (error) throw error;
-      return data?.txHash?.hash;
+        NFT_CONTRACT: item.nftAddress,
+        TOKEN_ID: TOKEN_ID == 0 ? TOKEN_ID + 1 : TOKEN_ID
+      })
+      return txHash?.hash
     } catch (error) {
       throw (error)
     }
@@ -272,28 +248,12 @@ const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
   const handleSendPrivyNft = async () => {
     try {
       const userWallet = user.wallet.address as Address
-      const walletId = item?.nftDeployWalletId || (item as any)?.nft_deploy_wallet_id || (item as any)?.nftDeployWalletId;
-      const contractAddress = item.nftAddress || (item as any)?.nft_address;
-
-      console.log("🛠️ Minting Request Details:", {
-        WALLET_ID: walletId,
+      const { mintTx } = await post('privy-nft/mint', {
+        WALLET_ID: item?.nftDeployWalletId,
         RECIPIENT: userWallet,
-        NFT_CONTRACT: contractAddress
-      });
-
-      if (!walletId || !contractAddress) {
-        throw new Error(`Missing NFT details! WALLET_ID: ${walletId}, CONTRACT: ${contractAddress}. Please recreate the item in Admin.`);
-      }
-
-      const { data, error } = await supabase.functions.invoke('mint-nft', {
-        body: {
-            WALLET_ID: walletId,
-            RECIPIENT: userWallet,
-            NFT_CONTRACT: contractAddress
-        }
-      });
-      if (error) throw error;
-      return data?.mintTx?.hash;
+        NFT_CONTRACT: item.nftAddress
+      })
+      return mintTx?.hash
     } catch (error) {
       throw (error)
     }
@@ -353,32 +313,11 @@ const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
       }
 
       if (success) {
-        onSuccess?.();
         onClose();
       }
 
-    } catch (error: any) {
-      console.log("Purchase Error:", error);
-      
-      let errorMessage = "Something went wrong. Please try again.";
-      
-      if (error?.response?.data?.error) {
-        const backendError = error.response.data.error;
-        // Check if it's the "Insufficient gas credits" stringified error
-        if (typeof backendError === 'string' && backendError.includes("insufficient_funds")) {
-          errorMessage = "Server error: Insufficient gas credits for minting. Please contact admin.";
-        } else if (error.response.data.message) {
-          errorMessage = error.response.data.message;
-        }
-      } else if (error?.message) {
-        errorMessage = error.message;
-      }
-
-      toast({
-        title: "Purchase Failed",
-        description: errorMessage,
-        variant: "destructive",
-      });
+    } catch (error) {
+      console.log(error)
     } finally {
       setIsLoading(false)
     }
@@ -400,13 +339,12 @@ const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
     try {
       setIsLoadingCard(true);
 
-      const response = await updateLockerItem(item?.id as string, { is_sell_item });
+      const response = await put(`locker-item/${item?.id}`, { is_sell_item });
       if (response?.success) {
         toast({
           title: "Success",
-          description: "Locker item updated",
+          description: response?.message,
         });
-        onSuccess?.();
         onClose();
       }
     } catch (error: any) {
@@ -443,22 +381,19 @@ const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
 
     try {
       setIsLoading(true);
-      const response = await updateLockerItem(item.id, {
+      const response = await put(`locker-item/${item.id}`, {
         is_sell_item: true,
         sale_price: salePrice,
         sale_end_date: saleEndDate,
-        listed_quantity: listedQuantity,
-        listed_at: new Date().toISOString(),
-        listed_for_sale: true
+        listed_quantity: listedQuantity
       });
 
       if (response?.success) {
-        toast({ title: "Success", description: "Item listed on marketplace" });
+        toast({ title: "Success", description: response.message });
         setSellModalOpen(false);
-        onSuccess?.();
         onClose();
       } else {
-        toast({ title: "Error", description: "Something went wrong", variant: "destructive" });
+        toast({ title: "Error", description: response?.message || "Something went wrong", variant: "destructive" });
       }
     } catch (error: any) {
       console.error("Sell Item error:", error);
@@ -502,39 +437,11 @@ const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
                   className="relative w-32 h-32 md:w-40 md:h-40 rounded-xl overflow-hidden bg-white/5 cursor-pointer group"
                   onClick={() => setIsImageExpanded(true)}
                 >
-                  {(() => {
-                    const rawUrl = item?.ImgGatewayUrl || item?.image_url;
-                    let finalUrl = rawUrl || "/placeholder.svg";
-
-                    if (rawUrl) {
-                      if (rawUrl.includes('pinata.cloud/ipfs/')) {
-                        const parts = rawUrl.split('/ipfs/');
-                        const path = parts[parts.length - 1];
-                        if (!(path.startsWith('Qm') || path.startsWith('bafy'))) {
-                          const cleanPath = decodeURIComponent(path).split('/').pop() || path;
-                          const { data: { publicUrl } } = supabase.storage.from('items').getPublicUrl(cleanPath);
-                          finalUrl = publicUrl;
-                        }
-                      } else if (!rawUrl.startsWith('http')) {
-                        const isIPFS = rawUrl.startsWith('Qm') || rawUrl.startsWith('bafy');
-                        if (isIPFS) {
-                          finalUrl = `https://gateway.pinata.cloud/ipfs/${rawUrl}`;
-                        } else {
-                          const cleanPath = decodeURIComponent(rawUrl).split('/').pop() || rawUrl;
-                          const { data: { publicUrl } } = supabase.storage.from('items').getPublicUrl(cleanPath);
-                          finalUrl = publicUrl;
-                        }
-                      }
-                    }
-
-                    return (
-                      <img
-                        src={finalUrl}
-                        alt={item.name}
-                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                      />
-                    );
-                  })()}
+                  <img
+                    src={item?.ImgGatewayUrl || item.image_url || "/placeholder.svg"}
+                    alt={item.name}
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
                     <ZoomIn className="w-6 h-6 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
                   </div>
@@ -547,39 +454,11 @@ const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
                     onClick={() => setIsImageExpanded(false)}
                   >
                     <div className="relative max-w-[90vw] max-h-[90vh] md:-translate-y-[50px]">
-                      {(() => {
-                        const rawUrl = item?.ImgGatewayUrl || item?.image_url;
-                        let finalUrl = rawUrl || "/placeholder.svg";
-
-                        if (rawUrl) {
-                          if (rawUrl.includes('pinata.cloud/ipfs/')) {
-                            const parts = rawUrl.split('/ipfs/');
-                            const path = parts[parts.length - 1];
-                            if (!(path.startsWith('Qm') || path.startsWith('bafy'))) {
-                              const cleanPath = decodeURIComponent(path).split('/').pop() || path;
-                              const { data: { publicUrl } } = supabase.storage.from('items').getPublicUrl(cleanPath);
-                              finalUrl = publicUrl;
-                            }
-                          } else if (!rawUrl.startsWith('http')) {
-                            const isIPFS = rawUrl.startsWith('Qm') || rawUrl.startsWith('bafy');
-                            if (isIPFS) {
-                              finalUrl = `https://gateway.pinata.cloud/ipfs/${rawUrl}`;
-                            } else {
-                              const cleanPath = decodeURIComponent(rawUrl).split('/').pop() || rawUrl;
-                              const { data: { publicUrl } } = supabase.storage.from('items').getPublicUrl(cleanPath);
-                              finalUrl = publicUrl;
-                            }
-                          }
-                        }
-
-                        return (
-                          <img
-                            src={finalUrl}
-                            alt={item.name}
-                            className="max-w-full max-h-[85vh] object-contain rounded-2xl"
-                          />
-                        );
-                      })()}
+                      <img
+                        src={item?.ImgGatewayUrl || item.image_url || "/placeholder.svg"}
+                        alt={item.name}
+                        className="max-w-full max-h-[85vh] object-contain rounded-2xl"
+                      />
                       <button
                         onClick={() => setIsImageExpanded(false)}
                         className="absolute -top-3 -right-3 w-8 h-8 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-colors"

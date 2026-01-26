@@ -9,19 +9,15 @@ export const axiosInstance = axios.create({
   baseURL: baseURL,
 });
 
-axiosInstance.interceptors.request.use(
-  (config) => {
-    const adminToken = localStorage.getItem('admin_token');
-    const token = localStorage.getItem('token');
-
-    if (adminToken) {
-      config.headers['Authorization'] = `Bearer ${adminToken}`;
-    } else if (token) {
-      config.headers['Authorization'] = `Bearer ${token}`;
+ axiosInstance.interceptors.request.use(
+    (config) => {
+      const token = localStorage.getItem('token');
+      if (token) {
+        config.headers['Authorization'] = `Bearer ${token}`;
+      }
+      return config;
+    },
+    (error) => {
+      return Promise.reject(error);
     }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
+  );
