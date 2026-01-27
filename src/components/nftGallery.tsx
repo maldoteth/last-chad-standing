@@ -3,14 +3,18 @@
 
 import { useState, useEffect } from "react";
 import type { Address } from "viem";
-import {
-} from "@/utils/nftFetch";
+
+interface NFTToken {
+  tokenName: string;
+  tokenSymbol: string;
+  tokenId: string;
+  contractAddress: string;
+}
 
 export const MyNFTsGallery = () => {
     const walletAddress: Address = '0x4201a1971Eb8734e34151c73C9161b24C3e1bcf0'
-    const apiKey = 'cqt_rQJFcvKHhphx4fHmhd38W7XVD7XV'
     const BASESCAN_API_KEY = 'AJUZEAEMS8I3BXDFK6Q6VPSNCR4JRZ8TQD';
-    const [nfts, setNfts] = useState([]);
+    const [nfts, setNfts] = useState<NFTToken[]>([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 

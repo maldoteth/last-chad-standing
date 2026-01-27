@@ -165,6 +165,15 @@ export const NFTDeployMintRefactored: React.FC = () => {
       return;
     }
 
+    const activeWallet = wallets.find(w => w.walletClientType !== 'privy') || wallets[0];
+    if (!activeWallet) {
+      setUi((prev) => ({
+        ...prev,
+        error: "No wallet available",
+      }));
+      return;
+    }
+
     resetError();
     try {
       setUi((prev) => ({
@@ -174,10 +183,12 @@ export const NFTDeployMintRefactored: React.FC = () => {
         successMessage: null,
       }));
 
+      const provider = await activeWallet.getEthereumProvider();
       const result = await mintNFT({
         contractAddress: ui.contractAddress as Address,
         toAddress: user.wallet.address as Address,
         userAddress: user.wallet.address as Address,
+        provider: provider as any,
         quantity: 1
       });
 
