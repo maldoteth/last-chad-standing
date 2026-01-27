@@ -74,7 +74,7 @@ export const CheckPrivy = ({ dollarAmount = 0, onComplete, ethToUsdRate = 0 }: C
       const { data, error } = await supabase
         .from('AdminWallet')
         .select('address')
-        .order('created_at', { ascending: false })
+        .eq('is_active', true)
         .limit(1)
         .single();
 

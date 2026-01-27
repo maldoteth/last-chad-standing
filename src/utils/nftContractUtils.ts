@@ -315,49 +315,35 @@ export const getUserTokens = async (
   const publicClient = getPublicClient();
 
   try {
-    // Try listnft first (custom helper)
-    try {
-      const data = await (publicClient as any).readContract({
-        address: contractAddress,
-        abi: CONTRACT_ABI,
-        functionName: "listnft",
-        args: [contractAddress as Address, userAddress as Address],
-      });
-      if (data && Array.isArray(data) && data.length > 0) {
-        return data;
-      }
-    } catch (e) {
-      console.warn("listnft failed, falling back to standard methods:", e);
-    }
-
-    // Fallback: use balanceOf and tokenOfOwnerByIndex (standard ERC721Enumerable)
-    const balance = await (publicClient as any).readContract({
+    // Step 1: Get number of tokens owned
+    const data = await (publicClient as any).readContract({
       address: contractAddress,
       abi: CONTRACT_ABI,
-      functionName: "balanceOf",
-      args: [userAddress],
+      functionName: "listnft",
+      args: [contractAddress as Address, userAddress as Address],
     });
 
-    const tokenCount = Number(balance);
-    const tokenIds: any[] = [];
-
-    for (let i = 0; i < tokenCount; i++) {
-      const tokenId = await (publicClient as any).readContract({
-        address: contractAddress as Address,
-        abi: CONTRACT_ABI,
-        functionName: "tokenOfOwnerByIndex",
-        args: [userAddress as Address, BigInt(i)],
-      });
-      tokenIds.push(Number(tokenId));
-    }
-
-    return [BigInt(tokenCount), tokenIds.map(id => BigInt(id))];
+    // const tokenCount = Number(balance);
+    // const tokenIds: any[] = [];
+    // // Step 2: Fetch each token ID by index
+    // for (let i = 0; i < tokenCount; i++) {
+    //   const tokenId = await publicClient.readContract({
+    //     address: contractAddress,
+    //     abi: CONTRACT_ABI,
+    //     functionName: "tokenByIndex",
+    //     args: [BigInt(i + 1)],
+    //     authorizationList: undefined
+    //   });
+    //   tokenIds.push(tokenId);
+    // }
+    return data;
   } catch (error) {
     const msg = handleContractError(error);
     console.error("❌ Error fetching tokens:", msg);
     throw new Error(msg);
   }
 };
+
 
 export const getUserWalletBalance = async (
   userAddress: Address

@@ -91,7 +91,6 @@ export const RankProvider = ({ children }: { children: ReactNode }) => {
   const [objectivesUserData, setObjectiveUserData] = useState<ObjectiveProgress[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const { getLevels, getRanks, getObjectives, getUserObjectives } = useSupabase();
-  const { profile } = useProfile();
   const { user, authenticated } = usePrivy();
   const { pathname } = useLocation()
   const isAdmin = pathname.startsWith('/admin')
@@ -131,10 +130,10 @@ export const RankProvider = ({ children }: { children: ReactNode }) => {
 
   const isFetchingObjectivesRef = useRef(false);
   const fetchObjectiveUserData = async () => {
-    if (isFetchingObjectivesRef.current || !authenticated || !profile?.id) return;
+    if (isFetchingObjectivesRef.current || !authenticated || !user?.id) return;
     try {
       isFetchingObjectivesRef.current = true;
-      const response = await getUserObjectives(profile.id);
+      const response = await getUserObjectives(user.id);
       if (response.success) {
         setObjectiveUserData(response.data as ObjectiveProgress[]);
       }
@@ -164,21 +163,20 @@ export const RankProvider = ({ children }: { children: ReactNode }) => {
 
     // 🎯 Personal Objectives Subscription
     let objectiveChannel: any;
-    if (authenticated && profile?.id) {
+    if (authenticated && user?.id) {
       objectiveChannel = supabase
-        .channel(`objectives-${profile.id}`)
+        .channel(`objectives-${user.id}`)
         .on(
           'postgres_changes',
           { 
             event: '*', 
             schema: 'public', 
             table: 'ObjectiveProgress',
-            filter: `user_id=eq.${profile.id}`
+            filter: `user_id=eq.${user.id}`
           },
           () => {
             console.log('🎯 Objectives updated via Realtime');
             fetchObjectiveUserData();
-            fetchRanksData(); // Update ranks too as XP changed
           }
         )
         .subscribe();
@@ -188,7 +186,7 @@ export const RankProvider = ({ children }: { children: ReactNode }) => {
       supabase.removeChannel(performanceChannel);
       if (objectiveChannel) supabase.removeChannel(objectiveChannel);
     };
-  }, [isAdmin, authenticated, profile?.id]);
+  }, [isAdmin, authenticated, user?.id]);
 
   useEffect(() => {
     if (isAdmin) return;
@@ -207,10 +205,10 @@ export const RankProvider = ({ children }: { children: ReactNode }) => {
   }, [isAdmin]);
 
   useEffect(() => {
-    if (authenticated && profile?.id) {
+    if (authenticated) {
       fetchObjectiveUserData();
     }
-  }, [authenticated, profile?.id]);
+  }, [authenticated]);
 
   return (
     <RankContext.Provider

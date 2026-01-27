@@ -95,8 +95,7 @@ const BuyDialogContent: React.FC<BuyDialogContentProps> = ({ selectedPlayer, onC
           exchangeRate: data?.exchangeRate,
           cryptoAmount: data?.cryptoAmount,
           amount: data?.amount,
-          type: 'crypto_coin_purchase',
-          userId: profile?.id
+          type: 'crypto_coin_purchase'
         }
       });
 
