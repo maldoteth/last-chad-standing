@@ -39,9 +39,20 @@ export default defineConfig(({ mode }) => ({
     }
   },
   build: {
+    commonjsOptions: {
+      transformMixedEsModules: true,
+    },
     rollupOptions: {
       output: {
-        // Removed manualChunks to avoid initialization order issues with wagmi/viem
+        // Prevent wagmi/viem from being split into separate chunks
+        // This fixes "Cannot access 'X' before initialization" errors
+        manualChunks: (id) => {
+          if (id.includes('node_modules')) {
+            if (id.includes('wagmi') || id.includes('viem') || id.includes('@privy-io')) {
+              return 'vendor-wallet';
+            }
+          }
+        },
       }
     }
   }

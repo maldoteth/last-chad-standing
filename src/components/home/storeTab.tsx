@@ -346,7 +346,7 @@ const StoreTab = () => {
       <StorePurchaseDialog
         isOpen={purchaseDialogOpen}
         onClose={() => setPurchaseDialogOpen(false)}
-        item={selectedStoreItem}
+        item={selectedStoreItem as any}
       />
     </>
   );
