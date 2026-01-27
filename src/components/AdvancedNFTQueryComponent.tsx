@@ -106,7 +106,7 @@ const AdvancedNFTQueryComponent = () => {
         abi: NFT_ABI,
         functionName: "balanceOf",
         args: [walletAddress as `0x${string}`],
-      });
+      } as any) as bigint;
 
       setBalance(bal);
       setOwnedNFTs([]);
@@ -149,14 +149,14 @@ const AdvancedNFTQueryComponent = () => {
           abi: NFT_ABI,
           functionName: "tokenOfOwnerByIndex",
           args: [walletAddress as `0x${string}`, BigInt(i)],
-        });
+        } as any) as bigint;
 
         const uri = await client.readContract({
           address: contractAddress as `0x${string}`,
           abi: NFT_ABI,
           functionName: "tokenURI",
           args: [tokenId],
-        });
+        } as any) as string;
 
         owned.push({
           id: tokenId.toString(),

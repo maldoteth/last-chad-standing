@@ -134,7 +134,7 @@ export const deployNFTContract = async (params: DeployContractParams) => {
         params.baseURI,
         BigInt(params.maxSupply),
       ],
-    });
+    } as any);
 
     console.log("📝 Deployment tx hash:", hash);
 
@@ -269,13 +269,13 @@ export const getContractInfo = async (contractAddress: Address) => {
         address: contractAddress,
         abi: CONTRACT_ABI,
         functionName: "totalMinted",
-      });
+      } as any) as bigint;
     } catch {
       totalMinted = await publicClient.readContract({
         address: contractAddress,
         abi: CONTRACT_ABI,
         functionName: "totalSupply",
-      });
+      } as any) as bigint;
     }
 
     // Get owner via ownerOf with token 1, or just skip owner fetching
@@ -284,7 +284,7 @@ export const getContractInfo = async (contractAddress: Address) => {
       address: contractAddress,
       abi: CONTRACT_ABI,
       functionName: "maxSupply",
-    });
+    } as any) as bigint;
 
     return {
       totalMinted: Number(totalMinted ?? 0n),
@@ -315,7 +315,7 @@ export const getUserTokens = async (
       abi: CONTRACT_ABI,
       functionName: "listnft",
       args: [contractAddress as Address, userAddress as Address],
-    });
+    } as any);
 
     return data;
   } catch (error) {
@@ -360,7 +360,7 @@ export const getTokenURI = async (
       abi: CONTRACT_ABI,
       functionName: "tokenURI",
       args: [BigInt(tokenId)],
-    });
+    } as any) as string;
 
     return uri;
   } catch (error) {
