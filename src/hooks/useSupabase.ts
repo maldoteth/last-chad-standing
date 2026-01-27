@@ -15,6 +15,25 @@ type ObjectiveProgress = Tables['ObjectiveProgress']['Row'];
 export function useSupabase() {
     const { toast } = useToast();
 
+    // Helper to check if a string is a UUID
+    const isUUID = (uuid: string) => {
+        return /^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(uuid);
+    };
+
+    // Helper to get Supabase ID from Privy ID if needed
+    const ensureSupabaseId = async (id: string): Promise<string> => {
+        if (isUUID(id)) return id;
+
+        const { data, error } = await supabase
+            .from('Users')
+            .select('id')
+            .eq('privy_id', id)
+            .maybeSingle();
+
+        if (data?.id) return data.id;
+        return id; // fallback to original (might still error but we tried)
+    };
+
     // ==================== STORE ITEMS ====================
 
     const getStoreItems = async (page: number = 1, pageSize: number = 10) => {
@@ -112,6 +131,8 @@ export function useSupabase() {
 
     const getLockerItems = async (userId: string, page: number = 1, pageSize: number = 10) => {
         try {
+            // Ensure we have the internal UUID
+            const internalId = await ensureSupabaseId(userId);
             const from = (page - 1) * pageSize;
             const to = from + pageSize - 1;
 
@@ -121,7 +142,7 @@ export function useSupabase() {
           *,
           item:store_items(*)
         `, { count: 'exact' })
-                .eq('user_id', userId)
+                .eq('user_id', internalId)
                 .order('created_at', { ascending: false })
                 .range(from, to);
 
@@ -233,14 +254,14 @@ export function useSupabase() {
                 .from('Users')
                 .select('*')
                 .eq('privy_id', userData.privy_id)
-                .single();
+                .maybeSingle();
 
             if (existingUser) {
                 // User exists, return it
                 return {
                     success: true,
                     user: existingUser,
-                    token: 'supabase-session' // Placeholder for compatibility
+                    token: 'supabase-session'
                 };
             }
 
@@ -253,7 +274,7 @@ export function useSupabase() {
                     wallet_address: userData.wallet_address,
                     privy_id: userData.privy_id,
                     ref_by_code: userData.referred_by,
-                    coins: 1000, // Starting coins
+                    coins: 1000,
                     xp: 0,
                 })
                 .select()
@@ -354,13 +375,14 @@ export function useSupabase() {
 
     const getUserObjectives = async (userId: string) => {
         try {
+            const internalId = await ensureSupabaseId(userId);
             const { data, error } = await supabase
                 .from('ObjectiveProgress')
                 .select(`
           *,
           objective:Objective(*)
         `)
-                .eq('user_id', userId)
+                .eq('user_id', internalId)
                 .order('lastUpdated', { ascending: false });
 
             if (error) throw error;
@@ -452,6 +474,7 @@ export function useSupabase() {
         pageSize?: number;
     }) => {
         try {
+            const internalId = await ensureSupabaseId(userId);
             const page = options?.page || 1;
             const pageSize = options?.pageSize || 20;
             const from = (page - 1) * pageSize;
@@ -460,7 +483,7 @@ export function useSupabase() {
             let query = supabase
                 .from('Notification')
                 .select('*', { count: 'exact' })
-                .eq('user_id', userId);
+                .eq('user_id', internalId);
 
             if (options?.unread_only) {
                 query = query.eq('is_read', false);
@@ -495,10 +518,11 @@ export function useSupabase() {
 
     const getUnreadNotificationCount = async (userId: string) => {
         try {
+            const internalId = await ensureSupabaseId(userId);
             const { count, error } = await supabase
                 .from('Notification')
                 .select('*', { count: 'exact', head: true })
-                .eq('user_id', userId)
+                .eq('user_id', internalId)
                 .eq('is_read', false);
 
             if (error) throw error;
@@ -567,12 +591,13 @@ export function useSupabase() {
 
     const getContractToken = async (contractId: string, itemId: string, userId: string) => {
         try {
+            const internalId = await ensureSupabaseId(userId);
             const { data, error } = await supabase
                 .from('Contract_token')
                 .select('*')
                 .eq('nftAddress', contractId)
                 .eq('item_id', itemId)
-                .eq('user_id', userId)
+                .eq('user_id', internalId)
                 .single();
 
             if (error) throw error;
@@ -594,8 +619,9 @@ export function useSupabase() {
         nftBuyerWalletId: string;
     }) => {
         try {
+            const internalId = await ensureSupabaseId(params.userId);
             const { data, error } = await supabase.functions.invoke('secure-purchase', {
-                body: { ...params, isMarketplace: false }
+                body: { ...params, userId: internalId, isMarketplace: false }
             });
 
             if (error) throw error;
@@ -615,8 +641,9 @@ export function useSupabase() {
         tokenId: string;
     }) => {
         try {
+            const internalId = await ensureSupabaseId(params.userId);
             const { data, error } = await supabase.functions.invoke('secure-purchase', {
-                body: { ...params, isMarketplace: true }
+                body: { ...params, userId: internalId, isMarketplace: true }
             });
 
             if (error) throw error;

@@ -1,179 +1,109 @@
-// api/useApi.ts
 /* eslint-disable prettier/prettier */
-import { useRef, useCallback } from "react";
-import { axiosInstance } from "./axiosInstance";
-import { decryptResponse } from "./decryptResponse";
-
-interface ApiOptions {
-  headers?: Record<string, string>;
-  deduplicate?: boolean;
-  cache?: boolean;            // enable cache
-  revalidate?: boolean;       // revalidate in background
-  ttl?: number;               // cache time-to-live in ms
-  signal?: AbortSignal;
-}
-
-type Params = Record<string, any>;
-type RequestMap = Map<string, Promise<any>>;
-
-interface CacheEntry {
-  data: any;
-  expiry: number; // timestamp when cache expires
-}
+import { useCallback } from "react";
+import { useSupabase } from "@/hooks/useSupabase";
+import { useProfile } from "@/context/profileContext";
 
 export function useApi() {
-  const activeRequestsRef = useRef<RequestMap>(new Map());
-  const cacheRef = useRef<Map<string, CacheEntry>>(new Map());
+  const supabase = useSupabase();
+  const { profile } = useProfile();
 
-  const handleUserLogout = () => {
-    // logout()
-    // toast.info("Your session expired, please login");
+  const handleObjectiveUser = async () => {
+    if (!profile?.id) return { success: false, data: [] };
+    return await supabase.getUserObjectives(profile.id);
   };
 
-  const header1 = { "Content-Type": "application/json" };
-  const header2 = { "Content-Type": "multipart/form-data" };
-
-  const getRequestKey = (method: string, endpoint: string, params?: Params) =>
-    `${method}:${endpoint}:${JSON.stringify(params || {})}`;
-
-  const fetchRequest = useCallback(
-    async (
-      method: "GET" | "POST" | "PUT" | "DELETE",
-      endpoint: string,
-      dataOrParams?: any,
-      options: ApiOptions = {},
-    ) => {
-      const {
-        headers = header1,
-        deduplicate = true,
-        cache = false,
-        revalidate = false,
-        ttl = 1000 * 60, // default 1 min
-        signal,
-      } = options;
-
-      const requestKey = getRequestKey(method, endpoint, dataOrParams);
-
-      // 1. Serve from cache if valid
-      if (cache && cacheRef.current.has(requestKey)) {
-        const cached = cacheRef.current.get(requestKey)!;
-        const now = Date.now();
-
-        if (cached.expiry > now) {
-          // fresh cache
-          if (revalidate) {
-            // kick off background refresh
-            fetchRequest(method, endpoint, dataOrParams, {
-              ...options,
-              revalidate: false,
-            }).catch(() => { });
-          }
-          return Promise.resolve(cached.data);
-        } else {
-          cacheRef.current.delete(requestKey);
-        }
-      }
-
-      // 2. Deduplicate in-flight request
-      if (deduplicate && activeRequestsRef.current.has(requestKey)) {
-        return activeRequestsRef.current.get(requestKey);
-      }
-
-      const controller = signal ? undefined : new AbortController();
-      const requestSignal = signal || controller?.signal;
-
-      let axiosPromise: Promise<any>;
-      if (method === "GET") {
-        axiosPromise = axiosInstance.get(endpoint, {
-          headers,
-          params: dataOrParams,
-          signal: requestSignal,
-        });
-      } else if (method === "POST") {
-        axiosPromise = axiosInstance.post(endpoint, dataOrParams, {
-          headers,
-          signal: requestSignal,
-        });
-      } else if (method === "PUT") {
-        axiosPromise = axiosInstance.put(endpoint, dataOrParams, {
-          headers,
-          signal: requestSignal,
-        });
-      } else {
-        axiosPromise = axiosInstance.delete(endpoint, {
-          headers,
-          signal: requestSignal,
-        });
-      }
-
-      const requestPromise = axiosPromise
-        .then((response) => decryptResponse(response?.data))
-        .then((data) => {
-          if (cache) {
-            cacheRef.current.set(requestKey, {
-              data,
-              expiry: Date.now() + ttl,
-            });
-          }
-          return data;
-        })
-        .catch((error) => {
-          // if (error?.response?.status === 430) handleUserLogout(); // Removed: 430 is rate limit, not session expiry
-          throw error;
-        })
-        .finally(() => {
-          activeRequestsRef.current.delete(requestKey);
-        });
-
-      if (deduplicate) {
-        activeRequestsRef.current.set(requestKey, requestPromise);
-      }
-
-      return requestPromise;
-    },
-    [],
-  );
-
   const get = useCallback(
-    (endpoint: string, params?: Params, options?: ApiOptions) =>
-      fetchRequest("GET", endpoint, params, options),
-    [fetchRequest],
+    async (endpoint: string, params?: any) => {
+      console.log(`useApi.get: ${endpoint}`, params);
+
+      // Handle specific mappings from old API to Supabase
+      if (endpoint === "objective/user") {
+        return await handleObjectiveUser();
+      }
+
+      if (endpoint === "notifications") {
+        if (!profile?.id) return { success: false, data: [] };
+        return await supabase.getNotifications(profile.id, {
+          page: params?.page,
+          unread_only: params?.unread_only === 'true'
+        });
+      }
+
+      if (endpoint.startsWith("locker-item/token")) {
+        // Example: locker-item/token?contractId=...&itemId=...&userId=...
+        return await supabase.getContractToken(
+          params?.contractId,
+          params?.itemId,
+          params?.userId || profile?.id
+        );
+      }
+
+      if (endpoint === "ranks") {
+        return await supabase.getRanks();
+      }
+
+      if (endpoint === "levels") {
+        return await supabase.getLevels();
+      }
+
+      if (endpoint === "objectives") {
+        return await supabase.getObjectives();
+      }
+
+      // Fallback or warning for unhandled endpoints
+      console.warn(`Unhandled useApi.get endpoint: ${endpoint}`);
+      return { success: false, message: "Endpoint not migrated" };
+    },
+    [supabase, profile]
   );
 
   const post = useCallback(
-    (endpoint: string, apiData: any, options?: ApiOptions) =>
-      fetchRequest("POST", endpoint, apiData, options),
-    [fetchRequest],
+    async (endpoint: string, apiData: any) => {
+      console.log(`useApi.post: ${endpoint}`, apiData);
+
+      if (endpoint === "payment/checkout-session") {
+        return await supabase.supabase.functions.invoke('create-checkout-session', { body: apiData });
+      }
+
+      if (endpoint === "payment/crypto") {
+        return await supabase.supabase.functions.invoke('verify-preorder-payment', { body: apiData });
+      }
+
+      console.warn(`Unhandled useApi.post endpoint: ${endpoint}`);
+      return { success: false, message: "Endpoint not migrated" };
+    },
+    [supabase]
   );
 
   const put = useCallback(
-    (endpoint: string, apiData: any, options?: ApiOptions) =>
-      fetchRequest("PUT", endpoint, apiData, options),
-    [fetchRequest],
+    async (endpoint: string, apiData: any) => {
+      console.log(`useApi.put: ${endpoint}`, apiData);
+
+      if (endpoint.startsWith("locker-item/")) {
+        const id = endpoint.split("/")[1];
+        return await supabase.updateLockerItem(id, apiData);
+      }
+
+      console.warn(`Unhandled useApi.put endpoint: ${endpoint}`);
+      return { success: false, message: "Endpoint not migrated" };
+    },
+    [supabase]
   );
 
   const deleteData = useCallback(
-    (endpoint: string, options?: ApiOptions) =>
-      fetchRequest("DELETE", endpoint, undefined, options),
-    [fetchRequest],
+    async (endpoint: string) => {
+      console.log(`useApi.delete: ${endpoint}`);
+      return { success: false, message: "Endpoint not migrated" };
+    },
+    []
   );
-
-  const cancelAllRequests = useCallback(() => {
-    activeRequestsRef.current.clear();
-  }, []);
-
-  const clearCache = useCallback(() => {
-    cacheRef.current.clear();
-  }, []);
 
   return {
     get,
     post,
     put,
     deleteData,
-    cancelAllRequests,
-    clearCache,
-    header1,
-    header2,
+    header1: { "Content-Type": "application/json" },
+    header2: { "Content-Type": "multipart/form-data" },
   };
 }
