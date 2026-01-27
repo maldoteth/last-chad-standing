@@ -4,6 +4,7 @@ import React, { createContext, useContext, useEffect, useState, ReactNode, useRe
 import { useSupabase } from '@/hooks/useSupabase';
 import { usePrivy } from '@privy-io/react-auth';
 import { supabase } from '@/integrations/supabase/client';
+import { useProfile } from './profileContext';
 
 export interface Notification {
     id: string;
@@ -42,21 +43,20 @@ export const NotificationProvider: React.FC<Props> = ({ children }) => {
     const [totalPages, setTotalPages] = useState<number>(1);
 
     const { getNotifications, getUnreadNotificationCount, markNotificationAsRead } = useSupabase();
-    const { user, authenticated } = usePrivy();
+    const { authenticated } = usePrivy();
+    const { profile } = useProfile();
 
-    // ---------------------
-    // Fetch Notifications (with pagination & unread filter)
-    // ---------------------
     const isFetchingRef = useRef(false);
     const isFetchingCountRef = useRef(false);
 
     const fetchNotifications = async (options?: { unread_only?: string; page?: number }) => {
-        if (isFetchingRef.current || !user?.id) return;
+        // CRITICAL: Must use profile.id (Supabase UUID), not user.id (Privy ID)
+        if (isFetchingRef.current || !profile?.id) return;
         try {
             isFetchingRef.current = true;
             setLoading(true);
 
-            const res = await getNotifications(user.id, { 
+            const res = await getNotifications(profile.id, { 
                 page: options?.page, 
                 unread_only: options?.unread_only === 'true' 
             });
@@ -70,17 +70,16 @@ export const NotificationProvider: React.FC<Props> = ({ children }) => {
         } catch (err) {
             console.error('❌ Error fetching notifications:', err);
         } finally {
-            setLoading(true); // Keeping sync with original logic or fixing? original had setLoading(true) then setLoading(false)
             setLoading(false);
             isFetchingRef.current = false;
         }
     };
 
     const fetchUnreadCount = async () => {
-        if (isFetchingCountRef.current || !user?.id) return;
+        if (isFetchingCountRef.current || !profile?.id) return;
         try {
             isFetchingCountRef.current = true;
-            const res = await getUnreadNotificationCount(user.id);
+            const res = await getUnreadNotificationCount(profile.id);
             if (res.success) {
                 setUnreadCount(res.count || 0);
             }
@@ -91,9 +90,6 @@ export const NotificationProvider: React.FC<Props> = ({ children }) => {
         }
     };
 
-    // ---------------------
-    // Mark As Read
-    // ---------------------
     const markAsRead = async (notificationId: string) => {
         try {
             const res = await markNotificationAsRead(notificationId);
@@ -108,27 +104,24 @@ export const NotificationProvider: React.FC<Props> = ({ children }) => {
         }
     };
 
-    // ---------------------
-    // Refresh All (both count + notifications)
-    // ---------------------
     const refreshAll = async () => {
         await Promise.all([fetchNotifications(), fetchUnreadCount()]);
     };
 
     useEffect(() => {
-        if (authenticated && user?.id) {
+        if (authenticated && profile?.id) {
             refreshAll();
 
-            // 💡 Enable Realtime Subscription
+            // 💡 Enable Realtime Subscription using Supabase UUID
             const channel = supabase
-                .channel(`notifications-${user.id}`)
+                .channel(`notifications-${profile.id}`)
                 .on(
                     'postgres_changes',
                     {
                         event: 'INSERT',
                         schema: 'public',
                         table: 'Notification',
-                        filter: `user_id=eq.${user.id}`
+                        filter: `user_id=eq.${profile.id}`
                     },
                     (payload) => {
                         console.log('📬 New notification received via Realtime:', payload);
@@ -141,7 +134,7 @@ export const NotificationProvider: React.FC<Props> = ({ children }) => {
                 supabase.removeChannel(channel);
             };
         }
-    }, [authenticated, user?.id]);
+    }, [authenticated, profile?.id]);
 
     return (
         <NotificationContext.Provider
