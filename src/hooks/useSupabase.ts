@@ -266,6 +266,7 @@ export function useSupabase() {
             }
 
             // 2. Create new user
+            const refCode = Math.random().toString(36).substring(2, 10).toUpperCase();
             const { data: newUser, error } = await supabase
                 .from('Users')
                 .insert({
@@ -274,6 +275,7 @@ export function useSupabase() {
                     wallet_address: userData.wallet_address,
                     privy_id: userData.privy_id,
                     ref_by_code: userData.referred_by,
+                    ref_code: refCode,
                     coins: 1000,
                     xp: 0,
                 })
@@ -282,7 +284,64 @@ export function useSupabase() {
 
             if (error) throw error;
 
-            // 3. Create performance record
+            // 3. Handle Referral Reward (Invitation Objective)
+            if (userData.referred_by) {
+                try {
+                    const { data: referrer } = await supabase
+                        .from('Users')
+                        .select('id')
+                        .eq('ref_code', userData.referred_by)
+                        .maybeSingle();
+
+                    if (referrer) {
+                        const { data: inviteObjs } = await supabase
+                            .from('Objective')
+                            .select('id, targetCount')
+                            .eq('type', 'invitation')
+                            .eq('isActive', true);
+
+                        if (inviteObjs) {
+                            for (const obj of inviteObjs) {
+                                const { data: progress } = await supabase
+                                    .from('ObjectiveProgress')
+                                    .select('*')
+                                    .eq('user_id', referrer.id)
+                                    .eq('objective_id', obj.id)
+                                    .maybeSingle();
+
+                                if (progress && !progress.completed) {
+                                    const newCount = (progress.currentCount || 0) + 1;
+                                    await supabase
+                                        .from('ObjectiveProgress')
+                                        .update({
+                                            currentCount: newCount,
+                                            completed: newCount >= obj.targetCount,
+                                            lastUpdated: new Date().toISOString()
+                                        })
+                                        .eq('id', progress.id);
+                                } else if (!progress) {
+                                    await supabase
+                                        .from('ObjectiveProgress')
+                                        .insert({
+                                            user_id: referrer.id,
+                                            objective_id: obj.id,
+                                            currentCount: 1,
+                                            completed: 1 >= obj.targetCount,
+                                            type: 'invitation',
+                                            category: 'weekly',
+                                            startDate: new Date().toISOString(),
+                                            lastUpdated: new Date().toISOString()
+                                        });
+                                }
+                            }
+                        }
+                    }
+                } catch (refError) {
+                    console.error('Error handling referral reward:', refError);
+                }
+            }
+
+            // 4. Create performance record
             await supabase
                 .from('Performances')
                 .insert({
