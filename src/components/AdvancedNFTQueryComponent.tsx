@@ -1,5 +1,6 @@
 import { useState, useCallback } from "react";
-import { createPublicClient, http, defineChain } from "viem";
+import { createPublicClient, http, getContract, multicall } from "viem";
+import { base } from "viem/chains";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,19 +14,6 @@ import {
 } from "@/components/ui/select";
 import { Loader2, AlertCircle, Download } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-
-// Define Base chain locally to avoid type mismatch issues
-const baseChain = defineChain({
-  id: 8453,
-  name: 'Base',
-  nativeCurrency: { name: 'Ether', symbol: 'ETH', decimals: 18 },
-  rpcUrls: {
-    default: { http: ['https://mainnet.base.org'] },
-  },
-  blockExplorers: {
-    default: { name: 'BaseScan', url: 'https://basescan.org' },
-  },
-});
 
 const NFT_ABI = [
   {
@@ -82,7 +70,7 @@ const AdvancedNFTQueryComponent = () => {
   });
 
   const client = createPublicClient({
-    chain: baseChain,
+    chain: base,
     transport: http(import.meta.env.VITE_RPC_URL || "https://base-mainnet.g.alchemy.com/v2/YOUR_KEY"),
   });
 
@@ -101,13 +89,13 @@ const AdvancedNFTQueryComponent = () => {
 
     setLoading(true);
     try {
-      const bal = await client.readContract({
+      const nft = getContract({
         address: contractAddress as `0x${string}`,
         abi: NFT_ABI,
-        functionName: "balanceOf",
-        args: [walletAddress as `0x${string}`],
-      } as any) as bigint;
+        client,
+      });
 
+      const bal = await nft.read.balanceOf([walletAddress as `0x${string}`]);
       setBalance(bal);
       setOwnedNFTs([]);
       setPagination({
@@ -138,25 +126,24 @@ const AdvancedNFTQueryComponent = () => {
 
     setLoadingDetails(true);
     try {
+      const nft = getContract({
+        address: contractAddress as `0x${string}`,
+        abi: NFT_ABI,
+        client,
+      });
+
       const startIdx = (page - 1) * pagination.itemsPerPage;
       const endIdx = Math.min(startIdx + pagination.itemsPerPage, Number(balance));
       const owned: OwnedNFT[] = [];
 
       // Fetch token IDs for this page
       for (let i = startIdx; i < endIdx; i++) {
-        const tokenId = await client.readContract({
-          address: contractAddress as `0x${string}`,
-          abi: NFT_ABI,
-          functionName: "tokenOfOwnerByIndex",
-          args: [walletAddress as `0x${string}`, BigInt(i)],
-        } as any) as bigint;
+        const tokenId = await nft.read.tokenOfOwnerByIndex([
+          walletAddress as `0x${string}`,
+          BigInt(i),
+        ]);
 
-        const uri = await client.readContract({
-          address: contractAddress as `0x${string}`,
-          abi: NFT_ABI,
-          functionName: "tokenURI",
-          args: [tokenId],
-        } as any) as string;
+        const uri = await nft.read.tokenURI([tokenId]);
 
         owned.push({
           id: tokenId.toString(),
@@ -515,7 +502,12 @@ const AdvancedNFTQueryComponent = () => {
             <div>
               <p className="font-semibold">Step 4: Export</p>
               <p className="text-muted-foreground">
-                Use "Export" to download your portfolio data as JSON.
+                Download your portfolio as JSON for backup or analysis.
+              </p>
+            </div>
+            <div className="pt-2 border-t border-border">
+              <p className="text-xs text-muted-foreground">
+                For large portfolios (1000+ NFTs), pagination prevents RPC overload.
               </p>
             </div>
           </CardContent>

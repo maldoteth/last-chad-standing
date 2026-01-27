@@ -1,7 +1,9 @@
 import { useState, useEffect, useCallback } from 'react';
+import { supabase } from '@/integrations/supabase/client';
 import { usePrivy } from '@privy-io/react-auth';
 import { toast } from 'sonner';
 import { useApi } from '@/Api/apiFunction';
+import { handleError } from '@/Api/handleError';
 import { useSocketEvent } from '@/context/SocketContext';
 
 
@@ -142,7 +144,23 @@ export const useMarketplace = () => {
       setLoadingMarket(false);
     }
   }, []);
+  const fetchListings = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('marketplace_listings')
+        .select('*')
+        .eq('status', 'active')
+        .order('created_at', { ascending: false });
 
+      if (error) throw error;
+      setListings((data || []) as any[]);
+    } catch (error) {
+      console.error('Error fetching marketplace listings:', error);
+      toast.error('Failed to load marketplace data');
+    } finally {
+      setLoading(false);
+    }
+  };
   const getMarketplacePrices = (itemId: string, itemType: string): MarketplacePrices => {
     const itemListings = listings.filter(
       listing => listing.item_id === itemId && listing?.category === itemType
@@ -178,10 +196,21 @@ export const useMarketplace = () => {
     }
 
     try {
-      // Note: This would need a backend API endpoint to create listings
-      // For now, just show a success message
+      const { error } = await supabase
+        .from('marketplace_listings')
+        .insert({
+          user_id: user.id,
+          item_id: itemId,
+          item_type: itemType,
+          listing_type: listingType,
+          price,
+          quantity
+        });
+
+      if (error) throw error;
+
       toast.success(`${listingType === 'sell' ? 'Sell' : 'Buy'} order created successfully!`);
-      await fetchStoreItems(); // Refresh listings
+      await fetchListings(); // Refresh listings
       return true;
     } catch (error) {
       console.error('Error creating listing:', error);
@@ -192,10 +221,15 @@ export const useMarketplace = () => {
 
   const cancelListing = async (listingId: string): Promise<boolean> => {
     try {
-      // Note: This would need a backend API endpoint to cancel listings
-      // For now, just show a success message
+      const { error } = await supabase
+        .from('marketplace_listings')
+        .update({ status: 'cancelled' })
+        .eq('id', listingId);
+
+      if (error) throw error;
+
       toast.success('Listing cancelled successfully!');
-      await fetchStoreItems(); // Refresh listings
+      await fetchListings(); // Refresh listings
       return true;
     } catch (error) {
       console.error('Error cancelling listing:', error);

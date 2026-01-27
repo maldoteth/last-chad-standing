@@ -8,31 +8,20 @@ import {
   Hex,
   BaseError,
   ContractFunctionRevertedError,
-  defineChain,
+  type WalletClient
 } from "viem";
+import { base } from "viem/chains";
 import { CONTRACT_ABI } from "./helpers";
-
-// Define Base chain locally to avoid type mismatch issues
-const baseChain = defineChain({
-  id: 8453,
-  name: 'Base',
-  nativeCurrency: { name: 'Ether', symbol: 'ETH', decimals: 18 },
-  rpcUrls: {
-    default: { http: ['https://mainnet.base.org'] },
-  },
-  blockExplorers: {
-    default: { name: 'BaseScan', url: 'https://basescan.org' },
-  },
-});
-
+import { deployContract, waitForTransactionReceipt } from "viem/actions";
 // -------------------------
 // Interfaces
 // -------------------------
 export interface DeployContractParams {
+  provider: EIP1193Provider;
   name: string;
   symbol: string;
   baseURI: string;
-  owner?: Address;
+  owner: Address;
   maxSupply: number;
   bytecode: Hex;
   userAddress: Address;
@@ -41,6 +30,7 @@ export interface DeployContractParams {
 export interface MintParams {
   contractAddress: Address;
   toAddress: Address;
+  provider: EIP1193Provider;
   quantity: number;
   userAddress?: Address;
 }
@@ -50,7 +40,7 @@ export interface MintParams {
 // -------------------------
 export const getPublicClient = () => {
   return createPublicClient({
-    chain: baseChain,
+    chain: base,
     transport: http(),
   });
 };
@@ -68,12 +58,12 @@ export const getWalletMetamaskClient = async (expectedUserAddress?: Address) => 
   // ✅ Request account access from MetaMask
   const [address] = await window.ethereum.request({
     method: 'eth_requestAccounts',
-  }) as string[];
+  });
 
   // ✅ Initialize wallet client with MetaMask as provider
   const walletClient = createWalletClient({
     account: address as Address,
-    chain: baseChain,
+    chain: base,
     transport: custom(window.ethereum),
   });
 
@@ -83,7 +73,7 @@ export const getWalletClient = async (provider: EIP1193Provider, expectedUserAdd
 
   const walletClient = createWalletClient({
     account: expectedUserAddress,
-    chain: baseChain,
+    chain: base,
     transport: custom(provider),
   });
 
@@ -123,22 +113,22 @@ export const deployNFTContract = async (params: DeployContractParams) => {
   try {
     console.log("🚀 Deploying NFT contract...");
 
-    const hash = await walletClient.deployContract({
+    const hash = await deployContract(walletClient, {
       abi: CONTRACT_ABI,
       bytecode: params.bytecode,
-      chain: baseChain,
-      account: account,
       args: [
         params.name,
         params.symbol,
         params.baseURI,
+        // params.owner ?? account.address,
         BigInt(params.maxSupply),
       ],
-    } as any);
+      // account: account.address,
+    });
 
     console.log("📝 Deployment tx hash:", hash);
 
-    const receipt = await publicClient.waitForTransactionReceipt({
+    const receipt = await waitForTransactionReceipt(publicClient, {
       hash,
       timeout: 120_000,
     });
@@ -177,9 +167,9 @@ export const mintNFT = async (params: MintParams) => {
     const { request } = await publicClient.simulateContract({
       address: params.contractAddress,
       abi: CONTRACT_ABI,
-      functionName: "mint",
+      functionName: "mint", // 👈 or "mint" if non-owner minting is allowed
       args: [BigInt(params.quantity)],
-      account,
+      account, // must match connected signer
     });
 
     console.log("✅ Simulation OK — executing mint transaction...");
@@ -269,26 +259,34 @@ export const getContractInfo = async (contractAddress: Address) => {
         address: contractAddress,
         abi: CONTRACT_ABI,
         functionName: "totalMinted",
-      } as any) as bigint;
+        authorizationList: undefined
+      });
     } catch {
       totalMinted = await publicClient.readContract({
         address: contractAddress,
         abi: CONTRACT_ABI,
         functionName: "totalSupply",
-      } as any) as bigint;
+      });
     }
 
-    // Get owner via ownerOf with token 1, or just skip owner fetching
-    // since the ABI doesn't have an "owner" function
-    const maxSupply = await publicClient.readContract({
-      address: contractAddress,
-      abi: CONTRACT_ABI,
-      functionName: "maxSupply",
-    } as any) as bigint;
+    const [owner, maxSupply] = await Promise.all([
+      publicClient.readContract({
+        address: contractAddress,
+        abi: CONTRACT_ABI,
+        functionName: "owner",
+        authorizationList: undefined
+      }),
+      publicClient.readContract({
+        address: contractAddress,
+        abi: CONTRACT_ABI,
+        functionName: "maxSupply",
+        authorizationList: undefined
+      }),
+    ]);
 
     return {
       totalMinted: Number(totalMinted ?? 0n),
-      owner: contractAddress, // Contract address as placeholder since no owner function
+      owner,
       maxSupply: Number(maxSupply),
     };
   } catch (error) {
@@ -315,8 +313,22 @@ export const getUserTokens = async (
       abi: CONTRACT_ABI,
       functionName: "listnft",
       args: [contractAddress as Address, userAddress as Address],
-    } as any);
+      authorizationList: undefined
+    });
 
+    // const tokenCount = Number(balance);
+    // const tokenIds: any[] = [];
+    // // Step 2: Fetch each token ID by index
+    // for (let i = 0; i < tokenCount; i++) {
+    //   const tokenId = await publicClient.readContract({
+    //     address: contractAddress,
+    //     abi: CONTRACT_ABI,
+    //     functionName: "tokenByIndex",
+    //     args: [BigInt(i + 1)],
+    //     authorizationList: undefined
+    //   });
+    //   tokenIds.push(tokenId);
+    // }
     return data;
   } catch (error) {
     const msg = handleContractError(error);
@@ -332,7 +344,7 @@ export const getUserWalletBalance = async (
 
   try {
     const client = createPublicClient({
-      chain: baseChain,
+      chain: base,
       transport: http(),
     });
     const bal = await client.getBalance({ address: userAddress });
@@ -360,7 +372,7 @@ export const getTokenURI = async (
       abi: CONTRACT_ABI,
       functionName: "tokenURI",
       args: [BigInt(tokenId)],
-    } as any) as string;
+    });
 
     return uri;
   } catch (error) {
