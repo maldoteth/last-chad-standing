@@ -25,7 +25,6 @@ import StorePurchaseDialog from "@/components/StorePurchaseDialog";
 import Header from "@/components/navbar/header";
 import BottomNavbar from "@/components/navbar/bottomNavbar";
 import { Level, useRank } from "@/context/rankData";
-import { useApi } from "@/Api/apiFunction";
 import StoreTab from "@/components/home/storeTab";
 import LockerTab from "@/components/home/lockerTab";
 import { useProfile } from "@/context/profileContext";
@@ -50,7 +49,6 @@ const Game = () => {
   const [selectedStoreItem, setSelectedStoreItem] = useState<StoreItem | null>(null);
   const objectivesRef = useRef<HTMLDivElement>(null);
   const [searchParams, setSearchParams] = useSearchParams();
-  const { post, get } = useApi()
   const { unreadCount } = useNotifications()
 
   const {
@@ -441,7 +439,7 @@ const Game = () => {
       <div />
     </PreOrderDialog>
     {/* Store Purchase Dialog */}
-    <StorePurchaseDialog isOpen={purchaseDialogOpen} onClose={() => setPurchaseDialogOpen(false)} item={selectedStoreItem} />
+    <StorePurchaseDialog isOpen={purchaseDialogOpen} onClose={() => setPurchaseDialogOpen(false)} item={selectedStoreItem as any} />
   </div>;
 };
 export default Game;

@@ -10,24 +10,29 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Loader2, Wallet, Save, X } from "lucide-react";
-import { useApi } from "@/Api/apiFunction";
+import { useSupabase } from "@/hooks/useSupabase";
 import { toast } from "sonner";
 
 export default function AdminWalletDialog({ existingWallet }) {
     const [open, setOpen] = useState(false);
     const [address, setAddress] = useState(existingWallet || "");
     const [loading, setLoading] = useState(false);
-    const { post } = useApi()
+    const { setAdminWallet: saveAdminWallet } = useSupabase()
     const handleSave = async (e) => {
         e.preventDefault();
         setLoading(true);
 
         try {
-            const response = await post("admin/wallet", { address });
-            setOpen(false);
-            toast.success(response?.message)
+            const response = await saveAdminWallet(address);
+            if (response.success) {
+                setOpen(false);
+                toast.success("Admin wallet saved successfully");
+            } else {
+                toast.error("Failed to save admin wallet");
+            }
         } catch (error) {
             console.error("Failed to save admin wallet", error);
+            toast.error("Failed to save admin wallet");
         } finally {
             setLoading(false);
         }

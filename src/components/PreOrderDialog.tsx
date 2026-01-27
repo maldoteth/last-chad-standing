@@ -8,8 +8,6 @@ import { GlowCard } from '@/components/ui/spotlight-card';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { supabase } from '@/integrations/supabase/client';
 import { usePrivy } from '@privy-io/react-auth';
-import { axiosInstance } from '@/Api/BaseUrl';
-import { useApi } from '@/Api/apiFunction';
 
 
 interface PreOrderTier {
@@ -58,7 +56,6 @@ const PreOrderDialog = ({ children, open: externalOpen, onOpenChange: externalOn
   const { toast } = useToast();
   const { user, authenticated, login } = usePrivy();
   const isMobile = useIsMobile();
-  const { post } = useApi()
   const isOpen = externalOpen !== undefined ? externalOpen : internalOpen;
   const preOrderData: PreOrderTier = preOrderTiers?.find(item => item?.id === selectedTier) || null
   const setIsOpen = (open: boolean) => {
@@ -98,15 +95,14 @@ const PreOrderDialog = ({ children, open: externalOpen, onOpenChange: externalOn
       // const { data, error } = await supabase.functions.invoke('create-preorder-checkout', {
       //   body: { tierId: selectedTier }
       // });
-      const response = post('payment/checkout-session', {
-        priceId: preOrderData?.priceId,
-        coins: preOrderData?.price * 100
-      })
+      const { data, error } = await supabase.functions.invoke('create-preorder-checkout', {
+        body: { tierId: selectedTier }
+      });
 
-      // if (error) {
-      //   throw error;
-      // }
-      const { url } = (await response)
+      if (error) {
+        throw error;
+      }
+      const { url } = data;
 
       if (url) {
         // Open Stripe checkout in a new tab

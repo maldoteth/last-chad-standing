@@ -103,7 +103,8 @@ const handleContractError = (error: unknown): string => {
 // -------------------------
 export const deployNFTContract = async (params: DeployContractParams) => {
   const publicClient = getPublicClient();
-  const walletClient = await getWalletMetamaskClient(params.userAddress);
+  // BUG FIX: Use the provided provider instead of hardcoded MetaMask
+  const walletClient = await getWalletClient(params.provider, params.userAddress);
 
   const account = walletClient.account;
   if (!account?.address) throw new Error("Wallet not connected or authorized.");
@@ -113,22 +114,32 @@ export const deployNFTContract = async (params: DeployContractParams) => {
   try {
     console.log("🚀 Deploying NFT contract...");
 
-    const hash = await deployContract(walletClient, {
+    // Format bytecode: Ensure it has 0x prefix
+    const formattedBytecode = params.bytecode.startsWith('0x')
+      ? params.bytecode
+      : `0x${params.bytecode}` as Hex;
+
+    console.log("📦 Bytecode length:", formattedBytecode.length);
+
+    // Manually set gas to avoid "intrinsic gas too low" error
+    const hash = await walletClient.deployContract({
       abi: CONTRACT_ABI,
-      bytecode: params.bytecode,
+      bytecode: formattedBytecode,
+      account: account.address,
+      chain: base,
       args: [
         params.name,
         params.symbol,
         params.baseURI,
-        // params.owner ?? account.address,
         BigInt(params.maxSupply),
       ],
-      // account: account.address,
-    });
+      gas: BigInt(3_000_000), // Manual gas limit for large contracts
+      // Let the network auto-calculate gas price for Base (very cheap)
+    } as any);
 
     console.log("📝 Deployment tx hash:", hash);
 
-    const receipt = await waitForTransactionReceipt(publicClient, {
+    const receipt = await (publicClient as any).waitForTransactionReceipt({
       hash,
       timeout: 120_000,
     });
@@ -156,7 +167,8 @@ export const deployNFTContract = async (params: DeployContractParams) => {
 // -------------------------
 export const mintNFT = async (params: MintParams) => {
   const publicClient = getPublicClient();
-  const walletClient = await getWalletMetamaskClient();
+  // BUG FIX: Use provided provider instead of MetaMask
+  const walletClient = await getWalletClient(params.provider, params.userAddress);
 
   try {
     const [account] = await walletClient.getAddresses();
@@ -164,22 +176,22 @@ export const mintNFT = async (params: MintParams) => {
     console.log(`🎨 Minting ${params.quantity} NFT(s) from ${account}...`);
 
     // Simulate the contract call first — ensures everything is valid
-    const { request } = await publicClient.simulateContract({
+    const { request } = await (publicClient as any).simulateContract({
       address: params.contractAddress,
       abi: CONTRACT_ABI,
-      functionName: "mint", // 👈 or "mint" if non-owner minting is allowed
+      functionName: "mint",
       args: [BigInt(params.quantity)],
-      account, // must match connected signer
+      account,
     });
 
     console.log("✅ Simulation OK — executing mint transaction...");
 
     // Write (send) the transaction to the blockchain
-    const hash = await walletClient.writeContract(request);
+    const hash = await (walletClient as any).writeContract(request);
     console.log("📝 Mint tx hash:", hash);
 
     // Wait for confirmation
-    const receipt = await publicClient.waitForTransactionReceipt({
+    const receipt = await (publicClient as any).waitForTransactionReceipt({
       hash,
       timeout: 120_000,
     });
@@ -252,17 +264,15 @@ export const getContractInfo = async (contractAddress: Address) => {
       throw new Error(`Address ${contractAddress} is not a deployed contract`);
     }
 
-    // Try totalMinted first, then fallback to totalSupply
     let totalMinted: bigint | undefined;
     try {
-      totalMinted = await publicClient.readContract({
+      totalMinted = await (publicClient as any).readContract({
         address: contractAddress,
         abi: CONTRACT_ABI,
         functionName: "totalMinted",
-        authorizationList: undefined
       });
     } catch {
-      totalMinted = await publicClient.readContract({
+      totalMinted = await (publicClient as any).readContract({
         address: contractAddress,
         abi: CONTRACT_ABI,
         functionName: "totalSupply",
@@ -270,17 +280,15 @@ export const getContractInfo = async (contractAddress: Address) => {
     }
 
     const [owner, maxSupply] = await Promise.all([
-      publicClient.readContract({
+      (publicClient as any).readContract({
         address: contractAddress,
         abi: CONTRACT_ABI,
         functionName: "owner",
-        authorizationList: undefined
       }),
-      publicClient.readContract({
+      (publicClient as any).readContract({
         address: contractAddress,
         abi: CONTRACT_ABI,
         functionName: "maxSupply",
-        authorizationList: undefined
       }),
     ]);
 
@@ -307,36 +315,49 @@ export const getUserTokens = async (
   const publicClient = getPublicClient();
 
   try {
-    // Step 1: Get number of tokens owned
-    const data = await publicClient.readContract({
+    // Try listnft first (custom helper)
+    try {
+      const data = await (publicClient as any).readContract({
+        address: contractAddress,
+        abi: CONTRACT_ABI,
+        functionName: "listnft",
+        args: [contractAddress as Address, userAddress as Address],
+      });
+      if (data && Array.isArray(data) && data.length > 0) {
+        return data;
+      }
+    } catch (e) {
+      console.warn("listnft failed, falling back to standard methods:", e);
+    }
+
+    // Fallback: use balanceOf and tokenOfOwnerByIndex (standard ERC721Enumerable)
+    const balance = await (publicClient as any).readContract({
       address: contractAddress,
       abi: CONTRACT_ABI,
-      functionName: "listnft",
-      args: [contractAddress as Address, userAddress as Address],
-      authorizationList: undefined
+      functionName: "balanceOf",
+      args: [userAddress],
     });
 
-    // const tokenCount = Number(balance);
-    // const tokenIds: any[] = [];
-    // // Step 2: Fetch each token ID by index
-    // for (let i = 0; i < tokenCount; i++) {
-    //   const tokenId = await publicClient.readContract({
-    //     address: contractAddress,
-    //     abi: CONTRACT_ABI,
-    //     functionName: "tokenByIndex",
-    //     args: [BigInt(i + 1)],
-    //     authorizationList: undefined
-    //   });
-    //   tokenIds.push(tokenId);
-    // }
-    return data;
+    const tokenCount = Number(balance);
+    const tokenIds: any[] = [];
+
+    for (let i = 0; i < tokenCount; i++) {
+      const tokenId = await (publicClient as any).readContract({
+        address: contractAddress as Address,
+        abi: CONTRACT_ABI,
+        functionName: "tokenOfOwnerByIndex",
+        args: [userAddress as Address, BigInt(i)],
+      });
+      tokenIds.push(Number(tokenId));
+    }
+
+    return [BigInt(tokenCount), tokenIds.map(id => BigInt(id))];
   } catch (error) {
     const msg = handleContractError(error);
     console.error("❌ Error fetching tokens:", msg);
     throw new Error(msg);
   }
 };
-
 
 export const getUserWalletBalance = async (
   userAddress: Address
@@ -367,7 +388,7 @@ export const getTokenURI = async (
   const publicClient = getPublicClient();
 
   try {
-    const uri = await publicClient.readContract({
+    const uri = await (publicClient as any).readContract({
       address: contractAddress,
       abi: CONTRACT_ABI,
       functionName: "tokenURI",

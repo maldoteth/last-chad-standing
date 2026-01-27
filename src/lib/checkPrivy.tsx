@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useWallets, usePrivy, useFundWallet } from "@privy-io/react-auth";
-import { createPublicClient, createWalletClient, http, custom } from "viem";
+import { createPublicClient, createWalletClient, http, custom, formatEther } from "viem";
 import { base } from "viem/chains";
-import type { Address, ByteArray } from "viem";
-import { useApi } from "@/Api/apiFunction";
+import type { Address } from "viem";
 import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Copy } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 export interface CryptoPaymentProps { hash: string, address: string, exchangeRate: number, cryptoAmount: number, amount: number }
 
@@ -22,22 +25,20 @@ export const CheckPrivy = ({ dollarAmount = 0, onComplete, ethToUsdRate = 0 }: C
   const [txHash, setTxHash] = useState<string | null>(null);
   const [isConnectingWallet, setIsConnectingWallet] = useState(false);
   const [insufficientBalance, setInsufficientBalance] = useState(false);
-  const isEmailOrSmsAuth = authenticated && user && !wallets?.length;
-  const { post, get } = useApi()
+  const activeWallet = wallets.find(w => w.walletClientType !== 'privy') || wallets[0];
+  const isEmailOrSmsAuth = authenticated && user && activeWallet?.walletClientType === 'privy';
   const { fundWallet, } = useFundWallet();
 
   const ethAmount = dollarAmount / ethToUsdRate;
-  // 1000000000000000000n = 1 ETH
   const TX_AMOUNT = BigInt(Math.floor(ethAmount * 1e18));
   const [adminWallet, setAdminWallet] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchBalance = async () => {
-      if (!wallets || wallets.length === 0) return;
+      if (!activeWallet) return;
 
-      const wallet = wallets[0];
-      const address = wallet.address as Address;
+      const address = activeWallet.address as Address;
 
       const client = createPublicClient({
         chain: base,
@@ -48,16 +49,13 @@ export const CheckPrivy = ({ dollarAmount = 0, onComplete, ethToUsdRate = 0 }: C
         const bal = await client.getBalance({ address });
         setBalance(bal);
         setInsufficientBalance(bal < TX_AMOUNT);
-        // if (bal < REQUIRED_AMOUNT) {
-        //   handleFundWallet()
-        // }
       } catch (err) {
         console.error("❌ Error fetching balance:", err);
       }
     };
 
     fetchBalance();
-  }, [wallets]);
+  }, [activeWallet, TX_AMOUNT]);
 
   const handleConnectWallet = async () => {
     setIsConnectingWallet(true);
@@ -73,41 +71,50 @@ export const CheckPrivy = ({ dollarAmount = 0, onComplete, ethToUsdRate = 0 }: C
   const handleGetAdminWallet = async () => {
     try {
       setIsLoading(true)
-      const response = await get('admin/wallet')
-      setAdminWallet(response?.wallet?.address)
+      const { data, error } = await supabase
+        .from('AdminWallet')
+        .select('address')
+        .order('created_at', { ascending: false })
+        .limit(1)
+        .single();
+
+      if (error) throw error;
+      setAdminWallet(data?.address || '')
     } catch (error) {
-      console.log(error)
+      console.error("Error fetching admin wallet from Supabase:", error);
     }
     finally {
       setIsLoading(false)
     }
   }
+
   useEffect(() => {
     handleGetAdminWallet()
   }, []);
+
   const sendUserTransaction = async () => {
     if (!adminWallet) {
       toast.error('Admin Wallet Address not found!')
       return
     }
-    const wallet = wallets[0];
-    const address = wallet.address as Address;
+    if (!activeWallet) return;
+    const address = activeWallet.address as Address;
 
     try {
-      const provider = await wallet.getEthereumProvider();
+      const provider = await activeWallet.getEthereumProvider();
 
       try {
-        await provider.request({
+        await (provider as any).request({
           method: "wallet_switchEthereumChain",
-          params: [{ chainId: "0x2105" }], // 0x209 = 521 in decimal? Actually, Base Mainnet chainId is 8453 decimal = 0x2105
+          params: [{ chainId: "0x2105" }], 
         });
       } catch (switchError: any) {
         if (switchError.code === 4902) {
-          await provider.request({
+          await (provider as any).request({
             method: "wallet_addEthereumChain",
             params: [
               {
-                chainId: "0x2105", // 8453 decimal
+                chainId: "0x2105", 
                 chainName: "Base Mainnet",
                 nativeCurrency: { name: "Ether", symbol: "ETH", decimals: 18 },
                 rpcUrls: ["https://mainnet.base.org"],
@@ -116,7 +123,7 @@ export const CheckPrivy = ({ dollarAmount = 0, onComplete, ethToUsdRate = 0 }: C
             ],
           });
 
-          await provider.request({
+          await (provider as any).request({
             method: "wallet_switchEthereumChain",
             params: [{ chainId: "0x2105" }],
           });
@@ -127,16 +134,15 @@ export const CheckPrivy = ({ dollarAmount = 0, onComplete, ethToUsdRate = 0 }: C
 
       const client = createWalletClient({
         account: address,
-        chain: base, // make sure 'base' is configured for Mainnet
-        transport: custom(provider),
+        chain: base, 
+        transport: custom(provider as any),
       });
 
       const hash = await client.sendTransaction({
         account: address,
         to: adminWallet as Address,
         value: TX_AMOUNT
-
-      });
+      } as any);
 
       console.log("✅ Transaction hash:", hash);
       setTxHash(hash);
@@ -155,8 +161,9 @@ export const CheckPrivy = ({ dollarAmount = 0, onComplete, ethToUsdRate = 0 }: C
       toast.error('Transaction failed. Check console for details.');
     }
   };
+
   const sendTransaction = async () => {
-    if (!wallets || wallets.length === 0) {
+    if (!activeWallet) {
       toast.info('Please connect your wallet first!')
       return;
     }
@@ -170,29 +177,28 @@ export const CheckPrivy = ({ dollarAmount = 0, onComplete, ethToUsdRate = 0 }: C
   };
 
   const handleFundWallet = async () => {
-    if (!wallets || wallets.length === 0) {
+    if (!activeWallet) {
       return;
     }
     if (!adminWallet) {
       toast.error('Admin Wallet Address not found!')
       return
     }
-    const wallet = wallets[0];
-    const address = wallet.address as Address;
+    const address = activeWallet.address as Address;
 
     try {
+      const formattedAmount = Number(formatEther(TX_AMOUNT)).toFixed(6);
+      
       await fundWallet({
         address,
         options: {
           chain: base,
           asset: "native-currency",
-          amount: (Number(TX_AMOUNT) / 1e18) as any, // ETH needed
+          amount: formattedAmount, 
         }
       });
 
       console.log("✅ Wallet funded successfully!");
-
-      // ✅ call send transaction after funding
       await sendUserTransaction();
 
     } catch (err) {
@@ -218,142 +224,118 @@ export const CheckPrivy = ({ dollarAmount = 0, onComplete, ethToUsdRate = 0 }: C
 
   return (
     <div className="max-w-lg mx-auto space-y-4">
-      {/* Email/SMS Auth Warning */}
-      {isEmailOrSmsAuth && (
-        <div className="border border-white/25 rounded-lg p-4 bg-white/25 backdrop-blur-3xl">
-          <div className="flex items-start gap-3">
-            <svg className="w-5 h-5 text-white/80 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <div className="flex-1">
-              <p className="text-sm text-gray-700 mb-3">
-                You're logged in via {user?.email ? "email" : "phone"}. Connect a wallet to continue.
-              </p>
-              <button
-                onClick={handleConnectWallet}
-                disabled={isConnectingWallet}
-                className="px-4 py-2 bg-gray-900 text-white text-sm font-medium rounded-md hover:bg-gray-800 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
-              >
-                {isConnectingWallet ? "Connecting..." : "Connect Wallet"}
-              </button>
-            </div>
+      <div className="border border-white/20 rounded-lg p-4 bg-white/5 backdrop-blur-3xl">
+        <div className="flex flex-col gap-3">
+          <div className="flex items-center justify-between">
+            <h3 className="text-sm font-semibold text-white">Payment Wallet</h3>
+            {isEmailOrSmsAuth && (
+              <Badge variant="outline" className="bg-orange-500/20 text-orange-400 border-orange-500/30 text-[10px]">
+                Embedded (Low Balance)
+              </Badge>
+            )}
           </div>
-        </div>
-      )}
-
-      {/* Wallet Connected View */}
-      {wallets.length > 0 && (
-        <div className="space-y-4">
-          {/* Wallet Address Card */}
-          <div className="border border-white/25 rounded-lg p-4 bg-white/25 backdrop-blur-3xl">
-            <div className="flex items-center gap-2 mb-3">
-              <div className={`w-2 h-2 rounded-full ${insufficientBalance ? 'bg-orange-400' : 'bg-green-500'}`} />
-              <h3 className="text-sm font-medium text-white">Wallet Address</h3>
-            </div>
-            <div className="flex items-center gap-2">
-              <p className="text-xs font-mono text-white break-all bg-black/50 backdrop-blur-2xl p-2 rounded border border-gray-200 flex-1">
-                {wallets[0].address}
-              </p>
+          
+          <div className="flex items-center gap-2 bg-black/40 p-3 rounded border border-white/10">
+            <p className="text-xs font-mono text-white/90 break-all flex-1">
+              {activeWallet?.address || "No wallet linked"}
+            </p>
+            {activeWallet && (
               <button
                 onClick={async () => {
-                  await navigator.clipboard.writeText(wallets[0].address);
+                  await navigator.clipboard.writeText(activeWallet.address);
                   toast.success("Address copied!");
                 }}
-                className="p-2 rounded bg-black/50 border border-gray-200 text-white hover:bg-white/20 transition-colors shrink-0"
+                className="p-1.5 rounded hover:bg-white/10 text-white/60 transition-colors"
                 title="Copy address"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <rect width="14" height="14" x="8" y="8" rx="2" ry="2"/>
-                  <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
-                </svg>
+                <Copy size={14} />
               </button>
-            </div>
-          </div>
-
-          {/* Balance Overview */}
-          <div className="border border-white/25 rounded-lg p-4 bg-white/25 backdrop-blur-3xl">
-            <h3 className="text-sm font-medium text-white mb-3">Balance Overview</h3>
-            <div className="grid grid-cols-2 gap-3">
-              <div className="p-3 rounded-md bg-black/50 backdrop-blur-2xl border border-gray-200">
-                <p className="text-xs text-white/80 mb-1">Current Balance</p>
-                <p className="text-sm font-semibold text-white">
-                  {balance !== null ? `${(Number(balance) / 1e18).toFixed(6)} ETH` : "Loading..."}
-                </p>
-              </div>
-              <div className="p-3 rounded-md bg-black/50 backdrop-blur-2xl border border-gray-200">
-                <p className="text-xs text-white/80 mb-1">Payment Amount</p>
-                <p className="text-sm font-semibold text-white">
-                  {(Number(TX_AMOUNT) / 1e18).toFixed(6)} ETH
-                </p>
-              </div>
-            </div>
-
-            {/* Insufficient Balance Warning */}
-            {insufficientBalance && balance !== null && (
-              <div className="mt-4 p-3 rounded-md bg-orange-50 border border-orange-200">
-                <p className="text-sm font-medium text-orange-900 mb-2">Insufficient Balance</p>
-                <p className="text-xs text-orange-800">
-                  Please add{" "}
-                  <span className="font-semibold">
-                    {((Number(TX_AMOUNT) - Number(balance)) / 1e18).toFixed(6)} ETH
-                  </span>{" "}
-                  to your wallet to proceed with the transaction.
-                </p>
-              </div>
             )}
           </div>
 
-          {/* Transaction Button */}
-          {insufficientBalance ?
+          {isEmailOrSmsAuth && (
             <div className="space-y-2">
-              <button
-                onClick={handleFundWallet}
-                disabled={isLoading}
-                className={`w-full px-4 py-3 text-sm font-medium rounded-lg transition-colors bg-gray-900 text-white hover:bg-gray-800`}
+              <p className="text-[11px] text-white/60 leading-relaxed">
+                You are using a temporary embedded wallet. To pay directly with MetaMask or other apps:
+              </p>
+              <Button 
+                onClick={handleConnectWallet} 
+                disabled={isConnectingWallet}
+                variant="secondary"
+                className="w-full h-8 text-xs font-bold"
               >
-                Acquire ETH
-              </button>
-              <button
-                onClick={async () => {
-                  await navigator.clipboard.writeText(wallets[0].address);
-                  toast.success("Address copied to clipboard!");
-                }}
-                className="w-full px-4 py-3 text-sm font-medium rounded-lg transition-colors bg-white/20 text-white hover:bg-white/30 border border-white/25"
-              >
-                Copy Address
-              </button>
-            </div> :
-            <button
-              onClick={sendTransaction}
-              disabled={insufficientBalance}
-              className={`w-full px-4 py-3 text-sm font-medium rounded-lg transition-colors ${insufficientBalance
-                ? "bg-gray-700 text-white/80 cursor-not-allowed"
-                : "bg-gray-900 text-white hover:bg-gray-800"
-                }`}
-            >
-              Send Transaction ({(Number(TX_AMOUNT) / 1e18).toFixed(6)} ETH)
-            </button>}
-
-          {/* Transaction Hash */}
-          {txHash && (
-            <div className="border border-green-300 rounded-lg p-4 bg-green-50">
-              <p className="text-sm font-medium text-green-900 mb-2">Transaction Successful</p>
-              <a
-                href={`https://basescan.org/tx/${txHash}`}
-                target="_blank"
-                rel="noreferrer"
-                className="text-xs font-mono text-green-700 hover:text-green-900 underline break-all"
-              >
-                {txHash}
-              </a>
+                {isConnectingWallet ? "Connecting..." : "Link MetaMask / External Wallet"}
+              </Button>
             </div>
           )}
         </div>
+      </div>
+
+      {activeWallet && (
+        <div className="border border-white/20 rounded-lg p-4 bg-white/5 backdrop-blur-3xl space-y-4">
+          <div className="grid grid-cols-2 gap-3">
+            <div className="bg-black/30 p-3 rounded border border-white/10">
+              <p className="text-[10px] text-white/50 uppercase tracking-wider mb-1">Your Balance</p>
+              <p className={`text-sm font-bold ${insufficientBalance ? 'text-orange-400' : 'text-white'}`}>
+                {balance !== null ? `${Number(formatEther(balance)).toFixed(6)} ETH` : "Loading..."}
+              </p>
+            </div>
+            <div className="bg-black/30 p-3 rounded border border-white/10">
+              <p className="text-[10px] text-white/50 uppercase tracking-wider mb-1">Amount Due</p>
+              <p className="text-sm font-bold text-white">
+                {Number(formatEther(TX_AMOUNT)).toFixed(6)} ETH
+              </p>
+            </div>
+          </div>
+
+          {insufficientBalance && (
+            <div className="p-3 bg-orange-500/10 border border-orange-500/20 rounded text-[11px] text-orange-300">
+              Insufficient ETH for payment and gas. Please add funds to your wallet.
+            </div>
+          )}
+
+          <div className="space-y-2 pt-2">
+            {!insufficientBalance ? (
+              <Button
+                onClick={sendTransaction}
+                disabled={isLoading}
+                className="w-full bg-primary hover:bg-primary/90 text-black font-bold h-12"
+              >
+                {isLoading ? "Processing..." : `Confirm Payment (${Number(formatEther(TX_AMOUNT)).toFixed(6)} ETH)`}
+              </Button>
+            ) : (
+              <div className="grid grid-cols-2 gap-2">
+                <Button
+                  onClick={handleFundWallet}
+                  variant="outline"
+                  className="bg-white/5 border-white/10 text-white hover:bg-white/10 text-[11px]"
+                >
+                  Acquire / Top-up
+                </Button>
+                <Button
+                  onClick={() => window.location.reload()}
+                  variant="outline"
+                  className="bg-white/5 border-white/10 text-white hover:bg-white/10 text-[11px]"
+                >
+                  Refresh Balance
+                </Button>
+              </div>
+            )}
+          </div>
+        </div>
       )}
-      {/* No Wallet */}
-      {wallets.length === 0 && !isEmailOrSmsAuth && (
-        <div className="border border-white/25 rounded-lg p-6 bg-white/25 backdrop-blur-3xl text-center">
-          <p className="text-sm text-white">No wallet connected</p>
+
+      {txHash && (
+        <div className="border border-green-500/30 rounded-lg p-4 bg-green-500/10 text-center space-y-2">
+          <p className="text-sm font-bold text-green-400">Payment Sent!</p>
+          <a
+            href={`https://basescan.org/tx/${txHash}`}
+            target="_blank"
+            rel="noreferrer"
+            className="text-xs text-white/60 underline truncate block"
+          >
+            Track on Explorer
+          </a>
         </div>
       )}
     </div>

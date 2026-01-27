@@ -2,9 +2,10 @@ import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { usePrivy } from '@privy-io/react-auth';
 import { toast } from 'sonner';
-import { useApi } from '@/Api/apiFunction';
+import { useSupabase } from './useSupabase';
 import { handleError } from '@/Api/handleError';
 import { useSocketEvent } from '@/context/SocketContext';
+import { useProfile } from '@/context/profileContext';
 
 
 export type MarketplaceListing = {
@@ -51,109 +52,92 @@ export const useMarketplace = () => {
   const [loading, setLoading] = useState(true);
   const [loadingMarket, setLoadingMarket] = useState(true);
   const { user } = usePrivy();
-  const { get } = useApi()
+  const { profile } = useProfile();
+  const { getMarketplaceListings, getLiveGraphData, getMarketValueData, updateLockerItem } = useSupabase();
   const fetchStoreItems = useCallback(async () => {
     setLoading(true);
     try {
-      const response = await get(`locker-item/market-place/?page=1`, {}, { cache: true, revalidate: true, ttl: 5000 });
-      if (response.success) {
-        const storeItemsData = response?.items?.map((item: any) => {
-          const { store_items, Users, ...rest } = item || {};
-          return {
-            ...(store_items || {}),
-            ...rest,
-            store_id: store_items?.id,
-            user_name: Users?.name || item?.user_name,
-          };
-        });
-        setListings(storeItemsData);
+      const response = await getMarketplaceListings({ page: 1 });
+      if (response.success && response.items) {
+        setListings(response.items as MarketplaceListing[]);
       }
     } catch (error) {
       console.log(error)
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [getMarketplaceListings]);
   const fetchLiveGraph = useCallback(async () => {
     setLoading(true);
     try {
-      const response = await get(`locker-item/live-listing`, {}, );
+      const response = await getLiveGraphData();
       if (response.success) {
-        setListGraphs(response?.days);
+        setListGraphs(response.days || []);
       }
     } catch (error) {
       console.log(error)
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [getLiveGraphData]);
   const fetchMarketValue = useCallback(async () => {
     setLoading(true);
     try {
-      const response = await get(`locker-item/market-value`, {}, );
+      const response = await getMarketValueData();
       if (response.success) {
-        setListMarketValue(response?.days);
+        setListMarketValue(response.days || []);
       }
     } catch (error) {
       console.log(error)
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [getMarketValueData]);
   const fetchGainerItems = useCallback(async (dateFilter = 'all') => {
     setLoadingMarket(true);
     try {
-      const response = await get(`locker-item/market-place/?page=1`, { type: 'up', dateFilter }, { cache: true, revalidate: true, ttl: 5000 });
-      if (response.success) {
-        const storeItemsData = response?.items?.map((item: any) => {
-          const { store_items, Users, ...rest } = item || {};
-          return {
-            ...(store_items || {}),
-            ...rest,
-            store_id: store_items?.id,
-            user_name: Users?.name || item?.user_name,
-          };
-        });
-        setListGainer(storeItemsData);
+      const response = await getMarketplaceListings({ type: 'up', dateFilter, page: 1 });
+      if (response.success && response.items) {
+        setListGainer(response.items as MarketplaceListing[]);
       }
     } catch (error) {
       console.log(error)
     } finally {
       setLoadingMarket(false);
     }
-  }, []);
+  }, [getMarketplaceListings]);
   const fetchTrendingItems = useCallback(async (dateFilter = 'all') => {
     setLoadingMarket(true);
     try {
-      const response = await get(`locker-item/market-place/?page=1`, { type: 'up', dateFilter, isTrending: true }, { cache: true, revalidate: true, ttl: 5000 });
-      if (response.success) {
-        const storeItemsData = response?.items?.map((item: any) => {
-          const { store_items, Users, ...rest } = item || {};
-          return {
-            ...(store_items || {}),
-            ...rest,
-            store_id: store_items?.id,
-            user_name: Users?.name || item?.user_name,
-          };
-        });
-        setListTrending(storeItemsData);
+      const response = await getMarketplaceListings({ type: 'up', dateFilter, isTrending: true, page: 1 });
+      if (response.success && response.items) {
+        setListTrending(response.items as MarketplaceListing[]);
       }
     } catch (error) {
       console.log(error)
     } finally {
       setLoadingMarket(false);
     }
-  }, []);
+  }, [getMarketplaceListings]);
   const fetchListings = async () => {
     try {
       const { data, error } = await supabase
-        .from('marketplace_listings')
-        .select('*')
-        .eq('status', 'active')
+        .from('Locker')
+        .select(`
+          *,
+          item:store_items(*),
+          user:Users(name, profileImage)
+        `)
+        .eq('listed_for_sale', true)
         .order('created_at', { ascending: false });
 
       if (error) throw error;
-      setListings((data || []) as any[]);
+      setListings((data || []).map(item => ({
+        ...item.item,
+        ...item,
+        store_id: item.item_id,
+        user_name: item.user?.name || 'Unknown'
+      })) as any[]);
     } catch (error) {
       console.error('Error fetching marketplace listings:', error);
       toast.error('Failed to load marketplace data');
@@ -184,11 +168,8 @@ export const useMarketplace = () => {
   };
 
   const createListing = async (
-    itemId: string,
-    itemType: string,
-    listingType: 'sell' | 'buy',
+    lockerId: string,
     price: number,
-    quantity: number = 1
   ): Promise<boolean> => {
     if (!user?.id) {
       toast.error('Please connect your wallet to create listings');
@@ -196,21 +177,16 @@ export const useMarketplace = () => {
     }
 
     try {
-      const { error } = await supabase
-        .from('marketplace_listings')
-        .insert({
-          user_id: user.id,
-          item_id: itemId,
-          item_type: itemType,
-          listing_type: listingType,
-          price,
-          quantity
-        });
+      const response = await updateLockerItem(lockerId, {
+        listed_for_sale: true,
+        sale_price: price,
+        listed_at: new Date().toISOString()
+      });
 
-      if (error) throw error;
+      if (!response.success) throw new Error(response.error);
 
-      toast.success(`${listingType === 'sell' ? 'Sell' : 'Buy'} order created successfully!`);
-      await fetchListings(); // Refresh listings
+      toast.success('Listing created successfully!');
+      await fetchStoreItems(); // Refresh listings
       return true;
     } catch (error) {
       console.error('Error creating listing:', error);
@@ -221,15 +197,16 @@ export const useMarketplace = () => {
 
   const cancelListing = async (listingId: string): Promise<boolean> => {
     try {
-      const { error } = await supabase
-        .from('marketplace_listings')
-        .update({ status: 'cancelled' })
-        .eq('id', listingId);
+      const response = await updateLockerItem(listingId, {
+        listed_for_sale: false,
+        sale_price: null,
+        listed_at: null
+      });
 
-      if (error) throw error;
+      if (!response.success) throw new Error(response.error);
 
       toast.success('Listing cancelled successfully!');
-      await fetchListings(); // Refresh listings
+      await fetchStoreItems(); // Refresh listings
       return true;
     } catch (error) {
       console.error('Error cancelling listing:', error);
