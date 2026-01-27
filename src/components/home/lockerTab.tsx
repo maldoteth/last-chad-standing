@@ -13,7 +13,7 @@ import { StoreCarouselRef } from "@/components/StoreCarousel";
 import StoreCategoryCard from "./storeCategoryCard";
 import StorePurchaseDialog from "../StorePurchaseDialog";
 import { toast } from "@/hooks/use-toast";
-import { useSocketEvent } from "@/context/SocketContext";
+import { useSocketEvent } from "@/hooks/use-socket-events";
 
 const LockerHeader = ({ title }: { title: string }) => (
     <div className="text-center">

@@ -25,6 +25,7 @@ export default defineConfig(({ mode }) => ({
     'process.env': {},
   },
   optimizeDeps: {
+    include: ['@privy-io/react-auth', 'wagmi', 'viem'],
     esbuildOptions: {
       define: {
         global: 'globalThis'
@@ -40,10 +41,7 @@ export default defineConfig(({ mode }) => ({
   build: {
     rollupOptions: {
       output: {
-        manualChunks: {
-          'vendor-privy': ['@privy-io/react-auth'],
-          'vendor-wagmi': ['wagmi', 'viem'],
-        }
+        // Removed manualChunks to avoid initialization order issues with wagmi/viem
       }
     }
   }
