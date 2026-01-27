@@ -18,19 +18,20 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import { ArrowLeft, Plus, Edit, Trash2, Save, X, LogOut, Loader2, ExternalLink, CheckCircle, Copy } from "lucide-react";
+import { ArrowLeft, Plus, Edit, Trash2, LogOut, Loader2, Copy } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { isAdminAuthenticated, adminLogout, getAdminSession, adminLogin } from '@/lib/adminAuth';
+import { isAdminAuthenticated, adminLogout, getAdminSession } from '@/lib/adminAuth';
 import { uploadFile, uploadPinataFile } from "@/Api/uploadFile";
-import { useApi } from "@/Api/apiFunction";
+import { useSupabase } from "@/hooks/useSupabase";
 import { formatDateToYMD } from "@/lib/utils";
 import { StoreItem } from "@/context/storeData";
 import { deployNFTContract, getContractInfo, getUserWalletBalance, mintNFT } from "@/utils/nftContractUtils";
 import { Address, Hex } from "viem";
 import { EIP1193Provider, usePrivy, useWallets } from "@privy-io/react-auth";
 import { base } from "viem/chains";
-import SessionSigners from "@/components/session-signers";
 import AdminWalletDialog from "./AdminWalletDialog";
+import { supabase } from "@/integrations/supabase/client";
+import { DialogDescription } from "@/components/ui/dialog";
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -44,16 +45,7 @@ const Admin = () => {
   const [submitting, setSubmitting] = useState(false);
   const [deleting, setDeleting] = useState<string | null>(null);
   const [toggling, setToggling] = useState<string | null>(null);
-  const contractBytecode: Hex = import.meta.env.VITE_SUPABASE_BYTECODE
-
-  // Transaction success modal state
-  const [showSuccessModal, setShowSuccessModal] = useState(false);
-  const [transactionData, setTransactionData] = useState<{
-    txHash: string;
-    explorerUrl: string;
-    contractAddress: string;
-    itemName: string;
-  } | null>(null);
+  const contractBytecode = import.meta.env.VITE_SUPABASE_BYTECODE as Hex;
 
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
@@ -63,7 +55,15 @@ const Admin = () => {
   const [isLoading, setIsLoading] = useState(false);
   const location = useLocation()
   const [uploading, setUploading] = useState(false);
-  const { post, get, put, deleteData } = useApi();
+  const { 
+    getStoreItems: fetchStoreItemsFromDB,
+    createStoreItem,
+    updateStoreItem,
+    deleteStoreItem,
+    getAdminWallet,
+    setAdminWallet: saveAdminWallet,
+    generateNFTMetadata
+  } = useSupabase();
   const [formData, setFormData] = useState({
     name: '',
     description: '',
@@ -93,19 +93,6 @@ const Admin = () => {
       address,
     };
   };
-  // Get the block explorer URL based on chain
-  const getExplorerUrl = (txHash: string, contractAddress?: string) => {
-    // Update these based on your blockchain network
-    // For Ethereum mainnet: https://etherscan.io
-    // For Base: https://basescan.org
-    // For Polygon: https://polygonscan.com
-    const explorerBase = 'https://basescan.org';
-
-    if (contractAddress) {
-      return `${explorerBase}/address/${contractAddress}`;
-    }
-    return `${explorerBase}/tx/${txHash}`;
-  };
 
   useEffect(() => {
     if (!isAdminAuthenticated()) {
@@ -113,7 +100,7 @@ const Admin = () => {
       return;
     }
     setAdminSession(getAdminSession());
-  }, [location]);
+  }, [location, navigate]);
 
   useEffect(() => {
     if (isAdminAuthenticated()) {
@@ -123,25 +110,18 @@ const Admin = () => {
 
   const handleGenerateMetadata = async (data: any) => {
     try {
-      const { gatewayUrl, ipfsHash, local_folder_url, baseURI, name, symbol } = await post('store-item/generate-metadata', data)
-      return {
-        gatewayUrl, ipfsHash, local_folder_url, baseURI, symbol, name
-      }
+      const result = await generateNFTMetadata({
+        name: data.name,
+        description: data.description,
+        image: data.ImgGatewayUrl || data.image_url,
+        rarity: data.rarity,
+        category: data.category
+      });
+      return result;
     } catch (error) {
-      throw error
+      console.error("Metadata generation failed:", error);
+      throw error;
     }
-  }
-
-  const handleGetContractInfo = async (contractAddress) => {
-    // Fetch contract info
-    const info: any = await getContractInfo(contractAddress as Address);
-    return (info)
-  }
-
-  const handleWalletBalance = async (walletAddress) => {
-    // Fetch contract info
-    const balance: any = await getUserWalletBalance(walletAddress as Address);
-    return (balance)
   }
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -149,36 +129,78 @@ const Admin = () => {
     if (!file) return;
 
     setUploading(true);
-    const uploadedUrl = await uploadPinataFile(file, true);
-    setUploading(false);
+    try {
+      let uploadedUrl;
+      try {
+        uploadedUrl = await uploadPinataFile(file, true);
+      } catch (pinataError: any) {
+        console.warn("Pinata upload failed, trying backend fallback...", pinataError);
+        try {
+          uploadedUrl = await uploadFile(file, true);
+        } catch (backendError: any) {
+          console.warn("Backend upload failed, trying DIRECT SUPABASE fallback...");
+          const fileName = `${Date.now()}-${file.name}`;
+          const { error } = await supabase.storage
+            .from('items')
+            .upload(fileName, file);
 
-    if (uploadedUrl) {
-      setFormData({ ...formData, image_url: uploadedUrl.ipfsHash, ImgGatewayUrl: uploadedUrl?.gatewayUrl });
+          if (error) throw error;
+          
+          const { data: { publicUrl } } = supabase.storage
+            .from('items')
+            .getPublicUrl(fileName);
+
+          uploadedUrl = { ipfsHash: fileName, gatewayUrl: publicUrl, image_url: publicUrl };
+        }
+      }
+
+      if (uploadedUrl && (uploadedUrl.ipfsHash || uploadedUrl.image_url)) {
+        setFormData({ 
+          ...formData, 
+          image_url: uploadedUrl.ipfsHash || uploadedUrl.image_url, 
+          ImgGatewayUrl: uploadedUrl?.gatewayUrl || uploadedUrl?.image_url 
+        });
+        toast({
+          title: "Image uploaded",
+          description: "Image has been uploaded successfully"
+        });
+      } else {
+        throw new Error("Invalid response from server");
+      }
+    } catch (error: any) {
+      console.error("Upload error:", error);
       toast({
-        title: "Image uploaded",
-        description: "Image has been uploaded successfully"
-      });
-    } else {
-      toast({
-        title: "Error",
-        description: "Failed to upload image",
+        title: "Upload Failed",
+        description: "Failed to upload image. Please check bucket configuration.",
         variant: "destructive"
       });
+    } finally {
+      setUploading(false);
     }
   };
 
   const fetchStoreItems = async () => {
     setLoading(true);
     try {
-      const response = await get(`store-item/?page=${currentPage}`);
+      const response = await fetchStoreItemsFromDB(currentPage, 10);
 
       if (response.success) {
-        setStoreItems(response.items);
+        setStoreItems(response.items as any);
         setTotalItems(response.pagination.total);
         setTotalPages(response.pagination.totalPages);
+      } else {
+        toast({
+          title: "Error",
+          description: "Failed to fetch store items",
+          variant: "destructive"
+        });
       }
     } catch (error) {
-      console.error("Failed to fetch store items:", error);
+      toast({
+        title: "Error",
+        description: "Failed to fetch store items",
+        variant: "destructive"
+      });
     } finally {
       setLoading(false);
     }
@@ -194,90 +216,126 @@ const Admin = () => {
       image_url: '',
       ImgGatewayUrl: '',
       first_release_date: '',
-      sale_end_date: '',
       sale_start_date: '',
+      sale_end_date: '',
       max_supply: '',
       is_active: true,
     });
     setEditingItem(null);
   };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!formData.image_url) {
+      toast({
+        title: "Image required",
+        description: "Please upload an image before creating the item.",
+        variant: "destructive"
+      });
+      return;
+    }
+
     setSubmitting(true);
 
     try {
       let response = null;
       const metaData = await handleGenerateMetadata(formData)
-      const { provider, address: anyad } = await walletProvider()
-      const address = user.smartWallet.address as Address
+      
+      const { provider } = await walletProvider()
+      
+      // Prioritize the EOA wallet (where user usually has gas money)
+      const address = (user?.wallet?.address || user?.smartWallet?.address || wallets[0]?.address) as Address;
+      
+      console.log('🚀 Starting Deployment...', {
+        address,
+        hasBytecode: !!contractBytecode,
+        bytecodeLength: contractBytecode?.length
+      });
+
+      if (!contractBytecode || contractBytecode === '0x') {
+        throw new Error("Contract Bytecode is missing! Please check VITE_SUPABASE_BYTECODE in your .env file.");
+      }
+
+      // 2. Deploy Contract
       const deployParams: any = {
-        provider,
         name: metaData.name,
         symbol: metaData.symbol,
         baseURI: metaData.baseURI,
-        maxSupply: formData?.max_supply,
-        bytecode: contractBytecode,
-        userAddress: address,
         owner: address,
-      };
-      const result = await deployNFTContract(deployParams);
-      const deployData = {
-        contractAddress: result.contractAddress,
-        deploymentTxHash: result.transactionHash,
+        provider: provider,
+        userAddress: address,
+        maxSupply: Number(formData.max_supply),
+        bytecode: contractBytecode
       }
+      const deploymentResult = await deployNFTContract(deployParams);
+      const contractAddress = deploymentResult.contractAddress as Address;
+      
+      if (!contractAddress || contractAddress === '0x0000000000000000000000000000000000000000') {
+        throw new Error("Deployment failed: Received invalid contract address.");
+      }
+      
+      console.log('✅ Contract deployed at:', contractAddress);
 
-      // const mintResponse = await mintNFT({
-      //   provider,
-      //   contractAddress: deployData.contractAddress as Address,
-      //   toAddress: address,
-      //   userAddress: address,
-      //   quantity: 1
-      // });
+      // 3. Mint NFT
+      const mintParams: any = {
+        contractAddress: contractAddress,
+        recipient: address,
+        provider: provider,
+        quantity: 1,
+        userAddress: address
+      }
+      const mintResult = await mintNFT(mintParams);
+      const mintTx = mintResult.transactionHash;
+      console.log('✅ NFT minted. Tx hash:', mintTx);
 
+      const walletId = user?.wallet?.id || user?.smartWallet?.address || (user as any)?.id;
+
+      // 4. Prepare Payload
+      const payload = {
+        ...formData,
+        ...metaData,
+        price: Number(formData.price),
+        max_supply: Number(formData.max_supply),
+        // CRITICAL: Map both naming styles
+        nftAddress: contractAddress,
+        nft_address: contractAddress, 
+        nftDeployWalletId: walletId,
+        nft_deploy_wallet_id: walletId,
+        deploymentTxHash: deploymentResult.transactionHash,
+        mintingTxHash: mintTx,
+        userAddress: address,
+        is_active: true
+      };
+      
+      console.log('📤 Final Payload for DB:', payload);
+
+      // 5. Save to Database
       if (editingItem) {
-        response = await put(`store-item/${editingItem.id}`, {
-          ...formData,
-          ...metaData,
-          ...deployData,
-          nftDeployWalletId: user?.wallet?.id
-          // mintingTxHash: mintResponse.transactionHash,
-        });
+        response = await updateStoreItem(editingItem.id, payload);
       } else {
-        response = await post('store-item/', {
-          ...formData,
-          ...metaData,
-          ...deployData,
-          nftDeployWalletId: user?.wallet?.id
-          // mintingTxHash: mintResponse.transactionHash,
+        response = await createStoreItem({
+          ...payload,
+          total_purchased: 0
         });
       }
 
       if (response.success) {
-        // Show success modal with transaction details
-        setTransactionData({
-          txHash: deployData.deploymentTxHash,
-          explorerUrl: getExplorerUrl(deployData.deploymentTxHash),
-          contractAddress: deployData.contractAddress,
-          itemName: formData.name,
+        toast({
+          title: editingItem ? "Item Updated" : "Item Created",
+          description: `Successfully ${editingItem ? "updated" : "created"} ${formData.name}`,
         });
-        setShowSuccessModal(true);
-
-        // Close the form dialog
         setIsDialogOpen(false);
         resetForm();
-
-        // Refresh the items list after a short delay
-        setTimeout(() => {
-          fetchStoreItems();
-        }, 1500);
+        fetchStoreItems();
       } else {
         throw new Error(response.message || 'Operation failed');
       }
     } catch (error: any) {
-      console.error(error)
+      console.error("Submit error:", error);
       toast({
-        title: "Error",
-        description: error.message || `Failed to ${editingItem ? 'update' : 'create'} item`,
+        title: "Submit Failed",
+        description: error.message || "An unexpected error occurred",
         variant: "destructive"
       });
     } finally {
@@ -298,34 +356,29 @@ const Admin = () => {
       is_active: item.is_active,
       first_release_date: formatDateToYMD(item.first_release_date),
       sale_start_date: formatDateToYMD(item.sale_start_date),
-      max_supply: item.max_supply,
+      max_supply: item.max_supply.toString(),
       sale_end_date: formatDateToYMD(item.sale_end_date),
     });
     setIsDialogOpen(true);
   };
+
   const handleGetAdminWallet = async () => {
     try {
       setIsLoading(true)
-      const response = await get('admin/wallet')
-      setAdminWallet(response?.wallet?.address)
+      const response = await getAdminWallet()
+      if (response?.wallet?.address) {
+        setAdminWallet(response.wallet.address)
+      }
     } catch (error) {
       console.log(error)
-    }
-    finally {
+    } finally {
       setIsLoading(false)
     }
   }
+
   const handleCopyWalletAddress = async () => {
-    if (!user?.linkedAccounts?.length) {
-      toast({
-        title: "No wallet connected",
-        description: "Please connect a wallet first",
-        variant: "default"
-      });
-      return;
-    }
-    const wallet = user.linkedAccounts.find(account => account.type === 'wallet');
-    if (!wallet) {
+    const address = user?.smartWallet?.address || user?.wallet?.address;
+    if (!address) {
       toast({
         title: "No wallet found",
         description: "No wallet address available to copy",
@@ -334,10 +387,10 @@ const Admin = () => {
       return;
     }
     try {
-      await navigator.clipboard.writeText(wallet.address);
+      await navigator.clipboard.writeText(address);
       toast({
         title: "Address copied!",
-        description: `${wallet.address.slice(0, 6)}...${wallet.address.slice(-4)} copied to clipboard`
+        description: `${address.slice(0, 6)}...${address.slice(-4)} copied to clipboard`
       });
     } catch (error) {
       toast({
@@ -347,21 +400,21 @@ const Admin = () => {
       });
     }
   };
+
   const handleDelete = async (id: string) => {
     if (!confirm('Are you sure you want to delete this item?')) return;
 
     setDeleting(id);
     try {
-      const response = await deleteData(`store-item/${id}`);
-
+      const response = await deleteStoreItem(id);
       if (response.success) {
-        toast({
-          title: "Success",
-          description: "Item deleted successfully"
-        });
+        toast({ title: "Success", description: "Item deleted successfully" });
         fetchStoreItems();
       } else {
-        throw new Error(response.message || 'Delete failed');
+        const { error } = await supabase.from('store_items').delete().eq('id', id);
+        if (error) throw error;
+        toast({ title: "Success", description: "Item deleted successfully (fallback)" });
+        fetchStoreItems();
       }
     } catch (error: any) {
       toast({
@@ -377,20 +430,24 @@ const Admin = () => {
   const toggleActive = async (item: StoreItem) => {
     setToggling(item.id);
     try {
-      const response = await put(`store-item/${item.id}`, {
-        ...item,
+      const response = await updateStoreItem(item.id, {
         is_active: !item.is_active
       });
 
       if (response.success) {
         fetchStoreItems();
       } else {
-        throw new Error(response.message || 'Update failed');
+        const { error } = await supabase
+          .from('store_items')
+          .update({ is_active: !item.is_active })
+          .eq('id', item.id);
+        if (error) throw error;
+        fetchStoreItems();
       }
     } catch (error: any) {
       toast({
         title: "Error",
-        description: error.message || "Failed to update item status",
+        description: "Failed to update item status",
         variant: "destructive"
       });
     } finally {
@@ -400,14 +457,13 @@ const Admin = () => {
 
   const handleLogout = () => {
     logout()
-      .then((result) => {
+      .then(() => {
         adminLogout();
         toast({
           title: "Logged out",
           description: "You have been logged out of the admin panel",
         });
         navigate('/admin/login');
-
       }).catch((err) => {
         console.log(err)
       });
@@ -424,12 +480,8 @@ const Admin = () => {
     const maxVisible = 5;
 
     if (totalPages <= maxVisible) {
-      // Show all pages if total is less than max
-      for (let i = 1; i <= totalPages; i++) {
-        pages.push(i);
-      }
+      for (let i = 1; i <= totalPages; i++) pages.push(i);
     } else {
-      // Show first, last, and pages around current
       if (currentPage <= 3) {
         for (let i = 1; i <= 4; i++) pages.push(i);
         pages.push('ellipsis');
@@ -448,18 +500,17 @@ const Admin = () => {
         pages.push(totalPages);
       }
     }
-
     return pages;
   };
  
   useEffect(() => {
     handleGetAdminWallet()
   }, []);
+
   if (!isAdminAuthenticated()) return null;
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
+    <div className="min-h-screen bg-background text-white">
       <header className="bg-card border-b border-border px-4 py-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-4">
@@ -474,7 +525,7 @@ const Admin = () => {
             <span className="text-sm text-muted-foreground">
               Welcome, {adminSession?.email}
               <Button size="sm" variant="outline" className=" transition-all ms-1 duration-300 text-xs px-2 py-1" onClick={handleCopyWalletAddress}>
-                Wallet   <Copy className="w-3 h-3" />
+                Wallet <Copy className="w-3 h-3" />
               </Button>
             </span>
             <Button
@@ -499,9 +550,11 @@ const Admin = () => {
                   <DialogTitle>
                     {editingItem ? 'Edit Item' : 'Add New Item'}
                   </DialogTitle>
+                  <DialogDescription>
+                    Fill in the details below to {editingItem ? 'update' : 'create'} a store item.
+                  </DialogDescription>
                 </DialogHeader>
                 <form onSubmit={handleSubmit} className="space-y-4">
-                  {/* Name */}
                   <div>
                     <Label htmlFor="name">Name</Label>
                     <Input
@@ -513,8 +566,6 @@ const Admin = () => {
                       disabled={submitting}
                     />
                   </div>
-
-                  {/* Description */}
                   <div>
                     <Label htmlFor="description">Description</Label>
                     <Textarea
@@ -527,8 +578,6 @@ const Admin = () => {
                       disabled={submitting}
                     />
                   </div>
-
-                  {/* Price + Category */}
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <Label htmlFor="price">Price</Label>
@@ -555,9 +604,8 @@ const Admin = () => {
                           <SelectValue placeholder="Select category" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="skins">Skins</SelectItem>
+                          <SelectItem value="skins">Fighters</SelectItem>
                           <SelectItem value="accessories">Accessories</SelectItem>
-                          <SelectItem value="fighters">Fighters</SelectItem>
                           <SelectItem value="emotes">Emotes</SelectItem>
                           <SelectItem value="packs">Packs</SelectItem>
                           <SelectItem value="mobility">Mobility</SelectItem>
@@ -565,8 +613,6 @@ const Admin = () => {
                       </Select>
                     </div>
                   </div>
-
-                  {/* Rarity */}
                   <div>
                     <Label htmlFor="rarity">Rarity</Label>
                     <Select
@@ -587,24 +633,17 @@ const Admin = () => {
                       </SelectContent>
                     </Select>
                   </div>
-
-                  {/* First Release Date */}
                   <div>
                     <Label htmlFor="first_release_date">First Release Date</Label>
                     <Input
                       id="first_release_date"
                       type="date"
-                      placeholder="Select release date"
                       value={formData.first_release_date || ""}
-                      onChange={(e) =>
-                        setFormData({ ...formData, first_release_date: e.target.value })
-                      }
+                      onChange={(e) => setFormData({ ...formData, first_release_date: e.target.value })}
                       required
                       disabled={submitting}
                     />
                   </div>
-
-                  {/* Max Supply */}
                   <div>
                     <Label htmlFor="max_supply">Max Supply</Label>
                     <Input
@@ -618,19 +657,14 @@ const Admin = () => {
                       disabled={submitting}
                     />
                   </div>
-
-                  {/* Sale Start + End Dates */}
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <Label htmlFor="sale_start_date">Sale Start Date</Label>
                       <Input
                         id="sale_start_date"
                         type="date"
-                        placeholder="Select start date"
                         value={formData.sale_start_date || ""}
-                        onChange={(e) =>
-                          setFormData({ ...formData, sale_start_date: e.target.value })
-                        }
+                        onChange={(e) => setFormData({ ...formData, sale_start_date: e.target.value })}
                         disabled={submitting}
                       />
                     </div>
@@ -639,281 +673,270 @@ const Admin = () => {
                       <Input
                         id="sale_end_date"
                         type="date"
-                        placeholder="Select end date"
                         value={formData.sale_end_date || ""}
-                        onChange={(e) =>
-                          setFormData({ ...formData, sale_end_date: e.target.value })
-                        }
+                        onChange={(e) => setFormData({ ...formData, sale_end_date: e.target.value })}
                         disabled={submitting}
                       />
                     </div>
                   </div>
-
-                  {/* Image Upload */}
                   <div>
-                    <Label htmlFor="image">Upload Image</Label>
-                    <Input
-                      id="image"
-                      type="file"
-                      required={!editingItem}
-                      accept="image/*"
-                      placeholder="Choose an image"
-                      onChange={handleFileChange}
-                      disabled={submitting || uploading}
-                    />
-                    {uploading && (
-                      <div className="flex items-center mt-2 text-sm text-muted-foreground">
-                        <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                        Uploading...
-                      </div>
-                    )}
-                    {(formData.ImgGatewayUrl || formData.image_url) && (
-                      <img
-                        src={formData.ImgGatewayUrl || formData.image_url}
-                        alt="Preview"
-                        className="mt-2 w-20 h-20 object-cover rounded"
-                      />
-                    )}
-                  </div>
+                    <Label>Item Image</Label>
+                    <div className="mt-2 flex items-center space-x-4">
+                      {(formData.ImgGatewayUrl || formData.image_url) && (
+                        <div className="relative w-20 h-20 rounded-md overflow-hidden border border-border">
+                          {(() => {
+                            let displayUrl = formData.ImgGatewayUrl || formData.image_url;
+                            let finalUrl = displayUrl;
 
-                  {/* Buttons */}
-                  <div className="flex justify-end space-x-2">
-                    <Button
-                      type="button"
-                      variant="outline"
-                      onClick={() => setIsDialogOpen(false)}
-                      disabled={submitting}
-                    >
-                      <X className="w-4 h-4 mr-2" />
-                      Cancel
-                    </Button>
-                    <Button type="submit" disabled={submitting || uploading}>
-                      {submitting ? (
-                        <>
-                          <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                          {editingItem ? "Updating..." : "Creating..."}
-                        </>
-                      ) : (
-                        <>
-                          <Save className="w-4 h-4 mr-2" />
-                          {editingItem ? "Update" : "Create"}
-                        </>
+                            if (displayUrl) {
+                              // 1. Detect and fix broken Pinata URLs
+                              if (displayUrl.includes('pinata.cloud/ipfs/')) {
+                                const parts = displayUrl.split('/ipfs/');
+                                const path = parts[parts.length - 1];
+                                if (!(path.startsWith('Qm') || path.startsWith('bafy'))) {
+                                  const cleanPath = decodeURIComponent(path).split('/').pop() || path;
+                                  const { data: { publicUrl } } = supabase.storage.from('items').getPublicUrl(cleanPath);
+                                  finalUrl = publicUrl;
+                                }
+                              }
+                              // 2. Resolve relative paths
+                              else if (!displayUrl.startsWith('http')) {
+                                const isIPFS = displayUrl.startsWith('Qm') || displayUrl.startsWith('bafy');
+                                if (isIPFS) {
+                                  finalUrl = `https://gateway.pinata.cloud/ipfs/${displayUrl}`;
+                                } else {
+                                  const cleanPath = decodeURIComponent(displayUrl).split('/').pop() || displayUrl;
+                                  const { data: { publicUrl } } = supabase.storage.from('items').getPublicUrl(cleanPath);
+                                  finalUrl = publicUrl;
+                                }
+                              }
+                            }
+                            return (
+                              <img
+                                src={finalUrl}
+                                alt="Preview"
+                                className="w-full h-full object-cover"
+                              />
+                            );
+                          })()}
+                        </div>
                       )}
-                    </Button>
+                      <div className="flex-1">
+                        <Input
+                          type="file"
+                          accept="image/*"
+                          onChange={handleFileChange}
+                          disabled={uploading || submitting}
+                          className="cursor-pointer"
+                        />
+                        {uploading && (
+                          <div className="flex items-center mt-2 text-sm text-muted-foreground">
+                            <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                            Uploading...
+                          </div>
+                        )}
+                      </div>
+                    </div>
                   </div>
+                  <Button type="submit" className="w-full" disabled={submitting || uploading}>
+                    {submitting ? (
+                      <>
+                        <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                        {editingItem ? 'Updating...' : 'Creating...'}
+                      </>
+                    ) : (
+                      editingItem ? 'Update Item' : 'Create Item'
+                    )}
+                  </Button>
                 </form>
               </DialogContent>
             </Dialog>
           </div>
         </div>
       </header>
-      {/* Transaction Success Modal */}
-      <Dialog open={showSuccessModal} onOpenChange={setShowSuccessModal}>
-        <DialogContent className="max-w-md">
-          <DialogHeader>
-            <DialogTitle className="flex items-center gap-2">
-              <CheckCircle className="w-5 h-5 text-green-500" />
-              NFT Minted Successfully
-            </DialogTitle>
-          </DialogHeader>
-          <div className="space-y-4">
-            {transactionData && (
-              <>
-                <div className="bg-muted p-4 rounded-lg space-y-2">
-                  <div>
-                    <p className="text-sm text-muted-foreground">Item Name</p>
-                    <p className="font-semibold">{transactionData.itemName}</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">Contract Address</p>
-                    <p className="font-mono text-sm break-all">{transactionData.contractAddress}</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">Transaction Hash</p>
-                    <p className="font-mono text-sm break-all">{transactionData.txHash}</p>
-                  </div>
-                </div>
 
-                <div className="space-y-2">
-                  <Button
-                    className="w-full"
-                    onClick={() => window.open(transactionData.explorerUrl, '_blank')}
-                  >
-                    <ExternalLink className="w-4 h-4 mr-2" />
-                    View on Block Explorer
-                  </Button>
-                  <Button
-                    className="w-full"
-                    onClick={() => {
-                      navigator.clipboard.writeText(transactionData.txHash);
-                      toast({
-                        title: "Copied",
-                        description: "Transaction hash copied to clipboard"
-                      });
-                    }}
-                    variant="outline"
-                  >
-                    Copy Transaction Hash
-                  </Button>
-                </div>
-              </>
-            )}
-
-            <Button
-              className="w-full"
-              onClick={() => setShowSuccessModal(false)}
-              variant="secondary"
-            >
-              Close
-            </Button>
-          </div>
-        </DialogContent>
-      </Dialog>
-
-      {/* Main Content */}
-      <div className="container mx-auto px-4 py-6">
-        <SessionSigners isSigner={adminSession?.isSigner} isAdmin={true} quorumId={adminSession?.quorumId} />
-
-        <Card>
+      <main className="p-6">
+        <Card className="bg-card border-border">
           <CardHeader>
-            <CardTitle>Store Items ({totalItems})</CardTitle>
+            <CardTitle>Store Items Management</CardTitle>
           </CardHeader>
           <CardContent>
             {loading ? (
-              <div className="flex justify-center items-center py-12">
-                <Loader2 className="w-8 h-8 animate-spin" />
+              <div className="flex justify-center py-10">
+                <Loader2 className="w-10 h-10 animate-spin text-primary" />
               </div>
             ) : (
-              <>
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Image</TableHead>
-                      <TableHead>Name</TableHead>
-                      <TableHead>Category</TableHead>
-                      <TableHead>Rarity</TableHead>
-                      <TableHead>Price</TableHead>
-                      <TableHead>Status</TableHead>
-                      <TableHead>Actions</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {storeItems.map((item) => (
-                      <TableRow key={item.id}>
-                        <TableCell>
-                          <img
-                            src={item?.ImgGatewayUrl || item.image_url || '/placeholder.svg'}
-                            alt={item.name}
-                            className="w-12 h-12 object-cover rounded"
-                          />
-                        </TableCell>
-                        <TableCell className="font-medium">{item.name}</TableCell>
-                        <TableCell className="capitalize">{item.category}</TableCell>
-                        <TableCell>
-                          <Badge variant="outline" className="capitalize text-dark">
-                            {item.rarity}
-                          </Badge>
-                        </TableCell>
-                        <TableCell>{item.price.toLocaleString()}</TableCell>
-                        <TableCell>
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => toggleActive(item)}
-                            disabled={toggling === item.id}
-                          >
-                            {toggling === item.id ? (
-                              <Loader2 className="w-4 h-4 animate-spin" />
-                            ) : (
-                              <Badge variant={item.is_active ? "default" : "secondary"}>
-                                {item.is_active ? 'Active' : 'Inactive'}
-                              </Badge>
-                            )}
-                          </Button>
-                        </TableCell>
-                        <TableCell>
-                          <div className="flex space-x-2">
-                            {/* <Button
-                              variant="ghost"
-                              size="sm"
-                              onClick={() => handleEdit(item)}
-                              disabled={deleting === item.id}
-                            >
-                              <Edit className="w-4 h-4" />
-                            </Button> */}
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              onClick={() => handleDelete(item.id)}
-                              className="text-red-500 hover:text-red-700"
-                              disabled={deleting === item.id}
-                            >
-                              {deleting === item.id ? (
-                                <Loader2 className="w-4 h-4 animate-spin" />
-                              ) : (
-                                <Trash2 className="w-4 h-4" />
-                              )}
-                            </Button>
-                          </div>
-                        </TableCell>
+              <div className="space-y-4">
+                <div className="rounded-md border border-border overflow-hidden">
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>Image</TableHead>
+                        <TableHead>Name</TableHead>
+                        <TableHead>Category</TableHead>
+                        <TableHead>Price</TableHead>
+                        <TableHead>Rarity</TableHead>
+                        <TableHead>Status</TableHead>
+                        <TableHead className="text-right">Actions</TableHead>
                       </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
+                    </TableHeader>
+                    <TableBody>
+                      {storeItems.length > 0 ? (
+                        storeItems.map((item) => (
+                          <TableRow key={item.id}>
+                            <TableCell>
+                              <div className="w-12 h-12 rounded-md overflow-hidden bg-muted border border-border">
+                                {(() => {
+                                  const rawUrl = item.ImgGatewayUrl || item.image_url || item.image;
+                                  if (!rawUrl) return (
+                                    <div className="w-full h-full flex items-center justify-center text-[10px] text-muted-foreground text-center p-1">
+                                      No img
+                                    </div>
+                                  );
 
-                {/* Pagination */}
-                {totalPages > 1 && (
-                  <div className="mt-6">
-                    <Pagination>
-                      <PaginationContent>
-                        <PaginationItem>
-                          <PaginationPrevious
-                            onClick={() => goToPage(currentPage - 1)}
-                            className={currentPage === 1 || loading ? "pointer-events-none opacity-50" : "cursor-pointer"}
-                          />
-                        </PaginationItem>
+                                  let finalUrl = rawUrl;
+                                  
+                                  // 1. Detect and fix broken Pinata URLs (filename instead of CID)
+                                  if (rawUrl.includes('pinata.cloud/ipfs/')) {
+                                    const parts = rawUrl.split('/ipfs/');
+                                    const path = parts[parts.length - 1];
+                                    const isID = path.startsWith('Qm') || path.startsWith('bafy');
+                                    
+                                    if (!isID) {
+                                      // It's a broken Pinata URL with a filename. Use Supabase fallback.
+                                      const cleanPath = decodeURIComponent(path).split('/').pop() || path;
+                                      const { data: { publicUrl } } = supabase.storage.from('items').getPublicUrl(cleanPath);
+                                      finalUrl = publicUrl;
+                                    }
+                                  } 
+                                  // 2. Resolve relative paths (Supabase filenames)
+                                  else if (!rawUrl.startsWith('http')) {
+                                    const isIPFS = rawUrl.startsWith('Qm') || rawUrl.startsWith('bafy');
+                                    if (isIPFS) {
+                                      finalUrl = `https://gateway.pinata.cloud/ipfs/${rawUrl}`;
+                                    } else {
+                                      const cleanPath = decodeURIComponent(rawUrl).split('/').pop() || rawUrl;
+                                      const { data: { publicUrl } } = supabase.storage.from('items').getPublicUrl(cleanPath);
+                                      finalUrl = publicUrl;
+                                    }
+                                  }
 
-                        {renderPageNumbers().map((page, index) => (
-                          <PaginationItem key={index}>
-                            {page === 'ellipsis' ? (
-                              <PaginationEllipsis />
-                            ) : (
-                              <PaginationLink
-                                onClick={() => goToPage(page as number)}
-                                isActive={currentPage === page}
-                                className={loading ? "pointer-events-none opacity-50" : "cursor-pointer"}
+                                  return (
+                                    <img
+                                      src={finalUrl}
+                                      alt={item.name}
+                                      className="w-full h-full object-cover"
+                                      onError={(e) => {
+                                        // Fallback if the URL fails to load
+                                        (e.target as HTMLImageElement).src = '/placeholder.png'; 
+                                        (e.target as HTMLImageElement).className = 'w-full h-full object-contain opacity-20';
+                                      }}
+                                    />
+                                  );
+                                })()}
+                              </div>
+                            </TableCell>
+                            <TableCell className="font-medium">{item.name}</TableCell>
+                            <TableCell className="capitalize">{item.category}</TableCell>
+                            <TableCell>{item.price} coins</TableCell>
+                            <TableCell>
+                              <Badge variant="outline" className={`capitalize rarity-${item.rarity}`}>
+                                {item.rarity}
+                              </Badge>
+                            </TableCell>
+                            <TableCell>
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                onClick={() => toggleActive(item)}
+                                disabled={toggling === item.id}
                               >
-                                {page}
-                              </PaginationLink>
-                            )}
-                          </PaginationItem>
-                        ))}
+                                {toggling === item.id ? (
+                                  <Loader2 className="w-4 h-4 animate-spin" />
+                                ) : item.is_active ? (
+                                  <Badge className="bg-green-500/20 text-green-500 hover:bg-green-500/30">
+                                    Active
+                                  </Badge>
+                                ) : (
+                                  <Badge variant="secondary" className="opacity-50">
+                                    Inactive
+                                  </Badge>
+                                )}
+                              </Button>
+                            </TableCell>
+                            <TableCell className="text-right">
+                              <div className="flex justify-end space-x-2">
+                                <Button
+                                  variant="ghost"
+                                  size="icon"
+                                  onClick={() => handleEdit(item)}
+                                  className="h-8 w-8 text-blue-500"
+                                >
+                                  <Edit className="h-4 w-4" />
+                                </Button>
+                                <Button
+                                  variant="ghost"
+                                  size="icon"
+                                  onClick={() => handleDelete(item.id)}
+                                  disabled={deleting === item.id}
+                                  className="h-8 w-8 text-red-500"
+                                >
+                                  {deleting === item.id ? (
+                                    <Loader2 className="h-4 w-4 animate-spin" />
+                                  ) : (
+                                    <Trash2 className="h-4 w-4" />
+                                  )}
+                                </Button>
+                              </div>
+                            </TableCell>
+                          </TableRow>
+                        ))
+                      ) : (
+                        <TableRow>
+                          <TableCell colSpan={7} className="text-center py-10 text-muted-foreground">
+                            No items found in the store.
+                          </TableCell>
+                        </TableRow>
+                      )}
+                    </TableBody>
+                  </Table>
+                </div>
 
-                        <PaginationItem>
-                          <PaginationNext
-                            onClick={() => goToPage(currentPage + 1)}
-                            className={currentPage === totalPages || loading ? "pointer-events-none opacity-50" : "cursor-pointer"}
-                          />
+                {totalPages > 1 && (
+                  <Pagination>
+                    <PaginationContent>
+                      <PaginationItem>
+                        <PaginationPrevious
+                          onClick={() => goToPage(currentPage - 1)}
+                        />
+                      </PaginationItem>
+                      {renderPageNumbers().map((page, index) => (
+                        <PaginationItem key={index}>
+                          {page === 'ellipsis' ? (
+                            <PaginationEllipsis />
+                          ) : (
+                            <PaginationLink
+                              isActive={currentPage === page}
+                              onClick={() => goToPage(page as number)}
+                            >
+                              {page}
+                            </PaginationLink>
+                          )}
                         </PaginationItem>
-                      </PaginationContent>
-                    </Pagination>
-
-                    <div className="text-center mt-2 text-sm text-muted-foreground">
-                      Page {currentPage} of {totalPages} ({totalItems} total items)
-                    </div>
-                  </div>
+                      ))}
+                      <PaginationItem>
+                        <PaginationNext
+                          onClick={() => goToPage(currentPage + 1)}
+                        />
+                      </PaginationItem>
+                    </PaginationContent>
+                  </Pagination>
                 )}
-              </>
-            )}
-
-            {!loading && storeItems.length === 0 && (
-              <div className="text-center py-8 text-muted-foreground">
-                No items found. Create your first store item!
               </div>
             )}
           </CardContent>
         </Card>
-      </div>
+      </main>
     </div>
   );
 };

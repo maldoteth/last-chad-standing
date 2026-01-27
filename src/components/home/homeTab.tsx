@@ -17,7 +17,6 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Coins, ShoppingBag, Users, Package, CreditCard, Trophy, Star, Target, ChevronRight, Bell, Play, TrendingUp, UserPlus, Medal, Info, Gift, Gamepad, Instagram, Layers, BookOpen, Youtube, X, RotateCcw, MessageCircle, } from "lucide-react";
 import PreOrderDialog from "@/components/PreOrderDialog";
 import { Level, useRank } from "@/context/rankData";
-import { useApi } from "@/Api/apiFunction";
 import { useProfile } from "@/context/profileContext";
 import ObjectivesCard from "@/components/objectivesCard";
 import SessionSigners from "../session-signers";
@@ -32,7 +31,6 @@ const HomeTab = () => {
     const [selectedPlayer, setSelectedPlayer] = useState<any>(null);
     const objectivesRef = useRef<HTMLDivElement>(null);
     const [searchParams, setSearchParams] = useSearchParams();
-    const { post, get } = useApi()
     const {
         toast
     } = useToast();

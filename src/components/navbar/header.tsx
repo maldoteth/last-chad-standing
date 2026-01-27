@@ -19,7 +19,6 @@ import { Bell, Medal, LogOut, X, Edit3, Check, Copy, CreditCard, Upload, History
 import TransactionHistory from "../TransactionHistory";
 import { tabItems } from "@/lib/data";
 import { useRank } from "@/context/rankData";
-import { useApi } from "@/Api/apiFunction";
 import BuyDialogContent from "../buyDialogContent";
 import { useProfile } from "@/context/profileContext";
 import { uploadFile } from "@/Api/uploadFile";
@@ -37,7 +36,6 @@ const Header = () => {
     const [buyDialogOpen, setBuyDialogOpen] = useState(false);
     const [selectedPlayer, setSelectedPlayer] = useState<any>(null);
     const { rankingData } = useRank()
-    const { get } = useApi()
     const {
         toast
     } = useToast();
@@ -136,20 +134,6 @@ const Header = () => {
             });
         }
     };
-    // Initialize user balance and profile on login
-    useEffect(() => {
-        if (authenticated && user?.id && !profile && !loading) {
-            console.log('Attempting to create profile for user:', user.id);
-            createProfile().catch(error => {
-                console.error('Failed to create profile in Game component:', error);
-                toast({
-                    title: "Profile Error",
-                    description: "Failed to load your profile. Please refresh the page.",
-                    variant: "destructive"
-                });
-            });
-        }
-    }, [authenticated, user?.id, profile, loading, createProfile]);
 
     const handleTabClick = (tabId: string) => {
         setSearchParams({ tab: tabId });

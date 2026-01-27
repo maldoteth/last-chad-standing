@@ -71,14 +71,12 @@ const NFTQueryComponent = () => {
 
     setLoading(true);
     try {
-      const nft = getContract({
+      const bal = await (client as any).readContract({
         address: contractAddress as `0x${string}`,
         abi: NFT_ABI,
-
-        client,
-      });
-
-      const bal = await nft.read.balanceOf([walletAddress as `0x${string}`]);
+        functionName: "balanceOf",
+        args: [walletAddress as `0x${string}`],
+      }) as bigint;
       setBalance(bal);
       setOwnedNFTs([]);
 
@@ -111,23 +109,24 @@ const NFTQueryComponent = () => {
 
     setLoadingDetails(true);
     try {
-      const nft = getContract({
-        address: contractAddress as `0x${string}`,
-        abi: NFT_ABI,
-        client,
-      });
-
       const owned: OwnedNFT[] = [];
 
       // Get each token ID one by one
       for (let i = 0n; i < balance; i++) {
-        const tokenId = await nft.read.tokenOfOwnerByIndex([
-          walletAddress as `0x${string}`,
-          i,
-        ]);
+        const tokenId = await (client as any).readContract({
+          address: contractAddress as `0x${string}`,
+          abi: NFT_ABI,
+          functionName: "tokenOfOwnerByIndex",
+          args: [walletAddress as `0x${string}`, i],
+        }) as bigint;
 
         // Get the URI for this token
-        const uri = await nft.read.tokenURI([tokenId]);
+        const uri = await (client as any).readContract({
+          address: contractAddress as `0x${string}`,
+          abi: NFT_ABI,
+          functionName: "tokenURI",
+          args: [tokenId],
+        }) as string;
 
         owned.push({
           id: tokenId.toString(),
@@ -166,7 +165,12 @@ const NFTQueryComponent = () => {
     try {
       const uris = await Promise.all(
         ownedNFTs.map((nft) =>
-          nft.read.tokenURI([BigInt(nft.id)])
+          (client as any).readContract({
+            address: contractAddress as `0x${string}`,
+            abi: NFT_ABI,
+            functionName: "tokenURI",
+            args: [BigInt(nft.id)],
+          }) as Promise<string>
         )
       );
 

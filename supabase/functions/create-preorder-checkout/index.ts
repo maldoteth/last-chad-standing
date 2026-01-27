@@ -61,7 +61,8 @@ serve(async (req) => {
           logStep("Authenticated user found", { userId });
         }
       } catch (error) {
-        logStep("Authentication failed, proceeding with guest checkout", { error: error.message });
+        const authErrorMsg = error instanceof Error ? error.message : String(error);
+        logStep("Authentication failed, proceeding with guest checkout", { error: authErrorMsg });
       }
     } else {
       logStep("No auth header, proceeding with guest checkout");

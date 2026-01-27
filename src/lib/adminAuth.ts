@@ -24,7 +24,7 @@ const setAdminSession = (adminUser: AdminUser): void => {
     loginTime: Date.now(),
   };
   localStorage.setItem('admin_session', JSON.stringify(sessionData));
-  localStorage.setItem('token', adminUser?.token);
+  localStorage.setItem('admin_token', adminUser?.token);
 };
 
 // Get admin session from localStorage
@@ -62,4 +62,5 @@ export const adminLogin = async (adminUser: any): Promise<LoginResult> => {
 // Admin logout function
 export const adminLogout = (): void => {
   localStorage.removeItem('admin_session');
+  localStorage.removeItem('admin_token');
 };
