@@ -139,8 +139,11 @@ export const ProfileProvider = ({ children }: { children: ReactNode }) => {
         const newIcon = getTierIcon(profile.xp || 0);
         setProfile(prev => (prev ? { ...prev, avatar_url: newIcon } : null));
     };
+    const hasTried = React.useRef(false);
+
     useEffect(() => {
-        if (authenticated && user?.id && !profile && !loading) {
+        if (authenticated && user?.id && !profile && !loading && !hasTried.current) {
+            hasTried.current = true;
             createProfile();
         }
     }, [authenticated, user?.id, profile, loading]);
