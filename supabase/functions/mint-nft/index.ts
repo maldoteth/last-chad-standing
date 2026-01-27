@@ -48,9 +48,8 @@ serve(async (req) => {
             status: 200,
         });
     } catch (error) {
-        const errorMessage = error instanceof Error ? error.message : String(error);
-        console.error("❌ Mint Error:", errorMessage);
-        return new Response(JSON.stringify({ error: errorMessage }), {
+        console.error("❌ Mint Error:", error.message);
+        return new Response(JSON.stringify({ error: error.message }), {
             headers: { ...corsHeaders, "Content-Type": "application/json" },
             status: 500,
         });

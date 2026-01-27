@@ -8,6 +8,7 @@ import { base, baseSepolia } from "viem/chains";
 import { ProfileProvider } from "./context/profileContext.tsx";
 // Add this line at the very top of the file
 import { Buffer } from "buffer";
+import { SocketProvider } from "./context/SocketContext.tsx";
 import { NotificationProvider } from "./context/notificationContext.tsx";
 if (!window.Buffer) window.Buffer = Buffer;
 
@@ -147,9 +148,11 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     >
       <SmartWalletsProvider>
         <ProfileProvider>
-          <NotificationProvider>
-            <App />
-          </NotificationProvider>
+          <SocketProvider>
+            <NotificationProvider>
+              <App />
+            </NotificationProvider>
+          </SocketProvider>
         </ProfileProvider>
       </SmartWalletsProvider>
     </PrivyProvider>

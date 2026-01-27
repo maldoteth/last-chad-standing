@@ -71,12 +71,14 @@ const NFTQueryComponent = () => {
 
     setLoading(true);
     try {
-      const bal = await (client as any).readContract({
+      const nft = getContract({
         address: contractAddress as `0x${string}`,
         abi: NFT_ABI,
-        functionName: "balanceOf",
-        args: [walletAddress as `0x${string}`],
-      }) as bigint;
+
+        client,
+      });
+
+      const bal = await nft.read.balanceOf([walletAddress as `0x${string}`]);
       setBalance(bal);
       setOwnedNFTs([]);
 
@@ -109,24 +111,23 @@ const NFTQueryComponent = () => {
 
     setLoadingDetails(true);
     try {
+      const nft = getContract({
+        address: contractAddress as `0x${string}`,
+        abi: NFT_ABI,
+        client,
+      });
+
       const owned: OwnedNFT[] = [];
 
       // Get each token ID one by one
       for (let i = 0n; i < balance; i++) {
-        const tokenId = await (client as any).readContract({
-          address: contractAddress as `0x${string}`,
-          abi: NFT_ABI,
-          functionName: "tokenOfOwnerByIndex",
-          args: [walletAddress as `0x${string}`, i],
-        }) as bigint;
+        const tokenId = await nft.read.tokenOfOwnerByIndex([
+          walletAddress as `0x${string}`,
+          i,
+        ]);
 
         // Get the URI for this token
-        const uri = await (client as any).readContract({
-          address: contractAddress as `0x${string}`,
-          abi: NFT_ABI,
-          functionName: "tokenURI",
-          args: [tokenId],
-        }) as string;
+        const uri = await nft.read.tokenURI([tokenId]);
 
         owned.push({
           id: tokenId.toString(),
@@ -165,12 +166,7 @@ const NFTQueryComponent = () => {
     try {
       const uris = await Promise.all(
         ownedNFTs.map((nft) =>
-          (client as any).readContract({
-            address: contractAddress as `0x${string}`,
-            abi: NFT_ABI,
-            functionName: "tokenURI",
-            args: [BigInt(nft.id)],
-          }) as Promise<string>
+          nft.read.tokenURI([BigInt(nft.id)])
         )
       );
 

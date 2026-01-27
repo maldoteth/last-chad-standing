@@ -71,8 +71,7 @@ interface StorePurchaseDialogProps {
   isOpen: boolean;
   onClose: () => void;
   item: StoreItem | LockerItem | null;
-  isLockerItem?: boolean;
-  onSuccess?: () => void;
+  isLockerItem?: boolean
 }
 
 // Get max supply based on rarity
@@ -167,8 +166,7 @@ const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
   isOpen,
   onClose,
   item,
-  isLockerItem = false,
-  onSuccess
+  isLockerItem = false
 }) => {
   const isMobile = useIsMobile();
   const { toast } = useToast();
@@ -196,16 +194,11 @@ const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
           item.nftAddress as Address,
           item.userAddress || user?.wallet?.address as Address
         );
-        
-        if (Array.isArray(data) && data.length === 2 && Array.isArray(data[1])) {
-          setTokenIds(data[1].map(id => Number(id)));
-        } else {
-          const converted = data?.toString();
-          const numbers = converted.split(",")
-            .map(Number)
-            .filter((v, i, a) => a.indexOf(v) === i);
-          setTokenIds(numbers);
-        }
+        const converted = data?.toString()
+        const numbers = converted.split(",")
+          .map(Number)
+          .filter((v, i, a) => a.indexOf(v) === i)
+        setTokenIds(numbers)
       } catch (error) {
         console.error("Error fetching user balance:", error);
       }
@@ -353,7 +346,6 @@ const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
       }
 
       if (success) {
-        onSuccess?.();
         onClose();
       }
 
@@ -406,7 +398,6 @@ const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
           title: "Success",
           description: "Locker item updated",
         });
-        onSuccess?.();
         onClose();
       }
     } catch (error: any) {
@@ -455,7 +446,6 @@ const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
       if (response?.success) {
         toast({ title: "Success", description: "Item listed on marketplace" });
         setSellModalOpen(false);
-        onSuccess?.();
         onClose();
       } else {
         toast({ title: "Error", description: "Something went wrong", variant: "destructive" });

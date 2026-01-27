@@ -150,13 +150,16 @@ export function useSupabase() {
 
     const updateLockerItem = async (id: string, updates: Tables['Locker']['Update']) => {
         try {
-            const { data, error } = await supabase.functions.invoke('update-locker', {
-                body: { id, updates }
-            });
+            const { data, error } = await supabase
+                .from('Locker')
+                .update(updates)
+                .eq('id', id)
+                .select()
+                .single();
 
             if (error) throw error;
 
-            return data;
+            return { success: true, data };
         } catch (error: any) {
             console.error('Error updating locker item:', error);
             return { success: false, error: error.message };
@@ -570,7 +573,7 @@ export function useSupabase() {
                 .eq('nftAddress', contractId)
                 .eq('item_id', itemId)
                 .eq('user_id', userId)
-                .maybeSingle();
+                .single();
 
             if (error) throw error;
 

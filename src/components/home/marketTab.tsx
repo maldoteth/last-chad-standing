@@ -212,7 +212,7 @@ const MarketTab = () => {
     const { getMarketplacePrices, listings: itemsData, listGainer,
         loadingMarket, loading,
         listMarketValue,
-        fetchTrendingItems, fetchGainerItems, listTrending, listGraphs, refetchListings
+        fetchTrendingItems, fetchGainerItems, listTrending, listGraphs
     } = useMarketplace();
     const handleSellClick = (player: any) => {
         toast({ title: "Item not found in locker", variant: "destructive" });
@@ -498,7 +498,6 @@ const MarketTab = () => {
                 onClose={() => setBuyDialogOpen(false)}
                 item={selectedPlayer}
                 isLockerItem={true}
-                onSuccess={refetchListings}
             />
         </>
     );

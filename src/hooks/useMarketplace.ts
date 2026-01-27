@@ -5,7 +5,6 @@ import { toast } from 'sonner';
 import { useSupabase } from './useSupabase';
 import { handleError } from '@/Api/handleError';
 import { useSocketEvent } from '@/context/SocketContext';
-import { useProfile } from '@/context/profileContext';
 
 
 export type MarketplaceListing = {
@@ -52,8 +51,7 @@ export const useMarketplace = () => {
   const [loading, setLoading] = useState(true);
   const [loadingMarket, setLoadingMarket] = useState(true);
   const { user } = usePrivy();
-  const { profile } = useProfile();
-  const { getMarketplaceListings, getLiveGraphData, getMarketValueData, updateLockerItem } = useSupabase();
+  const { getMarketplaceListings, getLiveGraphData, getMarketValueData } = useSupabase();
   const fetchStoreItems = useCallback(async () => {
     setLoading(true);
     try {
@@ -177,13 +175,17 @@ export const useMarketplace = () => {
     }
 
     try {
-      const response = await updateLockerItem(lockerId, {
-        listed_for_sale: true,
-        sale_price: price,
-        listed_at: new Date().toISOString()
-      });
+      const { error } = await supabase
+        .from('Locker')
+        .update({
+          listed_for_sale: true,
+          sale_price: price,
+          listed_at: new Date().toISOString()
+        })
+        .eq('id', lockerId)
+        .eq('user_id', user.id);
 
-      if (!response.success) throw new Error(response.error);
+      if (error) throw error;
 
       toast.success('Listing created successfully!');
       await fetchStoreItems(); // Refresh listings
@@ -197,13 +199,16 @@ export const useMarketplace = () => {
 
   const cancelListing = async (listingId: string): Promise<boolean> => {
     try {
-      const response = await updateLockerItem(listingId, {
-        listed_for_sale: false,
-        sale_price: null,
-        listed_at: null
-      });
+      const { error } = await supabase
+        .from('Locker')
+        .update({
+          listed_for_sale: false,
+          sale_price: null,
+          listed_at: null
+        })
+        .eq('id', listingId);
 
-      if (!response.success) throw new Error(response.error);
+      if (error) throw error;
 
       toast.success('Listing cancelled successfully!');
       await fetchStoreItems(); // Refresh listings

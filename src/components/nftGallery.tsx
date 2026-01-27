@@ -75,13 +75,6 @@ export const MyNFTsGallery = () => {
     );
 };
 
-interface NFTToken {
-    tokenId: string;
-    tokenName: string;
-    tokenSymbol: string;
-    contractAddress: string;
-}
-
 // NFT Card Component
 const NFTCard = ({ nft }: { nft: NFTToken }) => {
     const [metadata, setMetadata] = useState<any>(null);
