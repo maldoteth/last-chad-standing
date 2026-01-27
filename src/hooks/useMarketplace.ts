@@ -4,7 +4,7 @@ import { usePrivy } from '@privy-io/react-auth';
 import { toast } from 'sonner';
 import { useSupabase } from './useSupabase';
 import { handleError } from '@/Api/handleError';
-import { useSocketEvent } from '@/context/SocketContext';
+import { useSocketEvent } from '@/hooks/use-socket-events';
 
 
 export type MarketplaceListing = {

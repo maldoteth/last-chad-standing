@@ -4,7 +4,7 @@ import { useSupabase } from "@/hooks/useSupabase";
 import { generateUniqueWeb3Name } from "@/lib/utils";
 import { handleError } from "@/Api/handleError";
 import { useSearchParams } from "react-router-dom";
-import { useSocketEmit, useSocketEvent } from "./SocketContext";
+import { useSocketEvent } from "@/hooks/use-socket-events";
 
 // ---------------- Types ----------------
 export interface Performance {

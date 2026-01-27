@@ -6,7 +6,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { useSupabase } from "@/hooks/useSupabase";
 import { useProfile } from "./profileContext";
-import { useSocketEvent } from "./SocketContext";
+import { useSocketEvent } from "@/hooks/use-socket-events";
 import { useLocation } from "react-router-dom";
 
 // ---------- Types ----------

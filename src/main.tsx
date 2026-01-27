@@ -112,10 +112,22 @@ const observePrivyModals = () => {
     });
   });
 
-  observer.observe(document.body, {
-    childList: true,
-    subtree: true
-  });
+  if (document.body) {
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+  } else {
+    // If body not ready, wait for it
+    document.addEventListener('DOMContentLoaded', () => {
+      if (document.body) {
+        observer.observe(document.body, {
+          childList: true,
+          subtree: true
+        });
+      }
+    });
+  }
 };
 
 // Start observing after DOM is loaded
@@ -125,36 +137,42 @@ if (document.readyState === 'loading') {
   observePrivyModals();
 }
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-    <PrivyProvider
-      appId={import.meta.env.VITE_APPID}
-      config={{
-        appearance: {
-          theme: 'dark',
-          accentColor: '#ffffff',
-          logo: undefined,
-          showWalletLoginFirst: false,
-          walletChainType: 'ethereum-only',
-        },
-        defaultChain: base,
-        supportedChains: [base],
-        embeddedWallets: {
-          ethereum: {
-            createOnLogin: 'users-without-wallets',
-          }
-        },
-      }}
-    >
-      <SmartWalletsProvider>
-        <ProfileProvider>
-          <SocketProvider>
-            <NotificationProvider>
-              <App />
-            </NotificationProvider>
-          </SocketProvider>
-        </ProfileProvider>
-      </SmartWalletsProvider>
-    </PrivyProvider>
-  </React.StrictMode >
-);
+const rootElement = document.getElementById("root");
+
+if (rootElement) {
+  ReactDOM.createRoot(rootElement).render(
+    <React.StrictMode>
+      <PrivyProvider
+        appId={import.meta.env.VITE_APPID}
+        config={{
+          appearance: {
+            theme: 'dark',
+            accentColor: '#ffffff',
+            logo: undefined,
+            showWalletLoginFirst: false,
+            walletChainType: 'ethereum-only',
+          },
+          defaultChain: base,
+          supportedChains: [base],
+          embeddedWallets: {
+            ethereum: {
+              createOnLogin: 'users-without-wallets',
+            }
+          },
+        }}
+      >
+        <SmartWalletsProvider>
+          <ProfileProvider>
+            <SocketProvider>
+              <NotificationProvider>
+                <App />
+              </NotificationProvider>
+            </SocketProvider>
+          </ProfileProvider>
+        </SmartWalletsProvider>
+      </PrivyProvider>
+    </React.StrictMode >
+  );
+} else {
+  console.error("❌ Root element not found! Make sure <div id='root'></div> exists in index.html");
+}
