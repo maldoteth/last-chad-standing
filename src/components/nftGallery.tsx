@@ -3,18 +3,14 @@
 
 import { useState, useEffect } from "react";
 import type { Address } from "viem";
-
-interface NFTToken {
-    tokenId: string;
-    tokenName: string;
-    tokenSymbol: string;
-    contractAddress: string;
-}
+import {
+} from "@/utils/nftFetch";
 
 export const MyNFTsGallery = () => {
     const walletAddress: Address = '0x4201a1971Eb8734e34151c73C9161b24C3e1bcf0'
+    const apiKey = 'cqt_rQJFcvKHhphx4fHmhd38W7XVD7XV'
     const BASESCAN_API_KEY = 'AJUZEAEMS8I3BXDFK6Q6VPSNCR4JRZ8TQD';
-    const [nfts, setNfts] = useState<NFTToken[]>([]);
+    const [nfts, setNfts] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
@@ -81,6 +77,14 @@ export const MyNFTsGallery = () => {
 
 // NFT Card Component
 const NFTCard = ({ nft }: { nft: NFTToken }) => {
+    const [metadata, setMetadata] = useState<any>(null);
+    const [loadingMetadata, setLoadingMetadata] = useState(false);
+
+    useEffect(() => {
+        // Optionally fetch metadata if you have token URI
+        // For now, just show basic info
+    }, []);
+
     return (
         <div className="bg-white border rounded-lg overflow-hidden shadow-md hover:shadow-lg transition">
             <div className="h-48 bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center text-white text-4xl font-bold">

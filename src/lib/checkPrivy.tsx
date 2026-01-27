@@ -1,22 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useWallets, usePrivy, useFundWallet } from "@privy-io/react-auth";
-import { createPublicClient, createWalletClient, http, custom, defineChain } from "viem";
-import type { Address } from "viem";
+import { createPublicClient, createWalletClient, http, custom } from "viem";
+import { base } from "viem/chains";
+import type { Address, ByteArray } from "viem";
 import { useApi } from "@/Api/apiFunction";
 import { toast } from "sonner";
-
-// Define Base chain locally to avoid type mismatch issues
-const baseChain = defineChain({
-  id: 8453,
-  name: 'Base',
-  nativeCurrency: { name: 'Ether', symbol: 'ETH', decimals: 18 },
-  rpcUrls: {
-    default: { http: ['https://mainnet.base.org'] },
-  },
-  blockExplorers: {
-    default: { name: 'BaseScan', url: 'https://basescan.org' },
-  },
-});
 
 export interface CryptoPaymentProps { hash: string, address: string, exchangeRate: number, cryptoAmount: number, amount: number }
 
@@ -52,7 +40,7 @@ export const CheckPrivy = ({ dollarAmount = 0, onComplete, ethToUsdRate = 0 }: C
       const address = wallet.address as Address;
 
       const client = createPublicClient({
-        chain: baseChain,
+        chain: base,
         transport: http(),
       });
 
@@ -60,6 +48,9 @@ export const CheckPrivy = ({ dollarAmount = 0, onComplete, ethToUsdRate = 0 }: C
         const bal = await client.getBalance({ address });
         setBalance(bal);
         setInsufficientBalance(bal < TX_AMOUNT);
+        // if (bal < REQUIRED_AMOUNT) {
+        //   handleFundWallet()
+        // }
       } catch (err) {
         console.error("❌ Error fetching balance:", err);
       }
@@ -108,7 +99,7 @@ export const CheckPrivy = ({ dollarAmount = 0, onComplete, ethToUsdRate = 0 }: C
       try {
         await provider.request({
           method: "wallet_switchEthereumChain",
-          params: [{ chainId: "0x2105" }],
+          params: [{ chainId: "0x2105" }], // 0x209 = 521 in decimal? Actually, Base Mainnet chainId is 8453 decimal = 0x2105
         });
       } catch (switchError: any) {
         if (switchError.code === 4902) {
@@ -116,7 +107,7 @@ export const CheckPrivy = ({ dollarAmount = 0, onComplete, ethToUsdRate = 0 }: C
             method: "wallet_addEthereumChain",
             params: [
               {
-                chainId: "0x2105",
+                chainId: "0x2105", // 8453 decimal
                 chainName: "Base Mainnet",
                 nativeCurrency: { name: "Ether", symbol: "ETH", decimals: 18 },
                 rpcUrls: ["https://mainnet.base.org"],
@@ -136,16 +127,16 @@ export const CheckPrivy = ({ dollarAmount = 0, onComplete, ethToUsdRate = 0 }: C
 
       const client = createWalletClient({
         account: address,
-        chain: baseChain,
+        chain: base, // make sure 'base' is configured for Mainnet
         transport: custom(provider),
       });
 
       const hash = await client.sendTransaction({
         account: address,
         to: adminWallet as Address,
-        value: TX_AMOUNT,
-        chain: baseChain,
-      } as any);
+        value: TX_AMOUNT
+
+      });
 
       console.log("✅ Transaction hash:", hash);
       setTxHash(hash);
@@ -193,9 +184,9 @@ export const CheckPrivy = ({ dollarAmount = 0, onComplete, ethToUsdRate = 0 }: C
       await fundWallet({
         address,
         options: {
-          chain: baseChain,
+          chain: base,
           asset: "native-currency",
-          amount: (Number(TX_AMOUNT) / 1e18) as any,
+          amount: (Number(TX_AMOUNT) / 1e18) as any, // ETH needed
         }
       });
 

@@ -69,6 +69,15 @@ export const NFTDeployMintRefactored: React.FC = () => {
         successMessage: null,
       }));
 
+      // const response = await get("/api/nft/generate-metadata", {
+      //   method: "POST",
+      //   body: JSON.stringify(nftData),
+      // });
+
+      // if (!response.success) {
+      //   throw new Error(response.error || "Failed to generate metadata");
+      // }
+
       const APiData: MetadataResponse = {
         success: true,
         ipfsHash: `QmSxAi4pmi1R3E2qWgZMKoQymnUgMvrTMtKUf7m4zsDNPV`,
@@ -78,6 +87,7 @@ export const NFTDeployMintRefactored: React.FC = () => {
         max_supply: 100,
       }
       setMetadata(APiData);
+      // setMetadata(response);
       setUi((prev) => ({
         ...prev,
         loading: false,
@@ -111,7 +121,7 @@ export const NFTDeployMintRefactored: React.FC = () => {
         successMessage: null,
       }));
 
-      const deployParams = {
+      const deployParams: any = {
         name: metadata.name,
         symbol: metadata.symbol,
         baseURI: metadata.baseURI,
@@ -198,6 +208,18 @@ export const NFTDeployMintRefactored: React.FC = () => {
       [name]: name === "max_supply" ? parseInt(value) || 1 : value,
     }));
   };
+
+  // const handleBytecodeUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const file = e.target.files?.[0];
+  //   if (file) {
+  //     const reader = new FileReader();
+  //     reader.onload = (event) => {
+  //       const content = event.target?.result as string;
+  //       setContractBytecode(content as Hex);
+  //     };
+  //     reader.readAsText(file);
+  //   }
+  // };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 text-white p-6">
@@ -294,6 +316,7 @@ export const NFTDeployMintRefactored: React.FC = () => {
 
               <button
                 onClick={handleGenerateMetadata}
+                // disabled={ui.loading || !nftData.name || !nftData.image_url}
                 className="w-full bg-purple-600 hover:bg-purple-700 disabled:bg-gray-600 p-3 rounded font-semibold transition"
               >
                 {ui.loading && ui.currentStep === "metadata" ? "Generating..." : "Generate Metadata"}
@@ -313,6 +336,25 @@ export const NFTDeployMintRefactored: React.FC = () => {
             </div>
           )}
         </div>
+
+        {/* Contract Bytecode Upload */}
+        {/* {metadata && !contractBytecode && (
+          <div className="mb-6 p-6 bg-gray-800 rounded-lg border border-gray-700">
+            <h3 className="font-semibold mb-4">Upload Contract Bytecode</h3>
+            <label className="block p-4 border-2 border-dashed border-gray-600 rounded cursor-pointer hover:border-purple-500 transition">
+              <input
+                type="file"
+                onChange={handleBytecodeUpload}
+                accept=".json,.txt"
+                className="hidden"
+              />
+              <p className="text-center text-gray-400">Click to upload or drag bytecode file</p>
+            </label>
+            <p className="text-xs text-gray-500 mt-2">
+              Upload the compiled contract bytecode (get from hardhat/truffle compilation)
+            </p>
+          </div>
+        )} */}
 
         {/* Step 2: Deploy */}
         <div className="mb-6 p-6 bg-gray-800 rounded-lg border border-gray-700 hover:border-gray-600 transition">

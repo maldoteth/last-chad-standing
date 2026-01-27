@@ -115,23 +115,11 @@ export const getNFTsFromBasescanAPI = async (
 import {
   createPublicClient,
   http,
-  defineChain,
 } from "viem";
-
-const baseChain = defineChain({
-  id: 8453,
-  name: 'Base',
-  nativeCurrency: { name: 'Ether', symbol: 'ETH', decimals: 18 },
-  rpcUrls: {
-    default: { http: ['https://mainnet.base.org'] },
-  },
-  blockExplorers: {
-    default: { name: 'BaseScan', url: 'https://basescan.org' },
-  },
-});
+import { base } from "viem/chains";
 
 const publicClient = createPublicClient({
-  chain: baseChain,
+  chain: base,
   transport: http(),
 });
 

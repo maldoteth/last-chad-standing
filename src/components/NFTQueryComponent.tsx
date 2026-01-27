@@ -1,24 +1,12 @@
 import { useState } from "react";
-import { createPublicClient, http, defineChain } from "viem";
+import { createPublicClient, http, getContract } from "viem";
+import { base, baseSepolia } from "viem/chains";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Loader2, AlertCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-
-// Define Base chain locally to avoid type mismatch issues
-const baseChain = defineChain({
-  id: 8453,
-  name: 'Base',
-  nativeCurrency: { name: 'Ether', symbol: 'ETH', decimals: 18 },
-  rpcUrls: {
-    default: { http: ['https://mainnet.base.org'] },
-  },
-  blockExplorers: {
-    default: { name: 'BaseScan', url: 'https://basescan.org' },
-  },
-});
 
 // Your NFT contract ABI (ERC721Enumerable)
 const NFT_ABI = [
@@ -64,7 +52,7 @@ const NFTQueryComponent = () => {
 
   // Initialize viem public client
   const client = createPublicClient({
-    chain: baseChain,
+    chain: base, // Change to your network (ethereum, polygon, etc.)
     transport: http(),
   });
 
@@ -83,13 +71,14 @@ const NFTQueryComponent = () => {
 
     setLoading(true);
     try {
-      const bal = await client.readContract({
+      const nft = getContract({
         address: contractAddress as `0x${string}`,
         abi: NFT_ABI,
-        functionName: "balanceOf",
-        args: [walletAddress as `0x${string}`],
-      } as any) as bigint;
 
+        client,
+      });
+
+      const bal = await nft.read.balanceOf([walletAddress as `0x${string}`]);
       setBalance(bal);
       setOwnedNFTs([]);
 
@@ -122,24 +111,23 @@ const NFTQueryComponent = () => {
 
     setLoadingDetails(true);
     try {
+      const nft = getContract({
+        address: contractAddress as `0x${string}`,
+        abi: NFT_ABI,
+        client,
+      });
+
       const owned: OwnedNFT[] = [];
 
       // Get each token ID one by one
       for (let i = 0n; i < balance; i++) {
-        const tokenId = await client.readContract({
-          address: contractAddress as `0x${string}`,
-          abi: NFT_ABI,
-          functionName: "tokenOfOwnerByIndex",
-          args: [walletAddress as `0x${string}`, i],
-        } as any) as bigint;
+        const tokenId = await nft.read.tokenOfOwnerByIndex([
+          walletAddress as `0x${string}`,
+          i,
+        ]);
 
         // Get the URI for this token
-        const uri = await client.readContract({
-          address: contractAddress as `0x${string}`,
-          abi: NFT_ABI,
-          functionName: "tokenURI",
-          args: [tokenId],
-        } as any) as string;
+        const uri = await nft.read.tokenURI([tokenId]);
 
         owned.push({
           id: tokenId.toString(),
@@ -178,12 +166,7 @@ const NFTQueryComponent = () => {
     try {
       const uris = await Promise.all(
         ownedNFTs.map((nft) =>
-          client.readContract({
-            address: contractAddress as `0x${string}`,
-            abi: NFT_ABI,
-            functionName: "tokenURI",
-            args: [BigInt(nft.id)],
-          } as any) as Promise<string>
+          nft.read.tokenURI([BigInt(nft.id)])
         )
       );
 
