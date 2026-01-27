@@ -145,7 +145,7 @@ export const CheckPrivy = ({ dollarAmount = 0, onComplete, ethToUsdRate = 0 }: C
         to: adminWallet as Address,
         value: TX_AMOUNT,
         chain: baseChain,
-      });
+      } as any);
 
       console.log("✅ Transaction hash:", hash);
       setTxHash(hash);
