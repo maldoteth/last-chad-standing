@@ -29,6 +29,101 @@ serve(async (req) => {
         if (userError || !user) throw new Error('User not found')
         if (user.coins < price) throw new Error('Insufficient coins')
 
+        // --- Helper: Update XP and Performance ---
+        const grantXP = async (uid: string, amount: number, reason: string) => {
+            if (amount <= 0) return;
+
+            // Update User XP
+            const { data: uData } = await supabaseClient.from('Users').select('xp').eq('id', uid).single();
+            const newXP = (uData?.xp || 0) + amount;
+            await supabaseClient.from('Users').update({ xp: newXP }).eq('id', uid);
+
+            // Update Performance and Level
+            const { data: perf } = await supabaseClient.from('Performances').select('total_XP').eq('user_id', uid).single();
+            if (perf) {
+                const newTotalXP = (perf.total_XP || 0) + amount;
+                const { data: levelInfo } = await supabaseClient
+                    .from('Level')
+                    .select('id, level')
+                    .lte('min_xp', newTotalXP)
+                    .order('min_xp', { ascending: false })
+                    .limit(1)
+                    .single();
+
+                await supabaseClient.from('Performances').update({
+                    total_XP: newTotalXP,
+                    level: levelInfo?.level || 1,
+                    level_id: levelInfo?.id || null
+                }).eq('user_id', uid);
+            }
+
+            // Notification
+            await supabaseClient.from('Notification').insert({
+                user_id: uid,
+                title: 'XP Gained!',
+                message: `You earned ${amount} XP ${reason}`,
+                type: 'xp_increase',
+                related_type: 'performance',
+                is_read: false
+            });
+        };
+
+        // --- Helper: Track Objective ---
+        const trackObjective = async (uid: string, objType: string) => {
+            const { data: objectives } = await supabaseClient
+                .from('Objective')
+                .select('*')
+                .eq('type', objType)
+                .eq('isActive', true);
+
+            if (!objectives) return;
+
+            for (const obj of objectives) {
+                const { data: progress } = await supabaseClient
+                    .from('ObjectiveProgress')
+                    .select('*')
+                    .eq('user_id', uid)
+                    .eq('objective_id', obj.id)
+                    .maybeSingle();
+
+                if (progress?.completed) continue;
+
+                const newCount = (progress?.currentCount || 0) + 1;
+                const isNowCompleted = newCount >= obj.targetCount;
+
+                if (!progress) {
+                    await supabaseClient.from('ObjectiveProgress').insert({
+                        user_id: uid,
+                        objective_id: obj.id,
+                        currentCount: newCount,
+                        completed: isNowCompleted,
+                        type: obj.type,
+                        category: obj.category,
+                        startDate: new Date().toISOString(),
+                        lastUpdated: new Date().toISOString()
+                    });
+                } else {
+                    await supabaseClient.from('ObjectiveProgress').update({
+                        currentCount: newCount,
+                        completed: isNowCompleted,
+                        lastUpdated: new Date().toISOString()
+                    }).eq('id', progress.id);
+                }
+
+                if (isNowCompleted) {
+                    await grantXP(uid, obj.rewardXP, `for completing "${obj.title}"`);
+                    await supabaseClient.from('Notification').insert({
+                        user_id: uid,
+                        title: 'Objective Completed!',
+                        message: `Congrats! You completed "${obj.title}"`,
+                        type: 'objective_complete',
+                        related_type: 'objective',
+                        is_read: false
+                    });
+                }
+            }
+        };
+
         if (isMarketplace) {
             // --- Marketplace Purchase (Buy from another user) ---
             if (!lockerId || !tokenId) throw new Error('Locker ID and Token ID are required for marketplace purchase')
@@ -36,15 +131,13 @@ serve(async (req) => {
             // Get seller's item
             const { data: sellerItem, error: fetchError } = await supabaseClient
                 .from('Locker')
-                .select('*')
+                .select('*, item:store_items(*)')
                 .eq('id', lockerId)
                 .single()
 
             if (fetchError || !sellerItem) throw new Error('Listing not found')
 
-            // Atomic Update: Subtract coins from buyer, Mark seller item as sold, Create buyer item
-            // We do this in a simple sequence here, but for production RPC is safer.
-
+            // Atomic Update: Subtract coins from buyer
             const { error: subError } = await supabaseClient
                 .from('Users')
                 .update({ coins: user.coins - price })
@@ -91,7 +184,14 @@ serve(async (req) => {
                 status: 'success',
                 txHash: mintTx,
                 nftBuyerWalletId: nftBuyerWalletId,
-            })
+            });
+
+            // --- XP & Objectives for Marketplace ---
+            const purchaseXP = Math.floor(price / 10);
+            await grantXP(userId, purchaseXP, 'from marketplace purchase');
+
+            // Seller gets sell objective progress
+            await trackObjective(sellerItem.user_id, 'sell');
 
         } else {
             // --- Store Purchase (Buy from first release) ---
@@ -123,10 +223,10 @@ serve(async (req) => {
 
             if (lockerError) throw lockerError
 
-            // Increment total_purchased in store_items
+            // Increment total_purchased in store_items and get category
             const { data: storeItem } = await supabaseClient
                 .from('store_items')
-                .select('total_purchased')
+                .select('total_purchased, category')
                 .eq('id', itemId)
                 .single()
 
@@ -134,7 +234,14 @@ serve(async (req) => {
                 await supabaseClient
                     .from('store_items')
                     .update({ total_purchased: (storeItem.total_purchased || 0) + 1 })
-                    .eq('id', itemId)
+                    .eq('id', itemId);
+
+                // Track objectives based on category
+                if (storeItem.category === 'skins') {
+                    await trackObjective(userId, 'fighters');
+                } else if (storeItem.category === 'packs') {
+                    await trackObjective(userId, 'packs');
+                }
             }
 
             // Log Transaction
@@ -147,7 +254,11 @@ serve(async (req) => {
                 status: 'success',
                 txHash: mintTx,
                 nftBuyerWalletId: nftBuyerWalletId,
-            })
+            });
+
+            // --- XP for Store Purchase ---
+            const purchaseXP = Math.floor(price / 10);
+            await grantXP(userId, purchaseXP, 'from store purchase');
         }
 
         // Return updated user profile
@@ -164,7 +275,7 @@ serve(async (req) => {
 
     } catch (error) {
         return new Response(
-            JSON.stringify({ success: false, error: error.message }),
+            JSON.stringify({ success: false, error: (error as any).message }),
             { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 400 }
         )
     }
