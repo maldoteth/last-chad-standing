@@ -73,21 +73,7 @@ const Game = () => {
 
   // Handle buy with coins click
   const handleBuyWithCoinsClick = () => {
-    if (!authenticated) {
-      toast({
-        title: "Sign in required",
-        description: "Please sign in to purchase with coins",
-        action: <Button size="sm" onClick={login}>
-          Sign In
-        </Button>
-      });
-      return;
-    }
-    toast({
-      title: "Coming Soon",
-      description: "Coin purchases coming soon!",
-      duration: 3000
-    });
+    window.dispatchEvent(new CustomEvent('switch-tab', { detail: 'store' }));
   };
 
   // Handle buy with card click
@@ -131,13 +117,24 @@ const Game = () => {
     }
   };
   useEffect(() => {
+    const handleSwitchTab = (e: any) => {
+      if (e.detail) {
+        setActiveTab(e.detail);
+      }
+    };
+    window.addEventListener('switch-tab', handleSwitchTab);
+    return () => window.removeEventListener('switch-tab', handleSwitchTab);
+  }, []);
+
+  useEffect(() => {
     const tabFromUrl = searchParams.get("tab");
     if (tabFromUrl) {
       handleTabClick(tabFromUrl);
     }
   }, [searchParams]);
 
-  return <div className="min-h-screen bg-black text-foreground dark">
+  return (
+    <div className="min-h-screen bg-black text-foreground dark">
     {/* Mobile/Tablet optimized layout */}
     <Header />
 
@@ -371,27 +368,37 @@ const Game = () => {
               <NotificationsList />
             </TabsContent>
 
-            <TabsContent value="rankings" className="flex-1  overflow-y-auto custom-scrollspace-y-2 -mt-2 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] bg-black">
+            <TabsContent value="rankings" className="flex-1 overflow-y-auto custom-scroll space-y-2 -mt-2 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] bg-black">
               <p className="text-sm text-muted-foreground text-center pb-2 pt-6">Weekly prize pool: $0</p>
 
-              {rankingData && rankingData?.map(player => <div key={player?.id} className="flex items-center space-x-3 p-3 rounded-lg hover:bg-muted/50 transition-colors">
-                <div className="flex-shrink-0 w-8 text-center">
-                  {player?.level <= 3 ? <Medal className={`w-5 h-5 ${player?.level === 1 ? 'text-yellow-400' : player?.level === 2 ? 'text-gray-300' : 'text-amber-600'}`} /> : <span className="text-sm font-medium text-muted-foreground">#{player?.level}</span>}
-                </div>
-
-                <Avatar className="w-8 h-8">
-                  {player?.user_id?.profileImage && <AvatarImage src={player?.user_id?.profileImage} />}
-                  <AvatarFallback className="text-sm">{getTierIcon(Number(player.total_XP))}</AvatarFallback>
-                </Avatar>
-
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center justify-between">
-                    <p className="text-sm font-medium truncate max-w-[100px]">{player?.user_id?.name}</p>
-                    <Badge variant="outline" className="text-xs">Lv.{player.level}</Badge>
+              {rankingData && rankingData?.map((player: any) => (
+                <div key={player?.id} className="flex items-center space-x-3 p-3 rounded-lg hover:bg-muted/50 transition-colors">
+                  <div className="flex-shrink-0 w-8 text-center">
+                    {player?.rank <= 3 ? (
+                      <Medal className={`w-5 h-5 ${player?.rank === 1 ? 'text-yellow-400' : player?.rank === 2 ? 'text-gray-300' : 'text-amber-600'}`} />
+                    ) : (
+                      <span className="text-sm font-medium text-muted-foreground">#{player?.rank}</span>
+                    )}
                   </div>
-                  <p className="text-xs text-muted-foreground">{player.total_XP} XP</p>
+
+                  <Avatar className="w-8 h-8">
+                    {(player?.profileImage || player?.user_id?.profileImage) && (
+                      <AvatarImage src={player?.profileImage || player?.user_id?.profileImage} />
+                    )}
+                    <AvatarFallback className="text-sm">{getTierIcon(Number(player.xp || player.total_XP || 0))}</AvatarFallback>
+                  </Avatar>
+
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center justify-between">
+                      <p className="text-sm font-medium truncate max-w-[100px]">{player?.name || player?.user_id?.name || 'Player'}</p>
+                      <Badge variant="outline" className="text-xs">
+                        Lv.{player?.performance?.level || player?.level || 1}
+                      </Badge>
+                    </div>
+                    <p className="text-xs text-muted-foreground">{player.xp || player.total_XP || 0} XP</p>
+                  </div>
                 </div>
-              </div>)}
+              ))}
             </TabsContent>
           </Tabs>
         </aside>
@@ -440,6 +447,8 @@ const Game = () => {
     </PreOrderDialog>
     {/* Store Purchase Dialog */}
     <StorePurchaseDialog isOpen={purchaseDialogOpen} onClose={() => setPurchaseDialogOpen(false)} item={selectedStoreItem as any} />
-  </div>;
+  </div>
+  );
 };
+
 export default Game;

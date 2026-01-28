@@ -112,7 +112,13 @@ const LockerTab = () => {
     };
 
     const getStoreItemsByCategory = (category: string) =>
-        storeItems.filter((item) => item.category.toLowerCase() === category.toLowerCase());
+        storeItems.filter((item) => {
+            const itemCat = item.category?.toLowerCase();
+            const targetCat = category.toLowerCase();
+            // Map 'skins' to 'fighters'
+            if (targetCat === 'fighters' && itemCat === 'skins') return true;
+            return itemCat === targetCat;
+        });
 
     const mapItemsToDisplay = (items: StoreItem[]) =>
         items.map((item) => ({

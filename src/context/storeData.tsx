@@ -160,8 +160,8 @@ export const StoreProvider = ({ children }: { children: ReactNode }) => {
         setUserBalance({ coins: response.user.coins, xp: response.user.xp });
 
         toast({
-          title: "Purchase successful!",
-          description: `You purchased ${itemName} for ${price} coins.`,
+          title: "Purchase successful! 🎉",
+          description: `You purchased ${itemName} for ${price} coins. Head over to your Locker to see it!`,
         });
         return true;
       } else {
@@ -215,8 +215,8 @@ export const StoreProvider = ({ children }: { children: ReactNode }) => {
         setUserBalance({ coins: response.user.coins, xp: response.user.xp });
 
         toast({
-          title: "Purchase successful!",
-          description: `You purchased ${itemName} for ${price} coins.`,
+          title: "Purchase successful! 🎉",
+          description: `You purchased ${itemName} for ${price} coins. Head over to your Locker to see it!`,
         });
         return true;
       } else {
