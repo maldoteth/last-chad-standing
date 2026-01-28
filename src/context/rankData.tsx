@@ -13,6 +13,8 @@ import { useProfile } from "./profileContext";
 import { usePrivy } from "@privy-io/react-auth";
 import { useLocation } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
+import { Trophy, Star, Target } from "lucide-react";
 
 // Types
 export interface Level {
@@ -90,6 +92,7 @@ export const RankProvider = ({ children }: { children: ReactNode }) => {
   const [objectivesData, setObjectiveData] = useState<ObjectiveData[]>([]);
   const [objectivesUserData, setObjectiveUserData] = useState<ObjectiveProgress[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const { toast } = useToast();
   const { getLevels, getRanks, getObjectives, getUserObjectives } = useSupabase();
   const { authenticated } = usePrivy();
   const { profile } = useProfile();
@@ -146,6 +149,20 @@ export const RankProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  // 🧠 Keep tracks of latest data for use in Realtime callbacks
+  const objectivesDataRef = useRef<ObjectiveData[]>([]);
+  const lastKnownXPRef = useRef<number>(profile?.xp || 0);
+
+  useEffect(() => {
+    objectivesDataRef.current = objectivesData;
+  }, [objectivesData]);
+
+  useEffect(() => {
+    if (profile?.xp !== undefined) {
+      lastKnownXPRef.current = profile.xp;
+    }
+  }, [profile?.xp]);
+
   // 💡 Realtime Subscriptions
   useEffect(() => {
     if (isAdmin) return;
@@ -171,22 +188,73 @@ export const RankProvider = ({ children }: { children: ReactNode }) => {
         .on(
           'postgres_changes',
           { 
-            event: '*', 
+            event: 'UPDATE', 
             schema: 'public', 
             table: 'ObjectiveProgress',
             filter: `user_id=eq.${profile.id}`
           },
-          () => {
-            console.log('🎯 Objectives updated via Realtime');
+          (payload: any) => {
+            console.log('🎯 Objectives updated via Realtime', payload);
+            
+            // Check if objective was just completed
+            const oldData = payload.old;
+            const newData = payload.new;
+            
+            if (newData.completed && !oldData.completed) {
+              const objective = objectivesDataRef.current.find(obj => obj.id === newData.objective_id);
+              toast({
+                title: "Objective Completed! 🎉",
+                description: `You've completed: ${objective?.title || 'An objective'}!`,
+                duration: 5000,
+                // @ts-ignore - custom icon support in toast
+                icon: <Trophy className="w-5 h-5 text-yellow-500" />
+              });
+            } else if (newData.currentCount > oldData.currentCount) {
+               // Optional: Show subtle progress toast
+            }
+            
             fetchObjectiveUserData();
           }
         )
         .subscribe();
     }
 
+    // ✨ XP & Coins Realtime (Users table)
+    let userChannel: any;
+    if (authenticated && profile?.id) {
+        userChannel = supabase
+          .channel(`user-stats-${profile.id}`)
+          .on(
+            'postgres_changes',
+            {
+              event: 'UPDATE',
+              schema: 'public',
+              table: 'Users',
+              filter: `id=eq.${profile.id}`
+            },
+            (payload: any) => {
+              const oldXP = lastKnownXPRef.current;
+              const newXP = payload.new?.xp || 0;
+              
+              if (newXP > oldXP) {
+                toast({
+                  title: "XP Gained! ✨",
+                  description: `You earned +${newXP - oldXP} XP! Keep it up.`,
+                  duration: 3000,
+                  // @ts-ignore - custom icon support in toast
+                  icon: <Star className="w-5 h-5 text-blue-400 fill-blue-400" />
+                });
+              }
+              lastKnownXPRef.current = newXP;
+            }
+          )
+          .subscribe();
+    }
+
     return () => {
       supabase.removeChannel(performanceChannel);
       if (objectiveChannel) supabase.removeChannel(objectiveChannel);
+      if (userChannel) supabase.removeChannel(userChannel);
     };
   }, [isAdmin, authenticated, profile?.id]);
 

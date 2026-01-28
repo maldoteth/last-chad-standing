@@ -29,54 +29,15 @@ serve(async (req) => {
         if (userError || !user) throw new Error('User not found')
         if (user.coins < price) throw new Error('Insufficient coins')
 
-        // --- Helper: Update XP and Performance ---
-        const grantXP = async (uid: string, amount: number, reason: string) => {
-            if (amount <= 0) return;
-
-            // Update User XP
-            const { data: uData } = await supabaseClient.from('Users').select('xp').eq('id', uid).single();
-            const newXP = (uData?.xp || 0) + amount;
-            await supabaseClient.from('Users').update({ xp: newXP }).eq('id', uid);
-
-            // Update Performance and Level
-            const { data: perf } = await supabaseClient.from('Performances').select('total_XP').eq('user_id', uid).single();
-            if (perf) {
-                const newTotalXP = (perf.total_XP || 0) + amount;
-                const { data: levelInfo } = await supabaseClient
-                    .from('Level')
-                    .select('id, level')
-                    .lte('min_xp', newTotalXP)
-                    .order('min_xp', { ascending: false })
-                    .limit(1)
-                    .single();
-
-                await supabaseClient.from('Performances').update({
-                    total_XP: newTotalXP,
-                    level: levelInfo?.level || 1,
-                    level_id: levelInfo?.id || null
-                }).eq('user_id', uid);
-            }
-
-            // Notification
-            await supabaseClient.from('Notification').insert({
-                user_id: uid,
-                title: 'XP Gained!',
-                message: `You earned ${amount} XP ${reason}`,
-                type: 'xp_increase',
-                related_type: 'performance',
-                is_read: false
-            });
-        };
-
-        // --- Helper: Track Objective ---
-        const trackObjective = async (uid: string, objType: string) => {
+        // Helper to check for existing objective progress or create it
+        const updateObjective = async (uid: string, objType: string) => {
             const { data: objectives } = await supabaseClient
                 .from('Objective')
                 .select('*')
                 .eq('type', objType)
                 .eq('isActive', true);
 
-            if (!objectives) return;
+            if (!objectives || objectives.length === 0) return;
 
             for (const obj of objectives) {
                 const { data: progress } = await supabaseClient
@@ -111,11 +72,16 @@ serve(async (req) => {
                 }
 
                 if (isNowCompleted) {
-                    await grantXP(uid, obj.rewardXP, `for completing "${obj.title}"`);
+                    // Reward XP for completion
+                    const { data: userData } = await supabaseClient.from('Users').select('xp').eq('id', uid).single();
+                    const newXP = (userData?.xp || 0) + obj.rewardXP;
+                    await supabaseClient.from('Users').update({ xp: newXP }).eq('id', uid);
+
+                    // Notification for completion
                     await supabaseClient.from('Notification').insert({
                         user_id: uid,
                         title: 'Objective Completed!',
-                        message: `Congrats! You completed "${obj.title}"`,
+                        message: `Congrats! You completed "${obj.title}" and earned ${obj.rewardXP} XP!`,
                         type: 'objective_complete',
                         related_type: 'objective',
                         is_read: false
@@ -124,159 +90,150 @@ serve(async (req) => {
             }
         };
 
-        if (isMarketplace) {
-            // --- Marketplace Purchase (Buy from another user) ---
-            if (!lockerId || !tokenId) throw new Error('Locker ID and Token ID are required for marketplace purchase')
+        const priceNum = Number(price);
+        const purchaseXP = Math.floor(priceNum / 10);
+        const newTotalCoins = user.coins - priceNum;
+        const newTotalXP = (user.xp || 0) + purchaseXP;
 
-            // Get seller's item
+        // 2. Perform Primary Transaction (Update User Coins & XP)
+        const { error: updateError } = await supabaseClient
+            .from('Users')
+            .update({ coins: newTotalCoins, xp: newTotalXP })
+            .eq('id', userId);
+
+        if (updateError) throw updateError;
+
+        // 3. Update Performance Table (Total XP)
+        const { data: perf } = await supabaseClient.from('Performances').select('total_XP').eq('user_id', userId).single();
+        if (perf) {
+            const newTotalPerfXP = (perf.total_XP || 0) + purchaseXP;
+            const { data: levelInfo } = await supabaseClient
+                .from('Level')
+                .select('id, level')
+                .lte('min_xp', newTotalPerfXP)
+                .order('min_xp', { ascending: false })
+                .limit(1)
+                .single();
+
+            await supabaseClient.from('Performances').update({
+                total_XP: newTotalPerfXP,
+                level: levelInfo?.level || 1,
+                level_id: levelInfo?.id || null
+            }).eq('user_id', userId);
+        }
+
+        if (isMarketplace) {
+            // --- Marketplace Purchase Logic ---
+            if (!lockerId || !tokenId) throw new Error('Locker ID and Token ID are required for marketplace purchase');
+
             const { data: sellerItem, error: fetchError } = await supabaseClient
                 .from('Locker')
                 .select('*, item:store_items(*)')
                 .eq('id', lockerId)
-                .single()
+                .single();
 
-            if (fetchError || !sellerItem) throw new Error('Listing not found')
+            if (fetchError || !sellerItem) throw new Error('Listing not found');
 
-            // Atomic Update: Subtract coins from buyer
-            const { error: subError } = await supabaseClient
-                .from('Users')
-                .update({ coins: user.coins - price })
-                .eq('id', userId)
+            // Update seller item (mark as not for sale)
+            await supabaseClient.from('Locker').update({
+                listed_for_sale: false,
+                is_sell_item: false,
+                sell_count: (sellerItem.sell_count || 0) + 1,
+            }).eq('id', lockerId);
 
-            if (subError) throw subError
-
-            const { error: sellerUpdateError } = await supabaseClient
-                .from('Locker')
-                .update({
-                    listed_for_sale: false,
-                    is_sell_item: false,
-                    sell_count: (sellerItem.sell_count || 0) + 1,
-                })
-                .eq('id', lockerId)
-
-            if (sellerUpdateError) throw sellerUpdateError
-
-            const { error: buyerLockerError } = await supabaseClient
-                .from('Locker')
-                .insert({
-                    user_id: userId,
-                    item_id: sellerItem.item_id,
-                    coins: price,
-                    nftBuyerWalletId: nftBuyerWalletId,
-                    purchase_date: new Date().toISOString(),
-                    quantity: 1,
-                    listed_for_sale: false,
-                    is_sell_item: false,
-                    sell_count: 0,
-                    total_purchased_locker_item: (sellerItem.total_purchased_locker_item || 0) + 1,
-                    token_ids: [tokenId],
-                })
-
-            if (buyerLockerError) throw buyerLockerError
-
-            // Log Transaction
-            await supabaseClient.from('Transactions').insert({
+            // Create new locker entry for buyer
+            await supabaseClient.from('Locker').insert({
                 user_id: userId,
-                locker_id: lockerId,
-                amount: price,
-                coins: price,
-                paymentMethod: 'coin',
-                status: 'success',
-                txHash: mintTx,
+                item_id: sellerItem.item_id,
+                coins: priceNum,
                 nftBuyerWalletId: nftBuyerWalletId,
+                purchase_date: new Date().toISOString(),
+                quantity: 1,
+                listed_for_sale: false,
+                is_sell_item: false,
+                token_ids: [tokenId],
             });
 
-            // --- XP & Objectives for Marketplace ---
-            const purchaseXP = Math.floor(price / 10);
-            await grantXP(userId, purchaseXP, 'from marketplace purchase');
+            // Track Objectives for Buyer
+            await updateObjective(userId, 'buy');
 
-            // Seller gets sell objective progress
-            await trackObjective(sellerItem.user_id, 'sell');
+            // Map category to objective types
+            const cat = sellerItem.item?.category?.toLowerCase();
+            if (cat === 'skins' || cat === 'fighters') await updateObjective(userId, 'fighters');
+            if (cat === 'packs') await updateObjective(userId, 'packs');
+
+            // Track Objectives for Seller
+            await updateObjective(sellerItem.user_id, 'sell');
 
         } else {
-            // --- Store Purchase (Buy from first release) ---
-            if (!itemId) throw new Error('Item ID is required for store purchase')
+            // --- Store Purchase Logic ---
+            if (!itemId) throw new Error('Item ID is required for store purchase');
 
-            // Update Buyer Coins
-            const { error: subError } = await supabaseClient
-                .from('Users')
-                .update({ coins: user.coins - price })
-                .eq('id', userId)
-
-            if (subError) throw subError
-
-            // Create Locker entry
-            const { error: lockerError } = await supabaseClient
-                .from('Locker')
-                .insert({
-                    user_id: userId,
-                    item_id: itemId,
-                    coins: price,
-                    nftBuyerWalletId: nftBuyerWalletId,
-                    purchase_date: new Date().toISOString(),
-                    quantity: 1,
-                    listed_for_sale: false,
-                    is_sell_item: false,
-                    sell_count: 0,
-                    total_purchased_locker_item: 0,
-                })
-
-            if (lockerError) throw lockerError
-
-            // Increment total_purchased in store_items and get category
-            const { data: storeItem } = await supabaseClient
-                .from('store_items')
-                .select('total_purchased, category')
-                .eq('id', itemId)
-                .single()
-
-            if (storeItem) {
-                await supabaseClient
-                    .from('store_items')
-                    .update({ total_purchased: (storeItem.total_purchased || 0) + 1 })
-                    .eq('id', itemId);
-
-                // Track objectives based on category
-                if (storeItem.category === 'skins') {
-                    await trackObjective(userId, 'fighters');
-                } else if (storeItem.category === 'packs') {
-                    await trackObjective(userId, 'packs');
-                }
-            }
-
-            // Log Transaction
-            await supabaseClient.from('Transactions').insert({
+            await supabaseClient.from('Locker').insert({
                 user_id: userId,
                 item_id: itemId,
-                amount: price,
-                coins: price,
-                paymentMethod: 'coin',
-                status: 'success',
-                txHash: mintTx,
+                coins: priceNum,
                 nftBuyerWalletId: nftBuyerWalletId,
+                purchase_date: new Date().toISOString(),
+                quantity: 1,
+                listed_for_sale: false,
+                is_sell_item: false,
             });
 
-            // --- XP for Store Purchase ---
-            const purchaseXP = Math.floor(price / 10);
-            await grantXP(userId, purchaseXP, 'from store purchase');
+            const { data: storeItem } = await supabaseClient
+                .from('store_items')
+                .select('category, total_purchased')
+                .eq('id', itemId)
+                .single();
+
+            if (storeItem) {
+                await supabaseClient.from('store_items').update({
+                    total_purchased: (storeItem.total_purchased || 0) + 1
+                }).eq('id', itemId);
+
+                // Track Objectives
+                await updateObjective(userId, 'buy');
+                const cat = storeItem.category?.toLowerCase();
+                if (cat === 'skins' || cat === 'fighters') await updateObjective(userId, 'fighters');
+                if (cat === 'packs') await updateObjective(userId, 'packs');
+            }
         }
 
-        // Return updated user profile
-        const { data: finalUser } = await supabaseClient
-            .from('Users')
-            .select('*')
-            .eq('id', userId)
-            .single()
+        // Create Transaction Log
+        await supabaseClient.from('Transactions').insert({
+            user_id: userId,
+            item_id: isMarketplace ? null : itemId,
+            locker_id: isMarketplace ? lockerId : null,
+            amount: priceNum,
+            coins: priceNum,
+            paymentMethod: 'coin',
+            status: 'success',
+            txHash: mintTx,
+            nftBuyerWalletId: nftBuyerWalletId,
+        });
+
+        // Notification for purchase
+        await supabaseClient.from('Notification').insert({
+            user_id: userId,
+            title: 'Purchase Successful!',
+            message: `You earned ${purchaseXP} XP from your purchase.`,
+            type: 'xp_increase',
+            is_read: false
+        });
+
+        // 4. Return updated user
+        const { data: finalUser } = await supabaseClient.from('Users').select('*').eq('id', userId).single();
 
         return new Response(
             JSON.stringify({ success: true, user: finalUser }),
             { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 200 }
-        )
+        );
 
     } catch (error) {
+        console.error("Purchase error:", error);
         return new Response(
             JSON.stringify({ success: false, error: (error as any).message }),
             { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 400 }
-        )
+        );
     }
-})
+});

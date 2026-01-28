@@ -25,7 +25,7 @@ import { uploadFile, uploadPinataFile } from "@/Api/uploadFile";
 import { useSupabase } from "@/hooks/useSupabase";
 import { formatDateToYMD } from "@/lib/utils";
 import { StoreItem } from "@/context/storeData";
-import { deployNFTContract, getContractInfo, getUserWalletBalance, mintNFT } from "@/utils/nftContractUtils";
+import { deployNFTContract, getContractInfo, getUserWalletBalance, mintNFT, transferOwnershipNFT } from "@/utils/nftContractUtils";
 import { Address, Hex } from "viem";
 import { EIP1193Provider, usePrivy, useWallets } from "@privy-io/react-auth";
 import { base } from "viem/chains";
@@ -257,6 +257,16 @@ const Admin = () => {
         throw new Error("Contract Bytecode is missing! Please check VITE_SUPABASE_BYTECODE in your .env file.");
       }
 
+      if (!adminWallet) {
+        toast({
+          title: "System Wallet Missing",
+          description: "Please set the Admin Wallet address in the 'Admin Wallet' dialog before creating items. This is required for automatic ownership transfer.",
+          variant: "destructive"
+        });
+        setSubmitting(false);
+        return;
+      }
+
       // 2. Deploy Contract
       const deployParams: any = {
         name: metaData.name,
@@ -289,9 +299,31 @@ const Admin = () => {
       const mintTx = mintResult.transactionHash;
       console.log('✅ NFT minted. Tx hash:', mintTx);
 
+      // 4. Transfer Ownership to System Wallet
+      // Important: The system wallet must be the owner for the Edge Function to mint later
+      if (adminWallet && adminWallet.toLowerCase() !== address.toLowerCase()) {
+        console.log('🔄 Transferring ownership to system wallet:', adminWallet);
+        try {
+          await transferOwnershipNFT(
+            provider,
+            contractAddress,
+            adminWallet as Address,
+            address
+          );
+          console.log('✅ Ownership transferred to system wallet.');
+        } catch (transferError) {
+          console.error('⚠️ Ownership transfer failed, but continuing...', transferError);
+          toast({
+            title: "Ownership Transfer Alert",
+            description: "Contract deployed but ownership transfer semi-failed. You may need to transfer it manually for automated minting.",
+            variant: "default"
+          });
+        }
+      }
+
       const walletId = user?.wallet?.id || user?.smartWallet?.address || (user as any)?.id;
 
-      // 4. Prepare Payload
+      // 5. Prepare Payload
       const payload = {
         ...formData,
         ...metaData,

@@ -163,6 +163,54 @@ export const deployNFTContract = async (params: DeployContractParams) => {
 };
 
 // -------------------------
+// Transfer Ownership
+// -------------------------
+export const transferOwnershipNFT = async (
+  provider: any,
+  contractAddress: Address,
+  newOwner: Address,
+  userAddress: Address
+) => {
+  const publicClient = getPublicClient();
+  const walletClient = await getWalletClient(provider, userAddress);
+
+  try {
+    console.log(`🔄 Transferring ownership of ${contractAddress} to ${newOwner}...`);
+
+    const { request } = await (publicClient as any).simulateContract({
+      address: contractAddress,
+      abi: CONTRACT_ABI,
+      functionName: "transferOwnership",
+      args: [newOwner],
+      account: userAddress,
+    });
+
+    const hash = await (walletClient as any).writeContract(request);
+    console.log("📝 Transfer ownership tx hash:", hash);
+
+    const receipt = await (publicClient as any).waitForTransactionReceipt({
+      hash,
+      timeout: 120_000,
+    });
+
+    if (receipt.status !== "success") {
+      throw new Error("Transaction failed or reverted.");
+    }
+
+    console.log("✅ Ownership transferred successfully!");
+
+    return {
+      success: true,
+      transactionHash: hash,
+    };
+  } catch (error) {
+    const msg = handleContractError(error);
+    console.error("❌ Ownership transfer error:", msg);
+    throw new Error(`Ownership transfer failed: ${msg}`);
+  }
+};
+
+// -------------------------
 // Mint NFT (with simulation)
 // -------------------------
 export const mintNFT = async (params: MintParams) => {

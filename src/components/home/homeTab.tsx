@@ -29,6 +29,8 @@ const HomeTab = () => {
 
     const [sellDialogOpen, setSellDialogOpen] = useState(false);
     const [selectedPlayer, setSelectedPlayer] = useState<any>(null);
+    const [purchaseDialogOpen, setPurchaseDialogOpen] = useState(false);
+    const [selectedStoreItem, setSelectedStoreItem] = useState<StoreItem | null>(null);
     const objectivesRef = useRef<HTMLDivElement>(null);
     const [searchParams, setSearchParams] = useSearchParams();
     const {
@@ -53,47 +55,21 @@ const HomeTab = () => {
 
     // Handle buy with coins click
     const handleBuyWithCoinsClick = () => {
-        if (!authenticated) {
-            toast({
-                title: "Sign in required",
-                description: "Please sign in to purchase with coins",
-                action: <Button size="sm" onClick={login}>
-                    Sign In
-                </Button>
-            });
-            return;
-        }
-        toast({
-            title: "Coming Soon",
-            description: "Coin purchases coming soon!",
-            duration: 3000
-        });
+        window.dispatchEvent(new CustomEvent('switch-tab', { detail: 'store' }));
     };
 
     // Handle buy with card click
     const handleBuyWithCardClick = () => {
-        if (!authenticated) {
-            toast({
-                title: "Sign in required",
-                description: "Please sign in to purchase with card",
-                action: <Button size="sm" onClick={login}>
-                    Sign In
-                </Button>
-            });
-            return;
-        }
-        toast({
-            title: "Coming Soon",
-            description: "Card payments coming soon!",
-            duration: 3000
-        });
+        window.dispatchEvent(new CustomEvent('switch-tab', { detail: 'store' }));
     };
+
 
     const handleSetTabParams = (tabId: string) => {
         setSearchParams({ tab: tabId });
     };
 
-    return <>
+    return (
+        <>
         <SessionSigners isSigner={profile?.isSigner} isAdmin={false} quorumId={profile?.quorumId} />
 
         {isMobile &&
@@ -529,6 +505,7 @@ const HomeTab = () => {
         <PreOrderDialog open={isPreOrderOpen} onOpenChange={setIsPreOrderOpen}>
             <div />
         </PreOrderDialog>
-    </>;
+    </>
+    );
 };
 export default HomeTab;
