@@ -81,6 +81,7 @@ interface RankContextType {
   objectivesData: ObjectiveData[];
   objectivesUserData: ObjectiveProgress[];
   fetchRanksData: () => Promise<void>;
+  fetchObjectiveUserData: () => Promise<void>;
   isLoading: boolean;
 }
 
@@ -288,6 +289,7 @@ export const RankProvider = ({ children }: { children: ReactNode }) => {
         levelsData,
         objectivesData,
         fetchRanksData,
+        fetchObjectiveUserData,
         isLoading,
       }}
     >

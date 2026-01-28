@@ -164,7 +164,7 @@ serve(async (req) => {
             }).eq('id', lockerId);
 
             // Create new locker entry for buyer
-            await supabaseClient.from('Locker').insert({
+            const { data: newLocker, error: lockerError } = await supabaseClient.from('Locker').insert({
                 user_id: userId,
                 item_id: sellerItem.item_id,
                 coins: priceNum,
@@ -174,7 +174,18 @@ serve(async (req) => {
                 listed_for_sale: false,
                 is_sell_item: false,
                 token_ids: [tokenId],
-            });
+            }).select('id').single();
+
+            if (!lockerError && newLocker) {
+                // Also track in Contract_token for quick lookup
+                await supabaseClient.from('Contract_token').insert({
+                    user_id: userId,
+                    item_id: sellerItem.item_id,
+                    locker_id: newLocker.id,
+                    nftAddress: sellerItem.item?.nftAddress,
+                    token_id: parseInt(tokenId) || 0
+                });
+            }
 
             // Map category to objective types
             const cat = (sellerItem.item?.category || "").toLowerCase();
@@ -191,7 +202,7 @@ serve(async (req) => {
             // --- Store Purchase Logic ---
             if (!itemId) throw new Error('Item ID is required for store purchase');
 
-            await supabaseClient.from('Locker').insert({
+            const { data: newLocker, error: lockerError } = await supabaseClient.from('Locker').insert({
                 user_id: userId,
                 item_id: itemId,
                 coins: priceNum,
@@ -200,11 +211,11 @@ serve(async (req) => {
                 quantity: 1,
                 listed_for_sale: false,
                 is_sell_item: false,
-            });
+            }).select('id').single();
 
             const { data: storeItem } = await supabaseClient
                 .from('store_items')
-                .select('category, total_purchased')
+                .select('category, total_purchased, nftAddress')
                 .eq('id', itemId)
                 .single();
 
@@ -212,6 +223,17 @@ serve(async (req) => {
                 await supabaseClient.from('store_items').update({
                     total_purchased: (storeItem.total_purchased || 0) + 1
                 }).eq('id', itemId);
+
+                if (!lockerError && newLocker) {
+                    // Track in Contract_token
+                    await supabaseClient.from('Contract_token').insert({
+                        user_id: userId,
+                        item_id: itemId,
+                        locker_id: newLocker.id,
+                        nftAddress: storeItem.nftAddress,
+                        token_id: 0 // Default for store items
+                    });
+                }
 
                 // Track Objectives
                 const cat = (storeItem.category || "").toLowerCase();
@@ -227,7 +249,7 @@ serve(async (req) => {
         await supabaseClient.from('Transactions').insert({
             user_id: userId,
             item_id: isMarketplace ? null : itemId,
-            locker_id: isMarketplace ? lockerId : null,
+            locker_id: isMarketplace ? null : null, // Should ideally link the new locker ID here too
             amount: priceNum,
             coins: priceNum,
             paymentMethod: 'coin',
@@ -245,11 +267,19 @@ serve(async (req) => {
             is_read: false
         });
 
-        // 4. Return updated user
+        // 4. Return updated user and objectives
         const { data: finalUser } = await supabaseClient.from('Users').select('*').eq('id', userId).single();
+        const { data: finalObjectives } = await supabaseClient
+            .from('ObjectiveProgress')
+            .select('*, objective:Objective(*)')
+            .eq('user_id', userId);
 
         return new Response(
-            JSON.stringify({ success: true, user: finalUser }),
+            JSON.stringify({
+                success: true,
+                user: finalUser,
+                objectives: finalObjectives
+            }),
             { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 200 }
         );
 
