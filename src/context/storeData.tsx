@@ -8,6 +8,7 @@ import { useSupabase } from "@/hooks/useSupabase";
 import { useProfile } from "./profileContext";
 import { useSocketEvent } from "@/hooks/use-socket-events";
 import { useLocation } from "react-router-dom";
+import { useRank } from "./rankData";
 
 // ---------- Types ----------
 export interface StoreItem {
@@ -59,8 +60,9 @@ const StoreContext = createContext<StoreContextType | undefined>(undefined);
 export const StoreProvider = ({ children }: { children: ReactNode }) => {
   const { user } = usePrivy();
   const { toast } = useToast();
-  const { getStoreItems, purchaseStoreItem, purchaseLockerItem } = useSupabase();
+  const { getStoreItems, purchaseStoreItem, purchaseLockerItem, getUserProfile, loginOrCreateUser } = useSupabase();
   const { profile } = useProfile()
+  const { fetchObjectiveUserData } = useRank();
   const [storeItems, setStoreItems] = useState<StoreItem[]>([]);
   const [userBalance, setUserBalance] = useState<UserBalance>({ coins: 0, xp: 0 });
   const [userId, setUserId] = useState("");
@@ -163,6 +165,9 @@ export const StoreProvider = ({ children }: { children: ReactNode }) => {
           title: "Purchase successful! 🎉",
           description: `You purchased ${itemName} for ${price} coins. Head over to your Locker to see it!`,
         });
+        
+        // Refresh objectives to show updated progress
+        fetchObjectiveUserData();
         return true;
       } else {
         throw new Error(response.error || 'Purchase failed');
@@ -218,6 +223,9 @@ export const StoreProvider = ({ children }: { children: ReactNode }) => {
           title: "Purchase successful! 🎉",
           description: `You purchased ${itemName} for ${price} coins. Head over to your Locker to see it!`,
         });
+
+        // Refresh objectives to show updated progress
+        fetchObjectiveUserData();
         return true;
       } else {
         throw new Error(response.error || 'Purchase failed');

@@ -657,7 +657,7 @@ export function useSupabase() {
                 .eq('nftAddress', contractId)
                 .eq('item_id', itemId)
                 .eq('user_id', internalId)
-                .single();
+                .maybeSingle();
 
             if (error) throw error;
 
