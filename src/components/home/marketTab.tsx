@@ -223,7 +223,7 @@ const MarketTab = () => {
         setBuyDialogOpen(true);
     };
    
-    const filterMarketplaceByCategory = (players: any[], category: string) => category === "all" ? players : players.filter(player => player.itemType === category);
+    const filterMarketplaceByCategory = (players: any[], category: string) => category === "all" ? players : players.filter(player => player.category === category);
     const filterMarketplaceByRarity = (players: any[], rarity: string) => {
         if (rarity === "all") return players;
         if (rarity === "green") return players.filter(player => player.price <= 5000);

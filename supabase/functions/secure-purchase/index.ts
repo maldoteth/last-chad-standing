@@ -31,29 +31,47 @@ serve(async (req) => {
 
         // Helper to check for existing objective progress or create it
         const updateObjective = async (uid: string, objType: string) => {
-            const { data: objectives } = await supabaseClient
+            console.log(`Tracking objective type: ${objType} for user: ${uid}`);
+            const { data: objectives, error: objError } = await supabaseClient
                 .from('Objective')
                 .select('*')
                 .eq('type', objType)
                 .eq('isActive', true);
 
-            if (!objectives || objectives.length === 0) return;
+            if (objError) {
+                console.error(`Error fetching objectives for type ${objType}:`, objError);
+                return;
+            }
+
+            if (!objectives || objectives.length === 0) {
+                console.log(`No active objectives found for type: ${objType}`);
+                return;
+            }
 
             for (const obj of objectives) {
-                const { data: progress } = await supabaseClient
+                const { data: progress, error: progError } = await supabaseClient
                     .from('ObjectiveProgress')
                     .select('*')
                     .eq('user_id', uid)
                     .eq('objective_id', obj.id)
                     .maybeSingle();
 
-                if (progress?.completed) continue;
+                if (progError) {
+                    console.error(`Error fetching progress for obj ${obj.id}:`, progError);
+                    continue;
+                }
+
+                if (progress?.completed) {
+                    console.log(`Objective ${obj.id} already completed for user ${uid}`);
+                    continue;
+                }
 
                 const newCount = (progress?.currentCount || 0) + 1;
                 const isNowCompleted = newCount >= obj.targetCount;
 
                 if (!progress) {
-                    await supabaseClient.from('ObjectiveProgress').insert({
+                    console.log(`Creating new progress for objective ${obj.id}`);
+                    const { error: insError } = await supabaseClient.from('ObjectiveProgress').insert({
                         user_id: uid,
                         objective_id: obj.id,
                         currentCount: newCount,
@@ -63,15 +81,19 @@ serve(async (req) => {
                         startDate: new Date().toISOString(),
                         lastUpdated: new Date().toISOString()
                     });
+                    if (insError) console.error("Insert Progress Error:", insError);
                 } else {
-                    await supabaseClient.from('ObjectiveProgress').update({
+                    console.log(`Updating existing progress for objective ${obj.id} to ${newCount}`);
+                    const { error: updError } = await supabaseClient.from('ObjectiveProgress').update({
                         currentCount: newCount,
                         completed: isNowCompleted,
                         lastUpdated: new Date().toISOString()
                     }).eq('id', progress.id);
+                    if (updError) console.error("Update Progress Error:", updError);
                 }
 
                 if (isNowCompleted) {
+                    console.log(`Objective ${obj.id} COMPLETED for user ${uid}`);
                     // Reward XP for completion
                     const { data: userData } = await supabaseClient.from('Users').select('xp').eq('id', uid).single();
                     const newXP = (userData?.xp || 0) + obj.rewardXP;
@@ -80,7 +102,7 @@ serve(async (req) => {
                     // Notification for completion
                     await supabaseClient.from('Notification').insert({
                         user_id: uid,
-                        title: 'Objective Completed!',
+                        title: 'Objective Completed! 🎉',
                         message: `Congrats! You completed "${obj.title}" and earned ${obj.rewardXP} XP!`,
                         type: 'objective_complete',
                         related_type: 'objective',
@@ -154,15 +176,15 @@ serve(async (req) => {
                 token_ids: [tokenId],
             });
 
-            // Track Objectives for Buyer
-            await updateObjective(userId, 'buy');
-
             // Map category to objective types
-            const cat = sellerItem.item?.category?.toLowerCase();
-            if (cat === 'skins' || cat === 'fighters') await updateObjective(userId, 'fighters');
-            if (cat === 'packs') await updateObjective(userId, 'packs');
+            const cat = (sellerItem.item?.category || "").toLowerCase();
+            if (cat === 'skins' || cat === 'fighters') {
+                await updateObjective(userId, 'fighters');
+            } else if (cat === 'packs') {
+                await updateObjective(userId, 'packs');
+            }
 
-            // Track Objectives for Seller
+            // Seller gets sell objective progress
             await updateObjective(sellerItem.user_id, 'sell');
 
         } else {
@@ -192,10 +214,12 @@ serve(async (req) => {
                 }).eq('id', itemId);
 
                 // Track Objectives
-                await updateObjective(userId, 'buy');
-                const cat = storeItem.category?.toLowerCase();
-                if (cat === 'skins' || cat === 'fighters') await updateObjective(userId, 'fighters');
-                if (cat === 'packs') await updateObjective(userId, 'packs');
+                const cat = (storeItem.category || "").toLowerCase();
+                if (cat === 'skins' || cat === 'fighters') {
+                    await updateObjective(userId, 'fighters');
+                } else if (cat === 'packs') {
+                    await updateObjective(userId, 'packs');
+                }
             }
         }
 
@@ -215,9 +239,9 @@ serve(async (req) => {
         // Notification for purchase
         await supabaseClient.from('Notification').insert({
             user_id: userId,
-            title: 'Purchase Successful!',
-            message: `You earned ${purchaseXP} XP from your purchase.`,
-            type: 'xp_increase',
+            title: 'Purchase Successful! 💰',
+            message: `You spent ${priceNum} coins and earned ${purchaseXP} XP.`,
+            type: 'purchase',
             is_read: false
         });
 
