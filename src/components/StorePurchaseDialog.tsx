@@ -186,7 +186,8 @@ const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
   const [salePrice, setSalePrice] = useState<number>(0);
   const [listedQuantity, setListedQuantity] = useState<number>(1);
   const [saleEndDate, setSaleEndDate] = useState<any | null>(null);
-  const isUserPurchased = (item && "status" in item && item.status === "purchased") && profile?.id === item?.user_id
+  const isUserOwned = item && "user_id" in item && item.user_id === profile?.id;
+  const isUserPurchased = isUserOwned || (item && "status" in item && item.status === "purchased" && profile?.id === item?.user_id);
   const fetchBalance = async () => {
     if (item?.nftAddress) {
       try {
@@ -658,25 +659,44 @@ const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
                   {/* Actions */}
                   {authenticated && isUserPurchased && item?.quantity > 0 && (
                     <div>
-                      {item.is_sell_item ? (
-                        <Button 
-                          variant="outline" 
-                          disabled={isLoadingCard} 
-                          onClick={() => handleIsSellItem({ is_sell_item: false })}
-                          className="text-white/70 border-white/10 hover:bg-white/5 hover:text-white"
-                        >
-                          {isLoadingCard && <Spinner color="gray" />} Remove from Marketplace
-                        </Button>
-                      ) : (
-                        <Button 
-                          variant="outline"
-                          disabled={isLoadingCard} 
-                          onClick={() => handleOpenSellModal()}
-                          className="text-white/70 border-white/10 hover:bg-white/5 hover:text-white"
-                        >
-                          {isLoadingCard && <Spinner color="white" />} Sell on Marketplace
-                        </Button>
-                      )}
+                      <div className="flex flex-col gap-2">
+                        {item.is_sell_item ? (
+                          <Button 
+                            variant="outline" 
+                            disabled={isLoadingCard} 
+                            onClick={() => handleIsSellItem({ is_sell_item: false })}
+                            className="text-white/70 border-white/10 hover:bg-white/5 hover:text-white w-full"
+                          >
+                            {isLoadingCard && <Spinner color="gray" />} Remove from Marketplace
+                          </Button>
+                        ) : (
+                          <Button 
+                            variant="outline"
+                            disabled={isLoadingCard} 
+                            onClick={() => handleOpenSellModal()}
+                            className="text-white/70 border-white/10 hover:bg-white/5 hover:text-white w-full"
+                          >
+                            {isLoadingCard && <Spinner color="white" />} Sell on Marketplace
+                          </Button>
+                        )}
+                        
+                        {(item.nftAddress || (item as any)?.nft_address) && (
+                          <Button
+                            variant="link"
+                            className="text-primary hover:text-primary/80 text-xs py-0 h-auto font-medium"
+                            onClick={() => {
+                              const addr = item.nftAddress || (item as any)?.nft_address;
+                              const tid = tokenIds && tokenIds.length > 0 ? tokenIds[0] : null;
+                              const url = tid !== null 
+                                ? `https://basescan.org/token/${addr}?a=${tid}` 
+                                : `https://basescan.org/address/${addr}`;
+                              window.open(url, '_blank');
+                            }}
+                          >
+                            View on BaseScan →
+                          </Button>
+                        )}
+                      </div>
                     </div>
                   )}
 
