@@ -28,7 +28,7 @@ serve(async (req) => {
             apiVersion: "2023-10-16",
         });
 
-        const line_items = cartItems.map((item: any) => ({
+        const line_items = cartItems.map((item: { name: string; price: number; quantity?: number }) => ({
             price_data: {
                 currency: "usd",
                 product_data: {
@@ -52,7 +52,8 @@ serve(async (req) => {
             status: 200,
         });
     } catch (error) {
-        return new Response(JSON.stringify({ error: error.message }), {
+        const errorMessage = error instanceof Error ? error.message : String(error);
+        return new Response(JSON.stringify({ error: errorMessage }), {
             headers: { ...corsHeaders, "Content-Type": "application/json" },
             status: 500,
         });
