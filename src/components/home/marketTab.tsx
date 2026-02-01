@@ -130,15 +130,25 @@ const PlayerListItem = ({
                     </div>
 
                     {/* Marketplace Buttons */}
-                    <MarketplacePrices
-                        player={player}
-                        getMarketplacePrices={getMarketplacePrices}
-                        isMobile={isMobile}
-                        size={size}
-                        profile={profile}
-                        onSellClick={() => onSellClick(player)}
-                        onBuyClick={() => onBuyClick(player)}
-                    />
+                    <div className="flex flex-col items-end">
+                        <MarketplacePrices
+                            player={player}
+                            getMarketplacePrices={getMarketplacePrices}
+                            isMobile={isMobile}
+                            size={size}
+                            profile={profile}
+                            onSellClick={() => onSellClick(player)}
+                            onBuyClick={() => onBuyClick(player)}
+                        />
+                        {player.bids && player.bids[0]?.count > 0 && (
+                            <div className="flex items-center gap-1 mt-1 px-2 py-0.5 rounded-full bg-green-500/10 border border-green-500/20">
+                                <TrendingUp className="w-2.5 h-2.5 text-green-400" />
+                                <span className="text-[9px] font-bold text-green-400 uppercase tracking-tighter">
+                                    {player.bids[0].count} ACTIVE {player.bids[0].count === 1 ? 'BID' : 'BIDS'}
+                                </span>
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
         </div>

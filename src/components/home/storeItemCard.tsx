@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { GlowCard } from "@/components/ui/spotlight-card";
 import { getRarityDisplayName, getRarityColor, } from "@/lib/utils";
+import { TrendingUp } from "lucide-react";
 
 const StoreItemCard = ({
   item,
@@ -23,6 +24,14 @@ const StoreItemCard = ({
             alt={item.name}
             className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
           />
+          {item.bids && item.bids[0]?.count > 0 && (
+            <div className="absolute top-2 right-2 z-10">
+              <Badge className="bg-green-500/90 text-white border-none text-[8px] h-4 px-1.5 flex items-center gap-1 shadow-lg">
+                <TrendingUp className="w-2.5 h-2.5" />
+                {item.bids[0].count}
+              </Badge>
+            </div>
+          )}
         </div>
 
         <div className="mb-1 md:mb-2 flex items-center justify-between gap-1">

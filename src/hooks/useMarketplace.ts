@@ -34,6 +34,7 @@ export type MarketplaceListing = {
   total_purchased_locker_item: number
   is_sell_item: boolean
   store_id: string
+  bids?: { count: number }[]
 }
 
 export interface MarketplacePrices {

@@ -11,6 +11,7 @@ type Notification = Tables['Notification']['Row'];
 type Level = Tables['Level']['Row'];
 type Objective = Tables['Objective']['Row'];
 type ObjectiveProgress = Tables['ObjectiveProgress']['Row'];
+type NftBid = Tables['nft_bids']['Row'];
 
 export function useSupabase() {
     const { toast } = useToast();
@@ -140,7 +141,8 @@ export function useSupabase() {
                 .from('Locker')
                 .select(`
           *,
-          item:store_items(*)
+          item:store_items(*),
+          bids:nft_bids(count)
         `, { count: 'exact' })
                 .eq('user_id', internalId)
                 .order('created_at', { ascending: false })
@@ -472,8 +474,9 @@ export function useSupabase() {
                 .select(`
                     *,
                     item:store_items(*),
-                    user:Users(name, profileImage)
-                `)
+                    user:Users(name, profileImage),
+                    bids:nft_bids(count)
+                `, { count: 'exact' })
                 .eq('listed_for_sale', true);
 
             if (type === 'up') {
@@ -741,6 +744,100 @@ export function useSupabase() {
         }
     };
 
+    // ==================== BIDDING OPERATIONS ====================
+
+    const getBidsForItem = async (itemId: string) => {
+        const { data, error } = await supabase
+            .from('nft_bids')
+            .select(`
+                *,
+                bidder:Users(name, profileImage)
+            `)
+            .eq('item_id', itemId)
+            .eq('status', 'active')
+            .order('bid_amount', { ascending: false });
+
+        if (error) return { success: false, error: error.message };
+        return { success: true, data };
+    };
+
+    const getMyBids = async (userId: string) => {
+        const internalId = await ensureSupabaseId(userId);
+        const { data, error } = await supabase
+            .from('nft_bids')
+            .select(`
+                *,
+                item:store_items(*)
+            `)
+            .eq('bidder_id', internalId)
+            .order('created_at', { ascending: false });
+
+        if (error) return { success: false, error: error.message };
+        return { success: true, data };
+    };
+
+    const getHighestBidForLocker = async (lockerId: string) => {
+        const { data, error } = await supabase
+            .from('nft_bids')
+            .select(`
+                *,
+                bidder:Users(name)
+            `)
+            .eq('locker_id', lockerId)
+            .eq('status', 'active')
+            .order('bid_amount', { ascending: false })
+            .limit(1)
+            .maybeSingle();
+
+        if (error) return { success: false, error: error.message };
+        return { success: true, data };
+    };
+
+    const placeBid = async (params: {
+        bidderId: string;
+        itemId: string;
+        lockerId: string;
+        bidAmount: number;
+        expiresInDays?: number;
+    }) => {
+        try {
+            const internalId = await ensureSupabaseId(params.bidderId);
+            const { data, error } = await supabase.functions.invoke('place-bid', {
+                body: { ...params, bidderId: internalId }
+            });
+            if (error) throw error;
+            return data;
+        } catch (error: any) {
+            return { success: false, error: error.message };
+        }
+    };
+
+    const acceptBid = async (bidId: string, sellerId: string) => {
+        try {
+            const internalId = await ensureSupabaseId(sellerId);
+            const { data, error } = await supabase.functions.invoke('accept-bid', {
+                body: { bidId, sellerId: internalId }
+            });
+            if (error) throw error;
+            return data;
+        } catch (error: any) {
+            return { success: false, error: error.message };
+        }
+    };
+
+    const cancelBid = async (bidId: string, userId: string) => {
+        try {
+            const internalId = await ensureSupabaseId(userId);
+            const { data, error } = await supabase.functions.invoke('cancel-bid', {
+                body: { bidId, userId: internalId }
+            });
+            if (error) throw error;
+            return data;
+        } catch (error: any) {
+            return { success: false, error: error.message };
+        }
+    };
+
     return {
         // Store Items
         getStoreItems,
@@ -786,6 +883,15 @@ export function useSupabase() {
         // Edge Functions
         generateNFTMetadata,
         loginAdmin,
+
+        // Bidding
+        getBidsForItem,
+        getMyBids,
+        getHighestBidForLocker,
+        placeBid,
+        acceptBid,
+        cancelBid,
+
         supabase,
     };
 }

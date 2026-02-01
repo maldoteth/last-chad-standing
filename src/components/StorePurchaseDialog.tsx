@@ -26,6 +26,9 @@ import { CONTRACT_ABI, erc721Abi } from "@/utils/helpers";
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker"; // you can use any date picker
 import { useProfile } from "@/context/profileContext";
+import BidDialog from "./BidDialog";
+import BidListPanel from "./BidListPanel";
+import { useBids } from "@/hooks/useBids";
 
 interface StoreItem {
   id: string;
@@ -180,6 +183,9 @@ const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
   const { profile } = useProfile()
   const { sendTransaction } = useSendTransaction();
   const [isImageExpanded, setIsImageExpanded] = useState(false);
+  const [isBidDialogOpen, setIsBidDialogOpen] = useState(false);
+  const [highestBid, setHighestBid] = useState<any>(null);
+  const { getHighestBidForLocker } = useBids();
   // 👇 Sell Modal state
   const [sellModalOpen, setSellModalOpen] = useState(false);
   const [tokenIds, setTokenIds] = useState<any[]>();
@@ -222,7 +228,12 @@ const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
   };
   useEffect(() => {
     fetchToken();
-  }, [item]);
+    if (isOpen && isLockerItem && item?.id) {
+       getHighestBidForLocker(item.id).then(res => {
+         if (res.success) setHighestBid(res.data);
+       });
+    }
+  }, [item, isOpen]);
 
   // Reset image expanded state when dialog closes
   useEffect(() => {
@@ -654,6 +665,24 @@ const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
                         )}
                       </div>
                     )}
+
+                    {highestBid && (
+                      <div className="mt-2 text-center">
+                        <p className="text-green-400/80 text-[10px] uppercase tracking-widest font-bold">
+                          Highest Bid: {formatNumberWithAbbreviation(highestBid.bid_amount)}
+                        </p>
+                      </div>
+                    )}
+
+                    {isLockerItem && !isUserPurchased && (
+                      <Button 
+                        variant="outline"
+                        onClick={() => setIsBidDialogOpen(true)}
+                        className="mt-4 w-full py-4 rounded-2xl bg-white/5 border-white/10 hover:bg-white/10 text-white font-semibold transition-all"
+                      >
+                        Place Bid
+                      </Button>
+                    )}
                   </div>
 
                   {/* Actions */}
@@ -700,12 +729,30 @@ const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
                     </div>
                   )}
 
+                  {isUserOwned && (item as any).listed_for_sale && (
+                    <BidListPanel 
+                      lockerId={item.id} 
+                      itemId={(item as any).item_id} 
+                      onBidAccepted={() => {
+                        onClose();
+                      }} 
+                    />
+                  )}
+
                 </div>
               </div>
             </div>
           </ScrollArea>
         </DrawerContent>
       </Drawer>
+
+      {item && (
+        <BidDialog 
+          isOpen={isBidDialogOpen} 
+          onClose={() => setIsBidDialogOpen(false)} 
+          item={item} 
+        />
+      )}
       {sellModalOpen && (
         <Drawer open={sellModalOpen} onOpenChange={() => setSellModalOpen(false)}>
           <DrawerContent className="bg-black/30 backdrop-blur-xl border border-white/20 max-h-[60vh] shadow-2xl p-6">
