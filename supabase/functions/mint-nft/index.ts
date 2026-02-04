@@ -8,6 +8,7 @@ const corsHeaders = {
 
 const ABI = [
     "function mint(uint256 quantity) public",
+    "function mintTo(address to, uint256 quantity) public",
     "function totalMinted() public view returns (uint256)",
 ];
 
@@ -37,8 +38,8 @@ serve(async (req) => {
 
         console.log(`🚀 Minting NFT on ${NFT_CONTRACT} for ${RECIPIENT}...`);
 
-        // Execute Mint
-        const tx = await contract.mint(1); // Default quantity 1
+        // Execute Mint to recipient's wallet
+        const tx = await contract.mintTo(RECIPIENT, 1);
         const receipt = await tx.wait();
 
         console.log("✅ Mint Successful:", receipt.hash);
