@@ -33,23 +33,41 @@ serve(async (req) => {
         const wallet = new ethers.Wallet(PRIVATE_KEY, provider);
         const contract = new ethers.Contract(NFT_CONTRACT, ABI, wallet);
 
+        const adminAddress = wallet.address;
+        const balance = await provider.getBalance(adminAddress);
+
         console.log(`🚀 Transferring NFT ${TOKEN_ID} on ${NFT_CONTRACT} to ${RECIPIENT}...`);
+        console.log(`Admin Wallet: ${adminAddress}, Balance: ${ethers.formatEther(balance)} ETH`);
 
-        // The system wallet must be the owner or approved for this token
-        // In this project, the system wallet usually holds the NFTs for marketplace trades 
-        // or handles the transfer if it has operator permissions.
-        const fromAddress = wallet.address;
+        try {
+            // The system wallet must be the owner or approved for this token
+            const fromAddress = wallet.address;
 
-        // Execute Transfer
-        const tx = await contract.safeTransferFrom(fromAddress, RECIPIENT, TOKEN_ID);
-        const receipt = await tx.wait();
+            // Execute Transfer
+            const tx = await contract.safeTransferFrom(fromAddress, RECIPIENT, TOKEN_ID);
+            const receipt = await tx.wait();
 
-        console.log("✅ Transfer Successful:", receipt.hash);
+            console.log("✅ Transfer Successful:", receipt.hash);
 
-        return new Response(JSON.stringify({ txHash: { hash: receipt.hash } }), {
-            headers: { ...corsHeaders, "Content-Type": "application/json" },
-            status: 200,
-        });
+            return new Response(JSON.stringify({ txHash: { hash: receipt.hash } }), {
+                headers: { ...corsHeaders, "Content-Type": "application/json" },
+                status: 200,
+            });
+        } catch (error: any) {
+            if (error.code === 'INSUFFICIENT_FUNDS') {
+                const errMessage = `Admin wallet (${adminAddress}) has insufficient funds for gas. Balance: ${ethers.formatEther(balance)} ETH. Please fund this wallet on Base Mainnet.`;
+                console.error("❌ " + errMessage);
+                return new Response(JSON.stringify({
+                    error: "INSUFFICIENT_FUNDS",
+                    message: errMessage,
+                    adminAddress
+                }), {
+                    headers: { ...corsHeaders, "Content-Type": "application/json" },
+                    status: 500,
+                });
+            }
+            throw error;
+        }
     } catch (error) {
         const errorMessage = error instanceof Error ? error.message : String(error);
         console.error("❌ Transfer Error:", errorMessage);
