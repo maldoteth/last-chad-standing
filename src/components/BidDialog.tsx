@@ -22,12 +22,13 @@ const BidDialog: React.FC<BidDialogProps> = ({ isOpen, onClose, item }) => {
     const { placeBid, getBidsForItem, getHighestBidForLocker, loading: bidLoading } = useBids();
     const { userBalance } = useStore();
     
-    const [bidAmount, setBidAmount] = useState<number>(0);
+    const [bidAmount, setBidAmount] = useState<string>("");
     const [highestBid, setHighestBid] = useState<any>(null);
     const [bidHistory, setBidHistory] = useState<any[]>([]);
     const [loadingData, setLoadingData] = useState(false);
+    const [hasInitialized, setHasInitialized] = useState(false);
 
-    const fetchData = useCallback(async () => {
+    const fetchData = useCallback(async (isInitial = false) => {
         if (!item?.id || !item?.item_id) return;
         setLoadingData(true);
         try {
@@ -40,28 +41,35 @@ const BidDialog: React.FC<BidDialogProps> = ({ isOpen, onClose, item }) => {
             if (historyResult.success) setBidHistory(historyResult.data || []);
             
             // Set initial bid amount to highest bid + 1 or listing price
-            const currentHighest = hbResult.data?.bid_amount || 0;
-            const minBid = Math.max(currentHighest + 1, item.sale_price || item.price || 0);
-            setBidAmount(minBid);
+            // ONLY if it's the initial load or we haven't initialized yet
+            if (isInitial || !hasInitialized) {
+                const currentHighest = hbResult.data?.bid_amount || 0;
+                const minBidValue = Math.max(currentHighest + 1, item.sale_price || item.price || 0);
+                setBidAmount(minBidValue.toString());
+                setHasInitialized(true);
+            }
             
         } catch (error) {
             console.error("Error fetching bid data:", error);
         } finally {
             setLoadingData(false);
         }
-    }, [item, getHighestBidForLocker, getBidsForItem]);
+    }, [item, getHighestBidForLocker, getBidsForItem, hasInitialized]);
 
     useEffect(() => {
         if (isOpen) {
-            fetchData();
+            fetchData(true);
+        } else {
+            setHasInitialized(false);
         }
-    }, [isOpen, fetchData]);
+    }, [isOpen]); // Only trigger on open/close
 
     const handlePlaceBid = async () => {
+        const amount = parseInt(bidAmount) || 0;
         const success = await placeBid({
             itemId: item.item_id,
             lockerId: item.id,
-            bidAmount: bidAmount
+            bidAmount: amount
         });
 
         if (success) {
@@ -72,11 +80,12 @@ const BidDialog: React.FC<BidDialogProps> = ({ isOpen, onClose, item }) => {
     if (!item) return null;
 
     const minNextBid = highestBid ? highestBid.bid_amount + 1 : (item.sale_price || item.price || 1);
-    const isAmountValid = bidAmount >= minNextBid && bidAmount <= userBalance.coins;
+    const currentAmount = parseInt(bidAmount) || 0;
+    const isAmountValid = currentAmount >= minNextBid && currentAmount <= userBalance.coins;
 
     return (
         <Drawer open={isOpen} onOpenChange={onClose}>
-            <DrawerContent className="bg-black/80 backdrop-blur-2xl border-t border-white/10 max-h-[90vh]">
+            <DrawerContent className="bg-black/80 backdrop-blur-2xl border-t border-white/10 max-h-[90vh] z-[100]">
                 <DrawerHeader className="relative py-4 border-b border-white/5">
                     <DrawerClose asChild>
                         <Button
@@ -149,12 +158,18 @@ const BidDialog: React.FC<BidDialogProps> = ({ isOpen, onClose, item }) => {
                                     <label className="text-white/40 text-xs uppercase tracking-wider ml-1 mb-2 block">Your Bid Amount</label>
                                     <div className="relative flex items-center">
                                         <input
-                                            type="number"
+                                            type="text"
+                                            inputMode="numeric"
                                             value={bidAmount}
-                                            onChange={(e) => setBidAmount(parseInt(e.target.value) || 0)}
+                                            onChange={(e) => {
+                                                const val = e.target.value;
+                                                if (val === "" || /^\d+$/.test(val)) {
+                                                    setBidAmount(val);
+                                                }
+                                            }}
+                                            onFocus={(e) => e.target.select()}
                                             className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-2xl font-bold text-white focus:outline-none focus:border-primary/50 transition-colors"
                                             placeholder="0"
-                                            min={minNextBid}
                                         />
                                         <div className="absolute right-6 flex items-center gap-2">
                                             <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS" className="w-6 h-6" />
@@ -162,7 +177,7 @@ const BidDialog: React.FC<BidDialogProps> = ({ isOpen, onClose, item }) => {
                                     </div>
                                     <div className="flex justify-between mt-2 px-1">
                                         <p className="text-white/30 text-xs">Minimum bid: {formatNumberWithAbbreviation(minNextBid)}</p>
-                                        {bidAmount > userBalance.coins && (
+                                        {currentAmount > userBalance.coins && (
                                             <p className="text-red-400/80 text-xs">Insufficient balance</p>
                                         )}
                                     </div>
