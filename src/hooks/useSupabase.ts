@@ -751,7 +751,7 @@ export function useSupabase() {
             .from('nft_bids')
             .select(`
                 *,
-                bidder:Users(name, profileImage)
+                bidder:Users!nft_bids_bidder_id_fkey(name, profileImage)
             `)
             .eq('item_id', itemId)
             .eq('status', 'active')
@@ -781,7 +781,7 @@ export function useSupabase() {
             .from('nft_bids')
             .select(`
                 *,
-                bidder:Users(name)
+                bidder:Users!nft_bids_bidder_id_fkey(name)
             `)
             .eq('locker_id', lockerId)
             .eq('status', 'active')
