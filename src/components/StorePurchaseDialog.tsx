@@ -366,17 +366,32 @@ const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
       
       let errorMessage = "Something went wrong. Please try again.";
       
-      if (error?.response?.data?.error) {
-        const backendError = error.response.data.error;
-        // Check if it's the "Insufficient gas credits" stringified error
-        if (typeof backendError === 'string' && backendError.includes("insufficient_funds")) {
-          errorMessage = "Server error: Insufficient gas credits for minting. Please contact admin.";
-        } else if (error.response.data.message) {
-          errorMessage = error.response.data.message;
+      // Handle Supabase Edge Function errors
+      if (error.context) {
+        try {
+          const body = await error.context.json();
+          if (body.message) {
+            errorMessage = body.message;
+          } else if (body.error) {
+            errorMessage = body.error;
+          }
+        } catch (e) {
+          errorMessage = error.message || "Edge Function error";
         }
       } else if (error?.message) {
         errorMessage = error.message;
       }
+
+      // Special case for common variations of insufficient funds
+      if (errorMessage.toLowerCase().includes("insufficient funds") || 
+          errorMessage.toLowerCase().includes("insufficient_funds")) {
+        if (errorMessage.includes("Admin wallet")) {
+          // This is our specific message from the Edge Function
+        } else {
+          errorMessage = "Server error: The minting wallet has insufficient gas funds. Please contact admin.";
+        }
+      }
+
 
       toast({
         title: "Purchase Failed",
