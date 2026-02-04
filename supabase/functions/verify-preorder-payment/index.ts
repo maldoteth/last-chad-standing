@@ -22,7 +22,7 @@ serve(async (req) => {
     logStep("Function started");
 
     const body = await req.json();
-    const { sessionId, type, coins, txHash, depositAddress, exchangeRate, cryptoAmount, amount } = body;
+    const { sessionId, type, coins, txHash, depositAddress, exchangeRate, cryptoAmount, amount, userId: bodyUserId } = body;
 
     // Create Supabase service client
     const supabaseService = createClient(
@@ -33,34 +33,61 @@ serve(async (req) => {
 
     // --- CRYPTO COIN PURCHASE FLOW ---
     if (type === 'crypto_coin_purchase') {
-      logStep("Processing crypto coin purchase", { coins, txHash, amount });
+      logStep("Processing crypto coin purchase", { coins, txHash, amount, bodyUserId });
 
       if (!txHash || !coins) {
         throw new Error("Transaction hash and coins are required for crypto purchases");
       }
 
-      // Get user from JWT auth header
-      const authHeader = req.headers.get("Authorization");
-      if (!authHeader) {
-        throw new Error("Authorization header is required");
-      }
+      let userId = bodyUserId;
 
-      const supabaseAuth = createClient(
-        Deno.env.get("SUPABASE_URL") ?? "",
-        Deno.env.get("SUPABASE_ANON_KEY") ?? "",
-        {
-          global: { headers: { Authorization: authHeader } },
-          auth: { persistSession: false }
+      if (!userId) {
+        logStep("No userId in body, attempting to get from Auth header");
+        // Get user from JWT auth header
+        const authHeader = req.headers.get("Authorization");
+        if (!authHeader) {
+          throw new Error("Authorization header or userId is required");
         }
-      );
 
-      const { data: { user }, error: authError } = await supabaseAuth.auth.getUser();
-      if (authError || !user) {
-        throw new Error("User not authenticated");
+        const supabaseAuth = createClient(
+          Deno.env.get("SUPABASE_URL") ?? "",
+          Deno.env.get("SUPABASE_ANON_KEY") ?? "",
+          {
+            global: { headers: { Authorization: authHeader } },
+            auth: { persistSession: false }
+          }
+        );
+
+        const { data: { user }, error: authError } = await supabaseAuth.auth.getUser();
+        if (authError || !user) {
+          throw new Error("User not authenticated and no userId provided");
+        }
+        userId = user.id;
       }
 
-      const userId = user.id;
-      logStep("Authenticated user", { userId });
+      // Logic to ensure we have the internal Supabase UUID if a Privy ID was passed
+      const isUUID = (id: string) => /^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(id);
+
+      if (!isUUID(userId)) {
+        logStep("userId is not a UUID, attempting to lookup by privy_id", { userId });
+        const { data: userByPrivy, error: privyError } = await supabaseService
+          .from('Users')
+          .select('id')
+          .eq('privy_id', userId)
+          .maybeSingle();
+
+        if (privyError) {
+          logStep("Privy lookup error", { error: privyError.message });
+        } else if (userByPrivy) {
+          logStep("Resolved privy_id to user_id", { privyId: userId, userId: userByPrivy.id });
+          userId = userByPrivy.id;
+        } else {
+          logStep("Could not resolve privy_id", { userId });
+          throw new Error(`Could not find user with ID: ${userId}`);
+        }
+      }
+
+      logStep("Processing for resolved user_id", { userId });
 
       // Check for duplicate transaction
       const { data: existingTx } = await supabaseService
@@ -79,6 +106,7 @@ serve(async (req) => {
         .select('coins')
         .eq('id', userId)
         .single();
+
 
       if (userError) {
         logStep("User lookup error", { error: userError.message });
