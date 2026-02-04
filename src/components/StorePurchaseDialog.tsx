@@ -507,6 +507,9 @@ const StorePurchaseDialog: React.FC<StorePurchaseDialogProps> = ({
               </Button>
             </DrawerClose>
             <DrawerTitle className="sr-only">Purchase Item</DrawerTitle>
+            <div className="sr-only">
+              Details and purchase options for {item.name}
+            </div>
           </DrawerHeader>
 
           <ScrollArea className="max-h-[calc(85vh-60px)] overflow-y-auto">

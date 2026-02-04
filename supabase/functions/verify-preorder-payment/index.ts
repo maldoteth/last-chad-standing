@@ -82,8 +82,46 @@ serve(async (req) => {
           logStep("Resolved privy_id to user_id", { privyId: userId, userId: userByPrivy.id });
           userId = userByPrivy.id;
         } else {
-          logStep("Could not resolve privy_id", { userId });
-          throw new Error(`Could not find user with ID: ${userId}`);
+          logStep("User not found, auto-creating game profile", { privyId: userId });
+
+          // Auto-generate a name and ref_code
+          const randomSuffix = Math.floor(1000 + Math.random() * 9000);
+          const defaultName = `Player_${randomSuffix}`;
+          const refCode = Math.random().toString(36).substring(2, 10).toUpperCase();
+
+          // Create the user
+          const { data: newUser, error: createError } = await supabaseService
+            .from('Users')
+            .insert({
+              privy_id: userId,
+              name: defaultName,
+              ref_code: refCode,
+              coins: 0,
+              xp: 0
+            })
+            .select('id')
+            .single();
+
+          if (createError) {
+            logStep("User creation error", { error: createError.message });
+            throw new Error(`Failed to create user record: ${createError.message}`);
+          }
+
+          logStep("Successfully created new user record", { userId: newUser.id });
+          userId = newUser.id;
+
+          // Create performance record for the new user
+          const { error: perfError } = await supabaseService
+            .from('Performances')
+            .insert({
+              user_id: userId,
+              total_XP: 0,
+              level: 1
+            });
+
+          if (perfError) {
+            logStep("Warning: Performance record creation failed", { error: perfError.message });
+          }
         }
       }
 
