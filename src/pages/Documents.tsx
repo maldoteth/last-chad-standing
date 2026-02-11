@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import { useToast } from '@/hooks/use-toast';
 import { ArrowLeft, UserCheck, Gamepad2, DollarSign, ExternalLink, Search, Mail, Download, Palette, Scale } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -12,6 +13,7 @@ import TokenReleaseChart from '@/components/TokenReleaseChart';
 import DocumentSearch from '@/components/DocumentSearch';
 import { formatNumberWithAbbreviation } from '@/lib/utils';
 const Documents = () => {
+  const { toast } = useToast();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
 
@@ -1129,6 +1131,21 @@ This means fighters truly own their digital assets and can trade them freely wit
                                       </Label>
                                       <p className="text-xs text-gray-600">
                                         For users who staked $DHB before November 16th, 2024
+                                      </p>
+                                    </div>
+                                  </div>
+                                  <div className="flex items-center space-x-3">
+                                    <Checkbox id="time-traveler-bonus" onCheckedChange={(checked) => {
+                                      if (checked === true) {
+                                        toast({ title: "Time Traveler Bonus ⏳", description: "More details coming soon!" });
+                                      }
+                                    }} />
+                                    <div className="grid gap-1.5 leading-none">
+                                      <Label htmlFor="time-traveler-bonus" className="text-sm font-medium text-gray-900 cursor-pointer">
+                                        Time Traveler Bonus
+                                      </Label>
+                                      <p className="text-xs text-gray-600">
+                                        Stay tuned for more details
                                       </p>
                                     </div>
                                   </div>
