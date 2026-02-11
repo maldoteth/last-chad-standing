@@ -82,7 +82,7 @@ serve(async (req) => {
             await supabaseClient.from('Notification').insert({
                 user_id: highestBid.bidder_id,
                 title: 'You have been outbid! 📉',
-                message: `Someone placed a higher bid on "${locker.item?.name}". Your ${highestBid.bid_amount} coins have been refunded.`,
+                message: `Someone placed a higher bid on "${(locker.item as any)?.[0]?.name ?? 'this item'}". Your ${highestBid.bid_amount} coins have been refunded.`,
                 type: 'bid_outbid',
                 related_id: itemId,
                 related_type: 'store_item',
@@ -109,7 +109,7 @@ serve(async (req) => {
         await supabaseClient.from('Notification').insert({
             user_id: locker.user_id,
             title: 'New Bid Received! 🎟️',
-            message: `You received a bid of ${amount} coins for "${locker.item?.name}".`,
+            message: `You received a bid of ${amount} coins for "${(locker.item as any)?.[0]?.name ?? 'this item'}".`,
             type: 'bid_placed',
             related_id: itemId,
             related_type: 'store_item',
