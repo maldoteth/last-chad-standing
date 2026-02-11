@@ -1112,7 +1112,7 @@ This means fighters truly own their digital assets and can trade them freely wit
                               </CardHeader>
                               <CardContent className="space-y-4">
                                 <div className="space-y-3">
-                                  <div className="flex items-center space-x-3">
+                                  <div className="flex items-start space-x-3">
                                     <Checkbox id="og-bonus" checked={ogBonus} onCheckedChange={checked => setOgBonus(checked === true)} />
                                     <div className="grid gap-1.5 leading-none">
                                       <Label htmlFor="og-bonus" className="text-sm font-medium text-gray-900 cursor-pointer">
@@ -1123,7 +1123,7 @@ This means fighters truly own their digital assets and can trade them freely wit
                                        </p>
                                     </div>
                                   </div>
-                                  <div className="flex items-center space-x-3">
+                                  <div className="flex items-start space-x-3">
                                     <Checkbox id="veteran-bonus" checked={veteranBonus} onCheckedChange={checked => setVeteranBonus(checked === true)} />
                                     <div className="grid gap-1.5 leading-none">
                                       <Label htmlFor="veteran-bonus" className="text-sm font-medium text-gray-900 cursor-pointer">
@@ -1134,7 +1134,7 @@ This means fighters truly own their digital assets and can trade them freely wit
                                       </p>
                                     </div>
                                   </div>
-                                  <div className="flex items-center space-x-3">
+                                  <div className="flex items-start space-x-3">
                                     <Checkbox id="time-traveler-bonus" onCheckedChange={(checked) => {
                                       if (checked === true) {
                                         toast({ title: "Time Traveler Bonus ⏳", description: "More details coming soon!" });
