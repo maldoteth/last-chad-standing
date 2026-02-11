@@ -1145,7 +1145,7 @@ This means fighters truly own their digital assets and can trade them freely wit
                                         Time Traveler Bonus
                                       </Label>
                                       <p className="text-xs text-gray-600">
-                                        Stay tuned for more details
+                                        For those that purchased between November 2021 and February 2022
                                       </p>
                                     </div>
                                   </div>
