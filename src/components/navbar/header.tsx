@@ -16,6 +16,7 @@ import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerTrigger, Drawer
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogDescription } from "@/components/ui/dialog";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { GlowButton } from "@/components/ui/spotlight-card";
 import { Bell, Medal, LogOut, X, Edit3, Check, Copy, CreditCard, Upload, History } from "lucide-react";
 import TransactionHistory from "../TransactionHistory";
 import { tabItems } from "@/lib/data";
@@ -588,9 +589,9 @@ const Header = () => {
                         {accessCodeError && (
                             <p className="text-destructive text-sm text-center">{accessCodeError}</p>
                         )}
-                        <Button type="submit" className="w-full" disabled={!accessCode.trim()}>
+                        <GlowButton type="submit" disabled={!accessCode.trim()}>
                             Submit
-                        </Button>
+                        </GlowButton>
                     </form>
                 </DialogContent>
             </Dialog>
