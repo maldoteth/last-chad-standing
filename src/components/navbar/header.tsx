@@ -471,7 +471,7 @@ const Header = () => {
                         <DrawerTitle className="text-center text-white">Rankings</DrawerTitle>
                     </DrawerHeader>
                     <div className="px-4 pb-6 overflow-y-auto">
-                        <p className="text-sm text-white/70 text-center pb-4">Weekly prize pool: $0</p>
+                        
                         <div className="space-y-2">
                             {
                                 rankingData?.map(player => <div key={player?.id} className="flex items-center space-x-3 p-3 rounded-lg bg-white/5 backdrop-blur-sm border border-white/10">
