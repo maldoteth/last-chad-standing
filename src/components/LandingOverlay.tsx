@@ -33,7 +33,7 @@ const LandingOverlay = () => {
         playsInline
         className="absolute inset-0 w-full h-full object-cover pointer-events-none"
       >
-        <source src="/videos/LCS_TEASER_1.mp4" type="video/mp4" />
+        <source src="/videos/landing-overlay.mp4" type="video/mp4" />
       </video>
 
       {/* Gradient fade at bottom for readability */}
