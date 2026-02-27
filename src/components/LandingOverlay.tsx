@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Button } from '@/components/ui/button';
 import SocialLinks from '@/components/SocialLinks';
 
 const STORAGE_KEY = 'lcs_landing_seen';
@@ -22,14 +21,17 @@ const LandingOverlay = () => {
   if (!visible) return null;
 
   return (
-    <div className="fixed inset-0 z-[100] flex flex-col items-center justify-end bg-black">
+    <div
+      className="fixed inset-0 z-[100] flex flex-col items-center justify-end bg-black cursor-pointer"
+      onClick={handleEnter}
+    >
       {/* Video Background */}
       <video
         autoPlay
         loop
         muted
         playsInline
-        className="absolute inset-0 w-full h-full object-cover"
+        className="absolute inset-0 w-full h-full object-cover pointer-events-none"
       >
         <source src="/videos/LCS_TEASER_1.mp4" type="video/mp4" />
       </video>
@@ -38,15 +40,9 @@ const LandingOverlay = () => {
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
 
       {/* Bottom CTAs */}
-      <div className="relative z-10 flex flex-col items-center gap-6 pb-12 px-4">
+      <div className="relative z-10 flex flex-col items-center gap-4 pb-12 px-4" onClick={(e) => e.stopPropagation()}>
         <SocialLinks />
-        <Button
-          onClick={handleEnter}
-          size="lg"
-          className="px-12 py-6 text-lg font-bold rounded-full bg-white text-black hover:bg-white/90 transition-all hover:scale-105"
-        >
-          Enter App
-        </Button>
+        <p className="text-white/50 text-sm select-none">Tap anywhere to enter</p>
       </div>
     </div>
   );
