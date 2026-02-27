@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Game from "@/pages/Game";
 import Documents from "@/pages/Documents";
 import Blog from "@/pages/Blog";
+import Sale from "@/pages/Sale";
 import PreOrderSuccess from "@/pages/PreOrderSuccess";
 import PreOrderCancel from "@/pages/PreOrderCancel";
 import NotFound from "@/pages/NotFound";
@@ -10,7 +11,6 @@ import { CheckPrivy } from "@/lib/checkPrivy";
 import AdminLogin from "@/components/AdminLogin";
 import { isAdminAuthenticated } from "@/lib/adminAuth";
 import Admin from "@/pages/Admin";
-// import { NFTDeployMintRefactored } from "@/components/NFTDeployMintRefactored";
 
 const UserRoutes = () => {
   const isAdmin = isAdminAuthenticated()
@@ -22,6 +22,7 @@ const UserRoutes = () => {
       {/* <Route path="/nft" element={<NFTDeployMintRefactored />} /> */}
       <Route path="/" element={isAdmin ? <Navigate to={'/admin'} /> :  <Game />} />
       <Route path="/docs" element={<Documents />} />
+      <Route path="/sale" element={<Sale />} />
       <Route path="/blog" element={<Blog />} />
       <Route path="/preorder-success" element={<PreOrderSuccess />} />
       <Route path="/preorder-cancel" element={<PreOrderCancel />} />
