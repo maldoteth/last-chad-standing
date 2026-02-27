@@ -18,7 +18,7 @@ const addPrivyTabletStyles = () => {
   style.id = 'privy-tablet-styles';
   style.textContent = `
     /* Comprehensive Privy modal tablet styles */
-    @media (max-width: 1024px) {
+    @media (max-width: 1280px) {
       /* Target all possible Privy modal selectors */
       [data-privy-modal],
       [data-testid="privy-modal"],

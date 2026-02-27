@@ -156,12 +156,12 @@ const Header = () => {
 
     return (
         <>
-            <header className="bg-black lg:border-b border-border px-4 py-3 lg:px-6 lg:py-4">
+            <header className="bg-black xl:border-b border-border px-4 py-3 xl:px-6 xl:py-4">
                 <div className="flex items-center justify-between">
-                    <img src="/lovable-uploads/fa645b0b-fcbe-46f6-9054-45d5ab0929d6.png" alt="LCS Fist Logo" className="h-10 lg:h-12 cursor-pointer hover:opacity-80 transition-opacity" onClick={() => navigate("/")} />
+                    <img src="/lovable-uploads/fa645b0b-fcbe-46f6-9054-45d5ab0929d6.png" alt="LCS Fist Logo" className="h-10 xl:h-12 cursor-pointer hover:opacity-80 transition-opacity" onClick={() => navigate("/")} />
 
                     {/* Desktop Navigation - hidden on mobile */}
-                    <div className="hidden lg:flex items-center justify-center flex-1">
+                    <div className="hidden xl:flex items-center justify-center flex-1">
                         <nav className="flex items-center justify-center space-x-6 ml-12">
                             {tabItems?.filter(tab => tab.id !== "coins")?.map(tab => <button key={tab.id} onClick={() => handleTabClick(tab.id)} className={`relative flex items-center justify-center px-3 py-2 text-sm font-medium transition-all duration-300 ${activeTab === tab.id ? "text-foreground after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-primary after:scale-x-100 after:transition-transform after:duration-300" : "text-muted-foreground hover:text-foreground after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-primary after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100"}`}>
                                 <tab.icon className="w-8 h-8" />
@@ -171,7 +171,7 @@ const Header = () => {
 
                     <div className="flex items-center space-x-3">
                         {/* Mobile Notifications and Rankings Icons - Only show on mobile/tablet */}
-                        <div className="flex items-center space-x-2 lg:hidden">
+                        <div className="flex items-center space-x-2 xl:hidden">
                             <button onClick={() => setIsRankingsOpen(true)} className="p-2 rounded-lg hover:bg-gray-800/50 transition-colors">
                                 <Medal className="w-6 h-6 text-muted-foreground hover:text-foreground" />
                             </button>
@@ -187,7 +187,7 @@ const Header = () => {
 
                         {authenticated ? isMobile ? <Sheet>
                             <SheetTrigger asChild>
-                                <Avatar className="w-7 h-7 lg:w-8 lg:h-8 cursor-pointer">
+                                <Avatar className="w-7 h-7 xl:w-8 xl:h-8 cursor-pointer">
                                     {profile?.profileImage && <AvatarImage src={profile?.profileImage} />}
                                     <AvatarFallback className="text-lg">
                                         {profile?.avatar_url || getTierIcon(userBalance.xp)}
@@ -271,7 +271,7 @@ const Header = () => {
                             </SheetContent>
                         </Sheet> : <DropdownMenu>
                             <DropdownMenuTrigger asChild>
-                                <Avatar className="w-7 h-7 lg:w-8 lg:h-8 cursor-pointer">
+                                <Avatar className="w-7 h-7 xl:w-8 xl:h-8 cursor-pointer">
                                     {profile?.profileImage && <AvatarImage src={profile?.profileImage} />}
                                     <AvatarFallback className="text-lg">
                                         {profile?.avatar_url || getTierIcon(userBalance.xp)}
