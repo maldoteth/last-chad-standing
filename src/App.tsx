@@ -16,10 +16,10 @@ const App = () => {
   return (
     // <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <LandingOverlay />
       <Toaster />
       <Sonner richColors />
       <BrowserRouter>
+        <LandingOverlay />
         <RankProvider>
           <StoreProvider>
             <MainRoutes />
