@@ -139,10 +139,10 @@ const Game = () => {
     <Header />
 
     {/* Main Content - Mobile First Layout */}
-    <div className="lg:flex lg:min-h-[calc(100vh-80px)] custom-scroll">
+    <div className="xl:flex xl:min-h-[calc(100vh-80px)] custom-scroll">
 
       {/* Mobile: Stack everything vertically */}
-      {isMobile && <div className="lg:hidden overflow-y-auto custom-scroll max-h-[calc(100vh-140px)] pb-2">
+      {isMobile && <div className="xl:hidden overflow-y-auto custom-scroll max-h-[calc(100vh-140px)] pb-2">
         {activeTab === "home" &&
           <HomeTab />}
 
@@ -156,7 +156,7 @@ const Game = () => {
       </div>}
 
       {/* Desktop Layout - Hidden on mobile */}
-      <div className="hidden lg:flex lg:min-h-screen w-full">
+      <div className="hidden xl:flex xl:min-h-screen w-full">
         {/* Left Sidebar - Desktop only */}
         <aside className="w-80 bg-black border-r border-border p-6 space-y-6 overflow-y-auto custom-scroll h-screen">
           <div className="relative">
