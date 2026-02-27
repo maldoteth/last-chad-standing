@@ -34,7 +34,7 @@ const Sale = () => {
     <div className="min-h-screen bg-black flex items-center justify-center px-4 py-12">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <img src="/lovable-uploads/3ca10600-bbad-4fe7-a95c-eee64a8cffb4.png" alt="LCS" className="h-12 mx-auto mb-4" />
+          
           <h1 className="text-2xl font-bold text-white tracking-tight">Private Sale</h1>
           <p className="text-white/50 text-sm mt-1">Express your interest below</p>
         </div>
