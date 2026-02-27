@@ -179,7 +179,7 @@ const MarketStatCard = ({ title, icon: Icon, value, chartData, dataKey }) => (
             <div className="space-y-1 md:space-y-2">
                 <div className="flex items-center space-x-1">
                     {title.includes('Market Value') && <img src="/lovable-uploads/d85650a5-bc8a-4c1d-846e-8a281fe16ed0.png" alt="LCS Coin" className="w-3 h-3 md:w-4 md:h-4" />}
-                    {value && <span className="text-sm md:text-lg lg:text-xl font-bold text-white">{value}</span>}
+                    {value && <span className="text-sm md:text-lg lg:text-xl font-bold text-white select-none">{value}</span>}
                 </div>
                 <div className="h-48">
                     <ResponsiveContainer width="100%" height="100%">
