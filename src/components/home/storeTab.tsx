@@ -272,11 +272,70 @@ const StoreTab = () => {
         </div>
 
         {/* Categories */}
-        <div className="flex flex-col items-center justify-center py-20 text-center space-y-4">
-          <div className="text-4xl">🔒</div>
-          <h2 className="text-xl font-semibold text-white/80">Awaiting Listings</h2>
-          <p className="text-sm text-white/50 max-w-xs">New drops will appear here when available. Stay tuned!</p>
-        </div>
+        {loading ? <div className="grid sm:grid-cols-3 grid-cols-2 gap-3 ">
+          {[1, 2, 3, 4, 5].map((_, index) => (<div key={index} className=" space-y-2">
+            <Skeleton className="h-[200px] " />
+            <Skeleton className="h-[25px]" />
+            <Skeleton className="h-[25px]" />
+          </div>))}
+        </div> :
+          <div className="space-y-4 md:space-y-6">
+            {(selectedCategory === "all" || selectedCategory === "skins") && (
+              <StoreCategoryCard
+                title="Fighters"
+                items={[]}
+                onItemClick={handleStoreItemClick}
+                carouselRef={carouselRefs.fighters}
+                category='skins'
+                desktopMode={!isMobile}
+              />
+            )}
+
+            {(selectedCategory === "all" || selectedCategory === "accessories") && (
+              <StoreCategoryCard
+                title="Accessories"
+                items={[]}
+                onItemClick={handleStoreItemClick}
+                carouselRef={carouselRefs.accessories}
+                desktopMode={!isMobile}
+                category='accessories'
+              />
+            )}
+
+            {(selectedCategory === "all" || selectedCategory === "emotes") && (
+              <StoreCategoryCard
+                title="Emotes"
+                items={[]}
+                onItemClick={handleStoreItemClick}
+                carouselRef={carouselRefs.emotes}
+                desktopMode={!isMobile}
+                category='emotes'
+              />
+            )}
+
+            {(selectedCategory === "all" || selectedCategory === "mobility") && (
+              <StoreCategoryCard
+                title="Mobility"
+                items={[]}
+                onItemClick={handleStoreItemClick}
+                carouselRef={carouselRefs.mobility}
+                desktopMode={!isMobile}
+                category='mobility'
+              />
+            )}
+
+            {(selectedCategory === "all" || selectedCategory === "packs") && (
+              <StoreCategoryCard
+                title="Packs"
+                items={[]}
+                onItemClick={handleStoreItemClick}
+                carouselRef={carouselRefs.packs}
+                desktopMode={!isMobile}
+                category='packs'
+              />
+            )}
+          </div>
+        }
       </div>
     </div>
   );
