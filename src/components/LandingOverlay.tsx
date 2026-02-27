@@ -40,9 +40,8 @@ const LandingOverlay = () => {
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
 
       {/* Bottom CTAs */}
-      <div className="relative z-10 flex flex-col items-center gap-4 pb-12 px-4" onClick={(e) => e.stopPropagation()}>
+      <div className="relative z-10 flex flex-col items-center pb-8 px-4" onClick={(e) => e.stopPropagation()}>
         <SocialLinks />
-        <p className="text-white/50 text-sm select-none">Tap anywhere to enter</p>
       </div>
     </div>
   );
