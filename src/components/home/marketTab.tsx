@@ -274,7 +274,7 @@ const MarketTab = () => {
     };
 
     // Items to hide from marketplace (temporary, for investigation)
-    const HIDDEN_MARKETPLACE_ITEMS = ["Ray Del Maestro", "Dangerous fighter", "Conquisto D'ior", "Helicopter"];
+    const HIDDEN_MARKETPLACE_ITEMS = ["Ray Del Maestro", "Dangerous fighter", "Conquisto D'ior", "Helicopter", "White Base Vest"];
     const filterHiddenItems = (players: any[]) => 
         players?.filter(player => 
             !HIDDEN_MARKETPLACE_ITEMS.some(hidden => 
