@@ -91,7 +91,16 @@ const LandingOverlay = () => {
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
 
       {/* Bottom CTAs */}
-      <div className="relative z-10 flex flex-col items-center pb-8 px-4" onClick={(e) => e.stopPropagation()}>
+      <div className="relative z-10 flex flex-col items-center pb-8 px-4" onClick={(e) => {
+        e.stopPropagation();
+        // Check if the clicked element or its parent is the Game link
+        const target = e.target as HTMLElement;
+        const link = target.closest('a, [aria-label]');
+        if (link && (link.getAttribute('aria-label') === 'Game' || link.closest('[aria-label="Game"]'))) {
+          e.preventDefault();
+          handleEnter();
+        }
+      }}>
         <SocialLinks />
       </div>
     </div>
