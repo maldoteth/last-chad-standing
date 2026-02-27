@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { toast } from 'sonner';
+import { GlowButton } from '@/components/ui/spotlight-card';
 
 const ENTRY_SIZES = ['Under 10k', '10-25k', '25k+'] as const;
 
@@ -100,13 +101,9 @@ const Sale = () => {
             </div>
           </div>
 
-          <button
-            type="submit"
-            disabled={submitting}
-            className="w-full py-3.5 rounded-lg bg-white text-black font-semibold text-sm hover:bg-white/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed mt-2"
-          >
+          <GlowButton type="submit" disabled={submitting} className="mt-2 py-3.5">
             {submitting ? 'Submitting...' : 'Submit Interest'}
-          </button>
+          </GlowButton>
         </form>
       </div>
     </div>
