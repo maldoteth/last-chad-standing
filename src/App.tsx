@@ -6,6 +6,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { RankProvider } from "@/context/rankData";
 import MainRoutes from "./routes/routes";
 import { StoreProvider } from "./context/storeData";
+import LandingOverlay from "./components/LandingOverlay";
 
 
 // const queryClient = new QueryClient();
@@ -15,6 +16,7 @@ const App = () => {
   return (
     // <QueryClientProvider client={queryClient}>
     <TooltipProvider>
+      <LandingOverlay />
       <Toaster />
       <Sonner richColors />
       <BrowserRouter>
