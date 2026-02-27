@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
 import SocialLinks from '@/components/SocialLinks';
 
 const STORAGE_KEY = 'lcs_landing_seen';
@@ -13,7 +14,8 @@ const hasSeenLanding = () => {
 };
 
 const LandingOverlay = () => {
-  const [visible, setVisible] = useState(() => !hasSeenLanding());
+  const location = useLocation();
+  const [visible, setVisible] = useState(() => location.pathname === '/' && !hasSeenLanding());
   const [showMain, setShowMain] = useState(false);
   const introRef = useRef<HTMLVideoElement>(null);
   const mainRef = useRef<HTMLVideoElement>(null);
