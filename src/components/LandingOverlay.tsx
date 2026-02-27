@@ -3,20 +3,48 @@ import SocialLinks from '@/components/SocialLinks';
 
 const STORAGE_KEY = 'lcs_landing_seen';
 
-const LandingOverlay = () => {
-  const [visible, setVisible] = useState(false);
-  const [currentVideo, setCurrentVideo] = useState<'intro' | 'main'>('intro');
-  const videoRef = useRef<HTMLVideoElement>(null);
+// Check synchronously to avoid flash
+const hasSeenLanding = () => {
+  try {
+    return localStorage.getItem(STORAGE_KEY) === 'true';
+  } catch {
+    return false;
+  }
+};
 
+const LandingOverlay = () => {
+  const [visible, setVisible] = useState(() => !hasSeenLanding());
+  const [showMain, setShowMain] = useState(false);
+  const introRef = useRef<HTMLVideoElement>(null);
+  const mainRef = useRef<HTMLVideoElement>(null);
+
+  // Preload the main video as soon as component mounts
   useEffect(() => {
-    const seen = localStorage.getItem(STORAGE_KEY);
-    if (!seen) {
-      setVisible(true);
+    if (!visible) return;
+    const mainVideo = mainRef.current;
+    if (mainVideo) {
+      mainVideo.load();
     }
-  }, []);
+  }, [visible]);
+
+  const handleIntroTimeUpdate = () => {
+    const intro = introRef.current;
+    if (!intro) return;
+    // Start showing main video ~1 second before intro ends
+    if (intro.duration - intro.currentTime <= 1) {
+      if (!showMain) {
+        setShowMain(true);
+        mainRef.current?.play().catch(() => {});
+      }
+    }
+  };
 
   const handleIntroEnd = () => {
-    setCurrentVideo('main');
+    // Ensure main is playing
+    if (!showMain) {
+      setShowMain(true);
+      mainRef.current?.play().catch(() => {});
+    }
   };
 
   const handleEnter = () => {
@@ -31,30 +59,31 @@ const LandingOverlay = () => {
       className="fixed inset-0 z-[100] flex flex-col items-center justify-end bg-black cursor-pointer"
       onClick={handleEnter}
     >
-      {/* Intro Video - plays once first */}
-      {currentVideo === 'intro' && (
+      {/* Main Video - always mounted, hidden until crossfade */}
+      <video
+        ref={mainRef}
+        loop
+        muted
+        playsInline
+        preload="auto"
+        className={`absolute inset-0 w-full h-full object-cover pointer-events-none transition-opacity duration-700 ${showMain ? 'opacity-100' : 'opacity-0'}`}
+      >
+        <source src="/videos/landing-overlay.mp4" type="video/mp4" />
+      </video>
+
+      {/* Intro Video - fades out as main takes over */}
+      {!showMain && (
         <video
-          ref={videoRef}
+          ref={introRef}
           autoPlay
           muted
           playsInline
+          preload="auto"
+          onTimeUpdate={handleIntroTimeUpdate}
           onEnded={handleIntroEnd}
           className="absolute inset-0 w-full h-full object-cover pointer-events-none"
         >
           <source src="/videos/landing-intro.mp4" type="video/mp4" />
-        </video>
-      )}
-
-      {/* Main Video - loops after intro */}
-      {currentVideo === 'main' && (
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-        >
-          <source src="/videos/landing-overlay.mp4" type="video/mp4" />
         </video>
       )}
 
