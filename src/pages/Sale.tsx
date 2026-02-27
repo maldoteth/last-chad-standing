@@ -199,7 +199,7 @@ const Sale = () => {
       >
         <div className="w-full max-w-md animate-fade-in">
           <div className="text-center mb-8">
-            <h1 className="text-2xl font-bold text-white tracking-tight">Partner Sale</h1>
+            <h1 className="text-2xl font-bold text-white tracking-tight">Strategic Sale</h1>
             <p className="text-white/50 text-sm mt-1">Express your interest below</p>
           </div>
 
