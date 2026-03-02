@@ -116,7 +116,7 @@ const Sale = () => {
 
       {/* Video overlay */}
       {(phase === 'video' || phase === 'ended') && (
-        <div className="fixed inset-0 z-50 bg-black flex flex-col items-center justify-center">
+        <div className="fixed inset-0 z-50 bg-black flex flex-col items-center justify-end pb-[33vh]">
           <video
             ref={videoRef}
             autoPlay
