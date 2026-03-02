@@ -29,24 +29,10 @@ const LandingOverlay = () => {
     }
   }, [visible]);
 
-  const handleIntroTimeUpdate = () => {
-    const intro = introRef.current;
-    if (!intro) return;
-    // Start showing main video ~1 second before intro ends
-    if (intro.duration - intro.currentTime <= 1) {
-      if (!showMain) {
-        setShowMain(true);
-        mainRef.current?.play().catch(() => {});
-      }
-    }
-  };
-
   const handleIntroEnd = () => {
-    // Ensure main is playing
-    if (!showMain) {
-      setShowMain(true);
-      mainRef.current?.play().catch(() => {});
-    }
+    // Only switch to main video AFTER intro fully finishes
+    setShowMain(true);
+    mainRef.current?.play().catch(() => {});
   };
 
   const handleEnter = () => {
@@ -61,19 +47,19 @@ const LandingOverlay = () => {
       className="fixed inset-0 z-[100] flex flex-col items-center justify-end bg-black cursor-pointer"
       onClick={handleEnter}
     >
-      {/* Main Video - always mounted, hidden until crossfade */}
+      {/* Main Video - always mounted, hidden until intro ends */}
       <video
         ref={mainRef}
         loop
         muted
         playsInline
         preload="auto"
-        className={`absolute inset-0 w-full h-full object-cover pointer-events-none transition-opacity duration-700 ${showMain ? 'opacity-100' : 'opacity-0'}`}
+        className={`absolute inset-0 w-full h-full object-cover pointer-events-none ${showMain ? 'opacity-100' : 'opacity-0'}`}
       >
         <source src="/videos/landing-overlay.mp4" type="video/mp4" />
       </video>
 
-      {/* Intro Video - fades out as main takes over */}
+      {/* Intro Video - stays visible until it fully ends */}
       {!showMain && (
         <video
           ref={introRef}
@@ -81,7 +67,7 @@ const LandingOverlay = () => {
           muted
           playsInline
           preload="auto"
-          onTimeUpdate={handleIntroTimeUpdate}
+          
           onEnded={handleIntroEnd}
           className="absolute inset-0 w-full h-full object-cover pointer-events-none"
         >
