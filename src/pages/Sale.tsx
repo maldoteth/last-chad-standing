@@ -116,7 +116,7 @@ const Sale = () => {
 
       {/* Video overlay */}
       {(phase === 'video' || phase === 'ended') && (
-        <div className="fixed inset-0 z-50 bg-black flex flex-col items-center justify-end pb-[15vh] xl:pb-[33vh]">
+        <div className="fixed inset-0 z-50 bg-black">
           <video
             ref={videoRef}
             autoPlay
@@ -129,12 +129,61 @@ const Sale = () => {
             <source src="/videos/sale-intro.mp4" type="video/mp4" />
           </video>
 
-          {/* Button appears when video ends */}
+          {/* 3D button that looks like part of the TOKEN LISTING SOON sign */}
           {phase === 'ended' && (
-            <div className="relative z-10 animate-fade-in">
-              <GlowButton onClick={handleShatter} className="px-10 py-4 text-base">
-                Register Interest
-              </GlowButton>
+            <div 
+              className="absolute z-10 animate-fade-in"
+              style={{
+                /* Position over the sign in the video */
+                bottom: '28%',
+                left: '50%',
+                transform: 'translateX(-50%)',
+                perspective: '800px',
+              }}
+            >
+              <button
+                onClick={handleShatter}
+                className="relative cursor-pointer transition-all duration-200 hover:scale-105 active:scale-95"
+                style={{
+                  /* Match the sign's 3D perspective and slight tilt */
+                  transform: 'rotateX(4deg) rotateY(-1deg) skewX(-1deg)',
+                  transformStyle: 'preserve-3d',
+                  background: 'linear-gradient(180deg, rgba(255,215,0,0.95) 0%, rgba(218,165,32,0.95) 50%, rgba(184,134,11,0.9) 100%)',
+                  border: '3px solid rgba(139,101,8,0.8)',
+                  borderRadius: '4px',
+                  padding: '14px 36px',
+                  fontFamily: "'Exo', sans-serif",
+                  fontWeight: 800,
+                  fontSize: 'clamp(14px, 2.5vw, 22px)',
+                  letterSpacing: '3px',
+                  textTransform: 'uppercase',
+                  color: '#1a1000',
+                  textShadow: '0 1px 0 rgba(255,255,255,0.3)',
+                  boxShadow: `
+                    0 4px 15px rgba(0,0,0,0.5),
+                    inset 0 1px 0 rgba(255,255,255,0.3),
+                    inset 0 -2px 4px rgba(0,0,0,0.2),
+                    0 0 30px rgba(255,215,0,0.3)
+                  `,
+                }}
+              >
+                {/* Surface texture overlay */}
+                <span
+                  className="absolute inset-0 rounded-[4px] pointer-events-none"
+                  style={{
+                    background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px)',
+                    mixBlendMode: 'multiply',
+                  }}
+                />
+                {/* Metallic edge highlight */}
+                <span
+                  className="absolute inset-0 rounded-[4px] pointer-events-none"
+                  style={{
+                    boxShadow: 'inset 0 0 1px 1px rgba(255,255,255,0.15)',
+                  }}
+                />
+                <span className="relative z-10">Register Interest</span>
+              </button>
             </div>
           )}
         </div>
