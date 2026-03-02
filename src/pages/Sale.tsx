@@ -133,7 +133,7 @@ const Sale = () => {
           {phase === 'ended' && (
             <div className="relative z-10 animate-fade-in">
               <GlowButton onClick={handleShatter} className="px-10 py-4 text-base">
-                Apply for Access
+                Register Interest
               </GlowButton>
             </div>
           )}
