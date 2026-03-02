@@ -124,7 +124,7 @@ const Sale = () => {
             playsInline
             preload="auto"
             onEnded={handleVideoEnd}
-            className="absolute inset-0 w-full h-full object-cover"
+            className="absolute inset-0 w-full h-full object-cover object-[center_30%]"
           >
             <source src="/videos/sale-intro.mp4" type="video/mp4" />
           </video>
