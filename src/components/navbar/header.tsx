@@ -37,9 +37,6 @@ const Header = () => {
     const [isRankingsOpen, setIsRankingsOpen] = useState(false);
     const [buyDialogOpen, setBuyDialogOpen] = useState(false);
     const [selectedPlayer, setSelectedPlayer] = useState<any>(null);
-    const [accessCodeOpen, setAccessCodeOpen] = useState(false);
-    const [accessCode, setAccessCode] = useState('');
-    const [accessCodeError, setAccessCodeError] = useState('');
     const { rankingData } = useRank()
     const {
         toast
@@ -447,7 +444,7 @@ const Header = () => {
                                     </DropdownMenuItem>
                                 </div>
                             </DropdownMenuContent>
-                        </DropdownMenu> : <Button onClick={() => setAccessCodeOpen(true)} variant="outline" size="sm">
+                        </DropdownMenu> : <Button onClick={login} variant="outline" size="sm">
                             Log In
                         </Button>}
                     </div>
@@ -551,50 +548,7 @@ const Header = () => {
                     />
                 </DialogContent>
             </Dialog>}
-            {/* Access Code Dialog */}
-            <Dialog open={accessCodeOpen} onOpenChange={(open) => {
-                setAccessCodeOpen(open);
-                if (!open) {
-                    setAccessCode('');
-                    setAccessCodeError('');
-                }
-            }}>
-                <DialogContent className="sm:max-w-sm bg-gradient-to-br from-gray-900 via-black to-gray-800 border border-white/20 text-white">
-                    <DialogHeader>
-                        <DialogTitle className="text-white text-center">Access Code Required</DialogTitle>
-                        <DialogDescription className="text-white/60 text-center">
-                            Enter your access code to continue
-                        </DialogDescription>
-                    </DialogHeader>
-                    <form onSubmit={(e) => {
-                        e.preventDefault();
-                        setAccessCodeError('Access denied. Invalid access code.');
-                        toast({
-                            title: 'Access Denied',
-                            description: 'Invalid access code.',
-                            variant: 'destructive',
-                        });
-                    }} className="flex flex-col gap-4">
-                        <Input
-                            type="password"
-                            placeholder="Enter access code"
-                            value={accessCode}
-                            onChange={(e) => {
-                                setAccessCode(e.target.value);
-                                setAccessCodeError('');
-                            }}
-                            maxLength={64}
-                            className="bg-white/10 border-white/20 text-white placeholder:text-white/40"
-                        />
-                        {accessCodeError && (
-                            <p className="text-destructive text-sm text-center">{accessCodeError}</p>
-                        )}
-                        <GlowButton type="submit" disabled={!accessCode.trim()}>
-                            Submit
-                        </GlowButton>
-                    </form>
-                </DialogContent>
-            </Dialog>
+
         </>
     )
 }
