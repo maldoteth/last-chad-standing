@@ -1,6 +1,7 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { toast } from 'sonner';
 import { GlowButton } from '@/components/ui/spotlight-card';
+import { supabase } from '@/integrations/supabase/client';
 
 const ENTRY_SIZES = ['Under 10k', '10-25k', '25k+'] as const;
 const SHARD_COLS = 8;
