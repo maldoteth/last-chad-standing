@@ -589,6 +589,33 @@ export type Database = {
           },
         ]
       }
+      sale_interests: {
+        Row: {
+          contact: string
+          created_at: string
+          entry_size: string
+          id: string
+          name: string
+          wallet: string
+        }
+        Insert: {
+          contact: string
+          created_at?: string
+          entry_size: string
+          id?: string
+          name: string
+          wallet: string
+        }
+        Update: {
+          contact?: string
+          created_at?: string
+          entry_size?: string
+          id?: string
+          name?: string
+          wallet?: string
+        }
+        Relationships: []
+      }
       store_items: {
         Row: {
           baseURI: string | null
