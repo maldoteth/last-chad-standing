@@ -35,10 +35,22 @@ const Sale = () => {
       return;
     }
     setSubmitting(true);
-    await new Promise(r => setTimeout(r, 1000));
-    toast.success('Submitted successfully!');
-    setForm({ name: '', contact: '', wallet: '', entrySize: '' });
-    setSubmitting(false);
+    try {
+      const { error } = await supabase.from('sale_interests' as any).insert({
+        name: form.name.trim(),
+        contact: form.contact.trim(),
+        wallet: form.wallet.trim(),
+        entry_size: form.entrySize,
+      });
+      if (error) throw error;
+      toast.success('Submitted successfully!');
+      setForm({ name: '', contact: '', wallet: '', entrySize: '' });
+    } catch (err: any) {
+      console.error('Sale interest submission error:', err);
+      toast.error('Failed to submit. Please try again.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const captureFrame = useCallback(() => {
