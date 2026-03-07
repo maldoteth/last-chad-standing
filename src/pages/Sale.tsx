@@ -271,18 +271,18 @@ const Sale = () => {
               <label className="block text-white/70 text-xs font-medium mb-1.5 uppercase tracking-wider">Entry Size</label>
               <div className="grid grid-cols-3 gap-2">
                 {ENTRY_SIZES.map(size => (
-                  <button
+                  <GlowButton
                     key={size}
                     type="button"
                     onClick={() => setForm(prev => ({ ...prev, entrySize: size }))}
-                    className={`py-3 rounded-lg text-sm font-medium transition-all border ${
+                    className={`py-3 ${
                       form.entrySize === size
-                        ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-black border-amber-500 shadow-lg shadow-amber-500/25'
-                        : 'bg-white/5 text-white/60 border-white/10 hover:border-white/30 hover:text-white'
+                        ? 'border-blue-500/70 shadow-[0_0_20px_rgba(59,130,246,0.2)]'
+                        : ''
                     }`}
                   >
                     {size}
-                  </button>
+                  </GlowButton>
                 ))}
               </div>
             </div>
