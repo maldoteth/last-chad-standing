@@ -277,7 +277,7 @@ const Sale = () => {
                     onClick={() => setForm(prev => ({ ...prev, entrySize: size }))}
                     className={`py-3 rounded-lg text-sm font-medium transition-all border ${
                       form.entrySize === size
-                        ? 'bg-white text-black border-white'
+                        ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-black border-amber-500 shadow-lg shadow-amber-500/25'
                         : 'bg-white/5 text-white/60 border-white/10 hover:border-white/30 hover:text-white'
                     }`}
                   >
