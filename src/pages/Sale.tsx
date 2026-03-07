@@ -42,11 +42,12 @@ const Sale = () => {
         name: form.name.trim(),
         contact: form.contact.trim(),
         wallet: form.wallet.trim(),
+        socials: form.socials.trim() || null,
         entry_size: form.entrySize,
       });
       if (error) throw error;
       toast.success('Submitted successfully!');
-      setForm({ name: '', contact: '', wallet: '', entrySize: '' });
+      setForm({ name: '', contact: '', wallet: '', socials: '', entrySize: '' });
     } catch (err: any) {
       console.error('Sale interest submission error:', err);
       toast.error('Failed to submit. Please try again.');
@@ -238,7 +239,19 @@ const Sale = () => {
                 onChange={handleChange}
                 maxLength={255}
                 className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-white/30 text-sm focus:outline-none focus:border-white/30 transition-colors"
-                placeholder="email@example.com or @telegram"
+              placeholder="email@example.com or @telegram"
+              />
+            </div>
+
+            <div>
+              <label className="block text-white/70 text-xs font-medium mb-1.5 uppercase tracking-wider">Social Links <span className="text-white/30">(optional)</span></label>
+              <input
+                name="socials"
+                value={form.socials}
+                onChange={handleChange}
+                maxLength={500}
+                className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-white/30 text-sm focus:outline-none focus:border-white/30 transition-colors"
+                placeholder="X, Discord, etc."
               />
             </div>
 
