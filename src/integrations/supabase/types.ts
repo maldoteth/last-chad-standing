@@ -596,6 +596,7 @@ export type Database = {
           entry_size: string
           id: string
           name: string
+          socials: string | null
           wallet: string
         }
         Insert: {
@@ -604,6 +605,7 @@ export type Database = {
           entry_size: string
           id?: string
           name: string
+          socials?: string | null
           wallet: string
         }
         Update: {
@@ -612,6 +614,7 @@ export type Database = {
           entry_size?: string
           id?: string
           name?: string
+          socials?: string | null
           wallet?: string
         }
         Relationships: []
