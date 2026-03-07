@@ -21,6 +21,7 @@ const Sale = () => {
     name: '',
     contact: '',
     wallet: '',
+    socials: '',
     entrySize: '' as string,
   });
   const [submitting, setSubmitting] = useState(false);
