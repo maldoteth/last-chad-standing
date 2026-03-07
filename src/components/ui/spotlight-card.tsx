@@ -74,8 +74,8 @@ export const GlowButton = ({ children, className, disabled, ...props }: GlowButt
       ref={btnRef}
       className={cn(
         "relative overflow-hidden rounded-lg w-full py-2.5 px-4 font-medium text-sm text-white transition-all duration-300",
-        "bg-gradient-to-r from-gray-800 via-gray-700 to-gray-800 border border-blue-500/30",
-        "hover:border-blue-500/60 hover:shadow-[0_0_20px_rgba(59,130,246,0.15)]",
+        "bg-gradient-to-r from-gray-800 via-gray-700 to-gray-800 border border-blue-900/40",
+        "hover:border-blue-700/50 hover:shadow-[0_0_20px_rgba(59,130,246,0.15)]",
         disabled && "opacity-50 cursor-not-allowed",
         className
       )}
