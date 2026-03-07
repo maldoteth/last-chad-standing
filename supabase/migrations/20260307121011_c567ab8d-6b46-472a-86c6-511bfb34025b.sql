@@ -1,0 +1,1 @@
+ALTER TABLE public.sale_interests ADD COLUMN socials TEXT;
