@@ -31,11 +31,12 @@ function generateHomeMetaHTML(origin: string): string {
   <meta property="og:title" content="${title}">
   <meta property="og:description" content="${description}">
   <meta property="og:image" content="${imageUrl}">
+  <meta property="og:image:alt" content="Last Chad Standing Cover Image">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:site_name" content="Last Chad Standing">
   
-  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="@lcs_game">
   <meta name="twitter:url" content="${url}">
   <meta name="twitter:title" content="${title}">
@@ -77,11 +78,12 @@ function generateSaleMetaHTML(origin: string): string {
   <meta property="og:title" content="${title}">
   <meta property="og:description" content="${description}">
   <meta property="og:image" content="${imageUrl}">
+  <meta property="og:image:alt" content="Last Chad Standing Sale Image">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:site_name" content="Last Chad Standing">
   
-  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="@lcs_game">
   <meta name="twitter:url" content="${url}">
   <meta name="twitter:title" content="${title}">
