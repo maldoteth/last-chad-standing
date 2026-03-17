@@ -1,1 +1,4 @@
 project_id = "fltmwfygptfblwypsjgh"
+
+[functions.ssr-seo]
+verify_jwt = false
