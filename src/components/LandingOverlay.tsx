@@ -55,6 +55,14 @@ const LandingOverlay = () => {
     <div
       className="fixed inset-0 z-[100] flex flex-col items-center justify-end bg-black"
     >
+      {/* Unmute/Mute Button */}
+      <button
+        onClick={toggleMute}
+        className="absolute top-6 right-6 z-20 p-2 rounded-full bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-colors"
+        aria-label={isMuted ? 'Unmute' : 'Mute'}
+      >
+        {isMuted ? <VolumeX className="w-5 h-5 text-white" /> : <Volume2 className="w-5 h-5 text-white" />}
+      </button>
       {/* Main Video - always mounted, hidden until intro ends */}
       <video
         ref={mainRef}
