@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Volume2, VolumeX } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
 import SocialLinks from '@/components/SocialLinks';
 
@@ -16,6 +17,7 @@ const hasSeenLanding = () => {
 const LandingOverlay = () => {
   const location = useLocation();
   const [visible, setVisible] = useState(() => location.pathname === '/' && !hasSeenLanding());
+  const [isMuted, setIsMuted] = useState(true);
   const [showMain, setShowMain] = useState(false);
   const introRef = useRef<HTMLVideoElement>(null);
   const mainRef = useRef<HTMLVideoElement>(null);
@@ -40,12 +42,27 @@ const LandingOverlay = () => {
     setVisible(false);
   };
 
+  const toggleMute = () => {
+    const newMuted = !isMuted;
+    setIsMuted(newMuted);
+    if (introRef.current) introRef.current.muted = newMuted;
+    if (mainRef.current) mainRef.current.muted = newMuted;
+  };
+
   if (!visible) return null;
 
   return (
     <div
       className="fixed inset-0 z-[100] flex flex-col items-center justify-end bg-black"
     >
+      {/* Unmute/Mute Button */}
+      <button
+        onClick={toggleMute}
+        className="absolute top-6 right-6 z-20 p-2 rounded-full bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-colors"
+        aria-label={isMuted ? 'Unmute' : 'Mute'}
+      >
+        {isMuted ? <VolumeX className="w-5 h-5 text-white" /> : <Volume2 className="w-5 h-5 text-white" />}
+      </button>
       {/* Main Video - always mounted, hidden until intro ends */}
       <video
         ref={mainRef}
