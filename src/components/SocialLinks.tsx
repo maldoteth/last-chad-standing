@@ -40,7 +40,7 @@ const defaultSocialLinks: SocialLink[] = [
   {
     name: "Game",
     icon: <Joystick className="w-6 h-6" />,
-    to: "/game"
+    to: "/"
   }
 ];
 
