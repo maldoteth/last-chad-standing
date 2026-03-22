@@ -17,6 +17,7 @@ const hasSeenLanding = () => {
 const LandingOverlay = () => {
   const location = useLocation();
   const [visible, setVisible] = useState(() => location.pathname === '/' && !hasSeenLanding());
+  const [isMuted, setIsMuted] = useState(true);
   const [showMain, setShowMain] = useState(false);
   const introRef = useRef<HTMLVideoElement>(null);
   const mainRef = useRef<HTMLVideoElement>(null);
