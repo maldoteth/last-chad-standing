@@ -42,6 +42,13 @@ const LandingOverlay = () => {
     setVisible(false);
   };
 
+  const toggleMute = () => {
+    const newMuted = !isMuted;
+    setIsMuted(newMuted);
+    if (introRef.current) introRef.current.muted = newMuted;
+    if (mainRef.current) mainRef.current.muted = newMuted;
+  };
+
   if (!visible) return null;
 
   return (
