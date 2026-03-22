@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Volume2, VolumeX } from 'lucide-react';
+import { Volume2, VolumeX, X } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
 import SocialLinks from '@/components/SocialLinks';
 
 const STORAGE_KEY = 'lcs_landing_seen';
 
-// Check synchronously to avoid flash
 const hasSeenLanding = () => {
   try {
     return localStorage.getItem(STORAGE_KEY) === 'true';
@@ -19,10 +18,10 @@ const LandingOverlay = () => {
   const [visible, setVisible] = useState(() => location.pathname === '/' && !hasSeenLanding());
   const [isMuted, setIsMuted] = useState(true);
   const [showMain, setShowMain] = useState(false);
+  const [closing, setClosing] = useState(false);
   const introRef = useRef<HTMLVideoElement>(null);
   const mainRef = useRef<HTMLVideoElement>(null);
 
-  // Preload the main video as soon as component mounts
   useEffect(() => {
     if (!visible) return;
     const mainVideo = mainRef.current;
@@ -32,14 +31,16 @@ const LandingOverlay = () => {
   }, [visible]);
 
   const handleIntroEnd = () => {
-    // Only switch to main video AFTER intro fully finishes
     setShowMain(true);
     mainRef.current?.play().catch(() => {});
   };
 
   const handleEnter = () => {
-    localStorage.setItem(STORAGE_KEY, 'true');
-    setVisible(false);
+    setClosing(true);
+    setTimeout(() => {
+      localStorage.setItem(STORAGE_KEY, 'true');
+      setVisible(false);
+    }, 500);
   };
 
   const toggleMute = () => {
@@ -53,17 +54,27 @@ const LandingOverlay = () => {
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex flex-col items-center justify-end bg-black"
+      className={`fixed inset-0 z-[100] flex flex-col items-center justify-end bg-black transition-transform duration-500 ease-in-out ${closing ? '-translate-y-full' : 'translate-y-0'}`}
     >
-      {/* Unmute/Mute Button */}
-      <button
-        onClick={toggleMute}
-        className="absolute top-6 right-6 z-20 p-2 rounded-full bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-colors"
-        aria-label={isMuted ? 'Unmute' : 'Mute'}
-      >
-        {isMuted ? <VolumeX className="w-5 h-5 text-white" /> : <Volume2 className="w-5 h-5 text-white" />}
-      </button>
-      {/* Main Video - always mounted, hidden until intro ends */}
+      {/* Top-right buttons */}
+      <div className="absolute top-6 right-6 z-20 flex items-center gap-2">
+        <button
+          onClick={toggleMute}
+          className="p-2 rounded-full bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-colors"
+          aria-label={isMuted ? 'Unmute' : 'Mute'}
+        >
+          {isMuted ? <VolumeX className="w-5 h-5 text-white" /> : <Volume2 className="w-5 h-5 text-white" />}
+        </button>
+        <button
+          onClick={handleEnter}
+          className="p-2 rounded-full bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-colors"
+          aria-label="Close"
+        >
+          <X className="w-5 h-5 text-white" />
+        </button>
+      </div>
+
+      {/* Main Video */}
       <video
         ref={mainRef}
         loop
@@ -75,7 +86,7 @@ const LandingOverlay = () => {
         <source src="/videos/landing-overlay.mp4" type="video/mp4" />
       </video>
 
-      {/* Intro Video - stays visible until it fully ends */}
+      {/* Intro Video */}
       {!showMain && (
         <video
           ref={introRef}
@@ -83,7 +94,6 @@ const LandingOverlay = () => {
           muted
           playsInline
           preload="auto"
-          
           onEnded={handleIntroEnd}
           className="absolute inset-0 w-full h-full object-cover pointer-events-none"
         >
@@ -91,10 +101,10 @@ const LandingOverlay = () => {
         </video>
       )}
 
-      {/* Gradient fade at bottom for readability */}
+      {/* Gradient */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
 
-      {/* Bottom CTAs - only joystick/Game button dismisses overlay */}
+      {/* Bottom CTAs */}
       <div className="relative z-10 flex flex-col items-center pb-8 px-4" onClick={(e) => {
         const target = e.target as HTMLElement;
         const link = target.closest('a, [aria-label]');
