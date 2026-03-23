@@ -250,7 +250,7 @@ const DocumentSearch: React.FC<DocumentSearchProps> = ({ isOpen, onClose, isMobi
                 placeholder="Search documentation..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 pr-4"
+                className="pl-10 pr-4 bg-white text-gray-900 placeholder:text-gray-500 border-gray-300"
                 autoFocus
               />
             </div>
