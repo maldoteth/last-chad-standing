@@ -1,7 +1,7 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect, useCallback } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import { ArrowLeft, UserCheck, Gamepad2, DollarSign, ExternalLink, Search, Mail, Download, Palette, Scale } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -14,7 +14,32 @@ import DocumentSearch from '@/components/DocumentSearch';
 import { formatNumberWithAbbreviation } from '@/lib/utils';
 const Documents = () => {
   const { toast } = useToast();
+  const location = useLocation();
+  const navigate = useNavigate();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+
+  const handleSectionClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const id = href.replace('#', '');
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+      navigate(`/docs${href}`, { replace: true });
+    }
+  }, [navigate]);
+
+  // Scroll to hash section on initial load
+  useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.replace('#', '');
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 300);
+    }
+  }, []);
   const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
 
   // Calculator state
@@ -317,7 +342,7 @@ const Documents = () => {
                               {item.href.startsWith('http') ? <a href={item.href} target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-gray-900 transition-colors text-sm flex items-center gap-1">
                                   {item.title}
                                   <ExternalLink size={12} />
-                                </a> : <a href={item.href} className="text-gray-600 hover:text-gray-900 transition-colors text-sm">
+                                </a> : <a href={item.href} onClick={(e) => handleSectionClick(e, item.href)} className="text-gray-600 hover:text-gray-900 transition-colors text-sm">
                                   {item.title}
                                 </a>}
                             </li>)}
