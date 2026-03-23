@@ -12,34 +12,69 @@ import TokenDistributionChart from '@/components/TokenDistributionChart';
 import TokenReleaseChart from '@/components/TokenReleaseChart';
 import DocumentSearch from '@/components/DocumentSearch';
 import { formatNumberWithAbbreviation } from '@/lib/utils';
+// Map of URL slugs to section element IDs
+const slugToSectionId: Record<string, string> = {
+  'core-concept': 'core-concept',
+  'game-world': 'game-world',
+  'gameplay-mechanics': 'gameplay-mechanics',
+  'zone-mechanics': 'storm-cage-mechanics',
+  'progression': 'progression',
+  'game-modes': 'game-modes',
+  'monetization': 'monetization',
+  'visuals-and-sound': 'visuals-sound',
+  'marketing': 'marketing',
+  'controls': 'controls',
+  'weapons': 'weapons-inventory',
+  'movement': 'movement',
+  'map-hazards': 'map-hazards',
+  'strategy': 'strategy',
+  'social': 'social-aspects',
+  'currency': 'in-game-currency',
+  'distribution': 'token-economy',
+  'airdrops': 'airdrop-calculator',
+  'utility': 'utility',
+  'team': 'founding-team',
+  'assets': 'brand-assets',
+  'terms': 'terms-of-service',
+  'privacy': 'privacy-policy',
+};
+
+// Map section IDs back to slugs for sidebar links
+const sectionIdToSlug: Record<string, string> = Object.fromEntries(
+  Object.entries(slugToSectionId).map(([slug, id]) => [id, slug])
+);
+
 const Documents = () => {
   const { toast } = useToast();
-  const location = useLocation();
   const navigate = useNavigate();
+  const { section: urlSection } = useParams<{ section?: string }>();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
-  const handleSectionClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const handleSectionClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
     e.preventDefault();
-    const id = href.replace('#', '');
+    const id = sectionId.replace('#', '');
+    const slug = sectionIdToSlug[id];
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
-      navigate(`/docs${href}`, { replace: true });
+      navigate(slug ? `/docs/${slug}` : `/docs`, { replace: true });
     }
   }, [navigate]);
 
-  // Scroll to hash section on initial load
+  // Scroll to section on initial load or when URL section changes
   useEffect(() => {
-    if (location.hash) {
-      const id = location.hash.replace('#', '');
-      setTimeout(() => {
-        const element = document.getElementById(id);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }
-      }, 300);
+    if (urlSection) {
+      const sectionId = slugToSectionId[urlSection];
+      if (sectionId) {
+        setTimeout(() => {
+          const element = document.getElementById(sectionId);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 300);
+      }
     }
-  }, []);
+  }, [urlSection]);
   const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
 
   // Calculator state
