@@ -399,7 +399,7 @@ const Documents = () => {
                       {/* Game Blueprint Header */}
                       <div className="mb-12 p-6 bg-gradient-to-r from-red-50 to-orange-50 rounded-lg border border-red-200">
                         <h1 className="text-4xl font-bold text-gray-900 mb-4">Game Blueprint: Last Chad Standing</h1>
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm text-gray-700">
                           <div><strong>Genre:</strong> Third-Person Fighter Battle Royale</div>
                           <div><strong>Players:</strong> 20-100 players per lobby</div>
                           <div><strong>Platforms:</strong> PC, next-gen consoles</div>
