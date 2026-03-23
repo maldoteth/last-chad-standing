@@ -503,14 +503,6 @@ const HomeTab = () => {
                 </div>
             </div>
 
-            {/* Footer with Social Links */}
-            <div className="px-4 pt-8 pb-24">
-                <div className="border-t border-white/10 pt-6 flex flex-col items-center gap-4">
-                    <img src="/lovable-uploads/3c1059ce-1948-46a2-bc2a-8e6c6b55079d.png" alt="LCS" className="w-10 h-10 opacity-60" />
-                    <SocialLinks className="gap-5" />
-                    <p className="text-xs text-muted-foreground">© 2025 Last Chad Standing</p>
-                </div>
-            </div>
         </ScrollArea>}
         <PreOrderDialog open={isPreOrderOpen} onOpenChange={setIsPreOrderOpen}>
             <div />
