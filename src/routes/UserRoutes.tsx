@@ -21,7 +21,7 @@ const UserRoutes = () => {
       
       {/* <Route path="/nft" element={<NFTDeployMintRefactored />} /> */}
       <Route path="/" element={isAdmin ? <Navigate to={'/admin'} /> :  <Game />} />
-      <Route path="/docs" element={<Documents />} />
+      <Route path="/docs/:section?" element={<Documents />} />
       <Route path="/sale" element={<Sale />} />
       <Route path="/blog" element={<Blog />} />
       <Route path="/preorder-success" element={<PreOrderSuccess />} />
