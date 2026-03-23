@@ -349,6 +349,15 @@ const HomeTab = () => {
                         isObjectivesGlowing={isObjectivesGlowing}
                     />
                 </div>
+
+                {/* Footer with Social Links - Mobile/Tablet only */}
+                <div className="px-4 pt-8 pb-24">
+                    <div className="border-t border-white/10 pt-6 flex flex-col items-center gap-4">
+                        <img src="/lovable-uploads/885f4a61-92f8-40e3-8733-2ba3b2534e16.png" alt="DeHub" className="h-10 opacity-60" />
+                        <SocialLinks className="gap-5" />
+                        <p className="text-xs text-muted-foreground">© 2025 Last Chad Standing</p>
+                    </div>
+                </div>
             </>}
 
 
