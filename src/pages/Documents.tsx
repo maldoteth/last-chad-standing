@@ -1,4 +1,5 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect, useCallback } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useToast } from '@/hooks/use-toast';
 import { ArrowLeft, UserCheck, Gamepad2, DollarSign, ExternalLink, Search, Mail, Download, Palette, Scale } from 'lucide-react';
 import { Link } from 'react-router-dom';
