@@ -343,7 +343,7 @@ const Documents = () => {
                               {item.href.startsWith('http') ? <a href={item.href} target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-gray-900 transition-colors text-sm flex items-center gap-1">
                                   {item.title}
                                   <ExternalLink size={12} />
-                                </a> : <a href={item.href} className="text-gray-600 hover:text-gray-900 transition-colors text-sm">
+                                </a> : <a href={item.href} onClick={(e) => handleSectionClick(e, item.href)} className="text-gray-600 hover:text-gray-900 transition-colors text-sm">
                                   {item.title}
                                 </a>}
                             </li>)}
