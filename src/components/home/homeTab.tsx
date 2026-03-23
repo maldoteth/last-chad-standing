@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import SocialLinks from "@/components/SocialLinks";
 import { useToast } from "@/hooks/use-toast";
 import { usePrivy } from '@privy-io/react-auth';
 import { useNavigate, useSearchParams } from "react-router-dom";
