@@ -244,7 +244,7 @@ const DocumentSearch: React.FC<DocumentSearchProps> = ({ isOpen, onClose, isMobi
         <div className="p-4 border-b border-gray-200">
           <div className="flex items-center gap-2">
             <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-600" size={20} />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
               <Input
                 type="text"
                 placeholder="Search documentation..."
