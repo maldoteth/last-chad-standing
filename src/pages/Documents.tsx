@@ -980,7 +980,7 @@ This means fighters truly own their digital assets and can trade them freely wit
                                       Total Supply: {collection.supply.toLocaleString()}
                                     </span>
                                   </Label>
-                                  <Input id={key} type="number" min="0" value={holdings[key as keyof typeof holdings] || ''} onChange={e => handleInputChange(key, e.target.value)} placeholder="0" className="bg-white border-gray-300" />
+                                  <Input id={key} type="number" min="0" value={holdings[key as keyof typeof holdings] || ''} onChange={e => handleInputChange(key, e.target.value)} placeholder="0" className="bg-white border-gray-300 text-gray-900 placeholder:text-gray-400" />
                                 </div>)}
                               
                               <Button onClick={clearAll} variant="outline" className="w-full mt-4">
