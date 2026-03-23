@@ -15,7 +15,32 @@ import DocumentSearch from '@/components/DocumentSearch';
 import { formatNumberWithAbbreviation } from '@/lib/utils';
 const Documents = () => {
   const { toast } = useToast();
+  const location = useLocation();
+  const navigate = useNavigate();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+
+  const handleSectionClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const id = href.replace('#', '');
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+      navigate(`/docs${href}`, { replace: true });
+    }
+  }, [navigate]);
+
+  // Scroll to hash section on initial load
+  useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.replace('#', '');
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 300);
+    }
+  }, []);
   const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
 
   // Calculator state
