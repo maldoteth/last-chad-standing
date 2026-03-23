@@ -254,7 +254,7 @@ const DocumentSearch: React.FC<DocumentSearchProps> = ({ isOpen, onClose, isMobi
                 autoFocus
               />
             </div>
-            <Button variant="ghost" size="sm" onClick={onClose}>
+            <Button variant="ghost" size="sm" onClick={onClose} className="text-gray-900 hover:bg-gray-100">
               <X size={20} />
             </Button>
           </div>
