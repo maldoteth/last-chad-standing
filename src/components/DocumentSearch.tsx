@@ -244,17 +244,17 @@ const DocumentSearch: React.FC<DocumentSearchProps> = ({ isOpen, onClose, isMobi
         <div className="p-4 border-b border-gray-200">
           <div className="flex items-center gap-2">
             <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
+              <Search className="absolute left-3 top-1/2 z-10 -translate-y-1/2 text-black pointer-events-none" size={18} />
               <Input
                 type="text"
                 placeholder="Search documentation..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 pr-4 bg-white text-gray-900 placeholder:text-gray-500 border-gray-300"
+                className="pl-10 pr-4 bg-white text-gray-900 placeholder:text-gray-900 border-gray-300"
                 autoFocus
               />
             </div>
-            <Button variant="ghost" size="sm" onClick={onClose} className="text-gray-900 hover:bg-gray-100">
+            <Button variant="ghost" size="sm" onClick={onClose} className="h-10 w-10 shrink-0 rounded-md border border-gray-300 bg-white p-0 text-black hover:bg-gray-100">
               <X size={20} />
             </Button>
           </div>
