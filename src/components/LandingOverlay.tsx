@@ -107,10 +107,12 @@ const LandingOverlay = () => {
       {/* Bottom CTAs */}
       <div className="relative z-10 flex flex-col items-center pb-8 px-4" onClick={(e) => {
         const target = e.target as HTMLElement;
-        const link = target.closest('a, [aria-label]');
-        if (link && (link.getAttribute('aria-label') === 'Game' || link.closest('[aria-label="Game"]'))) {
-          e.preventDefault();
-          handleEnter();
+        const link = target.closest('[aria-label]');
+        if (link) {
+          const label = link.getAttribute('aria-label');
+          if (label === 'Game' || label === 'Documentation') {
+            handleEnter();
+          }
         }
       }}>
         <SocialLinks />
