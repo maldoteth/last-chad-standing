@@ -66,12 +66,25 @@ const Documents = () => {
     if (urlSection) {
       const sectionId = slugToSectionId[urlSection];
       if (sectionId) {
-        setTimeout(() => {
+        const scrollToElement = (attempt = 0) => {
           const element = document.getElementById(sectionId);
-          if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
+          if (!element) return;
+          
+          const prevTop = element.getBoundingClientRect().top;
+          element.scrollIntoView({ behavior: attempt === 0 ? 'instant' : 'smooth', block: 'start' });
+          
+          // Re-check position after images/content may have shifted layout
+          if (attempt < 3) {
+            setTimeout(() => {
+              const newTop = element.getBoundingClientRect().top;
+              if (Math.abs(newTop) > 5) {
+                scrollToElement(attempt + 1);
+              }
+            }, 400);
           }
-        }, 300);
+        };
+        // Initial delay for first render
+        setTimeout(() => scrollToElement(0), 150);
       }
     }
   }, [urlSection]);
