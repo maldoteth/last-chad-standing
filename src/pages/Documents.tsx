@@ -1114,7 +1114,7 @@ This means fighters truly own their digital assets and can trade them freely wit
                               </div>
 
                               {userAllocation === 0 && <div className="text-center text-gray-500 py-8">
-                                  Enter your NFT holdings above to see your airdrop allocation
+                                  Enter your holdings above to see your airdrop allocation
                                 </div>}
                             </CardContent>
                           </Card>
