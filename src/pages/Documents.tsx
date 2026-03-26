@@ -1034,7 +1034,7 @@ This means fighters truly own their digital assets and can trade them freely wit
                       <section id="airdrop-calculator" className="mb-12">
                         <br />
                         <h2 className="text-3xl font-bold">Airdrop Calculator</h2>
-                        <p className="mb-6">Calculate your share of the 5,000,000,000 token airdrop based on your NFT holdings.</p>
+                        <p className="mb-6">Calculate your share of the 5,000,000,000 token airdrop based on your holdings.</p>
 
                         <div className="grid gap-6 md:grid-cols-2 mb-8">
                           {/* Input Section */}
