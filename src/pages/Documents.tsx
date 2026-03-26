@@ -1067,7 +1067,7 @@ This means fighters truly own their digital assets and can trade them freely wit
                             <CardHeader>
                               <CardTitle className="text-gray-900">Your Airdrop Allocation</CardTitle>
                               <CardDescription>
-                                Based on your NFT holdings
+                                Based on your holdings
                               </CardDescription>
                             </CardHeader>
                             <CardContent className="space-y-4">
