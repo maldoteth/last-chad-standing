@@ -638,7 +638,7 @@ There are environmental traps like collapsing floors, explosive barrels, and nat
 
                         <h2 className="text-3xl font-bold">9. Marketing and Launch Strategy</h2>
                         <p>The game will launch with early access and token sales to build a dedicated community before full release. Influencers, streamers, and tournaments will drive hype and engagement, especially in the crypto and gaming communities. Post-launch, regular updates, skins, and new game modes will keep the player base engaged.</p>
-                        <p>Last Chad Standing is a brutal, high-octane take on the battle royale genre, offering intense, visceral combat with the unique twist of NFT ownership and customization, pushing the boundaries of what modern multiplayer games can offer.</p>
+                        <p>Last Chad Standing is a brutal, high-octane take on the battle royale genre, offering intense, visceral combat with the unique twist of true player ownership and customization, pushing the boundaries of what modern multiplayer games can offer.</p>
                       </section>
 
                       {/* Controls */}
