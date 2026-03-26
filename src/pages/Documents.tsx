@@ -1040,9 +1040,9 @@ This means fighters truly own their digital assets and can trade them freely wit
                           {/* Input Section */}
                           <Card className="bg-white border-gray-200">
                             <CardHeader>
-                              <CardTitle className="text-gray-900">Your NFT Holdings</CardTitle>
+                              <CardTitle className="text-gray-900">Your Holdings</CardTitle>
                               <CardDescription>
-                                Enter the number of NFTs you hold for each collection
+                                Enter the number you hold for each collection
                               </CardDescription>
                             </CardHeader>
                             <CardContent className="space-y-4">
