@@ -1136,7 +1136,7 @@ This means fighters truly own their digital assets and can trade them freely wit
                                 </ul>
                               </div>
                               <div>
-                                <h4 className="font-semibold mb-2 text-gray-900">NFT Collections</h4>
+                                <h4 className="font-semibold mb-2 text-gray-900">Collections</h4>
                                 <ul className="text-sm text-gray-600 space-y-1">
                                   {Object.entries(collections).map(([key, collection]) => <li key={key}>
                                       {collection.name}: {collection.supply.toLocaleString()} supply
