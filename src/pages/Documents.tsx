@@ -905,7 +905,7 @@ There are environmental traps like collapsing floors, explosive barrels, and nat
                           <li><strong>Dynamic Odds:</strong> Backing odds change in real-time based on fighter performance, reputation, and community sentiment.</li>
                           <li><strong>Multiple Fighters:</strong> Diversify your bets by backing multiple fighters in the same match to hedge your investments.</li>
                           <li><strong>Backer Leaderboards:</strong> Track the most successful backers and follow their betting strategies for future matches.</li>
-                          <li><strong>Exclusive Rewards:</strong> Top backers gain access to exclusive NFT drops, early access to new content, and special recognition in the community.</li>
+                          <li><strong>Exclusive Rewards:</strong> Top backers gain access to exclusive drops, early access to new content, and special recognition in the community.</li>
                         </ul>
 
                         <br />
