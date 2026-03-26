@@ -597,9 +597,9 @@ There are environmental traps like collapsing floors, explosive barrels, and nat
                         <br />
 
                         <h2 className="text-3xl font-bold">7. Monetization & Marketplace</h2>
-                        <p>The game operates on a play-and-earn model. Players earn in-game currency by participating in matches, which can be used to buy cosmetics, skins, or lootboxes in the marketplace. All NFTs are tradable on external platforms, allowing players to buy, sell, or auction rare skins for real-world value.</p>
+                        <p>The game operates on a play-and-earn model. Players earn in-game currency by participating in matches, which can be used to buy cosmetics, skins, or lootboxes in the marketplace. All digital collectibles are tradable on external platforms, allowing players to buy, sell, or auction rare skins for real-world value.</p>
                         <ul>
-                          <li><strong>NFT Drops:</strong> Special skins and items are occasionally dropped for players to claim in-game or purchase from the marketplace.</li>
+                          <li><strong>Exclusive Drops:</strong> Special skins and items are occasionally dropped for players to claim in-game or purchase from the marketplace.</li>
                           <li><strong>In-Game Store:</strong> Besides skins, there are in-game items like weapons, emotes, and accessories, all purchasable with in-game or real-world currency</li>
                           <li><strong>Season Pass:</strong> Unlock exclusive items the more you play</li>
                           <li><strong>LootBoxes:</strong> Players can purchase fairly randomized boxes for a chance to win rare items.</li>
