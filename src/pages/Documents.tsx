@@ -565,7 +565,7 @@ There are environmental traps like collapsing floors, explosive barrels, and nat
                         <br />
 
                         <h3 className="text-2xl font-bold">Character Customization</h3>
-                        <p>Players can customize the appearance of their characters by selecting base skins and layering accessories, clothing, and weapons. NFTs purchased from the marketplace are fully tradable and can enhance the player's appearance with unique styles, offering individuality and a sense of ownership.</p>
+                        <p>Players can customize the appearance of their characters by selecting base skins and layering accessories, clothing, and weapons. Digital collectibles purchased from the marketplace are fully tradable and can enhance the player's appearance with unique styles, offering individuality and a sense of ownership.</p>
 
                         
                         
