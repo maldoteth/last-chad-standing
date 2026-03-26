@@ -559,13 +559,13 @@ There are environmental traps like collapsing floors, explosive barrels, and nat
                         
                         <br />
 
-                        <h3 className="text-2xl font-bold">NFT Skins Marketplace</h3>
-                        <p>The in-game skins for characters are NFTs, each with unique visual attributes that can be traded on the marketplace. These skins range from cosmetic changes like clothing, tattoos, scars, and armor, to more grotesque body modifications, giving each fighter a distinct appearance. Limited-edition and rare skins are released periodically and can be earned through winning tournaments, in-game challenges, or purchased directly.</p>
+                        <h3 className="text-2xl font-bold">Skins Marketplace</h3>
+                        <p>The in-game skins for characters are user-owned digital collectibles, each with unique visual attributes that can be traded on the marketplace. These skins range from cosmetic changes like clothing, tattoos, scars, and armor, to more grotesque body modifications, giving each fighter a distinct appearance. Limited-edition and rare skins are released periodically and can be earned through winning tournaments, in-game challenges, or purchased directly.</p>
 
                         <br />
 
                         <h3 className="text-2xl font-bold">Character Customization</h3>
-                        <p>Players can customize the appearance of their characters by selecting base skins and layering accessories, clothing, and weapons. NFTs purchased from the marketplace are fully tradable and can enhance the player's appearance with unique styles, offering individuality and a sense of ownership.</p>
+                        <p>Players can customize the appearance of their characters by selecting base skins and layering accessories, clothing, and weapons. Digital collectibles purchased from the marketplace are fully tradable and can enhance the player's appearance with unique styles, offering individuality and a sense of ownership.</p>
 
                         
                         
@@ -597,9 +597,9 @@ There are environmental traps like collapsing floors, explosive barrels, and nat
                         <br />
 
                         <h2 className="text-3xl font-bold">7. Monetization & Marketplace</h2>
-                        <p>The game operates on a play-and-earn model. Players earn in-game currency by participating in matches, which can be used to buy cosmetics, skins, or lootboxes in the marketplace. All NFTs are tradable on external platforms, allowing players to buy, sell, or auction rare skins for real-world value.</p>
+                        <p>The game operates on a play-and-earn model. Players earn in-game currency by participating in matches, which can be used to buy cosmetics, skins, or lootboxes in the marketplace. All digital collectibles are tradable on external platforms, allowing players to buy, sell, or auction rare skins for real-world value.</p>
                         <ul>
-                          <li><strong>NFT Drops:</strong> Special skins and items are occasionally dropped for players to claim in-game or purchase from the marketplace.</li>
+                          <li><strong>Exclusive Drops:</strong> Special skins and items are occasionally dropped for players to claim in-game or purchase from the marketplace.</li>
                           <li><strong>In-Game Store:</strong> Besides skins, there are in-game items like weapons, emotes, and accessories, all purchasable with in-game or real-world currency</li>
                           <li><strong>Season Pass:</strong> Unlock exclusive items the more you play</li>
                           <li><strong>LootBoxes:</strong> Players can purchase fairly randomized boxes for a chance to win rare items.</li>
@@ -638,7 +638,7 @@ There are environmental traps like collapsing floors, explosive barrels, and nat
 
                         <h2 className="text-3xl font-bold">9. Marketing and Launch Strategy</h2>
                         <p>The game will launch with early access and token sales to build a dedicated community before full release. Influencers, streamers, and tournaments will drive hype and engagement, especially in the crypto and gaming communities. Post-launch, regular updates, skins, and new game modes will keep the player base engaged.</p>
-                        <p>Last Chad Standing is a brutal, high-octane take on the battle royale genre, offering intense, visceral combat with the unique twist of NFT ownership and customization, pushing the boundaries of what modern multiplayer games can offer.</p>
+                        <p>Last Chad Standing is a brutal, high-octane take on the battle royale genre, offering intense, visceral combat with the unique twist of true player ownership and customization, pushing the boundaries of what modern multiplayer games can offer.</p>
                       </section>
 
                       {/* Controls */}
@@ -905,7 +905,7 @@ There are environmental traps like collapsing floors, explosive barrels, and nat
                           <li><strong>Dynamic Odds:</strong> Backing odds change in real-time based on fighter performance, reputation, and community sentiment.</li>
                           <li><strong>Multiple Fighters:</strong> Diversify your bets by backing multiple fighters in the same match to hedge your investments.</li>
                           <li><strong>Backer Leaderboards:</strong> Track the most successful backers and follow their betting strategies for future matches.</li>
-                          <li><strong>Exclusive Rewards:</strong> Top backers gain access to exclusive NFT drops, early access to new content, and special recognition in the community.</li>
+                          <li><strong>Exclusive Rewards:</strong> Top backers gain access to exclusive drops, early access to new content, and special recognition in the community.</li>
                         </ul>
 
                         <br />
@@ -995,7 +995,7 @@ This means fighters truly own their digital assets and can trade them freely wit
                          <h2 className="text-3xl font-bold text-center sm:text-left my-[30px]">Genesis Chads</h2>
                         
                          <div className="space-y-4 text-gray-700 leading-relaxed">
-                           <p>The Genesis Chads collection represents the original foundation of the Lean Chad ecosystem, featuring uniquely hand-drawn cartoon characters created by founder Mike Hales in 2022. Each Chad was meticulously crafted with distinctive traits and personalities, forming the cornerstone of what would become a revolutionary gaming and NFT experience.</p>
+                           <p>The Genesis Chads collection represents the original foundation of the Lean Chad ecosystem, featuring uniquely hand-drawn cartoon characters created by founder Mike Hales in 2022. Each Chad was meticulously crafted with distinctive traits and personalities, forming the cornerstone of what would become a revolutionary gaming and digital collectible experience.</p>
                            
                            <p>These aren't just static collectibles—they're dynamic assets designed for utility and engagement. Each Genesis Chad will be progressively introduced to the in-game skins marketplace, where they'll be transformed into stunning 3D models ready for use across various gaming environments. This seamless integration bridges the gap between digital collectibles and interactive entertainment.</p>
                            
@@ -1034,15 +1034,15 @@ This means fighters truly own their digital assets and can trade them freely wit
                       <section id="airdrop-calculator" className="mb-12">
                         <br />
                         <h2 className="text-3xl font-bold">Airdrop Calculator</h2>
-                        <p className="mb-6">Calculate your share of the 5,000,000,000 token airdrop based on your NFT holdings.</p>
+                        <p className="mb-6">Calculate your share of the 5,000,000,000 token airdrop based on your holdings.</p>
 
                         <div className="grid gap-6 md:grid-cols-2 mb-8">
                           {/* Input Section */}
                           <Card className="bg-white border-gray-200">
                             <CardHeader>
-                              <CardTitle className="text-gray-900">Your NFT Holdings</CardTitle>
+                              <CardTitle className="text-gray-900">Your Holdings</CardTitle>
                               <CardDescription>
-                                Enter the number of NFTs you hold for each collection
+                                Enter the number you hold for each collection
                               </CardDescription>
                             </CardHeader>
                             <CardContent className="space-y-4">
@@ -1067,7 +1067,7 @@ This means fighters truly own their digital assets and can trade them freely wit
                             <CardHeader>
                               <CardTitle className="text-gray-900">Your Airdrop Allocation</CardTitle>
                               <CardDescription>
-                                Based on your NFT holdings
+                                Based on your holdings
                               </CardDescription>
                             </CardHeader>
                             <CardContent className="space-y-4">
@@ -1114,7 +1114,7 @@ This means fighters truly own their digital assets and can trade them freely wit
                               </div>
 
                               {userAllocation === 0 && <div className="text-center text-gray-500 py-8">
-                                  Enter your NFT holdings above to see your airdrop allocation
+                                  Enter your holdings above to see your airdrop allocation
                                 </div>}
                             </CardContent>
                           </Card>
@@ -1136,7 +1136,7 @@ This means fighters truly own their digital assets and can trade them freely wit
                                 </ul>
                               </div>
                               <div>
-                                <h4 className="font-semibold mb-2 text-gray-900">NFT Collections</h4>
+                                <h4 className="font-semibold mb-2 text-gray-900">Collections</h4>
                                 <ul className="text-sm text-gray-600 space-y-1">
                                   {Object.entries(collections).map(([key, collection]) => <li key={key}>
                                       {collection.name}: {collection.supply.toLocaleString()} supply
