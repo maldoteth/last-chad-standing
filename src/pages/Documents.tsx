@@ -995,7 +995,7 @@ This means fighters truly own their digital assets and can trade them freely wit
                          <h2 className="text-3xl font-bold text-center sm:text-left my-[30px]">Genesis Chads</h2>
                         
                          <div className="space-y-4 text-gray-700 leading-relaxed">
-                           <p>The Genesis Chads collection represents the original foundation of the Lean Chad ecosystem, featuring uniquely hand-drawn cartoon characters created by founder Mike Hales in 2022. Each Chad was meticulously crafted with distinctive traits and personalities, forming the cornerstone of what would become a revolutionary gaming and NFT experience.</p>
+                           <p>The Genesis Chads collection represents the original foundation of the Lean Chad ecosystem, featuring uniquely hand-drawn cartoon characters created by founder Mike Hales in 2022. Each Chad was meticulously crafted with distinctive traits and personalities, forming the cornerstone of what would become a revolutionary gaming and digital collectible experience.</p>
                            
                            <p>These aren't just static collectibles—they're dynamic assets designed for utility and engagement. Each Genesis Chad will be progressively introduced to the in-game skins marketplace, where they'll be transformed into stunning 3D models ready for use across various gaming environments. This seamless integration bridges the gap between digital collectibles and interactive entertainment.</p>
                            
