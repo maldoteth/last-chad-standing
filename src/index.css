@@ -155,3 +155,271 @@ div[style*="background-color"] {
   scrollbar-width: thin;
   scrollbar-color: rgba(100, 100, 100, 0.5) transparent;
 }
+
+/* Button-4 realistic animated button */
+@keyframes button4-pulse {
+  0% {
+    transform: perspective(100px) rotateX(10deg) scale(0.8);
+    opacity: 0.45;
+  }
+  50% {
+    transform: perspective(100px) rotateX(10deg) scale(1);
+    opacity: 0.75;
+  }
+  100% {
+    transform: perspective(100px) rotateX(10deg) scale(0.8);
+    opacity: 0.45;
+  }
+}
+
+.radio-group {
+  --radio-size-total: 120px;
+  --radio-border: 12px;
+  --radio-bg-hue: 220;
+  --radio-border-hue: 210;
+  --transition-speed: 50ms;
+  --glow-speed: 1.25s;
+  --glow-times: 3;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+}
+
+.radio-container {
+  width: var(--radio-size-total);
+  height: var(--radio-size-total);
+  background-color: hsl(var(--radio-border-hue), 20%, 20%);
+  box-shadow: 0 calc(var(--radio-border) / 3) 4px 0 rgba(0, 0, 0, 0.47);
+  border-radius: 50%;
+  position: relative;
+}
+
+.radio-container::before {
+  content: "";
+  pointer-events: none;
+  background-color: hsl(var(--radio-border-hue), 20%, 10%);
+  width: 100%;
+  height: 100%;
+  mask: radial-gradient(
+    circle at 50% 50%,
+    transparent calc(var(--radio-size-total) / 2 - var(--radio-border)),
+    black calc(var(--radio-size-total) / 2 - var(--radio-border) + 1px),
+    black calc(var(--radio-size-total) / 2 - var(--radio-border) + 3px),
+    transparent calc(var(--radio-size-total) / 2 - var(--radio-border) + 5px),
+    transparent calc(var(--radio-size-total) / 2 - 5px),
+    black calc(var(--radio-size-total) / 2 - 3px)
+  );
+  -webkit-mask: radial-gradient(
+    circle at 50% 50%,
+    transparent calc(var(--radio-size-total) / 2 - var(--radio-border)),
+    black calc(var(--radio-size-total) / 2 - var(--radio-border) + 1px),
+    black calc(var(--radio-size-total) / 2 - var(--radio-border) + 3px),
+    transparent calc(var(--radio-size-total) / 2 - var(--radio-border) + 5px),
+    transparent calc(var(--radio-size-total) / 2 - 5px),
+    black calc(var(--radio-size-total) / 2 - 3px)
+  );
+  z-index: 1;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.radio-button {
+  top: calc(var(--radio-border) / 1);
+  left: calc(var(--radio-border) / 1);
+  width: calc(var(--radio-size-total) - var(--radio-border) * 2);
+  height: calc(var(--radio-size-total) - var(--radio-border) * 2);
+  background-color: hsl(var(--radio-bg-hue), 100%, 50%);
+  background-image: linear-gradient(
+    to bottom,
+    hsl(var(--radio-bg-hue), 100%, 60%),
+    hsl(var(--radio-bg-hue), 100%, 50%) 70%,
+    hsl(var(--radio-bg-hue), 100%, 30%)
+  );
+  box-shadow: 0 calc(var(--radio-border) * 2) 6px 6px rgba(0, 0, 0, 0.2);
+  transition: box-shadow var(--transition-speed) ease-in-out;
+  border-radius: 50%;
+  position: absolute;
+  cursor: pointer;
+}
+
+.radio-button::before {
+  content: "";
+  pointer-events: none;
+  top: calc(-1 * var(--radio-border));
+  left: calc(-1 * var(--radio-border));
+  width: var(--radio-size-total);
+  height: var(--radio-size-total);
+  background-image: radial-gradient(
+      circle at 50% 50%,
+      transparent calc(var(--radio-size-total) / 2 - var(--radio-border)),
+      hsla(var(--radio-border-hue), 100%, 0%, 0.5) 75%
+    ),
+    conic-gradient(
+      from 20deg at 50% 50%,
+      #fff 0%,
+      transparent 1%,
+      rgba(255, 255, 255, 0.27) 20%,
+      rgba(0, 0, 0, 0.13) 50%,
+      rgba(255, 255, 255, 0.53) 75%,
+      transparent 85%,
+      rgba(255, 255, 255, 0.67) 86%,
+      rgba(255, 255, 255, 0.4) 87%,
+      transparent 99%,
+      #fff 100%
+    );
+  mask-image: radial-gradient(
+    circle at 50% 50%,
+    transparent 0,
+    transparent 30%,
+    black 35%,
+    black calc(var(--radio-size-total) / 2),
+    transparent calc(var(--radio-size-total) / 2 + 2px)
+  );
+  -webkit-mask-image: radial-gradient(
+    circle at 50% 50%,
+    transparent 0,
+    transparent 30%,
+    black 35%,
+    black calc(var(--radio-size-total) / 2),
+    transparent calc(var(--radio-size-total) / 2 + 2px)
+  );
+  border-radius: 50%;
+  position: absolute;
+}
+
+.radio-button::after {
+  content: "";
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 0 calc(var(--radio-border) / 3) 3px rgba(0, 0, 0, 0.8) inset;
+  z-index: 1;
+  transition: box-shadow var(--transition-speed) ease-in-out,
+    background-image var(--transition-speed) ease-in-out;
+  background-image: radial-gradient(6% 4% at 43% 29%, rgba(255, 255, 255, 0.93) 35%, rgba(255, 255, 255, 0.53) 55%, transparent),
+    radial-gradient(3% 2% at 75% 20%, rgba(255, 255, 255, 0.87) 45%, rgba(255, 255, 255, 0.53) 50%, transparent),
+    radial-gradient(2% 1% at 70% 30%, rgba(255, 255, 255, 0.8) 15%, rgba(255, 255, 255, 0.47) 50%, transparent),
+    radial-gradient(2% 1% at 65% 40%, rgba(255, 255, 255, 0.67) 15%, rgba(255, 255, 255, 0.33) 50%, transparent),
+    radial-gradient(3% 2% at 25% 22%, rgba(255, 255, 255, 0.87) 45%, rgba(255, 255, 255, 0.53) 50%, transparent),
+    radial-gradient(2% 1% at 30% 32%, rgba(255, 255, 255, 0.8) 15%, rgba(255, 255, 255, 0.47) 50%, transparent),
+    radial-gradient(2% 1% at 35% 42%, rgba(255, 255, 255, 0.67) 15%, rgba(255, 255, 255, 0.33) 50%, transparent),
+    radial-gradient(70% 50% at 50% 37%, transparent, rgba(255, 255, 255, 0.13) 45%, rgba(255, 255, 255, 0.2), transparent 57%),
+    radial-gradient(circle, transparent 40%, rgba(255, 255, 255, 0.13) 47%, rgba(255, 255, 255, 0.07) 68%, transparent 59%, transparent);
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.radio-input-element {
+  top: calc(var(--radio-border) / 1);
+  left: calc(var(--radio-border) / 1);
+  width: calc(var(--radio-size-total) - var(--radio-border) * 2);
+  height: calc(var(--radio-size-total) - var(--radio-border) * 2);
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  opacity: 0;
+  cursor: pointer;
+  background-color: transparent;
+  border-radius: 50%;
+  margin: 0;
+  position: absolute;
+  z-index: 2;
+}
+
+.radio-icon-element {
+  pointer-events: none;
+  fill: none;
+  stroke: rgba(230, 230, 230, 0.9);
+  stroke-width: 3px;
+  stroke-linecap: square;
+  filter: drop-shadow(0 14px 3px rgba(0, 0, 0, 0.4));
+  z-index: 0;
+  width: 75%;
+  height: 75%;
+  transition: transform calc(var(--transition-speed) * 0.25) ease-in-out,
+    filter calc(var(--transition-speed) * 0.25) ease-in-out;
+  position: absolute;
+  top: 12.5%;
+  left: 12.5%;
+  mask-image: radial-gradient(circle, #000 40%, transparent 100%);
+  -webkit-mask-image: radial-gradient(circle, #000 40%, transparent 100%);
+  mask-composite: exclude;
+  -webkit-mask-composite: xor;
+}
+
+.glow {
+  pointer-events: none;
+  background-color: color-mix(in hsl, hsl(var(--radio-bg-hue), 100%, 60%), #ffe15c 15%);
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: -15%;
+  left: 0;
+  filter: blur(2em);
+  opacity: 0;
+  z-index: 1;
+  transform: perspective(100px) rotateX(10deg) scale(0.8);
+}
+
+.radio-container.danger {
+  --radio-bg-hue: 355;
+}
+
+.radio-container:has(.radio-input-element:checked) .radio-button {
+  box-shadow: 0 calc(var(--radio-border) * 2) 12px 2px rgba(0, 0, 0, 0.27);
+}
+
+.radio-container:has(.radio-input-element:checked) .radio-button::after {
+  box-shadow: 0 0 var(--radio-border) calc(var(--radio-border) / 2) rgba(0, 0, 0, 0.8) inset;
+}
+
+.radio-container:has(.radio-input-element:checked) .glow {
+  animation: button4-pulse var(--glow-speed) ease-in-out var(--glow-times) forwards;
+}
+
+.radio-container:has(.radio-input-element:checked) .radio-icon-element {
+  filter: drop-shadow(0 12px 2px rgba(0, 0, 0, 0.5));
+}
+
+.radio-container:has(.radio-input-element:checked):hover .radio-icon-element {
+  filter: drop-shadow(0 16px 4px rgba(0, 0, 0, 0.4));
+}
+
+.radio-container:has(.radio-input-element:checked):active .radio-icon-element {
+  filter: drop-shadow(0 10px 2px rgba(0, 0, 0, 0.4));
+}
+
+.radio-container:hover .radio-button {
+  box-shadow: 0 calc(var(--radio-border) * 2.5) 12px 2px rgba(0, 0, 0, 0.2);
+}
+
+.radio-container:hover .radio-button::after {
+  box-shadow: 0 0 calc(var(--radio-border) / 3) 3px rgba(0, 0, 0, 0.33) inset;
+  scale: 1.05;
+}
+
+.radio-container:hover .radio-icon-element {
+  filter: drop-shadow(0 16px 4px rgba(0, 0, 0, 0.4));
+  transform: scale(1.05);
+}
+
+.radio-container:active .radio-button {
+  box-shadow: 0 calc(var(--radio-border) * 1.5) 6px 4px rgba(0, 0, 0, 0.2);
+}
+
+.radio-container:active .radio-button::after {
+  box-shadow: 0 0 calc(var(--radio-border) / 1) var(--radio-border) rgba(0, 0, 0, 0.6) inset;
+  scale: 1;
+}
+
+.radio-container:active .radio-icon-element {
+  filter: drop-shadow(0 10px 2px rgba(0, 0, 0, 0.4));
+  transform: scale(0.95);
+}
