@@ -37,7 +37,11 @@ const LandingOverlay = () => {
     <div
       className={`fixed inset-0 z-[100] bg-black transition-transform duration-500 ease-in-out ${closing ? '-translate-y-full' : 'translate-y-0'}`}
     >
-      <BrokenByDesign title="last chad standing." height="100%" />
+      <BrokenByDesign
+        title="last chad standing."
+        logoSrc="/lovable-uploads/fa645b0b-fcbe-46f6-9054-45d5ab0929d6.png"
+        height="100%"
+      />
 
       {/* Enter */}
       <button
