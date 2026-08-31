@@ -103,6 +103,29 @@ const BBD2_CSS = `/* broken by design. -----------------------------------------
   opacity: 0.85;
 }
 
+/* ------- logo variant ----------------------------------------------- */
+
+/* When a logo replaces the wordmark: same node in the under layer and
+   in every slice, so the shard alignment math still holds. */
+.bbd2-logo {
+  height: 62%;
+  width: auto;
+  max-width: 80%;
+  object-fit: contain;
+}
+
+.bbd2-title--under .bbd2-logo {
+  opacity: 0.22;
+  filter: grayscale(1) brightness(1.1);
+}
+
+.bbd2-slice > .bbd2-logo {
+  opacity: 0.55;
+  mix-blend-mode: screen;
+  filter: grayscale(1) blur(0.3px);
+  transform: var(--jt);
+}
+
 /* ------- cracks through the void ------------------------------------ */
 
 .bbd2-cracks {
@@ -348,6 +371,8 @@ export interface BrokenByDesignProps {
   /** Base URL where the shard PNGs are hosted (no trailing slash). */
   assetsBase?: string
   title?: string
+  /** Logo image that replaces the text behind the glass. */
+  logoSrc?: string
   height?: string
   /** Crack tick on hover. Starts ON; the UI toggle lets users mute. */
   sound?: boolean
@@ -511,6 +536,36 @@ function playCrack(ctx: AudioContext) {
   noise.start(now)
 }
 
+/* Sampled glass crackle (~6 KB mp3, embedded so the file stays
+   self-contained). Half the hover ticks play this recording instead of
+   the synth burst, so repeated hovers don't sound machine-made. */
+const CRACKLE_MP3 =
+  'data:audio/mpeg;base64,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xhoFoegB//twxEUAUCWdO4eMz8ntsmeymFABhAAKPhJAW+QUIfZDhsmk5GAQWHVFxYADJMgeOhXIJOUgwLYwdFxl1HC5ma+dDEVZTEqV0cxSMahXkjU2cxkcRQl1LZ9ZFH7sjFV1M5WaLnFUO92LKVzK1j0Hj0q1V7vSzPbroZ9zJYguKnO9cR+fAG03tdRaPhsLRYLRIJBGIxGFplvJTZ/3BZN9X/N5QRF2XJ/6TRDz4QHUO41d/gQgljk43bX+NaBqCIgjRKh3/nlDIelEHTulv/6Z+TqqZIR9sbv/9j0x9abHTp7c7/lv//5qWlbz586khBJi5hzvj////MLLCwpoyMDA4XnkqN87KKShRUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/7cMRYgBAhW1W5hYAYAAA0g4AABFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVU='
+
+let crackleBuf: AudioBuffer | null = null
+let crackleLoading = false
+
+function loadCrackle(ctx: AudioContext) {
+  if (crackleBuf || crackleLoading) return
+  crackleLoading = true
+  fetch(CRACKLE_MP3)
+    .then((r) => r.arrayBuffer())
+    .then((b) => ctx.decodeAudioData(b))
+    .then((buf) => { crackleBuf = buf })
+    .catch(() => { crackleLoading = false })
+}
+
+function playCrackle(ctx: AudioContext) {
+  if (!crackleBuf) return false
+  const src = ctx.createBufferSource()
+  src.buffer = crackleBuf
+  const g = ctx.createGain()
+  g.gain.value = 0.45
+  src.connect(g); g.connect(ctx.destination)
+  src.start()
+  return true
+}
+
 type SpringState = { rx: number; ry: number; tz: number; px: number; py: number; sc: number }
 
 /* Every fragment rests at its own slight depth and tilt — the pane
@@ -543,6 +598,7 @@ function toTransform(s: SpringState) {
 export default function BrokenByDesign({
   assetsBase = 'https://cdn.jsdelivr.net/gh/gughigug/broken-by-design-assets@main',
   title = 'broken by design.',
+  logoSrc,
   height = '100dvh',
   sound = true,
   interactive = true,
@@ -584,6 +640,7 @@ export default function BrokenByDesign({
       `${assetsBase}/sound-on.png`,
       `${assetsBase}/sound-off.png`,
     ]
+    if (logoSrc) urls.push(logoSrc)
     const timeout = setTimeout(() => { if (!cancelled) setReady(true) }, 2500)
     Promise.all(
       urls.map(
@@ -599,10 +656,13 @@ export default function BrokenByDesign({
       if (!cancelled) { clearTimeout(timeout); setReady(true) }
     })
     return () => { cancelled = true; clearTimeout(timeout) }
-  }, [assetsBase, setKey])
+  }, [assetsBase, setKey, logoSrc])
 
-  /* Portrait: the words stack and lean on a diagonal. */
-  const titleNode = portrait ? (
+  /* Portrait: the words stack and lean on a diagonal. A logo replaces
+     the text outright — same node in both layers either way. */
+  const titleNode = logoSrc ? (
+    <img className="bbd2-logo" src={logoSrc} alt="" draggable={false} />
+  ) : portrait ? (
     <span className="bbd2-stack">
       {title.split(' ').map((w, i) => (
         <em key={i}>{w}</em>
@@ -759,7 +819,8 @@ export default function BrokenByDesign({
             audioRef.current ??= new AudioContext()
             const ctx = audioRef.current
             if (ctx.state === 'suspended') ctx.resume().catch(() => {})
-            playCrack(ctx)
+            loadCrackle(ctx)
+            if (!(Math.random() < 0.5 && playCrackle(ctx))) playCrack(ctx)
           } catch { /* decorative */ }
         }
       }
@@ -900,7 +961,10 @@ export default function BrokenByDesign({
         aria-label={soundOn ? 'disattiva audio' : 'attiva audio'}
         onClick={() => {
           setSoundOn((v) => !v)
-          try { audioRef.current ??= new AudioContext() } catch { /* - */ }
+          try {
+            audioRef.current ??= new AudioContext()
+            loadCrackle(audioRef.current)
+          } catch { /* - */ }
         }}
       >
         {ready && (
