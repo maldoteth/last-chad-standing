@@ -47,6 +47,7 @@ const LandingOverlay = () => {
       <BrokenByDesign
         title="last chad standing."
         logoSrc="/lovable-uploads/fa645b0b-fcbe-46f6-9054-45d5ab0929d6.png"
+        logoHiSrc="/lovable-uploads/467b4b2b-4ef7-4259-8c00-cc82ac4255ae.png"
         height="100%"
         shatter={closing}
         onShatterEnd={finish}
