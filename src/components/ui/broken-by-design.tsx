@@ -363,18 +363,58 @@ const BBD2_CSS = `/* broken by design. -----------------------------------------
 }
 
 .bbd2--shatter .bbd2-bg,
-.bbd2--shatter .bbd2-cracks,
-.bbd2--shatter .bbd2-title--under,
 .bbd2--shatter .bbd2-sound,
 .bbd2--shatter .bbd2-credit {
   opacity: 0;
-  transition: opacity 0.3s ease-out;
+  transition: opacity 0.14s linear;
   pointer-events: none;
+}
+
+/* The fracture network holds until the fist actually hits it. */
+.bbd2--shatter .bbd2-cracks {
+  opacity: 0;
+  transition: opacity 0.22s linear 0.24s;
+  pointer-events: none;
+}
+
+/* Every screen-blend in here was compositing against the black pane.
+   Once the app is the backdrop, each blended layer forces the browser to
+   re-read a full-screen surface per frame — that is the jank. Drop them
+   for the fall: what's left is the glass and its edges, which is all you
+   see anyway once the pieces are tumbling. */
+.bbd2--shatter .bbd2-specular,
+.bbd2--shatter .bbd2-glassimg::after {
+  display: none;
+}
+
+/* The logo stops being a thing trapped inside the glass and becomes one
+   object in front of it — so the per-shard slices go, and the under layer
+   comes forward, lit. */
+.bbd2--shatter .bbd2-slice {
+  opacity: 0;
+  transition: opacity 0.16s linear;
+}
+
+.bbd2--shatter .bbd2-title--under {
+  z-index: 60;
+  opacity: 1;
+  animation: none;
+}
+
+.bbd2--shatter .bbd2-title--under .bbd2-logo {
+  opacity: 0.95;
+  filter:
+    grayscale(1) brightness(1.5)
+    drop-shadow(0 0 28px rgba(150, 185, 255, 0.4));
+  transition: opacity 0.18s linear, filter 0.18s linear;
 }
 
 .bbd2--shatter .bbd2-shard {
   pointer-events: none;
   transition: none;
+  filter: none;
+  will-change: transform;
+  backface-visibility: hidden;
 }
 `
 
@@ -623,6 +663,20 @@ function toTransform(s: SpringState) {
   )
 }
 
+/* Same function list as toTransform plus rotateZ — the exit keyframes must
+   match the resting transform function-for-function, or Chrome decomposes
+   both to matrices and interpolates the rotations into a wobble. */
+function toFallTransform(
+  x: number, y: number, z: number,
+  rx: number, ry: number, rz: number, sc: number,
+) {
+  return (
+    `translate3d(${x.toFixed(2)}px, ${y.toFixed(2)}px, ${z.toFixed(2)}px)` +
+    ` rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg) rotateZ(${rz.toFixed(2)}deg)` +
+    ` scale(${sc.toFixed(4)})`
+  )
+}
+
 export default function BrokenByDesign({
   assetsBase = 'https://cdn.jsdelivr.net/gh/gughigug/broken-by-design-assets@main',
   title = 'broken by design.',
@@ -636,6 +690,9 @@ export default function BrokenByDesign({
 }: BrokenByDesignProps) {
   const rootRef = useRef<HTMLElement>(null)
   const audioRef = useRef<AudioContext | null>(null)
+
+  /* last pose the spring loop wrote, handed to the exit animation */
+  const poseRef = useRef<SpringState[] | null>(null)
 
   const [portrait, setPortrait] = useState(false)
   const [soundOn, setSoundOn] = useState(sound)
@@ -759,6 +816,7 @@ export default function BrokenByDesign({
     const cur: SpringState[] = shards.map((_, i) => baseOf(P[i].id, i + 1))
     const tgt: SpringState[] = shards.map((_, i) => baseOf(P[i].id, i + 1))
     const hovered = new Set<number>()
+    poseRef.current = cur
 
     let raf = 0
     let running = false
@@ -877,7 +935,7 @@ export default function BrokenByDesign({
     }
   }, [interactive, setKey, ready, shatter])
 
-  /* ---------- exit: gravity takes the pane ---------- */
+  /* ---------- exit: the fist comes through the pane ---------- */
   useEffect(() => {
     const root = rootRef.current
     if (!root || !shatter) return
@@ -891,8 +949,44 @@ export default function BrokenByDesign({
       return () => clearTimeout(t)
     }
 
+    /* the beat: fist travels forward, connects, glass goes. Nothing in the
+       pane moves before IMPACT — that wait is what sells the hit. */
+    const IMPACT = 300
+    const FALL = 900
+    const fallY = window.innerHeight * 1.35
+    const pose = poseRef.current
     let last = 0
+    const cleanupSound: ReturnType<typeof setTimeout>[] = []
 
+    /* ---- the fist: forward into the pane, then past the camera ---- */
+    const mark = root.querySelector<HTMLElement>('.bbd2-title--under')
+    if (mark) {
+      mark.animate(
+        [
+          { transform: 'scale(1)', opacity: 1, offset: 0 },
+          { transform: 'scale(1.3)', opacity: 1, offset: 0.24, easing: 'cubic-bezier(.5,0,.85,.4)' },
+          { transform: 'scale(2.4)', opacity: 1, offset: 0.42, easing: 'cubic-bezier(.3,0,.7,1)' },
+          { transform: 'scale(13)', opacity: 0, offset: 1 },
+        ],
+        { duration: 1200, easing: 'cubic-bezier(.4,0,.7,1)', fill: 'forwards' },
+      )
+      last = 1200
+    }
+
+    /* the hit itself */
+    if (soundRef.current) {
+      const t = setTimeout(() => {
+        try {
+          audioRef.current ??= new AudioContext()
+          const ctx = audioRef.current
+          if (ctx.state === 'suspended') ctx.resume().catch(() => {})
+          if (!playCrackle(ctx)) playCrack(ctx)
+        } catch { /* decorative */ }
+      }, IMPACT)
+      cleanupSound.push(t)
+    }
+
+    /* ---- the glass: blown outward off the fist, then gravity ---- */
     shards.forEach((el, i) => {
       const p = P[i]
       const seed = i + 1
@@ -901,32 +995,40 @@ export default function BrokenByDesign({
         return s - Math.floor(s)
       }
 
-      /* start from wherever the spring loop left this piece, so nothing
-         snaps at the moment of release */
-      const from = el.style.transform || toTransform(baseOf(p.id, seed))
+      /* exact pose the spring loop left this piece in */
+      const b = (pose && pose[i]) || baseOf(p.id, seed)
 
-      /* higher pieces let go first; a little scatter so the pane doesn't
-         come away as one sheet */
-      const delay = Math.round((p.cy / 100) * 90 + r(4) * 170)
-      const dur = 1100 + Math.round(r(5) * 420)
-      const drift = (r(1) - 0.5) * 150 + (p.cx - 50) * 1.6
-      const spin = (r(2) - 0.5) * 140
-      const tilt = (r(3) - 0.5) * 90
+      /* pieces are thrown away from where the fist came through */
+      const ux = (p.cx - 50) / 50
+      const uy = (p.cy - 50) / 50
+      const burstX = ux * 110 + (r(1) - 0.5) * 40
+      const burstY = uy * 80 + (r(2) - 0.5) * 30
+
+      const delay = IMPACT + Math.round(r(4) * 60)
+      const dur = FALL + Math.round(r(5) * 160)
+      const drift = burstX * 1.5
+      const spin = (r(2) - 0.5) * 90
+      const tilt = (r(3) - 0.5) * 50
 
       el.animate(
         [
-          { transform: from, opacity: 1, offset: 0, easing: 'cubic-bezier(.33,0,.67,0)' },
           {
-            transform: `${from} translate3d(${(drift * 0.1).toFixed(1)}px, -22px, 70px)`,
-            opacity: 1,
-            offset: 0.13,
-            easing: 'cubic-bezier(.55,.06,.68,.19)',
+            transform: toFallTransform(b.px, b.py, b.tz, b.rx, b.ry, 0, b.sc),
           },
           {
-            transform:
-              `translate3d(${drift.toFixed(1)}px, 125vh, -140px)` +
-              ` rotateX(${tilt.toFixed(1)}deg) rotateZ(${spin.toFixed(1)}deg)`,
-            opacity: 0.9,
+            transform: toFallTransform(
+              b.px + burstX, b.py + burstY, b.tz + 230,
+              b.rx + tilt * 0.3, b.ry, spin * 0.25, b.sc * 1.06,
+            ),
+            offset: 0.2,
+            easing: 'cubic-bezier(.16,.9,.4,1)',
+          },
+          {
+            transform: toFallTransform(
+              b.px + drift, b.py + fallY, b.tz,
+              b.rx + tilt, b.ry, spin, b.sc,
+            ),
+            easing: 'cubic-bezier(.42,0,.86,.36)',
           },
         ],
         { duration: dur, delay, fill: 'forwards' },
@@ -935,8 +1037,11 @@ export default function BrokenByDesign({
       last = Math.max(last, dur + delay)
     })
 
-    const t = setTimeout(() => onShatterEnd?.(), last + 60)
-    return () => clearTimeout(t)
+    const t = setTimeout(() => onShatterEnd?.(), last + 40)
+    return () => {
+      clearTimeout(t)
+      cleanupSound.forEach(clearTimeout)
+    }
   }, [shatter, setKey, onShatterEnd])
 
   return (
