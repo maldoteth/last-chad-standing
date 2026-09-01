@@ -64,8 +64,6 @@ const BBD2_CSS = `/* broken by design. -----------------------------------------
 .bbd2-title {
   inset: 0;
   z-index: 1;
-  opacity: 0;
-  animation: bbd2-cracks-in 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 /* The exposed word: flat and cold. No halo — air doesn't glow. */
@@ -135,8 +133,6 @@ const BBD2_CSS = `/* broken by design. -----------------------------------------
   height: 100%;
   z-index: 2;
   pointer-events: none;
-  opacity: 0;
-  animation: bbd2-cracks-in 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes bbd2-cracks-in {
@@ -787,48 +783,11 @@ export default function BrokenByDesign({
     const shards = Array.from(root.querySelectorAll<HTMLElement>('[data-shard]'))
     const P = setKey === 'mobile' ? MOBILE : DESKTOP
 
-    /* resting pose is the floor state — set it as inline style so the
-       entrance animation (fill: backwards) lands exactly on it */
+    /* resting pose is the floor state — the pane paints already whole,
+       no assembly: by the time ready flips, everything is loaded */
     shards.forEach((el, i) => {
       el.style.transform = toTransform(baseOf(P[i].id, i + 1))
     })
-
-    /* ---------- entrance: the pane reassembles from the center ---------- */
-    if (!reduced) {
-      shards.forEach((el, i) => {
-        const p = P[i]
-        const rest = toTransform(baseOf(p.id, i + 1))
-        const dx = p.cx - 50
-        const dy = p.cy - 50
-        const dist = Math.hypot(dx, dy)
-        const ux = dx / (dist || 1)
-        const uy = dy / (dist || 1)
-        el.animate(
-          [
-            {
-              opacity: 0,
-              transform:
-                `translate3d(${ux * 110}px, ${uy * 110}px, 280px)` +
-                ` rotateX(${uy * -12}deg) rotateY(${ux * 12}deg)`,
-              filter: 'brightness(2) blur(2px)',
-            },
-            {
-              opacity: 1,
-              transform: rest,
-              filter: 'brightness(1) blur(0px)',
-              offset: 0.72,
-            },
-            { opacity: 1, transform: rest, filter: 'none' },
-          ],
-          {
-            duration: 1400,
-            delay: 180, // all pieces land together — the word assembles in one beat
-            easing: 'cubic-bezier(.16,1,.3,1)',
-            fill: 'backwards',
-          },
-        )
-      })
-    }
 
     if (!interactive || reduced) return
 
@@ -975,8 +934,6 @@ export default function BrokenByDesign({
     const BREAK = 240
     const THROUGH = 310
     const FIST = 1000
-    const FALL = 900
-    const fallY = window.innerHeight * 1.35
     const pose = poseRef.current
     const timers: ReturnType<typeof setTimeout>[] = []
     let last = FIST
@@ -1076,7 +1033,7 @@ export default function BrokenByDesign({
       }, BREAK))
     }
 
-    /* ---- the glass: gives at the centre, thrown at the camera, down ---- */
+    /* ---- the glass: blown off the punch, flying at every angle ---- */
     shards.forEach((el, i) => {
       const p = P[i]
       const seed = i + 1
@@ -1088,8 +1045,9 @@ export default function BrokenByDesign({
       /* exact pose the spring loop left this piece in */
       const b = (pose && pose[i]) || baseOf(p.id, seed)
 
-      /* the break travels out from the point of the punch, and the
-         nearest pieces are the ones thrown hardest at the viewer */
+      /* pop toward the camera off the impact, then out along each
+         piece's own radial — up, sideways, down, every angle at once.
+         Centre pieces, with no radial to speak of, pick a random one. */
       const ux = (p.cx - 50) / 50
       const uy = (p.cy - 50) / 50
       const spread = Math.hypot(p.cx - 50, p.cy - 50)
@@ -1097,9 +1055,16 @@ export default function BrokenByDesign({
       const burstY = uy * 95 + (r(2) - 0.5) * 30
       const burstZ = 340 - spread * 2.2
 
+      const heading =
+        spread > 8
+          ? Math.atan2(uy, ux) + (r(6) - 0.5) * 0.9
+          : r(7) * Math.PI * 2
+      const throwR = Math.max(window.innerWidth, window.innerHeight) * 1.15
+      const exitX = Math.cos(heading) * throwR
+      const exitY = Math.sin(heading) * throwR + 170
+
       const delay = BREAK + Math.round(spread * 1.2 + r(4) * 25)
-      const dur = FALL + Math.round(r(5) * 160)
-      const drift = burstX * 1.5
+      const dur = 780 + Math.round(r(5) * 240)
       const spin = (r(2) - 0.5) * 90
       const tilt = (r(3) - 0.5) * 50
 
@@ -1115,12 +1080,12 @@ export default function BrokenByDesign({
               b.rx + tilt * 0.3, b.ry, spin * 0.25, b.sc * 1.09,
             ),
             offset: 0.18,
-            easing: 'cubic-bezier(.42,0,.86,.36)',
+            easing: 'cubic-bezier(.25,.46,.45,.94)',
           },
           {
             transform: toFallTransform(
-              b.px + drift, b.py + fallY, b.tz,
-              b.rx + tilt, b.ry, spin, b.sc,
+              b.px + exitX, b.py + exitY, b.tz - 40,
+              b.rx + tilt * 2.4, b.ry + (r(8) - 0.5) * 140, spin * 2.2, b.sc,
             ),
           },
         ],
