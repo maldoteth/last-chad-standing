@@ -366,14 +366,15 @@ const BBD2_CSS = `/* broken by design. -----------------------------------------
 .bbd2--shatter .bbd2-sound,
 .bbd2--shatter .bbd2-credit {
   opacity: 0;
-  transition: opacity 0.14s linear;
+  transition: opacity 0.14s linear 0.12s;
   pointer-events: none;
 }
 
-/* The fracture network holds until the fist actually hits it. */
+/* The fracture network holds until the break, then dies WITH it — any
+   fade that outlives the pieces reads as an outline hanging in the air. */
 .bbd2--shatter .bbd2-cracks {
   opacity: 0;
-  transition: opacity 0.08s linear 0.13s;
+  transition: opacity 0.07s linear 0.17s;
   pointer-events: none;
 }
 
@@ -387,26 +388,18 @@ const BBD2_CSS = `/* broken by design. -----------------------------------------
   display: none;
 }
 
-/* The logo stops being a thing trapped inside the glass and becomes one
-   object in front of it — so the per-shard slices go, and the under layer
-   comes forward, lit. */
+/* The fist stays a thing behind the glass right up to the break — the
+   slices swell with it, then ride their shards down. The z-order flip and
+   the punch-out flash are driven from the exit effect, at the moment it
+   actually crosses the plane. */
 .bbd2--shatter .bbd2-slice {
   opacity: 0;
-  transition: opacity 0.12s linear 0.06s;
+  transition: opacity 0.3s linear 0.26s;
 }
 
 .bbd2--shatter .bbd2-title--under {
-  z-index: 60;
   opacity: 1;
   animation: none;
-}
-
-.bbd2--shatter .bbd2-title--under .bbd2-logo {
-  opacity: 0.95;
-  filter:
-    grayscale(1) brightness(1.5)
-    drop-shadow(0 0 28px rgba(150, 185, 255, 0.4));
-  transition: opacity 0.18s linear, filter 0.18s linear;
 }
 
 .bbd2--shatter .bbd2-shard {
@@ -976,53 +969,114 @@ export default function BrokenByDesign({
       return () => clearTimeout(t)
     }
 
-    /* The hit is early and the pane gives on contact: the fist is still
-       crossing the frame while the glass is coming down behind it, which
-       is the whole point — it breaks through, it doesn't follow through. */
-    const IMPACT = 180
-    const FIST = 950
+    /* The order of the hit: the pane gives first — cracks die, pieces let
+       go and start to drop — and the fist bursts through the falling
+       curtain a beat later. The glass falls ON the breakthrough. */
+    const BREAK = 240
+    const THROUGH = 310
+    const FIST = 1000
     const FALL = 900
     const fallY = window.innerHeight * 1.35
     const pose = poseRef.current
-    let last = 0
-    const cleanupSound: ReturnType<typeof setTimeout>[] = []
+    const timers: ReturnType<typeof setTimeout>[] = []
+    let last = FIST
 
-    /* ---- the fist: reaches the pane at IMPACT, then past the camera ---- */
+    /* Prime the audio path now, inside the click's activation window —
+       creating or resuming the context later, inside a timeout, is exactly
+       when Safari decides the gesture is stale and mutes the hit. */
+    if (soundRef.current) {
+      try {
+        audioRef.current ??= new AudioContext()
+        const ctx = audioRef.current
+        if (ctx.state === 'suspended') ctx.resume().catch(() => {})
+        loadCrackle(ctx)
+      } catch { /* decorative */ }
+    }
+
+    /* ---- the fist: swells behind the glass, then through and past ---- */
     const mark = root.querySelector<HTMLElement>('.bbd2-title--under')
     if (mark) {
       mark.animate(
         [
           { transform: 'scale(1)', opacity: 1, filter: 'blur(0px)', offset: 0 },
           {
-            transform: 'scale(1.5)', opacity: 1, filter: 'blur(0px)',
-            offset: IMPACT / FIST, easing: 'cubic-bezier(.2,.7,.3,1)',
+            transform: 'scale(1.45)', opacity: 1, filter: 'blur(0px)',
+            offset: BREAK / FIST, easing: 'cubic-bezier(.3,0,.7,1)',
           },
           {
-            transform: 'scale(3.4)', opacity: 1, filter: 'blur(1.5px)',
-            offset: 0.36, easing: 'cubic-bezier(.3,0,.7,1)',
+            transform: 'scale(2.6)', opacity: 1, filter: 'blur(1px)',
+            offset: 0.45, easing: 'cubic-bezier(.3,0,.7,1)',
           },
-          { transform: 'scale(7)', opacity: 0.6, filter: 'blur(9px)', offset: 0.64 },
+          { transform: 'scale(7)', opacity: 0.6, filter: 'blur(9px)', offset: 0.72 },
           { transform: 'scale(13)', opacity: 0, filter: 'blur(22px)', offset: 1 },
         ],
         { duration: FIST, easing: 'cubic-bezier(.45,0,.75,1)', fill: 'forwards' },
       )
-      last = FIST
+
+      /* behind the pane on approach; in front of everything once through */
+      timers.push(setTimeout(() => { mark.style.zIndex = '60' }, THROUGH))
+
+      /* punch-out flash: brightness spikes as it crosses, then settles */
+      const logoEl = mark.querySelector<HTMLElement>('.bbd2-logo')
+      if (logoEl) {
+        logoEl.animate(
+          [
+            { opacity: 0.22, filter: 'grayscale(1) brightness(1.1)' },
+            {
+              opacity: 1,
+              filter: 'grayscale(1) brightness(2.1) drop-shadow(0 0 48px rgba(170, 200, 255, 0.55))',
+              offset: 0.45,
+            },
+            {
+              opacity: 0.95,
+              filter: 'grayscale(1) brightness(1.5) drop-shadow(0 0 26px rgba(150, 185, 255, 0.35))',
+            },
+          ],
+          { duration: 300, delay: THROUGH - 60, easing: 'ease-out', fill: 'forwards' },
+        )
+      }
     }
 
-    /* the hit itself */
+    /* the fist seen IN the glass swells with it until the pane gives */
+    root.querySelectorAll<HTMLElement>('.bbd2-slice > .bbd2-logo').forEach((el) => {
+      try {
+        el.animate(
+          [
+            { transform: 'var(--jt) scale(1)' },
+            { transform: 'var(--jt) scale(1.5)' },
+          ],
+          { duration: BREAK + 80, easing: 'cubic-bezier(.3,0,.7,1)', fill: 'forwards' },
+        )
+      } catch { /* losing the swell is not worth losing the exit */ }
+    })
+
+    /* one hard jolt through the whole stage as the pane gives */
+    const stage = root.querySelector<HTMLElement>('.bbd2-stage')
+    if (stage) {
+      stage.animate(
+        [
+          { transform: 'translate(0, 0)' },
+          { transform: 'translate(7px, -5px)', offset: 0.3 },
+          { transform: 'translate(-5px, 3px)', offset: 0.65 },
+          { transform: 'translate(0, 0)' },
+        ],
+        { duration: 190, delay: BREAK - 30, easing: 'ease-out' },
+      )
+    }
+
+    /* the crack of the hit lands with the break */
     if (soundRef.current) {
-      const t = setTimeout(() => {
+      timers.push(setTimeout(() => {
         try {
-          audioRef.current ??= new AudioContext()
           const ctx = audioRef.current
+          if (!ctx) return
           if (ctx.state === 'suspended') ctx.resume().catch(() => {})
           if (!playCrackle(ctx)) playCrack(ctx)
         } catch { /* decorative */ }
-      }, IMPACT)
-      cleanupSound.push(t)
+      }, BREAK))
     }
 
-    /* ---- the glass: gives at the point of contact, outward then down ---- */
+    /* ---- the glass: gives at the centre, thrown at the camera, down ---- */
     shards.forEach((el, i) => {
       const p = P[i]
       const seed = i + 1
@@ -1034,15 +1088,16 @@ export default function BrokenByDesign({
       /* exact pose the spring loop left this piece in */
       const b = (pose && pose[i]) || baseOf(p.id, seed)
 
-      /* the break travels out from where the fist came through, so the
-         centre pieces go first and the corners a beat behind */
+      /* the break travels out from the point of the punch, and the
+         nearest pieces are the ones thrown hardest at the viewer */
       const ux = (p.cx - 50) / 50
       const uy = (p.cy - 50) / 50
       const spread = Math.hypot(p.cx - 50, p.cy - 50)
       const burstX = ux * 130 + (r(1) - 0.5) * 40
       const burstY = uy * 95 + (r(2) - 0.5) * 30
+      const burstZ = 340 - spread * 2.2
 
-      const delay = IMPACT + Math.round(spread * 1.5 + r(4) * 30)
+      const delay = BREAK + Math.round(spread * 1.2 + r(4) * 25)
       const dur = FALL + Math.round(r(5) * 160)
       const drift = burstX * 1.5
       const spin = (r(2) - 0.5) * 90
@@ -1052,21 +1107,21 @@ export default function BrokenByDesign({
         [
           {
             transform: toFallTransform(b.px, b.py, b.tz, b.rx, b.ry, 0, b.sc),
+            easing: 'cubic-bezier(.05,.7,.1,1)',
           },
           {
             transform: toFallTransform(
-              b.px + burstX, b.py + burstY, b.tz + 260,
-              b.rx + tilt * 0.3, b.ry, spin * 0.25, b.sc * 1.07,
+              b.px + burstX, b.py + burstY, b.tz + burstZ,
+              b.rx + tilt * 0.3, b.ry, spin * 0.25, b.sc * 1.09,
             ),
-            offset: 0.16,
-            easing: 'cubic-bezier(.1,.85,.35,1)',
+            offset: 0.18,
+            easing: 'cubic-bezier(.42,0,.86,.36)',
           },
           {
             transform: toFallTransform(
               b.px + drift, b.py + fallY, b.tz,
               b.rx + tilt, b.ry, spin, b.sc,
             ),
-            easing: 'cubic-bezier(.42,0,.86,.36)',
           },
         ],
         { duration: dur, delay, fill: 'forwards' },
@@ -1078,7 +1133,7 @@ export default function BrokenByDesign({
     const t = setTimeout(() => onShatterEnd?.(), last + 40)
     return () => {
       clearTimeout(t)
-      cleanupSound.forEach(clearTimeout)
+      timers.forEach(clearTimeout)
     }
   }, [shatter, setKey, onShatterEnd])
 
