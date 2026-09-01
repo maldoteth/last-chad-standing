@@ -373,7 +373,7 @@ const BBD2_CSS = `/* broken by design. -----------------------------------------
 /* The fracture network holds until the fist actually hits it. */
 .bbd2--shatter .bbd2-cracks {
   opacity: 0;
-  transition: opacity 0.22s linear 0.24s;
+  transition: opacity 0.08s linear 0.13s;
   pointer-events: none;
 }
 
@@ -392,7 +392,7 @@ const BBD2_CSS = `/* broken by design. -----------------------------------------
    comes forward, lit. */
 .bbd2--shatter .bbd2-slice {
   opacity: 0;
-  transition: opacity 0.16s linear;
+  transition: opacity 0.12s linear 0.06s;
 }
 
 .bbd2--shatter .bbd2-title--under {
@@ -437,6 +437,10 @@ export interface BrokenByDesignProps {
   title?: string
   /** Logo image that replaces the text behind the glass. */
   logoSrc?: string
+  /** Full-size copy of the logo. Loaded lazily, after the pane is up, and
+      used only for the layer that flies at the camera on exit — the small
+      one pixelates at that scale, and this one is too heavy to gate on. */
+  logoHiSrc?: string
   height?: string
   /** Crack tick on hover. Starts ON; the UI toggle lets users mute. */
   sound?: boolean
@@ -681,6 +685,7 @@ export default function BrokenByDesign({
   assetsBase = 'https://cdn.jsdelivr.net/gh/gughigug/broken-by-design-assets@main',
   title = 'broken by design.',
   logoSrc,
+  logoHiSrc,
   height = '100dvh',
   sound = true,
   interactive = true,
@@ -705,6 +710,7 @@ export default function BrokenByDesign({
      THEN assembles. Times out after 2.5s so a slow network still
      shows something rather than hanging on a blank hero. */
   const [ready, setReady] = useState(false)
+  const [hiReady, setHiReady] = useState(false)
 
   useEffect(() => {
     const mq = window.matchMedia('(max-aspect-ratio: 1/1)')
@@ -745,6 +751,17 @@ export default function BrokenByDesign({
     return () => { cancelled = true; clearTimeout(timeout) }
   }, [assetsBase, setKey, logoSrc])
 
+  /* The big logo is deliberately outside the ready gate: the pane must not
+     wait on a megabyte, and this is only needed by the time someone leaves. */
+  useEffect(() => {
+    if (!logoHiSrc) return
+    let cancelled = false
+    const img = new Image()
+    img.onload = () => { if (!cancelled) setHiReady(true) }
+    img.src = logoHiSrc
+    return () => { cancelled = true }
+  }, [logoHiSrc])
+
   /* Portrait: the words stack and lean on a diagonal. A logo replaces
      the text outright — same node in both layers either way. */
   const titleNode = logoSrc ? (
@@ -758,6 +775,16 @@ export default function BrokenByDesign({
   ) : (
     <span>{title}</span>
   )
+
+  /* The under layer is the one that comes forward and fills the screen, so
+     it gets the full-size art once that has arrived. The per-shard slices
+     stay on the small copy — they are masked, blurred and gone on impact. */
+  const underNode =
+    logoSrc && logoHiSrc && hiReady ? (
+      <img className="bbd2-logo" src={logoHiSrc} alt="" draggable={false} />
+    ) : (
+      titleNode
+    )
 
   useEffect(() => {
     const root = rootRef.current
@@ -949,28 +976,37 @@ export default function BrokenByDesign({
       return () => clearTimeout(t)
     }
 
-    /* the beat: fist travels forward, connects, glass goes. Nothing in the
-       pane moves before IMPACT — that wait is what sells the hit. */
-    const IMPACT = 300
+    /* The hit is early and the pane gives on contact: the fist is still
+       crossing the frame while the glass is coming down behind it, which
+       is the whole point — it breaks through, it doesn't follow through. */
+    const IMPACT = 180
+    const FIST = 950
     const FALL = 900
     const fallY = window.innerHeight * 1.35
     const pose = poseRef.current
     let last = 0
     const cleanupSound: ReturnType<typeof setTimeout>[] = []
 
-    /* ---- the fist: forward into the pane, then past the camera ---- */
+    /* ---- the fist: reaches the pane at IMPACT, then past the camera ---- */
     const mark = root.querySelector<HTMLElement>('.bbd2-title--under')
     if (mark) {
       mark.animate(
         [
-          { transform: 'scale(1)', opacity: 1, offset: 0 },
-          { transform: 'scale(1.3)', opacity: 1, offset: 0.24, easing: 'cubic-bezier(.5,0,.85,.4)' },
-          { transform: 'scale(2.4)', opacity: 1, offset: 0.42, easing: 'cubic-bezier(.3,0,.7,1)' },
-          { transform: 'scale(13)', opacity: 0, offset: 1 },
+          { transform: 'scale(1)', opacity: 1, filter: 'blur(0px)', offset: 0 },
+          {
+            transform: 'scale(1.5)', opacity: 1, filter: 'blur(0px)',
+            offset: IMPACT / FIST, easing: 'cubic-bezier(.2,.7,.3,1)',
+          },
+          {
+            transform: 'scale(3.4)', opacity: 1, filter: 'blur(1.5px)',
+            offset: 0.36, easing: 'cubic-bezier(.3,0,.7,1)',
+          },
+          { transform: 'scale(7)', opacity: 0.6, filter: 'blur(9px)', offset: 0.64 },
+          { transform: 'scale(13)', opacity: 0, filter: 'blur(22px)', offset: 1 },
         ],
-        { duration: 1200, easing: 'cubic-bezier(.4,0,.7,1)', fill: 'forwards' },
+        { duration: FIST, easing: 'cubic-bezier(.45,0,.75,1)', fill: 'forwards' },
       )
-      last = 1200
+      last = FIST
     }
 
     /* the hit itself */
@@ -986,7 +1022,7 @@ export default function BrokenByDesign({
       cleanupSound.push(t)
     }
 
-    /* ---- the glass: blown outward off the fist, then gravity ---- */
+    /* ---- the glass: gives at the point of contact, outward then down ---- */
     shards.forEach((el, i) => {
       const p = P[i]
       const seed = i + 1
@@ -998,13 +1034,15 @@ export default function BrokenByDesign({
       /* exact pose the spring loop left this piece in */
       const b = (pose && pose[i]) || baseOf(p.id, seed)
 
-      /* pieces are thrown away from where the fist came through */
+      /* the break travels out from where the fist came through, so the
+         centre pieces go first and the corners a beat behind */
       const ux = (p.cx - 50) / 50
       const uy = (p.cy - 50) / 50
-      const burstX = ux * 110 + (r(1) - 0.5) * 40
-      const burstY = uy * 80 + (r(2) - 0.5) * 30
+      const spread = Math.hypot(p.cx - 50, p.cy - 50)
+      const burstX = ux * 130 + (r(1) - 0.5) * 40
+      const burstY = uy * 95 + (r(2) - 0.5) * 30
 
-      const delay = IMPACT + Math.round(r(4) * 60)
+      const delay = IMPACT + Math.round(spread * 1.5 + r(4) * 30)
       const dur = FALL + Math.round(r(5) * 160)
       const drift = burstX * 1.5
       const spin = (r(2) - 0.5) * 90
@@ -1017,11 +1055,11 @@ export default function BrokenByDesign({
           },
           {
             transform: toFallTransform(
-              b.px + burstX, b.py + burstY, b.tz + 230,
-              b.rx + tilt * 0.3, b.ry, spin * 0.25, b.sc * 1.06,
+              b.px + burstX, b.py + burstY, b.tz + 260,
+              b.rx + tilt * 0.3, b.ry, spin * 0.25, b.sc * 1.07,
             ),
-            offset: 0.2,
-            easing: 'cubic-bezier(.16,.9,.4,1)',
+            offset: 0.16,
+            easing: 'cubic-bezier(.1,.85,.35,1)',
           },
           {
             transform: toFallTransform(
@@ -1067,7 +1105,7 @@ export default function BrokenByDesign({
       {/* Exposed word in the gaps: flat, cold, no halo — the glow
           belongs to the glass, not to the air. */}
       <div className="bbd2-title bbd2-title--under" aria-hidden="true">
-        {titleNode}
+        {underNode}
       </div>
 
       {/* The fracture network continues through the void. */}
