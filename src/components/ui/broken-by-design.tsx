@@ -352,6 +352,30 @@ const BBD2_CSS = `/* broken by design. -----------------------------------------
     opacity: 1;
   }
 }
+
+/* ------- shatter exit ------------------------------------------------ */
+
+/* On exit the pane stops being a backdrop and becomes just the glass:
+   the room behind it (the app) shows through while the pieces fall. */
+.bbd2--shatter {
+  background: transparent;
+  overflow: visible;
+}
+
+.bbd2--shatter .bbd2-bg,
+.bbd2--shatter .bbd2-cracks,
+.bbd2--shatter .bbd2-title--under,
+.bbd2--shatter .bbd2-sound,
+.bbd2--shatter .bbd2-credit {
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+  pointer-events: none;
+}
+
+.bbd2--shatter .bbd2-shard {
+  pointer-events: none;
+  transition: none;
+}
 `
 
 /* ------------------------------------------------------------------ */
@@ -378,6 +402,10 @@ export interface BrokenByDesignProps {
   sound?: boolean
   interactive?: boolean
   className?: string
+  /** Drop the pane: every shard falls off-screen, revealing what's behind. */
+  shatter?: boolean
+  /** Fires once the last shard has left the screen. */
+  onShatterEnd?: () => void
 }
 
 type Piece = {
@@ -603,6 +631,8 @@ export default function BrokenByDesign({
   sound = true,
   interactive = true,
   className = '',
+  shatter = false,
+  onShatterEnd,
 }: BrokenByDesignProps) {
   const rootRef = useRef<HTMLElement>(null)
   const audioRef = useRef<AudioContext | null>(null)
@@ -674,7 +704,7 @@ export default function BrokenByDesign({
 
   useEffect(() => {
     const root = rootRef.current
-    if (!root || !ready) return
+    if (!root || !ready || shatter) return
 
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const shards = Array.from(root.querySelectorAll<HTMLElement>('[data-shard]'))
@@ -845,14 +875,76 @@ export default function BrokenByDesign({
       cancelAnimationFrame(raf)
       cleanups.forEach((fn) => fn())
     }
-  }, [interactive, setKey, ready])
+  }, [interactive, setKey, ready, shatter])
+
+  /* ---------- exit: gravity takes the pane ---------- */
+  useEffect(() => {
+    const root = rootRef.current
+    if (!root || !shatter) return
+
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const shards = Array.from(root.querySelectorAll<HTMLElement>('[data-shard]'))
+    const P = setKey === 'mobile' ? MOBILE : DESKTOP
+
+    if (reduced || shards.length === 0) {
+      const t = setTimeout(() => onShatterEnd?.(), 260)
+      return () => clearTimeout(t)
+    }
+
+    let last = 0
+
+    shards.forEach((el, i) => {
+      const p = P[i]
+      const seed = i + 1
+      const r = (n: number) => {
+        const s = Math.sin(seed * 57.3 + n * 191.9) * 43758.5453
+        return s - Math.floor(s)
+      }
+
+      /* start from wherever the spring loop left this piece, so nothing
+         snaps at the moment of release */
+      const from = el.style.transform || toTransform(baseOf(p.id, seed))
+
+      /* higher pieces let go first; a little scatter so the pane doesn't
+         come away as one sheet */
+      const delay = Math.round((p.cy / 100) * 90 + r(4) * 170)
+      const dur = 1100 + Math.round(r(5) * 420)
+      const drift = (r(1) - 0.5) * 150 + (p.cx - 50) * 1.6
+      const spin = (r(2) - 0.5) * 140
+      const tilt = (r(3) - 0.5) * 90
+
+      el.animate(
+        [
+          { transform: from, opacity: 1, offset: 0, easing: 'cubic-bezier(.33,0,.67,0)' },
+          {
+            transform: `${from} translate3d(${(drift * 0.1).toFixed(1)}px, -22px, 70px)`,
+            opacity: 1,
+            offset: 0.13,
+            easing: 'cubic-bezier(.55,.06,.68,.19)',
+          },
+          {
+            transform:
+              `translate3d(${drift.toFixed(1)}px, 125vh, -140px)` +
+              ` rotateX(${tilt.toFixed(1)}deg) rotateZ(${spin.toFixed(1)}deg)`,
+            opacity: 0.9,
+          },
+        ],
+        { duration: dur, delay, fill: 'forwards' },
+      )
+
+      last = Math.max(last, dur + delay)
+    })
+
+    const t = setTimeout(() => onShatterEnd?.(), last + 60)
+    return () => clearTimeout(t)
+  }, [shatter, setKey, onShatterEnd])
 
   return (
     <>
     <style>{BBD2_CSS}</style>
     <section
       ref={rootRef}
-      className={`bbd2 ${portrait ? 'bbd2--portrait' : ''} ${ready ? 'bbd2--ready' : ''} ${className}`}
+      className={`bbd2 ${portrait ? 'bbd2--portrait' : ''} ${ready ? 'bbd2--ready' : ''} ${shatter ? 'bbd2--shatter' : ''} ${className}`}
       style={{ height }}
       aria-label={title}
     >
