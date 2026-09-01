@@ -35,7 +35,7 @@ const LandingOverlay = () => {
     if (closing) return;
     setClosing(true);
     // safety net: never strand the overlay if the animation never reports back
-    setTimeout(finish, 2600);
+    setTimeout(finish, 2000);
   };
 
   if (!visible) return null;
@@ -55,7 +55,7 @@ const LandingOverlay = () => {
       {/* Enter */}
       <button
         onClick={handleEnter}
-        className={`absolute top-6 right-6 z-[110] p-2 rounded-full bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-all duration-300 ${closing ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
+        className={`absolute top-6 right-6 z-[110] p-2 rounded-full bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-all duration-150 ${closing ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
         aria-label="Close"
       >
         <X className="w-5 h-5 text-white" />
@@ -63,7 +63,7 @@ const LandingOverlay = () => {
 
       {/* Bottom CTAs */}
       <div
-        className={`absolute inset-x-0 bottom-0 z-[110] flex flex-col items-center pb-8 px-4 pointer-events-none transition-opacity duration-300 ${closing ? 'opacity-0' : 'opacity-100'}`}
+        className={`absolute inset-x-0 bottom-0 z-[110] flex flex-col items-center pb-8 px-4 pointer-events-none transition-opacity duration-150 ${closing ? 'opacity-0' : 'opacity-100'}`}
         onClick={(e) => {
           const target = e.target as HTMLElement;
           const link = target.closest('[aria-label]');
