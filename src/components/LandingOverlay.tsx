@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import SocialLinks from '@/components/SocialLinks';
 import BrokenByDesign from '@/components/ui/broken-by-design';
 
-const STORAGE_KEY = 'lcs_landing_seen_v2';
+const STORAGE_KEY = 'lcs_landing_seen_v3';
 
 const hasSeenLanding = () => {
   try {
