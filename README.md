@@ -1,72 +1,25 @@
-# Welcome to your Lovable project
+# Last Chad Standing
 
-## Project info
-**URL**: https://lovable.dev/projects/3e6e3d5c-fc49-4055-8da9-035e5b5f1fd8
+The website for Last Chad Standing, the first MMA battle royale: landing page, NFT store and bidding on Base, pre-orders, blog, docs and an admin panel.
 
-## How can I edit this code.
+## Tech stack
 
-There are several ways of editing your application.
+- React + TypeScript, built with Vite
+- Tailwind CSS and shadcn/ui
+- Supabase (Postgres, auth, storage, edge functions in `supabase/functions`)
 
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/3e6e3d5c-fc49-4055-8da9-035e5b5f1fd8) and start prompting
-
-Changes made via Lovable will be committed automatically to this rep
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
+## Getting started
 
 ```sh
-# Step 1: Clone the repository using the project's Git.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+git clone <this repo>
+cd last-chad-standing
+cp .env.example .env   # fill in your own keys
+npm install
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+Edge functions read their secrets from the Supabase project's function secrets; see `.env.example` for the names the code expects.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## License
 
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/3e6e3d5c-fc49-4055-8da9-035e5b5f1fd8) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+[MIT](./LICENSE)
